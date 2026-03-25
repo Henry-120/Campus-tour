@@ -41,7 +41,7 @@ class _EncyclopediaPageState extends State<EncyclopediaPage> {
           Expanded(
             child: ElfGrid(
               items: displayItems,
-              onItemTap: (item) => print('_showDetail(item)'),
+              onItemTap: (item) => debugPrint('_showDetail(item)'),
             ),
           ),
           // 篩選列

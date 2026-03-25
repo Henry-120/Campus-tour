@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:campus_tour/view/welcome_page.dart';
+import 'package:flutter/services.dart';
+import 'view/start_page.dart'; // 引入拆分後的開始頁面
 
-void main(){
-  runApp(Myapp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  // 移除狀態列與虛擬按鍵，進入沉浸模式
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky); 
+  runApp(const MyApp());
 }
 
-class Myapp extends StatelessWidget {
-  const Myapp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(title: Text("campus tour"),),
-        body: WelcomePage(),
-      )
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: StartPage(), // 指向 lib/view/start_page.dart
     );
   }
 }
-
-
