@@ -9,7 +9,7 @@ class UserHead extends StatelessWidget {
       width: 60,
       height: 60,
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.9),
+        color: Colors.white.withValues(alpha: 0.9),
         shape: BoxShape.circle,
         boxShadow: const [BoxShadow(color: Colors.black26, blurRadius: 4)],
         border: Border.all(color: Colors.blueAccent, width: 2),

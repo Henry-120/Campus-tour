@@ -19,7 +19,7 @@ class SystemMenu extends StatelessWidget {
         CircleIconButton(
           icon: Icons.camera_alt,
           label: '相機',
-          onTap: () => print('開啟相機'),
+          onTap: () => debugPrint('開啟相機'),
         ),
       ],
     );
