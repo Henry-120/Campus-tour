@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../services/audio_service.dart';
+import '../../view/welcome_page.dart';
+import '../../styles/app_theme.dart';
 
 class StartButton extends StatefulWidget {
-  final VoidCallback onPressed;
-
-  const StartButton({super.key, required this.onPressed});
+  const StartButton({super.key});
 
   @override
   State<StartButton> createState() => _StartButtonState();
@@ -12,6 +12,25 @@ class StartButton extends StatefulWidget {
 
 class _StartButtonState extends State<StartButton> {
   double _buttonScale = 1.0;
+
+  Future<void> _handleStart() async {
+    AudioService().play(
+      fileName: 'audio/startSFX.mp3',
+      volume: 1.0,
+      isLooping: false,
+    );
+    
+    setState(() => _buttonScale = 1.2);
+    await Future.delayed(const Duration(milliseconds: 150));
+    setState(() => _buttonScale = 1.0);
+    await Future.delayed(const Duration(milliseconds: 350));
+
+    if (!mounted) return;
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const WelcomePage()),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,31 +42,26 @@ class _StartButtonState extends State<StartButton> {
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           boxShadow: [
-            BoxShadow(color: Colors.pinkAccent.withValues(alpha: 0.3), blurRadius: 20, spreadRadius: 5)
-          ],
+            BoxShadow(
+              color: Colors.pinkAccent.withValues(alpha: 0.3),
+              blurRadius: 20,
+              spreadRadius: 5
+            )
+          ]
         ),
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.pink.withValues(alpha: 0.7),
+            backgroundColor:AppTheme.primaryColor.withValues(alpha: 0.7), 
             padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(35),
-              side: const BorderSide(color: Colors.white, width: 2),
+              borderRadius: BorderRadius.circular(35), 
+              side: const BorderSide(color: Colors.white, width: 2), 
             ),
           ),
-          onPressed: () async {
-            setState(() => _buttonScale = 1.2);
-            await Future.delayed(const Duration(milliseconds: 150));
-            setState(() => _buttonScale = 1.0);
-            widget.onPressed();
-          },
+          onPressed: _handleStart, // 💡 執行封裝好的邏輯
           child: Text(
             "START",
-            style: GoogleFonts.zcoolQingKeHuangYou(
-              fontSize: 26,
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
+            style: AppTheme.buttonTextStyle,
           ),
         ),
       ),

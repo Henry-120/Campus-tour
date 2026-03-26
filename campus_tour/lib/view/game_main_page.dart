@@ -1,9 +1,30 @@
 import 'package:flutter/material.dart';
 import '../widgets/sections/game_hud_overlay.dart';
 import '../widgets/game/character.dart';
+import '../widgets/game/game_map.dart';
+import '../services/audio_service.dart';
 
-class GameMainPage extends StatelessWidget {
+class GameMainPage extends StatefulWidget {
   const GameMainPage({super.key});
+
+  @override
+  State<GameMainPage> createState() => _GameMainPageState();
+}
+
+class _GameMainPageState extends State<GameMainPage> {
+  Future<void> _playIntro() async {
+    await AudioService().play(
+      fileName: 'audio/intro.mp3',
+      volume: 1.0,
+      isLooping: false, // 通常 Intro 只播一次
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _playIntro();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +32,7 @@ class GameMainPage extends StatelessWidget {
       body: Stack(
         children: [
           // 1. 背景層 (未來放 Google Map)
-          Container(color: Colors.blueGrey[50]),
+          GameMap(),
 
           // 2. UI 層
           SafeArea(

@@ -19,11 +19,11 @@ class AuthButtonGroup extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        PrimaryButton(text: '登入', onPressed: onLogin),
+        PrimaryButton(text: 'Login', onPressed: onLogin),
         const SizedBox(height: AppTheme.elementSpacing),
-        SecondaryButton(text: '註冊', onPressed: onRegister),
+        SecondaryButton(text: 'Register', onPressed: onRegister),
         const SizedBox(height: AppTheme.elementSpacing + 10),
-        LinkButton(text: '使用 google 登入', onPressed: onGoogleLogin),
+        LinkButton(text: 'Google Login', onPressed: onGoogleLogin),
       ],
     );
   }

@@ -38,7 +38,7 @@ class SecondaryButton extends StatelessWidget {
         minimumSize: const Size(double.infinity, 50),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       ),
-      child: Text(text, style: AppTheme.buttonTextStyle),
+      child: Text(text, style: AppTheme.buttonTextStyle2),
     );
   }
 }

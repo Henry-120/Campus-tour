@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:campus_tour/widgets/buttons/circle_icon_button.dart';
 import 'package:campus_tour/view/encyclopedia_page.dart';
+import '../../services/camera_service.dart';
 
 class SystemMenu extends StatelessWidget {
   const SystemMenu({super.key});
@@ -19,7 +20,7 @@ class SystemMenu extends StatelessWidget {
         CircleIconButton(
           icon: Icons.camera_alt,
           label: '相機',
-          onTap: () => debugPrint('開啟相機'),
+          onTap: () => CameraService().takePhoto(),
         ),
       ],
     );
