@@ -35,11 +35,11 @@ class _StartPageState extends State<StartPage> with WidgetsBindingObserver {
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.paused) {
       AudioService().pauseBgm(); 
-      debugPrint("App 進入背景，音樂已暫停");
+      debugPrint("[StartPage]:App 進入背景，音樂已暫停");
     } 
     else if (state == AppLifecycleState.resumed) {
       AudioService().resumeBgm();
-      debugPrint("歡迎回來，音樂繼續播放");
+      debugPrint("[StartPage]:歡迎回來，音樂繼續播放");
     }
   }
 

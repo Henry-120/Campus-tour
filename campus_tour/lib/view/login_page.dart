@@ -6,6 +6,7 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint("[Debug][LoginPage]:前往 GameMainPage");
     return GameMainPage();
   }
 }

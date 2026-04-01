@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
-  // 顏色
-  static const Color primaryColor = Colors.blue;
-  static const Color secondaryColor = Colors.grey;
-  static const Color linkColor = Colors.black54;
+  // 💡 少女風的核心配色
+  static const Color primaryColor = Color(0xFFFF8C94);    // 嫩粉色
+  static const Color secondaryColor = Color(0xFFA8E6CF);  // 嫩綠色
+  static const Color accentColor = Color(0xFFFFD3B6);     // 奶油色
+  static const Color textColor = Color(0xFF5D5D5D);       // 深灰色 (取代純黑)
+  static const Color linkColor = Color(0xFF9B9B9B);       // 中灰色
 
   // 間距
   static const double horizontalPadding = 40.0;
@@ -13,34 +15,30 @@ class AppTheme {
   static const double sectionSpacing = 60.0;
 
   // 文字樣式
-  static TextStyle titleStyle = GoogleFonts.zcoolQingKeHuangYou(
+  static TextStyle titleStyle = GoogleFonts.itim(
     fontSize: 48,
     color: Colors.white,
     fontWeight: FontWeight.bold,
     shadows: [
-      const Shadow(
-        color: Colors.black26,
-        offset: Offset(2, 2),
-        blurRadius: 4,
+      Shadow(
+        color:accentColor.withValues(alpha: 0.3),
+        offset: Offset(3, 3),
+        blurRadius: 6,
       ),
     ],
   );
-  static TextStyle buttonTextStyle = GoogleFonts.zcoolQingKeHuangYou(
+  static TextStyle buttonTextStyle = GoogleFonts.itim(
     fontSize: 26,
-    color: Colors.white,
+    color: primaryColor,
     fontWeight: FontWeight.bold,
-    letterSpacing: 1.2, // 稍微拉開字距，更有質感
+    letterSpacing: 1.2,
   );
-  static TextStyle buttonTextStyle2 = GoogleFonts.zcoolQingKeHuangYou(
-    fontSize: 26,
-    color: Colors.blue,
-    fontWeight: FontWeight.bold,
-    letterSpacing: 1.2, // 稍微拉開字距，更有質感
-  );
+
   // static const TextStyle buttonTextStyle = TextStyle(fontSize: 18, fontWeight: FontWeight.w500);
   static const TextStyle linkTextStyle = TextStyle(
     color: linkColor,
     fontSize: 16,
     decoration: TextDecoration.underline,
+    decorationColor: linkColor,
   );
 }

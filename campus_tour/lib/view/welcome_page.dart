@@ -18,22 +18,19 @@ class WelcomePage extends StatelessWidget {
           padding: const EdgeInsets.symmetric(
             horizontal: AppTheme.horizontalPadding,
           ),
-          child: Center(
-            child: SingleChildScrollView(
-              // 防止內容過多時溢出
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const WelcomeLogo(),
-                  const SizedBox(height: AppTheme.sectionSpacing),
-                  AuthButtonGroup(
-                    onLogin: () => _navigateTo(context, 'login'),
-                    onRegister: () => _navigateTo(context, 'register'),
-                    onGoogleLogin: () => _handleGoogleLogin(),
-                  ),
-                ],
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Spacer(),
+              const WelcomeLogo(),
+              const SizedBox(height: AppTheme.sectionSpacing),
+              AuthButtonGroup(
+                onLogin: () => _navigateTo(context, 'login'),
+                onRegister: () => _navigateTo(context, 'register'),
+                onGoogleLogin: () => _handleGoogleLogin(),
               ),
-            ),
+              const Spacer(),
+            ],
           ),
         ),
       ),
@@ -41,6 +38,7 @@ class WelcomePage extends StatelessWidget {
   }
 
   void _navigateTo(BuildContext context, String pageType) {
+    debugPrint('[Debug][WelcomePage]Navigating to: $pageType');
     // 宣告一個變數來儲存目標頁面
     Widget destination;
 
@@ -54,6 +52,7 @@ class WelcomePage extends StatelessWidget {
       destination = const WelcomePage();
     }
 
+    debugPrint("[Debug][WelcomePage]:正在導航到 $pageType 頁面");
     Navigator.push(
       context,
       MaterialPageRoute(
