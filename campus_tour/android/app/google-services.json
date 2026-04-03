@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "322346919988",
+    "project_id": "campus-tour-679e9",
+    "storage_bucket": "campus-tour-679e9.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:322346919988:android:d63e21b522238a65240261",
+        "android_client_info": {
+          "package_name": "com.example.campus_tour"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "322346919988-o3kh3d3k6kmeo7hv60rd4vln0cljv5kd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADyRlCi8SRBCXpqJLf3huNXxSMuPQ1uxA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "322346919988-o3kh3d3k6kmeo7hv60rd4vln0cljv5kd.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "322346919988-d555vambpeuvljnfkm8vujot734fu5el.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.campusTour"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
