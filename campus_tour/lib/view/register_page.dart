@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../controllers/login_controller.dart';
 import '../widgets/login/login_text_form_field.dart';
 import '../view/login_page.dart';
+import '../widgets/buttons/login_buttons.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -44,6 +45,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
+    //頁面排版
     return Scaffold(
       appBar: AppBar(title: Text("註冊")),
       body: Padding(
@@ -56,6 +58,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 controller: _emailController,
                 label: "Email",
                 validator: (value) =>
+                //email 規則更改
                 value!.contains("@") ? null : "請輸入有效的 Email",
               ),
               LoginTextFormField(
@@ -63,6 +66,8 @@ class _RegisterPageState extends State<RegisterPage> {
                 label: "密碼",
                 obscure: true,
                 validator: (value) =>
+
+                //密碼規則更改
                 value!.length >= 6 ? null : "密碼至少 6 位數",
               ),
               LoginTextFormField(
@@ -77,10 +82,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 label: "暱稱",
               ),
               SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: _register,
-                child: Text("註冊"),
-              ),
+              LoginButton(onPressed: _register,label:"註冊"),
             ],
           ),
         ),

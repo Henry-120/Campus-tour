@@ -33,6 +33,8 @@ class _LoginPageState extends State<LoginPage> {
     } else {
       debugPrint("[Debug][LoginPage]: 登入失敗");
       ScaffoldMessenger.of(context).showSnackBar(
+
+        //帳密錯誤顯示
         const SnackBar(content: Text("帳號或密碼錯誤")),
       );
     }
@@ -40,15 +42,19 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+
+    //頁面排版
     return Scaffold(
       appBar: AppBar(title: const Text("遊戲登入")),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
+            //TextField 樣式在 widget/login/login_test_field 更改
             LoginTextField(controller: _emailController, label: "帳號"),
             LoginTextField(controller: _passwordController, label: "密碼", obscure: true),
             const SizedBox(height: 20),
+            //button 樣式在 widget/buttons/login_buttons 更改
             LoginButton(onPressed: _login,label:"登入"),
           ],
         ),
