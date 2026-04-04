@@ -3,6 +3,8 @@ import '../widgets/sections/game_hud_overlay.dart';
 import '../widgets/game/character.dart';
 import '../widgets/game/game_map.dart';
 import '../services/audio_service.dart';
+import 'package:get/get.dart';
+import '../controllers/monster_controller.dart';
 
 class GameMainPage extends StatefulWidget {
   const GameMainPage({super.key});
@@ -25,6 +27,7 @@ class _GameMainPageState extends State<GameMainPage> {
     super.initState();
     debugPrint("[Debug][GameMainPage]:進入game_main_page");
     _playIntro();
+
   }
 
   @override

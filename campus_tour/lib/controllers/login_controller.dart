@@ -19,7 +19,7 @@ class LoginController {
   Future<User?> register(String email, String password, String nickname) async {
     final user = await _authService.register(email, password);
     if (user != null) {
-      await _firestoreService.saveUser(
+      await _firestoreService.setUser(
         UserModel(uid: user.uid, email: user.email!, nickname: nickname),
       );
     }

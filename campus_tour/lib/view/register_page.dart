@@ -56,14 +56,14 @@ class _RegisterPageState extends State<RegisterPage> {
             children: [
               LoginTextFormField(
                 controller: _emailController,
-                label: "Email",
+                label: "email",
                 validator: (value) =>
                 //email 規則更改
                 value!.contains("@") ? null : "請輸入有效的 Email",
               ),
               LoginTextFormField(
                 controller: _passwordController,
-                label: "密碼",
+                label: "密碼 (至少6位數)",
                 obscure: true,
                 validator: (value) =>
 
