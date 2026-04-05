@@ -18,7 +18,7 @@ class LoginController {
       controller.loadUserCollection(user.uid);
 
       //建立假資料
-      //controller.seedUserMonsters(user.uid);
+      // controller.seedUserMonsters(user.uid);
     }
     return await _authService.login(email, password);
   }

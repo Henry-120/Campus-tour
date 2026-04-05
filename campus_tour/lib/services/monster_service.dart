@@ -26,4 +26,6 @@ class MonsterService{
   }
 
   double _deg2rad(double deg) => deg * (pi / 180);
+
+
 }

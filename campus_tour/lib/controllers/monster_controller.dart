@@ -45,6 +45,16 @@ class MonsterController extends GetxController {
     await loadUserCollection(userId);
   }
 
+  // [ 如何將抓到的moster + captured time 轉成 userMonsterModel ]
+  // final userMonster = UserMonsterModel(
+  //   docId: null, // Firestore 新增時會自動產生
+  //   name: monster.name,
+  //   imageURL: monster.imageURL,
+  //   monsterRef: FirebaseFirestore.instance.collection("monsters").doc(docId),
+  //   caughtAt: capturedTime,
+  // );
+  //
+
   Future<void> updateNearbyMonsters(Position userPosition) async {
     final monsters = await _service.getAllMonsters(); // 從資料庫抓全部
     nearbyMonsters.value = monsters.where((m) {
@@ -52,39 +62,35 @@ class MonsterController extends GetxController {
     }).toList();
   }
 
-
+// //之後要拿掉，用來建立user monster collection 的假資料
+//   Future<void> seedUserMonsters(String uid) async {
+//     final db = FirebaseFirestore.instance;
 //
-  // //之後要拿掉，用來建立user monster collection 的假資料
-  // Future<void> seedUserMonsters(String uid) async {
-  //   final db = FirebaseFirestore.instance;
-  //
-  //   // 假設怪物文件已經存在
-  //   final m1Ref = db.collection("monsters").doc("m1");
-  //   final m2Ref = db.collection("monsters").doc("m2");
-  //   final m3Ref = db.collection("monsters").doc("m3");
-  //
-  //   // 建立三筆測試資料
-  //   await addUserMonster(uid, UserMonsterModel(
-  //     monsterRef: m1Ref,
-  //     caughtAt: DateTime.now().subtract(const Duration(days: 2)),
-  //     name: "m1",
-  //     imageURL: "assets/images/fairy_img/中大湖.jpg"
-  //   ));
-  //
-  //   await addUserMonster(uid, UserMonsterModel(
-  //     monsterRef: m2Ref,
-  //     caughtAt: DateTime.now().subtract(const Duration(days: 1)),
-  //     name: "m2",
-  //     imageURL: "assets/images/fairy_img/客家學院.jpg"
-  //   ));
-  //
-  //   await addUserMonster(uid, UserMonsterModel(
-  //     monsterRef: m3Ref,
-  //     caughtAt: DateTime.now(),
-  //     name: "m3",
-  //     imageURL: "assets/images/fairy_img/傑尼龜.jpg"
-  //   ));
-  // }
-
-
+//     // 假設怪物文件已經存在
+//     final m1Ref = db.collection("monsters").doc("m1");
+//     final m2Ref = db.collection("monsters").doc("m2");
+//     final m3Ref = db.collection("monsters").doc("m3");
+//
+//     // 建立三筆測試資料
+//     await addUserMonster(uid, UserMonsterModel(
+//       monsterRef: m1Ref,
+//       caughtAt: DateTime.now().subtract(const Duration(days: 2)),
+//       name: "m1",
+//       imageURL: "assets/images/fairy_img/中大湖.jpg"
+//     ));
+//
+//     await addUserMonster(uid, UserMonsterModel(
+//       monsterRef: m2Ref,
+//       caughtAt: DateTime.now().subtract(const Duration(days: 1)),
+//       name: "m2",
+//       imageURL: "assets/images/fairy_img/客家學院.jpg"
+//     ));
+//
+//     await addUserMonster(uid, UserMonsterModel(
+//       monsterRef: m3Ref,
+//       caughtAt: DateTime.now(),
+//       name: "m3",
+//       imageURL: "assets/images/fairy_img/傑尼龜.jpg"
+//     ));
+//   }
 }

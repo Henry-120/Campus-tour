@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../controllers/encyclopedia_controller.dart';
-import '../models/item_model.dart';
+import '../models/user_monster_model.dart';
 import '../widgets/encyclopedia/elf_grid.dart';
 import '../widgets/encyclopedia/filter_bar.dart';
 import '../controllers/monster_controller.dart';
@@ -18,7 +18,7 @@ class EncyclopediaPage extends StatefulWidget {
 
 class _EncyclopediaPageState extends State<EncyclopediaPage> {
   int currentFilter = 1;
-  final EncyclopediaController _controller = EncyclopediaController();
+  final monsterController = Get.find<MonsterController>();
 
   @override
   Widget build(BuildContext context) {
@@ -29,12 +29,7 @@ class _EncyclopediaPageState extends State<EncyclopediaPage> {
         children: [
           // 網格區塊被抽離了
           Expanded(
-            child: Obx(() {
-              final items = _controller.getDisplayItems();
-              debugPrint("items.length=${items.length}");
-              return ElfGrid(items: items);
-            }),
-          ),
+            child: ElfGrid()),
           // 篩選列
           FilterBar(
             selectedIndex: currentFilter,
