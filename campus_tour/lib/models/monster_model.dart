@@ -19,7 +19,7 @@ class MonsterModel {
     required this.location
   });
 
-  factory MonsterModel.fromMap(String id, Map<String, dynamic> data) {
+  factory MonsterModel.fromMap( Map<String, dynamic> data,{String? id}) {
     final loc = data['location'];
     DocumentReference? archRef;
     if (data['architectureRef'] != null) {
@@ -57,7 +57,7 @@ class MonsterModel {
     }
 
     return MonsterModel(
-      id: id,
+      id: id ?? data['id'] ?? '',
       name: data['name'] ?? '',
       type: data['type'] ?? '',
       imageURL: data['imageURL'] ?? '',

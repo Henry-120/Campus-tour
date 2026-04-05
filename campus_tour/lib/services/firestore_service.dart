@@ -29,7 +29,7 @@ class FirestoreService {
   Future<MonsterModel?> getMonster(String id) async {
     final doc = await _db.collection("monsters").doc(id).get();
     if (doc.exists) {
-      return MonsterModel.fromMap(doc.id, doc.data() as Map<String, dynamic>);
+      return MonsterModel.fromMap(doc.data() as Map<String, dynamic>,id:doc.id);
     }
     return null;
   }
@@ -37,7 +37,7 @@ class FirestoreService {
   Future<List<MonsterModel>> getAllMonsters() async {
     final snapshot = await _db.collection("monsters").get();
     return snapshot.docs
-        .map((doc) => MonsterModel.fromMap(doc.id, doc.data() ))
+        .map((doc) => MonsterModel.fromMap(id:doc.id, doc.data() ))
         .toList();
   }
 
@@ -49,7 +49,7 @@ class FirestoreService {
   Future<ArchitectureModel?> getArchitecture(String id) async {
     final doc = await _db.collection("architectures").doc(id).get();
     if (doc.exists) {
-      return ArchitectureModel.fromMap(doc.id, doc.data() as Map<String, dynamic>);
+      return ArchitectureModel.fromMap(id:doc.id, doc.data() as Map<String, dynamic>);
     }
     return null;
   }
@@ -74,14 +74,14 @@ class FirestoreService {
     if (!doc.exists) return null;
 
     // Monster 本身
-    final monster = MonsterModel.fromMap(doc.id, doc.data() as Map<String, dynamic>);
+    final monster = MonsterModel.fromMap(id:doc.id, doc.data() as Map<String, dynamic>);
 
     // Architecture
     ArchitectureModel? architecture;
     if (monster.architectureRef != null) {
       final archSnap = await monster.architectureRef!.get();
       if (archSnap.exists) {
-        architecture = ArchitectureModel.fromMap(archSnap.id, archSnap.data() as Map<String, dynamic>);
+        architecture = ArchitectureModel.fromMap(id:archSnap.id, archSnap.data() as Map<String, dynamic>);
       }
     }
 
@@ -131,6 +131,7 @@ class FirestoreService {
         .doc(monsterDocId)
         .delete();
   }
+
 }
 
 

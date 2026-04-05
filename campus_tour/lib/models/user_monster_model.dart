@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 class UserMonsterModel {
   String? docId;
-  final DocumentReference? monsterRef;
+  final DocumentReference monsterRef;
   final String name;
   final String imageURL;
   final DateTime caughtAt;

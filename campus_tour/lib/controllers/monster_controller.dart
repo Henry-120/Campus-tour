@@ -52,7 +52,8 @@ class MonsterController extends GetxController {
     }).toList();
   }
 
-  //
+
+//
   // //之後要拿掉，用來建立user monster collection 的假資料
   // Future<void> seedUserMonsters(String uid) async {
   //   final db = FirebaseFirestore.instance;

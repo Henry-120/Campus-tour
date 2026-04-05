@@ -32,10 +32,7 @@ class _EncyclopediaPageState extends State<EncyclopediaPage> {
             child: Obx(() {
               final items = _controller.getDisplayItems();
               debugPrint("items.length=${items.length}");
-              return ElfGrid(
-                items: items,
-                onItemTap: (item) => debugPrint('點擊了 ${item.name}'),
-              );
+              return ElfGrid(items: items);
             }),
           ),
           // 篩選列

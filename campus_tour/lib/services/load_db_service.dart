@@ -16,7 +16,7 @@ class LoadDbService {
     final List<dynamic> data = json.decode(response);
 
     for (var monsterData in data) {
-      MonsterModel monster = MonsterModel.fromMap(monsterData['id'], monsterData);
+      MonsterModel monster = MonsterModel.fromMap(id:monsterData['id'], monsterData);
       await FirebaseFirestore.instance
           .collection("monsters")
           .doc(monster.id)
@@ -30,7 +30,7 @@ class LoadDbService {
     final List<dynamic> data = json.decode(response);
 
     for (var architectureData in data) {
-      ArchitectureModel architecture = ArchitectureModel.fromMap(architectureData['id'], architectureData);
+      ArchitectureModel architecture = ArchitectureModel.fromMap(id:architectureData['id'], architectureData);
       await FirebaseFirestore.instance
           .collection("architectures")
           .doc(architecture.id)

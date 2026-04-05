@@ -15,9 +15,9 @@ class ArchitectureModel {
     required this.preStory,
   });
 
-  factory ArchitectureModel.fromMap(String id, Map<String, dynamic> data) {
+  factory ArchitectureModel.fromMap(Map<String, dynamic> data,{String? id}) {
     return ArchitectureModel(
-      id: id,
+      id: id ?? data['id'] ?? '',
       name: data['name'] ?? '',
       type: data['type'] ?? '',
       story: data['story'] ?? '',
