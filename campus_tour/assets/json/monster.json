@@ -4,7 +4,7 @@
     "name": "中大湖",
     "type": "電",
     "imageURL": "assets/images/fairy_img/中大湖.jpg",
-    "location": { "latitude": 24.9685, "longitude": 121.1950 },
+    "location": { "latitude": 24.9681, "longitude": 121.1919 },
     "architectureRef": "/architectures/a2",
     "qaRef": "/questions/qa1"
   },
@@ -13,7 +13,7 @@
     "name": "客家學院",
     "type": "火",
     "imageURL": "assets/images/fairy_img/客家學院.jpg",
-    "location": { "latitude": 24.9685, "longitude": 121.1950 },
+    "location": { "latitude": 50.9685, "longitude": 150.1950 },
     "architectureRef": "/architectures/a1",
     "qaRef": ""
   },
@@ -22,7 +22,7 @@
     "name": "傑尼龜",
     "type": "水",
     "imageURL": "assets/images/fairy_img/傑尼龜.jpg",
-    "location": { "latitude": 24.9685, "longitude": 121.1950 },
+    "location": { "latitude": 50.9685, "longitude": 150.1950 },
     "architectureRef": "/architectures/a3",
     "qaRef": "/questions/qa3"
   }

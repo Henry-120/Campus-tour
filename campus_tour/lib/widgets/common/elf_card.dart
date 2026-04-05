@@ -24,7 +24,7 @@ class ElfCard extends StatelessWidget {
                 size: 40,
                 color: item.isUnlocked ? Colors.blue : Colors.grey),
             const SizedBox(height: 8),
-            Text('No.${item.id}', style: const TextStyle(fontSize: 12)),
+            Text(item.name, style: const TextStyle(fontSize: 12)),
           ],
         ),
       ),

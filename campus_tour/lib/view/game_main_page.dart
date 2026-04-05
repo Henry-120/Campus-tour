@@ -14,6 +14,7 @@ class GameMainPage extends StatefulWidget {
 }
 
 class _GameMainPageState extends State<GameMainPage> {
+
   Future<void> _playIntro() async {
     await AudioService().play(
       fileName: 'audio/intro.mp3',

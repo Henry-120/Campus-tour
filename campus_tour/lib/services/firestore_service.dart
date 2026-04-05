@@ -103,11 +103,12 @@ class FirestoreService {
   }
   // ===== UserMonster =====
   Future<void> addUserMonster(String uid, UserMonsterModel userMonster) async {
-    await _db
+    final docRef = await _db
         .collection("users")
         .doc(uid)
         .collection("monsters")
         .add(userMonster.toMap()); // Firestore 自動生成 id
+    userMonster.docId = docRef.id;
   }
 
   Future<List<UserMonsterModel>> getUserMonsters(String uid) async {
@@ -118,7 +119,7 @@ class FirestoreService {
         .get();
 
     return snapshot.docs
-        .map((doc) => UserMonsterModel.fromMap(doc.data()))
+        .map((doc) => UserMonsterModel.fromMap(doc.data(), docId:doc.id))
         .toList();
   }
 

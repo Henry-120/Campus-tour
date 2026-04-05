@@ -4,6 +4,8 @@ import '../controllers/encyclopedia_controller.dart';
 import '../models/item_model.dart';
 import '../widgets/encyclopedia/elf_grid.dart';
 import '../widgets/encyclopedia/filter_bar.dart';
+import '../controllers/monster_controller.dart';
+import 'package:get/get.dart';
 
 
 class EncyclopediaPage extends StatefulWidget {
@@ -18,20 +20,8 @@ class _EncyclopediaPageState extends State<EncyclopediaPage> {
   int currentFilter = 1;
   final EncyclopediaController _controller = EncyclopediaController();
 
-  // 原始資料 (get from database)
-  final List<ElfItem> _allItems = List.generate(30, (i) {
-    // 模擬一些隨機的解鎖狀態
-    return ElfItem(
-      id: i + 1,
-      name: '精靈 ${i + 1}',
-      isUnlocked: i % 3 == 0, // 每隔兩隻就有一隻是解鎖的
-    );
-  });
-
   @override
   Widget build(BuildContext context) {
-    // 根據目前的篩選值計算要顯示的列表
-    final displayItems = _controller.getPageItems(_allItems, currentFilter);
 
     return Scaffold(
       appBar: AppBar(title: const Text('圖鑑'), centerTitle: true),
@@ -39,10 +29,14 @@ class _EncyclopediaPageState extends State<EncyclopediaPage> {
         children: [
           // 網格區塊被抽離了
           Expanded(
-            child: ElfGrid(
-              items: displayItems,
-              onItemTap: (item) => debugPrint('_showDetail(item)'),
-            ),
+            child: Obx(() {
+              final items = _controller.getDisplayItems();
+              debugPrint("items.length=${items.length}");
+              return ElfGrid(
+                items: items,
+                onItemTap: (item) => debugPrint('點擊了 ${item.name}'),
+              );
+            }),
           ),
           // 篩選列
           FilterBar(

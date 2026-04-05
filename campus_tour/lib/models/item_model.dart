@@ -1,5 +1,5 @@
 class ElfItem {
-  final int id;
+  final String id;
   final String name;
   final String imageUrl;
   final bool isUnlocked;

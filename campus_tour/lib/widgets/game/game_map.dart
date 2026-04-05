@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:geolocator/geolocator.dart'; // 💡 引入 GPS 套件
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:campus_tour/controllers/monster_controller.dart';
+import 'package:get/get.dart';
 
 class GameMap extends StatefulWidget {
   const GameMap({super.key});
@@ -59,6 +61,8 @@ class _GameMapState extends State<GameMap> {
   // 💡 核心邏輯：檢查權限並追蹤位置
   Future<void> _checkPermissionAndListen() async {
     try {
+      final monsterController = Get.find<MonsterController>();
+
       debugPrint("[Debug][GameMap]:正在檢查定位服務是否啟用");
       bool serviceEnabled = await Geolocator.isLocationServiceEnabled().timeout(
         const Duration(seconds: 5),
@@ -90,7 +94,7 @@ class _GameMapState extends State<GameMap> {
 
       setState(() => _hasLocationPermission = true);
       debugPrint("[Debug][GameMap]:定位權限已授權，開始監聽位置變化");
-      
+
       _positionStream = Geolocator.getPositionStream(
         locationSettings: const LocationSettings(
           accuracy: LocationAccuracy.bestForNavigation,
@@ -99,6 +103,9 @@ class _GameMapState extends State<GameMap> {
       ).listen((Position position) {
         debugPrint('[Debug][GameMap]:位置更新: ${position.latitude}, ${position.longitude}');
         _moveCamera(position);
+
+        // 更新附近怪物
+        monsterController.updateNearbyMonsters(position);
       });
 
       debugPrint("[Debug][GameMap]:已開始監聽位置變化");
