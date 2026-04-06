@@ -3,13 +3,25 @@ import 'package:flutter/services.dart';
 import 'view/start_page.dart'; // 引入拆分後的開始頁面
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart'; // FlutterFire CLI 產生的檔案
+import 'services/load_db_service.dart';
+import 'controllers/monster_controller.dart';
+import 'package:get/get.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky); 
+
+  //初始化 db (之後要拿掉)
+  await LoadDbService().loadArchitecture();
+  await LoadDbService().loadQA();
+  await LoadDbService().loadMonsters();
+  debugPrint("db loaded");
+
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+
+  Get.put(MonsterController()); // 全域共用
   runApp(const MyApp());
 }
 

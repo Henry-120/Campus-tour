@@ -3,6 +3,9 @@ import '../widgets/sections/game_hud_overlay.dart';
 import '../widgets/game/character.dart';
 import '../widgets/game/game_map.dart';
 import '../services/audio_service.dart';
+import 'package:get/get.dart';
+import '../controllers/monster_controller.dart';
+import 'package:campus_tour/widgets/common/LHF_Drawer.dart';
 
 class GameMainPage extends StatefulWidget {
   const GameMainPage({super.key});
@@ -30,6 +33,7 @@ class _GameMainPageState extends State<GameMainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: AppDrawer(),
       body: Stack(
         children: [
           // 1. 背景層 (未來放 Google Map)

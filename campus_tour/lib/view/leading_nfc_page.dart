@@ -20,8 +20,9 @@ class LeadingNfcPage extends StatefulWidget {
 class _LeadingNfcPage extends State<LeadingNfcPage> {
   int nowIndex = 0;
 
-  void _checkNfcResult(String scannedId) {
+  void _checkNfcResult(NfcScanResult result) {
     // 檢查感應到的 ID 是否符合目前進度要求的 ID
+    String scannedId = result.tagId;
     if (scannedId == widget.treasureID[nowIndex]) {
       setState(() {
         if (nowIndex < widget.treasureID.length - 1) {
@@ -33,7 +34,7 @@ class _LeadingNfcPage extends State<LeadingNfcPage> {
     } else {
       // 錯誤處理：可以彈出 SnackBar 提示感應錯了
       ScaffoldMessenger.of(context).showSnackBar(
-        //TODO 這裡也要重寫
+        //TODO 這裡也要重寫  //解決訊息過多的問題
         const SnackBar(content: Text("ID 不符合，請重新嘗試！")),
       );
     }
@@ -51,6 +52,10 @@ class _LeadingNfcPage extends State<LeadingNfcPage> {
         child: Center(
           child: Column(
             children: [
+              Text(
+                widget.treasureText[nowIndex],
+                style: TextStyle(fontSize: 50),
+              ),
               NfcButton(
                 ans: widget.treasureID[nowIndex],
                 onResult: _checkNfcResult,
@@ -67,7 +72,7 @@ class _LeadingNfcPage extends State<LeadingNfcPage> {
 
 class NfcButton extends StatefulWidget {
   final String ans;
-  final Function(String id) onResult; // 成功感應後的動作
+  final Function(NfcScanResult result) onResult; // 成功感應後的動作
   const NfcButton({super.key, required this.ans, required this.onResult});
   @override
   State<StatefulWidget> createState() {
@@ -96,7 +101,7 @@ class _NfcButton extends State<NfcButton> {
         if (mounted && _isScanning) {
           if (response.isSuccess) {
             // --- 成功：透過 .data 取得結果，並回傳 ID ---
-            widget.onResult(response.data.tagId);
+            widget.onResult(response.data);
           } else {
             // --- 失敗：處理錯誤類型 ---
             _handleError(response.error);
@@ -150,12 +155,12 @@ class _NfcButton extends State<NfcButton> {
   Widget build(BuildContext context) {
     return NfcButton1(
       text: _isScanning
-          ? NfcLeadingStyle.primaryButtonString
-          : NfcLeadingStyle.NfcIngString,
+          ? NfcLeadingStyle.NfcIngString
+          : NfcLeadingStyle.primaryButtonString,
       onPressedToDo: onPressed,
       now_style: _isScanning
-          ? NfcLeadingStyle.primaryButtonStyle
-          : NfcLeadingStyle.NfcIngStyle,
+          ? NfcLeadingStyle.NfcIngStyle
+          : NfcLeadingStyle.primaryButtonStyle,
     );
   }
 }

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import '../../models/item_model.dart';
+
+import '../../models/user_monster_model.dart';
 
 class ElfCard extends StatelessWidget {
-  final ElfItem item;
+  final UserMonsterModel item;
   final VoidCallback onTap;
 
   const ElfCard({super.key, required this.item, required this.onTap});
@@ -22,9 +23,9 @@ class ElfCard extends StatelessWidget {
           children: [
             Icon(Icons.catching_pokemon,
                 size: 40,
-                color: item.isUnlocked ? Colors.blue : Colors.grey),
+                color:Colors.blue),
             const SizedBox(height: 8),
-            Text('No.${item.id}', style: const TextStyle(fontSize: 12)),
+            Text(item.name, style: const TextStyle(fontSize: 12)),
           ],
         ),
       ),
