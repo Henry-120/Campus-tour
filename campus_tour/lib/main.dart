@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'view/start_page.dart'; // 引入拆分後的開始頁面
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart'; // FlutterFire CLI 產生的檔案
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky); 
   runApp(const MyApp());
 }

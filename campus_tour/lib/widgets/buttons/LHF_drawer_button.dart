@@ -18,15 +18,7 @@ class DrawerSecondaryButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(
-      style: OutlinedButton.styleFrom(
-        foregroundColor: DrawerStyles.sbutton_font_color,
-        backgroundColor: DrawerStyles.sbutton_bg_color,
-        side: const BorderSide(
-          color: DrawerStyles.sbutton_side_color, // 邊框也設為橘色
-          width: DrawerStyles.sbutton_side_width, // 邊框粗細
-        ),
-        minimumSize: DrawerStyles.sbutton_size,
-      ),
+      style: ButtonStyle(),
       onPressed: onPressedToDo,
       child: Text(text, style: DrawerStyles.second_button_text),
     );

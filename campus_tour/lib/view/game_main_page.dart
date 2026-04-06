@@ -23,6 +23,7 @@ class _GameMainPageState extends State<GameMainPage> {
   @override
   void initState() {
     super.initState();
+    debugPrint("[Debug][GameMainPage]:進入game_main_page");
     _playIntro();
   }
 

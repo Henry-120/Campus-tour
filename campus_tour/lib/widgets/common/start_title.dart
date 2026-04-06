@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../../styles/app_theme.dart';
 
 class StartTitle extends StatelessWidget {
   final String title;
@@ -9,18 +9,7 @@ class StartTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       title,
-      style: GoogleFonts.zcoolQingKeHuangYou(
-        fontSize: 60,
-        fontWeight: FontWeight.bold,
-        color: Colors.white,
-        shadows: const [
-          Shadow(
-            color: Colors.blue, 
-            blurRadius: 10, 
-            offset: Offset(2, 2)
-          ),
-        ],
-      ),
+      style: AppTheme.titleStyle,
     );
   }
 }

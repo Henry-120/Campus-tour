@@ -26,6 +26,7 @@ class _StartButtonState extends State<StartButton> {
     await Future.delayed(const Duration(milliseconds: 350));
 
     if (!mounted) return;
+    debugPrint("[Debug][StartButton]:開始按鈕被按下，正在導航到 WelcomePage");
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) => const WelcomePage()),

@@ -12,12 +12,14 @@ class PrimaryButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        backgroundColor: AppTheme.primaryColor,
+        backgroundColor: AppTheme.accentColor,
         foregroundColor: Colors.white,
         minimumSize: const Size(double.infinity, 50),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       ),
-      child: Text(text, style: AppTheme.buttonTextStyle),
+      child: Text(
+        text, 
+        style: AppTheme.buttonTextStyle,),
     );
   }
 }
@@ -38,7 +40,7 @@ class SecondaryButton extends StatelessWidget {
         minimumSize: const Size(double.infinity, 50),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       ),
-      child: Text(text, style: AppTheme.buttonTextStyle2),
+      child: Text(text, style: AppTheme.buttonTextStyle),
     );
   }
 }

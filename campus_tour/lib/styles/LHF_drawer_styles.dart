@@ -18,20 +18,29 @@ class DrawerStyles {
   static const String rain_image_path = "assets/images/weather/raining.png";
   static const String sunny_image_path = "assets/images/weather/sunny.png";
 
-  //image
-  // static final Image rain_image = Image.asset(
-  //   "assets/images/weather/raining.png",
-  // );
-  // static final Image sunny_image = Image.asset(
-  //   "assets/images/weather/sunny.png",
-  // );
-
   //animate time
   static const int rain_to_sunny = 1500;
 
   //對齊格式
   static const drawer_main_alignment = MainAxisAlignment.start;
   static const drawer_cross_alignment = CrossAxisAlignment.stretch;
+
+  //side width
+  static const double sbutton_side_width = 1.5;
+
+  //size
+  static const Size sbutton_size = Size(100, 75);
+
+  //button style
+  static ButtonStyle drawer_button_style = OutlinedButton.styleFrom(
+    foregroundColor: sbutton_font_color,
+    backgroundColor: sbutton_bg_color,
+    side: const BorderSide(
+      color: sbutton_side_color, // 邊框也設為橘色
+      width: sbutton_side_width, // 邊框粗細
+    ),
+    minimumSize: sbutton_size,
+  );
 
   //Text Style
   static final TextStyle second_button_text = GoogleFonts.zcoolQingKeHuangYou(
@@ -40,10 +49,4 @@ class DrawerStyles {
     fontWeight: FontWeight.bold,
     letterSpacing: 1.2, // 稍微拉開字距，更有質感
   );
-
-  //side width
-  static const double sbutton_side_width = 1.5;
-
-  //size
-  static const Size sbutton_size = Size(100, 75);
 }

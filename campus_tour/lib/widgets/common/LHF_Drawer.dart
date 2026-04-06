@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:campus_tour/controllers/LHF_weather_api.dart';
 import 'package:campus_tour/controllers/LHF_drawer_weather_trans.dart';
 import 'package:campus_tour/styles/LHF_drawer_styles.dart';
-import 'package:campus_tour/widgets/buttons/LHF_drawer_button.dart';
-import 'package:campus_tour/controllers/LHF_drawer_button_funtion.dart';
+// import 'package:campus_tour/widgets/buttons/LHF_drawer_button.dart';
+// import 'package:campus_tour/controllers/LHF_drawer_button_funtion.dart';
+import 'package:campus_tour/widgets/sections/drawer_button_group.dart';
 // import 'package:campus_tour/view/LHF_setting_page.dart';
 
 // Abc for class
@@ -65,28 +66,11 @@ class _ImageToWidget extends StatelessWidget {
 }
 
 class _DarwerButton extends StatelessWidget {
-  // 按鈕都在這裡
+  // 按鈕都在這裡 // 在sections裡面
   const _DarwerButton();
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: DrawerStyles.drawer_main_alignment,
-      crossAxisAlignment: DrawerStyles.drawer_cross_alignment,
-      //填滿格式設定
-      children: [_SettingButton(), _SettingButton()], //左選單按鈕列,
-    );
-  }
-}
-
-class _SettingButton extends StatelessWidget {
-  //設定按鈕實體化
-
-  @override
-  Widget build(BuildContext context) {
-    return DrawerSecondaryButton(
-      text: '設定',
-      onPressedToDo: () => DrawerButtonFuntion.onPress(context),
-    );
+    return DrawerButtonGroup();
   }
 }
