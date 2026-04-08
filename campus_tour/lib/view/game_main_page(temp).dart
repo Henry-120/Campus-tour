@@ -3,8 +3,6 @@ import '../widgets/sections/game_hud_overlay.dart';
 import '../widgets/game/character.dart';
 import '../widgets/game/game_map.dart';
 import '../services/audio_service.dart';
-import 'package:get/get.dart';
-import '../controllers/monster_controller.dart';
 import 'package:campus_tour/widgets/common/LHF_Drawer.dart';
 
 class GameMainPage extends StatefulWidget {
@@ -26,7 +24,6 @@ class _GameMainPageState extends State<GameMainPage> {
   @override
   void initState() {
     super.initState();
-    debugPrint("[Debug][GameMainPage]:進入game_main_page");
     _playIntro();
   }
 

@@ -3,7 +3,12 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.CAMERA" />
-    
+
+    <!-- this is for NFC -->
+    <uses-permission android:name="android.permission.NFC" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- end of NFC -->
+
     <application
         android:label="campus_tour"
         android:name="${applicationName}"
