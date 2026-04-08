@@ -75,7 +75,6 @@ flutter:
   assets:
     - assets/images/
     - assets/images/fairy_img/
-    -
     - assets/audio/
     - assets/mapStyles/
     - assets/json/
