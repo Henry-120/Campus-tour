@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'view/start_page.dart'; // 引入拆分後的開始頁面
+import 'view/login_page.dart'; // 變更為直接從登入頁開始
 import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart'; // FlutterFire CLI 產生的檔案
+import 'firebase_options.dart'; 
 import 'services/load_db_service.dart';
 import 'controllers/monster_controller.dart';
 import 'package:get/get.dart';
@@ -13,7 +13,7 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  //初始化 db (之後要拿掉)
+  //初始化 db
   await LoadDbService().loadArchitecture();
   await LoadDbService().loadQA();
   await LoadDbService().loadMonsters();
@@ -21,7 +21,7 @@ Future<void> main() async {
 
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
 
-  Get.put(MonsterController()); // 全域共用
+  Get.put(MonsterController()); 
   runApp(const MyApp());
 }
 
@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: StartPage(), // 指向 lib/view/start_page.dart
+      home: LoginPage(), // 直接顯示登入頁面
     );
   }
 }

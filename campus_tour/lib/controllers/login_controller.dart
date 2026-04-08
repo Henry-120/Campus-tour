@@ -12,17 +12,31 @@ class LoginController {
 
   Future<User?> login(String email, String password) async {
     final user = await _authService.login(email, password);
-    if(user != null){
-
-      //初始化user monster collection
+    if (user != null) {
       controller.loadUserCollection(user.uid);
-
-      //建立假資料
-      // controller.seedUserMonsters(user.uid);
     }
-    return await _authService.login(email, password);
+    return user;
   }
 
+  Future<User?> signInWithGoogle() async {
+    final user = await _authService.signInWithGoogle();
+    if (user != null) {
+      // 檢查使用者是否已存在於 Firestore
+      final existingUser = await _firestoreService.getUser(user.uid);
+      if (existingUser == null) {
+        // 如果是新使用者，建立資料
+        await _firestoreService.setUser(
+          UserModel(
+            uid: user.uid,
+            email: user.email ?? "",
+            nickname: user.displayName ?? "冒險者",
+          ),
+        );
+      }
+      controller.loadUserCollection(user.uid);
+    }
+    return user;
+  }
 
   Future<void> logout() async {
     await _authService.logout();
