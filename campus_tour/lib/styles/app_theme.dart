@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
-  // 💡 少女風的核心配色
-  static const Color primaryColor = Color(0xFFFF8C94);    // 嫩粉色
-  static const Color secondaryColor = Color(0xFFA8E6CF);  // 嫩綠色
-  static const Color accentColor = Color(0xFFFFD3B6);     // 奶油色
-  static const Color textColor = Color(0xFF5D5D5D);       // 深灰色 (取代純黑)
-  static const Color linkColor = Color(0xFF9B9B9B);       // 中灰色
+  // 💡 暖色系的核心配色
+  static const Color primaryColor = Color(0xFFF28482);    // 溫暖珊瑚粉
+  static const Color secondaryColor = Color(0xFFF6BD60);  // 暖金色
+  static const Color accentColor = Color(0xFFF7EDE2);     // 杏仁色
+  static const Color textColor = Color(0xFF5D4037);       // 暖深啡色 (取代深灰色)
+  static const Color linkColor = Color(0xFF8D6E63);       // 淺啡色
 
   // 間距
   static const double horizontalPadding = 40.0;
@@ -21,7 +21,7 @@ class AppTheme {
     fontWeight: FontWeight.bold,
     shadows: [
       Shadow(
-        color:accentColor.withValues(alpha: 0.3),
+        color: primaryColor.withValues(alpha: 0.4),
         offset: Offset(3, 3),
         blurRadius: 6,
       ),
@@ -34,7 +34,6 @@ class AppTheme {
     letterSpacing: 1.2,
   );
 
-  // static const TextStyle buttonTextStyle = TextStyle(fontSize: 18, fontWeight: FontWeight.w500);
   static const TextStyle linkTextStyle = TextStyle(
     color: linkColor,
     fontSize: 16,
