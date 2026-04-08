@@ -20,7 +20,6 @@ class FairyVideoWidget extends StatelessWidget {
           Colors.white,
           BlendMode.dstOut, // 嘗試過濾白色背景
         ),
-        // 💡 child 放在最後面
         child: Opacity(
           opacity: 0.9,
           child: SizedBox(
