@@ -50,3 +50,17 @@ class DrawerStyles {
     letterSpacing: 1.2, // 稍微拉開字距，更有質感
   );
 }
+
+class DrawerWeatherTrans {
+  static AssetImage weatherToColor(String? weather) {
+    //判斷天氣對應的狀況
+    switch (weather) {
+      case ("rain"):
+        return AssetImage(DrawerStyles.rain_image_path);
+      case ('sunny'):
+        return AssetImage(DrawerStyles.sunny_image_path);
+      default:
+        return AssetImage(DrawerStyles.sunny_image_path);
+    }
+  }
+}

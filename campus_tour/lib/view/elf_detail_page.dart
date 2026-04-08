@@ -1,6 +1,7 @@
 import 'package:campus_tour/models/monster_model.dart';
 import 'package:flutter/material.dart';
 import '../controllers/encyclopedia_controller.dart';
+import 'package:campus_tour/view/elf_detial_1.dart';
 
 class ElfDetailPage extends StatefulWidget {
   final MonsterModel monsterModel;
@@ -24,7 +25,9 @@ class _ElfDetailPageState extends State<ElfDetailPage> {
 
   Future<void> _loadStory() async {
     try {
-      final result = await _controller.getStory(widget.monsterModel.architectureRef!);
+      final result = await _controller.getStory(
+        widget.monsterModel.architectureRef!,
+      );
       setState(() {
         story = result;
         isLoading = false;
@@ -39,27 +42,34 @@ class _ElfDetailPageState extends State<ElfDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text(widget.monsterModel.name)),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Image.network(widget.monsterModel.imageURL, height: 200),
-            const SizedBox(height: 16),
-            Text(
-              widget.monsterModel.name,
-              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 8),
-            if (isLoading)
-              const CircularProgressIndicator()
-            else
-              Text("Story: ${story ?? "沒有故事資料"}"),
-          ],
-        ),
-      ),
-    );
+    // return Scaffold(
+    //   appBar: AppBar(title: Text(widget.monsterModel.name)),
+    //   body: Padding(
+    //     padding: const EdgeInsets.all(16.0),
+    //     child: Column(
+    //       crossAxisAlignment: CrossAxisAlignment.start,
+    //       children: [
+    //         // Image.network(widget.monsterModel.imageURL, height: 200),
+    //         const SizedBox(height: 16), //間隔
+    //         Text(
+    //           widget.monsterModel.name,
+    //           style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+    //         ), //名字
+    //         const SizedBox(height: 8),
+    //         if (isLoading)
+    //           const CircularProgressIndicator()
+    //         else
+    //           Text("Story: ${story ?? "沒有故事資料"}"),
+    //       ],
+    //     ),
+    //   ),
+    // );
+    if (isLoading)
+      return CircularProgressIndicator();
+    else
+      return MonsterEncyclopediaPage(
+        monsterName: widget.monsterModel.name,
+        monsterStory: story,
+      );
   }
 }

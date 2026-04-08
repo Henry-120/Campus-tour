@@ -38,7 +38,7 @@ class _SettingButton extends StatelessWidget {
 //測試用
 class _NfcgButton extends StatelessWidget {
   //設定按鈕實體化
-  final List<String> Idtest = ["D5:DF:AE:5E", "21"];
+  final List<String> Idtest = ["85:45:BE:17", "21"];
   final List<String> Tex = ["mission 1", "mission 2"];
   void onPress(BuildContext context) {
     Navigator.push(
