@@ -34,6 +34,13 @@ class AppTheme {
     letterSpacing: 1.2,
   );
 
+  static TextStyle hudNameStyle = GoogleFonts.itim(
+    fontSize: 30,
+    color: textColor,
+    fontWeight: FontWeight.bold,
+    letterSpacing: 0.5,
+  );
+
   // static const TextStyle buttonTextStyle = TextStyle(fontSize: 18, fontWeight: FontWeight.w500);
   static const TextStyle linkTextStyle = TextStyle(
     color: linkColor,

@@ -36,7 +36,7 @@ class _GameMapState extends State<GameMap> {
       const imageConfig = ImageConfiguration();
 
       // 1. 載入 JSON 風格字串 (這會花一點點時間)
-      final style = await rootBundle.loadString('assets/mapStyles/style2.json');
+      final style = await rootBundle.loadString('assets/mapStyles/style3.json');
       
       // 2. 載入特製地圖圖片 (直接使用剛剛存好的 imageConfig，不依賴現在的 context)
       final image = await AssetMapBitmap.create(
@@ -161,7 +161,7 @@ class _GameMapState extends State<GameMap> {
               groundOverlayId: const GroundOverlayId("ncu_custom_map"),
               image: _customMapImage!,
               bounds: campusBounds, // 圖片會自動對齊這四個角
-              transparency: 0.2,         // 0.0 ~ 1.0，建議先設 0.8 方便校對
+              transparency: 0.2,   // 0.0 ~ 1.0，建議先設 0.8 方便校對
               clickable: false,
             ),
           } : {},

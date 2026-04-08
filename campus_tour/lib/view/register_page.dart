@@ -27,6 +27,8 @@ class _RegisterPageState extends State<RegisterPage> {
 
       final user = await _controller.register(email, password, nickname);
 
+      if (!mounted) return;
+
       if (user != null) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text("註冊成功！歡迎 $nickname")),
