@@ -2,6 +2,7 @@ import 'package:campus_tour/controllers/NFC_api.dart';
 import 'package:flutter/material.dart';
 import 'package:campus_tour/styles/app_theme.dart';
 import 'package:campus_tour/styles/nfc_leading_style.dart';
+import 'package:campus_tour/widgets/common/snackbar_builder.dart';
 
 class NfcButtonAbstract extends StatelessWidget {
   final Icon nfc_icon = NfcLeadingStyle.nfc_icon;
@@ -114,16 +115,6 @@ class _NfcButton2 extends State<NfcButton1> {
       now_style: _isScanning
           ? NfcLeadingStyle.NfcIngStyle
           : NfcLeadingStyle.primaryButtonStyle,
-    );
-  }
-}
-
-class SnackBarBuilder {
-  static SnackBar showOut(String mes) {
-    return SnackBar(
-      content: Text(mes),
-      duration: Duration(seconds: 2), // 設定停留時間，預設通常是 4 秒
-      behavior: SnackBarBehavior.floating, // 讓它「浮起來」，看起來更現代
     );
   }
 }
