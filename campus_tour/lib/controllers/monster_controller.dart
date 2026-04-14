@@ -62,35 +62,27 @@ class MonsterController extends GetxController {
     }).toList();
   }
 
-// //之後要拿掉，用來建立user monster collection 的假資料
-//   Future<void> seedUserMonsters(String uid) async {
-//     final db = FirebaseFirestore.instance;
-//
-//     // 假設怪物文件已經存在
-//     final m1Ref = db.collection("monsters").doc("m1");
-//     final m2Ref = db.collection("monsters").doc("m2");
-//     final m3Ref = db.collection("monsters").doc("m3");
-//
-//     // 建立三筆測試資料
-//     await addUserMonster(uid, UserMonsterModel(
-//       monsterRef: m1Ref,
-//       caughtAt: DateTime.now().subtract(const Duration(days: 2)),
-//       name: "m1",
-//       imageURL: "assets/images/fairy_img/中大湖.jpg"
-//     ));
-//
-//     await addUserMonster(uid, UserMonsterModel(
-//       monsterRef: m2Ref,
-//       caughtAt: DateTime.now().subtract(const Duration(days: 1)),
-//       name: "m2",
-//       imageURL: "assets/images/fairy_img/客家學院.jpg"
-//     ));
-//
-//     await addUserMonster(uid, UserMonsterModel(
-//       monsterRef: m3Ref,
-//       caughtAt: DateTime.now(),
-//       name: "m3",
-//       imageURL: "assets/images/fairy_img/傑尼龜.jpg"
-//     ));
-//   }
+//之後要拿掉，用來建立user monster collection 的假資料
+  Future<void> seedUserMonsters(String uid) async {
+    final db = FirebaseFirestore.instance;
+
+    // 從 monsters collection 抓出幾筆資料
+    final snapshot = await db.collection("monsters").limit(9).get();
+
+    for (var doc in snapshot.docs) {
+      final monsterData = doc.data();
+
+      // 建立 UserMonsterModel
+      final userMonster = UserMonsterModel(
+        monsterRef: doc.reference,
+        caughtAt: DateTime.now(), // 這裡可以隨機或指定時間
+        name: monsterData["name"] ?? "未知怪物",
+        imageURL: monsterData["imageURL"] ?? "",
+      );
+
+      // 加入使用者圖鑑
+      await addUserMonster(uid, userMonster);
+    }
+  }
+
 }

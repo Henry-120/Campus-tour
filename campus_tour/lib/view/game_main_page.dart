@@ -47,7 +47,7 @@ class _GameMainPageState extends State<GameMainPage> {
                 children: [
                   const GameHudOverlay(), // 呼叫剛建立的 Section
                   const Spacer(),
-                  const Character(), // 呼叫中間的小人
+                  // const Character(), // 呼叫中間的小人
                   const Spacer(flex: 2), // 讓下方留白多一點，平衡視覺
                 ],
               ),
