@@ -1,7 +1,6 @@
 import 'package:campus_tour/styles/nfc_leading_style.dart';
 import 'package:flutter/material.dart';
 import 'package:campus_tour/widgets/buttons/nfc_button.dart';
-import 'package:campus_tour/controllers/NFC_api.dart' show NfcScanResult;
 
 class LeadingNfcPage extends StatefulWidget {
   final List<String> treasureID;

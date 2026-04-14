@@ -26,7 +26,7 @@ class DrawerStyles {
   static const drawer_cross_alignment = CrossAxisAlignment.stretch;
 
   //side width
-  static const double sbutton_side_width = 1.5;
+  static const double sbutton_side_width = 0;
 
   //size
   static const Size sbutton_size = Size(100, 75);

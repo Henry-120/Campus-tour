@@ -60,18 +60,24 @@ class _CryptographyLevelPageState extends State<CryptographyLevelPage> {
             child: Container(
               width: double.infinity,
               decoration: LevelStyle.battleShellDecoration(theme),
-              clipBehavior: Clip.antiAlias,
+              clipBehavior: Clip.antiAlias, //子類抗鋸齒圓角設計
               child: LayoutBuilder(
                 builder: (context, constraints) {
                   final heroHeight = math.min(
-                    360.0,
-                    math.max(260.0, constraints.maxHeight * 0.42),
+                    360.0, //上限 360
+                    math.max(
+                      260.0,
+                      constraints.maxHeight * 0.42,
+                    ), //下限 260 或 42% 的高度，取較大者
                   );
 
                   return SingleChildScrollView(
+                    //使有辦法滾動，避免在小螢幕或大量內容時溢出
                     child: ConstrainedBox(
+                      //給定大小範圍的工具，可以設定最大最小值
                       constraints: BoxConstraints(
-                        minHeight: constraints.maxHeight,
+                        minHeight:
+                            constraints.maxHeight, //最小高度為可用高度，確保內容不足時仍然填滿整個區域
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
