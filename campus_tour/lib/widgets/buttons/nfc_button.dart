@@ -29,16 +29,19 @@ class NfcButtonAbstract extends StatelessWidget {
 
 //實例化
 class NfcButton1 extends StatefulWidget {
+  // The expected tag id to match against the scanned tag.
   final String ans;
-  final Function(NfcScanResult result) onResult; // 成功感應後的動作
+  // Called when a matching tag is scanned. No parameters — the button
+  // performs the comparison internally.
+  final VoidCallback onResult; // 成功感應後的動作 (no args)
   const NfcButton1({super.key, required this.ans, required this.onResult});
   @override
   State<StatefulWidget> createState() {
-    return _NfcButton2();
+    return _NfcButton1();
   }
 }
 
-class _NfcButton2 extends State<NfcButton1> {
+class _NfcButton1 extends State<NfcButton1> {
   bool _isScanning = false; // 控制按鈕狀態的關鍵
 
   Future<void> onPressed() async {
@@ -58,8 +61,17 @@ class _NfcButton2 extends State<NfcButton1> {
         // 只有在使用者還沒手動按停止 (isScanning 仍為 true) 時才處理結果
         if (mounted && _isScanning) {
           if (response.isSuccess) {
-            // --- 成功：透過 .data 取得結果，並回傳 ID ---
-            widget.onResult(response.data);
+            // --- 成功：透過 .data 取得結果 ---
+            final tagId = response.data.tagId;
+            // 比對是否符合預期的 ans
+            if (tagId == widget.ans) {
+              widget.onResult();
+            } else {
+              // 不符合則顯示錯誤訊息
+              ScaffoldMessenger.of(
+                context,
+              ).showSnackBar(SnackBarBuilder.showOut('ID 不符合，請重新嘗試！'));
+            }
           } else {
             // --- 失敗：處理錯誤類型 ---
             _handleError(response.error);

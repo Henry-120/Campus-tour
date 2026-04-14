@@ -1,4 +1,3 @@
-import 'package:campus_tour/controllers/NFC_api.dart';
 import 'package:campus_tour/styles/level_style.dart';
 import 'package:campus_tour/widgets/buttons/nfc_button.dart';
 import 'package:campus_tour/widgets/game/catching_pages/graphics_text_level.dart';
@@ -12,7 +11,7 @@ class GraphicsTextLevelPage extends StatefulWidget {
   });
 
   final GraphicsTextLevel level;
-  final void Function(NfcScanResult result) nextFunction;
+  final VoidCallback nextFunction;
 
   @override
   State<GraphicsTextLevelPage> createState() => _GraphicsTextLevelPageState();
