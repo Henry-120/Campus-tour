@@ -5,7 +5,6 @@ import 'package:campus_tour/widgets/common/welcome_logo.dart';
 import '../widgets/sections/auth_button_group.dart';
 import 'login_page.dart';
 import 'register_page.dart';
-import 'game_main_page.dart';
 import '../services/google_auth_service.dart';
 
 
@@ -17,6 +16,8 @@ class WelcomePage extends StatelessWidget {
     final googleAuthService = GoogleAuthService();
     final user = await googleAuthService.signInWithGoogle();
 
+    if (!context.mounted) return;
+    
     if (user != null) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(

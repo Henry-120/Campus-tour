@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 // Abc for class
 // a_b_c for var
-//aBc for funtion
+// aBc for funtion
 
 class DrawerStyles {
   //左拉選單的樣式設定
