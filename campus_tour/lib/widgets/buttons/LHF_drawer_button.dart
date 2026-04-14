@@ -18,7 +18,7 @@ class DrawerSecondaryButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(
-      style: ButtonStyle(),
+      style: DrawerStyles.drawer_button_style,
       onPressed: onPressedToDo,
       child: Text(text, style: DrawerStyles.second_button_text),
     );
