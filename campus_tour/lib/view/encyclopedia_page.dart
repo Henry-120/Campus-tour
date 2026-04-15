@@ -30,11 +30,7 @@ class _EncyclopediaPageState extends State<EncyclopediaPage> {
           // 網格區塊被抽離了
           Expanded(
             child: ElfGrid()),
-          // 篩選列
-          FilterBar(
-            selectedIndex: currentFilter,
-            onSelect: (index) => setState(() => currentFilter = index),
-          ),
+
         ],
       ),
     );
