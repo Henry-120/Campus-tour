@@ -34,9 +34,14 @@ class _RegisterPageState extends State<RegisterPage> {
 
         if (user != null) {
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("註冊成功！歡迎加入冒險之旅")));
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const GameMainPage()));
+          // 註冊成功後直接進入遊戲主頁
+          Navigator.pushAndRemoveUntil(
+            context, 
+            MaterialPageRoute(builder: (context) => const GameMainPage()),
+            (route) => false, // 清除導覽堆疊
+          );
         } else {
-          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("註冊失敗，該 Email 可能已被使用")));
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("註冊失敗，該 Email 可能已被使用或網路異常")));
         }
       } finally {
         if (mounted) setState(() => _isLoading = false);
@@ -49,7 +54,15 @@ class _RegisterPageState extends State<RegisterPage> {
     try {
       final user = await _controller.signInWithGoogle();
       if (user != null && mounted) {
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const GameMainPage()));
+        Navigator.pushAndRemoveUntil(
+          context, 
+          MaterialPageRoute(builder: (context) => const GameMainPage()),
+          (route) => false,
+        );
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Google 登入失敗: $e")));
       }
     } finally {
       if (mounted) setState(() => _isLoading = false);
@@ -93,6 +106,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       TextFormField(
                         controller: _emailController,
                         decoration: AppTheme.inputDecoration("電子郵件", Icons.email_outlined),
+                        keyboardType: TextInputType.emailAddress,
                         validator: (v) => (v != null && v.contains("@")) ? null : "Email 格式不正確",
                       ),
                       const SizedBox(height: 15),
@@ -128,7 +142,6 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                       const SizedBox(height: 20),
                       
-                      // Google 註冊選項
                       const Row(
                         children: [
                           Expanded(child: Divider()),
@@ -141,9 +154,10 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                       const SizedBox(height: 20),
                       
+                      // 使用圖標取代 SVG 網址避免顯示錯誤
                       OutlinedButton.icon(
                         onPressed: _isLoading ? null : _handleGoogleSignIn,
-                        icon: Image.network('https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg', height: 20, errorBuilder: (c, e, s) => const Icon(Icons.g_mobiledata, color: Colors.red)),
+                        icon: const Icon(Icons.login, color: Colors.redAccent), // 改用通用圖標
                         label: const Text("Google 快速註冊", style: TextStyle(color: AppTheme.textColor, fontWeight: FontWeight.bold)),
                         style: OutlinedButton.styleFrom(
                           minimumSize: const Size(double.infinity, 50),

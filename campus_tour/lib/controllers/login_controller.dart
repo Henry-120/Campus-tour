@@ -13,7 +13,7 @@ class LoginController {
   Future<User?> login(String email, String password) async {
     final user = await _authService.login(email, password);
     if (user != null) {
-      controller.loadUserCollection(user.uid);
+      await controller.loadUserCollection(user.uid);
     }
     return user;
   }
@@ -21,10 +21,8 @@ class LoginController {
   Future<User?> signInWithGoogle() async {
     final user = await _authService.signInWithGoogle();
     if (user != null) {
-      // 檢查使用者是否已存在於 Firestore
       final existingUser = await _firestoreService.getUser(user.uid);
       if (existingUser == null) {
-        // 如果是新使用者，建立資料
         await _firestoreService.setUser(
           UserModel(
             uid: user.uid,
@@ -33,7 +31,7 @@ class LoginController {
           ),
         );
       }
-      controller.loadUserCollection(user.uid);
+      await controller.loadUserCollection(user.uid);
     }
     return user;
   }
@@ -46,8 +44,10 @@ class LoginController {
     final user = await _authService.register(email, password);
     if (user != null) {
       await _firestoreService.setUser(
-        UserModel(uid: user.uid, email: user.email!, nickname: nickname),
+        UserModel(uid: user.uid, email: user.email ?? email, nickname: nickname),
       );
+      // 💡 重要修正：註冊後也要載入收藏，否則主畫面會沒資料
+      await controller.loadUserCollection(user.uid);
     }
     return user;
   }
