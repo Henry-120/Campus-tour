@@ -5,7 +5,9 @@ import 'package:geolocator/geolocator.dart'; // 💡 引入 GPS 套件
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:campus_tour/controllers/monster_controller.dart';
 import 'package:get/get.dart';
-
+import '../../view/nearby_monsters_display.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import '../../models/monster_model.dart';
 import 'user_marker.dart';
 
 class GameMap extends StatefulWidget {
@@ -15,7 +17,7 @@ class GameMap extends StatefulWidget {
   State<GameMap> createState() => _GameMapState();
 }
 
-class _GameMapState extends State<GameMap> {
+class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
   GoogleMapController? _mapController;
   StreamSubscription<Position>? _positionStream; // 📡 位置監聽器
 
@@ -200,12 +202,29 @@ class _GameMapState extends State<GameMap> {
       ),
     );
   }
+
+  Future<void> _handleMonsterCapture(MonsterModel monster) async {
+    final uid = FirebaseAuth.instance.currentUser?.uid;
+    if (uid == null) return;
+  
+    final controller = Get.find<MonsterController>();
+    final success = await controller.captureMonster(monster, uid);
+  
+    if (mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(success ? '成功捕捉 ${monster.name} ✓' : '${monster.name} 已捕捉過'),
+        backgroundColor: success ? Colors.green : Colors.orange,
+        duration: const Duration(seconds: 2),
+      ));
+    }
+  }
   
   @override
   void initState() {
     super.initState();
     _loadAssets(); // 一次性載入 JSON 與 圖片
     _checkPermissionAndListen(); // 初始化時檢查權限並開始監聽
+    listenToNearbyMonsters(_handleMonsterCapture);
   }
 
   @override
@@ -236,7 +255,10 @@ class _GameMapState extends State<GameMap> {
           } : {},
 
           buildingsEnabled: true,
-          markers: _playerMarker?.toMarkerSet() ?? {},
+          markers: {
+            if (_playerMarker != null) _playerMarker!.toMarker(),
+            ...monsterMarkers, // 👈 MonsterMarkersMixin 提供的 getter
+          },
           myLocationEnabled: false,
           myLocationButtonEnabled: false,
           zoomControlsEnabled: false,

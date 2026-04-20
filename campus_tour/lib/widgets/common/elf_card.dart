@@ -59,7 +59,7 @@ class ElfCard extends StatelessWidget {
   Widget _buildErrorState(String path) {
     return Container(
       width: double.infinity,
-      color: AppTheme.errorColor.withOpacity(0.05),
+      color: AppTheme.errorColor.withValues(alpha: 0.05),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

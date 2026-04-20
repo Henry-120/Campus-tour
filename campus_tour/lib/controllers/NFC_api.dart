@@ -123,7 +123,7 @@ class NfcResponse {
       // 我們直接拋出異常，阻止程式繼續執行
       throw StateError("錯誤：嘗試在掃描失敗的情況下讀取 Data。請先檢查 isSuccess！");
     }
-    return _data!; // 否則，安全地回傳資料
+    return _data; // 否則，安全地回傳資料
   }
 
   // --- 重點：封裝後的 Error 存取器 ---
@@ -131,6 +131,6 @@ class NfcResponse {
     if (_error == null) {
       throw StateError("錯誤：嘗試在掃描成功的情況下讀取 Error 類型。");
     }
-    return _error!;
+    return _error;
   }
 }
