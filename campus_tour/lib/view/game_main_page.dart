@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import '../widgets/sections/game_hud_overlay.dart';
-import '../widgets/game/character.dart';
 import '../widgets/game/game_map.dart';
 import '../services/audio_service.dart';
-import 'package:get/get.dart';
-import '../controllers/monster_controller.dart';
 import 'package:campus_tour/widgets/common/LHF_Drawer.dart';
 
 class GameMainPage extends StatefulWidget {
@@ -15,6 +12,7 @@ class GameMainPage extends StatefulWidget {
 }
 
 class _GameMainPageState extends State<GameMainPage> {
+
   Future<void> _playIntro() async {
     await AudioService().play(
       fileName: 'audio/intro.mp3',
@@ -31,13 +29,18 @@ class _GameMainPageState extends State<GameMainPage> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: AppDrawer(),
       body: Stack(
         children: [
-          // 1. 背景層 (未來放 Google Map)
-          GameMap(),
+          // 1. 背景層 (Google Map)
+          const GameMap(),
 
           // 2. UI 層
           SafeArea(

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';                // 提供 GetxController、Rxn、Obx 等
 import '../services/firestore_service.dart';
 import '../models/monster_model.dart';        // MonsterModel
@@ -22,6 +23,7 @@ class MonsterController extends GetxController {
 
   // 使用者已捕捉的怪物（圖鑑）
   var userMonsterCollection = <UserMonsterModel>[].obs;
+  var capturedMonsterIds = <String>{}.obs;
 
   Future<void> loadMonsterWithRelations(String id) async {
     final result = await _service.getMonsterWithRelations(id);
@@ -45,15 +47,39 @@ class MonsterController extends GetxController {
     await loadUserCollection(userId);
   }
 
-  // [ 如何將抓到的moster + captured time 轉成 userMonsterModel ]
-  // final userMonster = UserMonsterModel(
-  //   docId: null, // Firestore 新增時會自動產生
-  //   name: monster.name,
-  //   imageURL: monster.imageURL,
-  //   monsterRef: FirebaseFirestore.instance.collection("monsters").doc(docId),
-  //   caughtAt: capturedTime,
-  // );
-  //
+  // 捕捉怪物 - 從 nearbyMonsters 中選擇要捕捉的怪物
+  Future<bool> captureMonster(MonsterModel monster, String userId) async {
+    try {
+      // 檢查是否已經捕捉過這隻怪物
+      final alreadyCaptured = userMonsterCollection.any(
+        (m) => m.monsterRef.id == monster.id,
+      );
+
+      if (alreadyCaptured) {
+        debugPrint('[MonsterController] 怪物 ${monster.name} 已經被捕捉過');
+        return false;
+      }
+
+      // 建立 UserMonsterModel
+      final userMonster = UserMonsterModel(
+        monsterRef: FirebaseFirestore.instance.collection("monsters").doc(monster.id),
+        name: monster.name,
+        imageURL: monster.imageURL,
+        caughtAt: DateTime.now(),
+      );
+
+      // 新增到 Firestore
+      await addUserMonster(userId, userMonster);
+      
+      // ✅ 捕捉後從 nearbyMonsters 移除 → 地圖上的 Marker 也會消失
+      nearbyMonsters.removeWhere((m) => m.id == monster.id);
+      debugPrint('[MonsterController] 成功捕捉怪物: ${monster.name}');
+      return true;
+    } catch (e) {
+      debugPrint('[MonsterController] 捕捉怪物時出錯: $e');
+      return false;
+    }
+  }
 
   Future<void> updateNearbyMonsters(Position userPosition) async {
     final monsters = await _service.getAllMonsters(); // 從資料庫抓全部
@@ -84,5 +110,4 @@ class MonsterController extends GetxController {
       await addUserMonster(uid, userMonster);
     }
   }
-
 }

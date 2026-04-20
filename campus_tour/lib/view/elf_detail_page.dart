@@ -69,7 +69,7 @@ class _ElfDetailPageState extends State<ElfDetailPage> {
                   borderRadius: BorderRadius.circular(20),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.1),
+                      color: Colors.black.withValues(alpha: 0.1),
                       blurRadius: 10,
                       spreadRadius: 2,
                     ),
@@ -136,9 +136,9 @@ class _ElfDetailPageState extends State<ElfDetailPage> {
               width: double.infinity,
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: Colors.orange.withOpacity(0.05),
+                color: Colors.orange.withValues(alpha: 0.05),
                 borderRadius: BorderRadius.circular(15),
-                border: Border.all(color: Colors.orange.withOpacity(0.1)),
+                border: Border.all(color: Colors.orange.withValues(alpha: 0.1)),
               ),
               child: isLoading
                 ? const Center(child: CircularProgressIndicator())

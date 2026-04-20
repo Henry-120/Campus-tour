@@ -67,7 +67,7 @@
     "name": "嚶嚶嚶",
     "type": "火",
     "imageURL": "assets/images/fairy_img/friendship_cherry.jpg",
-    "location": { "latitude": 50.9685, "longitude": 150.1950 },
+    "location": { "latitude": 24.969957, "longitude": 121.19172 },
     "architectureRef": "/architectures/a2",
     "qaRef": ""
   },
