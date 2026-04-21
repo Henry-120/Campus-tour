@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../services/audio_service.dart';
-import '../../view/welcome_page.dart';
+import '../../view/login_page.dart';
 import '../../styles/app_theme.dart';
 
 class StartButton extends StatefulWidget {
@@ -26,10 +26,10 @@ class _StartButtonState extends State<StartButton> {
     await Future.delayed(const Duration(milliseconds: 350));
 
     if (!mounted) return;
-    debugPrint("[Debug][StartButton]:開始按鈕被按下，正在導航到 WelcomePage");
+    debugPrint("[Debug][StartButton]:開始按鈕被按下，正在導航到 LoginPage");
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => const WelcomePage()),
+      MaterialPageRoute(builder: (context) => const LoginPage()),
     );
   }
 
