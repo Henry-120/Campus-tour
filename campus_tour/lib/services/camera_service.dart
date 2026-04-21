@@ -8,6 +8,16 @@ class CameraService {
 
   final ImagePicker _picker = ImagePicker();
 
+  // 新增這個方法，專門處理「已經拍好的照片路徑」
+  void handleCapturedPath(String path) {
+    debugPrint('[Camera]: AR捕捉成功！路徑：$path');
+
+    // 未來你可以在這裡寫：
+    // 1. 上傳到 FastAPI 做 YOLO 辨識
+    // 2. 儲存到 Firestore 的精靈圖鑑
+    // 3. 彈出成功視窗
+  }
+
   /// 💡 啟動相機拍照
   Future<void> takePhoto() async {
     try {
