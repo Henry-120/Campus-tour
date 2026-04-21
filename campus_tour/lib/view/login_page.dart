@@ -54,8 +54,14 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    // ... 保持不變 (省略渲染程式碼以節省空間，但實務上需保留完整內容)
     return Scaffold(
       body: Container(
         width: double.infinity,

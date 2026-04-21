@@ -69,7 +69,7 @@ class _ElfDetailPageState extends State<ElfDetailPage> {
                   borderRadius: BorderRadius.circular(20),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.1),
+                      color: Colors.black.withValues(alpha: 0.1),
                       blurRadius: 10,
                       spreadRadius: 2,
                     ),
@@ -93,7 +93,7 @@ class _ElfDetailPageState extends State<ElfDetailPage> {
                           children: [
                             const Icon(Icons.broken_image, size: 50, color: Colors.grey),
                             const SizedBox(height: 8),
-                            Text("圖片路徑錯誤:\n$imagePath", 
+                            Text("圖片路徑錯誤:\n$imagePath",
                               textAlign: TextAlign.center,
                               style: const TextStyle(fontSize: 12, color: Colors.grey)
                             ),
@@ -136,9 +136,9 @@ class _ElfDetailPageState extends State<ElfDetailPage> {
               width: double.infinity,
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: Colors.orange.withOpacity(0.05),
+                color: Colors.orange.withValues(alpha: 0.05),
                 borderRadius: BorderRadius.circular(15),
-                border: Border.all(color: Colors.orange.withOpacity(0.1)),
+                border: Border.all(color: Colors.orange.withValues(alpha: 0.1)),
               ),
               child: isLoading
                 ? const Center(child: CircularProgressIndicator())

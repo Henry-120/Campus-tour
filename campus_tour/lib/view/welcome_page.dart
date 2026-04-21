@@ -17,6 +17,8 @@ class WelcomePage extends StatelessWidget {
     final googleAuthService = GoogleAuthService();
     final user = await googleAuthService.signInWithGoogle();
 
+    if (!context.mounted) return;
+
     if (user != null) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(

@@ -4,7 +4,14 @@ import '../../view/login_page.dart';
 import '../../styles/app_theme.dart';
 
 class StartButton extends StatefulWidget {
-  const StartButton({super.key});
+  final String label;           // 按鈕文字
+  final Widget destination;     // 跳轉目標頁面
+
+  const StartButton({
+    super.key,
+    required this.label,
+    required this.destination,
+  });
 
   @override
   State<StartButton> createState() => _StartButtonState();
@@ -26,10 +33,11 @@ class _StartButtonState extends State<StartButton> {
     await Future.delayed(const Duration(milliseconds: 350));
 
     if (!mounted) return;
-    debugPrint("[Debug][StartButton]:開始按鈕被按下，正在導航到 LoginPage");
+    debugPrint("[Debug][StartButton]:開始按鈕被按下，正在導航到 WelcomePage");
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => const LoginPage()),
+      // MaterialPageRoute(builder: (context) => const LoginPage()),
+      MaterialPageRoute(builder: (context) => widget.destination), // 使用傳入的目標頁面
     );
   }
 
@@ -52,7 +60,8 @@ class _StartButtonState extends State<StartButton> {
         ),
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-            backgroundColor:AppTheme.primaryColor.withValues(alpha: 0.7), 
+            backgroundColor:AppTheme.primaryColor.withValues(alpha: 0.7),
+            //backgroundColor: Color(0xFF64B5F6),
             padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(35), 
@@ -61,7 +70,7 @@ class _StartButtonState extends State<StartButton> {
           ),
           onPressed: _handleStart, // 💡 執行封裝好的邏輯
           child: Text(
-            "START",
+            widget.label,
             style: AppTheme.buttonTextStyle,
           ),
         ),

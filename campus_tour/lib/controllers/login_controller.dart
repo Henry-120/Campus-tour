@@ -14,7 +14,6 @@ class LoginController {
   final monsterController = Get.find<MonsterController>();
   final userController = Get.find<UserController>();
 
-  // 一般 Email 登入
   Future<User?> login(String email, String password) async {
     final user = await _authService.login(email, password);
     if (user != null) {
@@ -24,33 +23,32 @@ class LoginController {
     return user;
   }
 
-  // Google 快速登入
   Future<User?> signInWithGoogle() async {
     try {
       debugPrint("正在啟動 Google 認證...");
       final user = await _authService.signInWithGoogle();
-      
+
       if (user != null) {
         debugPrint("Google 認證成功: ${user.uid}");
-        
+
         // 檢查使用者是否已存在於 Firestore
         final existingUser = await _firestoreService.getUser(user.uid);
         if (existingUser == null) {
           debugPrint("新使用者，正在建立 Firestore 資料...");
-          
+
           // 💡 強制使用生成的 SVG 頭像，不論 Google 是否有提供照片
           final photoUrl = BigHeadService.generateRandomUrl();
-          
+
           await _firestoreService.setUser(
             UserModel(
               uid: user.uid,
               email: user.email ?? "",
               nickname: user.displayName ?? "冒險者",
-              photoUrl: photoUrl, 
+              photoUrl: photoUrl,
             ),
           );
         }
-        
+
         debugPrint("正在載入使用者收藏與資料...");
         await monsterController.loadUserCollection(user.uid);
         await userController.fetchCurrentUser();
@@ -72,11 +70,11 @@ class LoginController {
     final user = await _authService.register(email, password);
     if (user != null) {
       final randomAvatar = BigHeadService.generateRandomUrl();
-      
+
       await _firestoreService.setUser(
         UserModel(
-          uid: user.uid, 
-          email: user.email ?? email, 
+          uid: user.uid,
+          email: user.email ?? email,
           nickname: nickname,
           photoUrl: randomAvatar,
         ),

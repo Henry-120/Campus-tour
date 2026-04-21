@@ -27,18 +27,18 @@ class GoogleAuthService {
 
       if (user != null) {
         final userDoc = await _db.collection('users').doc(user.uid).get();
-        
+
         if (!userDoc.exists) {
           debugPrint("Google Sign-In: 初始化新使用者隨機頭像...");
           final nickname = user.displayName ?? "冒險者";
-          final email = user.email ?? ""; 
-          
+          final email = user.email ?? "";
+
           // 💡 統一使用隨機產生的 BigHead SVG 頭像
           final photoUrl = BigHeadService.generateRandomUrl();
-          
+
           final userModel = UserModel(
-            uid: user.uid, 
-            email: email, 
+            uid: user.uid,
+            email: email,
             nickname: nickname,
             photoUrl: photoUrl,
           );
