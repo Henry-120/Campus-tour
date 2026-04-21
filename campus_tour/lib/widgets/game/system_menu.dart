@@ -1,47 +1,104 @@
 import 'package:flutter/material.dart';
-import 'package:campus_tour/widgets/buttons/circle_icon_button.dart';
 import 'package:campus_tour/view/encyclopedia_page.dart';
 import '../../services/camera_service.dart';
+import '../../styles/app_theme.dart';
+import '../common/scale_button.dart';
 
 class SystemMenu extends StatelessWidget {
   const SystemMenu({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Row(
       mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        CircleIconButton(
+        _buildMenuButton(
           icon: Icons.auto_stories,
-          label: '圖鑑',
-          onTap: () => _navigateTo(context,'encyclopedia'),
+          label: 'Pokedex',
+          onTap: () => _navigateTo(context, const EncyclopediaPage()),
         ),
-        const SizedBox(height: 12),
-        CircleIconButton(
-          icon: Icons.camera_alt,
-          label: '相機',
-          onTap: () => CameraService().takePhoto(),
+        const SizedBox(width: 20),
+        _buildScanButton(onTap: () => CameraService().takePhoto()),
+        const SizedBox(width: 20),
+        _buildMenuButton(
+          icon: Icons.local_mall,
+          label: 'Bag',
+          onTap: () {
+            // 待實作背包頁面
+          },
         ),
       ],
     );
   }
-}
-void _navigateTo(BuildContext context, String pageType) {
-  // 宣告一個變數來儲存目標頁面
-  Widget destination;
 
-  // 根據傳入的字串判斷要跳轉到哪一個 Widget
-  if (pageType == 'encyclopedia') {
-    destination = const EncyclopediaPage();
-  } else {
-    // 預設跳轉
-    destination = const SystemMenu();
+  Widget _buildMenuButton({required IconData icon, required String label, required VoidCallback onTap}) {
+    return ScaleButton(
+      onTap: onTap,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              shape: BoxShape.circle,
+              boxShadow: [
+                BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 4, offset: const Offset(0, 2))
+              ],
+            ),
+            child: Icon(icon, color: Colors.grey[700], size: 28),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            label,
+            style: const TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.bold,
+              color: AppTheme.textColor,
+            ),
+          ),
+        ],
+      ),
+    );
   }
-  Navigator.push(
-    context,
-    MaterialPageRoute(
-      builder: (context) => destination,
-    ),
-  );
-}
 
+  Widget _buildScanButton({required VoidCallback onTap}) {
+    return ScaleButton(
+      onTap: onTap,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: AppTheme.secondaryColor, // 橘黃色
+              shape: BoxShape.circle,
+              border: Border.all(color: Colors.white, width: 4),
+              boxShadow: [
+                BoxShadow(color: Colors.black.withOpacity(0.2), blurRadius: 8, offset: const Offset(0, 4))
+              ],
+            ),
+            child: const Icon(Icons.camera_alt, color: Colors.white, size: 36),
+          ),
+          const SizedBox(height: 4),
+          const Text(
+            'SCAN',
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+              color: AppTheme.secondaryColor,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _navigateTo(BuildContext context, Widget destination) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => destination),
+    );
+  }
+}
