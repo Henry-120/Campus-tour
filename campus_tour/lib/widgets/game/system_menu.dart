@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:campus_tour/widgets/buttons/circle_icon_button.dart';
 import 'package:campus_tour/view/encyclopedia_page.dart';
+import '../../view/Camera_view.dart';
+import '../../view/Real_ar_view.dart';
 import '../../services/camera_service.dart';
 import '../../styles/app_theme.dart';
 import '../common/scale_button.dart';
@@ -19,14 +22,23 @@ class SystemMenu extends StatelessWidget {
           onTap: () => _navigateTo(context, const EncyclopediaPage()),
         ),
         const SizedBox(width: 20),
-        _buildScanButton(onTap: () => CameraService().takePhoto()),
+        _buildScanButton(onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const ArCapturePage(),
+          ),
+        ),
+        ),
         const SizedBox(width: 20),
         _buildMenuButton(
           icon: Icons.local_mall,
-          label: 'Bag',
-          onTap: () {
-            // 待實作背包頁面
-          },
+          label: 'AR',
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const RealArPage (),
+            ),
+          ),
         ),
       ],
     );

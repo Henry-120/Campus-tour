@@ -13,10 +13,10 @@ class EncyclopediaController {
   List<UserMonsterModel> getPageItems(int pageNumber) {
     int startIndex = (pageNumber - 1) * itemsPerPage;
     int endIndex = startIndex + itemsPerPage;
-    
+
     // 使用 .toList() 確保我們操作的是當前快照
     List<UserMonsterModel> allItems = _monsterController.userMonsterCollection.toList();
-    
+
     if (startIndex >= allItems.length) return [];
     if (endIndex > allItems.length) endIndex = allItems.length;
 

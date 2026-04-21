@@ -59,13 +59,13 @@ class ElfCard extends StatelessWidget {
   Widget _buildErrorState(String path) {
     return Container(
       width: double.infinity,
-      color: AppTheme.errorColor.withOpacity(0.05),
+      color: AppTheme.errorColor.withValues(alpha: 0.05),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Icon(Icons.broken_image, color: AppTheme.errorColor, size: 20),
           Text(
-            path.split('/').last, 
+            path.split('/').last,
             style: TextStyle(fontSize: 8, color: AppTheme.errorColor.withOpacity(0.7)),
             maxLines: 1,
           ),

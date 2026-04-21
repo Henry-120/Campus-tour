@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import '../widgets/game/user_hud.dart';
+import '../widgets/sections/game_hud_overlay.dart';
 import '../widgets/game/character.dart';
 import '../widgets/game/game_map.dart';
 import '../widgets/game/control_buttons.dart';
 import '../widgets/game/main_bottom_menu.dart';
 import '../widgets/common/scale_button.dart';
 import '../services/audio_service.dart';
-import '../widgets/common/LHF_Drawer.dart';
+import 'package:get/get.dart';
+import '../controllers/monster_controller.dart';
+import 'package:campus_tour/widgets/common/LHF_Drawer.dart';
 
 class GameMainPage extends StatefulWidget {
   const GameMainPage({super.key});
@@ -31,12 +34,16 @@ class _GameMainPageState extends State<GameMainPage> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: AppDrawer(),
       body: Stack(
         children: [
-          // 1. 背景地圖
           const GameMap(),
 
           // 2. 左上角：使用者頭像與狀態
