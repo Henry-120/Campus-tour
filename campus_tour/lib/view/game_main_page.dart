@@ -42,10 +42,6 @@ class _GameMainPageState extends State<GameMainPage> {
       drawer: AppDrawer(),
       body: Stack(
         children: [
-<<<<<<< HEAD
-          // 1. 背景層 (Google Map)
-=======
->>>>>>> origin/main
           const GameMap(),
 
           // 2. 左上角：使用者頭像與狀態

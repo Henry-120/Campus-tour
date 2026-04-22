@@ -16,11 +16,7 @@ class StartMenuGroup extends StatelessWidget {
         StartTitle(title: "校園導覽"),
         SizedBox(height: AppTheme.elementSpacing + 100),
         StartButton(
-<<<<<<< HEAD
-          label: "開始", 
-=======
           label: "開始",
->>>>>>> origin/main
           destination: LoginPage()), // 直接從登入頁開始
       ],
     );

@@ -70,11 +70,6 @@ class MonsterController extends GetxController {
 
       // 新增到 Firestore
       await addUserMonster(userId, userMonster);
-<<<<<<< HEAD
-      
-=======
-
->>>>>>> origin/main
       // ✅ 捕捉後從 nearbyMonsters 移除 → 地圖上的 Marker 也會消失
       nearbyMonsters.removeWhere((m) => m.id == monster.id);
       debugPrint('[MonsterController] 成功捕捉怪物: ${monster.name}');
