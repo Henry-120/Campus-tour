@@ -64,9 +64,9 @@ class _GameMainPageState extends State<GameMainPage> {
           ),
 
           // 4. 中間：角色小人
-          const Center(
-            child: Character(),
-          ),
+          // const Center(
+          //   child: Character(),
+          // ),
 
           // 5. 下方：主選單
           const Positioned(
