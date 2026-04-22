@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import '../../services/audio_service.dart';
-import '../../view/login_page.dart';
-import '../../styles/app_theme.dart';
 
 class StartButton extends StatefulWidget {
-  final String label;           // 按鈕文字
-  final Widget destination;     // 跳轉目標頁面
+  final String label;
+  final Widget destination;
 
   const StartButton({
     super.key,
@@ -17,8 +15,27 @@ class StartButton extends StatefulWidget {
   State<StartButton> createState() => _StartButtonState();
 }
 
-class _StartButtonState extends State<StartButton> {
-  double _buttonScale = 1.0;
+class _StartButtonState extends State<StartButton> with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _scaleAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 100),
+    );
+    _scaleAnimation = Tween<double>(begin: 1.0, end: 0.9).animate(
+      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
+    );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   Future<void> _handleStart() async {
     AudioService().play(
@@ -26,52 +43,42 @@ class _StartButtonState extends State<StartButton> {
       volume: 1.0,
       isLooping: false,
     );
-    
-    setState(() => _buttonScale = 1.2);
-    await Future.delayed(const Duration(milliseconds: 150));
-    setState(() => _buttonScale = 1.0);
-    await Future.delayed(const Duration(milliseconds: 350));
+
+    await _controller.forward();
+    await _controller.reverse();
+
+    await Future.delayed(const Duration(milliseconds: 200));
 
     if (!mounted) return;
-    debugPrint("[Debug][StartButton]:開始按鈕被按下，正在導航到 WelcomePage");
     Navigator.pushReplacement(
       context,
-      // MaterialPageRoute(builder: (context) => const LoginPage()),
-      MaterialPageRoute(builder: (context) => widget.destination), // 使用傳入的目標頁面
+      MaterialPageRoute(builder: (context) => widget.destination),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedScale(
-      scale: _buttonScale,
-      duration: const Duration(milliseconds: 150),
-      curve: Curves.easeInOut,
-      child: Container(
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.pinkAccent.withValues(alpha: 0.3),
-              blurRadius: 20,
-              spreadRadius: 5
-            )
-          ]
-        ),
-        child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            backgroundColor:AppTheme.primaryColor.withValues(alpha: 0.7),
-            //backgroundColor: Color(0xFF64B5F6),
-            padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(35), 
-              side: const BorderSide(color: Colors.white, width: 2), 
+    // 💡 獲取螢幕寬度以進行響應式設計
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    // 💡 設定按鈕寬度 (例如佔螢幕寬度的 65%)
+    final buttonWidth = screenWidth * 1.5;
+    // 💡 保持圖片比例
+    final buttonHeight = buttonWidth * (80 / 200);
+
+    return GestureDetector(
+      onTap: _handleStart,
+      child: ScaleTransition(
+        scale: _scaleAnimation,
+        child: Container(
+          width: buttonWidth,
+          height: buttonHeight,
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              // 💡 修正：明確指向 start_button.png
+              image: AssetImage('assets/images/start_button.png'),
+              fit: BoxFit.contain,
             ),
-          ),
-          onPressed: _handleStart, // 💡 執行封裝好的邏輯
-          child: Text(
-            widget.label,
-            style: AppTheme.buttonTextStyle,
           ),
         ),
       ),
