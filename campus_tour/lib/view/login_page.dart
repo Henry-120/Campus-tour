@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../styles/app_theme.dart';
 import '../controllers/login_controller.dart';
+import '../controllers/user_controller.dart';
 import 'game_main_page.dart';
 import 'register_page.dart';
 
@@ -13,7 +15,10 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final LoginController _controller = LoginController();
+<<<<<<< HEAD
   // 將帳號密碼預設寫死，方便測試
+=======
+>>>>>>> origin/main
   final TextEditingController _emailController = TextEditingController(text: "test@gmail.com");
   final TextEditingController _passwordController = TextEditingController(text: "123456");
   bool _isLoading = false;
@@ -29,6 +34,12 @@ class _LoginPageState extends State<LoginPage> {
       if (!mounted) return;
 
       if (user != null) {
+        if (Get.isRegistered<UserController>()) {
+          debugPrint("[LoginPage] 登入成功，正在獲取資料...");
+          await Get.find<UserController>().fetchCurrentUser();
+        }
+
+        if (!mounted) return;
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => const GameMainPage()),
@@ -38,6 +49,8 @@ class _LoginPageState extends State<LoginPage> {
           const SnackBar(content: Text("帳號或密碼錯誤")),
         );
       }
+    } catch (e) {
+      debugPrint("[LoginPage] 登入出錯: $e");
     } finally {
       if (mounted) setState(() => _isLoading = false);
     }
@@ -62,15 +75,12 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             children: [
               const SizedBox(height: 100),
-              // 標題區域
               Text("Campus Tour", style: AppTheme.titleStyle),
               const SizedBox(height: 8),
               const Text("開啟你的校園冒險之旅", 
                 style: TextStyle(color: AppTheme.textColor, fontSize: 16, fontWeight: FontWeight.w500)
               ),
               const SizedBox(height: 50),
-              
-              // 登入卡片
               Container(
                 padding: const EdgeInsets.all(AppTheme.cardPadding * 1.5),
                 decoration: BoxDecoration(
@@ -93,8 +103,6 @@ class _LoginPageState extends State<LoginPage> {
                       decoration: AppTheme.inputDecoration("密碼", Icons.lock_outline),
                     ),
                     const SizedBox(height: 40),
-                    
-                    // 登入按鈕
                     SizedBox(
                       width: double.infinity,
                       height: 55,
@@ -103,7 +111,6 @@ class _LoginPageState extends State<LoginPage> {
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppTheme.primaryColor,
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-                          elevation: 0,
                         ),
                         child: _isLoading 
                           ? const CircularProgressIndicator(color: Colors.white)
@@ -114,8 +121,6 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               const SizedBox(height: 30),
-              
-              // 註冊連結
               TextButton(
                 onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const RegisterPage())),
                 child: const Text("還沒有帳號？立即加入冒險", style: AppTheme.linkTextStyle),

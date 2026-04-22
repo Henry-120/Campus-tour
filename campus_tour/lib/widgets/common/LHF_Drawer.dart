@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:campus_tour/controllers/LHF_weather_api.dart';
-import 'package:campus_tour/controllers/LHF_drawer_weather_trans.dart';
 import 'package:campus_tour/styles/LHF_drawer_styles.dart';
 // import 'package:campus_tour/widgets/buttons/LHF_drawer_button.dart';
 // import 'package:campus_tour/controllers/LHF_drawer_button_funtion.dart';
 import 'package:campus_tour/widgets/sections/drawer_button_group.dart';
 // import 'package:campus_tour/view/LHF_setting_page.dart';
+import 'package:campus_tour/view/leading_nfc_page.dart';
 
 // Abc for class
 // a_b_c for var

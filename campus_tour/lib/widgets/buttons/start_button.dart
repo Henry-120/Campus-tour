@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
 import '../../services/audio_service.dart';
+<<<<<<< HEAD
+=======
+import '../../view/login_page.dart';
+>>>>>>> origin/main
 import '../../styles/app_theme.dart';
 // import '../../view/login_page.dart'; // 直接從登入頁開始
 
 class StartButton extends StatefulWidget {
   final String label;           // 按鈕文字
   final Widget destination;     // 跳轉目標頁面
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> origin/main
   const StartButton({
     super.key,
     required this.label,
