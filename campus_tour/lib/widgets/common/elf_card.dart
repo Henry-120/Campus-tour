@@ -65,7 +65,7 @@ class ElfCard extends StatelessWidget {
         children: [
           const Icon(Icons.broken_image, color: AppTheme.errorColor, size: 20),
           Text(
-            path.split('/').last, 
+            path.split('/').last,
             style: TextStyle(fontSize: 8, color: AppTheme.errorColor.withOpacity(0.7)),
             maxLines: 1,
           ),

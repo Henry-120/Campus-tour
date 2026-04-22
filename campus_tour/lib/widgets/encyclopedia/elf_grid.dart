@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../common/elf_card.dart';
 import '../../view/elf_detail_page.dart';
 import '../../controllers/encyclopedia_controller.dart';
+import '../../models/monster_model.dart';
 import 'package:get/get.dart';
 import '../../controllers/monster_controller.dart';
 
@@ -67,7 +68,7 @@ class _ElfGridState extends State<ElfGrid> {
               },
             ),
           ),
-          
+
           // 分頁控制欄
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
@@ -76,8 +77,8 @@ class _ElfGridState extends State<ElfGrid> {
               children: [
                 IconButton(
                   icon: const Icon(Icons.arrow_back_ios),
-                  onPressed: _currentPage > 1 
-                    ? () => setState(() => _currentPage--) 
+                  onPressed: _currentPage > 1
+                    ? () => setState(() => _currentPage--)
                     : null,
                 ),
                 Container(
@@ -96,8 +97,8 @@ class _ElfGridState extends State<ElfGrid> {
                 ),
                 IconButton(
                   icon: const Icon(Icons.arrow_forward_ios),
-                  onPressed: _currentPage < totalPages 
-                    ? () => setState(() => _currentPage++) 
+                  onPressed: _currentPage < totalPages
+                    ? () => setState(() => _currentPage++)
                     : null,
                 ),
               ],

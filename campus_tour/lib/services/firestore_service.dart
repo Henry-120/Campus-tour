@@ -21,6 +21,10 @@ class FirestoreService {
     return null;
   }
 
+  Future<void> updateUser(String uid, Map<String, dynamic> data) async {
+    await _db.collection("users").doc(uid).update(data);
+  }
+
   // ===== Monster =====
   Future<void> setMonster(MonsterModel monster) async {
     await _db.collection("monsters").doc(monster.id).set(monster.toMap());
@@ -133,5 +137,3 @@ class FirestoreService {
   }
 
 }
-
-

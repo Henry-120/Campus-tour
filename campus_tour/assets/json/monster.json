@@ -3,8 +3,8 @@
     "id": "m1",
     "name": "中大湖水怪",
     "type": "水",
-    "imageURL": "assets/images/fairy_img/zhongda_lake.jpg",
-    "location": { "latitude": 24.9681, "longitude": 121.1919 },
+    "imageURL": "assets/images/fairy_img/中大湖.jpg",
+    "location": { "latitude": 24.970919577227008, "longitude": 121.19146340514713 },
     "architectureRef": "/architectures/a1",
     "qaRef": "/questions/qa1"
   },
@@ -12,7 +12,7 @@
     "id": "m2",
     "name": "客家狗",
     "type": "金",
-    "imageURL": "assets/images/fairy_img/hakka_college.jpg",
+    "imageURL": "assets/images/fairy_img/客家學院.jpg",
     "location": { "latitude": 50.9685, "longitude": 150.1950 },
     "architectureRef": "/architectures/a6",
     "qaRef": ""
@@ -21,25 +21,25 @@
     "id": "m3",
     "name": "小蛋球",
     "type": "木",
-    "imageURL": "assets/images/fairy_img/geoscience.jpg",
+    "imageURL": "assets/images/fairy_img/地科院.jpg",
     "location": { "latitude": 50.9685, "longitude": 150.1950 },
     "architectureRef": "/architectures/a3",
     "qaRef": "/questions/qa3"
   },
   {
-    "id": "m4",
-    "name": "大大象",
-    "type": "火",
-    "imageURL": "assets/images/fairy_img/elephant_five_forms.jpg",
-    "location": { "latitude": 50.9685, "longitude": 150.1950 },
-    "architectureRef": "/architectures/a4",
-    "qaRef": ""
+  "id": "m4",
+  "name": "大大象",
+  "type": "土",
+  "imageURL": "assets/images/fairy_img/大象五形.jpg",
+  "location": { "latitude": 50.9685, "longitude": 150.1950 },
+  "architectureRef": "/architectures/a4",
+  "qaRef": ""
   },
   {
     "id": "m5",
     "name": "小拳極",
-    "type": "火",
-    "imageURL": "assets/images/fairy_img/taichi_sculpture.jpg",
+    "type": "土",
+    "imageURL": "assets/images/fairy_img/太極銅雕.jpg",
     "location": { "latitude": 50.9685, "longitude": 150.1950 },
     "architectureRef": "/architectures/a5",
     "qaRef": ""
@@ -47,8 +47,8 @@
   {
     "id": "m6",
     "name": "機居械",
-    "type": "火",
-    "imageURL": "assets/images/fairy_img/engineering.jpg",
+    "type": "金",
+    "imageURL": "assets/images/fairy_img/工學院.jpg",
     "location": { "latitude": 50.9685, "longitude": 150.1950 },
     "architectureRef": "/architectures/a7",
     "qaRef": ""
@@ -56,26 +56,32 @@
   {
     "id": "m7",
     "name": "讀書怪",
-    "type": "火",
-    "imageURL": "assets/images/fairy_img/literature.jpg",
-    "location": { "latitude": 50.9685, "longitude": 150.1950 },
+    "type": "木",
+    "imageURL": "assets/images/fairy_img/文學院.jpg",
+    "location": { "latitude": 24.968897381555106, "longitude": 121.1946085189337 },
     "architectureRef": "/architectures/a8",
     "qaRef": ""
   },
   {
     "id": "m8",
     "name": "嚶嚶嚶",
+<<<<<<< HEAD
     "type": "火",
     "imageURL": "assets/images/fairy_img/friendship_cherry.jpg",
     "location": { "latitude": 24.969957, "longitude": 121.19172 },
+=======
+    "type": "木",
+    "imageURL": "assets/images/fairy_img/友好之櫻.jpg",
+    "location": { "latitude": 24.970220951203125, "longitude":121.19192852509413 },
+>>>>>>> origin/main
     "architectureRef": "/architectures/a2",
     "qaRef": ""
   },
   {
     "id": "m9",
     "name": "環寶寶",
-    "type": "火",
-    "imageURL": "assets/images/fairy_img/sustainability_college.jpg",
+    "type": "土",
+    "imageURL": "assets/images/fairy_img/永續...院.jpg",
     "location": { "latitude": 50.9685, "longitude": 150.1950 },
     "architectureRef": "/architectures/a9",
     "qaRef": ""
@@ -83,8 +89,8 @@
   {
     "id": "m10",
     "name": "數碼博士",
-    "type": "火",
-    "imageURL": "assets/images/fairy_img/science_college.jpg",
+    "type": "木",
+    "imageURL": "assets/images/fairy_img/理學院.jpg",
     "location": { "latitude": 50.9685, "longitude": 150.1950 },
     "architectureRef": "/architectures/a10",
     "qaRef": ""
@@ -92,8 +98,8 @@
   {
     "id": "m11",
     "name": "大英菌",
-    "type": "火",
-    "imageURL": "assets/images/fairy_img/biomedical_college.jpg",
+    "type": "水",
+    "imageURL": "assets/images/fairy_img/生醫理工學院.jpg",
     "location": { "latitude": 50.9685, "longitude": 150.1950 },
     "architectureRef": "/architectures/a11",
     "qaRef": ""
@@ -101,8 +107,8 @@
   {
     "id": "m12",
     "name": "毛毛精靈",
-    "type": "火",
-    "imageURL": "assets/images/fairy_img/baihua_river.jpg",
+    "type": "木",
+    "imageURL": "assets/images/fairy_img/百花川.jpg",
     "location": { "latitude": 50.9685, "longitude": 150.1950 },
     "architectureRef": "/architectures/a12",
     "qaRef": ""
@@ -110,9 +116,9 @@
   {
     "id": "m13",
     "name": "SM獸",
-    "type": "火",
-    "imageURL": "assets/images/fairy_img/business_college.jpg",
-    "location": { "latitude": 50.9685, "longitude": 150.1950 },
+    "type": "金",
+    "imageURL": "assets/images/fairy_img/管院.jpg",
+    "location": { "latitude": 24.97079253260032, "longitude": 121.19404607765239 },
     "architectureRef": "/architectures/a13",
     "qaRef": ""
   },
@@ -120,7 +126,7 @@
     "id": "m14",
     "name": "亮晶精",
     "type": "火",
-    "imageURL": "assets/images/fairy_img/electrical_college.jpg",
+    "imageURL": "assets/images/fairy_img/資電院.jpg",
     "location": { "latitude": 50.9685, "longitude": 150.1950 },
     "architectureRef": "/architectures/a14",
     "qaRef": ""

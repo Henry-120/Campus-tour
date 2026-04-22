@@ -166,11 +166,11 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
 
     if (!_hasCenteredMap) {
       _hasCenteredMap = true;
-      
+
       _mapController!.animateCamera(
         CameraUpdate.newLatLngBounds(campusBounds, 200),
       );
-      
+
       // 1 秒后拉进玩家位置，然后锁定缩放倍率
       Future.delayed(const Duration(seconds: 1), () {
         if (_mapController != null && mounted) {
@@ -182,7 +182,7 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
               ),
             ),
           );
-          
+
           // 完成后锁定缩放倍率
           setState(() {
             _minZoomRate = 19.5;
@@ -206,10 +206,17 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
   Future<void> _handleMonsterCapture(MonsterModel monster) async {
     final uid = FirebaseAuth.instance.currentUser?.uid;
     if (uid == null) return;
+<<<<<<< HEAD
   
     final controller = Get.find<MonsterController>();
     final success = await controller.captureMonster(monster, uid);
   
+=======
+
+    final controller = Get.find<MonsterController>();
+    final success = await controller.captureMonster(monster, uid);
+
+>>>>>>> origin/main
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text(success ? '成功捕捉 ${monster.name} ✓' : '${monster.name} 已捕捉過'),

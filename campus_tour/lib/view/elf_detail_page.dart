@@ -25,7 +25,9 @@ class _ElfDetailPageState extends State<ElfDetailPage> {
   Future<void> _loadStory() async {
     try {
       if (widget.monsterModel.architectureRef != null) {
-        final result = await _controller.getStory(widget.monsterModel.architectureRef!);
+        final result = await _controller.getStory(
+          widget.monsterModel.architectureRef!,
+        );
         setState(() {
           story = result;
           isLoading = false;

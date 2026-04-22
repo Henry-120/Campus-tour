@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import '../widgets/game/user_hud.dart';
 import '../widgets/sections/game_hud_overlay.dart';
 import '../widgets/game/game_map.dart';
+import '../widgets/game/control_buttons.dart';
+import '../widgets/game/main_bottom_menu.dart';
+import '../widgets/common/scale_button.dart';
 import '../services/audio_service.dart';
 import 'package:campus_tour/widgets/common/LHF_Drawer.dart';
 
@@ -17,14 +21,13 @@ class _GameMainPageState extends State<GameMainPage> {
     await AudioService().play(
       fileName: 'audio/intro.mp3',
       volume: 1.0,
-      isLooping: false, // 通常 Intro 只播一次
+      isLooping: false,
     );
   }
 
   @override
   void initState() {
     super.initState();
-    debugPrint("[Debug][GameMainPage]:進入game_main_page");
     _playIntro();
   }
 
@@ -39,22 +42,40 @@ class _GameMainPageState extends State<GameMainPage> {
       drawer: AppDrawer(),
       body: Stack(
         children: [
+<<<<<<< HEAD
           // 1. 背景層 (Google Map)
+=======
+>>>>>>> origin/main
           const GameMap(),
 
-          // 2. UI 層
-          SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              child: Column(
-                children: [
-                  const GameHudOverlay(), // 呼叫剛建立的 Section
-                  const Spacer(),
-                  // const Character(), // 呼叫中間的小人
-                  const Spacer(flex: 2), // 讓下方留白多一點，平衡視覺
-                ],
-              ),
+          // 2. 左上角：使用者頭像與狀態
+          const Positioned(
+            top: 50,
+            left: 20,
+            child: ScaleButton(
+              onTap: null, // UserHud 內部已有點擊邏輯
+              child: UserHud(),
             ),
+          ),
+
+          // 3. 右上角：控制按鈕 (定位、圖層)
+          const Positioned(
+            top: 50,
+            right: 20,
+            child: ControlButtons(),
+          ),
+
+          // 4. 中間：角色小人
+          // const Center(
+          //   child: Character(),
+          // ),
+
+          // 5. 下方：主選單
+          const Positioned(
+            bottom: 40,
+            left: 0,
+            right: 0,
+            child: MainBottomMenu(),
           ),
         ],
       ),
