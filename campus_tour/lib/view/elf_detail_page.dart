@@ -25,7 +25,9 @@ class _ElfDetailPageState extends State<ElfDetailPage> {
   Future<void> _loadStory() async {
     try {
       if (widget.monsterModel.architectureRef != null) {
-        final result = await _controller.getStory(widget.monsterModel.architectureRef!);
+        final result = await _controller.getStory(
+          widget.monsterModel.architectureRef!,
+        );
         setState(() {
           story = result;
           isLoading = false;
@@ -93,7 +95,7 @@ class _ElfDetailPageState extends State<ElfDetailPage> {
                           children: [
                             const Icon(Icons.broken_image, size: 50, color: Colors.grey),
                             const SizedBox(height: 8),
-                            Text("圖片路徑錯誤:\n$imagePath",
+                            Text("圖片路徑錯誤:\n$imagePath", 
                               textAlign: TextAlign.center,
                               style: const TextStyle(fontSize: 12, color: Colors.grey)
                             ),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../styles/app_theme.dart';
 import '../controllers/login_controller.dart';
-import '../controllers/user_controller.dart'; // 💡 引入 UserController
+import '../controllers/user_controller.dart';
 import 'game_main_page.dart';
 import 'register_page.dart';
 
@@ -30,9 +30,8 @@ class _LoginPageState extends State<LoginPage> {
       if (!mounted) return;
 
       if (user != null) {
-        // 💡 關鍵修正：登入成功後，手動等待 UserController 抓取完資料
         if (Get.isRegistered<UserController>()) {
-          debugPrint("[LoginPage] 登入成功，正在抓取使用者資料...");
+          debugPrint("[LoginPage] 登入成功，正在獲取資料...");
           await Get.find<UserController>().fetchCurrentUser();
         }
 
@@ -47,7 +46,7 @@ class _LoginPageState extends State<LoginPage> {
         );
       }
     } catch (e) {
-      debugPrint("[LoginPage] 登入發生錯誤: $e");
+      debugPrint("[LoginPage] 登入出錯: $e");
     } finally {
       if (mounted) setState(() => _isLoading = false);
     }
