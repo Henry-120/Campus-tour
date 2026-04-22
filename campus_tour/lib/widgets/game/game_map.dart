@@ -206,17 +206,10 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
   Future<void> _handleMonsterCapture(MonsterModel monster) async {
     final uid = FirebaseAuth.instance.currentUser?.uid;
     if (uid == null) return;
-<<<<<<< HEAD
-  
-    final controller = Get.find<MonsterController>();
-    final success = await controller.captureMonster(monster, uid);
-  
-=======
 
     final controller = Get.find<MonsterController>();
     final success = await controller.captureMonster(monster, uid);
 
->>>>>>> origin/main
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text(success ? '成功捕捉 ${monster.name} ✓' : '${monster.name} 已捕捉過'),

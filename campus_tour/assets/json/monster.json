@@ -65,15 +65,9 @@
   {
     "id": "m8",
     "name": "嚶嚶嚶",
-<<<<<<< HEAD
-    "type": "火",
-    "imageURL": "assets/images/fairy_img/friendship_cherry.jpg",
-    "location": { "latitude": 24.969957, "longitude": 121.19172 },
-=======
     "type": "木",
     "imageURL": "assets/images/fairy_img/友好之櫻.jpg",
     "location": { "latitude": 24.970220951203125, "longitude":121.19192852509413 },
->>>>>>> origin/main
     "architectureRef": "/architectures/a2",
     "qaRef": ""
   },

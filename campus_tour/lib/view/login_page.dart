@@ -15,10 +15,6 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final LoginController _controller = LoginController();
-<<<<<<< HEAD
-  // 將帳號密碼預設寫死，方便測試
-=======
->>>>>>> origin/main
   final TextEditingController _emailController = TextEditingController(text: "test@gmail.com");
   final TextEditingController _passwordController = TextEditingController(text: "123456");
   bool _isLoading = false;
