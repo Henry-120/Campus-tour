@@ -22,7 +22,7 @@ class DrawerStyles {
   static const int rain_to_sunny = 1500;
 
   //對齊格式
-  static const drawer_main_alignment = MainAxisAlignment.start;
+  static const drawer_main_alignment = MainAxisAlignment.center;
   static const drawer_cross_alignment = CrossAxisAlignment.stretch;
 
   //side width
