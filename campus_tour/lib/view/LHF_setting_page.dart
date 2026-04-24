@@ -1,5 +1,7 @@
 import 'package:campus_tour/local_information/local_setting.dart';
+import 'package:campus_tour/styles/app_theme.dart';
 import 'package:campus_tour/styles/setting_page_styles.dart';
+import 'package:campus_tour/view/user_protocol.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -37,6 +39,11 @@ class SteeingPageStrings {
   static const vibrationEnabledMessage = '在支援振動的情境中，遊戲可以提供更明顯的回饋。';
   static const vibrationDisabledMessage = '目前不會發出震動提示，適合需要安靜的使用情境。';
 
+  // Protocol
+  static const userProtocolTitle = '使用者協議';
+  static const userProtocolDescription = '查看目前版本的使用者協議與說明內容。';
+  static const userProtocolButtonHint = '點擊前往閱讀協議內容';
+
   static String volumePercentage(int volume) => '$volume%';
 
   static String currentVolume(int volume) => '目前音量 ${volumePercentage(volume)}';
@@ -49,6 +56,32 @@ class SteeingPageStrings {
 
   static String vibrationPanelMessage(bool enabled) =>
       enabled ? vibrationEnabledMessage : vibrationDisabledMessage;
+}
+
+class FullPageList {
+  static const List<Widget> stttingList = [
+    FullPageList.pageHeader,
+    FullPageList.sectionGap,
+    FullPageList.firstCardGap,
+    FullPageList.volumeSetCard,
+    FullPageList.cardGap,
+    FullPageList.vibrationSetCard,
+    FullPageList.cardGap,
+    FullPageList.userProtocolButton,
+  ];
+
+  static const Widget pageHeader = _PageHeader();
+  static const Widget sectionGap = SizedBox(
+    height: SettingPageStyles.sectionSpacing,
+  );
+  // static const Widget heroPanel = _HeroPanel();
+  static const Widget firstCardGap = SizedBox(
+    height: SettingPageStyles.cardSpacing,
+  );
+  static const Widget volumeSetCard = _VolumeSettingCard();
+  static const Widget cardGap = SizedBox(height: SettingPageStyles.cardSpacing);
+  static const Widget vibrationSetCard = _VibrationSettingCard();
+  static const Widget userProtocolButton = _UserProtocolButton();
 }
 
 class SettingPage extends StatelessWidget {
@@ -76,164 +109,278 @@ class SettingPage extends StatelessWidget {
                 return const _LoadingPanel();
               }
 
-              return ValueListenableBuilder(
-                valueListenable: LocalSettingService.settingsBox.listenable(),
-                builder: (context, box, child) {
-                  final int volume = LocalSettingService.volume.current;
-                  final bool vibrationEnabled =
-                      LocalSettingService.vibration.isEnabled;
-
-                  return Align(
-                    alignment: Alignment.topCenter,
-                    child: ConstrainedBox(
-                      constraints: SettingPageStyles.pageContentConstraints,
-                      child: ListView(
-                        padding: SettingPageStyles.pagePadding,
-                        physics: const BouncingScrollPhysics(),
-                        children: [
-                          const _PageHeader(),
-                          const SizedBox(
-                            height: SettingPageStyles.sectionSpacing,
-                          ),
-                          // const _HeroPanel(),
-                          const SizedBox(height: SettingPageStyles.cardSpacing),
-                          // 音量設定卡
-                          _SettingCard(
-                            icon: Icons.volume_up_rounded,
-                            title: SteeingPageStrings.volumeTitle,
-                            description: SteeingPageStrings.volumeDescription,
-                            status: _StatusChip(
-                              label: SteeingPageStrings.volumePercentage(
-                                volume,
-                              ),
-                              enabled: volume > 0,
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SliderTheme(
-                                  data: SettingPageStyles.sliderTheme(context),
-                                  child: Slider(
-                                    value: volume.toDouble(),
-                                    min: 0,
-                                    max: 100,
-                                    divisions: 100,
-                                    label: SteeingPageStrings.volumePercentage(
-                                      volume,
-                                    ),
-                                    onChanged: (value) async {
-                                      await LocalSettingService.volume.update(
-                                        value.round(),
-                                      );
-                                    },
-                                  ),
-                                ),
-                                Row(
-                                  children: [
-                                    Text(
-                                      SteeingPageStrings.volumeMuteLabel,
-                                      style: SettingPageStyles.scaleHintStyle,
-                                    ),
-                                    Expanded(
-                                      child: Center(
-                                        child: Text(
-                                          SteeingPageStrings.currentVolume(
-                                            volume,
-                                          ),
-                                          style:
-                                              SettingPageStyles.toggleTitleStyle(
-                                                volume > 0,
-                                              ),
-                                        ),
-                                      ),
-                                    ),
-                                    Text(
-                                      SteeingPageStrings.volumeMaxLabel,
-                                      style: SettingPageStyles.scaleHintStyle,
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(height: SettingPageStyles.cardSpacing),
-                          // 振動設定卡
-                          _SettingCard(
-                            icon: Icons.vibration_rounded,
-                            title: SteeingPageStrings.vibrationTitle,
-                            description:
-                                SteeingPageStrings.vibrationDescription,
-                            status: _StatusChip(
-                              label: SteeingPageStrings.vibrationStatus(
-                                vibrationEnabled,
-                              ),
-                              enabled: vibrationEnabled,
-                            ),
-                            child: AnimatedContainer(
-                              duration: SettingPageStyles.animationDuration,
-                              padding: SettingPageStyles.toggleShellPadding,
-                              decoration:
-                                  SettingPageStyles.toggleShellDecoration(
-                                    vibrationEnabled,
-                                  ),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          SteeingPageStrings.vibrationPanelTitle(
-                                            vibrationEnabled,
-                                          ),
-                                          style:
-                                              SettingPageStyles.toggleTitleStyle(
-                                                vibrationEnabled,
-                                              ),
-                                        ),
-                                        const SizedBox(
-                                          height: SettingPageStyles.gap2xs,
-                                        ),
-                                        Text(
-                                          SteeingPageStrings.vibrationPanelMessage(
-                                            vibrationEnabled,
-                                          ),
-                                          style:
-                                              SettingPageStyles.bodyTextStyle,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    width: SettingPageStyles.gapMd,
-                                  ),
-                                  Switch(
-                                    value: vibrationEnabled,
-                                    activeThumbColor: SettingPageStyles
-                                        .switchActiveThumbColor,
-                                    activeTrackColor: SettingPageStyles
-                                        .switchActiveTrackColor,
-                                    inactiveThumbColor: SettingPageStyles
-                                        .switchInactiveThumbColor,
-                                    inactiveTrackColor: SettingPageStyles
-                                        .switchInactiveTrackColor,
-                                    onChanged: (value) async {
-                                      await LocalSettingService.vibration
-                                          .update(value);
-                                    },
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
+              return Align(
+                alignment: Alignment.topCenter,
+                child: ConstrainedBox(
+                  constraints: SettingPageStyles.pageContentConstraints,
+                  child: ListView(
+                    padding: SettingPageStyles.pagePadding,
+                    physics: const BouncingScrollPhysics(),
+                    children: FullPageList.stttingList,
+                  ),
+                ),
               );
             },
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _VolumeSettingCard extends StatelessWidget {
+  const _VolumeSettingCard();
+
+  @override
+  Widget build(BuildContext context) {
+    return ValueListenableBuilder(
+      valueListenable: LocalSettingService.settingsBox.listenable(),
+      builder: (context, _, child) {
+        final int volume = LocalSettingService.volume.current;
+
+        return _SettingCard(
+          icon: Icons.volume_up_rounded,
+          title: SteeingPageStrings.volumeTitle,
+          description: SteeingPageStrings.volumeDescription,
+          status: _StatusChip(
+            label: SteeingPageStrings.volumePercentage(volume),
+            enabled: volume > 0,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SliderTheme(
+                data: SettingPageStyles.sliderTheme(context),
+                child: Slider(
+                  value: volume.toDouble(),
+                  min: 0,
+                  max: 100,
+                  divisions: 100,
+                  label: SteeingPageStrings.volumePercentage(volume),
+                  onChanged: (value) async {
+                    await LocalSettingService.volume.update(value.round());
+                  },
+                ),
+              ),
+              Row(
+                children: [
+                  Text(
+                    SteeingPageStrings.volumeMuteLabel,
+                    style: SettingPageStyles.scaleHintStyle,
+                  ),
+                  Expanded(
+                    child: Center(
+                      child: Text(
+                        SteeingPageStrings.currentVolume(volume),
+                        style: SettingPageStyles.toggleTitleStyle(volume > 0),
+                      ),
+                    ),
+                  ),
+                  Text(
+                    SteeingPageStrings.volumeMaxLabel,
+                    style: SettingPageStyles.scaleHintStyle,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _VibrationSettingCard extends StatelessWidget {
+  const _VibrationSettingCard();
+
+  @override
+  Widget build(BuildContext context) {
+    return ValueListenableBuilder(
+      valueListenable: LocalSettingService.settingsBox.listenable(),
+      builder: (context, _, child) {
+        final bool vibrationEnabled = LocalSettingService.vibration.isEnabled;
+
+        return _SettingCard(
+          icon: Icons.vibration_rounded,
+          title: SteeingPageStrings.vibrationTitle,
+          description: SteeingPageStrings.vibrationDescription,
+          status: _StatusChip(
+            label: SteeingPageStrings.vibrationStatus(vibrationEnabled),
+            enabled: vibrationEnabled,
+          ),
+          child: AnimatedContainer(
+            duration: SettingPageStyles.animationDuration,
+            padding: SettingPageStyles.toggleShellPadding,
+            decoration: SettingPageStyles.toggleShellDecoration(
+              vibrationEnabled,
+            ),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        SteeingPageStrings.vibrationPanelTitle(
+                          vibrationEnabled,
+                        ),
+                        style: SettingPageStyles.toggleTitleStyle(
+                          vibrationEnabled,
+                        ),
+                      ),
+                      const SizedBox(height: SettingPageStyles.gap2xs),
+                      Text(
+                        SteeingPageStrings.vibrationPanelMessage(
+                          vibrationEnabled,
+                        ),
+                        style: SettingPageStyles.bodyTextStyle,
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: SettingPageStyles.gapMd),
+                Switch(
+                  value: vibrationEnabled,
+                  activeThumbColor: SettingPageStyles.switchActiveThumbColor,
+                  activeTrackColor: SettingPageStyles.switchActiveTrackColor,
+                  inactiveThumbColor:
+                      SettingPageStyles.switchInactiveThumbColor,
+                  inactiveTrackColor:
+                      SettingPageStyles.switchInactiveTrackColor,
+                  onChanged: (value) async {
+                    await LocalSettingService.vibration.update(value);
+                  },
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _UserProtocolButton extends StatefulWidget {
+  const _UserProtocolButton();
+
+  @override
+  State<_UserProtocolButton> createState() => _UserProtocolButtonState();
+}
+
+class _UserProtocolButtonState extends State<_UserProtocolButton> {
+  static const Duration _pressAnimationDuration = Duration(milliseconds: 120);
+  static const double _pressedScale = 0.96;
+
+  bool _isPressed = false;
+
+  void _setPressed(bool value) {
+    if (_isPressed == value) {
+      return;
+    }
+
+    setState(() {
+      _isPressed = value;
+    });
+  }
+
+  Future<void> _handleTapUp() async {
+    _setPressed(false);
+    await Future<void>.delayed(_pressAnimationDuration);
+    if (!mounted) {
+      return;
+    }
+
+    await Navigator.of(context).push(
+      MaterialPageRoute<void>(builder: (context) => const UserProtocolPage()),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTapDown: (_) => _setPressed(true),
+      onTapUp: (_) => _handleTapUp(),
+      onTapCancel: () => _setPressed(false),
+      behavior: HitTestBehavior.opaque,
+      child: AnimatedScale(
+        scale: _isPressed ? _pressedScale : 1,
+        duration: _pressAnimationDuration,
+        curve: Curves.easeOutCubic,
+        child: Container(
+          width: double.infinity,
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+          decoration: BoxDecoration(
+            gradient: const LinearGradient(
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+              colors: [
+                SettingPageStyles.switchActiveTrackColor,
+                SettingPageStyles.switchInactiveTrackColor,
+              ],
+            ),
+            borderRadius: SettingPageStyles.panelBorderRadius,
+            boxShadow: AppTheme.softShadow,
+          ),
+          child: Row(
+            children: [
+              Container(
+                width: SettingPageStyles.settingIconSize,
+                height: SettingPageStyles.settingIconSize,
+                decoration: BoxDecoration(
+                  color: Colors.white.withValues(alpha: 0.18),
+                  borderRadius: SettingPageStyles.settingIconBorderRadius,
+                ),
+                child: const Icon(
+                  Icons.description_rounded,
+                  color: SettingPageStyles.surfaceIconColor,
+                  size: SettingPageStyles.settingIconGlyphSize,
+                ),
+              ),
+              const SizedBox(width: SettingPageStyles.gapLg),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      SteeingPageStrings.userProtocolTitle,
+                      style: AppTheme.cardTitleStyle.copyWith(
+                        fontSize: 20,
+                        color: Colors.white,
+                      ),
+                    ),
+                    const SizedBox(height: SettingPageStyles.gap2xs),
+                    Text(
+                      SteeingPageStrings.userProtocolDescription,
+                      style: AppTheme.detailBodyStyle.copyWith(
+                        fontSize: 14,
+                        height: 1.45,
+                        color: Colors.white.withValues(alpha: 0.92),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: SettingPageStyles.gapMd),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Icon(
+                    Icons.chevron_right_rounded,
+                    color: Colors.white.withValues(alpha: 0.92),
+                    size: 30,
+                  ),
+                  const SizedBox(height: SettingPageStyles.gap2xs),
+                  Text(
+                    SteeingPageStrings.userProtocolButtonHint,
+                    style: AppTheme.cardTitleStyle.copyWith(
+                      fontSize: 12,
+                      color: Colors.white.withValues(alpha: 0.88),
+                    ),
+                    textAlign: TextAlign.end,
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
       ),
@@ -280,86 +427,6 @@ class _PageHeader extends StatelessWidget {
   }
 }
 
-// class _HeroPanel extends StatelessWidget {
-//   const _HeroPanel();
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       decoration: SettingPageStyles.heroCardDecoration,
-//       padding: SettingPageStyles.heroPadding,
-//       child: LayoutBuilder(
-//         builder: (context, constraints) {
-//           final bool isCompact =
-//               constraints.maxWidth < SettingPageStyles.heroCompactBreakpoint;
-//           final Widget content = Column(
-//             crossAxisAlignment: CrossAxisAlignment.start,
-//             children: [
-//               Text(
-//                 SteeingPageStrings.heroTitle,
-//                 style: SettingPageStyles.heroTitleStyle,
-//               ),
-//               const SizedBox(height: SettingPageStyles.gapXs),
-//               Text(
-//                 SteeingPageStrings.heroDescription,
-//                 style: SettingPageStyles.bodyTextStyle,
-//               ),
-//               const SizedBox(height: SettingPageStyles.gapLg),
-//               const Wrap(
-//                 spacing: SettingPageStyles.gapSm,
-//                 runSpacing: SettingPageStyles.gapSm,
-//                 children: [
-//                   _InfoBadge(
-//                     icon: Icons.save_outlined,
-//                     label: SteeingPageStrings.heroLocalStorageBadge,
-//                     highlighted: true,
-//                   ),
-//                   _InfoBadge(
-//                     icon: Icons.flash_on_rounded,
-//                     label: SteeingPageStrings.heroInstantApplyBadge,
-//                     highlighted: false,
-//                   ),
-//                 ],
-//               ),
-//             ],
-//           );
-
-//           final Widget iconPanel = Container(
-//             width: SettingPageStyles.heroIconSize,
-//             height: SettingPageStyles.heroIconSize,
-//             decoration: SettingPageStyles.heroIconDecoration,
-//             child: const Icon(
-//               Icons.settings_suggest_rounded,
-//               color: SettingPageStyles.surfaceIconColor,
-//               size: SettingPageStyles.heroIconGlyphSize,
-//             ),
-//           );
-
-//           if (isCompact) {
-//             return Column(
-//               crossAxisAlignment: CrossAxisAlignment.start,
-//               children: [
-//                 content,
-//                 const SizedBox(height: SettingPageStyles.gapXl),
-//                 Align(alignment: Alignment.centerRight, child: iconPanel),
-//               ],
-//             );
-//           }
-
-//           return Row(
-//             crossAxisAlignment: CrossAxisAlignment.start,
-//             children: [
-//               Expanded(child: content),
-//               const SizedBox(width: SettingPageStyles.gapXl),
-//               iconPanel,
-//             ],
-//           );
-//         },
-//       ),
-//     );
-//   }
-// }
-
 class _SettingCard extends StatelessWidget {
   const _SettingCard({
     required this.icon,
@@ -382,9 +449,11 @@ class _SettingCard extends StatelessWidget {
       padding: SettingPageStyles.cardPadding,
       child: LayoutBuilder(
         builder: (context, constraints) {
+          //
           final bool isCompact =
               constraints.maxWidth <
               SettingPageStyles.settingCardCompactBreakpoint;
+          //
           final Widget titleBlock = Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -395,7 +464,7 @@ class _SettingCard extends StatelessWidget {
               ],
             ),
           );
-
+          //
           final Widget iconBlock = Container(
             width: SettingPageStyles.settingIconSize,
             height: SettingPageStyles.settingIconSize,
@@ -423,7 +492,7 @@ class _SettingCard extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: SettingPageStyles.gapMd),
-                    status,
+                    // status,
                   ],
                 )
               else
@@ -438,7 +507,7 @@ class _SettingCard extends StatelessWidget {
                   ],
                 ),
               const SizedBox(height: SettingPageStyles.gap2xl),
-              child,
+              child, //內容插槽
             ],
           );
         },
