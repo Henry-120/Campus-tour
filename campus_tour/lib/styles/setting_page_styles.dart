@@ -65,9 +65,14 @@ class SettingPageStyles {
   static const Color surfaceIconColor = Colors.white;
   static const Color mutedIconColor = AppTheme.linkColor;
   static const Color switchActiveThumbColor = AppTheme.cardColor;
-  static const Color switchActiveTrackColor = AppTheme.primaryColor;
+  static const Color switchActiveTrackColor = Color.fromARGB(
+    255,
+    104,
+    164,
+    255,
+  );
   static const Color switchInactiveThumbColor = mutedIconColor;
-  static const Color switchInactiveTrackColor = AppTheme.accentColor;
+  static const Color switchInactiveTrackColor = AppTheme.primaryColor;
 
   // Border radius
   static const BorderRadius panelBorderRadius = BorderRadius.all(
