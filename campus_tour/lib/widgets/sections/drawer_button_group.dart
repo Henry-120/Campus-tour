@@ -10,6 +10,7 @@ import 'package:campus_tour/widgets/game/catching_pages/graphics_text_level.dart
 import 'package:campus_tour/widgets/game/catching_pages/cryptography_level_page.dart';
 import 'package:campus_tour/widgets/game/catching_pages/cryptography_level.dart';
 import 'package:campus_tour/widgets/game/catching_pages/monster_model_cry.dart';
+import 'package:campus_tour/widgets/sections/monster_test.dart';
 
 class DrawerButtonGroup extends StatelessWidget {
   const DrawerButtonGroup({super.key});
@@ -24,6 +25,7 @@ class DrawerButtonGroup extends StatelessWidget {
         _NfcgButton(),
         _GraphicsTextButton(),
         _CryptographyButton(),
+        const FullMissionTestButtonGroup(),
       ], //左選單按鈕列,
     );
   }
