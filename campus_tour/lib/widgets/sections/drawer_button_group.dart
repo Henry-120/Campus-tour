@@ -79,6 +79,10 @@ class _GraphicsTextButton extends StatelessWidget {
     debugPrint('NFC matched');
   }
 
+  void loseingFunction() {
+    debugPrint('GraphicsText loseingFunction called');
+  }
+
   final GraphicsTextLevel level = GraphicsTextLevel(
     firstTracePhoto: 'assets/images/campus_map_2.jpg',
     descriptionText: 'This is a description for testing.',
@@ -89,8 +93,11 @@ class _GraphicsTextButton extends StatelessWidget {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) =>
-            GraphicsTextLevelPage(level: level, nextFunction: nextFunction),
+        builder: (context) => GraphicsTextLevelPage(
+          level: level,
+          nextFunction: nextFunction,
+          loseingFunction: loseingFunction,
+        ),
       ),
     );
   }
