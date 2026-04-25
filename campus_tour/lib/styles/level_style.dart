@@ -14,6 +14,7 @@ class LevelStyle {
 
   static const double pageHorizontalPadding = 24;
   static const double pageVerticalPadding = 20;
+  static const EdgeInsets cryptographyPagePadding = EdgeInsets.zero;
   static const double bodySpacing = 18;
   static const double panelSpacing = 16;
   static const double nfcButtonTopSpacing = 18;

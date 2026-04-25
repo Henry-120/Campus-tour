@@ -49,7 +49,7 @@ class _SettingButton extends StatelessWidget {
 
 //測試用
 class _NfcgButton extends StatelessWidget {
-  //設定按鈕實體化
+  //NFC按鈕實體化
   final List<String> Idtest = ["85:45:BE:17", "21"];
   final List<String> Tex = ["mission 1", "mission 2"];
   void onPress(BuildContext context) {
@@ -73,7 +73,7 @@ class _NfcgButton extends StatelessWidget {
 
 //測試graphics_text_
 class _GraphicsTextButton extends StatelessWidget {
-  //設定按鈕實體化
+  //GT按鈕實體化
   void nextFunction() {
     // Called when the NFC tag matched the expected ans.
     debugPrint('NFC matched');
