@@ -75,26 +75,30 @@ class _RegisterPageState extends State<RegisterPage> {
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        decoration: const BoxDecoration(gradient: AppTheme.warmGradient),
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/register_page_bg.png'), // 👈 設定背景圖
+            fit: BoxFit.cover,
+          ),
+        ),
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 30),
           child: Form(
             key: _formKey,
             child: Column(
               children: [
-                const SizedBox(height: 80),
-                Text("建立勇者帳號", style: AppTheme.titleStyle.copyWith(fontSize: 36)),
-                const SizedBox(height: 10),
-                const Text("填寫資料以開啟你的校園圖鑑", style: TextStyle(color: AppTheme.textColor, fontSize: 16, fontWeight: FontWeight.w500)),
+                const SizedBox(height: 150),
+                Text("註冊帳號", style: AppTheme.titleStyle.copyWith(fontSize: 36)),
+
                 const SizedBox(height: 35),
                 
                 Container(
                   padding: const EdgeInsets.all(AppTheme.cardPadding * 1.5),
-                  decoration: BoxDecoration(
-                    color: AppTheme.cardColor,
-                    borderRadius: BorderRadius.circular(30),
-                    boxShadow: AppTheme.softShadow,
-                  ),
+                  // decoration: BoxDecoration(
+                  //   color: AppTheme.cardColor.withOpacity(0.9), // 💡 稍微透明，顯示背景
+                  //   borderRadius: BorderRadius.circular(30),
+                  //   boxShadow: AppTheme.softShadow,
+                  // ),
                   child: Column(
                     children: [
                       TextFormField(
