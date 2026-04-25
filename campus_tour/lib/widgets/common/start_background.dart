@@ -15,7 +15,7 @@ class StartBackground extends StatelessWidget {
           fit: BoxFit.cover,
           alignment: Alignment.center,
         ),
-        Container(color: Colors.black.withValues(alpha: 0.4)), 
+        Container(color: Colors.black.withValues(alpha: 0.2)),
       ],
     );
   }
