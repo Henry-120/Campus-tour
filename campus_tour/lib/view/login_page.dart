@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../styles/app_theme.dart';
+
 import '../controllers/login_controller.dart';
 import '../controllers/user_controller.dart';
+import '../widgets/constants/asset_paths.dart';
+import '../widgets/constants/responsive.dart';
+import '../widgets/login/game_title.dart';
+import '../widgets/login/wood_login_panel.dart';
 import 'game_main_page.dart';
 import 'register_page.dart';
 
@@ -19,8 +23,9 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _passwordController = TextEditingController(text: "123456");
   bool _isLoading = false;
 
-  void _login() async {
+  Future<void> _login() async {
     setState(() => _isLoading = true);
+
     try {
       final user = await _controller.login(
         _emailController.text.trim(),
@@ -36,9 +41,12 @@ class _LoginPageState extends State<LoginPage> {
         }
 
         if (!mounted) return;
+
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => const GameMainPage()),
+          MaterialPageRoute(
+            builder: (context) => const GameMainPage(),
+          ),
         );
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -47,9 +55,32 @@ class _LoginPageState extends State<LoginPage> {
       }
     } catch (e) {
       debugPrint("[LoginPage] 登入出錯: $e");
+
+      if (!mounted) return;
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("登入發生錯誤，請稍後再試")),
+      );
     } finally {
-      if (mounted) setState(() => _isLoading = false);
+      if (mounted) {
+        setState(() => _isLoading = false);
+      }
     }
+  }
+
+  void _goToRegister() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => const RegisterPage(),
+      ),
+    );
+  }
+
+  void _forgotPassword() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text("尚未實作忘記密碼功能")),
+    );
   }
 
   @override
@@ -61,70 +92,42 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final scale = Responsive.scale(context);
+
     return Scaffold(
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: const BoxDecoration(gradient: AppTheme.warmGradient),
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 30),
-          child: Column(
-            children: [
-              const SizedBox(height: 100),
-              Text("Campus Tour", style: AppTheme.titleStyle),
-              const SizedBox(height: 8),
-              const Text("開啟你的校園冒險之旅", 
-                style: TextStyle(color: AppTheme.textColor, fontSize: 16, fontWeight: FontWeight.w500)
-              ),
-              const SizedBox(height: 50),
-              Container(
-                padding: const EdgeInsets.all(AppTheme.cardPadding * 1.5),
-                decoration: BoxDecoration(
-                  color: AppTheme.cardColor,
-                  borderRadius: BorderRadius.circular(30),
-                  boxShadow: AppTheme.softShadow,
-                ),
+      body: Stack(
+        children: [
+          Positioned.fill(
+            child: Image.asset(
+              AssetPaths.loginBg,
+              fit: BoxFit.cover,
+            ),
+          ),
+          SafeArea(
+            child: Center(
+              child: SingleChildScrollView(
+                padding: EdgeInsets.symmetric(horizontal: 24 * scale),
                 child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Text("登入遊戲", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: AppTheme.textColor)),
-                    const SizedBox(height: 30),
-                    TextField(
-                      controller: _emailController,
-                      decoration: AppTheme.inputDecoration("電子郵件", Icons.email_outlined),
+                    SizedBox(height: 12 * scale),
+                    const GameTitle(title: "LOGIN"),
+                    SizedBox(height: 10 * scale),
+                    WoodLoginPanel(
+                      emailController: _emailController,
+                      passwordController: _passwordController,
+                      isLoading: _isLoading,
+                      onLogin: _login,
+                      onRegister: _goToRegister,
+                      onForgotPassword: _forgotPassword,
                     ),
-                    const SizedBox(height: 20),
-                    TextField(
-                      controller: _passwordController,
-                      obscureText: true,
-                      decoration: AppTheme.inputDecoration("密碼", Icons.lock_outline),
-                    ),
-                    const SizedBox(height: 40),
-                    SizedBox(
-                      width: double.infinity,
-                      height: 55,
-                      child: ElevatedButton(
-                        onPressed: _isLoading ? null : _login,
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: AppTheme.primaryColor,
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-                        ),
-                        child: _isLoading 
-                          ? const CircularProgressIndicator(color: Colors.white)
-                          : Text("進入冒險", style: AppTheme.buttonTextStyle),
-                      ),
-                    ),
+                    SizedBox(height: 30 * scale),
                   ],
                 ),
               ),
-              const SizedBox(height: 30),
-              TextButton(
-                onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const RegisterPage())),
-                child: const Text("還沒有帳號？立即加入冒險", style: AppTheme.linkTextStyle),
-              ),
-              const SizedBox(height: 50),
-            ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
