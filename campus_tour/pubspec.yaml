@@ -51,6 +51,7 @@ flutter:
   assets:
     - assets/images/
     - assets/images/fairy_img/
+    - assets/images/component/
     - assets/images/NCU/
     - assets/audio/
     - assets/mapStyles/
