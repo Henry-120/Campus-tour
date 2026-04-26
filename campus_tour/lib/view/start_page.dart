@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import '../widgets/common/start_background.dart'; 
-import '../widgets/sections/start_menu_group.dart'; // 💡 引入 Group 組件
-import '../services/audio_service.dart'; 
+
+import '../widgets/common/start_background.dart';
+import '../widgets/sections/start_menu_group.dart';
+import '../services/audio_service.dart';
+import '../widgets/constants/responsive.dart';
 
 class StartPage extends StatefulWidget {
   const StartPage({super.key});
@@ -31,10 +33,22 @@ class _StartPageState extends State<StartPage> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addObserver(this); 
-    AudioService().play(fileName: 'audio/BGM.mp3', isBgm: true, isLooping: true, volume: 0.65);
+
+    WidgetsBinding.instance.addObserver(this);
+
+    AudioService().play(
+      fileName: 'audio/BGM.mp3',
+      isBgm: true,
+      isLooping: true,
+      volume: 0.65,
+    );
+
     _timer = Timer.periodic(const Duration(seconds: 4), (_) {
-      if (mounted) setState(() => _currentIndex = (_currentIndex + 1) % _images.length);
+      if (mounted) {
+        setState(() {
+          _currentIndex = (_currentIndex + 1) % _images.length;
+        });
+      }
     });
   }
 
@@ -47,26 +61,30 @@ class _StartPageState extends State<StartPage> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.of(context).size.height;
+    final scale = Responsive.scale(context);
+
     return Scaffold(
       body: Stack(
         children: [
-          // 1. 背景動畫
           AnimatedSwitcher(
             duration: const Duration(milliseconds: 1000),
-            child: StartBackground(key: ValueKey(_currentIndex), imagePath: _images[_currentIndex]),
+            child: StartBackground(
+              key: ValueKey(_currentIndex),
+              imagePath: _images[_currentIndex],
+            ),
           ),
 
-          // 2. 💡 統一使用 StartMenuGroup，並放在畫面下方並增加底邊距
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
-              padding:  EdgeInsets.only(bottom: screenHeight*0.05), // 👈 調整這個數值讓它離底部更遠
+              padding: EdgeInsets.only(
+                bottom: 46 * scale,
+              ),
               child: const StartMenuGroup(),
             ),
           ),
-        ]
-      )
+        ],
+      ),
     );
   }
 }
