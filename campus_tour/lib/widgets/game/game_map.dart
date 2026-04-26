@@ -9,6 +9,17 @@ import '../../view/nearby_monsters_display.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../../models/monster_model.dart';
 import 'user_marker.dart';
+//for mission
+import 'package:campus_tour/view/full_mission_page.dart';
+import 'package:campus_tour/widgets/game/catching_pages/monster_model_cry.dart';
+import 'package:campus_tour/widgets/game/catching_pages/full_mission.dart';
+import 'package:campus_tour/widgets/game/catching_pages/graphics_text_level.dart';
+import 'package:campus_tour/widgets/game/catching_pages/cryptography_level.dart';
+import 'package:campus_tour/widgets/encyclopedia/all_the_monster/monster_graphics.dart';
+import 'package:campus_tour/widgets/encyclopedia/all_the_monster/monster_text.dart';
+import 'package:campus_tour/widgets/encyclopedia/all_the_monster/monster_nfc.dart';
+import 'package:campus_tour/models/qa_model.dart';
+//end for mission
 
 class GameMap extends StatefulWidget {
   const GameMap({super.key});
@@ -56,7 +67,7 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
         height: 48,
       );
 
-      if (!mounted) return; 
+      if (!mounted) return;
 
       setState(() {
         _mapStyle = style;
@@ -89,7 +100,8 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
         permission = await Geolocator.requestPermission();
       }
 
-      if (permission == LocationPermission.denied || permission == LocationPermission.deniedForever) {
+      if (permission == LocationPermission.denied ||
+          permission == LocationPermission.deniedForever) {
         setState(() => _hasLocationPermission = false);
         return;
       }
@@ -117,41 +129,49 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
         }
       });
 
-      _positionStream = Geolocator.getPositionStream(
-        locationSettings: const LocationSettings(
-          accuracy: LocationAccuracy.bestForNavigation,
-          distanceFilter: 8,
-        ),
-      ).listen((Position position) {
-        debugPrint('[Debug][GameMap]:位置更新: ${position.latitude}, ${position.longitude}');
+      _positionStream =
+          Geolocator.getPositionStream(
+            locationSettings: const LocationSettings(
+              accuracy: LocationAccuracy.bestForNavigation,
+              distanceFilter: 8,
+            ),
+          ).listen((Position position) {
+            debugPrint(
+              '[Debug][GameMap]:位置更新: ${position.latitude}, ${position.longitude}',
+            );
 
-        final currentLocation = LatLng(position.latitude, position.longitude);
-        final oldPosition = _playerPosition;
-        final shouldUpdateMarker = oldPosition == null ||
-            Geolocator.distanceBetween(
-                  oldPosition.latitude,
-                  oldPosition.longitude,
-                  currentLocation.latitude,
-                  currentLocation.longitude,
-                ) > 2;
+            final currentLocation = LatLng(
+              position.latitude,
+              position.longitude,
+            );
+            final oldPosition = _playerPosition;
+            final shouldUpdateMarker =
+                oldPosition == null ||
+                Geolocator.distanceBetween(
+                      oldPosition.latitude,
+                      oldPosition.longitude,
+                      currentLocation.latitude,
+                      currentLocation.longitude,
+                    ) >
+                    2;
 
-        if (shouldUpdateMarker) {
-          setState(() {
-            _playerPosition = currentLocation;
-            if (_playerIcon != null) {
-              _playerMarker = UserMarker(
-                position: currentLocation,
-                icon: _playerIcon!,
-              );
+            if (shouldUpdateMarker) {
+              setState(() {
+                _playerPosition = currentLocation;
+                if (_playerIcon != null) {
+                  _playerMarker = UserMarker(
+                    position: currentLocation,
+                    icon: _playerIcon!,
+                  );
+                }
+              });
             }
+
+            _moveCamera(position);
+
+            // 更新附近怪物
+            monsterController.updateNearbyMonsters(position);
           });
-        }
-
-        _moveCamera(position);
-
-        // 更新附近怪物
-        monsterController.updateNearbyMonsters(position);
-      });
 
       debugPrint("[Debug][GameMap]:已開始監聽位置變化");
     } catch (e, st) {
@@ -203,6 +223,27 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
     );
   }
 
+  // Future<void> _handleMonsterCapture(MonsterModel monster) async {
+  //   final uid = FirebaseAuth.instance.currentUser?.uid;
+  //   if (uid == null) return;
+
+  //   final controller = Get.find<MonsterController>();
+  //   final success = await controller.captureMonster(monster, uid);
+
+  //   if (mounted) {
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       SnackBar(
+  //         content: Text(
+  //           success ? '成功捕捉 ${monster.name} ✓' : '${monster.name} 已捕捉過',
+  //         ),
+  //         backgroundColor: success ? Colors.green : Colors.orange,
+  //         duration: const Duration(seconds: 2),
+  //       ),
+  //     );
+  //   }
+  // }
+
+  //從這裡開始
   Future<void> _handleMonsterCapture(MonsterModel monster) async {
     final uid = FirebaseAuth.instance.currentUser?.uid;
     if (uid == null) return;
@@ -211,14 +252,36 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
     final success = await controller.captureMonster(monster, uid);
 
     if (mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text(success ? '成功捕捉 ${monster.name} ✓' : '${monster.name} 已捕捉過'),
-        backgroundColor: success ? Colors.green : Colors.orange,
-        duration: const Duration(seconds: 2),
-      ));
+      if (success) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => BuildingMonsterLevel(
+              monster: monster,
+              qa:
+                  controller.qa.value ??
+                  QAModel(
+                    id: "???",
+                    question: "中央十景不包含哪一個？",
+                    options: ["A. 中大路", "B. 百花川", "C. 依仁堂", "D. 鹿林天文台"],
+                    answer: "C. 依仁堂",
+                  ),
+            ),
+          ),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('${monster.name} 已捕捉過'),
+            backgroundColor: Colors.orange,
+            duration: const Duration(seconds: 2),
+          ),
+        );
+      }
     }
   }
-  
+  //到這裡為止
+
   @override
   void initState() {
     super.initState();
@@ -238,21 +301,26 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
     return Stack(
       children: [
         GoogleMap(
-          minMaxZoomPreference: MinMaxZoomPreference(_minZoomRate, _maxZoomRate),
+          minMaxZoomPreference: MinMaxZoomPreference(
+            _minZoomRate,
+            _maxZoomRate,
+          ),
           initialCameraPosition: const CameraPosition(
             target: LatLng(24.9684, 121.1912),
           ),
           style: _mapStyle,
 
-          groundOverlays: _customMapImage != null ? {
-            GroundOverlay.fromBounds(
-              groundOverlayId: const GroundOverlayId("ncu_custom_map"),
-              image: _customMapImage!,
-              bounds: campusBounds, // 圖片會自動對齊這四個角
-              transparency: 0,   // 0.0 ~ 1.0，建議先設 0.8 方便校對
-              clickable: false,
-            ),
-          } : {},
+          groundOverlays: _customMapImage != null
+              ? {
+                  GroundOverlay.fromBounds(
+                    groundOverlayId: const GroundOverlayId("ncu_custom_map"),
+                    image: _customMapImage!,
+                    bounds: campusBounds, // 圖片會自動對齊這四個角
+                    transparency: 0, // 0.0 ~ 1.0，建議先設 0.8 方便校對
+                    clickable: false,
+                  ),
+                }
+              : {},
 
           buildingsEnabled: true,
           markers: {
@@ -280,10 +348,51 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
                 color: Colors.white70,
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: const Text('定位權限未授權', style: TextStyle(color: Colors.black87)),
+              child: const Text(
+                '定位權限未授權',
+                style: TextStyle(color: Colors.black87),
+              ),
             ),
           ),
       ],
     );
   }
 }
+
+//從這裡開始
+class BuildingMonsterLevel extends StatelessWidget {
+  final MonsterModel monster;
+  final QAModel qa;
+  final MonsterModelCry monsterModelCry;
+  final GraphicsTextLevel mission1;
+  final CryptographyLevel mission2;
+  BuildingMonsterLevel({super.key, required this.monster, required this.qa})
+    : monsterModelCry = MonsterModelCry(
+        name: monster.name,
+        type: monster.type,
+        imageUrl: monster.imageURL,
+      ),
+      mission1 = GraphicsTextLevel(
+        firstTracePhoto: MonsterGraphics.graphics[monster.id] ?? '',
+        descriptionText: MonsterText.texts[monster.id] ?? '',
+        nfcId: MonsterNFC.nfcIds[monster.id] ?? '',
+      ),
+      mission2 = CryptographyLevel(
+        questionSet: [qa.question],
+        choiceSet: [qa.options],
+        answerSet: [qa.answer],
+      );
+  List<FullMission> get missions => [
+    FullMission(levelType: "graphicsTextLevel", graphicsTextLevel: mission1),
+    FullMission(levelType: "cryptographyLevel", cryptographyLevel: mission2),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return FullMissionPage(
+      missions: missions,
+      monsterModelCry: monsterModelCry,
+    );
+  }
+}
+//到這裡為止
