@@ -8,12 +8,16 @@ import 'package:campus_tour/widgets/game/catching_pages/monster_model_cry.dart';
 class FullMissionPage extends StatefulWidget {
   final List<FullMission> missions; //任務列表
   final MonsterModelCry monsterModelCry; //精靈資料
+  final Future<void> Function()? onMissionFinished;
+  final VoidCallback? onMissionFailed;
 
   //建構子
   const FullMissionPage({
     super.key,
     required this.missions,
     required this.monsterModelCry,
+    this.onMissionFinished,
+    this.onMissionFailed,
   });
 
   @override
@@ -22,6 +26,7 @@ class FullMissionPage extends StatefulWidget {
 
 class _FullMissionPageState extends State<FullMissionPage> {
   int _missionIndex = 0;
+  bool _isFinishing = false;
 
   void nextFunction() {
     if (_missionIndex >= widget.missions.length - 1) {
@@ -35,14 +40,18 @@ class _FullMissionPageState extends State<FullMissionPage> {
   }
 
   void loseingFunction() {
+    widget.onMissionFailed?.call();
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) => const CatchingFaildPage()),
     );
   }
 
-  void finishFunction() {
+  Future<void> finishFunction() async {
+    if (_isFinishing) return;
+    _isFinishing = true;
     debugPrint('成功捕捉精靈: ${widget.monsterModelCry.name}');
+    await widget.onMissionFinished?.call();
   }
 
   @override
@@ -54,10 +63,16 @@ class _FullMissionPageState extends State<FullMissionPage> {
         }
       });
 
-      return const Scaffold(body: Center(child: Text('沒有關卡')));
+      return const PopScope(
+        canPop: false,
+        child: Scaffold(body: Center(child: Text('沒有關卡'))),
+      );
     }
 
-    return _buildMissionPage(widget.missions[_missionIndex]);
+    return PopScope(
+      canPop: false,
+      child: _buildMissionPage(widget.missions[_missionIndex]),
+    );
   }
 
   Widget _buildMissionPage(FullMission mission) {

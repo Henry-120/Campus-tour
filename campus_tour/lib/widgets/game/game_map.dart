@@ -244,40 +244,63 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
   // }
 
   //從這裡開始
+  bool _isCaptureFlowActive = false;
+
   Future<void> _handleMonsterCapture(MonsterModel monster) async {
+    if (_isCaptureFlowActive) return;
+    if (ModalRoute.of(context)?.isCurrent != true) return;
+
     final uid = FirebaseAuth.instance.currentUser?.uid;
     if (uid == null) return;
 
     final controller = Get.find<MonsterController>();
-    final success = await controller.captureMonster(monster, uid);
+    _isCaptureFlowActive = true;
 
-    if (mounted) {
-      if (success) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => BuildingMonsterLevel(
-              monster: monster,
-              qa:
-                  controller.qa.value ??
-                  QAModel(
-                    id: "???",
-                    question: "中央十景不包含哪一個？",
-                    options: ["A. 中大路", "B. 百花川", "C. 依仁堂", "D. 鹿林天文台"],
-                    answer: "C. 依仁堂",
-                  ),
-            ),
-          ),
-        );
-      } else {
+    try {
+      final qa = await controller.getQAByMonster(monster);
+
+      if (!mounted) return;
+
+      if (qa == null) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('${monster.name} 已捕捉過'),
-            backgroundColor: Colors.orange,
-            duration: const Duration(seconds: 2),
+            content: Text('無法載入 ${monster.name} 的題目，請稍後再試'),
+            backgroundColor: Colors.red,
+            duration: const Duration(seconds: 3),
           ),
         );
+        return;
       }
+
+      await Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => BuildingMonsterLevel(
+            monster: monster,
+            qa: qa,
+            onMissionFinished: () async {
+              final navigator = Navigator.of(context);
+              final messenger = ScaffoldMessenger.of(context);
+              final success = await controller.captureMonster(monster, uid);
+
+              if (!mounted) return;
+
+              navigator.pop();
+              messenger.showSnackBar(
+                SnackBar(
+                  content: Text(
+                    success ? '成功捕捉 ${monster.name} ✓' : '${monster.name} 已捕捉過',
+                  ),
+                  backgroundColor: success ? Colors.green : Colors.orange,
+                  duration: const Duration(seconds: 2),
+                ),
+              );
+            },
+          ),
+        ),
+      );
+    } finally {
+      _isCaptureFlowActive = false;
     }
   }
   //到這裡為止
@@ -363,25 +386,30 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
 class BuildingMonsterLevel extends StatelessWidget {
   final MonsterModel monster;
   final QAModel qa;
+  final Future<void> Function()? onMissionFinished;
   final MonsterModelCry monsterModelCry;
   final GraphicsTextLevel mission1;
   final CryptographyLevel mission2;
-  BuildingMonsterLevel({super.key, required this.monster, required this.qa})
-    : monsterModelCry = MonsterModelCry(
-        name: monster.name,
-        type: monster.type,
-        imageUrl: monster.imageURL,
-      ),
-      mission1 = GraphicsTextLevel(
-        firstTracePhoto: MonsterGraphics.graphics[monster.id] ?? '',
-        descriptionText: MonsterText.texts[monster.id] ?? '',
-        nfcId: MonsterNFC.nfcIds[monster.id] ?? '',
-      ),
-      mission2 = CryptographyLevel(
-        questionSet: [qa.question],
-        choiceSet: [qa.options],
-        answerSet: [qa.answer],
-      );
+  BuildingMonsterLevel({
+    super.key,
+    required this.monster,
+    required this.qa,
+    this.onMissionFinished,
+  }) : monsterModelCry = MonsterModelCry(
+         name: monster.name,
+         type: monster.type,
+         imageUrl: monster.imageURL,
+       ),
+       mission1 = GraphicsTextLevel(
+         firstTracePhoto: MonsterGraphics.graphics[monster.id] ?? '',
+         descriptionText: MonsterText.texts[monster.id] ?? '',
+         nfcId: MonsterNFC.nfcIds[monster.id] ?? '',
+       ),
+       mission2 = CryptographyLevel(
+         questionSet: [qa.question],
+         choiceSet: [qa.options],
+         answerSet: [qa.answer],
+       );
   List<FullMission> get missions => [
     FullMission(levelType: "graphicsTextLevel", graphicsTextLevel: mission1),
     FullMission(levelType: "cryptographyLevel", cryptographyLevel: mission2),
@@ -392,7 +420,9 @@ class BuildingMonsterLevel extends StatelessWidget {
     return FullMissionPage(
       missions: missions,
       monsterModelCry: monsterModelCry,
+      onMissionFinished: onMissionFinished,
     );
   }
 }
+
 //到這裡為止
