@@ -4,7 +4,7 @@
     "name": "中大湖水怪",
     "type": "水",
     "imageURL": "assets/images/fairy_img/zhongda_lake.jpg",
-    "location": { "latitude": 24.9681, "longitude": 121.1919 },
+    "location": { "latitude": 24.9702, "longitude": 121.1955 },
     "architectureRef": "/architectures/a1",
     "qaRef": "/questions/qa1"
   },

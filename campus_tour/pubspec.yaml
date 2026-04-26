@@ -58,7 +58,7 @@ flutter:
     - assets/json/
     - assets/images/weather/
     - assets/images/fairy_video/
-    - assets/images/nfc_position_photo/
+    - assets/images/nfc_position_photos/
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

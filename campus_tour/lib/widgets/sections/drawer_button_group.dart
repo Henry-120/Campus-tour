@@ -1,8 +1,15 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:campus_tour/styles/LHF_drawer_styles.dart';
 import 'package:campus_tour/widgets/buttons/LHF_drawer_button.dart';
 import 'package:campus_tour/view/LHF_setting_page.dart';
 import 'package:campus_tour/view/leading_nfc_page.dart';
+import 'package:campus_tour/controllers/monster_controller.dart';
+import 'package:campus_tour/models/monster_model.dart';
+import 'package:campus_tour/models/qa_model.dart';
 // game1
 import 'package:campus_tour/widgets/game/catching_pages/graphics_text_level_page.dart';
 import 'package:campus_tour/widgets/game/catching_pages/graphics_text_level.dart';
@@ -25,6 +32,7 @@ class DrawerButtonGroup extends StatelessWidget {
         _NfcgButton(),
         _GraphicsTextButton(),
         _CryptographyButton(),
+        _QaValueDebugButton(),
         const FullMissionTestButtonGroup(),
       ], //左選單按鈕列,
     );
@@ -166,6 +174,94 @@ class _CryptographyButton extends StatelessWidget {
     return DrawerSecondaryButton(
       text: 'cryptography',
       onPressedToDo: () => onPress(context),
+    );
+  }
+}
+
+class _QaValueDebugButton extends StatelessWidget {
+  static const String _monsterJsonPath = 'assets/json/monster.json';
+  static const String _targetMonsterName = 'SM獸';
+
+  Future<void> _onPress(BuildContext context) async {
+    final messenger = ScaffoldMessenger.of(context);
+
+    try {
+      final controller = Get.find<MonsterController>();
+      final monster = await _loadTargetMonsterFromJson();
+      final qa = await controller.getQAByMonster(monster);
+      final qaValue = controller.qa.value;
+
+      if (!context.mounted) return;
+
+      await showDialog<void>(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('QA 讀取測試'),
+          content: SingleChildScrollView(
+            child: Text(
+              [
+                '測試精靈：${monster.name} (${monster.id})',
+                'qaRef：${monster.qaRef?.path ?? 'null'}',
+                '',
+                'getQAByMonster 回傳：',
+                _formatQa(qa),
+                '',
+                'controller.qa.value：',
+                _formatQa(qaValue),
+              ].join('\n'),
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('關閉'),
+            ),
+          ],
+        ),
+      );
+    } catch (e, st) {
+      debugPrint('[QA Debug] 讀取失敗: $e');
+      debugPrint('[QA Debug] stack trace: $st');
+
+      if (!context.mounted) return;
+
+      messenger.showSnackBar(
+        SnackBar(
+          content: Text('QA 讀取失敗：$e'),
+          backgroundColor: Colors.red,
+          duration: const Duration(seconds: 4),
+        ),
+      );
+    }
+  }
+
+  Future<MonsterModel> _loadTargetMonsterFromJson() async {
+    final response = await rootBundle.loadString(_monsterJsonPath);
+    final monsters = jsonDecode(response) as List<dynamic>;
+    final targetMonsterData = monsters.cast<Map<dynamic, dynamic>>().firstWhere(
+      (monster) => monster['name'] == _targetMonsterName,
+    );
+    return MonsterModel.fromMap(Map<String, dynamic>.from(targetMonsterData));
+  }
+
+  String _formatQa(QAModel? qa) {
+    if (qa == null) {
+      return 'null';
+    }
+
+    return [
+      'id：${qa.id}',
+      'question：${qa.question}',
+      'options：${qa.options.join(' / ')}',
+      'answer：${qa.answer}',
+    ].join('\n');
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return DrawerSecondaryButton(
+      text: 'qa debug',
+      onPressedToDo: () => _onPress(context),
     );
   }
 }
