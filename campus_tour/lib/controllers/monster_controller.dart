@@ -24,13 +24,10 @@ class MonsterController extends GetxController {
   // 使用者已捕捉的怪物（圖鑑）
   var userMonsterCollection = <UserMonsterModel>[].obs;
 
-  Future<void> loadMonsterWithRelations(String id) async {
-    final result = await _service.getMonsterWithRelations(id);
-    if (result != null) {
-      monster.value = result["monster"] as MonsterModel;
-      architecture.value = result["architecture"] as ArchitectureModel?;
-      qa.value = result["qa"] as QAModel?;
-    }
+  Future<void> loadMonsterWithRelations(MonsterModel monsterModel) async {
+    monster.value = monsterModel;
+    getQAByMonster(monsterModel);
+    getArchitectureByMonster(monsterModel);
   }
 
   /// 傳入 MonsterModel 取得對應的 QA 資料
@@ -52,6 +49,30 @@ class MonsterController extends GetxController {
     }
     return null;
   }
+
+  /// 傳入 MonsterModel 取得對應的 Architecture 資料
+  Future<ArchitectureModel?> getArchitectureByMonster(MonsterModel monsterModel) async {
+    if (monsterModel.architectureRef == null) {
+      debugPrint('[MonsterController] 此怪物沒有關聯的建築資料');
+      return null;
+    }
+
+    try {
+      final doc = await monsterModel.architectureRef!.get();
+      if (doc.exists) {
+        final architectureData = ArchitectureModel.fromMap(
+          doc.data() as Map<String, dynamic>,
+          id: doc.id,
+        );
+        architecture.value = architectureData; // 更新 Rxn 狀態供 UI 監聽
+        return architectureData;
+      }
+    } catch (e) {
+      debugPrint('[MonsterController] 獲取建築資料失敗: $e');
+    }
+    return null;
+  }
+
 
   // 載入使用者的圖鑑（例如從 Firestore）
   Future<void> loadUserCollection(String userId) async {
@@ -80,13 +101,13 @@ class MonsterController extends GetxController {
       // 新增到 Firestore
       await addUserMonster(userId, userMonster);
 
-      // ✅ 捕捉成功後，自動更新對應怪物的 QA 資料
-      await getQAByMonster(monsterObj);
+      // ✅ 捕捉成功後，自動更新對應怪物的 QA 資料與建築資料
+      await loadMonsterWithRelations(monsterObj);
 
       // ✅ 捕捉後從 nearbyMonsters 移除 → 地圖上的 Marker 也會消失
       nearbyMonsters.removeWhere((m) => m.id == monsterObj.id);
       
-      debugPrint('[MonsterController] 成功捕捉怪物: ${monsterObj.name} 並已同步更新 QA');
+      debugPrint('[MonsterController] 成功捕捉怪物: ${monsterObj.name} 並已同步更新 QA 與建築資料');
       return true;
     } catch (e) {
       debugPrint('[MonsterController] 捕捉怪物時出錯: $e');
