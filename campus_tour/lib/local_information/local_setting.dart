@@ -10,6 +10,8 @@ class LocalSettingService {
 
   static final VolumeSetting volume = VolumeSetting._();
   static final VibrationSetting vibration = VibrationSetting._();
+  static final AutoSkipStorySetting autoSkipStory = AutoSkipStorySetting._();
+  static final LanguageSetting language = LanguageSetting._();
 
   static Future<void> initBox() {
     if (_isInitialized) {
@@ -25,6 +27,8 @@ class LocalSettingService {
 
     await volume.ensureInitialized(_box);
     await vibration.ensureInitialized(_box);
+    await autoSkipStory.ensureInitialized(_box);
+    await language.ensureInitialized(_box);
 
     _isInitialized = true;
   } //初始化過程並隱式回傳Future<void>
@@ -78,6 +82,7 @@ abstract class LocalSettingItem<T> {
 }
 
 class VolumeSetting extends LocalSettingItem<int> {
+  //聲音設定
   VolumeSetting._() : super(_key, 100);
 
   static const String _key = 'volume';
@@ -106,6 +111,7 @@ class VolumeSetting extends LocalSettingItem<int> {
 }
 
 class VibrationSetting extends LocalSettingItem<bool> {
+  //振動設定
   VibrationSetting._() : super(_key, true);
 
   static const String _key = 'vibration_enabled';
@@ -131,4 +137,72 @@ class VibrationSetting extends LocalSettingItem<bool> {
 
   @override
   bool normalize(bool value) => value;
+}
+
+class AutoSkipStorySetting extends LocalSettingItem<bool> {
+  //自動跳過劇情設定
+  AutoSkipStorySetting._() : super(_key, false);
+
+  static const String _key = 'auto_skip_story';
+
+  bool get isEnabled => getValue();
+
+  Future<void> update(bool enabled) => setValue(enabled);
+
+  Future<void> enable() => setValue(true);
+
+  Future<void> disable() => setValue(false);
+
+  Future<void> toggle() => setValue(!isEnabled);
+
+  @override
+  bool _read(dynamic rawValue) {
+    if (rawValue is bool) {
+      return rawValue;
+    }
+
+    return defaultValue;
+  }
+
+  @override
+  bool normalize(bool value) => value;
+}
+
+class LanguageSetting extends LocalSettingItem<String> {
+  //語言設定
+  LanguageSetting._() : super(_key, chinese);
+
+  static const String _key = 'language';
+  static const String english = 'en';
+  static const String chinese = 'zh';
+
+  String get current => getValue();
+
+  bool get isEnglish => current == english;
+
+  bool get isChinese => current == chinese;
+
+  Future<void> update(String language) => setValue(language);
+
+  Future<void> useEnglish() => setValue(english);
+
+  Future<void> useChinese() => setValue(chinese);
+
+  @override
+  String _read(dynamic rawValue) {
+    if (rawValue is String) {
+      return normalize(rawValue);
+    }
+
+    return defaultValue;
+  }
+
+  @override
+  String normalize(String value) {
+    if (value == english || value == chinese) {
+      return value;
+    }
+
+    return defaultValue;
+  }
 }

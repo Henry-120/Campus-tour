@@ -128,7 +128,7 @@ class LevelStyle {
           lockFill: Color(0xFF58AEE8),
           glow: Color(0x3348A4E0),
         );
-      case '電':
+      case '金':
         return const BattleLevelTheme(
           topColor: Color(0xFFFFF8D9),
           bottomColor: Color(0xFFFFE788),

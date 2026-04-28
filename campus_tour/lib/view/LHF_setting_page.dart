@@ -39,6 +39,23 @@ class SteeingPageStrings {
   static const vibrationEnabledMessage = '在支援振動的情境中，遊戲可以提供更明顯的回饋。';
   static const vibrationDisabledMessage = '目前不會發出震動提示，適合需要安靜的使用情境。';
 
+  // Auto skip story
+  static const autoSkipStoryTitle = '跳過劇情';
+  static const autoSkipStoryDescription = '控制是否自動略過劇情對話，快速進入遊戲流程。';
+  static const autoSkipStoryEnabledStatus = '已開啟';
+  static const autoSkipStoryDisabledStatus = '已關閉';
+  static const autoSkipStoryEnabledTitle = '自動跳過劇情中';
+  static const autoSkipStoryDisabledTitle = '保留劇情播放';
+  static const autoSkipStoryEnabledMessage = '進入關卡時會略過劇情段落，適合重複挑戰時使用。';
+  static const autoSkipStoryDisabledMessage = '劇情段落會正常顯示，適合第一次體驗故事內容。';
+
+  // Language
+  static const languageTitle = '語言';
+  static const languageDescription = '選擇遊戲介面的顯示語言。';
+  static const languageChineseLabel = '中文';
+  static const languageEnglishLabel = 'English';
+  static const languageDropdownLabel = '目前語言';
+
   // Protocol
   static const userProtocolTitle = '使用者協議';
   static const userProtocolDescription = '查看目前版本的使用者協議與說明內容。';
@@ -56,6 +73,21 @@ class SteeingPageStrings {
 
   static String vibrationPanelMessage(bool enabled) =>
       enabled ? vibrationEnabledMessage : vibrationDisabledMessage;
+
+  static String autoSkipStoryStatus(bool enabled) =>
+      enabled ? autoSkipStoryEnabledStatus : autoSkipStoryDisabledStatus;
+
+  static String autoSkipStoryPanelTitle(bool enabled) =>
+      enabled ? autoSkipStoryEnabledTitle : autoSkipStoryDisabledTitle;
+
+  static String autoSkipStoryPanelMessage(bool enabled) =>
+      enabled ? autoSkipStoryEnabledMessage : autoSkipStoryDisabledMessage;
+
+  static String languageLabel(String language) {
+    return language == LanguageSetting.english
+        ? languageEnglishLabel
+        : languageChineseLabel;
+  }
 }
 
 class FullPageList {
@@ -66,6 +98,10 @@ class FullPageList {
     FullPageList.volumeSetCard,
     FullPageList.cardGap,
     FullPageList.vibrationSetCard,
+    FullPageList.cardGap,
+    FullPageList.autoSkipStorySetCard,
+    FullPageList.cardGap,
+    FullPageList.languageSetCard,
     FullPageList.cardGap,
     FullPageList.userProtocolButton,
   ];
@@ -81,6 +117,8 @@ class FullPageList {
   static const Widget volumeSetCard = _VolumeSettingCard();
   static const Widget cardGap = SizedBox(height: SettingPageStyles.cardSpacing);
   static const Widget vibrationSetCard = _VibrationSettingCard();
+  static const Widget autoSkipStorySetCard = _AutoSkipStorySettingCard();
+  static const Widget languageSetCard = _LanguageSettingCard();
   static const Widget userProtocolButton = _UserProtocolButton();
 }
 
@@ -260,6 +298,136 @@ class _VibrationSettingCard extends StatelessWidget {
   }
 }
 
+class _AutoSkipStorySettingCard extends StatelessWidget {
+  const _AutoSkipStorySettingCard();
+
+  @override
+  Widget build(BuildContext context) {
+    return ValueListenableBuilder(
+      valueListenable: LocalSettingService.settingsBox.listenable(),
+      builder: (context, _, child) {
+        final bool autoSkipStoryEnabled =
+            LocalSettingService.autoSkipStory.isEnabled;
+
+        return _SettingCard(
+          icon: Icons.fast_forward_rounded,
+          title: SteeingPageStrings.autoSkipStoryTitle,
+          description: SteeingPageStrings.autoSkipStoryDescription,
+          status: _StatusChip(
+            label: SteeingPageStrings.autoSkipStoryStatus(autoSkipStoryEnabled),
+            enabled: autoSkipStoryEnabled,
+          ),
+          child: AnimatedContainer(
+            duration: SettingPageStyles.animationDuration,
+            padding: SettingPageStyles.toggleShellPadding,
+            decoration: SettingPageStyles.toggleShellDecoration(
+              autoSkipStoryEnabled,
+            ),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        SteeingPageStrings.autoSkipStoryPanelTitle(
+                          autoSkipStoryEnabled,
+                        ),
+                        style: SettingPageStyles.toggleTitleStyle(
+                          autoSkipStoryEnabled,
+                        ),
+                      ),
+                      const SizedBox(height: SettingPageStyles.gap2xs),
+                      Text(
+                        SteeingPageStrings.autoSkipStoryPanelMessage(
+                          autoSkipStoryEnabled,
+                        ),
+                        style: SettingPageStyles.bodyTextStyle,
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: SettingPageStyles.gapMd),
+                Switch(
+                  value: autoSkipStoryEnabled,
+                  activeThumbColor: SettingPageStyles.switchActiveThumbColor,
+                  activeTrackColor: SettingPageStyles.switchActiveTrackColor,
+                  inactiveThumbColor:
+                      SettingPageStyles.switchInactiveThumbColor,
+                  inactiveTrackColor:
+                      SettingPageStyles.switchInactiveTrackColor,
+                  onChanged: (value) async {
+                    await LocalSettingService.autoSkipStory.update(value);
+                  },
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _LanguageSettingCard extends StatelessWidget {
+  const _LanguageSettingCard();
+
+  @override
+  Widget build(BuildContext context) {
+    return ValueListenableBuilder(
+      valueListenable: LocalSettingService.settingsBox.listenable(),
+      builder: (context, _, child) {
+        return _SettingCard(
+          icon: Icons.language_rounded,
+          title: SteeingPageStrings.languageTitle,
+          description: SteeingPageStrings.languageDescription,
+          status: _StatusChip(
+            label: SteeingPageStrings.languageChineseLabel,
+            enabled: true,
+          ),
+          child: DropdownButtonFormField<String>(
+            initialValue: LanguageSetting.chinese,
+            decoration: InputDecoration(
+              labelText: SteeingPageStrings.languageDropdownLabel,
+              labelStyle: SettingPageStyles.bodyTextStyle,
+              filled: true,
+              fillColor: AppTheme.accentColor.withValues(alpha: 0.88),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: SettingPageStyles.toggleShellBorderRadius,
+                borderSide: BorderSide(
+                  color: AppTheme.primaryColor.withValues(alpha: 0.24),
+                  width: 1.2,
+                ),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: SettingPageStyles.toggleShellBorderRadius,
+                borderSide: const BorderSide(
+                  color: AppTheme.primaryColor,
+                  width: 1.2,
+                ),
+              ),
+              contentPadding: SettingPageStyles.toggleShellPadding,
+            ),
+            icon: const Icon(
+              Icons.keyboard_arrow_down_rounded,
+              color: SettingPageStyles.mutedIconColor,
+            ),
+            dropdownColor: AppTheme.cardColor,
+            style: SettingPageStyles.toggleTitleStyle(true),
+            items: const [
+              DropdownMenuItem<String>(
+                value: LanguageSetting.chinese,
+                child: Text(SteeingPageStrings.languageChineseLabel),
+              ),
+            ],
+            onChanged: null,
+          ),
+        );
+      },
+    );
+  }
+}
+
 class _UserProtocolButton extends StatefulWidget {
   const _UserProtocolButton();
 
@@ -369,15 +537,15 @@ class _UserProtocolButtonState extends State<_UserProtocolButton> {
                     color: Colors.white.withValues(alpha: 0.92),
                     size: 30,
                   ),
-                  const SizedBox(height: SettingPageStyles.gap2xs),
-                  Text(
-                    SteeingPageStrings.userProtocolButtonHint,
-                    style: AppTheme.cardTitleStyle.copyWith(
-                      fontSize: 12,
-                      color: Colors.white.withValues(alpha: 0.88),
-                    ),
-                    textAlign: TextAlign.end,
-                  ),
+                  // const SizedBox(height: SettingPageStyles.gap2xs),
+                  // Text(
+                  //   SteeingPageStrings.userProtocolButtonHint,
+                  //   style: AppTheme.cardTitleStyle.copyWith(
+                  //     fontSize: 12,
+                  //     color: Colors.white.withValues(alpha: 0.88),
+                  //   ),
+                  //   textAlign: TextAlign.end,
+                  // ),
                 ],
               ),
             ],

@@ -23,7 +23,7 @@ class CryptographyLevel {
   static const String nextQuestionButton = "下一題";
   static const String finishButton = "完成戰鬥";
   static const String retryHint = "請重新觀察題目後再作答";
-  static const int playerMaxHp = 3;
+  static const int playerMaxHp = 2;
   static const int playerDamageOnWrong = 1;
   static const int enemyDamageOnCorrect = 1;
   static const Duration feedbackDuration = Duration(milliseconds: 900);

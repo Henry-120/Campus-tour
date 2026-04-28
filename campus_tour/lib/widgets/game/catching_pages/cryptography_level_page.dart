@@ -183,7 +183,7 @@ class _CryptographyLevelPageState extends State<CryptographyLevelPage> {
             final selected = _selectedChoiceIndex == index;
             final correctAnswer = widget.level.answerSet[_questionIndex];
             final isCorrect =
-                _isAnswerLocked && choices[index] == correctAnswer;
+                _isAnswerLocked && selected && choices[index] == correctAnswer;
             final isWrong = _isAnswerLocked && selected && !isCorrect;
             return Padding(
               padding: EdgeInsets.only(
