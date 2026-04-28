@@ -4,6 +4,7 @@ import 'package:campus_tour/widgets/game/catching_pages/cryptography_level_page.
 import 'package:campus_tour/widgets/game/catching_pages/full_mission.dart';
 import 'package:campus_tour/widgets/game/catching_pages/graphics_text_level_page.dart';
 import 'package:campus_tour/widgets/game/catching_pages/monster_model_cry.dart';
+import 'package:campus_tour/widgets/game/catching_pages/plot_level_page.dart';
 
 class FullMissionPage extends StatefulWidget {
   final List<FullMission> missions; //任務列表
@@ -96,6 +97,10 @@ class _FullMissionPageState extends State<FullMissionPage> {
       );
     }
 
+    if (_isPlotMission(mission)) {
+      return PlotLevelPage(plotLevel: mission.plot, nextFunction: nextFunction);
+    }
+
     if (_isCamaraMission(mission) || _isTraceMission(mission)) {
       return _buildDisabledPage(mission);
     }
@@ -113,6 +118,11 @@ class _FullMissionPageState extends State<FullMissionPage> {
     return mission.isGraphicsText ||
         levelType == 'graphics_text' ||
         levelType == 'graphicstext';
+  }
+
+  bool _isPlotMission(FullMission mission) {
+    final levelType = mission.levelType.toLowerCase();
+    return mission.isPlot || levelType == 'plot' || levelType == 'plotlevel';
   }
 
   bool _isCamaraMission(FullMission mission) {
