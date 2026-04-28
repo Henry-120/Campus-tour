@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
-  // 💡 暖色系的核心配色
-  static const Color primaryColor = Color(0xFFF28482);    // 溫暖珊瑚粉
-  static const Color secondaryColor = Color(0xFFF6BD60);  // 暖金色
-  static const Color accentColor = Color(0xFFF7EDE2);     // 杏仁色
-  static const Color textColor = Color(0xFF5D4037);       // 暖深啡色
+  // 💡 依照「註冊背景圖」風格調整的核心配色
+  static const Color primaryColor = Color(0xFFD99A84);    // 溫暖的黏土紅/棕，來自 LevelStyle.imageIconColor
+  static const Color secondaryColor = Color(0xFFF4C8B8);  // 淺肉粉色，來自 LevelStyle.borderColor
+  static const Color accentColor = Color(0xFFFFEDE2);     // 杏仁白/羊皮紙色，來自 LevelStyle.imagePlaceholderColor
+  static const Color textColor = Color(0xFF5D4037);       // 暖深啡色，保持原有的穩重感
   static const Color linkColor = Color(0xFF8D6E63);       // 淺啡色
-  static const Color cardColor = Colors.white;
+  static const Color cardColor = Color(0xFFFFFBF7);       // 紙張米白色，來自 LevelStyle.textPanelColor
   static const Color errorColor = Color(0xFFE57373);
 
-  // 漸層背景
+  // 漸層背景 - 參考自 LevelStyle 的頁面背景
   static const LinearGradient warmGradient = LinearGradient(
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
-    colors: [Color(0xFFF7EDE2), Color(0xFFF5CAC3)],
+    colors: [Color(0xFFFFF4EC), Color(0xFFFFE1D6)],
   );
 
   // 間距
@@ -24,30 +24,21 @@ class AppTheme {
   static const double sectionSpacing = 60.0;
   static const double cardPadding = 16.0;
 
-  // 陰影
+  // 陰影 - 使用更溫潤的咖啡色系陰影
   static List<BoxShadow> softShadow = [
     BoxShadow(
-      color: Colors.black.withValues(alpha: 0.05),
+      color: const Color(0x1A8D5A4A).withValues(alpha: 0.1), // 參考 LevelStyle.shadowColor
       blurRadius: 15,
       offset: const Offset(0, 8),
     ),
   ];
 
-  // 文字樣式
+  // 文字樣式 - 已依照圖片修改為深啡色、無陰影的手繪風格
   static TextStyle titleStyle = GoogleFonts.zenMaruGothic(
-    fontSize: 48,
-    color: primaryColor,
-    // color: Color(0xFF64B5F6),
-    fontWeight: FontWeight.w700,
-    shadows: [
-      Shadow(
-        color: primaryColor.withValues(alpha: 0.2),
-        // color: Colors.black.withValues(alpha: 0.6),
-        offset: const Offset(2, 2),
-        //offset: const Offset(1, 1),
-        blurRadius: 4,
-      ),
-    ],
+    fontSize: 40,
+    color: textColor,
+    fontWeight: FontWeight.w900, // 更加粗體
+    letterSpacing: 2.0,
   );
 
   static TextStyle cardTitleStyle = TextStyle(
@@ -88,7 +79,6 @@ class AppTheme {
     letterSpacing: 0.5,
   );
 
-  // static const TextStyle buttonTextStyle = TextStyle(fontSize: 18, fontWeight: FontWeight.w500);
   static const TextStyle linkTextStyle = TextStyle(
     color: linkColor,
     fontSize: 15,
@@ -96,22 +86,29 @@ class AppTheme {
     decoration: TextDecoration.underline,
   );
 
-  // 輸入框樣式
+  // 輸入框樣式 - 已修改為手繪感底部線條樣式
   static InputDecoration inputDecoration(String label, IconData icon) {
     return InputDecoration(
       labelText: label,
-      prefixIcon: Icon(icon, color: primaryColor),
-      filled: true,
-      fillColor: Colors.white.withValues(alpha: 0.8),
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(15),
-        borderSide: BorderSide.none,
+      labelStyle: GoogleFonts.zenMaruGothic(
+        color: textColor,
+        fontSize: 21,
+        fontWeight: FontWeight.w700,
       ),
-      focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(15),
-        borderSide: const BorderSide(color: primaryColor, width: 2),
+      floatingLabelBehavior: FloatingLabelBehavior.always,
+      prefixIcon: Padding(
+        padding: const EdgeInsets.only(right: 12),
+        child: Icon(icon, color: textColor, size: 40),
       ),
-      contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+      prefixIconConstraints: const BoxConstraints(minWidth: 50),
+      enabledBorder: const UnderlineInputBorder(
+        borderSide: BorderSide(color: textColor, width: 2.5),
+      ),
+      focusedBorder: const UnderlineInputBorder(
+        borderSide: BorderSide(color: textColor, width: 4),
+      ),
+      filled: false,
+      contentPadding: const EdgeInsets.symmetric(vertical: 10),
     );
   }
 }
