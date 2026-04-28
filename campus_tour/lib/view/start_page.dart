@@ -1,9 +1,10 @@
 import 'dart:async';
-import 'package:campus_tour/widgets/sections/start_menu_group.dart';
 import 'package:flutter/material.dart';
-import '../widgets/common/start_background.dart'; // 開始頁面背景 
-import '../services/audio_service.dart'; // 撥放器
-import '../styles/app_theme.dart';
+
+import '../widgets/common/start_background.dart';
+import '../widgets/sections/start_menu_group.dart';
+import '../services/audio_service.dart';
+import '../widgets/constants/responsive.dart';
 
 class StartPage extends StatefulWidget {
   const StartPage({super.key});
@@ -32,8 +33,9 @@ class _StartPageState extends State<StartPage> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addObserver(this); 
-    
+
+    WidgetsBinding.instance.addObserver(this);
+
     AudioService().play(
       fileName: 'audio/BGM.mp3',
       isBgm: true,
@@ -58,40 +60,31 @@ class _StartPageState extends State<StartPage> with WidgetsBindingObserver {
   }
 
   @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state == AppLifecycleState.paused) {
-      AudioService().pauseBgm(); 
-      debugPrint("[StartPage]:App 進入背景，音樂已暫停");
-    } 
-    else if (state == AppLifecycleState.resumed) {
-      AudioService().resumeBgm();
-      debugPrint("[StartPage]:歡迎回來，音樂繼續播放");
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final scale = Responsive.scale(context);
+
     return Scaffold(
       body: Stack(
         children: [
           AnimatedSwitcher(
-            duration: const Duration(milliseconds: 1000), // 淡出/淡入各 1 秒
+            duration: const Duration(milliseconds: 1000),
             child: StartBackground(
-              key: ValueKey(_currentIndex), // key 變了才會觸發動畫
+              key: ValueKey(_currentIndex),
               imagePath: _images[_currentIndex],
             ),
           ),
-          // const StartBackground(imagePath: 'assets/images/NCU/0.jpg'),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: AppTheme.horizontalPadding, 
-            ),
-            child: const Center(
-              child: StartMenuGroup(),
+
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: EdgeInsets.only(
+                bottom: 46 * scale,
+              ),
+              child: const StartMenuGroup(),
             ),
           ),
-        ]
-      )
+        ],
+      ),
     );
   }
 }
