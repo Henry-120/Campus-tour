@@ -22,4 +22,7 @@ class AssetPaths {
   static const String rightArrow = 'assets/images/component/right_arrow.png';
   static const String wood = 'assets/images/component/wood.png';
   static const String paper = 'assets/images/component/paper.png';
+
+  static const String changeNameBg = 'assets/images/component/change_name_bg.png';
+  static const String textDialog = 'assets/images/component/text_dialog.png';
 }
