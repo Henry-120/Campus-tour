@@ -136,5 +136,25 @@
     "architectureRef": "/architectures/a14",
     "qaRef": "/questions/qa14",
     "ARRef": "Infor_Engineering.usdz"
+  },
+  {
+    "id": "m15",
+    "name" : "",
+    "tyoe": "",
+    "imageURL": "assets/images/fairy_img/electrical_college.jpg",
+    "location": { "latitude": , "longitude":  },
+    "architectureRef": "",
+    "qaRef": "/questions/qa",
+    "ARRef": ""
+  },
+  {
+    "id": "m16",
+    "name" : "",
+    "tyoe": "",
+    "imageURL": "assets/images/fairy_img/electrical_college.jpg",
+    "location": { "latitude": , "longitude":  },
+    "architectureRef": "",
+    "qaRef": "/questions/qa",
+    "ARRef": ""
   }
 ]
