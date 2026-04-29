@@ -16,6 +16,21 @@
 		97C146FC1CF9000F007C117D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FA1CF9000F007C117D /* Main.storyboard */; };
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
 		97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */; };
+		BA27D5412F9ABD16009A1F8D /* YMCA.usdz in Resources */ = {isa = PBXBuildFile; fileRef = BA27D5402F9ABD16009A1F8D /* YMCA.usdz */; };
+		BA27D5432F9ABE27009A1F8D /* fairy_beauty.usdz in Resources */ = {isa = PBXBuildFile; fileRef = BA27D5422F9ABE27009A1F8D /* fairy_beauty.usdz */; };
+		BA4F71D92F9CBA4100399639 /* cherry_fairy.usdz in Resources */ = {isa = PBXBuildFile; fileRef = BA4F71D82F9CBA4100399639 /* cherry_fairy.usdz */; };
+		BA8107FF2F9DF230005686B4 /* language.usdz in Resources */ = {isa = PBXBuildFile; fileRef = BA8107FE2F9DF22F005686B4 /* language.usdz */; };
+		BAB31A3E2F9BDA6600AF8D91 /* ES.usdz in Resources */ = {isa = PBXBuildFile; fileRef = BAB31A332F9BDA6600AF8D91 /* ES.usdz */; };
+		BAB31A3F2F9BDA6600AF8D91 /* Infor_Engineer.usdz in Resources */ = {isa = PBXBuildFile; fileRef = BAB31A362F9BDA6600AF8D91 /* Infor_Engineer.usdz */; };
+		BAB31A402F9BDA6600AF8D91 /* Management.usdz in Resources */ = {isa = PBXBuildFile; fileRef = BAB31A382F9BDA6600AF8D91 /* Management.usdz */; };
+		BAB31A412F9BDA6600AF8D91 /* flower_river.usdz in Resources */ = {isa = PBXBuildFile; fileRef = BAB31A342F9BDA6600AF8D91 /* flower_river.usdz */; };
+		BAB31A422F9BDA6600AF8D91 /* Taichi.usdz in Resources */ = {isa = PBXBuildFile; fileRef = BAB31A3C2F9BDA6600AF8D91 /* Taichi.usdz */; };
+		BAB31A432F9BDA6600AF8D91 /* DNA.usdz in Resources */ = {isa = PBXBuildFile; fileRef = BAB31A322F9BDA6600AF8D91 /* DNA.usdz */; };
+		BAB31A452F9BDA6600AF8D91 /* Hakka.usdz in Resources */ = {isa = PBXBuildFile; fileRef = BAB31A352F9BDA6600AF8D91 /* Hakka.usdz */; };
+		BAB31A462F9BDA6600AF8D91 /* clound.usdz in Resources */ = {isa = PBXBuildFile; fileRef = BAB31A312F9BDA6600AF8D91 /* clound.usdz */; };
+		BAB31A472F9BDA6600AF8D91 /* NCU_Lake.usdz in Resources */ = {isa = PBXBuildFile; fileRef = BAB31A3A2F9BDA6600AF8D91 /* NCU_Lake.usdz */; };
+		BAB31A482F9BDA6600AF8D91 /* Mechanical.usdz in Resources */ = {isa = PBXBuildFile; fileRef = BAB31A392F9BDA6600AF8D91 /* Mechanical.usdz */; };
+		BAB31A492F9BDA6600AF8D91 /* Recycle.usdz in Resources */ = {isa = PBXBuildFile; fileRef = BAB31A3B2F9BDA6600AF8D91 /* Recycle.usdz */; };
 		F106E40905B01AB0B82C78C3 /* Pods_Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43562D67693D1B35993C1149 /* Pods_Runner.framework */; };
 /* End PBXBuildFile section */
 
@@ -64,6 +79,21 @@
 		97C146FD1CF9000F007C117D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		97C147001CF9000F007C117D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		97C147021CF9000F007C117D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BA27D5402F9ABD16009A1F8D /* YMCA.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = YMCA.usdz; sourceTree = "<group>"; };
+		BA27D5422F9ABE27009A1F8D /* fairy_beauty.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = fairy_beauty.usdz; sourceTree = "<group>"; };
+		BA4F71D82F9CBA4100399639 /* cherry_fairy.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = cherry_fairy.usdz; sourceTree = "<group>"; };
+		BA8107FE2F9DF22F005686B4 /* language.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = language.usdz; sourceTree = "<group>"; };
+		BAB31A312F9BDA6600AF8D91 /* clound.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = clound.usdz; sourceTree = "<group>"; };
+		BAB31A322F9BDA6600AF8D91 /* DNA.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = DNA.usdz; sourceTree = "<group>"; };
+		BAB31A332F9BDA6600AF8D91 /* ES.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = ES.usdz; sourceTree = "<group>"; };
+		BAB31A342F9BDA6600AF8D91 /* flower_river.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = flower_river.usdz; sourceTree = "<group>"; };
+		BAB31A352F9BDA6600AF8D91 /* Hakka.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = Hakka.usdz; sourceTree = "<group>"; };
+		BAB31A362F9BDA6600AF8D91 /* Infor_Engineer.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = Infor_Engineer.usdz; sourceTree = "<group>"; };
+		BAB31A382F9BDA6600AF8D91 /* Management.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = Management.usdz; sourceTree = "<group>"; };
+		BAB31A392F9BDA6600AF8D91 /* Mechanical.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = Mechanical.usdz; sourceTree = "<group>"; };
+		BAB31A3A2F9BDA6600AF8D91 /* NCU_Lake.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = NCU_Lake.usdz; sourceTree = "<group>"; };
+		BAB31A3B2F9BDA6600AF8D91 /* Recycle.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = Recycle.usdz; sourceTree = "<group>"; };
+		BAB31A3C2F9BDA6600AF8D91 /* Taichi.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = Taichi.usdz; sourceTree = "<group>"; };
 		C7216E8DD429A61CAD9C10B1 /* Pods-RunnerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.release.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.release.xcconfig"; sourceTree = "<group>"; };
 		DF8AC72B8C3F641962DD90C9 /* Pods-Runner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug.xcconfig"; sourceTree = "<group>"; };
 		E17AB329C21D054B1FE8FE37 /* Pods_RunnerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RunnerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -126,6 +156,21 @@
 				331C8082294A63A400263BE5 /* RunnerTests */,
 				AE08350CD16CFC778B133121 /* Pods */,
 				45571A16728B255139CA6558 /* Frameworks */,
+				BA27D5402F9ABD16009A1F8D /* YMCA.usdz */,
+				BA27D5422F9ABE27009A1F8D /* fairy_beauty.usdz */,
+				BAB31A312F9BDA6600AF8D91 /* clound.usdz */,
+				BAB31A322F9BDA6600AF8D91 /* DNA.usdz */,
+				BAB31A332F9BDA6600AF8D91 /* ES.usdz */,
+				BAB31A342F9BDA6600AF8D91 /* flower_river.usdz */,
+				BAB31A352F9BDA6600AF8D91 /* Hakka.usdz */,
+				BAB31A362F9BDA6600AF8D91 /* Infor_Engineer.usdz */,
+				BAB31A382F9BDA6600AF8D91 /* Management.usdz */,
+				BAB31A392F9BDA6600AF8D91 /* Mechanical.usdz */,
+				BAB31A3A2F9BDA6600AF8D91 /* NCU_Lake.usdz */,
+				BAB31A3B2F9BDA6600AF8D91 /* Recycle.usdz */,
+				BAB31A3C2F9BDA6600AF8D91 /* Taichi.usdz */,
+				BA4F71D82F9CBA4100399639 /* cherry_fairy.usdz */,
+				BA8107FE2F9DF22F005686B4 /* language.usdz */,
 			);
 			sourceTree = "<group>";
 		};
@@ -263,8 +308,23 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA8107FF2F9DF230005686B4 /* language.usdz in Resources */,
 				97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */,
+				BAB31A3E2F9BDA6600AF8D91 /* ES.usdz in Resources */,
+				BAB31A3F2F9BDA6600AF8D91 /* Infor_Engineer.usdz in Resources */,
+				BAB31A402F9BDA6600AF8D91 /* Management.usdz in Resources */,
+				BAB31A412F9BDA6600AF8D91 /* flower_river.usdz in Resources */,
+				BAB31A422F9BDA6600AF8D91 /* Taichi.usdz in Resources */,
+				BAB31A432F9BDA6600AF8D91 /* DNA.usdz in Resources */,
+				BAB31A452F9BDA6600AF8D91 /* Hakka.usdz in Resources */,
+				BA4F71D92F9CBA4100399639 /* cherry_fairy.usdz in Resources */,
+				BAB31A462F9BDA6600AF8D91 /* clound.usdz in Resources */,
+				BAB31A472F9BDA6600AF8D91 /* NCU_Lake.usdz in Resources */,
+				BAB31A482F9BDA6600AF8D91 /* Mechanical.usdz in Resources */,
+				BAB31A492F9BDA6600AF8D91 /* Recycle.usdz in Resources */,
 				3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */,
+				BA27D5412F9ABD16009A1F8D /* YMCA.usdz in Resources */,
+				BA27D5432F9ABE27009A1F8D /* fairy_beauty.usdz in Resources */,
 				97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */,
 				97C146FC1CF9000F007C117D /* Main.storyboard in Resources */,
 			);

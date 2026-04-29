@@ -63,69 +63,103 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: const BoxDecoration(gradient: AppTheme.warmGradient),
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 30),
-          child: Column(
-            children: [
-              const SizedBox(height: 100),
-              Text("Campus Tour", style: AppTheme.titleStyle),
-              const SizedBox(height: 8),
-              const Text("開啟你的校園冒險之旅", 
-                style: TextStyle(color: AppTheme.textColor, fontSize: 16, fontWeight: FontWeight.w500)
-              ),
-              const SizedBox(height: 50),
-              Container(
-                padding: const EdgeInsets.all(AppTheme.cardPadding * 1.5),
-                decoration: BoxDecoration(
-                  color: AppTheme.cardColor,
-                  borderRadius: BorderRadius.circular(30),
-                  boxShadow: AppTheme.softShadow,
-                ),
-                child: Column(
-                  children: [
-                    const Text("登入遊戲", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: AppTheme.textColor)),
-                    const SizedBox(height: 30),
-                    TextField(
-                      controller: _emailController,
-                      decoration: AppTheme.inputDecoration("電子郵件", Icons.email_outlined),
+      resizeToAvoidBottomInset: false,
+      body: Stack(
+        children: [
+          // 1. 背景圖片 (填滿全螢幕)
+          Positioned(
+            top: 150,      // 💡 往下移動 60 像素，可根據需求調整
+            left: 0,
+            right: 0,
+            bottom: 10,   // 💡 負值確保圖片下方不會留白
+            child: Image.asset(
+              "assets/images/login_monster_white-removebg-preview.png",
+              fit: BoxFit.cover,
+            ),
+          ),
+          
+          // 2. 登入內容
+          SafeArea(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Column(
+                children: [
+                  const SizedBox(height: 20),
+                  // 標題 (白色 + 陰影)
+                  Text(
+                    "Campus Tour", 
+                    style: AppTheme.titleStyle.copyWith(
+                      color: Colors.white,
+                      shadows: [const Shadow(color: Colors.black, blurRadius: 10)],
+                    )
+                  ),
+                  const SizedBox(height: 250),
+                  
+                  // 登入卡片 (💡 已去背)
+                  Container(
+                    padding: const EdgeInsets.all(AppTheme.cardPadding * 2),
+                    decoration: const BoxDecoration(
+                      color: Colors.transparent, // 💡 完全透明
                     ),
-                    const SizedBox(height: 20),
-                    TextField(
-                      controller: _passwordController,
-                      obscureText: true,
-                      decoration: AppTheme.inputDecoration("密碼", Icons.lock_outline),
-                    ),
-                    const SizedBox(height: 40),
-                    SizedBox(
-                      width: double.infinity,
-                      height: 55,
-                      child: ElevatedButton(
-                        onPressed: _isLoading ? null : _login,
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: AppTheme.primaryColor,
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 30, width: double.infinity*2),
+                        TextField(
+                          controller: _emailController,
+                          style: const TextStyle(color: Colors.white),
+                          decoration: AppTheme.inputDecoration("電子郵件", Icons.email_outlined).copyWith(
+                            fillColor: Colors.transparent,
+                            labelStyle: const TextStyle(color: Colors.white70),
+                          ),
                         ),
-                        child: _isLoading 
-                          ? const CircularProgressIndicator(color: Colors.white)
-                          : Text("進入冒險", style: AppTheme.buttonTextStyle),
+                        const SizedBox(height: 20),
+                        TextField(
+                          controller: _passwordController,
+                          obscureText: true,
+                          style: const TextStyle(color: Colors.white),
+                          decoration: AppTheme.inputDecoration("密碼", Icons.lock_outline).copyWith(
+                            fillColor: Colors.transparent,
+                            labelStyle: const TextStyle(color: Colors.white70),
+                          ),
+                        ),
+                        const SizedBox(height: 40),
+                        SizedBox(
+                          width: 200,
+                          height: 55,
+                          child: ElevatedButton(
+                            onPressed: _isLoading ? null : _login,
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: AppTheme.primaryColor,
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                              elevation: 5,
+                            ),
+                            child: _isLoading 
+                              ? const CircularProgressIndicator(color: Colors.white)
+                              : Text("進入冒險", style: AppTheme.buttonTextStyle),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 30),
+                  TextButton(
+                    onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const RegisterPage())),
+                    child: const Text(
+                      "還沒有帳號？立即加入冒險", 
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        shadows: [Shadow(color: Colors.black, blurRadius: 5)],
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                  const SizedBox(height: 50),
+                ],
               ),
-              const SizedBox(height: 30),
-              TextButton(
-                onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const RegisterPage())),
-                child: const Text("還沒有帳號？立即加入冒險", style: AppTheme.linkTextStyle),
-              ),
-              const SizedBox(height: 50),
-            ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }

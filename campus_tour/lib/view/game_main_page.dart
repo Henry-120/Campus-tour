@@ -63,10 +63,10 @@ class _GameMainPageState extends State<GameMainPage> {
             child: ControlButtons(),
           ),
 
-          // 4. 中間：角色小人
-          const Center(
-            child: Character(),
-          ),
+          // // 4. 中間：角色小人
+          // const Center(
+          //   child: Character(),
+          // ),
 
           // 5. 下方：主選單
           const Positioned(
