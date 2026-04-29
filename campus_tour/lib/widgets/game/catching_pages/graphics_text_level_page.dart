@@ -1,4 +1,5 @@
 import 'package:campus_tour/styles/level_style.dart';
+import 'package:campus_tour/widgets/buttons/click_and_accept_button.dart';
 import 'package:campus_tour/widgets/buttons/nfc_button.dart';
 import 'package:campus_tour/widgets/game/catching_pages/graphics_text_level.dart';
 import 'package:flutter/material.dart';
@@ -8,10 +9,12 @@ class GraphicsTextLevelPage extends StatefulWidget {
     super.key,
     required this.level,
     required this.nextFunction,
+    required this.loseingFunction,
   });
 
   final GraphicsTextLevel level;
   final VoidCallback nextFunction;
+  final VoidCallback loseingFunction;
 
   @override
   State<GraphicsTextLevelPage> createState() => _GraphicsTextLevelPageState();
@@ -64,6 +67,13 @@ class _GraphicsTextLevelPageState extends State<GraphicsTextLevelPage> {
                 NfcButton1(
                   ans: widget.level.nfcId,
                   onResult: widget.nextFunction,
+                ),
+                const SizedBox(height: 8),
+                ClickAndAcceptButton(
+                  movementFuntion: widget.loseingFunction,
+                  accept_info: '是否確定放棄捕捉精靈?',
+                  AppearanceIcon: Icons.close,
+                  AppearanceText: '放棄捕捉',
                 ),
               ],
             ),
