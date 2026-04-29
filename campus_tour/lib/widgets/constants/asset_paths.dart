@@ -15,4 +15,11 @@ class AssetPaths {
   static const String nameBroad = 'assets/images/component/name_broad.png';
   static const String userHeadBorder = 'assets/images/component/user_head_border.png';
   static const String squirrel = 'assets/images/component/squirrel.png';
+
+  static const String encyclopediaBg = 'assets/images/component/encyclopedia_bg.png';
+  static const String book = 'assets/images/component/book.png';
+  static const String leftArrow = 'assets/images/component/left_arrow.png';
+  static const String rightArrow = 'assets/images/component/right_arrow.png';
+  static const String wood = 'assets/images/component/wood.png';
+  static const String paper = 'assets/images/component/paper.png';
 }
