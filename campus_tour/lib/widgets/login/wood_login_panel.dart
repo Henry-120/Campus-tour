@@ -27,6 +27,7 @@ class WoodLoginPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scale = Responsive.scale(context);
+    final color = Color(0xFFB9F451);
 
     return SizedBox(
       width: 390 * scale,
@@ -102,6 +103,7 @@ class WoodLoginPanel extends StatelessWidget {
                   text: "Forgot Password?",
                   onTap: onForgotPassword,
                   fontSize: 18 * scale,
+                  color:color,
                 ),
               ],
             ),

@@ -1,4 +1,5 @@
 import 'dart:async'; // 💡 引入 StreamSubscription
+import 'package:campus_tour/widgets/constants/asset_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:geolocator/geolocator.dart'; // 💡 引入 GPS 套件
@@ -39,6 +40,7 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
     southwest: southwest,
     northeast: northeast,
   );
+  static const double playerSize = 60;
 
   Future<void> _loadAssets() async {
     try {
@@ -46,14 +48,14 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
       final style = await rootBundle.loadString('assets/mapStyles/style3.json');
       final image = await AssetMapBitmap.create(
         imageConfig,
-        'assets/images/campus_map_4.png',
+        'assets/images/forest_map.png',
         bitmapScaling: MapBitmapScaling.none,
       );
       final playerIcon = await BitmapDescriptor.asset(
-        const ImageConfiguration(size: Size(48, 48)),
-        'assets/images/doro.png',
-        width: 48,
-        height: 48,
+        const ImageConfiguration(size: Size(playerSize, playerSize)),
+        AssetPaths.squirrel,
+        width: playerSize,
+        height: playerSize,
       );
 
       if (!mounted) return; 
@@ -107,6 +109,8 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
         currentPosition.longitude,
       );
 
+      // final LatLng currentLocation = const LatLng(24.9684, 121.1912);
+
       setState(() {
         _playerPosition = currentLocation;
         if (_playerIcon != null) {
@@ -126,6 +130,7 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
         debugPrint('[Debug][GameMap]:位置更新: ${position.latitude}, ${position.longitude}');
 
         final currentLocation = LatLng(position.latitude, position.longitude);
+        // final currentLocation = const LatLng(24.9684, 121.1912);
         final oldPosition = _playerPosition;
         final shouldUpdateMarker = oldPosition == null ||
             Geolocator.distanceBetween(
@@ -178,6 +183,7 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
             CameraUpdate.newCameraPosition(
               CameraPosition(
                 target: LatLng(position.latitude, position.longitude),
+                // target: const LatLng(24.9684, 121.1912),
                 bearing: position.heading,
               ),
             ),
@@ -185,8 +191,8 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
 
           // 完成后锁定缩放倍率
           setState(() {
-            _minZoomRate = 19.5;
-            _maxZoomRate = 19.5;
+            _minZoomRate = 18.5;
+            _maxZoomRate = 18.5;
           });
         }
       });
@@ -197,6 +203,7 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
       CameraUpdate.newCameraPosition(
         CameraPosition(
           target: LatLng(position.latitude, position.longitude),
+          // target: const LatLng(24.9684, 121.1912),
           bearing: position.heading,
         ),
       ),
@@ -239,8 +246,9 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
       children: [
         GoogleMap(
           minMaxZoomPreference: MinMaxZoomPreference(_minZoomRate, _maxZoomRate),
-          initialCameraPosition: const CameraPosition(
-            target: LatLng(24.9684, 121.1912),
+          initialCameraPosition:CameraPosition(
+            target: _playerPosition ?? const LatLng(24.9684, 121.1912) ,
+
           ),
           style: _mapStyle,
 
