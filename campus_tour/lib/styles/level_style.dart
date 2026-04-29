@@ -14,6 +14,7 @@ class LevelStyle {
 
   static const double pageHorizontalPadding = 24;
   static const double pageVerticalPadding = 20;
+  static const EdgeInsets cryptographyPagePadding = EdgeInsets.zero;
   static const double bodySpacing = 18;
   static const double panelSpacing = 16;
   static const double nfcButtonTopSpacing = 18;
@@ -127,7 +128,7 @@ class LevelStyle {
           lockFill: Color(0xFF58AEE8),
           glow: Color(0x3348A4E0),
         );
-      case '電':
+      case '金':
         return const BattleLevelTheme(
           topColor: Color(0xFFFFF8D9),
           bottomColor: Color(0xFFFFE788),

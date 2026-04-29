@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 
+import 'package:campus_tour/controllers/shock_controllers.dart';
 import 'package:campus_tour/styles/level_style.dart';
 import 'package:campus_tour/widgets/game/catching_pages/cryptography_level.dart';
 import 'package:campus_tour/widgets/game/catching_pages/monster_model_cry.dart';
@@ -26,6 +27,8 @@ class CryptographyLevelPage extends StatefulWidget {
 }
 
 class _CryptographyLevelPageState extends State<CryptographyLevelPage> {
+  final ShockController _shockController = const ShockController();
+
   late int _playerHp;
   late int _enemyHp;
   int _questionIndex = 0;
@@ -53,10 +56,7 @@ class _CryptographyLevelPageState extends State<CryptographyLevelPage> {
         decoration: LevelStyle.battlePageDecoration(theme),
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: LevelStyle.pageHorizontalPadding,
-              vertical: LevelStyle.pageVerticalPadding,
-            ),
+            padding: LevelStyle.cryptographyPagePadding,
             child: Container(
               width: double.infinity,
               decoration: LevelStyle.battleShellDecoration(theme),
@@ -183,7 +183,7 @@ class _CryptographyLevelPageState extends State<CryptographyLevelPage> {
             final selected = _selectedChoiceIndex == index;
             final correctAnswer = widget.level.answerSet[_questionIndex];
             final isCorrect =
-                _isAnswerLocked && choices[index] == correctAnswer;
+                _isAnswerLocked && selected && choices[index] == correctAnswer;
             final isWrong = _isAnswerLocked && selected && !isCorrect;
             return Padding(
               padding: EdgeInsets.only(
@@ -347,6 +347,10 @@ class _CryptographyLevelPageState extends State<CryptographyLevelPage> {
         );
       }
     });
+
+    if (!isCorrect) {
+      await _shockController.wrongAnswerShock();
+    }
 
     await Future<void>.delayed(CryptographyLevel.feedbackDuration);
     if (!mounted) {

@@ -1,5 +1,7 @@
+import 'package:campus_tour/widgets/game/system_menu.dart';
 import 'package:flutter/material.dart';
 import '../widgets/game/user_hud.dart';
+import '../widgets/sections/game_hud_overlay.dart';
 import '../widgets/game/game_map.dart';
 import '../widgets/game/control_buttons.dart';
 import '../widgets/game/main_bottom_menu.dart';
@@ -59,7 +61,7 @@ class _GameMainPageState extends State<GameMainPage> {
 
           // 3. 右上角：控制按鈕 (定位、圖層)
           const Positioned(
-            top: 50,
+            top: 30,
             right: 20,
             child: ControlButtons(),
           ),
@@ -71,13 +73,13 @@ class _GameMainPageState extends State<GameMainPage> {
 
           // 5. 中間：最近怪物箭頭
           const NearestMonsterArrow(),
-
+          
           // 6. 下方：主選單
           const Positioned(
-            bottom: 40,
+            bottom: 30,
             left: 0,
             right: 0,
-            child: MainBottomMenu(),
+            child: SystemMenu(),
           ),
         ],
       ),

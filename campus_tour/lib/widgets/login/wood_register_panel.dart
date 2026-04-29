@@ -34,6 +34,7 @@ class WoodRegisterPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scale = Responsive.scale(context);
+    final color = Color(0xFFB9F451);
 
     return SizedBox(
       width: 390 * scale,
@@ -185,6 +186,7 @@ class WoodRegisterPanel extends StatelessWidget {
                   text: "-- OR REGISTRATION VIA --",
                   onTap: () {},
                   fontSize: 16 * scale,
+                  color:color,
                 ),
               ],
             ),

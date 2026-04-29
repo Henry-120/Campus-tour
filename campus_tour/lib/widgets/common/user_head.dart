@@ -2,11 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import '../../controllers/user_controller.dart';
+import '../constants/asset_paths.dart';
 import 'show_edit_profile.dart';
 
 class UserHead extends StatelessWidget {
   final double size;
-  const UserHead({super.key, this.size = 60});
+
+  const UserHead({
+    super.key,
+    this.size = 95,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -16,27 +21,36 @@ class UserHead extends StatelessWidget {
       final user = userController.userModel.value;
       final photoUrl = user?.photoUrl;
 
-      debugPrint("[UserHead] 正在重繪, photoUrl: $photoUrl");
-
       return GestureDetector(
         onTap: () => showEditProfileDialog(context, userController),
-        child: Container(
+        child: SizedBox(
           width: size,
           height: size,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            shape: BoxShape.circle,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.15),
-                blurRadius: 10,
-                offset: const Offset(0, 4),
-              )
+          child: Stack(
+            clipBehavior: Clip.none,
+            alignment: Alignment.center,
+            children: [
+
+              // 2. 最上層木框圖片
+              // 外層是正方形，所以右下角指南針不會被切掉
+              Positioned.fill(
+                child: Image.asset(
+                  AssetPaths.userHeadBorder,
+                  fit: BoxFit.contain,
+                ),
+              ),
+
+              // 1. 中間圓形頭像
+              Positioned(
+                child: ClipOval(
+                  child: SizedBox(
+                    width: size * 0.66,
+                    height: size * 0.66,
+                    child: _buildAvatar(photoUrl),
+                  ),
+                ),
+              ),
             ],
-            border: Border.all(color: Colors.orange.shade200, width: 3),
-          ),
-          child: ClipOval(
-            child: _buildAvatar(photoUrl),
           ),
         ),
       );
@@ -48,29 +62,22 @@ class UserHead extends StatelessWidget {
       return _buildDefaultIcon();
     }
 
-    // 💡 判斷是否為 SVG
-    // 1. 檢查副檔名
-    // 2. 檢查是否包含 "netlify" (您的隨機頭像服務)
-    // 3. 檢查是否包含 "svg" 關鍵字
-    final isSvg = url.toLowerCase().contains(".svg") || 
-                  url.toLowerCase().contains("svg") ||
-                  url.contains("netlify");
+    final isSvg = url.toLowerCase().contains(".svg") ||
+        url.toLowerCase().contains("svg") ||
+        url.contains("netlify");
 
     if (isSvg) {
       return SvgPicture.network(
         url,
         key: ValueKey(url),
-        fit: BoxFit.contain,
+        fit: BoxFit.cover,
         placeholderBuilder: (context) => _buildDefaultIcon(),
-        // 💡 增加錯誤處理，如果 SVG 載入失敗則顯示預設圖標
         errorBuilder: (context, error, stackTrace) {
-          // debugPrint(url);
           debugPrint("[UserHead] SVG 載入失敗: $error");
           return _buildDefaultIcon();
         },
       );
     } else {
-      // 💡 非 SVG 則使用普通圖片載入 (如 Google 原始頭像)
       return Image.network(
         url,
         key: ValueKey(url),
@@ -89,12 +96,12 @@ class UserHead extends StatelessWidget {
 
   Widget _buildDefaultIcon() {
     return Container(
-      color: Colors.orange.shade50,
+      color: const Color(0xFFFFE8B8),
       child: Center(
         child: Icon(
-            Icons.person_rounded,
-            size: size * 0.6,
-            color: Colors.orange.shade300
+          Icons.person_rounded,
+          size: size * 0.38,
+          color: const Color(0xFFB8793E),
         ),
       ),
     );
