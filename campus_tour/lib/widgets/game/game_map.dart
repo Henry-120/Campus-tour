@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 import '../../view/nearby_monsters_display.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../../models/monster_model.dart';
-import 'user_marker.dart';
+// import 'user_marker.dart';
 
 class GameMap extends StatefulWidget {
   const GameMap({super.key});
@@ -29,8 +29,8 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
 
   LatLng? _playerPosition;
   bool _hasCenteredMap = false;
-  UserMarker? _playerMarker;
-  BitmapDescriptor? _playerIcon;
+  // UserMarker? _playerMarker;
+  // BitmapDescriptor? _playerIcon;
 
   static const LatLng southwest = LatLng(24.965184, 121.185000); // 左下
   static const LatLng northeast = LatLng(24.971653, 121.197487); // 右上
@@ -49,25 +49,25 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
         'assets/images/campus_map_4.png',
         bitmapScaling: MapBitmapScaling.none,
       );
-      final playerIcon = await BitmapDescriptor.asset(
-        const ImageConfiguration(size: Size(48, 48)),
-        'assets/images/doro.png',
-        width: 48,
-        height: 48,
-      );
+      // final playerIcon = await BitmapDescriptor.asset(
+      //   const ImageConfiguration(size: Size(48, 48)),
+      //   'assets/images/doro.png',
+      //   width: 48,
+      //   height: 48,
+      // );
 
       if (!mounted) return; 
 
       setState(() {
         _mapStyle = style;
         _customMapImage = image;
-        _playerIcon = playerIcon;
-        if (_playerPosition != null) {
-          _playerMarker = UserMarker(
-            position: _playerPosition!,
-            icon: _playerIcon!,
-          );
-        }
+        // _playerIcon = playerIcon;
+        // if (_playerPosition != null) {
+        //   _playerMarker = UserMarker(
+        //     position: _playerPosition!,
+        //     icon: _playerIcon!,
+        //   );
+        // }
       });
     } catch (e) {
       debugPrint("[Debug][GameMap][Error] 載入資源失敗: $e");
@@ -109,18 +109,18 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
 
       setState(() {
         _playerPosition = currentLocation;
-        if (_playerIcon != null) {
-          _playerMarker = UserMarker(
-            position: currentLocation,
-            icon: _playerIcon!,
-          );
-        }
+        // if (_playerIcon != null) {
+        //   _playerMarker = UserMarker(
+        //     position: currentLocation,
+        //     icon: _playerIcon!,
+        //   );
+        // }
       });
 
       _positionStream = Geolocator.getPositionStream(
         locationSettings: const LocationSettings(
           accuracy: LocationAccuracy.bestForNavigation,
-          distanceFilter: 8,
+          distanceFilter: 0,
         ),
       ).listen((Position position) {
         debugPrint('[Debug][GameMap]:位置更新: ${position.latitude}, ${position.longitude}');
@@ -138,12 +138,12 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
         if (shouldUpdateMarker) {
           setState(() {
             _playerPosition = currentLocation;
-            if (_playerIcon != null) {
-              _playerMarker = UserMarker(
-                position: currentLocation,
-                icon: _playerIcon!,
-              );
-            }
+            // if (_playerIcon != null) {
+            //   _playerMarker = UserMarker(
+            //     position: currentLocation,
+            //     icon: _playerIcon!,
+            //   );
+            // }
           });
         }
 
@@ -151,6 +151,7 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
 
         // 更新附近怪物
         monsterController.updateNearbyMonsters(position);
+        monsterController.updateNearestGlobal(position);
       });
 
       debugPrint("[Debug][GameMap]:已開始監聽位置變化");
@@ -176,9 +177,10 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
         if (_mapController != null && mounted) {
           _mapController!.animateCamera(
             CameraUpdate.newCameraPosition(
+              // 不讓畫面旋轉
               CameraPosition(
                 target: LatLng(position.latitude, position.longitude),
-                bearing: position.heading,
+                bearing: 0,
               ),
             ),
           );
@@ -197,7 +199,7 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
       CameraUpdate.newCameraPosition(
         CameraPosition(
           target: LatLng(position.latitude, position.longitude),
-          bearing: position.heading,
+          bearing: 0,
         ),
       ),
     );
@@ -249,14 +251,14 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
               groundOverlayId: const GroundOverlayId("ncu_custom_map"),
               image: _customMapImage!,
               bounds: campusBounds, // 圖片會自動對齊這四個角
-              transparency: 0,   // 0.0 ~ 1.0，建議先設 0.8 方便校對
+              transparency: 0,
               clickable: false,
             ),
           } : {},
 
           buildingsEnabled: true,
           markers: {
-            if (_playerMarker != null) _playerMarker!.toMarker(),
+            // if (_playerMarker != null) _playerMarker!.toMarker(),
             ...monsterMarkers, // 👈 MonsterMarkersMixin 提供的 getter
           },
           myLocationEnabled: false,
