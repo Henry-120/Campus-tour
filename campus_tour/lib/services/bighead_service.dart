@@ -2,7 +2,7 @@ import 'dart:math';
 
 class BigHeadService {
   // 目前最新穩定版本建議使用 9.x，或者維持 7.x 也可以
-  static const String baseUrl = "https://api.dicebear.com/9.x/notionists-neutral/svg";
+  static const String baseUrl = "https://api.dicebear.com/9.x/adventurer/svg";
 
   static String generateRandomUrl() {
     final seed = _getRandomString(12);
