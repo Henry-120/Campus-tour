@@ -92,11 +92,11 @@ class MonsterController extends GetxController {
     try {
       // 檢查是否已經捕捉過這隻怪物
       final alreadyCaptured = userMonsterCollection.any(
-        (m) => m.monsterRef.id == monster.id,
+        (m) => m.monsterRef.id == monsterObj.id,
       );
 
       if (alreadyCaptured) {
-        debugPrint('[MonsterController] 怪物 ${monster.name} 已經被捕捉過');
+        debugPrint('[MonsterController] 怪物 ${monsterObj.name} 已經被捕捉過');
         return false;
       }
 
@@ -105,7 +105,7 @@ class MonsterController extends GetxController {
         monsterRef: FirebaseFirestore.instance.collection("monsters").doc(monsterObj.id),
         name: monsterObj.name,
         imageURL: monsterObj.imageURL,
-        arRef: monster.ARRef ?? '',
+        arRef: monsterObj.ARRef ?? '',
         caughtAt: DateTime.now(),
       );
 
