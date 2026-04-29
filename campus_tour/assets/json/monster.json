@@ -51,13 +51,11 @@
   {
     "id": "m6",
     "name": "機居械",
-    "type": "火",
-    "imageURL": "assets/images/fairy_img/engineering.jpg",
-    "location": { "latitude": 24.9670, "longitude": 121.1875 },
+    "type": "金",
+    "imageURL": "assets/images/fairy_img/工學院.jpg",
+    "location": { "latitude": 50.9685, "longitude": 150.1950 },
     "architectureRef": "/architectures/a7",
-    "qaRef": "/questions/qa7",
-    "ARRef": "Mechanical.usdz"
-
+    "qaRef": ""
   },
   {
     "id": "m7",
@@ -66,6 +64,7 @@
     "imageURL": "assets/images/fairy_img/literature.jpg",
     "location": { "latitude": 24.9691, "longitude": 121.1946 },
     "architectureRef": "/architectures/a8",
+    "qaRef": "/questions/qa8"
     "qaRef": "/questions/qa8",
     "ARRef": "language.usdz"
   },

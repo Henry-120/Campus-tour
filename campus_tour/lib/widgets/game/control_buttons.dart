@@ -1,64 +1,81 @@
+import 'package:campus_tour/view/Real_ar_view.dart';
+import 'package:campus_tour/widgets/constants/asset_paths.dart';
+import 'package:campus_tour/widgets/login/game_link_text.dart';
 import 'package:flutter/material.dart';
+import '../../view/Camera_view.dart';
+import '../../view/encyclopedia_page.dart';
 import '../common/scale_button.dart';
 import 'package:get/get.dart';
+
+import '../constants/responsive.dart';
 
 class ControlButtons extends StatelessWidget {
   const ControlButtons({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final scale = Responsive.scale(context);
+    final color = Color(0xFFFFE0B2);
     return Column(
       children: [
-        // 1. 定位按鈕 (藍藍可愛風)
+        //4. AR按鈕
         _buildCuteButton(
-          icon: Icons.gps_fixed_rounded,
-          color: Colors.blue.shade400,
-          onTap: () => debugPrint("定位按鈕被按下"),
+          img:AssetPaths.cameraButton,
+          onTap: () => _openARCamera(context),
         ),
-        const SizedBox(height: 15),
-        // 2. 系統設定按鈕 (橘橘可愛風)
-        _buildCuteButton(
-          icon: Icons.settings_rounded,
-          color: Colors.orange.shade400,
-          onTap: () {
-            // 打開侧邊欄 (Scaffold.of(context).openDrawer())
-            Scaffold.of(context).openDrawer();
-          },
-        ),
+
+        const SizedBox(height: 5),
+        GameLinkText( text: "AR", onTap: () {}, fontSize: 16 * scale,color:color,),
+        const SizedBox(height: 10),
+
       ],
     );
   }
 
   Widget _buildCuteButton({
-    required IconData icon,
-    required Color color,
+    required String img,
     required VoidCallback onTap,
   }) {
     return ScaleButton(
       onTap: onTap,
       child: Container(
-        width: 55,
-        height: 55,
+        width: 65,
+        height: 65,
         decoration: BoxDecoration(
-          color: Colors.white,
+          image: DecorationImage(image:AssetImage(img)),
           shape: BoxShape.circle,
-          border: Border.all(color: color.withAlpha(80), width: 3),
-          boxShadow: [
-            BoxShadow(
-              color: color.withAlpha(40),
-              blurRadius: 10,
-              offset: const Offset(0, 4),
-            )
-          ],
-        ),
-        child: Center(
-          child: Icon(
-            icon,
-            color: color,
-            size: 30,
-          ),
         ),
       ),
     );
+  }
+  void _openPokedex(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => const EncyclopediaPage(),
+      ),
+    );
+  }
+
+  void _openCamera(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => const ArCapturePage(),
+      ),
+    );
+  }
+
+  void _openARCamera(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => const RealArPage(),
+      ),
+    );
+  }
+
+  void _openDrawer(BuildContext context) {
+    Scaffold.of(context).openDrawer();
   }
 }

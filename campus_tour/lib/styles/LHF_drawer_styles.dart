@@ -26,7 +26,7 @@ class DrawerStyles {
   static const drawer_cross_alignment = CrossAxisAlignment.stretch;
 
   //side width
-  static const double sbutton_side_width = 1.5;
+  static const double sbutton_side_width = 0;
 
   //size
   static const Size sbutton_size = Size(100, 75);
@@ -49,4 +49,18 @@ class DrawerStyles {
     fontWeight: FontWeight.bold,
     letterSpacing: 1.2, // 稍微拉開字距，更有質感
   );
+}
+
+class DrawerWeatherTrans {
+  static AssetImage weatherToColor(String? weather) {
+    //判斷天氣對應的狀況
+    switch (weather) {
+      case ("rain"):
+        return AssetImage(DrawerStyles.rain_image_path);
+      case ('sunny'):
+        return AssetImage(DrawerStyles.sunny_image_path);
+      default:
+        return AssetImage(DrawerStyles.sunny_image_path);
+    }
+  }
 }

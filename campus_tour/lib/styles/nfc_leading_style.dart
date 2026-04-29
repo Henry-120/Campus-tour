@@ -34,4 +34,6 @@ class NfcLeadingStyle {
   );
   //Text style
   static TextStyle primaryButtonText = AppTheme.buttonTextStyle;
+
+  static TextStyle mission_style = TextStyle(fontSize: 50);
 }
