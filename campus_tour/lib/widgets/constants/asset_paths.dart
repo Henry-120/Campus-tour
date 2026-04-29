@@ -15,4 +15,7 @@ class AssetPaths {
   static const String nameBroad = 'assets/images/component/name_broad.png';
   static const String userHeadBorder = 'assets/images/component/user_head_border.png';
   static const String squirrel = 'assets/images/component/squirrel.png';
+
+  static const String encyclopediaBg = 'assets/images/component/encyclopedia_bg.png';
+  static const String book = 'assets/images/component/book.png';
 }
