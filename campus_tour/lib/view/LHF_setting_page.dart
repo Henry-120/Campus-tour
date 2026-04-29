@@ -25,7 +25,7 @@ class SteeingPageStrings {
 
   // Volume
   static const volumeTitle = '音量';
-  static const volumeDescription = '調整遊戲內音效與背景音樂的預設音量。';
+  static const volumeDescription = '目前此功能尚未完成。';
   static const volumeMuteLabel = '靜音';
   static const volumeMaxLabel = '最大';
 
