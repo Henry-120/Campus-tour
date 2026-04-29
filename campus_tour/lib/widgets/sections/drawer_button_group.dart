@@ -40,7 +40,7 @@ class DrawerButtonGroup extends StatelessWidget {
                                 DrawerStyles.drawerCrossAlignment,
                             //填滿格式設定
                             children: [
-                              const _SettingButton(),
+                              // const _SettingButton(),
                               const _TutorialButton(),
                               const _IssueReportButton(),
                             ], //左選單按鈕列,
@@ -160,25 +160,25 @@ class _DrawerUserName extends StatelessWidget {
   }
 }
 
-class _SettingButton extends StatelessWidget {
-  const _SettingButton();
+// class _SettingButton extends StatelessWidget {
+//   const _SettingButton();
 
-  //設定按鈕實體化
-  void onPress(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const SettingPage()),
-    );
-  }
+//   //設定按鈕實體化
+//   void onPress(BuildContext context) {
+//     Navigator.push(
+//       context,
+//       MaterialPageRoute(builder: (context) => const SettingPage()),
+//     );
+//   }
 
-  @override
-  Widget build(BuildContext context) {
-    return DrawerSecondaryButton(
-      text: '設定',
-      onPressedToDo: () => onPress(context),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return DrawerSecondaryButton(
+//       text: '設定',
+//       onPressedToDo: () => onPress(context),
+//     );
+//   }
+// }
 
 class _TutorialButton extends StatelessWidget {
   const _TutorialButton();
@@ -221,7 +221,7 @@ class _LogoutButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton.icon(
       style: DrawerStyles.logoutButtonStyle,
-      onPressed: _onPress,
+      onPressed: () => _showFeatureNotImplementedMessage(context),
       icon: const Icon(Icons.logout_rounded),
       label: Text('登出', style: DrawerStyles.logoutButtonText),
     );
