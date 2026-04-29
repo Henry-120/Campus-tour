@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import '../widgets/game/user_hud.dart';
-import '../widgets/sections/game_hud_overlay.dart';
 import '../widgets/game/game_map.dart';
 import '../widgets/game/control_buttons.dart';
 import '../widgets/game/main_bottom_menu.dart';
 import '../widgets/common/scale_button.dart';
 import '../services/audio_service.dart';
 import 'package:campus_tour/widgets/common/LHF_Drawer.dart';
+import '../widgets/game/player_sprite.dart';
+import 'package:get/get.dart';
+import '../controllers/monster_controller.dart';
+import '../widgets/game/nearest_monster_arrow.dart';
 
 class GameMainPage extends StatefulWidget {
   const GameMainPage({super.key});
@@ -61,12 +64,15 @@ class _GameMainPageState extends State<GameMainPage> {
             child: ControlButtons(),
           ),
 
-          // 4. 中間：角色小人
-          // const Center(
-          //   child: Character(),
-          // ),
+          // 4. 中間：松鼠
+          const Center(
+            child: PlayerSprite(size: 90),
+          ),
 
-          // 5. 下方：主選單
+          // 5. 中間：最近怪物箭頭
+          const NearestMonsterArrow(),
+
+          // 6. 下方：主選單
           const Positioned(
             bottom: 40,
             left: 0,

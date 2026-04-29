@@ -20,9 +20,14 @@ class MonsterController extends GetxController {
 
   // 動態位置相關的 monsters
   var nearbyMonsters = <MonsterModel>[].obs;
+  var nearestMonster = Rxn<MonsterModel>();
+  var nearestDistance = RxnDouble();
 
   // 使用者已捕捉的怪物（圖鑑）
   var userMonsterCollection = <UserMonsterModel>[].obs;
+
+  // 玩家當前位置 
+  var playerPosition = Rxn<Position>();
 
   Future<void> loadMonsterWithRelations(MonsterModel monsterModel) async {
     monster.value = monsterModel;
@@ -130,7 +135,7 @@ class MonsterController extends GetxController {
     }).toList();
   }
 
-//之後要拿掉，用來建立user monster collection 的假資料
+  //之後要拿掉，用來建立user monster collection 的假資料
   Future<void> seedUserMonsters(String uid) async {
     final db = FirebaseFirestore.instance;
 
@@ -151,5 +156,35 @@ class MonsterController extends GetxController {
       // 加入使用者圖鑑
       await addUserMonster(uid, userMonster);
     }
+  }
+
+  void updateNearestGlobal(Position userPosition) async{
+    playerPosition.value = userPosition;
+    debugPrint('[updateNearestGlobal] playerPosition 已更新: ${playerPosition.value?.latitude}, ${playerPosition.value?.longitude}');
+    final all = await _service.getAllMonsters();
+    if (all.isEmpty) {
+      nearestMonster.value = null;
+      nearestDistance.value = null;
+      return;
+    }
+
+    final nearest = all.reduce((a, b) {
+      final da = Geolocator.distanceBetween(
+        userPosition.latitude, userPosition.longitude,
+        a.location.latitude, a.location.longitude,
+      );
+      final db = Geolocator.distanceBetween(
+        userPosition.latitude, userPosition.longitude,
+        b.location.latitude, b.location.longitude,
+      );
+      return da < db ? a : b;
+    });
+
+    nearestMonster.value = nearest;
+    nearestDistance.value = Geolocator.distanceBetween(
+      userPosition.latitude, userPosition.longitude,
+      nearest.location.latitude, nearest.location.longitude,
+    );
+    debugPrint('[updateNearestGlobal] 最近精靈: ${nearestMonster.value?.name}, 距離: ${nearestDistance.value}');
   }
 }
