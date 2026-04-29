@@ -19,7 +19,7 @@ Future<void> main() async {
   // 初始化 db
   // await LoadDbService().loadArchitecture();
   // await LoadDbService().loadQA();
-  await LoadDbService().loadMonsters();
+  // await LoadDbService().loadMonsters();
   // 💡 預先注入 Controller，內部的 onInit 會自動監聽 Firebase Auth 狀態
   Get.put(MonsterController());
   Get.put(UserController());
