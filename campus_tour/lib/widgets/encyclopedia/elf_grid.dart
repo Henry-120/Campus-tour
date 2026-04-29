@@ -1,3 +1,4 @@
+import 'package:campus_tour/widgets/encyclopedia/page_selector.dart';
 import 'package:flutter/material.dart';
 import '../common/elf_card.dart';
 import '../../view/elf_detail_page.dart';
@@ -69,42 +70,17 @@ class _ElfGridState extends State<ElfGrid> {
             ),
           ),
 
-          // 分頁控制欄
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                IconButton(
-                  icon: const Icon(Icons.arrow_back_ios),
-                  onPressed: _currentPage > 1
-                    ? () => setState(() => _currentPage--)
-                    : null,
-                ),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).primaryColor.withValues(alpha: 0.1),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Text(
-                    "第 $_currentPage / $totalPages 頁",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Theme.of(context).primaryColor,
-                    ),
-                  ),
-                ),
-                IconButton(
-                  icon: const Icon(Icons.arrow_forward_ios),
-                  onPressed: _currentPage < totalPages
-                    ? () => setState(() => _currentPage++)
-                    : null,
-                ),
-              ],
-            ),
-          ),
-        ],
+      PageSelector(
+        currentPage: _currentPage,
+        totalPages: totalPages,
+        onPrevious: _currentPage > 1
+        ? () => setState(() => _currentPage--)
+            : null,
+        onNext: _currentPage < totalPages
+        ? () => setState(() => _currentPage++)
+            : null,
+        ),
+      ]
       );
     });
   }

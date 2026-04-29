@@ -6,11 +6,13 @@ class GameLinkText extends StatelessWidget {
     required this.text,
     required this.onTap,
     this.fontSize = 18,
+    this.color = Colors.white,
   });
 
   final String text;
   final VoidCallback onTap;
   final double fontSize;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,7 @@ class GameLinkText extends StatelessWidget {
           fontSize: fontSize,
           height: 1.25,
           fontWeight: FontWeight.w900,
-          color: const Color(0xFFB9F451),
+          color: color,
           shadows: [
             Shadow(
               offset: Offset(fontSize * 0.11, fontSize * 0.11),

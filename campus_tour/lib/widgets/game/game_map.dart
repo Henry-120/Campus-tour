@@ -1,14 +1,28 @@
 import 'dart:async'; // 💡 引入 StreamSubscription
+import 'package:campus_tour/widgets/constants/asset_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:geolocator/geolocator.dart'; // 💡 引入 GPS 套件
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:campus_tour/controllers/monster_controller.dart';
+import 'package:campus_tour/local_information/local_setting.dart';
 import 'package:get/get.dart';
 import '../../view/nearby_monsters_display.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../../models/monster_model.dart';
-// import 'user_marker.dart';
+import 'user_marker.dart';
+//for mission
+import 'package:campus_tour/view/full_mission_page.dart';
+import 'package:campus_tour/widgets/game/catching_pages/monster_model_cry.dart';
+import 'package:campus_tour/widgets/game/catching_pages/full_mission.dart';
+import 'package:campus_tour/widgets/game/catching_pages/graphics_text_level.dart';
+import 'package:campus_tour/widgets/game/catching_pages/cryptography_level.dart';
+import 'package:campus_tour/widgets/game/catching_pages/plot_level.dart';
+import 'package:campus_tour/widgets/encyclopedia/all_the_monster/monster_graphics.dart';
+import 'package:campus_tour/widgets/encyclopedia/all_the_monster/monster_text.dart';
+import 'package:campus_tour/widgets/encyclopedia/all_the_monster/monster_nfc.dart';
+import 'package:campus_tour/models/qa_model.dart';
+//end for mission
 
 class GameMap extends StatefulWidget {
   const GameMap({super.key});
@@ -39,6 +53,7 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
     southwest: southwest,
     northeast: northeast,
   );
+  static const double playerSize = 60;
 
   Future<void> _loadAssets() async {
     try {
@@ -46,7 +61,7 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
       final style = await rootBundle.loadString('assets/mapStyles/style3.json');
       final image = await AssetMapBitmap.create(
         imageConfig,
-        'assets/images/campus_map_4.png',
+        'assets/images/forest_map.png',
         bitmapScaling: MapBitmapScaling.none,
       );
       // final playerIcon = await BitmapDescriptor.asset(
@@ -89,7 +104,8 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
         permission = await Geolocator.requestPermission();
       }
 
-      if (permission == LocationPermission.denied || permission == LocationPermission.deniedForever) {
+      if (permission == LocationPermission.denied ||
+          permission == LocationPermission.deniedForever) {
         setState(() => _hasLocationPermission = false);
         return;
       }
@@ -106,6 +122,8 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
         currentPosition.latitude,
         currentPosition.longitude,
       );
+
+      // final LatLng currentLocation = const LatLng(24.9684, 121.1912);
 
       setState(() {
         _playerPosition = currentLocation;
@@ -125,15 +143,20 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
       ).listen((Position position) {
         debugPrint('[Debug][GameMap]:位置更新: ${position.latitude}, ${position.longitude}');
 
-        final currentLocation = LatLng(position.latitude, position.longitude);
-        final oldPosition = _playerPosition;
-        final shouldUpdateMarker = oldPosition == null ||
-            Geolocator.distanceBetween(
-                  oldPosition.latitude,
-                  oldPosition.longitude,
-                  currentLocation.latitude,
-                  currentLocation.longitude,
-                ) > 2;
+            final currentLocation = LatLng(
+              position.latitude,
+              position.longitude,
+            );
+            final oldPosition = _playerPosition;
+            final shouldUpdateMarker =
+                oldPosition == null ||
+                Geolocator.distanceBetween(
+                      oldPosition.latitude,
+                      oldPosition.longitude,
+                      currentLocation.latitude,
+                      currentLocation.longitude,
+                    ) >
+                    2;
 
         if (shouldUpdateMarker) {
           setState(() {
@@ -169,10 +192,10 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
       _hasCenteredMap = true;
 
       _mapController!.animateCamera(
-        CameraUpdate.newLatLngBounds(campusBounds, 200),
+        CameraUpdate.newLatLngBounds(campusBounds, 50),
       );
 
-      // 1 秒后拉进玩家位置，然后锁定缩放倍率
+      // 1 秒後拉近玩家位置，並設定正確縮放倍率以顯示特製地圖
       Future.delayed(const Duration(seconds: 1), () {
         if (_mapController != null && mounted) {
           _mapController!.animateCamera(
@@ -185,10 +208,10 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
             ),
           );
 
-          // 完成后锁定缩放倍率
+          // 完成後鎖定縮放倍率
           setState(() {
-            _minZoomRate = 19.5;
-            _maxZoomRate = 19.5;
+            _minZoomRate = 18.5;
+            _maxZoomRate = 18.5;
           });
         }
       });
@@ -205,22 +228,88 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
     );
   }
 
+  // Future<void> _handleMonsterCapture(MonsterModel monster) async {
+  //   final uid = FirebaseAuth.instance.currentUser?.uid;
+  //   if (uid == null) return;
+
+  //   final controller = Get.find<MonsterController>();
+  //   final success = await controller.captureMonster(monster, uid);
+
+  //   if (mounted) {
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       SnackBar(
+  //         content: Text(
+  //           success ? '成功捕捉 ${monster.name} ✓' : '${monster.name} 已捕捉過',
+  //         ),
+  //         backgroundColor: success ? Colors.green : Colors.orange,
+  //         duration: const Duration(seconds: 2),
+  //       ),
+  //     );
+  //   }
+  // }
+
+  //從這裡開始
+  bool _isCaptureFlowActive = false;
+
   Future<void> _handleMonsterCapture(MonsterModel monster) async {
+    if (_isCaptureFlowActive) return;
+    if (ModalRoute.of(context)?.isCurrent != true) return;
+
     final uid = FirebaseAuth.instance.currentUser?.uid;
     if (uid == null) return;
 
     final controller = Get.find<MonsterController>();
-    final success = await controller.captureMonster(monster, uid);
+    _isCaptureFlowActive = true;
 
-    if (mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text(success ? '成功捕捉 ${monster.name} ✓' : '${monster.name} 已捕捉過'),
-        backgroundColor: success ? Colors.green : Colors.orange,
-        duration: const Duration(seconds: 2),
-      ));
+    try {
+      final qa = await controller.getQAByMonster(monster);
+
+      if (!mounted) return;
+
+      if (qa == null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('無法載入 ${monster.name} 的題目，請稍後再試'),
+            backgroundColor: Colors.red,
+            duration: const Duration(seconds: 3),
+          ),
+        );
+        return;
+      }
+
+      await Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => BuildingMonsterLevel(
+            monster: monster,
+            qa: qa,
+            onMissionFinished: () async {
+              final navigator = Navigator.of(context);
+              final messenger = ScaffoldMessenger.of(context);
+              final success = await controller.captureMonster(monster, uid);
+
+              if (!mounted) return;
+
+              navigator.pop();
+              messenger.showSnackBar(
+                SnackBar(
+                  content: Text(
+                    success ? '成功捕捉 ${monster.name} ✓' : '${monster.name} 已捕捉過',
+                  ),
+                  backgroundColor: success ? Colors.green : Colors.orange,
+                  duration: const Duration(seconds: 2),
+                ),
+              );
+            },
+          ),
+        ),
+      );
+    } finally {
+      _isCaptureFlowActive = false;
     }
   }
-  
+  //到這裡為止
+
   @override
   void initState() {
     super.initState();
@@ -240,21 +329,27 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
     return Stack(
       children: [
         GoogleMap(
-          minMaxZoomPreference: MinMaxZoomPreference(_minZoomRate, _maxZoomRate),
+          minMaxZoomPreference: MinMaxZoomPreference(
+            _minZoomRate,
+            _maxZoomRate,
+          ),
           initialCameraPosition: const CameraPosition(
             target: LatLng(24.9684, 121.1912),
+            zoom: 18.5 // 💡 初始縮放
           ),
           style: _mapStyle,
 
-          groundOverlays: _customMapImage != null ? {
-            GroundOverlay.fromBounds(
-              groundOverlayId: const GroundOverlayId("ncu_custom_map"),
-              image: _customMapImage!,
-              bounds: campusBounds, // 圖片會自動對齊這四個角
-              transparency: 0,
-              clickable: false,
-            ),
-          } : {},
+          groundOverlays: _customMapImage != null
+              ? {
+                  GroundOverlay.fromBounds(
+                    groundOverlayId: const GroundOverlayId("ncu_custom_map"),
+                    image: _customMapImage!,
+                    bounds: campusBounds, // 圖片會自動對齊這四個角
+                    transparency: 0, // 0.0 ~ 1.0，建議先設 0.8 方便校對
+                    clickable: false,
+                  ),
+                }
+              : {},
 
           buildingsEnabled: true,
           markers: {
@@ -282,10 +377,74 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
                 color: Colors.white70,
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: const Text('定位權限未授權', style: TextStyle(color: Colors.black87)),
+              child: const Text(
+                '定位權限未授權',
+                style: TextStyle(color: Colors.black87),
+              ),
             ),
           ),
       ],
     );
   }
 }
+
+//從這裡開始
+class BuildingMonsterLevel extends StatelessWidget {
+  final MonsterModel monster;
+  final QAModel qa;
+  final Future<void> Function()? onMissionFinished;
+  final MonsterModelCry monsterModelCry;
+  final PlotLevel tracePlotMission;
+  final GraphicsTextLevel mission1;
+  final PlotLevel battlePlotMission;
+  final CryptographyLevel mission2;
+  BuildingMonsterLevel({
+    super.key,
+    required this.monster,
+    required this.qa,
+    this.onMissionFinished,
+  }) : monsterModelCry = MonsterModelCry(
+         name: monster.name,
+         type: monster.type,
+         imageUrl: monster.imageURL,
+       ),
+       tracePlotMission = PlotLevel(
+         type: PlotLevel.traceType,
+         isPassed: LocalSettingService.autoSkipStory.isEnabled,
+         title: PlotLevel.traceTitle,
+         description: PlotLevel.traceDescription,
+       ),
+       mission1 = GraphicsTextLevel(
+         firstTracePhoto: MonsterGraphics.graphics[monster.id] ?? '',
+         descriptionText: MonsterText.texts[monster.id] ?? '',
+         nfcId: MonsterNFC.nfcIds[monster.id] ?? '',
+       ),
+       battlePlotMission = PlotLevel(
+         type: PlotLevel.battleType,
+         isPassed: LocalSettingService.autoSkipStory.isEnabled,
+         title: PlotLevel.battleTitle,
+         description: PlotLevel.battleDescription,
+       ),
+       mission2 = CryptographyLevel(
+         questionSet: [qa.question],
+         choiceSet: [qa.options],
+         answerSet: [qa.answer],
+       );
+  List<FullMission> get missions => [
+    FullMission(levelType: "plotLevel", plotLevel: tracePlotMission),
+    FullMission(levelType: "graphicsTextLevel", graphicsTextLevel: mission1),
+    FullMission(levelType: "plotLevel", plotLevel: battlePlotMission),
+    FullMission(levelType: "cryptographyLevel", cryptographyLevel: mission2),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return FullMissionPage(
+      missions: missions,
+      monsterModelCry: monsterModelCry,
+      onMissionFinished: onMissionFinished,
+    );
+  }
+}
+
+//到這裡為止

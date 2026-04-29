@@ -135,6 +135,7 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     final scale = Responsive.scale(context);
+    final color = Color(0xFFB9F451);
 
     return Scaffold(
       resizeToAvoidBottomInset: true,
@@ -172,11 +173,13 @@ class _RegisterPageState extends State<RegisterPage> {
                         text: "Already have account?",
                         onTap: () {},
                         fontSize: 14 * scale,
+                        color:color,
                       ),
                       GameLinkText(
                         text: "Return to Login",
                         onTap: _isLoading ? () {} : _goBackToLogin,
                         fontSize: 14 * scale,
+                        color:color,
                       ),
                       SizedBox(height: 24 * scale),
                     ],
