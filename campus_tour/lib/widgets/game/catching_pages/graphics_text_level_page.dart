@@ -21,6 +21,8 @@ class GraphicsTextLevelPage extends StatefulWidget {
 }
 
 class _GraphicsTextLevelPageState extends State<GraphicsTextLevelPage> {
+  static const String _nfcTeachingGifPath = 'assets/images/nfc_teaching.gif';
+
   @override
   Widget build(BuildContext context) {
     final hasImage =
@@ -49,7 +51,15 @@ class _GraphicsTextLevelPageState extends State<GraphicsTextLevelPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('探索關卡', style: LevelStyle.titleStyle),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: Text('探索關卡', style: LevelStyle.titleStyle),
+                            ),
+                            _buildTeachingButton(),
+                          ],
+                        ),
                         const SizedBox(height: 6),
                         Text('觀察線索後，前往指定地點感應 NFC', style: LevelStyle.hintStyle),
                         const SizedBox(height: LevelStyle.bodySpacing),
@@ -80,6 +90,72 @@ class _GraphicsTextLevelPageState extends State<GraphicsTextLevelPage> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildTeachingButton() {
+    return SizedBox(
+      width: 36,
+      height: 36,
+      child: IconButton(
+        padding: EdgeInsets.zero,
+        tooltip: 'NFC 教學',
+        icon: const Icon(Icons.help_outline_rounded),
+        color: LevelStyle.imageIconColor,
+        iconSize: 26,
+        onPressed: _showNfcTeachingDialog,
+      ),
+    );
+  }
+
+  void _showNfcTeachingDialog() {
+    showGeneralDialog<void>(
+      context: context,
+      barrierDismissible: true,
+      barrierLabel: '關閉 NFC 教學',
+      barrierColor: Colors.black.withValues(alpha: 0.55),
+      pageBuilder: (dialogContext, _, _) {
+        return GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTap: () => Navigator.of(dialogContext).pop(),
+          child: SafeArea(
+            child: Center(
+              child: Container(
+                margin: const EdgeInsets.all(28),
+                padding: const EdgeInsets.all(10),
+                constraints: const BoxConstraints(
+                  maxWidth: 360,
+                  maxHeight: 520,
+                ),
+                decoration: BoxDecoration(
+                  color: LevelStyle.frameColor,
+                  borderRadius: LevelStyle.innerCardRadius,
+                  border: Border.all(color: LevelStyle.borderColor, width: 1.4),
+                  boxShadow: LevelStyle.softShadow,
+                ),
+                clipBehavior: Clip.antiAlias,
+                child: Image.asset(
+                  _nfcTeachingGifPath,
+                  fit: BoxFit.contain,
+                  errorBuilder: (_, _, _) => _buildImageFallback(),
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+      transitionBuilder: (_, animation, _, child) {
+        return FadeTransition(
+          opacity: CurvedAnimation(parent: animation, curve: Curves.easeOut),
+          child: ScaleTransition(
+            scale: Tween<double>(begin: 0.96, end: 1).animate(
+              CurvedAnimation(parent: animation, curve: Curves.easeOutCubic),
+            ),
+            child: child,
+          ),
+        );
+      },
+      transitionDuration: const Duration(milliseconds: 160),
     );
   }
 

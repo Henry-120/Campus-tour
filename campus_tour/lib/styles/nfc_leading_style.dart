@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class NfcLeadingStyle {
   //color
-  static const Color buttonBgColor1 = AppTheme.secondaryColor;
+  static const Color buttonBgColor1 = Color.fromARGB(255, 124, 0, 196);
   static const Color buttonBgColor2 = Color(0xFF5D5D5D);
   static const Color buttonFgColor = Colors.white;
   //icon
