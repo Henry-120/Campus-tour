@@ -47,29 +47,42 @@ class _NearestMonsterArrowState extends State<NearestMonsterArrow> {
       // 相對於手機螢幕的箭頭角度
       final angle = (bearing - _heading) * math.pi / 180.0;
 
+      const double radius = 70;
+      final dx = radius * math.sin(angle);
+      final dy = -radius * math.cos(angle);
+
       return Center(
-        child: Transform.translate(
-          offset: const Offset(0, -120),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
+        child: SizedBox(
+          width: 200,
+          height: 200,
+          child: Stack(
+            alignment: Alignment.center,
             children: [
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                decoration: BoxDecoration(
-                  color: Colors.black.withValues(alpha: 0.6),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Text(
-                  '${nearest.name}  ${distance?.toStringAsFixed(0)} m',
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 11,
-                    fontWeight: FontWeight.w600,
+              // 精靈名稱 + 距離，固定在松鼠正上方
+              Transform.translate(
+                offset: const Offset(0, -110),
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                  decoration: BoxDecoration(
+                    color: Colors.black.withValues(alpha: 0.6),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Text(
+                    '${nearest.name}  ${distance?.toStringAsFixed(0)} m',
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 11,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
               ),
-              const SizedBox(height: 4),
-              _AnimatedArrow(angle: angle),
+  
+              // 箭頭沿圓周移動
+              Transform.translate(
+                offset: Offset(dx, dy),
+                child: _AnimatedArrow(angle: angle),
+              ),
             ],
           ),
         ),
@@ -144,25 +157,11 @@ class _AnimatedArrowState extends State<_AnimatedArrow>
           child: child,
         );
       },
-      child: Container(
-        width: 44,
-        height: 44,
-        decoration: BoxDecoration(
-          color: Colors.amber.withValues(alpha: 0.9),
-          shape: BoxShape.circle,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withValues(alpha: 0.3),
-              blurRadius: 6,
-              offset: const Offset(0, 2),
-            ),
-          ],
-        ),
-        child: const Icon(
-          Icons.navigation_rounded,
-          color: Colors.white,
-          size: 26,
-        ),
+      child: Image.asset(
+        'assets/images/arrow_global.png',
+        width: 128,
+        height: 128,
+        fit: BoxFit.contain,
       ),
     );
   }

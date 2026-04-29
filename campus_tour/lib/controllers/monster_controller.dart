@@ -168,7 +168,16 @@ class MonsterController extends GetxController {
       return;
     }
 
-    final nearest = all.reduce((a, b) {
+    final uncaught = all.where((m) =>
+      !userMonsterCollection.any((captured) => captured.monsterRef.id == m.id)
+    ).toList();
+    if (uncaught.isEmpty) {
+      nearestMonster.value = null;
+      nearestDistance.value = null;
+      return;
+    }
+
+    final nearest = uncaught.reduce((a, b) {
       final da = Geolocator.distanceBetween(
         userPosition.latitude, userPosition.longitude,
         a.location.latitude, a.location.longitude,
