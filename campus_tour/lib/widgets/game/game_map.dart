@@ -38,8 +38,8 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
   bool _hasLocationPermission = false;
   String? _mapStyle; // 地圖 JSON 風格
   AssetMapBitmap? _customMapImage; // 特製地圖圖片
-  double _maxZoomRate = 21.0;
-  double _minZoomRate = 15.0;
+  double _maxZoomRate = 18.5;
+  double _minZoomRate = 18.5;
 
   LatLng? _playerPosition;
   bool _hasCenteredMap = false;
@@ -53,7 +53,7 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
     southwest: southwest,
     northeast: northeast,
   );
-  static const double playerSize = 60;
+  // static const double playerSize = 60;
 
   Future<void> _loadAssets() async {
     try {
@@ -64,25 +64,12 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
         'assets/images/forest_map.png',
         bitmapScaling: MapBitmapScaling.none,
       );
-      // final playerIcon = await BitmapDescriptor.asset(
-      //   const ImageConfiguration(size: Size(48, 48)),
-      //   'assets/images/doro.png',
-      //   width: 48,
-      //   height: 48,
-      // );
 
       if (!mounted) return; 
 
       setState(() {
         _mapStyle = style;
         _customMapImage = image;
-        // _playerIcon = playerIcon;
-        // if (_playerPosition != null) {
-        //   _playerMarker = UserMarker(
-        //     position: _playerPosition!,
-        //     icon: _playerIcon!,
-        //   );
-        // }
       });
     } catch (e) {
       debugPrint("[Debug][GameMap][Error] 載入資源失敗: $e");
@@ -127,12 +114,6 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
 
       setState(() {
         _playerPosition = currentLocation;
-        // if (_playerIcon != null) {
-        //   _playerMarker = UserMarker(
-        //     position: currentLocation,
-        //     icon: _playerIcon!,
-        //   );
-        // }
       });
 
       _positionStream = Geolocator.getPositionStream(
@@ -161,12 +142,6 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
         if (shouldUpdateMarker) {
           setState(() {
             _playerPosition = currentLocation;
-            // if (_playerIcon != null) {
-            //   _playerMarker = UserMarker(
-            //     position: currentLocation,
-            //     icon: _playerIcon!,
-            //   );
-            // }
           });
         }
 

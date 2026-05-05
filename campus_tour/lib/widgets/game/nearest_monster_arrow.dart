@@ -45,8 +45,8 @@ class _NearestMonsterArrowState extends State<NearestMonsterArrow> {
       );
 
       // 相對於手機螢幕的箭頭角度
-      final angle = (bearing - _heading) * math.pi / 180.0;
-
+      // final angle = (bearing - _heading) * math.pi / 180.0;
+      final angle = bearing * math.pi / 180.0;
       const double radius = 70;
       final dx = radius * math.sin(angle);
       final dy = -radius * math.cos(angle);
@@ -158,9 +158,9 @@ class _AnimatedArrowState extends State<_AnimatedArrow>
         );
       },
       child: Image.asset(
-        'assets/images/arrow_global.png',
-        width: 128,
-        height: 128,
+        'assets/images/arrow_global_3.png',
+        width: 32,
+        height: 32,
         fit: BoxFit.contain,
       ),
     );
