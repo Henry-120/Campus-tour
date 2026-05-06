@@ -23,12 +23,16 @@ class NoviceLeadingPage {
 
   static bool _isShowingCoachMark = false;
   static bool _isStartingMission = false;
+  static bool _isCheckScheduled = false;
 
   void showStep1(BuildContext context) {
+    // [L-01]
     NoviceManager.start();
+    // [L-02]
     _isShowingCoachMark = true;
 
     late TutorialCoachMark tutorial;
+    // [L-03]
     tutorial = _buildTutorial(
       targets: [
         _targetByKey(
@@ -45,6 +49,7 @@ class NoviceLeadingPage {
         ),
       ],
       onClickTarget: (target) {
+        // [L-04]
         if (target.identify == "avatar") {
           NoviceManager.currentStep = NoviceManager.waitingAvatarPage;
           tutorial.finish();
@@ -54,57 +59,86 @@ class NoviceLeadingPage {
   }
 
   void checkAndShow(BuildContext context) {
-    if (!NoviceManager.isTutorialActive || _isShowingCoachMark) return;
+    // [L-05]
+    if (!NoviceManager.isTutorialActive ||
+        _isShowingCoachMark ||
+        _isCheckScheduled) {
+      return;
+    }
 
-    Future.delayed(const Duration(milliseconds: 350), () {
-      if (!context.mounted || !NoviceManager.isTutorialActive) return;
-
-      switch (NoviceManager.currentStep) {
-        case NoviceManager.waitingAvatarPage:
-          if (_areTargetsMounted([
-            KeyOfNoviceTeaching.avatarImage,
-            KeyOfNoviceTeaching.avatarCheak,
-          ])) {
-            showStep2(context);
-          } else {
-            NoviceManager.currentStep = NoviceManager.avatarSelected;
-            checkAndShow(context);
-          }
-          break;
-        case NoviceManager.avatarSelected:
-          _showTutorialFairyAndMission(context);
-          break;
-        case NoviceManager.waitingEncyclopediaButton:
-          if (_isTargetMounted(KeyOfNoviceTeaching.encyclopediaButton)) {
-            showStep3(context);
-          } else if (_isTargetMounted(KeyOfNoviceTeaching.encyclopediaCard)) {
-            NoviceManager.currentStep = NoviceManager.waitingEncyclopediaCard;
-            checkAndShow(context);
-          }
-          break;
-        case NoviceManager.waitingEncyclopediaCard:
-          if (_isTargetMounted(KeyOfNoviceTeaching.encyclopediaCard)) {
-            showStep4(context);
-          } else if (_isTargetMounted(KeyOfNoviceTeaching.encyclopediaText)) {
-            NoviceManager.currentStep = NoviceManager.waitingEncyclopediaText;
-            checkAndShow(context);
-          }
-          break;
-        case NoviceManager.waitingEncyclopediaText:
-          if (_isTargetMounted(KeyOfNoviceTeaching.encyclopediaText)) {
-            showStep5(context);
-          }
-          break;
-      }
+    // [L-06]
+    _isCheckScheduled = true;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _isCheckScheduled = false;
+      _dispatchCurrentStep(context);
     });
+    WidgetsBinding.instance.ensureVisualUpdate();
+  }
+
+  void _dispatchCurrentStep(BuildContext context) {
+    // [L-07]
+    if (!context.mounted ||
+        !NoviceManager.isTutorialActive ||
+        _isShowingCoachMark) {
+      return;
+    }
+
+    // [L-08]
+    switch (NoviceManager.currentStep) {
+      case NoviceManager.waitingAvatarPage:
+        // [L-09]
+        if (_areTargetsMounted([
+          KeyOfNoviceTeaching.avatarImage,
+          KeyOfNoviceTeaching.avatarCheak,
+        ])) {
+          showStep2(context);
+        } else {
+          // [L-10]
+          NoviceManager.currentStep = NoviceManager.avatarSelected;
+          checkAndShow(context);
+        }
+        break;
+      case NoviceManager.avatarSelected:
+        // [L-11]
+        _showTutorialFairyAndMission(context);
+        break;
+      case NoviceManager.waitingEncyclopediaButton:
+        // [L-12]
+        if (_isTargetMounted(KeyOfNoviceTeaching.encyclopediaButton)) {
+          showStep3(context);
+        } else if (_isTargetMounted(KeyOfNoviceTeaching.encyclopediaCard)) {
+          // [L-13]
+          NoviceManager.currentStep = NoviceManager.waitingEncyclopediaCard;
+          checkAndShow(context);
+        }
+        break;
+      case NoviceManager.waitingEncyclopediaCard:
+        // [L-14]
+        if (_isTargetMounted(KeyOfNoviceTeaching.encyclopediaCard)) {
+          showStep4(context);
+        } else if (_isTargetMounted(KeyOfNoviceTeaching.encyclopediaText)) {
+          // [L-15]
+          NoviceManager.currentStep = NoviceManager.waitingEncyclopediaText;
+          checkAndShow(context);
+        }
+        break;
+      case NoviceManager.waitingEncyclopediaText:
+        // [L-16]
+        if (_isTargetMounted(KeyOfNoviceTeaching.encyclopediaText)) {
+          showStep5(context);
+        }
+        break;
+    }
   }
 
   void showStep2(BuildContext context) {
+    // [L-17]
     final position = _targetPositionFromKeys([
       KeyOfNoviceTeaching.avatarImage,
       KeyOfNoviceTeaching.avatarCheak,
     ]);
 
+    // [L-18]
     if (position == null) {
       _retryCheck(context);
       return;
@@ -158,6 +192,7 @@ class NoviceLeadingPage {
   }
 
   void showStep5(BuildContext context) {
+    // [L-02]
     _isShowingCoachMark = true;
     late TutorialCoachMark tutorial;
     tutorial = _buildTutorial(
@@ -171,18 +206,21 @@ class NoviceLeadingPage {
         ),
       ],
       onClickTarget: (target) {
+        // [L-19]
         if (target.identify == "encyclopediaText") {
           NoviceManager.currentStep = NoviceManager.finished;
           tutorial.finish();
         }
       },
       onClickOverlay: (target) {
+        // [L-20]
         if (target.identify == "encyclopediaText") {
           NoviceManager.currentStep = NoviceManager.finished;
           tutorial.finish();
         }
       },
       onFinish: () {
+        // [L-21]
         if (NoviceManager.currentStep == NoviceManager.finished) {
           _showFinishedDialog(context);
         }
@@ -206,10 +244,13 @@ class NoviceLeadingPage {
       onClickTarget: onClickTarget,
       onClickOverlay: onClickOverlay,
       onFinish: () {
+        // [L-22]
         _isShowingCoachMark = false;
+        // [L-23]
         onFinish?.call();
       },
       onSkip: () {
+        // [L-24]
         _isShowingCoachMark = false;
         NoviceManager.reset();
         return true;
@@ -221,7 +262,9 @@ class NoviceLeadingPage {
     required BuildContext context,
     required List<TargetFocus> targets,
   }) {
+    // [L-02]
     _isShowingCoachMark = true;
+    // [L-25]
     _buildTutorial(targets: targets).show(context: context);
   }
 
@@ -258,9 +301,12 @@ class NoviceLeadingPage {
   }
 
   Future<void> _showTutorialFairyAndMission(BuildContext context) async {
+    // [L-26]
     if (_isStartingMission) return;
+    // [L-27]
     _isStartingMission = true;
 
+    // [L-28]
     await showDialog<void>(
       context: context,
       barrierDismissible: false,
@@ -296,20 +342,25 @@ class NoviceLeadingPage {
       },
     );
 
+    // [L-29]
     if (!context.mounted) {
       _isStartingMission = false;
       return;
     }
 
+    // [L-30]
     await _openTutorialMission(context);
+    // [L-31]
     _isStartingMission = false;
 
+    // [L-32]
     if (context.mounted) {
       checkAndShow(context);
     }
   }
 
   Future<void> _openTutorialMission(BuildContext context) {
+    // [L-33]
     return Navigator.of(context).push(
       MaterialPageRoute(
         builder: (missionContext) {
@@ -331,8 +382,10 @@ class NoviceLeadingPage {
               imageUrl: AssetPaths.squirrel,
             ),
             onMissionFinished: () async {
+              // [L-34]
               NoviceManager.currentStep =
                   NoviceManager.waitingEncyclopediaButton;
+              // [L-35]
               if (Navigator.of(missionContext).canPop()) {
                 Navigator.of(missionContext).pop();
               }
@@ -344,6 +397,7 @@ class NoviceLeadingPage {
   }
 
   Future<void> _showFinishedDialog(BuildContext context) async {
+    // [L-36]
     await showDialog<void>(
       context: context,
       barrierDismissible: true,
@@ -360,8 +414,11 @@ class NoviceLeadingPage {
           actions: [
             TextButton(
               onPressed: () {
+                // [L-37]
                 NoviceManager.reset();
+                // [L-38]
                 Navigator.of(dialogContext).pop();
+                // [L-39]
                 Navigator.of(context).pushAndRemoveUntil(
                   MaterialPageRoute(builder: (_) => const GameMainPage()),
                   (route) => false,
@@ -376,26 +433,30 @@ class NoviceLeadingPage {
   }
 
   void _retryCheck(BuildContext context) {
-    Future.delayed(const Duration(milliseconds: 300), () {
-      if (context.mounted) checkAndShow(context);
-    });
+    // [L-40]
+    // [L-41]
+    checkAndShow(context);
   }
 
   bool _isTargetMounted(GlobalKey key) {
+    // [L-42]
     return key.currentContext != null;
   }
 
   bool _areTargetsMounted(List<GlobalKey> keys) {
+    // [L-43]
     return keys.every(_isTargetMounted);
   }
 
   TargetPosition? _targetPositionFromKeys(List<GlobalKey> keys) {
+    // [L-44]
     final boxes = keys
         .map((key) => key.currentContext?.findRenderObject())
         .whereType<RenderBox>()
         .where((box) => box.hasSize)
         .toList();
 
+    // [L-45]
     if (boxes.length != keys.length) return null;
 
     double left = double.infinity;
@@ -403,6 +464,7 @@ class NoviceLeadingPage {
     double right = -double.infinity;
     double bottom = -double.infinity;
 
+    // [L-46]
     for (final box in boxes) {
       final offset = box.localToGlobal(Offset.zero);
       left = math.min(left, offset.dx);
@@ -411,6 +473,7 @@ class NoviceLeadingPage {
       bottom = math.max(bottom, offset.dy + box.size.height);
     }
 
+    // [L-47]
     return TargetPosition(Size(right - left, bottom - top), Offset(left, top));
   }
 }
@@ -428,11 +491,13 @@ class NoviceManager {
   static bool isTutorialActive = false;
 
   static void start() {
+    // [L-48]
     currentStep = notStarted;
     isTutorialActive = true;
   }
 
   static void reset() {
+    // [L-49]
     currentStep = notStarted;
     isTutorialActive = false;
   }
