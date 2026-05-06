@@ -1,7 +1,9 @@
 import 'package:campus_tour/models/monster_model.dart';
 import 'package:flutter/material.dart';
 import '../controllers/encyclopedia_controller.dart';
+import '../models/architecture_model.dart';
 import '../widgets/encyclopedia/elf_creator_section.dart';
+import '../widgets/encyclopedia/elf_department_section.dart';
 import '../widgets/encyclopedia/elf_hero_section.dart';
 import '../widgets/encyclopedia/elf_installation_section.dart';
 import '../widgets/encyclopedia/elf_story_section.dart';
@@ -22,40 +24,36 @@ class ElfDetailPage extends StatefulWidget {
 class _ElfDetailPageState extends State<ElfDetailPage> {
   final EncyclopediaController _controller = EncyclopediaController();
 
-  String? story;
+  ArchitectureModel? architecture;
   bool isLoading = true;
 
   static const Color primaryColor = Color(0xFF006C49);
   static const Color backgroundColor = Color(0xFFF8F9FF);
 
-  final String installationLocation = 'Main Courtyard';
-  final String installationYear = '2023';
-  final String creatorName = 'Aris Thorne';
-
   @override
   void initState() {
     super.initState();
-    _loadStory();
+    _loadData();
   }
 
-  Future<void> _loadStory() async {
+  Future<void> _loadData() async {
     try {
       if (widget.monsterModel.architectureRef != null) {
-        final result = await _controller.getStory(
+        final arch = await _controller.getArchitecture(
           widget.monsterModel.architectureRef!,
         );
 
         if (!mounted) return;
 
         setState(() {
-          story = result;
+          architecture = arch;
           isLoading = false;
         });
       } else {
         if (!mounted) return;
 
         setState(() {
-          story = "目前沒有此精靈的故事資料。";
+          architecture = null;
           isLoading = false;
         });
       }
@@ -63,7 +61,7 @@ class _ElfDetailPageState extends State<ElfDetailPage> {
       if (!mounted) return;
 
       setState(() {
-        story = "載入故事失敗: $e";
+        architecture = null;
         isLoading = false;
       });
     }
@@ -72,7 +70,6 @@ class _ElfDetailPageState extends State<ElfDetailPage> {
   @override
   Widget build(BuildContext context) {
     final imagePath = widget.monsterModel.imageURL;
-    String archPath = "assets/images/大象五行.png";
 
     return Scaffold(
       backgroundColor: backgroundColor,
@@ -94,9 +91,9 @@ class _ElfDetailPageState extends State<ElfDetailPage> {
             ),
           ),
         ),
-        title: const Text(
-          'Spirit Profile',
-          style: TextStyle(
+        title: Text(
+          widget.monsterModel.name,
+          style: const TextStyle(
             color: primaryColor,
             fontWeight: FontWeight.bold,
             fontSize: 20,
@@ -113,21 +110,33 @@ class _ElfDetailPageState extends State<ElfDetailPage> {
               name: widget.monsterModel.name,
               type: widget.monsterModel.type,
             ),
+
             ElfTypeTag(
               type: widget.monsterModel.type,
             ),
+
             ElfStorySection(
-              story: story,
+              story: architecture?.story ?? '目前沒有此精靈的故事資料。',
               isLoading: isLoading,
             ),
-            ElfInstallationSection(
-              imagePath: archPath,
-              location: installationLocation,
-              year: installationYear,
-            ),
-            ElfCreatorSection(
-              creatorName: creatorName,
-            ),
+
+            if (architecture?.type == '裝置藝術') ...[
+              ElfInstallationSection(
+                imagePath: architecture?.imageURL ?? '',
+                location: architecture?.name ?? '目前沒有裝置藝術資料',
+                year: architecture?.date ?? '',
+              ),
+
+              ElfCreatorSection(
+                creatorName: architecture?.author ?? '未知作者',
+              ),
+            ],
+
+            if (architecture?.type == '系館') ...[
+              ElfDepartmentSection(
+                major: architecture?.major,
+              ),
+            ],
           ],
         ),
       ),
