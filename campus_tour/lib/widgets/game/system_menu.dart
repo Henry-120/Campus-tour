@@ -16,34 +16,29 @@ class SystemMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     final scale = Responsive.scale(context);
 
-    return Positioned(
-      left: 0,
-      right: 0,
-      bottom: 25,
-      child: SafeArea(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            StoneButton(
-              img: AssetPaths.pokedexButton,
-              text: "圖鑑",
-              scale: scale,
-              onTap: () => _openPokedex(context),
-            ),
-            StoneButton(
-              img: AssetPaths.cameraButton,
-              text: "相機",
-              scale: scale,
-              onTap: () => _openCamera(context),
-            ),
-            StoneButton(
-              img: AssetPaths.settingButton,
-              text: "設定",
-              scale: scale,
-              onTap: () => _openSettings(context),
-            ),
-          ],
-        ),
+    return SafeArea(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          StoneButton(
+            img: AssetPaths.pokedexButton,
+            text: "圖鑑",
+            scale: scale,
+            onTap: () => _openPokedex(context),
+          ),
+          StoneButton(
+            img: AssetPaths.cameraButton,
+            text: "相機",
+            scale: scale,
+            onTap: () => _openCamera(context),
+          ),
+          StoneButton(
+            img: AssetPaths.settingButton,
+            text: "設定",
+            scale: scale,
+            onTap: () => _openSettings(context),
+          ),
+        ],
       ),
     );
   }
