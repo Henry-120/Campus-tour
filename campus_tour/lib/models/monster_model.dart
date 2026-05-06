@@ -19,7 +19,7 @@ class MonsterModel {
     required this.location
   });
 
-  factory MonsterModel.fromMap( Map<String, dynamic> data,{String? id}) {
+  factory MonsterModel.fromMap(Map<String, dynamic> data,{String? id}) {
     final loc = data['location'];
     DocumentReference? archRef;
     if (data['architectureRef'] != null) {
