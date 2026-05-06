@@ -12,6 +12,7 @@ import '../widgets/game/player_sprite.dart';
 import 'package:get/get.dart';
 import '../controllers/monster_controller.dart';
 import '../widgets/game/nearest_monster_arrow.dart';
+import '../controllers/key_of_novice_teaching.dart';
 
 class GameMainPage extends StatefulWidget {
   const GameMainPage({super.key});
@@ -67,8 +68,11 @@ class _GameMainPageState extends State<GameMainPage> {
           ),
 
           // 4. 中間：松鼠
-          const Center(
-            child: PlayerSprite(size: 90),
+          Center(
+            child: PlayerSprite(
+              key: KeyOfNoviceTeaching.mainCharacter,
+              size: 90
+            ),
           ),
 
           // 5. 中間：最近怪物箭頭

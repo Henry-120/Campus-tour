@@ -1,9 +1,9 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
-import 'package:flutter_compass/flutter_compass.dart';
 import 'package:get/get.dart';
 import 'package:geolocator/geolocator.dart';
 import '../../controllers/monster_controller.dart';
+import '../../controllers/key_of_novice_teaching.dart';
 
 class NearestMonsterArrow extends StatefulWidget {
   const NearestMonsterArrow({super.key});
@@ -13,17 +13,10 @@ class NearestMonsterArrow extends StatefulWidget {
 }
 
 class _NearestMonsterArrowState extends State<NearestMonsterArrow> {
-  double _heading = 0; // 手機目前朝向（度，北=0）
 
   @override
   void initState() {
     super.initState();
-    // 監聽羅盤
-    FlutterCompass.events?.listen((CompassEvent event) {
-      if (event.heading != null && mounted) {
-        setState(() => _heading = event.heading!);
-      }
-    });
   }
 
   @override
@@ -45,7 +38,6 @@ class _NearestMonsterArrowState extends State<NearestMonsterArrow> {
       );
 
       // 相對於手機螢幕的箭頭角度
-      // final angle = (bearing - _heading) * math.pi / 180.0;
       final angle = bearing * math.pi / 180.0;
       const double radius = 70;
       final dx = radius * math.sin(angle);
@@ -81,7 +73,10 @@ class _NearestMonsterArrowState extends State<NearestMonsterArrow> {
               // 箭頭沿圓周移動
               Transform.translate(
                 offset: Offset(dx, dy),
-                child: _AnimatedArrow(angle: angle),
+                child: _AnimatedArrow(
+                  key: KeyOfNoviceTeaching.arrow,
+                  angle: angle
+                ),
               ),
             ],
           ),
@@ -93,7 +88,7 @@ class _NearestMonsterArrowState extends State<NearestMonsterArrow> {
 
 class _AnimatedArrow extends StatefulWidget {
   final double angle;
-  const _AnimatedArrow({required this.angle});
+  const _AnimatedArrow({super.key, required this.angle});
 
   @override
   State<_AnimatedArrow> createState() => _AnimatedArrowState();
