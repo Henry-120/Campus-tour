@@ -61,7 +61,7 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
       final style = await rootBundle.loadString('assets/mapStyles/style3.json');
       final image = await AssetMapBitmap.create(
         imageConfig,
-        'assets/images/forest_map.png',
+        'assets/images/cute_forest_map.png',
         bitmapScaling: MapBitmapScaling.none,
       );
       // final playerIcon = await BitmapDescriptor.asset(
@@ -203,6 +203,7 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
               // 不讓畫面旋轉
               CameraPosition(
                 target: LatLng(position.latitude, position.longitude),
+                // target: LatLng(24.9684, 121.1912),
                 bearing: 0,
               ),
             ),
@@ -222,6 +223,7 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
       CameraUpdate.newCameraPosition(
         CameraPosition(
           target: LatLng(position.latitude, position.longitude),
+          // target: LatLng(24.9684, 121.1912),
           bearing: 0,
         ),
       ),
