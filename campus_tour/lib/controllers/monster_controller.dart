@@ -140,7 +140,7 @@ class MonsterController extends GetxController {
     final db = FirebaseFirestore.instance;
 
     // 從 monsters collection 抓出幾筆資料
-    final snapshot = await db.collection("monsters").limit(9).get();
+    final snapshot = await db.collection("monsters").get();
 
     for (var doc in snapshot.docs) {
       final monsterData = doc.data();
