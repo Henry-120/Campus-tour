@@ -71,7 +71,7 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
       //   height: 48,
       // );
 
-      if (!mounted) return; 
+      if (!mounted) return;
 
       setState(() {
         _mapStyle = style;
@@ -337,7 +337,7 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
           ),
           initialCameraPosition: const CameraPosition(
             target: LatLng(24.9684, 121.1912),
-            zoom: 18.5 // 💡 初始縮放
+            zoom: 18.5, // 💡 初始縮放
           ),
           style: _mapStyle,
 
@@ -361,9 +361,9 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
           myLocationEnabled: false,
           myLocationButtonEnabled: false,
           zoomControlsEnabled: false,
-          scrollGesturesEnabled: false,
-          rotateGesturesEnabled: false,
-          tiltGesturesEnabled: false,
+          scrollGesturesEnabled: true,
+          rotateGesturesEnabled: true,
+          tiltGesturesEnabled: true,
           zoomGesturesEnabled: true,
           onMapCreated: (controller) {
             _mapController = controller;
