@@ -12,7 +12,7 @@ class MonsterService {
       monsterLocation.longitude,
     );
 
-    return distance < 20; // 20 公尺內顯示
+    return distance < 50; // 20 公尺內顯示
   }
 
   double _calculateDistance(
