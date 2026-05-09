@@ -20,12 +20,6 @@ dependencies:
   cupertino_icons: ^1.0.8
   google_maps_flutter: ^2.16.0
 
-#  # 💡 替換為修復了 namespace 問題的 Git 版本
-#  arcore_flutter_plugin:
-#    git:
-#      url: https://github.com/giandifra/arcore_flutter_plugin.git
-#      ref: master
-
   # 🔥 Firebase 套件 (版本對齊)
   firebase_core: ^4.6.0
   firebase_auth: ^6.3.0
@@ -41,7 +35,7 @@ dependencies:
   vector_math: ^2.1.4
   hive: ^2.2.3
   hive_flutter: ^1.1.0
-  vibration: ^2.0.1
+  vibration: ^2.0.1 
 
 
 
@@ -65,6 +59,7 @@ flutter:
     - assets/images/weather/
     - assets/images/fairy_video/
     - assets/images/nfc_position_photos/
+    - assets/images/novice_leading/
     - assets/models/
   # To add assets to your application, add an assets section, like this:
   # assets:

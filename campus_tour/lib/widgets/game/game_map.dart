@@ -38,13 +38,13 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
   bool _hasLocationPermission = false;
   String? _mapStyle; // 地圖 JSON 風格
   AssetMapBitmap? _customMapImage; // 特製地圖圖片
-  double _maxZoomRate = 21.0;
-  double _minZoomRate = 15.0;
+  double _maxZoomRate = 18.5;
+  double _minZoomRate = 18.5;
 
   LatLng? _playerPosition;
   bool _hasCenteredMap = false;
-  UserMarker? _playerMarker;
-  BitmapDescriptor? _playerIcon;
+  // UserMarker? _playerMarker;
+  // BitmapDescriptor? _playerIcon;
 
   static const LatLng southwest = LatLng(24.965184, 121.185000); // 左下
   static const LatLng northeast = LatLng(24.971653, 121.197487); // 右上
@@ -53,42 +53,25 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
     southwest: southwest,
     northeast: northeast,
   );
-  static const double playerSize = 60;
+  // static const double playerSize = 60;
 
   Future<void> _loadAssets() async {
     try {
-      debugPrint("[Debug][GameMap] 開始載入資源...");
-      final imageConfig = createLocalImageConfiguration(context);
-
+      const imageConfig = ImageConfiguration();
       final style = await rootBundle.loadString('assets/mapStyles/style3.json');
       debugPrint("[Debug][GameMap] 地圖風格載入成功");
 
       final image = await AssetMapBitmap.create(
         imageConfig,
-        'assets/images/forest_map.png',
+        'assets/images/cute_forest_map.png',
+        bitmapScaling: MapBitmapScaling.none,
       );
-      debugPrint("[Debug][GameMap] 特製地圖圖片物件創建成功: $image");
-
-      final playerIcon = await BitmapDescriptor.asset(
-        const ImageConfiguration(size: Size(playerSize, playerSize)),
-        AssetPaths.squirrel,
-        width: playerSize,
-        height: playerSize,
-      );
-      debugPrint("[Debug][GameMap] 玩家圖示載入成功");
 
       if (!mounted) return;
 
       setState(() {
         _mapStyle = style;
         _customMapImage = image;
-        _playerIcon = playerIcon;
-        if (_playerPosition != null) {
-          _playerMarker = UserMarker(
-            position: _playerPosition!,
-            icon: _playerIcon!,
-          );
-        }
       });
       debugPrint("[Debug][GameMap] setState 已執行");
     } catch (e, st) {
@@ -135,19 +118,13 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
 
       setState(() {
         _playerPosition = currentLocation;
-        if (_playerIcon != null) {
-          _playerMarker = UserMarker(
-            position: currentLocation,
-            icon: _playerIcon!,
-          );
-        }
       });
 
       _positionStream =
           Geolocator.getPositionStream(
             locationSettings: const LocationSettings(
               accuracy: LocationAccuracy.bestForNavigation,
-              distanceFilter: 8,
+              distanceFilter: 0,
             ),
           ).listen((Position position) {
             debugPrint(
@@ -172,12 +149,6 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
             if (shouldUpdateMarker) {
               setState(() {
                 _playerPosition = currentLocation;
-                if (_playerIcon != null) {
-                  _playerMarker = UserMarker(
-                    position: currentLocation,
-                    icon: _playerIcon!,
-                  );
-                }
               });
             }
 
@@ -185,6 +156,7 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
 
             // 更新附近怪物
             monsterController.updateNearbyMonsters(position);
+            monsterController.updateNearestGlobal(position);
           });
 
       debugPrint("[Debug][GameMap]:已開始監聽位置變化");
@@ -210,10 +182,11 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
         if (_mapController != null && mounted) {
           _mapController!.animateCamera(
             CameraUpdate.newCameraPosition(
+              // 不讓畫面旋轉
               CameraPosition(
                 target: LatLng(position.latitude, position.longitude),
-                bearing: position.heading,
-                zoom: 18.5, // 💡 必須指定 zoom，否則會看不到特製地圖
+                // target: LatLng(24.9684, 121.1912),
+                bearing: 0,
               ),
             ),
           );
@@ -232,8 +205,8 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
       CameraUpdate.newCameraPosition(
         CameraPosition(
           target: LatLng(position.latitude, position.longitude),
-          bearing: position.heading,
-          zoom: 18.5, // 💡 保持縮放倍率
+          // target: LatLng(24.9684, 121.1912),
+          bearing: 0,
         ),
       ),
     );
@@ -274,6 +247,7 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
 
     try {
       final qa = await controller.getQAByMonster(monster);
+      final architecture = await controller.getArchitectureByMonster(monster);
 
       if (!mounted) return;
 
@@ -288,12 +262,24 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
         return;
       }
 
+      if (architecture == null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('無法載入 ${monster.name} 的建築資料，請稍後再試'),
+            backgroundColor: Colors.red,
+            duration: const Duration(seconds: 3),
+          ),
+        );
+        return;
+      }
+
       await Navigator.push(
         context,
         MaterialPageRoute(
           builder: (_) => BuildingMonsterLevel(
             monster: monster,
             qa: qa,
+            architectureType: architecture.type,
             onMissionFinished: () async {
               final navigator = Navigator.of(context);
               final messenger = ScaffoldMessenger.of(context);
@@ -348,17 +334,17 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
           ),
           initialCameraPosition: const CameraPosition(
             target: LatLng(24.9684, 121.1912),
-            zoom: 18.5 // 💡 初始縮放
+            zoom: 18.5, // 💡 初始縮放
           ),
           style: _mapStyle,
+
           groundOverlays: _customMapImage != null
               ? {
                   GroundOverlay.fromBounds(
                     groundOverlayId: const GroundOverlayId("ncu_custom_map"),
                     image: _customMapImage!,
                     bounds: campusBounds, // 圖片會自動對齊這四個角
-                    transparency: 0.01, // 0.0 ~ 1.0
-                    zIndex: 100, // 💡 提高層級
+                    transparency: 0, // 0.0 ~ 1.0，建議先設 0.8 方便校對
                     clickable: false,
                   ),
                 }
@@ -366,15 +352,15 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
 
           buildingsEnabled: true,
           markers: {
-            if (_playerMarker != null) _playerMarker!.toMarker(),
+            // if (_playerMarker != null) _playerMarker!.toMarker(),
             ...monsterMarkers, // 👈 MonsterMarkersMixin 提供的 getter
           },
           myLocationEnabled: false,
           myLocationButtonEnabled: false,
           zoomControlsEnabled: false,
-          scrollGesturesEnabled: false,
-          rotateGesturesEnabled: false,
-          tiltGesturesEnabled: false,
+          scrollGesturesEnabled: true,
+          rotateGesturesEnabled: true,
+          tiltGesturesEnabled: true,
           zoomGesturesEnabled: true,
           onMapCreated: (controller) {
             _mapController = controller;
@@ -405,6 +391,7 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
 class BuildingMonsterLevel extends StatelessWidget {
   final MonsterModel monster;
   final QAModel qa;
+  final String architectureType;
   final Future<void> Function()? onMissionFinished;
   final MonsterModelCry monsterModelCry;
   final PlotLevel tracePlotMission;
@@ -415,6 +402,7 @@ class BuildingMonsterLevel extends StatelessWidget {
     super.key,
     required this.monster,
     required this.qa,
+    required this.architectureType,
     this.onMissionFinished,
   }) : monsterModelCry = MonsterModelCry(
          name: monster.name,
@@ -443,9 +431,32 @@ class BuildingMonsterLevel extends StatelessWidget {
          choiceSet: [qa.options],
          answerSet: [qa.answer],
        );
-  List<FullMission> get missions => [
+  List<FullMission> get missions {
+    switch (architectureType) {
+      case "系管":
+        return systemManagementMissions;
+      case "裝置藝術":
+        return installationArtMissions;
+      case "景點":
+        return scenicSpotMissions;
+      default:
+        return installationArtMissions;
+    }
+  }
+
+  List<FullMission> get systemManagementMissions => [
+    FullMission(levelType: "plotLevel", plotLevel: battlePlotMission),
+    FullMission(levelType: "cryptographyLevel", cryptographyLevel: mission2),
+  ];
+
+  List<FullMission> get installationArtMissions => [
     FullMission(levelType: "plotLevel", plotLevel: tracePlotMission),
     FullMission(levelType: "graphicsTextLevel", graphicsTextLevel: mission1),
+    FullMission(levelType: "plotLevel", plotLevel: battlePlotMission),
+    FullMission(levelType: "cryptographyLevel", cryptographyLevel: mission2),
+  ];
+
+  List<FullMission> get scenicSpotMissions => [
     FullMission(levelType: "plotLevel", plotLevel: battlePlotMission),
     FullMission(levelType: "cryptographyLevel", cryptographyLevel: mission2),
   ];

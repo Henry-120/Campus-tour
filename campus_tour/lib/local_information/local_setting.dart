@@ -12,6 +12,7 @@ class LocalSettingService {
   static final VibrationSetting vibration = VibrationSetting._();
   static final AutoSkipStorySetting autoSkipStory = AutoSkipStorySetting._();
   static final LanguageSetting language = LanguageSetting._();
+  static final NoviceTeachingSetting noviceTeaching = NoviceTeachingSetting._();
 
   static Future<void> initBox() {
     if (_isInitialized) {
@@ -29,6 +30,7 @@ class LocalSettingService {
     await vibration.ensureInitialized(_box);
     await autoSkipStory.ensureInitialized(_box);
     await language.ensureInitialized(_box);
+    await noviceTeaching.ensureInitialized(_box);
 
     _isInitialized = true;
   } //初始化過程並隱式回傳Future<void>
@@ -154,6 +156,33 @@ class AutoSkipStorySetting extends LocalSettingItem<bool> {
   Future<void> disable() => setValue(false);
 
   Future<void> toggle() => setValue(!isEnabled);
+
+  @override
+  bool _read(dynamic rawValue) {
+    if (rawValue is bool) {
+      return rawValue;
+    }
+
+    return defaultValue;
+  }
+
+  @override
+  bool normalize(bool value) => value;
+}
+
+class NoviceTeachingSetting extends LocalSettingItem<bool> {
+  //是否經歷過新手教學
+  NoviceTeachingSetting._() : super(_key, false);
+
+  static const String _key = 'has_experienced_novice_teaching';
+
+  bool get hasExperienced => getValue();
+
+  Future<void> update(bool experienced) => setValue(experienced);
+
+  Future<void> markExperienced() => setValue(true);
+
+  Future<void> resetExperience() => setValue(false);
 
   @override
   bool _read(dynamic rawValue) {

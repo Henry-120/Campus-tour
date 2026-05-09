@@ -2,50 +2,63 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import '../../controllers/profile_edit_controller.dart';
+import '../constants/responsive.dart';
+
 
 class AvatarPreview extends StatelessWidget {
   final ProfileEditController controller;
-  
+
   const AvatarPreview({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
+    final avatarSize = Responsive.s(context, 120);
+    final refreshRadius = Responsive.s(context, 18);
+
     return GestureDetector(
       onTap: controller.generateRandomAvatar,
       child: Stack(
         alignment: Alignment.bottomRight,
         children: [
           Container(
-            width: 120,
-            height: 120,
+            width: avatarSize,
+            height: avatarSize,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: Colors.white, // 💡 設為白色背景，SVG 渲染更清楚
-              border: Border.all(color: Colors.orange.shade200, width: 3),
+              color: Colors.white,
+              border: Border.all(
+                color: Colors.orange.shade200,
+                width: Responsive.s(context, 3),
+              ),
               boxShadow: [
-                BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 10, offset: const Offset(0, 4))
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.1),
+                  blurRadius: Responsive.s(context, 10),
+                  offset: Offset(0, Responsive.s(context, 4)),
+                ),
               ],
             ),
             child: ClipOval(
               child: Obx(() {
                 final url = controller.previewUrl.value;
                 if (url == null || url.isEmpty) {
-                  return _buildDefaultIcon();
+                  return _buildDefaultIcon(context);
                 }
 
-                // 💡 在手機端，ValueKey 非常重要，強迫 Flutter 每次重新渲染新的 URL
                 return SvgPicture.network(
                   url,
-                  key: ValueKey(url), 
+                  key: ValueKey(url),
                   fit: BoxFit.contain,
-                  width: 120,
-                  height: 120,
-                  // 💡 增加載入與錯誤處理
-                  placeholderBuilder: (context) => const Center(
+                  width: avatarSize,
+                  height: avatarSize,
+                  placeholderBuilder: (context) => Center(
                     child: SizedBox(
-                      width: 30,
-                      height: 30,
-                      child: CircularProgressIndicator(strokeWidth: 2, color: Colors.orange),
+                      width: Responsive.s(context, 30),
+                      height: Responsive.s(context, 30),
+                      child: CircularProgressIndicator(
+                        strokeWidth: Responsive.s(context, 2),
+                        color: Colors.orange,
+                      ),
                     ),
                   ),
                 );
@@ -54,18 +67,26 @@ class AvatarPreview extends StatelessWidget {
           ),
           CircleAvatar(
             backgroundColor: Colors.orange.shade400,
-            radius: 18,
-            child: const Icon(Icons.refresh, color: Colors.white, size: 20),
+            radius: refreshRadius,
+            child: Icon(
+              Icons.refresh,
+              color: Colors.white,
+              size: Responsive.s(context, 20),
+            ),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildDefaultIcon() {
+  Widget _buildDefaultIcon(BuildContext context) {
     return Container(
       color: Colors.orange.shade50,
-      child: const Icon(Icons.person, size: 60, color: Colors.grey),
+      child: Icon(
+        Icons.person,
+        size: Responsive.s(context, 60),
+        color: Colors.grey,
+      ),
     );
   }
 }

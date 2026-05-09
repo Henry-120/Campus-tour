@@ -63,10 +63,10 @@ mixin MonsterMarkersMixin<T extends StatefulWidget> on State<T> {
     }
     try {
       final icon = await BitmapDescriptor.asset(
-        const ImageConfiguration(size: Size(256, 256)),
+        const ImageConfiguration(size: Size(64, 64)),
         monster.imageURL,
-        width: 256,
-        height: 256,
+        width: 128,
+        height: 128,
       );
       _monsterIconCache[monster.id] = icon;
       return icon;

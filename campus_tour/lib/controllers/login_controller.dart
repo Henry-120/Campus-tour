@@ -19,7 +19,7 @@ class LoginController {
     if (user != null) {
       await monsterController.loadUserCollection(user.uid);
       await userController.fetchCurrentUser();
-      // hfghfgjhfgj
+      // await monsterController.seedUserMonsters(user.uid);
     }
     return user;
   }

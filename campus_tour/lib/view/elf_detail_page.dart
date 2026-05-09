@@ -1,11 +1,19 @@
 import 'package:campus_tour/models/monster_model.dart';
 import 'package:flutter/material.dart';
 import '../controllers/encyclopedia_controller.dart';
+import '../widgets/encyclopedia/elf_creator_section.dart';
+import '../widgets/encyclopedia/elf_hero_section.dart';
+import '../widgets/encyclopedia/elf_installation_section.dart';
+import '../widgets/encyclopedia/elf_story_section.dart';
+import '../widgets/encyclopedia/elf_type_tag.dart';
 
 class ElfDetailPage extends StatefulWidget {
   final MonsterModel monsterModel;
 
-  const ElfDetailPage({super.key, required this.monsterModel});
+  const ElfDetailPage({
+    super.key,
+    required this.monsterModel,
+  });
 
   @override
   State<ElfDetailPage> createState() => _ElfDetailPageState();
@@ -13,8 +21,16 @@ class ElfDetailPage extends StatefulWidget {
 
 class _ElfDetailPageState extends State<ElfDetailPage> {
   final EncyclopediaController _controller = EncyclopediaController();
+
   String? story;
   bool isLoading = true;
+
+  static const Color primaryColor = Color(0xFF006C49);
+  static const Color backgroundColor = Color(0xFFF8F9FF);
+
+  final String installationLocation = 'Main Courtyard';
+  final String installationYear = '2023';
+  final String creatorName = 'Aris Thorne';
 
   @override
   void initState() {
@@ -28,17 +44,24 @@ class _ElfDetailPageState extends State<ElfDetailPage> {
         final result = await _controller.getStory(
           widget.monsterModel.architectureRef!,
         );
+
+        if (!mounted) return;
+
         setState(() {
           story = result;
           isLoading = false;
         });
       } else {
+        if (!mounted) return;
+
         setState(() {
           story = "目前沒有此精靈的故事資料。";
           isLoading = false;
         });
       }
     } catch (e) {
+      if (!mounted) return;
+
       setState(() {
         story = "載入故事失敗: $e";
         isLoading = false;
@@ -48,106 +71,62 @@ class _ElfDetailPageState extends State<ElfDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    // 直接使用 monster.json 中定義的完整路徑
-    // 例如: assets/images/fairy_img/zhongda_lake.jpg
-    String imagePath = widget.monsterModel.imageURL;
+    final imagePath = widget.monsterModel.imageURL;
+    String archPath = "assets/images/大象五行.png";
 
     return Scaffold(
+      backgroundColor: backgroundColor,
       appBar: AppBar(
-        title: Text(widget.monsterModel.name),
-        backgroundColor: Colors.transparent,
+        backgroundColor: backgroundColor.withValues(alpha: 0.85),
         elevation: 0,
-        foregroundColor: Colors.black87,
+        centerTitle: true,
+        leading: Padding(
+          padding: const EdgeInsets.all(8),
+          child: CircleAvatar(
+            backgroundColor: const Color(0xFFDCE9FF),
+            child: IconButton(
+              icon: const Icon(
+                Icons.arrow_back,
+                color: primaryColor,
+                size: 20,
+              ),
+              onPressed: () => Navigator.pop(context),
+            ),
+          ),
+        ),
+        title: const Text(
+          'Spirit Profile',
+          style: TextStyle(
+            color: primaryColor,
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
+          ),
+        ),
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.only(bottom: 40),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // 顯示 Asset 圖片
-            Center(
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withValues(alpha: 0.1),
-                      blurRadius: 10,
-                      spreadRadius: 2,
-                    ),
-                  ],
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: Image.asset(
-                    imagePath,
-                    height: 250,
-                    width: double.infinity,
-                    fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) {
-                      debugPrint("圖片載入失敗路徑: $imagePath");
-                      return Container(
-                        height: 250,
-                        width: double.infinity,
-                        color: Colors.grey[200],
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Icon(Icons.broken_image, size: 50, color: Colors.grey),
-                            const SizedBox(height: 8),
-                            Text("圖片路徑錯誤:\n$imagePath", 
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(fontSize: 12, color: Colors.grey)
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              ),
+            ElfHeroSection(
+              imagePath: imagePath,
+              name: widget.monsterModel.name,
+              type: widget.monsterModel.type,
             ),
-            const SizedBox(height: 24),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  widget.monsterModel.name,
-                  style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
-                ),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).primaryColor,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Text(
-                    widget.monsterModel.type,
-                    style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ],
+            ElfTypeTag(
+              type: widget.monsterModel.type,
             ),
-            const SizedBox(height: 24),
-            const Text(
-              "傳說故事",
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+            ElfStorySection(
+              story: story,
+              isLoading: isLoading,
             ),
-            const SizedBox(height: 12),
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: Colors.orange.withValues(alpha: 0.05),
-                borderRadius: BorderRadius.circular(15),
-                border: Border.all(color: Colors.orange.withValues(alpha: 0.1)),
-              ),
-              child: isLoading
-                ? const Center(child: CircularProgressIndicator())
-                : Text(
-                    story ?? "沒有故事資料",
-                    style: const TextStyle(fontSize: 17, height: 1.6, color: Colors.black87),
-                  ),
+            ElfInstallationSection(
+              imagePath: archPath,
+              location: installationLocation,
+              year: installationYear,
+            ),
+            ElfCreatorSection(
+              creatorName: creatorName,
             ),
           ],
         ),
