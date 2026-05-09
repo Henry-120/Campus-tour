@@ -86,7 +86,7 @@ class _RealArPageState extends State<RealArPage> {
                       itemCount: collection.length,
                       itemBuilder: (context, index) {
                         final userMonster = collection[index];
-                        String modelFile = userMonster.arRef; // 💡 使用 Model 內的 arRef
+                        String modelFile = userMonster.arRef ?? ""; // 💡 使用 Model 內的 arRef
                         bool isSelected = selectedMonsterUrl == modelFile;
 
                         return GestureDetector(

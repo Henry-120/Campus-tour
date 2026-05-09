@@ -32,6 +32,12 @@
 		BAB31A472F9BDA6600AF8D91 /* NCU_Lake.usdz in Resources */ = {isa = PBXBuildFile; fileRef = BAB31A3A2F9BDA6600AF8D91 /* NCU_Lake.usdz */; };
 		BAB31A482F9BDA6600AF8D91 /* Mechanical.usdz in Resources */ = {isa = PBXBuildFile; fileRef = BAB31A392F9BDA6600AF8D91 /* Mechanical.usdz */; };
 		BAB31A492F9BDA6600AF8D91 /* Recycle.usdz in Resources */ = {isa = PBXBuildFile; fileRef = BAB31A3B2F9BDA6600AF8D91 /* Recycle.usdz */; };
+		BAC29D4E2FAB7F5B00466301 /* qmark.usdz in Resources */ = {isa = PBXBuildFile; fileRef = BAC29D4D2FAB7F5B00466301 /* qmark.usdz */; };
+		BAC29D502FAB7F6500466301 /* sit_and_listen.usdz in Resources */ = {isa = PBXBuildFile; fileRef = BAC29D4F2FAB7F6500466301 /* sit_and_listen.usdz */; };
+		BAC29D522FAB7F6B00466301 /* Math.usdz in Resources */ = {isa = PBXBuildFile; fileRef = BAC29D512FAB7F6B00466301 /* Math.usdz */; };
+		BAC29D542FAB871800466301 /* Feather.usdz in Resources */ = {isa = PBXBuildFile; fileRef = BAC29D532FAB871800466301 /* Feather.usdz */; };
+		BAC29D562FAB89EF00466301 /* circle_90.usdz in Resources */ = {isa = PBXBuildFile; fileRef = BAC29D552FAB89EF00466301 /* circle_90.usdz */; };
+		BAC29D582FAB8A1400466301 /* squirrel.usdz in Resources */ = {isa = PBXBuildFile; fileRef = BAC29D572FAB8A1400466301 /* squirrel.usdz */; };
 		F106E40905B01AB0B82C78C3 /* Pods_Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43562D67693D1B35993C1149 /* Pods_Runner.framework */; };
 /* End PBXBuildFile section */
 
@@ -96,6 +102,12 @@
 		BAB31A3A2F9BDA6600AF8D91 /* NCU_Lake.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = NCU_Lake.usdz; sourceTree = "<group>"; };
 		BAB31A3B2F9BDA6600AF8D91 /* Recycle.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = Recycle.usdz; sourceTree = "<group>"; };
 		BAB31A3C2F9BDA6600AF8D91 /* Taichi.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = Taichi.usdz; sourceTree = "<group>"; };
+		BAC29D4D2FAB7F5B00466301 /* qmark.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = qmark.usdz; sourceTree = "<group>"; };
+		BAC29D4F2FAB7F6500466301 /* sit_and_listen.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = sit_and_listen.usdz; sourceTree = "<group>"; };
+		BAC29D512FAB7F6B00466301 /* Math.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = Math.usdz; sourceTree = "<group>"; };
+		BAC29D532FAB871800466301 /* Feather.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = Feather.usdz; sourceTree = "<group>"; };
+		BAC29D552FAB89EF00466301 /* circle_90.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = circle_90.usdz; sourceTree = "<group>"; };
+		BAC29D572FAB8A1400466301 /* squirrel.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = squirrel.usdz; sourceTree = "<group>"; };
 		C7216E8DD429A61CAD9C10B1 /* Pods-RunnerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.release.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.release.xcconfig"; sourceTree = "<group>"; };
 		DF8AC72B8C3F641962DD90C9 /* Pods-Runner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug.xcconfig"; sourceTree = "<group>"; };
 		E17AB329C21D054B1FE8FE37 /* Pods_RunnerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RunnerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -174,6 +186,12 @@
 				BAB31A3C2F9BDA6600AF8D91 /* Taichi.usdz */,
 				BA4F71D82F9CBA4100399639 /* cherry_fairy.usdz */,
 				BA8107FE2F9DF22F005686B4 /* language.usdz */,
+				BAC29D4D2FAB7F5B00466301 /* qmark.usdz */,
+				BAC29D4F2FAB7F6500466301 /* sit_and_listen.usdz */,
+				BAC29D512FAB7F6B00466301 /* Math.usdz */,
+				BAC29D532FAB871800466301 /* Feather.usdz */,
+				BAC29D552FAB89EF00466301 /* circle_90.usdz */,
+				BAC29D572FAB8A1400466301 /* squirrel.usdz */,
 			);
 			sourceTree = "<group>";
 		};
@@ -313,16 +331,22 @@
 			files = (
 				BA8107FF2F9DF230005686B4 /* language.usdz in Resources */,
 				97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */,
+				BAC29D582FAB8A1400466301 /* squirrel.usdz in Resources */,
 				BAB31A3E2F9BDA6600AF8D91 /* ES.usdz in Resources */,
 				BAB31A3F2F9BDA6600AF8D91 /* Infor_Engineer.usdz in Resources */,
+				BAC29D522FAB7F6B00466301 /* Math.usdz in Resources */,
 				BAB31A402F9BDA6600AF8D91 /* Management.usdz in Resources */,
 				BAB31A412F9BDA6600AF8D91 /* flower_river.usdz in Resources */,
 				BAB31A422F9BDA6600AF8D91 /* Taichi.usdz in Resources */,
 				BAB31A432F9BDA6600AF8D91 /* DNA.usdz in Resources */,
+				BAC29D562FAB89EF00466301 /* circle_90.usdz in Resources */,
 				BAB31A452F9BDA6600AF8D91 /* Hakka.usdz in Resources */,
+				BAC29D502FAB7F6500466301 /* sit_and_listen.usdz in Resources */,
+				BAC29D4E2FAB7F5B00466301 /* qmark.usdz in Resources */,
 				BA4F71D92F9CBA4100399639 /* cherry_fairy.usdz in Resources */,
 				BAB31A462F9BDA6600AF8D91 /* clound.usdz in Resources */,
 				BAB31A472F9BDA6600AF8D91 /* NCU_Lake.usdz in Resources */,
+				BAC29D542FAB871800466301 /* Feather.usdz in Resources */,
 				BAB31A482F9BDA6600AF8D91 /* Mechanical.usdz in Resources */,
 				BAB31A492F9BDA6600AF8D91 /* Recycle.usdz in Resources */,
 				3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */,
@@ -361,9 +385,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -437,9 +465,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

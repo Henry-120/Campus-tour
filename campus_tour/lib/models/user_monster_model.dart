@@ -5,15 +5,17 @@ class UserMonsterModel {
   final DocumentReference monsterRef;
   final String name;
   final String imageURL;
-  final String arRef; // 💡 加入 AR 模型檔名
+  final String? arRef; // 💡 加入 AR 模型檔名
+  final String? videoRef;
   final DateTime caughtAt;
 
   UserMonsterModel({
     this.docId,
     required this.name,
     required this.imageURL,
-    required this.arRef,
+    this.arRef,
     required this.monsterRef,
+    this.videoRef,
     required this.caughtAt
   });
 
@@ -35,6 +37,7 @@ class UserMonsterModel {
       'name': name,
       'imageURL': imageURL,
       'ARRef': arRef, // 💡 存入 ARRef
+      'videoRef': videoRef,
     };
   }
 }

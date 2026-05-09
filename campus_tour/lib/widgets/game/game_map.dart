@@ -57,21 +57,27 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
 
   Future<void> _loadAssets() async {
     try {
-      const imageConfig = ImageConfiguration();
+      debugPrint("[Debug][GameMap] 開始載入資源...");
+      final imageConfig = createLocalImageConfiguration(context);
+
       final style = await rootBundle.loadString('assets/mapStyles/style3.json');
+      debugPrint("[Debug][GameMap] 地圖風格載入成功");
+
       final image = await AssetMapBitmap.create(
         imageConfig,
         'assets/images/forest_map.png',
-        bitmapScaling: MapBitmapScaling.none,
       );
+      debugPrint("[Debug][GameMap] 特製地圖圖片物件創建成功: $image");
+
       final playerIcon = await BitmapDescriptor.asset(
         const ImageConfiguration(size: Size(playerSize, playerSize)),
         AssetPaths.squirrel,
         width: playerSize,
         height: playerSize,
       );
+      debugPrint("[Debug][GameMap] 玩家圖示載入成功");
 
-      if (!mounted) return; 
+      if (!mounted) return;
 
       setState(() {
         _mapStyle = style;
@@ -84,8 +90,10 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
           );
         }
       });
-    } catch (e) {
+      debugPrint("[Debug][GameMap] setState 已執行");
+    } catch (e, st) {
       debugPrint("[Debug][GameMap][Error] 載入資源失敗: $e");
+      debugPrint("[Debug][GameMap][Error] StackTrace: $st");
     }
   }
 
@@ -329,6 +337,8 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint("[Debug][GameMap] Build 被呼叫, _customMapImage 是否為 null: ${_customMapImage == null}");
+
     return Stack(
       children: [
         GoogleMap(
@@ -341,14 +351,14 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
             zoom: 18.5 // 💡 初始縮放
           ),
           style: _mapStyle,
-
           groundOverlays: _customMapImage != null
               ? {
                   GroundOverlay.fromBounds(
                     groundOverlayId: const GroundOverlayId("ncu_custom_map"),
                     image: _customMapImage!,
                     bounds: campusBounds, // 圖片會自動對齊這四個角
-                    transparency: 0, // 0.0 ~ 1.0，建議先設 0.8 方便校對
+                    transparency: 0.01, // 0.0 ~ 1.0
+                    zIndex: 100, // 💡 提高層級
                     clickable: false,
                   ),
                 }

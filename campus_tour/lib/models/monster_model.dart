@@ -6,6 +6,7 @@ class MonsterModel {
   final String type;
   final String imageURL;
   final String? ARRef;
+  final String? videoRef;
   final DocumentReference? architectureRef;
   final DocumentReference? qaRef;
   final GeoPoint location;
@@ -18,6 +19,7 @@ class MonsterModel {
     this.architectureRef,
     this.qaRef,
     this.ARRef,
+    this.videoRef,
     required this.location
   });
 
@@ -78,6 +80,7 @@ class MonsterModel {
       'architectureRef': architectureRef,
       'qaRef': qaRef,
       'ARRef': ARRef,
+      'videoRef': videoRef,
       'location': location
     };
   }
