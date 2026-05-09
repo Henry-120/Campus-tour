@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "name": "Flutter (lib/view/full_mission_page.dart)",
+            "type": "dart",
+            "request": "launch",
+            "cwd": "campus_tour",
+            "program": "lib/view/full_mission_page.dart"
+        }
+    ]
+}
