@@ -66,31 +66,69 @@ class LevelStyle {
     border: Border.all(color: borderColor.withValues(alpha: 0.75)),
   );
 
-  static TextStyle titleStyle = GoogleFonts.itim(
+  static TextStyle titleStyle = GoogleFonts.zenMaruGothic(
     fontSize: 30,
     fontWeight: FontWeight.w700,
     color: AppTheme.textColor,
     letterSpacing: 0.8,
   );
 
-  static TextStyle hintStyle = GoogleFonts.itim(
+  static TextStyle hintStyle = GoogleFonts.zenMaruGothic(
     fontSize: 15,
     fontWeight: FontWeight.w400,
     color: AppTheme.textColor.withValues(alpha: 0.72),
     letterSpacing: 0.4,
   );
 
-  static TextStyle descriptionStyle = GoogleFonts.itim(
+  static TextStyle descriptionStyle = GoogleFonts.zenMaruGothic(
     fontSize: 25,
     fontWeight: FontWeight.w400,
     color: AppTheme.textColor,
     height: 1.6,
   );
 
-  static TextStyle placeholderStyle = GoogleFonts.itim(
+  static TextStyle placeholderStyle = GoogleFonts.zenMaruGothic(
     fontSize: 20,
     fontWeight: FontWeight.w400,
     color: AppTheme.textColor.withValues(alpha: 0.75),
+  );
+
+  static const List<Shadow> plotSmallTextShadows = [
+    Shadow(color: Color(0x99000000), blurRadius: 4, offset: Offset(0, 1)),
+  ];
+
+  static const List<Shadow> plotTextShadows = [
+    Shadow(color: Color(0xB3000000), blurRadius: 8, offset: Offset(0, 2)),
+  ];
+
+  static TextStyle plotSkipTextStyle = GoogleFonts.zenMaruGothic(
+    fontSize: 16,
+    fontWeight: FontWeight.w600,
+    color: Colors.white,
+    shadows: plotSmallTextShadows,
+  );
+
+  static TextStyle plotTitleStyle = GoogleFonts.zenMaruGothic(
+    fontSize: 34,
+    fontWeight: FontWeight.w800,
+    color: Colors.white,
+    height: 1.25,
+    shadows: plotTextShadows,
+  );
+
+  static TextStyle plotDescriptionStyle = GoogleFonts.zenMaruGothic(
+    fontSize: 20,
+    fontWeight: FontWeight.w600,
+    color: Colors.white,
+    height: 1.55,
+    shadows: plotTextShadows,
+  );
+
+  static TextStyle plotPressTextStyle = GoogleFonts.zenMaruGothic(
+    fontSize: 23,
+    fontWeight: FontWeight.w700,
+    color: Colors.white,
+    shadows: plotTextShadows,
   );
 
   static const double battleCardRadius = 30;
@@ -291,7 +329,7 @@ class LevelStyle {
         borderRadius: const BorderRadius.all(Radius.circular(optionRadius)),
         side: BorderSide(color: border, width: 1.4),
       ),
-      textStyle: GoogleFonts.itim(
+      textStyle: GoogleFonts.zenMaruGothic(
         fontSize: 20,
         fontWeight: FontWeight.w400,
         color: foreground,
@@ -299,72 +337,79 @@ class LevelStyle {
     );
   }
 
-  static TextStyle battleTitleStyle(BattleLevelTheme theme) => GoogleFonts.itim(
-    fontSize: 30,
-    fontWeight: FontWeight.w700,
-    color: theme.text,
-    letterSpacing: 0.8,
-  );
+  static TextStyle battleTitleStyle(BattleLevelTheme theme) =>
+      GoogleFonts.zenMaruGothic(
+        fontSize: 30,
+        fontWeight: FontWeight.w700,
+        color: theme.text,
+        letterSpacing: 0.8,
+      );
 
-  static TextStyle battleHintStyle(BattleLevelTheme theme) => GoogleFonts.itim(
-    fontSize: 15,
-    fontWeight: FontWeight.w400,
-    color: theme.text.withValues(alpha: 0.78),
-    letterSpacing: 0.4,
-  );
+  static TextStyle battleHintStyle(BattleLevelTheme theme) =>
+      GoogleFonts.zenMaruGothic(
+        fontSize: 15,
+        fontWeight: FontWeight.w400,
+        color: theme.text.withValues(alpha: 0.78),
+        letterSpacing: 0.4,
+      );
 
-  static TextStyle battleNameStyle(BattleLevelTheme theme) => GoogleFonts.itim(
-    fontSize: 28,
-    fontWeight: FontWeight.w700,
-    color: Colors.white,
-  );
+  static TextStyle battleNameStyle(BattleLevelTheme theme) =>
+      GoogleFonts.zenMaruGothic(
+        fontSize: 28,
+        fontWeight: FontWeight.w700,
+        color: Colors.white,
+      );
 
-  static TextStyle battleTypeStyle(BattleLevelTheme theme) => GoogleFonts.itim(
-    fontSize: 16,
-    fontWeight: FontWeight.w400,
-    color: Colors.white.withValues(alpha: 0.92),
-    letterSpacing: 0.8,
-  );
+  static TextStyle battleTypeStyle(BattleLevelTheme theme) =>
+      GoogleFonts.zenMaruGothic(
+        fontSize: 16,
+        fontWeight: FontWeight.w400,
+        color: Colors.white.withValues(alpha: 0.92),
+        letterSpacing: 0.8,
+      );
 
   static TextStyle sectionLabelStyle(BattleLevelTheme theme) =>
-      GoogleFonts.itim(
+      GoogleFonts.zenMaruGothic(
         fontSize: 16,
         fontWeight: FontWeight.w400,
         color: theme.text.withValues(alpha: 0.76),
       );
 
-  static TextStyle questionStyle(BattleLevelTheme theme) => GoogleFonts.itim(
-    fontSize: 24,
-    fontWeight: FontWeight.w400,
-    color: theme.text,
-    height: 1.45,
-  );
+  static TextStyle questionStyle(BattleLevelTheme theme) =>
+      GoogleFonts.zenMaruGothic(
+        fontSize: 24,
+        fontWeight: FontWeight.w400,
+        color: theme.text,
+        height: 1.45,
+      );
 
   static TextStyle lockDigitStyle(
     BattleLevelTheme theme, {
     required bool unlocked,
-  }) => GoogleFonts.itim(
+  }) => GoogleFonts.zenMaruGothic(
     fontSize: 28,
     fontWeight: FontWeight.w700,
     color: unlocked ? Colors.white : theme.primary.withValues(alpha: 0.34),
   );
 
-  static TextStyle hpLabelStyle(BattleLevelTheme theme) => GoogleFonts.itim(
-    fontSize: 16,
-    fontWeight: FontWeight.w400,
-    color: theme.text,
-  );
+  static TextStyle hpLabelStyle(BattleLevelTheme theme) =>
+      GoogleFonts.zenMaruGothic(
+        fontSize: 16,
+        fontWeight: FontWeight.w400,
+        color: theme.text,
+      );
 
-  static TextStyle hpValueStyle(BattleLevelTheme theme) => GoogleFonts.itim(
-    fontSize: 16,
-    fontWeight: FontWeight.w700,
-    color: theme.text,
-  );
+  static TextStyle hpValueStyle(BattleLevelTheme theme) =>
+      GoogleFonts.zenMaruGothic(
+        fontSize: 16,
+        fontWeight: FontWeight.w700,
+        color: theme.text,
+      );
 
   static TextStyle feedbackStyle(
     BattleLevelTheme theme, {
     required bool success,
-  }) => GoogleFonts.itim(
+  }) => GoogleFonts.zenMaruGothic(
     fontSize: 18,
     fontWeight: FontWeight.w400,
     color: success ? const Color(0xFF1E7A43) : const Color(0xFFA2382E),

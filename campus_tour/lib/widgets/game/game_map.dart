@@ -1,5 +1,4 @@
 import 'dart:async'; // 💡 引入 StreamSubscription
-import 'package:campus_tour/widgets/constants/asset_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:geolocator/geolocator.dart'; // 💡 引入 GPS 套件
@@ -10,7 +9,6 @@ import 'package:get/get.dart';
 import '../../view/nearby_monsters_display.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../../models/monster_model.dart';
-import 'user_marker.dart';
 //for mission
 import 'package:campus_tour/view/full_mission_page.dart';
 import 'package:campus_tour/widgets/game/catching_pages/monster_model_cry.dart';
@@ -18,6 +16,7 @@ import 'package:campus_tour/widgets/game/catching_pages/full_mission.dart';
 import 'package:campus_tour/widgets/game/catching_pages/graphics_text_level.dart';
 import 'package:campus_tour/widgets/game/catching_pages/cryptography_level.dart';
 import 'package:campus_tour/widgets/game/catching_pages/plot_level.dart';
+import 'package:campus_tour/widgets/game/catching_pages/strategy_book_level.dart';
 import 'package:campus_tour/widgets/encyclopedia/all_the_monster/monster_graphics.dart';
 import 'package:campus_tour/widgets/encyclopedia/all_the_monster/monster_text.dart';
 import 'package:campus_tour/widgets/encyclopedia/all_the_monster/monster_nfc.dart';
@@ -38,8 +37,8 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
   bool _hasLocationPermission = false;
   String? _mapStyle; // 地圖 JSON 風格
   AssetMapBitmap? _customMapImage; // 特製地圖圖片
-  double _maxZoomRate = 21.0;
-  double _minZoomRate = 15.0;
+  double _maxZoomRate = 18.5;
+  double _minZoomRate = 18.5;
 
   LatLng? _playerPosition;
   bool _hasCenteredMap = false;
@@ -53,7 +52,7 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
     southwest: southwest,
     northeast: northeast,
   );
-  static const double playerSize = 60;
+  // static const double playerSize = 60;
 
   Future<void> _loadAssets() async {
     try {
@@ -64,25 +63,12 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
         'assets/images/cute_forest_map.png',
         bitmapScaling: MapBitmapScaling.none,
       );
-      // final playerIcon = await BitmapDescriptor.asset(
-      //   const ImageConfiguration(size: Size(48, 48)),
-      //   'assets/images/doro.png',
-      //   width: 48,
-      //   height: 48,
-      // );
 
       if (!mounted) return;
 
       setState(() {
         _mapStyle = style;
         _customMapImage = image;
-        // _playerIcon = playerIcon;
-        // if (_playerPosition != null) {
-        //   _playerMarker = UserMarker(
-        //     position: _playerPosition!,
-        //     icon: _playerIcon!,
-        //   );
-        // }
       });
     } catch (e) {
       debugPrint("[Debug][GameMap][Error] 載入資源失敗: $e");
@@ -127,21 +113,18 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
 
       setState(() {
         _playerPosition = currentLocation;
-        // if (_playerIcon != null) {
-        //   _playerMarker = UserMarker(
-        //     position: currentLocation,
-        //     icon: _playerIcon!,
-        //   );
-        // }
       });
 
-      _positionStream = Geolocator.getPositionStream(
-        locationSettings: const LocationSettings(
-          accuracy: LocationAccuracy.bestForNavigation,
-          distanceFilter: 0,
-        ),
-      ).listen((Position position) {
-        debugPrint('[Debug][GameMap]:位置更新: ${position.latitude}, ${position.longitude}');
+      _positionStream =
+          Geolocator.getPositionStream(
+            locationSettings: const LocationSettings(
+              accuracy: LocationAccuracy.bestForNavigation,
+              distanceFilter: 0,
+            ),
+          ).listen((Position position) {
+            debugPrint(
+              '[Debug][GameMap]:位置更新: ${position.latitude}, ${position.longitude}',
+            );
 
             final currentLocation = LatLng(
               position.latitude,
@@ -158,24 +141,18 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
                     ) >
                     2;
 
-        if (shouldUpdateMarker) {
-          setState(() {
-            _playerPosition = currentLocation;
-            // if (_playerIcon != null) {
-            //   _playerMarker = UserMarker(
-            //     position: currentLocation,
-            //     icon: _playerIcon!,
-            //   );
-            // }
+            if (shouldUpdateMarker) {
+              setState(() {
+                _playerPosition = currentLocation;
+              });
+            }
+
+            _moveCamera(position);
+
+            // 更新附近怪物
+            monsterController.updateNearbyMonsters(position);
+            monsterController.updateNearestGlobal(position);
           });
-        }
-
-        _moveCamera(position);
-
-        // 更新附近怪物
-        monsterController.updateNearbyMonsters(position);
-        monsterController.updateNearestGlobal(position);
-      });
 
       debugPrint("[Debug][GameMap]:已開始監聽位置變化");
     } catch (e, st) {
@@ -265,6 +242,7 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
 
     try {
       final qa = await controller.getQAByMonster(monster);
+      final architecture = await controller.getArchitectureByMonster(monster);
 
       if (!mounted) return;
 
@@ -279,12 +257,24 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
         return;
       }
 
+      if (architecture == null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('無法載入 ${monster.name} 的建築資料，請稍後再試'),
+            backgroundColor: Colors.red,
+            duration: const Duration(seconds: 3),
+          ),
+        );
+        return;
+      }
+
       await Navigator.push(
         context,
         MaterialPageRoute(
           builder: (_) => BuildingMonsterLevel(
             monster: monster,
             qa: qa,
+            architectureType: architecture.type,
             onMissionFinished: () async {
               final navigator = Navigator.of(context);
               final messenger = ScaffoldMessenger.of(context);
@@ -394,6 +384,7 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
 class BuildingMonsterLevel extends StatelessWidget {
   final MonsterModel monster;
   final QAModel qa;
+  final String architectureType;
   final Future<void> Function()? onMissionFinished;
   final MonsterModelCry monsterModelCry;
   final PlotLevel tracePlotMission;
@@ -404,6 +395,7 @@ class BuildingMonsterLevel extends StatelessWidget {
     super.key,
     required this.monster,
     required this.qa,
+    required this.architectureType,
     this.onMissionFinished,
   }) : monsterModelCry = MonsterModelCry(
          name: monster.name,
@@ -419,6 +411,7 @@ class BuildingMonsterLevel extends StatelessWidget {
        mission1 = GraphicsTextLevel(
          firstTracePhoto: MonsterGraphics.graphics[monster.id] ?? '',
          descriptionText: MonsterText.texts[monster.id] ?? '',
+         strategyBookLevel: const StrategyBookLevel(),
          nfcId: MonsterNFC.nfcIds[monster.id] ?? '',
        ),
        battlePlotMission = PlotLevel(
@@ -432,9 +425,32 @@ class BuildingMonsterLevel extends StatelessWidget {
          choiceSet: [qa.options],
          answerSet: [qa.answer],
        );
-  List<FullMission> get missions => [
+  List<FullMission> get missions {
+    switch (architectureType) {
+      case "系管":
+        return systemManagementMissions;
+      case "裝置藝術":
+        return installationArtMissions;
+      case "景點":
+        return scenicSpotMissions;
+      default:
+        return installationArtMissions;
+    }
+  }
+
+  List<FullMission> get systemManagementMissions => [
+    FullMission(levelType: "plotLevel", plotLevel: battlePlotMission),
+    FullMission(levelType: "cryptographyLevel", cryptographyLevel: mission2),
+  ];
+
+  List<FullMission> get installationArtMissions => [
     FullMission(levelType: "plotLevel", plotLevel: tracePlotMission),
     FullMission(levelType: "graphicsTextLevel", graphicsTextLevel: mission1),
+    FullMission(levelType: "plotLevel", plotLevel: battlePlotMission),
+    FullMission(levelType: "cryptographyLevel", cryptographyLevel: mission2),
+  ];
+
+  List<FullMission> get scenicSpotMissions => [
     FullMission(levelType: "plotLevel", plotLevel: battlePlotMission),
     FullMission(levelType: "cryptographyLevel", cryptographyLevel: mission2),
   ];

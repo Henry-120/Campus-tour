@@ -2,6 +2,7 @@ import 'package:campus_tour/styles/level_style.dart';
 import 'package:campus_tour/widgets/buttons/click_and_accept_button.dart';
 import 'package:campus_tour/widgets/buttons/nfc_button.dart';
 import 'package:campus_tour/widgets/game/catching_pages/graphics_text_level.dart';
+import 'package:campus_tour/widgets/game/catching_pages/strategy_book_level_page.dart';
 import 'package:flutter/material.dart';
 
 class GraphicsTextLevelPage extends StatefulWidget {
@@ -25,13 +26,16 @@ class _GraphicsTextLevelPageState extends State<GraphicsTextLevelPage> {
 
   @override
   Widget build(BuildContext context) {
+    // [L-01]
     final hasImage =
         widget.level.firstTracePhoto != null &&
         widget.level.firstTracePhoto!.trim().isNotEmpty;
+    // [L-02]
     final hasText =
         widget.level.descriptionText != null &&
         widget.level.descriptionText!.trim().isNotEmpty;
 
+    // [L-03]
     return Scaffold(
       body: Container(
         decoration: LevelStyle.pageDecoration,
@@ -74,9 +78,10 @@ class _GraphicsTextLevelPageState extends State<GraphicsTextLevelPage> {
                   ),
                 ),
                 const SizedBox(height: LevelStyle.nfcButtonTopSpacing),
+                // [L-04]
                 NfcButton1(
                   ans: widget.level.nfcId,
-                  onResult: widget.nextFunction,
+                  onResult: _handleNfcSuccess,
                 ),
                 const SizedBox(height: 8),
                 ClickAndAcceptButton(
@@ -94,6 +99,7 @@ class _GraphicsTextLevelPageState extends State<GraphicsTextLevelPage> {
   }
 
   Widget _buildTeachingButton() {
+    // [L-05]
     return SizedBox(
       width: 36,
       height: 36,
@@ -109,6 +115,7 @@ class _GraphicsTextLevelPageState extends State<GraphicsTextLevelPage> {
   }
 
   void _showNfcTeachingDialog() {
+    // [L-06]
     showGeneralDialog<void>(
       context: context,
       barrierDismissible: true,
@@ -159,7 +166,48 @@ class _GraphicsTextLevelPageState extends State<GraphicsTextLevelPage> {
     );
   }
 
+  void _handleNfcSuccess() {
+    final strategyBookLevel = widget.level.strategyBookLevel;
+
+    // [L-07]
+    if (strategyBookLevel == null) {
+      widget.nextFunction();
+      return;
+    }
+
+    // [L-08]
+    showGeneralDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      barrierLabel: '攻略秘集',
+      barrierColor: Colors.black.withValues(alpha: 0.48),
+      pageBuilder: (dialogContext, _, _) {
+        return StrategyBookLevelPage(
+          level: strategyBookLevel,
+          nextFunction: () {
+            // [L-09]
+            Navigator.of(dialogContext).pop();
+            widget.nextFunction();
+          },
+        );
+      },
+      transitionBuilder: (_, animation, _, child) {
+        return FadeTransition(
+          opacity: CurvedAnimation(parent: animation, curve: Curves.easeOut),
+          child: ScaleTransition(
+            scale: Tween<double>(begin: 0.92, end: 1).animate(
+              CurvedAnimation(parent: animation, curve: Curves.easeOutBack),
+            ),
+            child: child,
+          ),
+        );
+      },
+      transitionDuration: const Duration(milliseconds: 220),
+    );
+  }
+
   Widget _buildBody({required bool hasImage, required bool hasText}) {
+    // [L-10]
     if (hasImage && hasText) {
       return Column(
         children: [
@@ -170,14 +218,17 @@ class _GraphicsTextLevelPageState extends State<GraphicsTextLevelPage> {
       );
     }
 
+    // [L-11]
     if (hasImage) {
       return _buildImageSection(widget.level.firstTracePhoto!);
     }
 
+    // [L-12]
     if (hasText) {
       return _buildTextSection(widget.level.descriptionText!);
     }
 
+    // [L-13]
     return _buildEmptySection();
   }
 
@@ -192,10 +243,12 @@ class _GraphicsTextLevelPageState extends State<GraphicsTextLevelPage> {
   }
 
   Widget _buildAdaptiveImage(String imagePath) {
+    // [L-14]
     final trimmedPath = imagePath.trim();
     final isNetworkImage =
         trimmedPath.startsWith('http://') || trimmedPath.startsWith('https://');
 
+    // [L-15]
     final image = isNetworkImage
         ? Image.network(
             trimmedPath,
@@ -212,6 +265,7 @@ class _GraphicsTextLevelPageState extends State<GraphicsTextLevelPage> {
   }
 
   Widget _buildTextSection(String text) {
+    // [L-16]
     return Container(
       width: double.infinity,
       constraints: const BoxConstraints(minHeight: LevelStyle.sectionMinHeight),
@@ -230,6 +284,7 @@ class _GraphicsTextLevelPageState extends State<GraphicsTextLevelPage> {
   }
 
   Widget _buildEmptySection() {
+    // [L-17]
     return Container(
       width: double.infinity,
       constraints: const BoxConstraints(minHeight: LevelStyle.sectionMinHeight),
@@ -241,6 +296,7 @@ class _GraphicsTextLevelPageState extends State<GraphicsTextLevelPage> {
   }
 
   Widget _buildImageFallback() {
+    // [L-18]
     return Container(
       decoration: LevelStyle.imagePlaceholderDecoration,
       child: const Center(
