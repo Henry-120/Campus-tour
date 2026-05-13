@@ -98,7 +98,7 @@ class _PlotLevelPageState extends State<PlotLevelPage> {
                       child: TextButton(
                         onPressed: _callNextFunction,
                         style: PlotLevelPageStyle.skipButtonStyle,
-                        child: const Text(
+                        child: Text(
                           PlotLevel.passLevel,
                           style: PlotLevelPageStyle.skipTextStyle,
                         ),
