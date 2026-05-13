@@ -1,5 +1,4 @@
 import 'dart:async'; // 💡 引入 StreamSubscription
-import 'package:campus_tour/widgets/constants/asset_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:geolocator/geolocator.dart'; // 💡 引入 GPS 套件
@@ -10,7 +9,6 @@ import 'package:get/get.dart';
 import '../../view/nearby_monsters_display.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../../models/monster_model.dart';
-import 'user_marker.dart';
 //for mission
 import 'package:campus_tour/view/full_mission_page.dart';
 import 'package:campus_tour/widgets/game/catching_pages/monster_model_cry.dart';
@@ -18,6 +16,7 @@ import 'package:campus_tour/widgets/game/catching_pages/full_mission.dart';
 import 'package:campus_tour/widgets/game/catching_pages/graphics_text_level.dart';
 import 'package:campus_tour/widgets/game/catching_pages/cryptography_level.dart';
 import 'package:campus_tour/widgets/game/catching_pages/plot_level.dart';
+import 'package:campus_tour/widgets/game/catching_pages/strategy_book_level.dart';
 import 'package:campus_tour/widgets/encyclopedia/all_the_monster/monster_graphics.dart';
 import 'package:campus_tour/widgets/encyclopedia/all_the_monster/monster_text.dart';
 import 'package:campus_tour/widgets/encyclopedia/all_the_monster/monster_nfc.dart';
@@ -412,6 +411,7 @@ class BuildingMonsterLevel extends StatelessWidget {
        mission1 = GraphicsTextLevel(
          firstTracePhoto: MonsterGraphics.graphics[monster.id] ?? '',
          descriptionText: MonsterText.texts[monster.id] ?? '',
+         strategyBookLevel: const StrategyBookLevel(),
          nfcId: MonsterNFC.nfcIds[monster.id] ?? '',
        ),
        battlePlotMission = PlotLevel(
