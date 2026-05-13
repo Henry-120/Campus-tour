@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:campus_tour/styles/level_style.dart';
 
 class PlotLevel {
   static const String traceType = "trace";
@@ -14,7 +15,7 @@ class PlotLevel {
   static const String traceImageUrl = "assets/images/elf_trail.png";
   static const String battleImageUrl = "assets/images/elf_battle.png";
   static const String traceTitle = "這裡好像有精靈的蹤跡";
-  static const String traceDescription = "開啟你的探測器，掃描並追蹤它。";
+  static const String traceDescription = "開啟你的偵測器，試著找到它吧。";
   static const String battleTitle = "你找到了精靈";
   static const String battleDescription = "但它好像很有攻擊性的看著你......";
   static const String press = "點擊任意位置繼續";
@@ -56,41 +57,11 @@ class PlotLevelPageStyle {
     shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
   );
 
-  static const TextStyle skipTextStyle = TextStyle(
-    fontSize: 16,
-    fontWeight: FontWeight.w600,
-    color: Colors.white,
-    shadows: [
-      Shadow(color: Color(0x99000000), blurRadius: 4, offset: Offset(0, 1)),
-    ],
-  );
+  static TextStyle get skipTextStyle => LevelStyle.plotSkipTextStyle;
 
-  static const TextStyle titleStyle = TextStyle(
-    fontSize: 34,
-    fontWeight: FontWeight.w800,
-    color: Colors.white,
-    height: 1.25,
-    shadows: [
-      Shadow(color: Color(0xB3000000), blurRadius: 8, offset: Offset(0, 2)),
-    ],
-  );
+  static TextStyle get titleStyle => LevelStyle.plotTitleStyle;
 
-  static const TextStyle descriptionStyle = TextStyle(
-    fontSize: 20,
-    fontWeight: FontWeight.w600,
-    color: Colors.white,
-    height: 1.55,
-    shadows: [
-      Shadow(color: Color(0xB3000000), blurRadius: 8, offset: Offset(0, 2)),
-    ],
-  );
+  static TextStyle get descriptionStyle => LevelStyle.plotDescriptionStyle;
 
-  static const TextStyle pressTextStyle = TextStyle(
-    fontSize: 17,
-    fontWeight: FontWeight.w700,
-    color: Colors.white,
-    shadows: [
-      Shadow(color: Color(0xB3000000), blurRadius: 8, offset: Offset(0, 2)),
-    ],
-  );
+  static TextStyle get pressTextStyle => LevelStyle.plotPressTextStyle;
 }

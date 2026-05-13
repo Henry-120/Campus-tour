@@ -40,7 +40,9 @@ class _CryptographyLevelPageState extends State<CryptographyLevelPage> {
   @override
   void initState() {
     super.initState();
+    // [L-01]
     _playerHp = CryptographyLevel.playerMaxHp;
+    // [L-02]
     _enemyHp =
         widget.level.questionSet.length *
         CryptographyLevel.enemyDamageOnCorrect;
@@ -48,9 +50,12 @@ class _CryptographyLevelPageState extends State<CryptographyLevelPage> {
 
   @override
   Widget build(BuildContext context) {
+    // [L-03]
     final theme = LevelStyle.battleThemeForType(widget.monsterModel.type);
+    // [L-04]
     final choices = widget.level.choiceSet[_questionIndex];
 
+    // [L-05]
     return Scaffold(
       body: Container(
         decoration: LevelStyle.battlePageDecoration(theme),
@@ -63,6 +68,7 @@ class _CryptographyLevelPageState extends State<CryptographyLevelPage> {
               clipBehavior: Clip.antiAlias, //子類抗鋸齒圓角設計
               child: LayoutBuilder(
                 builder: (context, constraints) {
+                  // [L-06]
                   final heroHeight = math.min(
                     360.0, //上限 360
                     math.max(
@@ -110,6 +116,7 @@ class _CryptographyLevelPageState extends State<CryptographyLevelPage> {
   }
 
   Widget _buildMonsterHero(BattleLevelTheme theme, double height) {
+    // [L-07]
     return SizedBox(
       width: double.infinity,
       height: height,
@@ -167,6 +174,7 @@ class _CryptographyLevelPageState extends State<CryptographyLevelPage> {
   }
 
   Widget _buildQuestionCard(BattleLevelTheme theme, List<String> choices) {
+    // [L-08]
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(18),
@@ -179,11 +187,16 @@ class _CryptographyLevelPageState extends State<CryptographyLevelPage> {
             style: LevelStyle.questionStyle(theme),
           ),
           const SizedBox(height: 18),
+          // [L-09]
           ...List.generate(choices.length, (index) {
+            // [L-10]
             final selected = _selectedChoiceIndex == index;
+            // [L-11]
             final correctAnswer = widget.level.answerSet[_questionIndex];
+            // [L-12]
             final isCorrect =
                 _isAnswerLocked && selected && choices[index] == correctAnswer;
+            // [L-13]
             final isWrong = _isAnswerLocked && selected && !isCorrect;
             return Padding(
               padding: EdgeInsets.only(
@@ -196,6 +209,7 @@ class _CryptographyLevelPageState extends State<CryptographyLevelPage> {
                 child: ElevatedButton(
                   onPressed: _isAnswerLocked
                       ? null
+                      // [L-14]
                       : () => _submitAnswer(index),
                   style: LevelStyle.answerButtonStyle(
                     theme,
@@ -209,6 +223,7 @@ class _CryptographyLevelPageState extends State<CryptographyLevelPage> {
             );
           }),
           if (_feedbackText != null) ...[
+            // [L-15]
             const SizedBox(height: 16),
             Center(
               child: Text(
@@ -227,6 +242,7 @@ class _CryptographyLevelPageState extends State<CryptographyLevelPage> {
   }
 
   Widget _buildPlayerPanel(BattleLevelTheme theme) {
+    // [L-16]
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(18),
@@ -247,15 +263,20 @@ class _CryptographyLevelPageState extends State<CryptographyLevelPage> {
     required String label,
     bool invertTextColor = false,
   }) {
+    // [L-17]
     final clampedHp = currentHp.clamp(0, maxHp);
+    // [L-18]
     final ratio = maxHp == 0 ? 0.0 : clampedHp / maxHp;
+    // [L-19]
     final labelStyle = invertTextColor
         ? LevelStyle.hpLabelStyle(theme).copyWith(color: Colors.white)
         : LevelStyle.hpLabelStyle(theme);
+    // [L-20]
     final valueStyle = invertTextColor
         ? LevelStyle.hpValueStyle(theme).copyWith(color: Colors.white)
         : LevelStyle.hpValueStyle(theme);
 
+    // [L-21]
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -292,14 +313,18 @@ class _CryptographyLevelPageState extends State<CryptographyLevelPage> {
   }
 
   Widget _buildMonsterImage() {
+    // [L-22]
     final imagePath = widget.monsterModel.imageUrl.trim();
+    // [L-23]
     final isNetworkImage =
         imagePath.startsWith('http://') || imagePath.startsWith('https://');
 
+    // [L-24]
     if (imagePath.isEmpty) {
       return _buildImageFallback();
     }
 
+    // [L-25]
     return isNetworkImage
         ? Image.network(
             imagePath,
@@ -316,6 +341,7 @@ class _CryptographyLevelPageState extends State<CryptographyLevelPage> {
   }
 
   Widget _buildImageFallback() {
+    // [L-26]
     return Container(
       color: Colors.white.withValues(alpha: 0.12),
       alignment: Alignment.center,
@@ -324,10 +350,14 @@ class _CryptographyLevelPageState extends State<CryptographyLevelPage> {
   }
 
   Future<void> _submitAnswer(int index) async {
+    // [L-27]
     final selectedChoice = widget.level.choiceSet[_questionIndex][index];
+    // [L-28]
     final correctAnswer = widget.level.answerSet[_questionIndex];
+    // [L-29]
     final isCorrect = selectedChoice == correctAnswer;
 
+    // [L-30]
     setState(() {
       _selectedChoiceIndex = index;
       _isAnswerLocked = true;
@@ -335,12 +365,14 @@ class _CryptographyLevelPageState extends State<CryptographyLevelPage> {
       _feedbackText = isCorrect
           ? CryptographyLevel.correctMessage
           : '${CryptographyLevel.wrongMessage}，${CryptographyLevel.retryHint}';
+      // [L-31]
       if (isCorrect) {
         _enemyHp = math.max(
           0,
           _enemyHp - CryptographyLevel.enemyDamageOnCorrect,
         );
       } else {
+        // [L-32]
         _playerHp = math.max(
           0,
           _playerHp - CryptographyLevel.playerDamageOnWrong,
@@ -348,20 +380,25 @@ class _CryptographyLevelPageState extends State<CryptographyLevelPage> {
       }
     });
 
+    // [L-33]
     if (!isCorrect) {
       await _shockController.wrongAnswerShock();
     }
 
+    // [L-34]
     await Future<void>.delayed(CryptographyLevel.feedbackDuration);
+    // [L-35]
     if (!mounted) {
       return;
     }
 
+    // [L-36]
     if (!isCorrect && _playerHp <= 0) {
       widget.loseingFunction();
       return;
     }
 
+    // [L-37]
     if (!isCorrect) {
       setState(() {
         _selectedChoiceIndex = null;
@@ -371,20 +408,25 @@ class _CryptographyLevelPageState extends State<CryptographyLevelPage> {
       return;
     }
 
+    // [L-38]
     widget.nextFunction();
 
+    // [L-39]
     if (_questionIndex >= widget.level.questionSet.length - 1 ||
         _enemyHp <= 0) {
       setState(() {
         _feedbackText = CryptographyLevel.finishMessage;
       });
+      // [L-40]
       await Future<void>.delayed(const Duration(milliseconds: 500));
+      // [L-41]
       if (mounted) {
         widget.finishFunction();
       }
       return;
     }
 
+    // [L-42]
     setState(() {
       _questionIndex += 1;
       _selectedChoiceIndex = null;

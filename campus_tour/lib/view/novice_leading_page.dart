@@ -1,439 +1,361 @@
-import 'dart:async';
-import 'dart:math' as math;
-
-import 'package:campus_tour/controllers/key_of_novice_teaching.dart';
-import 'package:campus_tour/styles/app_theme.dart';
-import 'package:campus_tour/view/full_mission_page.dart';
-import 'package:campus_tour/view/game_main_page.dart';
-import 'package:campus_tour/widgets/constants/asset_paths.dart';
-import 'package:campus_tour/widgets/game/catching_pages/full_mission.dart';
-import 'package:campus_tour/widgets/game/catching_pages/monster_model_cry.dart';
-import 'package:campus_tour/widgets/game/catching_pages/plot_level.dart';
+import 'package:campus_tour/styles/novice_leading_style.dart';
 import 'package:flutter/material.dart';
-import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 
-class NoviceLeadingPage {
-  static const String mainCharacterDescription = "這是遊戲的主角，代表你在校園中的位置。";
-  static const String avatarDescription = "點擊查看你的個人資訊。";
-  static const String avatarSelectDescription = "選一個喜歡的頭像吧";
-  static const String encyclopediaButtonDescription = "點擊圖鑑，看看你收集到的精靈吧。";
-  static const String encyclopediaCardDescription = "你收集到的精靈都會出現在這裡";
-  static const String encyclopediaTextDescription = "這裡可以查看關於這隻精靈的細節喔";
-  static const String tutorialFinishedDescription = "教學到此結束，還有更多好玩與實用的功能等著你探索";
+class NoviceLeadingPage extends StatefulWidget {
+  const NoviceLeadingPage({super.key, this.onFinish});
 
-  static bool _isShowingCoachMark = false;
-  static bool _isStartingMission = false;
+  final VoidCallback? onFinish;
 
-  void showStep1(BuildContext context) {
-    NoviceManager.start();
-    _isShowingCoachMark = true;
+  @override
+  State<NoviceLeadingPage> createState() => _NoviceLeadingPageState();
+}
 
-    late TutorialCoachMark tutorial;
-    tutorial = _buildTutorial(
-      targets: [
-        _targetByKey(
-          identify: "mainCharacter",
-          key: KeyOfNoviceTeaching.mainCharacter,
-          description: mainCharacterDescription,
-          align: ContentAlign.bottom,
-        ),
-        _targetByKey(
-          identify: "avatar",
-          key: KeyOfNoviceTeaching.avatar,
-          description: avatarDescription,
-          align: ContentAlign.bottom,
-        ),
-      ],
-      onClickTarget: (target) {
-        if (target.identify == "avatar") {
-          NoviceManager.currentStep = NoviceManager.waitingAvatarPage;
-          tutorial.finish();
-        }
-      },
-    )..show(context: context);
+class _NoviceLeadingPageState extends State<NoviceLeadingPage> {
+  // [L-01]
+  static const List<_NoviceLeadingStep> _steps = [
+    _NoviceLeadingStep.image(
+      imageAsset: 'assets/images/novice_leading/squirrel.JPG',
+      message: '這是你現在在的位置，你將帶領它探索校園',
+      textAlignment: Alignment.bottomCenter,
+    ),
+    _NoviceLeadingStep.image(
+      imageAsset: 'assets/images/novice_leading/avatar.JPG',
+      message: '這裡可以更改修改個人資訊',
+      textAlignment: Alignment.bottomCenter,
+    ),
+    _NoviceLeadingStep.image(
+      imageAsset: 'assets/images/novice_leading/avatar_chageing.JPG',
+      message: '這裡可以更改頭像，選一個你心儀的角色吧',
+      textAlignment: Alignment.bottomCenter,
+    ),
+    _NoviceLeadingStep.image(
+      imageAsset: 'assets/images/novice_leading/arrow.JPG',
+      message: '這個箭頭將帶領你找到最近的精靈',
+      textAlignment: Alignment.topCenter,
+    ),
+    _NoviceLeadingStep.image(
+      imageAsset: 'assets/images/novice_leading/elf.JPG',
+      message: '精靈出現了，點擊它來開始捉捕吧',
+      textAlignment: Alignment.topCenter,
+    ),
+    _NoviceLeadingStep.plot(message: '更多精采體驗等著你去探索'),
+    _NoviceLeadingStep.image(
+      imageAsset: 'assets/images/novice_leading/encyclopedia.JPG',
+      message: '抓到的精靈將會在圖鑑裡面',
+      textAlignment: Alignment.topCenter,
+    ),
+    _NoviceLeadingStep.image(
+      imageAsset: 'assets/images/novice_leading/encylopedia_col.JPG',
+      message: '點擊查看精靈詳情!',
+      textAlignment: Alignment.bottomCenter,
+    ),
+    _NoviceLeadingStep.image(
+      imageAsset: 'assets/images/novice_leading/story.JPG',
+      message: '更多資訊在這邊!!',
+      textAlignment: Alignment.topCenter,
+    ),
+    _NoviceLeadingStep.finish(message: '更多功能等待你探索!!'),
+  ];
+
+  // [L-02]
+  final PageController _pageController = PageController();
+  int _currentIndex = 0;
+
+  @override
+  void dispose() {
+    // [L-03]
+    _pageController.dispose();
+    super.dispose();
   }
 
-  void checkAndShow(BuildContext context) {
-    if (!NoviceManager.isTutorialActive || _isShowingCoachMark) return;
-
-    Future.delayed(const Duration(milliseconds: 350), () {
-      if (!context.mounted || !NoviceManager.isTutorialActive) return;
-
-      switch (NoviceManager.currentStep) {
-        case NoviceManager.waitingAvatarPage:
-          if (_areTargetsMounted([
-            KeyOfNoviceTeaching.avatarImage,
-            KeyOfNoviceTeaching.avatarCheak,
-          ])) {
-            showStep2(context);
-          } else {
-            NoviceManager.currentStep = NoviceManager.avatarSelected;
-            checkAndShow(context);
-          }
-          break;
-        case NoviceManager.avatarSelected:
-          _showTutorialFairyAndMission(context);
-          break;
-        case NoviceManager.waitingEncyclopediaButton:
-          if (_isTargetMounted(KeyOfNoviceTeaching.encyclopediaButton)) {
-            showStep3(context);
-          } else if (_isTargetMounted(KeyOfNoviceTeaching.encyclopediaCard)) {
-            NoviceManager.currentStep = NoviceManager.waitingEncyclopediaCard;
-            checkAndShow(context);
-          }
-          break;
-        case NoviceManager.waitingEncyclopediaCard:
-          if (_isTargetMounted(KeyOfNoviceTeaching.encyclopediaCard)) {
-            showStep4(context);
-          } else if (_isTargetMounted(KeyOfNoviceTeaching.encyclopediaText)) {
-            NoviceManager.currentStep = NoviceManager.waitingEncyclopediaText;
-            checkAndShow(context);
-          }
-          break;
-        case NoviceManager.waitingEncyclopediaText:
-          if (_isTargetMounted(KeyOfNoviceTeaching.encyclopediaText)) {
-            showStep5(context);
-          }
-          break;
-      }
-    });
-  }
-
-  void showStep2(BuildContext context) {
-    final position = _targetPositionFromKeys([
-      KeyOfNoviceTeaching.avatarImage,
-      KeyOfNoviceTeaching.avatarCheak,
-    ]);
-
-    if (position == null) {
-      _retryCheck(context);
-      return;
-    }
-
-    _showTutorial(
-      context: context,
-      targets: [
-        TargetFocus(
-          identify: "avatarSelection",
-          targetPosition: position,
-          enableTargetTab: false,
-          enableOverlayTab: false,
-          shape: ShapeLightFocus.RRect,
-          radius: 18,
-          paddingFocus: 8,
-          contents: [_content(avatarSelectDescription, ContentAlign.bottom)],
-        ),
-      ],
-    );
-  }
-
-  void showStep3(BuildContext context) {
-    _showTutorial(
-      context: context,
-      targets: [
-        _targetByKey(
-          identify: "encyclopediaButton",
-          key: KeyOfNoviceTeaching.encyclopediaButton,
-          description: encyclopediaButtonDescription,
-          align: ContentAlign.top,
-          enableTargetTab: false,
-        ),
-      ],
-    );
-  }
-
-  void showStep4(BuildContext context) {
-    _showTutorial(
-      context: context,
-      targets: [
-        _targetByKey(
-          identify: "encyclopediaCard",
-          key: KeyOfNoviceTeaching.encyclopediaCard,
-          description: encyclopediaCardDescription,
-          align: ContentAlign.bottom,
-          enableTargetTab: false,
-        ),
-      ],
-    );
-  }
-
-  void showStep5(BuildContext context) {
-    _isShowingCoachMark = true;
-    late TutorialCoachMark tutorial;
-    tutorial = _buildTutorial(
-      targets: [
-        _targetByKey(
-          identify: "encyclopediaText",
-          key: KeyOfNoviceTeaching.encyclopediaText,
-          description: encyclopediaTextDescription,
-          align: ContentAlign.top,
-          enableOverlayTab: true,
-        ),
-      ],
-      onClickTarget: (target) {
-        if (target.identify == "encyclopediaText") {
-          NoviceManager.currentStep = NoviceManager.finished;
-          tutorial.finish();
-        }
-      },
-      onClickOverlay: (target) {
-        if (target.identify == "encyclopediaText") {
-          NoviceManager.currentStep = NoviceManager.finished;
-          tutorial.finish();
-        }
-      },
-      onFinish: () {
-        if (NoviceManager.currentStep == NoviceManager.finished) {
-          _showFinishedDialog(context);
-        }
-      },
-    )..show(context: context);
-  }
-
-  TutorialCoachMark _buildTutorial({
-    required List<TargetFocus> targets,
-    void Function(TargetFocus target)? onClickTarget,
-    void Function(TargetFocus target)? onClickOverlay,
-    VoidCallback? onFinish,
-  }) {
-    return TutorialCoachMark(
-      targets: targets,
-      colorShadow: Colors.black,
-      opacityShadow: 0.78,
-      textSkip: "略過",
-      paddingFocus: 10,
-      hideSkip: false,
-      onClickTarget: onClickTarget,
-      onClickOverlay: onClickOverlay,
-      onFinish: () {
-        _isShowingCoachMark = false;
-        onFinish?.call();
-      },
-      onSkip: () {
-        _isShowingCoachMark = false;
-        NoviceManager.reset();
-        return true;
-      },
-    );
-  }
-
-  void _showTutorial({
-    required BuildContext context,
-    required List<TargetFocus> targets,
-  }) {
-    _isShowingCoachMark = true;
-    _buildTutorial(targets: targets).show(context: context);
-  }
-
-  TargetFocus _targetByKey({
-    required String identify,
-    required GlobalKey key,
-    required String description,
-    required ContentAlign align,
-    bool enableTargetTab = true,
-    bool enableOverlayTab = false,
-  }) {
-    return TargetFocus(
-      identify: identify,
-      keyTarget: key,
-      enableTargetTab: enableTargetTab,
-      enableOverlayTab: enableOverlayTab,
-      shape: ShapeLightFocus.RRect,
-      radius: 14,
-      contents: [_content(description, align)],
-    );
-  }
-
-  TargetContent _content(String text, ContentAlign align) {
-    return TargetContent(
-      align: align,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
-        child: Text(
-          text,
-          style: AppTheme.detailBodyStyle.copyWith(color: Colors.white),
+  @override
+  Widget build(BuildContext context) {
+    // [L-04]
+    return Scaffold(
+      backgroundColor: NoviceLeadingStyle.backgroundColor,
+      body: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        // [L-05]
+        onTap: _handlePageTap,
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            // [L-06]
+            PageView.builder(
+              controller: _pageController,
+              itemCount: _steps.length,
+              // [L-07]
+              onPageChanged: _updateCurrentIndex,
+              itemBuilder: (context, index) {
+                // [L-08]
+                return _buildStepPage(_steps[index]);
+              },
+            ),
+            // [L-09]
+            _buildSkipButton(),
+            // [L-10]
+            _buildNavigationButtons(),
+          ],
         ),
       ),
     );
   }
 
-  Future<void> _showTutorialFairyAndMission(BuildContext context) async {
-    if (_isStartingMission) return;
-    _isStartingMission = true;
-
-    await showDialog<void>(
-      context: context,
-      barrierDismissible: false,
-      builder: (dialogContext) {
-        return AlertDialog(
-          backgroundColor: const Color(0xFFFFF6EF),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(18),
-          ),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Image.asset(
-                AssetPaths.squirrel,
-                height: 120,
-                fit: BoxFit.contain,
-              ),
-              const SizedBox(height: 16),
-              Text(
-                "發現一隻精靈！",
-                style: AppTheme.detailBodyStyle,
-                textAlign: TextAlign.center,
-              ),
-            ],
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(dialogContext).pop(),
-              child: const Text("前往捕捉"),
-            ),
-          ],
-        );
-      },
-    );
-
-    if (!context.mounted) {
-      _isStartingMission = false;
-      return;
-    }
-
-    await _openTutorialMission(context);
-    _isStartingMission = false;
-
-    if (context.mounted) {
-      checkAndShow(context);
+  Widget _buildStepPage(_NoviceLeadingStep step) {
+    // [L-11]
+    switch (step.kind) {
+      case _NoviceLeadingStepKind.image:
+        return _buildImagePage(step);
+      case _NoviceLeadingStepKind.plot:
+        return _buildPlotLevelPage(step);
+      case _NoviceLeadingStepKind.finish:
+        return _buildFinishPage(step);
     }
   }
 
-  Future<void> _openTutorialMission(BuildContext context) {
-    return Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (missionContext) {
-          return FullMissionPage(
-            missions: [
-              FullMission(
-                levelType: "plotLevel",
-                plotLevel: PlotLevel(
-                  type: PlotLevel.traceType,
-                  isPassed: false,
-                  title: "實際抓捕會更有趣",
-                  description: "真正遇見精靈時，還會有更多有趣的關卡等著你挑戰。",
+  Widget _buildImagePage(_NoviceLeadingStep step) {
+    // [L-12]
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        Image.asset(step.imageAsset!, fit: BoxFit.cover),
+        const DecoratedBox(
+          decoration: BoxDecoration(
+            gradient: NoviceLeadingStyle.imageShadeGradient,
+          ),
+        ),
+        Align(
+          alignment: step.textAlignment,
+          child: Padding(
+            padding: NoviceLeadingStyle.textPanelMargin,
+            child: _InstructionPanel(message: step.message),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildPlotLevelPage(_NoviceLeadingStep step) {
+    // [L-13]
+    return DecoratedBox(
+      decoration: const BoxDecoration(
+        gradient: NoviceLeadingStyle.plotGradient,
+      ),
+      child: SafeArea(
+        child: Center(
+          child: Padding(
+            padding: NoviceLeadingStyle.textPanelMargin,
+            child: Text(
+              step.message,
+              style: NoviceLeadingStyle.plotTextStyle,
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildFinishPage(_NoviceLeadingStep step) {
+    // [L-14]
+    return DecoratedBox(
+      decoration: const BoxDecoration(
+        gradient: NoviceLeadingStyle.finishGradient,
+      ),
+      child: SafeArea(
+        child: Center(
+          child: Padding(
+            padding: NoviceLeadingStyle.textPanelMargin,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  step.message,
+                  style: NoviceLeadingStyle.finishTextStyle,
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 28),
+                ElevatedButton(
+                  // [L-15]
+                  onPressed: _finishTutorial,
+                  style: NoviceLeadingStyle.finishButtonStyle,
+                  child: Text(
+                    '結束教學',
+                    style: NoviceLeadingStyle.finishButtonTextStyle,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSkipButton() {
+    // [L-16]
+    if (_isLastPage) {
+      return const SizedBox.shrink();
+    }
+
+    return SafeArea(
+      child: Align(
+        alignment: Alignment.topRight,
+        child: Padding(
+          padding: NoviceLeadingStyle.skipPadding,
+          child: TextButton(
+            // [L-17]
+            onPressed: _finishTutorial,
+            style: NoviceLeadingStyle.textButtonStyle,
+            child: Text('跳過', style: NoviceLeadingStyle.actionTextStyle),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildNavigationButtons() {
+    // [L-18]
+    return SafeArea(
+      child: Align(
+        alignment: Alignment.bottomCenter,
+        child: Padding(
+          padding: NoviceLeadingStyle.navigationPadding,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              TextButton(
+                // [L-19]
+                onPressed: _currentIndex == 0 ? null : _goPrevious,
+                style: NoviceLeadingStyle.textButtonStyle,
+                child: Text(
+                  '上一步',
+                  style: _currentIndex == 0
+                      ? NoviceLeadingStyle.disabledActionTextStyle
+                      : NoviceLeadingStyle.actionTextStyle,
                 ),
               ),
+              if (!_isLastPage)
+                TextButton(
+                  // [L-20]
+                  onPressed: _goNext,
+                  style: NoviceLeadingStyle.textButtonStyle,
+                  child: Text('下一步', style: NoviceLeadingStyle.actionTextStyle),
+                ),
             ],
-            monsterModelCry: const MonsterModelCry(
-              name: "教學精靈",
-              type: "tutorial",
-              imageUrl: AssetPaths.squirrel,
-            ),
-            onMissionFinished: () async {
-              NoviceManager.currentStep =
-                  NoviceManager.waitingEncyclopediaButton;
-              if (Navigator.of(missionContext).canPop()) {
-                Navigator.of(missionContext).pop();
-              }
-            },
-          );
-        },
+          ),
+        ),
       ),
     );
   }
 
-  Future<void> _showFinishedDialog(BuildContext context) async {
-    await showDialog<void>(
-      context: context,
-      barrierDismissible: true,
-      builder: (dialogContext) {
-        return AlertDialog(
-          backgroundColor: const Color(0xFFFFF6EF),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(18),
-          ),
-          content: Text(
-            tutorialFinishedDescription,
-            style: AppTheme.detailBodyStyle,
-          ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                NoviceManager.reset();
-                Navigator.of(dialogContext).pop();
-                Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(builder: (_) => const GameMainPage()),
-                  (route) => false,
-                );
-              },
-              child: const Text("回到主頁"),
-            ),
-          ],
-        );
-      },
+  void _handlePageTap() {
+    // [L-21]
+    if (_isLastPage) {
+      return;
+    }
+
+    _goNext();
+  }
+
+  void _goNext() {
+    // [L-22]
+    if (_isLastPage) {
+      return;
+    }
+
+    _goToPage(_currentIndex + 1);
+  }
+
+  void _goPrevious() {
+    // [L-23]
+    if (_currentIndex == 0) {
+      return;
+    }
+
+    _goToPage(_currentIndex - 1);
+  }
+
+  void _goToPage(int index) {
+    // [L-24]
+    final int targetIndex = index.clamp(0, _steps.length - 1);
+    _pageController.animateToPage(
+      targetIndex,
+      duration: NoviceLeadingStyle.pageTurnDuration,
+      curve: NoviceLeadingStyle.pageTurnCurve,
     );
   }
 
-  void _retryCheck(BuildContext context) {
-    Future.delayed(const Duration(milliseconds: 300), () {
-      if (context.mounted) checkAndShow(context);
+  void _updateCurrentIndex(int index) {
+    // [L-25]
+    setState(() {
+      _currentIndex = index;
     });
   }
 
-  bool _isTargetMounted(GlobalKey key) {
-    return key.currentContext != null;
-  }
-
-  bool _areTargetsMounted(List<GlobalKey> keys) {
-    return keys.every(_isTargetMounted);
-  }
-
-  TargetPosition? _targetPositionFromKeys(List<GlobalKey> keys) {
-    final boxes = keys
-        .map((key) => key.currentContext?.findRenderObject())
-        .whereType<RenderBox>()
-        .where((box) => box.hasSize)
-        .toList();
-
-    if (boxes.length != keys.length) return null;
-
-    double left = double.infinity;
-    double top = double.infinity;
-    double right = -double.infinity;
-    double bottom = -double.infinity;
-
-    for (final box in boxes) {
-      final offset = box.localToGlobal(Offset.zero);
-      left = math.min(left, offset.dx);
-      top = math.min(top, offset.dy);
-      right = math.max(right, offset.dx + box.size.width);
-      bottom = math.max(bottom, offset.dy + box.size.height);
+  void _finishTutorial() {
+    // [L-26]
+    if (widget.onFinish != null) {
+      widget.onFinish!();
+      return;
     }
 
-    return TargetPosition(Size(right - left, bottom - top), Offset(left, top));
+    // [L-27]
+    Navigator.maybePop(context);
+  }
+
+  bool get _isLastPage {
+    // [L-28]
+    return _currentIndex == _steps.length - 1;
   }
 }
 
-class NoviceManager {
-  static const int notStarted = 0;
-  static const int waitingAvatarPage = 1;
-  static const int avatarSelected = 2;
-  static const int waitingEncyclopediaButton = 3;
-  static const int waitingEncyclopediaCard = 4;
-  static const int waitingEncyclopediaText = 5;
-  static const int finished = 6;
+class _InstructionPanel extends StatelessWidget {
+  const _InstructionPanel({required this.message});
 
-  static int currentStep = notStarted;
-  static bool isTutorialActive = false;
+  final String message;
 
-  static void start() {
-    currentStep = notStarted;
-    isTutorialActive = true;
+  @override
+  Widget build(BuildContext context) {
+    // [L-29]
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: NoviceLeadingStyle.textPanelColor,
+        borderRadius: NoviceLeadingStyle.textPanelRadius,
+      ),
+      child: Padding(
+        padding: NoviceLeadingStyle.textPanelPadding,
+        child: Text(
+          message,
+          style: NoviceLeadingStyle.instructionTextStyle,
+          textAlign: TextAlign.center,
+        ),
+      ),
+    );
   }
+}
 
-  static void reset() {
-    currentStep = notStarted;
-    isTutorialActive = false;
-  }
+enum _NoviceLeadingStepKind { image, plot, finish }
+
+class _NoviceLeadingStep {
+  const _NoviceLeadingStep.image({
+    required this.imageAsset,
+    required this.message,
+    required this.textAlignment,
+  }) : kind = _NoviceLeadingStepKind.image;
+
+  const _NoviceLeadingStep.plot({required this.message})
+    : kind = _NoviceLeadingStepKind.plot,
+      imageAsset = null,
+      textAlignment = Alignment.center;
+
+  const _NoviceLeadingStep.finish({required this.message})
+    : kind = _NoviceLeadingStepKind.finish,
+      imageAsset = null,
+      textAlignment = Alignment.center;
+
+  final _NoviceLeadingStepKind kind;
+  final String? imageAsset;
+  final String message;
+  final Alignment textAlignment;
 }
