@@ -133,7 +133,7 @@
     <tr>
       <td>[L-23]</td>
       <td>目的[關卡分流]</td>
-      <td>若 <code>mission</code>[參數] 為 graphicsText mission，回傳 GraphicsTextLevelPage，並接上成功與失敗 callback；若該 level 含 <code>strategyBookLevel</code>[mission.graphicsText 欄位]，攻略秘集 overlay 由 GraphicsTextLevelPage 內部處理。</td>
+      <td>若 <code>mission</code>[參數] 為 graphicsText mission，回傳 GraphicsTextLevelPage，並接上成功與失敗 callback；若該 level 含 <code>discoveredItem</code>[mission.graphicsText 欄位]，發現物品 overlay 由 GraphicsTextLevelPage 內部處理。</td>
     </tr>
     <tr>
       <td>[L-24]</td>
@@ -304,7 +304,7 @@ sequenceDiagram
 | [L-20] | 動畫關門時確認才呼叫 _advanceMission。 |
 | [L-21] | 轉場完成後確認 overlay 移除且可再次互動。 |
 | [L-22] | 傳入 cryptographyLevel，確認顯示 CryptographyLevelPage。 |
-| [L-23] | 傳入含 strategyBookLevel 的 graphicsTextLevel，確認攻略 overlay 由 GraphicsTextLevelPage 顯示。 |
+| [L-23] | 傳入含 discoveredItem 的 graphicsTextLevel，確認發現物品 overlay 由 GraphicsTextLevelPage 顯示。 |
 | [L-24] | 傳入 battle plot，點擊後確認 nextFunction 能啟動轉場。 |
 | [L-25] | 傳入 camaraLevel 或 traceLevel，確認顯示禁用錯誤頁。 |
 | [L-26] | 傳入未知 levelType，確認 ErrorWidget 顯示類型。 |

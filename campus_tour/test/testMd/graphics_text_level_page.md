@@ -48,18 +48,18 @@
     <tr>
       <td>[L-07]</td>
       <td>目的[流程分流]</td>
-      <td>讀取 <code>strategyBookLevel</code>[區域變數，來自 <code>widget.level.strategyBookLevel</code>]；若為 null，直接呼叫 <code>widget.nextFunction</code>[來自建構子 callback]，維持一般掃描關卡完成流程。</td>
-      <td rowspan="3">【功能函數】(Action Performer)<br>Purpose: [NFC 成功處理/Overlay/任務推進]<br>Action: NFC 成功後先檢查是否有攻略秘集資料；沒有資料則直接前進；有資料則在原掃描頁上方顯示攻略秘集 dialog；使用者按下按鈕後關閉 dialog 並呼叫外部 nextFunction。</td>
+      <td>讀取 <code>discoveredItem</code>[區域變數，來自 <code>widget.level.discoveredItem</code>]；若為 null，直接呼叫 <code>widget.nextFunction</code>[來自建構子 callback]，維持一般掃描關卡完成流程。</td>
+      <td rowspan="3">【功能函數】(Action Performer)<br>Purpose: [NFC 成功處理/Overlay/任務推進]<br>Action: NFC 成功後先檢查是否有發現物品資料；沒有資料則直接前進；有資料則在原掃描頁上方顯示發現物品 dialog；使用者按下按鈕後關閉 dialog 並呼叫外部 nextFunction。</td>
     </tr>
     <tr>
       <td>[L-08]</td>
       <td>目的[攻略 Overlay]</td>
-      <td>在 <code>strategyBookLevel</code>[區域變數] 不為 null 時呼叫 <code>showGeneralDialog</code>[Flutter Dialog API]，將 <code>StrategyBookLevelPage</code> 疊在原掃描關卡上，營造突然發現攻略秘集的效果。</td>
+      <td>在 <code>discoveredItem</code>[區域變數] 不為 null 時呼叫 <code>showGeneralDialog</code>[Flutter Dialog API]，將 <code>DiscoveredItemPage</code> 疊在原掃描關卡上，營造突然發現物品的效果。</td>
     </tr>
     <tr>
       <td>[L-09]</td>
       <td>目的[彈窗收尾]</td>
-      <td>攻略秘集按鈕觸發時，先使用 <code>Navigator.of(dialogContext).pop()</code>[Flutter 導航 API 與 dialogContext 區域參數] 關閉 dialog，再呼叫 <code>widget.nextFunction</code>[來自建構子 callback] 繼續後續任務。</td>
+      <td>發現物品按鈕觸發時，先使用 <code>Navigator.of(dialogContext).pop()</code>[Flutter 導航 API 與 dialogContext 區域參數] 關閉 dialog，再呼叫 <code>widget.nextFunction</code>[來自建構子 callback] 繼續後續任務。</td>
     </tr>
     <tr>
       <td>[L-10]</td>
@@ -183,17 +183,17 @@ Container // [L-18]
 sequenceDiagram
   participant User as 使用者
   participant Page as GraphicsTextLevelPage
-  participant Strategy as StrategyBookLevelPage
+  participant Item as DiscoveredItemPage
   participant FullMission as FullMissionPage
 
   User->>Page: 感應正確 NFC [L-04]
-  Page->>Page: 讀取 strategyBookLevel [L-07]
-  alt 沒有攻略秘集資料
+  Page->>Page: 讀取 discoveredItem [L-07]
+  alt 沒有發現物品資料
     Page->>FullMission: 直接呼叫 nextFunction [L-07]
-  else 有攻略秘集資料
-    Page->>Strategy: 疊加攻略秘集 dialog [L-08]
-    User->>Strategy: 點擊「好好研究它」
-    Strategy->>Page: 關閉 dialog 並回呼 [L-09]
+  else 有發現物品資料
+    Page->>Item: 疊加發現物品 dialog [L-08]
+    User->>Item: 點擊物品按鈕
+    Item->>Page: 關閉 dialog 並回呼 [L-09]
     Page->>FullMission: 呼叫 nextFunction 繼續任務 [L-09]
   end
 ```
@@ -208,9 +208,9 @@ sequenceDiagram
 | [L-04] | NFC 成功時確認呼叫 <code>_handleNfcSuccess</code> 而非直接跳下一關。 |
 | [L-05] | 點擊教學按鈕，確認 NFC 教學 dialog 顯示。 |
 | [L-06] | 教學 GIF 路徑失效，確認 fallback 顯示且 dialog 可關閉。 |
-| [L-07] | <code>strategyBookLevel = null</code>，確認 NFC 成功後直接呼叫 <code>nextFunction</code>。 |
-| [L-08] | <code>strategyBookLevel</code> 不為 null，確認 dialog 疊在掃描頁上方且背景仍可辨識。 |
-| [L-09] | 點擊「好好研究它」，確認 dialog 關閉後才進入下一個 mission。 |
+| [L-07] | <code>discoveredItem = null</code>，確認 NFC 成功後直接呼叫 <code>nextFunction</code>。 |
+| [L-08] | <code>discoveredItem</code> 不為 null，確認 dialog 疊在掃描頁上方且背景仍可辨識。 |
+| [L-09] | 點擊發現物品按鈕，確認 dialog 關閉後才進入下一個 mission。 |
 | [L-10] | 圖片與文字皆存在，確認上下兩區都顯示。 |
 | [L-11] | 只有圖片存在，確認只顯示圖片區。 |
 | [L-12] | 只有文字存在，確認只顯示文字區。 |

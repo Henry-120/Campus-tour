@@ -1,15 +1,15 @@
 import 'package:campus_tour/styles/level_style.dart';
-import 'package:campus_tour/widgets/game/catching_pages/strategy_book_level.dart';
+import 'package:campus_tour/widgets/game/catching_pages/discovered_item.dart';
 import 'package:flutter/material.dart';
 
-class StrategyBookLevelPage extends StatelessWidget {
-  const StrategyBookLevelPage({
+class DiscoveredItemPage extends StatelessWidget {
+  const DiscoveredItemPage({
     super.key,
-    required this.level,
+    required this.item,
     required this.nextFunction,
   });
 
-  final StrategyBookLevel level;
+  final DiscoveredItem item;
   final VoidCallback nextFunction;
 
   @override
@@ -42,12 +42,12 @@ class StrategyBookLevelPage extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            level.title,
+            item.title,
             style: LevelStyle.titleStyle,
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: LevelStyle.bodySpacing),
-          _buildStrategyBookImage(),
+          _buildItemImage(),
           const SizedBox(height: LevelStyle.bodySpacing),
           _buildContinueButton(),
         ],
@@ -55,16 +55,16 @@ class StrategyBookLevelPage extends StatelessWidget {
     );
   }
 
-  Widget _buildStrategyBookImage() {
-    final imagePath = level.imagePath.trim();
+  Widget _buildItemImage() {
+    final imagePath = item.imagePath.trim();
 
     // [L-03]
     if (imagePath.isEmpty) {
-      return _buildBookImageFrame(child: _buildImageFallback());
+      return _buildItemImageFrame(child: _buildImageFallback());
     }
 
     // [L-04]
-    return _buildBookImageFrame(
+    return _buildItemImageFrame(
       child: Image.asset(
         imagePath,
         fit: BoxFit.contain,
@@ -73,7 +73,7 @@ class StrategyBookLevelPage extends StatelessWidget {
     );
   }
 
-  Widget _buildBookImageFrame({required Widget child}) {
+  Widget _buildItemImageFrame({required Widget child}) {
     // [L-05]
     return Container(
       width: double.infinity,
@@ -84,48 +84,62 @@ class StrategyBookLevelPage extends StatelessWidget {
         fit: StackFit.expand,
         children: [
           child,
-          Align(
-            alignment: Alignment.topCenter,
-            child: Container(
-              width: double.infinity,
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-              color: Colors.black.withValues(alpha: 0.58),
-              child: Text(
-                level.noteText,
-                style: LevelStyle.hintStyle.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w700,
+          if (item.noteText.trim().isNotEmpty)
+            // [L-06]
+            Align(
+              alignment: Alignment.topCenter,
+              child: Container(
+                width: double.infinity,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 14,
+                  vertical: 10,
                 ),
-                textAlign: TextAlign.center,
+                color: Colors.black.withValues(alpha: 0.58),
+                child: Text(
+                  item.noteText,
+                  style: LevelStyle.hintStyle.copyWith(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w700,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
               ),
             ),
-          ),
         ],
       ),
     );
   }
 
   Widget _buildContinueButton() {
-    // [L-06]
+    // [L-07]
     return SizedBox(
       width: double.infinity,
       child: FilledButton(
         onPressed: nextFunction,
-        child: Text(level.buttonText),
+        child: Text(item.buttonText),
       ),
     );
   }
 
   Widget _buildImageFallback() {
-    // [L-07]
+    // [L-08]
     return Container(
       width: double.infinity,
       constraints: const BoxConstraints(minHeight: 220),
       decoration: LevelStyle.imagePlaceholderDecoration,
-      child: Icon(
-        Icons.menu_book_rounded,
-        size: 72,
-        color: LevelStyle.imageIconColor,
+      child: Center(
+        child: Icon(
+          item.fallbackIcon,
+          size: 88,
+          color: LevelStyle.imageIconColor,
+          shadows: [
+            Shadow(
+              color: LevelStyle.imageIconColor.withValues(alpha: 0.95),
+              blurRadius: 28,
+            ),
+            Shadow(color: Colors.white.withValues(alpha: 0.7), blurRadius: 46),
+          ],
+        ),
       ),
     );
   }
