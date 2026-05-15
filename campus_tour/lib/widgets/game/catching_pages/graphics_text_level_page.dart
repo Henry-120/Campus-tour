@@ -1,8 +1,8 @@
 import 'package:campus_tour/styles/level_style.dart';
 import 'package:campus_tour/widgets/buttons/click_and_accept_button.dart';
 import 'package:campus_tour/widgets/buttons/nfc_button.dart';
+import 'package:campus_tour/widgets/game/catching_pages/discovered_item_page.dart';
 import 'package:campus_tour/widgets/game/catching_pages/graphics_text_level.dart';
-import 'package:campus_tour/widgets/game/catching_pages/strategy_book_level_page.dart';
 import 'package:flutter/material.dart';
 
 class GraphicsTextLevelPage extends StatefulWidget {
@@ -167,10 +167,10 @@ class _GraphicsTextLevelPageState extends State<GraphicsTextLevelPage> {
   }
 
   void _handleNfcSuccess() {
-    final strategyBookLevel = widget.level.strategyBookLevel;
+    final discoveredItem = widget.level.discoveredItem;
 
     // [L-07]
-    if (strategyBookLevel == null) {
+    if (discoveredItem == null) {
       widget.nextFunction();
       return;
     }
@@ -179,11 +179,11 @@ class _GraphicsTextLevelPageState extends State<GraphicsTextLevelPage> {
     showGeneralDialog<void>(
       context: context,
       barrierDismissible: false,
-      barrierLabel: '攻略秘集',
+      barrierLabel: discoveredItem.title,
       barrierColor: Colors.black.withValues(alpha: 0.48),
       pageBuilder: (dialogContext, _, _) {
-        return StrategyBookLevelPage(
-          level: strategyBookLevel,
+        return DiscoveredItemPage(
+          item: discoveredItem,
           nextFunction: () {
             // [L-09]
             Navigator.of(dialogContext).pop();
