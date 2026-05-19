@@ -2,6 +2,10 @@
 
 Context: 我正在進行一個大型協作專案，需要建立代碼邏輯與文檔的強連結。我會提供一段程式碼，請你進行解構並同步完成標記。
 
+## Task 0: 檔案用途與使用方式
+請參考/home/a/for_coding/FOR_FLUTTER/flutter_projects/smart_school_pro/Campus-tour/campus_tour/test/Documentation_Guidelines_2.md內的內容完成
+
+
 ## Task 1: 邏輯拆解與文檔寫入
 #### 請在專案目錄下我指定的文件中，針對指定的程式碼完成以下內容，內容包含：
 

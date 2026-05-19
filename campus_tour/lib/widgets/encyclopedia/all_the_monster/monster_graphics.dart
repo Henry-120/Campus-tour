@@ -4,7 +4,7 @@ class MonsterGraphics {
     // "m2": "assets/images/nfc_position_photos/nfc_position.jpg",
     // "m3": "assets/images/nfc_position_photos/nfc_position.jpg",
     "m4": "assets/images/nfc_position_photos/nfc_position.jpg",
-    "m5": "assets/images/nfc_position_photos/nfc_position.jpg",
+    "m5": "assets/images/nfc_position_photos/taichi_sculpture.jpg",
     // "m6": "assets/images/nfc_position_photos/nfc_position.jpg",
     // "m7": "assets/images/nfc_position_photos/nfc_position.jpg",
     // "m8": "assets/images/nfc_position_photos/nfc_position.jpg",
@@ -15,11 +15,11 @@ class MonsterGraphics {
     // "m13": "assets/images/nfc_position_photos/nfc_position.jpg",
     // "m14": "assets/images/nfc_position_photos/nfc_position.jpg",
     "m15": "assets/images/nfc_position_photos/nfc_position.jpg",
-    "m16": "assets/images/nfc_position_photos/nfc_position.jpg",
+    "m16": "assets/images/nfc_position_photos/circle_90de_the_wings.jpg",
     "m17": "assets/images/nfc_position_photos/nfc_position.jpg",
     "m18": "assets/images/nfc_position_photos/nfc_position.jpg",
     "m19": "assets/images/nfc_position_photos/nfc_position.jpg",
     "m20": "assets/images/nfc_position_photos/cloud.jpg",
-    "m21": "assets/images/nfc_position_photos/nfc_position.jpg",
+    "m21": "assets/images/nfc_position_photos/circle_90de_II.jpg",
   }; //with id as key, url as value
 }
