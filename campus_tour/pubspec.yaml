@@ -57,6 +57,7 @@ flutter:
     - assets/audio/
     - assets/mapStyles/
     - assets/json/
+    - assets/json/locations/
     - assets/images/weather/
     - assets/images/fairy_video/
     - assets/images/nfc_position_photos/
