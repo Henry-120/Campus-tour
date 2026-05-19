@@ -7,7 +7,7 @@ import '../widgets/constants/asset_paths.dart';
 import '../widgets/constants/responsive.dart';
 import '../widgets/login/game_title.dart';
 import '../widgets/login/wood_login_panel.dart';
-import 'game_main_page.dart';
+import 'after_login.dart';
 import 'register_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -19,8 +19,12 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final LoginController _controller = LoginController();
-  final TextEditingController _emailController = TextEditingController(text: "test@gmail.com");
-  final TextEditingController _passwordController = TextEditingController(text: "123456");
+  final TextEditingController _emailController = TextEditingController(
+    text: "test@gmail.com",
+  );
+  final TextEditingController _passwordController = TextEditingController(
+    text: "123456",
+  );
   bool _isLoading = false;
 
   Future<void> _login() async {
@@ -42,25 +46,20 @@ class _LoginPageState extends State<LoginPage> {
 
         if (!mounted) return;
 
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const GameMainPage(),
-          ),
-        );
+        navigateAfterLogin(context);
       } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("帳號或密碼錯誤")),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(const SnackBar(content: Text("帳號或密碼錯誤")));
       }
     } catch (e) {
       debugPrint("[LoginPage] 登入出錯: $e");
 
       if (!mounted) return;
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("登入發生錯誤，請稍後再試")),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text("登入發生錯誤，請稍後再試")));
     } finally {
       if (mounted) {
         setState(() => _isLoading = false);
@@ -71,16 +70,14 @@ class _LoginPageState extends State<LoginPage> {
   void _goToRegister() {
     Navigator.push(
       context,
-      MaterialPageRoute(
-        builder: (_) => const RegisterPage(),
-      ),
+      MaterialPageRoute(builder: (_) => const RegisterPage()),
     );
   }
 
   void _forgotPassword() {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text("尚未實作忘記密碼功能")),
-    );
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(const SnackBar(content: Text("尚未實作忘記密碼功能")));
   }
 
   @override
@@ -98,10 +95,7 @@ class _LoginPageState extends State<LoginPage> {
       body: Stack(
         children: [
           Positioned.fill(
-            child: Image.asset(
-              AssetPaths.loginBg,
-              fit: BoxFit.cover,
-            ),
+            child: Image.asset(AssetPaths.loginBg, fit: BoxFit.cover),
           ),
           SafeArea(
             child: Center(

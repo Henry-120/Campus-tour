@@ -60,7 +60,7 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
       final style = await rootBundle.loadString('assets/mapStyles/style3.json');
       final image = await AssetMapBitmap.create(
         imageConfig,
-        'assets/images/cute_forest_map.png',
+        'assets/images/cute_map_real.png',
         bitmapScaling: MapBitmapScaling.none,
       );
 
