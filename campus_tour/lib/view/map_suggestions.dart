@@ -13,7 +13,7 @@ class MapSuggestionsVariables {
 
   // [L-02]
   // ignore: constant_identifier_names
-  static const String position_char = 'assets/images/component/squirrel.png';
+  static const String position_char = 'assets/images/squirrel_front.png';
 
   // [L-03]
   static const Size mapImageSize = Size(2744, 1568);
