@@ -1,6 +1,6 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
-import 'package:flutter_compass/flutter_compass.dart';
+// import 'package:flutter_compass/flutter_compass.dart';
 import 'package:get/get.dart';
 import 'package:geolocator/geolocator.dart';
 import '../../controllers/monster_controller.dart';
@@ -13,18 +13,18 @@ class NearestMonsterArrow extends StatefulWidget {
 }
 
 class _NearestMonsterArrowState extends State<NearestMonsterArrow> {
-  double _heading = 0; // 手機目前朝向（度，北=0）
+  // double _heading = 0; // 手機目前朝向（度，北=0）
 
-  @override
-  void initState() {
-    super.initState();
-    // 監聽羅盤
-    FlutterCompass.events?.listen((CompassEvent event) {
-      if (event.heading != null && mounted) {
-        setState(() => _heading = event.heading!);
-      }
-    });
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   // 監聽羅盤
+  //   FlutterCompass.events?.listen((CompassEvent event) {
+  //     if (event.heading != null && mounted) {
+  //       setState(() => _heading = event.heading!);
+  //     }
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +33,7 @@ class _NearestMonsterArrowState extends State<NearestMonsterArrow> {
       final player = controller.playerPosition.value;
       final nearest = controller.nearestMonster.value;
       final distance = controller.nearestDistance.value;
+      final bool showArrow = distance == null || distance >= 40;
 
       if (player == null || nearest == null) return const SizedBox.shrink();
 
@@ -77,12 +78,12 @@ class _NearestMonsterArrowState extends State<NearestMonsterArrow> {
                   ),
                 ),
               ),
-  
-              // 箭頭沿圓周移動
-              Transform.translate(
-                offset: Offset(dx, dy),
-                child: _AnimatedArrow(angle: angle),
-              ),
+
+              if (showArrow)
+                Transform.translate(
+                  offset: Offset(dx, dy),
+                  child: _AnimatedArrow(angle: angle),
+                ),
             ],
           ),
         ),

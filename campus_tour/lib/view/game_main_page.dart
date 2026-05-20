@@ -67,13 +67,17 @@ class _GameMainPageState extends State<GameMainPage> {
           ),
 
           // 4. 中間：松鼠
-          const Center(
-            child: PlayerSprite(size: 90),
+          IgnorePointer(
+            child: const Center(
+              child: PlayerSprite(size: 90),
+            ),
           ),
 
           // 5. 中間：最近怪物箭頭
-          const NearestMonsterArrow(),
-          
+          IgnorePointer(
+            child: const NearestMonsterArrow(),
+          ),
+
           // 6. 下方：主選單
           const Positioned(
             bottom: 30,

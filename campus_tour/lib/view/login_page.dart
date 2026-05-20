@@ -19,8 +19,8 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final LoginController _controller = LoginController();
-  final TextEditingController _emailController = TextEditingController(text: "test@gmail.com");
-  final TextEditingController _passwordController = TextEditingController(text: "123456");
+  final TextEditingController _emailController = TextEditingController(text: "uuu@gmail.com");
+  final TextEditingController _passwordController = TextEditingController(text: "uuuuuuuu");
   bool _isLoading = false;
 
   Future<void> _login() async {

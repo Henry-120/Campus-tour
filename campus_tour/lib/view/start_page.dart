@@ -36,12 +36,12 @@ class _StartPageState extends State<StartPage> with WidgetsBindingObserver {
 
     WidgetsBinding.instance.addObserver(this);
 
-    AudioService().play(
-      fileName: 'audio/BGM.mp3',
-      isBgm: true,
-      isLooping: true,
-      volume: 0.65,
-    );
+    // AudioService().play(
+    //   fileName: 'audio/BGM.mp3',
+    //   isBgm: true,
+    //   isLooping: true,
+    //   volume: 0.65,
+    // );
 
     _timer = Timer.periodic(const Duration(seconds: 4), (_) {
       if (mounted) {
