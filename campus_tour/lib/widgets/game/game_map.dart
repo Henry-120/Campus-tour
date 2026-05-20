@@ -13,10 +13,10 @@ import '../../models/monster_model.dart';
 import 'package:campus_tour/view/full_mission_page.dart';
 import 'package:campus_tour/widgets/game/catching_pages/monster_model_cry.dart';
 import 'package:campus_tour/widgets/game/catching_pages/full_mission.dart';
+import 'package:campus_tour/widgets/game/catching_pages/discovered_item.dart';
 import 'package:campus_tour/widgets/game/catching_pages/graphics_text_level.dart';
 import 'package:campus_tour/widgets/game/catching_pages/cryptography_level.dart';
 import 'package:campus_tour/widgets/game/catching_pages/plot_level.dart';
-import 'package:campus_tour/widgets/game/catching_pages/strategy_book_level.dart';
 import 'package:campus_tour/widgets/encyclopedia/all_the_monster/monster_graphics.dart';
 import 'package:campus_tour/widgets/encyclopedia/all_the_monster/monster_text.dart';
 import 'package:campus_tour/widgets/encyclopedia/all_the_monster/monster_nfc.dart';
@@ -60,7 +60,7 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
       final style = await rootBundle.loadString('assets/mapStyles/style3.json');
       final image = await AssetMapBitmap.create(
         imageConfig,
-        'assets/images/cute_forest_map.png',
+        'assets/images/cute_map_real.png',
         bitmapScaling: MapBitmapScaling.none,
       );
 
@@ -407,11 +407,12 @@ class BuildingMonsterLevel extends StatelessWidget {
          isPassed: LocalSettingService.autoSkipStory.isEnabled,
          title: PlotLevel.traceTitle,
          description: PlotLevel.traceDescription,
+         discoveredItem: DiscoveredItem.magicStone,
        ),
        mission1 = GraphicsTextLevel(
          firstTracePhoto: MonsterGraphics.graphics[monster.id] ?? '',
          descriptionText: MonsterText.texts[monster.id] ?? '',
-         strategyBookLevel: const StrategyBookLevel(),
+         discoveredItem: DiscoveredItem.strategyBook,
          nfcId: MonsterNFC.nfcIds[monster.id] ?? '',
        ),
        battlePlotMission = PlotLevel(

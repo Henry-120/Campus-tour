@@ -117,6 +117,7 @@ class _ElfDetailPageState extends State<ElfDetailPage> {
             ),
 
             ElfStorySection(
+              name:architecture?.name ??'傳說故事',
               story: architecture?.story ?? '目前沒有此精靈的故事資料。',
               isLoading: isLoading,
             ),

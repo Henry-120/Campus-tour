@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:campus_tour/styles/level_style.dart';
+import 'package:campus_tour/widgets/game/catching_pages/discovered_item.dart';
+import 'package:flutter/material.dart';
 
 class PlotLevel {
   static const String traceType = "trace";
@@ -12,11 +13,13 @@ class PlotLevel {
   final bool isPassed;
   final String title;
   final String description;
+  // [L-01]
+  final DiscoveredItem? discoveredItem;
   static const String traceImageUrl = "assets/images/elf_trail.png";
   static const String battleImageUrl = "assets/images/elf_battle.png";
-  static const String traceTitle = "這裡好像有精靈的蹤跡";
-  static const String traceDescription = "開啟你的偵測器，試著找到它吧。";
-  static const String battleTitle = "你找到了精靈";
+  static const String traceTitle = "你找到了一塊魔法石";
+  static const String traceDescription = "找到對應的法陣，將魔法石放上去吧！";
+  static const String battleTitle = "你召喚了精靈";
   static const String battleDescription = "但它好像很有攻擊性的看著你......";
   static const String press = "點擊任意位置繼續";
   static const String pressBattle = "點擊任意位置開始戰鬥";
@@ -26,11 +29,13 @@ class PlotLevel {
     return type == battleType ? battleImageUrl : traceImageUrl;
   }
 
+  // [L-02]
   PlotLevel({
     required this.type,
     required this.isPassed,
     required this.title,
     required this.description,
+    this.discoveredItem,
   });
 }
 
