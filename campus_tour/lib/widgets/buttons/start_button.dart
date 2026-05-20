@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../services/audio_service.dart';
+// import '../../services/audio_service.dart';
 import '../constants/responsive.dart';
 
 class StartButton extends StatefulWidget {
@@ -49,11 +49,11 @@ class _StartButtonState extends State<StartButton>
   }
 
   Future<void> _handleStart() async {
-    AudioService().play(
-      fileName: 'audio/startSFX.mp3',
-      volume: 1.0,
-      isLooping: false,
-    );
+    // AudioService().play(
+    //   fileName: 'audio/startSFX.mp3',
+    //   volume: 1.0,
+    //   isLooping: false,
+    // );
 
     await _controller.forward();
     await _controller.reverse();
