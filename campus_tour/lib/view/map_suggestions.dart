@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:campus_tour/services/json_to_suggestion.dart';
+import 'package:campus_tour/styles/map_suggestion_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
@@ -29,9 +30,6 @@ class MapSuggestionsVariables {
   // [L-07]
   static const double northeastLongitude = 121.197487;
 
-  // [L-08]
-  static const double markerSize = 56;
-
   // [L-09]
   static const double locationUpdateMeters = 2;
 
@@ -42,9 +40,6 @@ class MapSuggestionsVariables {
   static const List<String> locationJsonPaths = [
     'assets/json/locations/NCU10view.json',
   ];
-
-  // [L-12]
-  static const double landmarkDotSize = 10;
 
   static const int step = 10;
 }
@@ -281,7 +276,7 @@ class _MapSuggestionsPageState extends State<MapSuggestionsPage> {
   Widget build(BuildContext context) {
     // [L-39]
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: MapSuggestionStyle.pageBackgroundColor,
       body: SafeArea(
         child: LayoutBuilder(
           builder: (context, constraints) {
@@ -302,7 +297,9 @@ class _MapSuggestionsPageState extends State<MapSuggestionsPage> {
 
             // [L-42]
             final landmarkMarkers = _visibleLandmarkMarkers(fittedMap.size);
-            final panelLength = constraints.maxWidth / 3;
+            final panelLength = MapSuggestionStyle.filterPanelLength(
+              constraints.maxWidth,
+            );
 
             // [L-43]
             return Stack(
@@ -311,23 +308,24 @@ class _MapSuggestionsPageState extends State<MapSuggestionsPage> {
                   rect: fittedMap,
                   child: Image.asset(
                     MapSuggestionsVariables.map_path,
-                    fit: BoxFit.contain,
+                    fit: MapSuggestionStyle.mapImageFit,
                   ),
                 ),
                 if (markerOffset != null)
                   Positioned(
+                    // [L-08]
                     left:
                         fittedMap.left +
                         markerOffset.dx -
-                        MapSuggestionsVariables.markerSize / 2,
+                        MapSuggestionStyle.markerSize / 2,
                     top:
                         fittedMap.top +
                         markerOffset.dy -
-                        MapSuggestionsVariables.markerSize / 2,
+                        MapSuggestionStyle.markerSize / 2,
                     child: Image.asset(
                       MapSuggestionsVariables.position_char,
-                      width: MapSuggestionsVariables.markerSize,
-                      height: MapSuggestionsVariables.markerSize,
+                      width: MapSuggestionStyle.markerSize,
+                      height: MapSuggestionStyle.markerSize,
                     ),
                   ),
                 for (final landmarkMarker in landmarkMarkers)
@@ -337,8 +335,8 @@ class _MapSuggestionsPageState extends State<MapSuggestionsPage> {
                     child: _LandmarkLabel(marker: landmarkMarker),
                   ),
                 Positioned(
-                  left: 12,
-                  top: 12,
+                  left: MapSuggestionStyle.filterPanelInset,
+                  top: MapSuggestionStyle.filterPanelInset,
                   width: panelLength,
                   child: _LandmarkFilterPanel(
                     maxPanelHeight: panelLength,
@@ -351,7 +349,7 @@ class _MapSuggestionsPageState extends State<MapSuggestionsPage> {
                   Center(
                     child: Text(
                       _locationMessage!,
-                      style: const TextStyle(color: Colors.white),
+                      style: MapSuggestionStyle.locationMessageTextStyle,
                     ),
                   ),
               ],
@@ -382,11 +380,7 @@ class _LandmarkFilterPanel extends StatelessWidget {
     return ConstrainedBox(
       constraints: BoxConstraints(maxHeight: maxPanelHeight),
       child: DecoratedBox(
-        decoration: BoxDecoration(
-          color: Colors.black.withValues(alpha: 0.72),
-          border: Border.all(color: Colors.white24),
-          borderRadius: BorderRadius.circular(8),
-        ),
+        decoration: MapSuggestionStyle.filterPanelDecoration,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -394,23 +388,23 @@ class _LandmarkFilterPanel extends StatelessWidget {
               CheckboxListTile(
                 value: entry.value,
                 onChanged: (value) => onCategoryChanged(entry.key, value),
-                dense: true,
-                controlAffinity: ListTileControlAffinity.leading,
-                activeColor: Colors.white,
-                checkColor: Colors.black,
+                dense: MapSuggestionStyle.filterTileDense,
+                controlAffinity: MapSuggestionStyle.filterTileControlAffinity,
+                activeColor: MapSuggestionStyle.filterTileActiveColor,
+                checkColor: MapSuggestionStyle.filterTileCheckColor,
                 title: Text(
                   entry.key,
-                  style: const TextStyle(color: Colors.white),
+                  style: MapSuggestionStyle.filterOptionTextStyle,
                 ),
               ),
             if (loadMessage != null)
               Padding(
-                padding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
+                padding: MapSuggestionStyle.loadMessagePadding,
                 child: Align(
-                  alignment: Alignment.centerLeft,
+                  alignment: MapSuggestionStyle.loadMessageAlignment,
                   child: Text(
                     loadMessage!,
-                    style: const TextStyle(color: Colors.white70),
+                    style: MapSuggestionStyle.loadMessageTextStyle,
                   ),
                 ),
               ),
@@ -430,31 +424,22 @@ class _LandmarkLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     // [L-45]
     return Transform.translate(
-      offset: const Offset(
-        -MapSuggestionsVariables.landmarkDotSize / 2,
-        -MapSuggestionsVariables.landmarkDotSize / 2,
+      offset: MapSuggestionStyle.landmarkLabelOffset(
+        // [L-12]
+        MapSuggestionStyle.landmarkDotSize,
       ),
       child: Row(
-        mainAxisSize: MainAxisSize.min,
+        mainAxisSize: MapSuggestionStyle.landmarkLabelAxisSize,
         children: [
           Container(
-            width: MapSuggestionsVariables.landmarkDotSize,
-            height: MapSuggestionsVariables.landmarkDotSize,
-            decoration: BoxDecoration(
-              color: Colors.amberAccent,
-              shape: BoxShape.circle,
-              border: Border.all(color: Colors.black, width: 1.5),
-            ),
+            width: MapSuggestionStyle.landmarkDotSize,
+            height: MapSuggestionStyle.landmarkDotSize,
+            decoration: MapSuggestionStyle.landmarkDotDecoration,
           ),
-          const SizedBox(width: 4),
+          const SizedBox(width: MapSuggestionStyle.landmarkLabelSpacing),
           Text(
             marker.landmark.name,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 12,
-              fontWeight: FontWeight.w700,
-              shadows: [Shadow(color: Colors.black, blurRadius: 4)],
-            ),
+            style: MapSuggestionStyle.landmarkNameTextStyle,
           ),
         ],
       ),

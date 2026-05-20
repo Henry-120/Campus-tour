@@ -4,16 +4,16 @@
 
 ### 0-1. 檔案簡介
 
-`map_suggestions.dart` 是校園全景地圖頁，負責把固定地圖圖片完整最大化顯示在橫向畫面中，並將 GPS 座標轉換成圖片座標。它會顯示目前位置，也能透過左上角篩選面板顯示固定地景點位。目前面板支援「中大十景」，地景 JSON 解析已抽到 `JsonToSuggestionService`。此檔案不負責 JSON 欄位驗證、不負責主路由註冊，也不負責 Google Map 圖層。
+`map_suggestions.dart` 是校園地圖建議頁面，負責顯示校園圖片地圖、目前 GPS 位置標示，以及可勾選顯示的固定地景標籤。它會處理頁面方向鎖定、定位權限流程、GPS 座標轉圖片座標、地景資料載入與篩選狀態。它不負責解析單筆 JSON 欄位格式，該工作由 `JsonToSuggestionService` 處理；也不負責維護 UI 樣式常數，樣式集中在 `MapSuggestionStyle`。通常由其他頁面透過 `Navigator` 進入此頁。
 
 ### 0-2. 檔案類型判斷
 
 主要類型：A. 頁面檔案 Page / Screen  
-次要類型：B. 可重用 Widget 檔案 Reusable Widget / Component，因為內含 `_LandmarkFilterPanel` 與 `_LandmarkLabel`。
+次要類型：B. 可重用 Widget 檔案 Reusable Widget / Component，因為同檔包含 `_LandmarkFilterPanel` 與 `_LandmarkLabel` 私有元件。
 
 ### 使用方式或呼叫方式
 
-呼叫端可直接 push `MapSuggestionsPage`，不需傳入參數。使用前需確認 `geolocator` 權限設定已完成，且 `pubspec.yaml` 有宣告 `assets/json/locations/`。
+此頁面不需要建構子參數，呼叫端可直接 push `MapSuggestionsPage`。使用前需確認定位權限設定已完成，`geolocator` 可在目標平台運作，且 `pubspec.yaml` 已宣告地圖圖片、角色圖片與 `assets/json/locations/` 相關資源。畫面顏色、文字樣式、面板外觀、標示尺寸等由 `map_suggestion_style.dart` 提供；此頁面不會回傳資料給上一頁。
 
 ```dart
 Navigator.push(
@@ -24,90 +24,69 @@ Navigator.push(
 );
 ```
 
-### 公開函數表
+### 公開方法表
 
 | 方法名稱 | 作用 | 輸入 | 輸出 | 是否需要 await | 可能錯誤 |
 |---|---|---|---|---|---|
-| `calculateContainedMapRect` | 計算地圖圖片以 contain 規則顯示時的位置與尺寸 | `containerSize: Size`、`imageSize: Size` | `Rect` | 否 | 尺寸為空時回傳 `Rect.zero` |
-| `gpsToImageOffset` | 將 GPS 座標轉成圖片座標 | `latitude: double`、`longitude: double`、`imageSize: Size` | `Offset` | 否 | 超出邊界時會 clamp 到圖片範圍 |
+| `calculateContainedMapRect` | 計算圖片以 contain 規則放入容器時的實際矩形 | `containerSize: Size`、`imageSize: Size` | `Rect` | 否 | 尺寸為空時回傳 `Rect.zero` |
+| `gpsToImageOffset` | 將 GPS 經緯度換算成圖片內座標 | `latitude: double`、`longitude: double`、`imageSize: Size` | `Offset` | 否 | 超出校園 GPS 邊界時會 clamp 到圖片邊界 |
 
-## 目前版本邏輯對照表
+## Task 1: 邏輯對照表
 
-<table>
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>目的標籤</th>
-      <th>邏輯描述</th>
-      <th>函數為單位</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td>[L-01]</td><td>目的[資源路徑]</td><td>宣告 <code>map_path</code>[來自 MapSuggestionsVariables 靜態常數]，指定地圖圖片 asset。</td><td rowspan="12">【回傳函數】(Data Transformer)<br>Input: 無。<br>Process: 集中宣告地圖圖片、角色圖片、地圖尺寸、GPS 邊界、分類名稱、地景 JSON 路徑與點位顯示尺寸。<br>Output: <code>MapSuggestionsVariables</code> 靜態常數集合。</td></tr>
-    <tr><td>[L-02]</td><td>目的[資源路徑]</td><td>宣告 <code>position_char</code>[來自 MapSuggestionsVariables 靜態常數]，指定目前位置角色圖片 asset。</td></tr>
-    <tr><td>[L-03]</td><td>目的[圖片基準]</td><td>宣告 <code>mapImageSize</code>[來自 MapSuggestionsVariables 靜態常數]，以 2744 x 1568 作為地圖原始尺寸。</td></tr>
-    <tr><td>[L-04]</td><td>目的[GPS 邊界]</td><td>宣告 <code>southwestLatitude</code>[來自 MapSuggestionsVariables 靜態常數]，代表圖片左下角緯度。</td></tr>
-    <tr><td>[L-05]</td><td>目的[GPS 邊界]</td><td>宣告 <code>southwestLongitude</code>[來自 MapSuggestionsVariables 靜態常數]，代表圖片左下角經度。</td></tr>
-    <tr><td>[L-06]</td><td>目的[GPS 邊界]</td><td>宣告 <code>northeastLatitude</code>[來自 MapSuggestionsVariables 靜態常數]，代表圖片右上角緯度。</td></tr>
-    <tr><td>[L-07]</td><td>目的[GPS 邊界]</td><td>宣告 <code>northeastLongitude</code>[來自 MapSuggestionsVariables 靜態常數]，代表圖片右上角經度。</td></tr>
-    <tr><td>[L-08]</td><td>目的[標示尺寸]</td><td>宣告 <code>markerSize</code>[來自 MapSuggestionsVariables 靜態常數]，控制目前位置角色圖大小。</td></tr>
-    <tr><td>[L-09]</td><td>目的[更新門檻]</td><td>宣告 <code>locationUpdateMeters</code>[來自 MapSuggestionsVariables 靜態常數]，GPS 移動超過此公尺數才更新角色位置。</td></tr>
-    <tr><td>[L-10]</td><td>目的[分類名稱]</td><td>宣告 <code>ncuTenViewsCategory</code>[來自 MapSuggestionsVariables 靜態常數]，作為「中大十景」勾選項與 JSON 種類比對值。</td></tr>
-    <tr><td>[L-11]</td><td>目的[資料來源]</td><td>宣告 <code>locationJsonPaths</code>[來自 MapSuggestionsVariables 靜態常數]，提供 service 要載入的地景 JSON asset 清單。</td></tr>
-    <tr><td>[L-12]</td><td>目的[標示尺寸]</td><td>宣告 <code>landmarkDotSize</code>[來自 MapSuggestionsVariables 靜態常數]，控制固定地景小圓點大小。</td></tr>
-
-    <tr><td>[L-13]</td><td>目的[方向控制]</td><td>在 <code>initState</code>[State 生命週期函數] 呼叫 <code>_forceLandscape</code>[State 方法]，進入頁面後鎖定橫向。</td><td rowspan="3">【功能函數】(Action Performer)<br>Purpose: 頁面初始化。<br>Action: 鎖定橫向；載入固定地景資料；啟動 GPS 權限與位置監聽流程。</td></tr>
-    <tr><td>[L-14]</td><td>目的[資料載入]</td><td>在 <code>initState</code>[State 生命週期函數] 呼叫 <code>_loadLandscapeLocations</code>[State 方法]，透過 service 載入地景。</td></tr>
-    <tr><td>[L-15]</td><td>目的[定位啟動]</td><td>在 <code>initState</code>[State 生命週期函數] 呼叫 <code>_startLocationTracking</code>[State 方法]，啟動定位流程。</td></tr>
-
-    <tr><td>[L-16]</td><td>目的[資源釋放]</td><td>在 <code>dispose</code>[State 生命週期函數] 取消 <code>_positionSubscription</code>[State 欄位]，避免離頁後仍接收 GPS 串流。</td><td rowspan="2">【功能函數】(Action Performer)<br>Purpose: 生命週期收尾。<br>Action: 停止位置串流；恢復裝置可用方向。</td></tr>
-    <tr><td>[L-17]</td><td>目的[方向恢復]</td><td>在 <code>dispose</code>[State 生命週期函數] 呼叫 <code>_restoreOrientation</code>[State 方法]，離開頁面時解除橫向限制。</td></tr>
-
-    <tr><td>[L-18]</td><td>目的[方向控制]</td><td>呼叫 <code>SystemChrome.setPreferredOrientations</code>[Flutter services API]，只允許 landscapeLeft 與 landscapeRight。</td><td>【功能函數】(Action Performer)<br>Purpose: 橫向鎖定。<br>Action: 要求系統將頁面方向限制為橫向。</td></tr>
-    <tr><td>[L-19]</td><td>目的[方向恢復]</td><td>呼叫 <code>SystemChrome.setPreferredOrientations</code>[Flutter services API]，傳入 <code>DeviceOrientation.values</code>[Flutter enum values]。</td><td>【功能函數】(Action Performer)<br>Purpose: 方向恢復。<br>Action: 解除頁面方向限制，避免影響其他頁面。</td></tr>
-
-    <tr><td>[L-20]</td><td>目的[資料載入]</td><td>呼叫 <code>_suggestionService.loadLocations</code>[State 欄位 service]，傳入 <code>locationJsonPaths</code>[靜態常數] 取得 <code>loadedLandmarks</code>[區域變數]。</td><td rowspan="3">【功能函數】(Action Performer)<br>Purpose: 地景載入/錯誤回饋。<br>Action: 委派 JsonToSuggestionService 讀取並解析 JSON；成功後寫入地景狀態並清除快取；失敗後顯示包含錯誤內容的提示。</td></tr>
-    <tr><td>[L-21]</td><td>目的[狀態更新]</td><td>成功載入後透過 setState 將 <code>loadedLandmarks</code>[區域變數] 寫入 <code>_landmarks</code>[State 欄位]，並清除錯誤訊息與點位快取。</td></tr>
-    <tr><td>[L-22]</td><td>目的[錯誤處理]</td><td>catch 錯誤後將 <code>error</code>[catch 變數] 寫入 <code>_landmarkLoadMessage</code>[State 欄位]，讓面板顯示明確失敗原因。</td></tr>
-
-    <tr><td>[L-23]</td><td>目的[服務檢查]</td><td>呼叫 <code>Geolocator.isLocationServiceEnabled</code>[Geolocator API] 取得 <code>serviceEnabled</code>[區域變數]；服務未開啟時寫入提示並返回。</td><td rowspan="6">【功能函數】(Action Performer)<br>Purpose: 定位初始化/權限處理。<br>Action: 檢查定位服務與權限；必要時請求權限；成功時取得初始位置並建立串流。</td></tr>
-    <tr><td>[L-24]</td><td>目的[權限請求]</td><td>使用 <code>permission</code>[區域變數] 保存 <code>Geolocator.checkPermission</code>[Geolocator API] 結果，denied 時請求權限。</td></tr>
-    <tr><td>[L-25]</td><td>目的[權限防護]</td><td>檢查 <code>permission</code>[區域變數] 是否 denied 或 deniedForever；若無權限則寫入提示並返回。</td></tr>
-    <tr><td>[L-26]</td><td>目的[初始定位]</td><td>呼叫 <code>Geolocator.getCurrentPosition</code>[Geolocator API] 取得 <code>initialPosition</code>[區域變數]。</td></tr>
-    <tr><td>[L-27]</td><td>目的[狀態更新]</td><td>透過 setState 將 <code>initialPosition</code>[區域變數] 寫入 <code>_currentPosition</code>[State 欄位]，並清除定位提示。</td></tr>
-    <tr><td>[L-28]</td><td>目的[串流監聽]</td><td>將 <code>Geolocator.getPositionStream</code>[Geolocator API] 訂閱保存到 <code>_positionSubscription</code>[State 欄位]。</td></tr>
-
-    <tr><td>[L-29]</td><td>目的[更新判斷]</td><td>使用 <code>previousPosition</code>[區域變數]、<code>position</code>[函數參數] 與 <code>locationUpdateMeters</code>[靜態常數] 計算距離是否達更新門檻。</td><td rowspan="3">【功能函數】(Action Performer)<br>Purpose: 定位更新/效能保護。<br>Action: 比對新舊 GPS 距離；未達門檻或頁面卸載時停止；達門檻才更新目前位置。</td></tr>
-    <tr><td>[L-30]</td><td>目的[重繪防護]</td><td>若 <code>shouldUpdate</code>[區域變數] 為 false 或 <code>mounted</code>[State 生命週期屬性] 為 false，直接返回。</td></tr>
-    <tr><td>[L-31]</td><td>目的[狀態更新]</td><td>透過 setState 將 <code>position</code>[函數參數] 寫入 <code>_currentPosition</code>[State 欄位]。</td></tr>
-
-    <tr><td>[L-32]</td><td>目的[篩選更新]</td><td>在 <code>_toggleCategory</code> 中更新 <code>_selectedCategories</code>[State 欄位] 指定分類的勾選值，並清除地景點位快取。</td><td>【功能函數】(Action Performer)<br>Purpose: 勾選狀態更新。<br>Action: 接收 checkbox 變更；更新分類狀態；讓地景點位重新計算。</td></tr>
-    <tr><td>[L-33]</td><td>目的[快取重置]</td><td>清空 <code>_cachedLandmarkMapSize</code>、<code>_cachedSelectedCategoryKey</code> 與 <code>_cachedLandmarkMarkers</code>[State 欄位]。</td><td>【功能函數】(Action Performer)<br>Purpose: 快取失效。<br>Action: 清除舊地景點位，避免分類或資料變更後沿用舊座標。</td></tr>
-    <tr><td>[L-34]</td><td>目的[快取鍵產生]</td><td>從 <code>_selectedCategories</code>[State 欄位] 取出已勾選分類、排序並串成字串。</td><td>【回傳函數】(Data Transformer)<br>Input: 無，使用 State 欄位 <code>_selectedCategories</code>。<br>Process: 過濾已勾選分類並排序。<br>Output: <code>String</code>，代表目前分類選取快取鍵。</td></tr>
-    <tr><td>[L-35]</td><td>目的[快取命中]</td><td>在 <code>_visibleLandmarkMarkers</code> 中比較 <code>_cachedLandmarkMapSize</code>、<code>_cachedSelectedCategoryKey</code>[State 欄位] 與目前狀態，命中則直接回傳快取。</td><td rowspan="4">【回傳函數】(Data Transformer)<br>Input: <code>mapSize: Size</code>，目前地圖顯示尺寸。<br>Process: 若快取命中直接回傳；否則依分類篩選地景，並用 GPS 公式計算圖片座標。<br>Output: <code>List&lt;_LandmarkMarker&gt;</code>，目前要顯示的固定地景標示。</td></tr>
-    <tr><td>[L-36]</td><td>目的[分類集合]</td><td>從 <code>_selectedCategories</code>[State 欄位] 建立 <code>selectedCategories</code>[區域變數]，只包含已勾選分類。</td></tr>
-    <tr><td>[L-37]</td><td>目的[固定座標計算]</td><td>篩選 <code>_landmarks</code>[State 欄位] 中種類符合的資料，並呼叫 <code>gpsToImageOffset</code> 計算地景圖片座標。</td></tr>
-    <tr><td>[L-38]</td><td>目的[快取寫入]</td><td>將 <code>mapSize</code>[函數參數]、<code>selectedCategoryKey</code> 與 <code>markers</code>[區域變數] 寫入 State 快取欄位。</td></tr>
-
-    <tr><td>[L-39]</td><td>目的[UI 建構]</td><td>回傳黑底 <code>Scaffold</code>[Widget] 作為地圖頁根節點；結構見 <a href="#map-widget-tree">Map Widget Tree</a>。</td><td rowspan="5">【Build 函數 / Widget 返回函數】(UI Tree)<br>Input: <code>context: BuildContext</code>。<br>Process: 依容器尺寸計算地圖顯示矩形；將目前 GPS 與固定地景轉為圖片座標；建立地圖、角色標示、地景標籤、篩選面板與提示。Widget 結構見 <a href="#map-widget-tree">Map Widget Tree</a>。</td></tr>
-    <tr><td>[L-40]</td><td>目的[圖片適配]</td><td>呼叫 <code>calculateContainedMapRect</code>[頂層函數]，用 <code>constraints.biggest</code>[LayoutBuilder 約束] 與 <code>mapImageSize</code>[靜態常數] 取得 <code>fittedMap</code>[區域變數]。</td></tr>
-    <tr><td>[L-41]</td><td>目的[目前位置轉換]</td><td>若 <code>_currentPosition</code>[State 欄位] 不為 null，呼叫 <code>gpsToImageOffset</code> 取得 <code>markerOffset</code>[區域變數]。</td></tr>
-    <tr><td>[L-42]</td><td>目的[地景標示準備]</td><td>呼叫 <code>_visibleLandmarkMarkers</code>[State 方法] 取得 <code>landmarkMarkers</code>[區域變數]，並用 <code>constraints.maxWidth</code>[LayoutBuilder 約束] 計算面板長度。</td></tr>
-    <tr><td>[L-43]</td><td>目的[圖層堆疊]</td><td>回傳 <code>Stack</code>[Widget]，依序放入地圖、目前位置、地景標籤、篩選面板與定位提示。</td></tr>
-
-    <tr><td>[L-44]</td><td>目的[篩選面板 UI]</td><td>在 <code>_LandmarkFilterPanel.build</code> 中依 <code>selectedCategories</code>[來自建構子] 建立 checkbox 清單，並依 <code>loadMessage</code>[來自建構子] 顯示錯誤。</td><td>【Build 函數 / Widget 返回函數】(UI Tree)<br>Input: <code>maxPanelHeight: double</code>、<code>selectedCategories: Map&lt;String, bool&gt;</code>、<code>loadMessage: String?</code>、<code>onCategoryChanged</code> callback。<br>Process: 建立可擴充分類面板；checkbox 變更時回呼父層。Widget 結構見 <a href="#filter-panel-widget-tree">Filter Panel Widget Tree</a>。</td></tr>
-    <tr><td>[L-45]</td><td>目的[地景標籤 UI]</td><td>在 <code>_LandmarkLabel.build</code> 中使用 <code>marker</code>[來自建構子] 建立小圓點與地景名稱。</td><td>【Build 函數 / Widget 返回函數】(UI Tree)<br>Input: <code>marker: _LandmarkMarker</code>，包含地景模型與圖片座標。<br>Process: 將小圓點中心對齊座標，並在旁邊顯示地景文字。Widget 結構見 <a href="#landmark-label-widget-tree">Landmark Label Widget Tree</a>。</td></tr>
-
-    <tr><td>[L-46]</td><td>目的[邊界檢查]</td><td>檢查 <code>containerSize</code> 與 <code>imageSize</code>[皆來自函數參數] 是否為空，空尺寸時回傳 <code>Rect.zero</code>。</td><td rowspan="4">【回傳函數】(Data Transformer)<br>Input: <code>containerSize: Size</code> 可用畫面尺寸；<code>imageSize: Size</code> 地圖原始尺寸。<br>Process: 用 contain 規則取較小縮放比例，計算置中矩形。<br>Output: <code>Rect</code>，地圖實際顯示矩形。</td></tr>
-    <tr><td>[L-47]</td><td>目的[縮放計算]</td><td>用 <code>widthScale</code>、<code>heightScale</code> 與 <code>scale</code>[區域變數] 計算完整顯示圖片所需比例。</td></tr>
-    <tr><td>[L-48]</td><td>目的[置中計算]</td><td>根據 <code>scale</code>[區域變數] 算出 <code>fittedSize</code>、<code>left</code> 與 <code>top</code>[區域變數]。</td></tr>
-    <tr><td>[L-49]</td><td>目的[矩形回傳]</td><td>回傳由 <code>Offset(left, top)</code> 與 <code>fittedSize</code>[皆來自區域變數] 組成的地圖矩形。</td></tr>
-
-    <tr><td>[L-50]</td><td>目的[比例換算]</td><td>用 <code>latitude</code>、<code>longitude</code>、<code>imageSize</code>[皆來自函數參數] 與 GPS 邊界常數計算經緯度比例，並將緯度反轉為圖片 Y 軸。</td><td rowspan="3">【回傳函數】(Data Transformer)<br>Input: <code>latitude: double</code>、<code>longitude: double</code>、<code>imageSize: Size</code>。<br>Process: 經度線性映射 X 軸；緯度反向映射 Y 軸；比例限制在 0 到 1。<br>Output: <code>Offset</code>，標示點中心在圖片內的位置。</td></tr>
-    <tr><td>[L-51]</td><td>目的[邊界限制]</td><td>將 <code>longitudeRatio</code> 與 <code>latitudeRatio</code>[區域變數] clamp 到 0 到 1。</td></tr>
-    <tr><td>[L-52]</td><td>目的[座標回傳]</td><td>用 <code>safeLongitudeRatio</code>、<code>safeLatitudeRatio</code>[區域變數] 與 <code>imageSize</code>[函數參數] 回傳 <code>Offset</code>。</td></tr>
-  </tbody>
-</table>
+| ID | 目的標籤 | 邏輯描述 | 函數為單位 |
+|---|---|---|---|
+| [L-01] | 目的[資源路徑] | 宣告 `map_path`[來自 `MapSuggestionsVariables` 靜態常數]，指定地圖圖片 asset 路徑。 | 【回傳函數】(Data Transformer)<br>Input: 無。<br>Process: 集中宣告地圖圖片、目前位置圖片、地圖原始尺寸、GPS 邊界、分類名稱與 JSON 路徑；純 UI 樣式常數改由 `MapSuggestionStyle` 提供。<br>Output: `MapSuggestionsVariables` 靜態常數集合。 |
+| [L-02] | 目的[資源路徑] | 宣告 `position_char`[來自 `MapSuggestionsVariables` 靜態常數]，指定目前位置角色圖片 asset 路徑。 | 同 [L-01]。 |
+| [L-03] | 目的[圖片基準] | 宣告 `mapImageSize`[來自 `MapSuggestionsVariables` 靜態常數]，作為 GPS 座標換算與圖片 contain 計算的原始地圖尺寸。 | 同 [L-01]。 |
+| [L-04] | 目的[GPS 邊界] | 宣告 `southwestLatitude`[來自 `MapSuggestionsVariables` 靜態常數]，表示地圖左下角緯度。 | 同 [L-01]。 |
+| [L-05] | 目的[GPS 邊界] | 宣告 `southwestLongitude`[來自 `MapSuggestionsVariables` 靜態常數]，表示地圖左下角經度。 | 同 [L-01]。 |
+| [L-06] | 目的[GPS 邊界] | 宣告 `northeastLatitude`[來自 `MapSuggestionsVariables` 靜態常數]，表示地圖右上角緯度。 | 同 [L-01]。 |
+| [L-07] | 目的[GPS 邊界] | 宣告 `northeastLongitude`[來自 `MapSuggestionsVariables` 靜態常數]，表示地圖右上角經度。 | 同 [L-01]。 |
+| [L-08] | 目的[樣式引用] | 在目前位置 `Positioned`[Widget] 中讀取 `markerSize`[來自 `MapSuggestionStyle` 靜態常數]，控制角色圖片定位偏移與顯示尺寸。 | 同 [L-39]。 |
+| [L-09] | 目的[效能優化] | 宣告 `locationUpdateMeters`[來自 `MapSuggestionsVariables` 靜態常數]，作為 GPS 位置更新的最小移動距離門檻。 | 同 [L-01]。 |
+| [L-10] | 目的[分類名稱] | 宣告 `ncuTenViewsCategory`[來自 `MapSuggestionsVariables` 靜態常數]，作為篩選面板分類名稱與地景 `category` 比對值。 | 同 [L-01]。 |
+| [L-11] | 目的[資料來源] | 宣告 `locationJsonPaths`[來自 `MapSuggestionsVariables` 靜態常數]，提供地景 service 載入的 JSON asset 路徑清單。 | 同 [L-01]。 |
+| [L-12] | 目的[樣式引用] | 在 `_LandmarkLabel.build` 中讀取 `landmarkDotSize`[來自 `MapSuggestionStyle` 靜態常數]，作為地景標籤位移與圓點尺寸基準。 | 同 [L-45]。 |
+| [L-13] | 目的[方向控制] | 在 `initState`[State 生命週期函數] 呼叫 `_forceLandscape`[State 方法]，頁面初始化時鎖定橫向。 | 【功能函數】(Action Performer)<br>Purpose: 頁面初始化。<br>Action: 呼叫父類初始化；鎖定橫向；載入地景 JSON；啟動定位權限與位置監聽流程。 |
+| [L-14] | 目的[資料載入] | 在 `initState`[State 生命週期函數] 呼叫 `_loadLandscapeLocations`[State 方法]，非同步載入固定地景資料。 | 同 [L-13]。 |
+| [L-15] | 目的[定位啟動] | 在 `initState`[State 生命週期函數] 呼叫 `_startLocationTracking`[State 方法]，啟動定位服務檢查與 GPS 串流。 | 同 [L-13]。 |
+| [L-16] | 目的[資源釋放] | 在 `dispose`[State 生命週期函數] 取消 `_positionSubscription`[State 欄位]，避免離開頁面後繼續接收位置串流。 | 【功能函數】(Action Performer)<br>Purpose: 生命週期收尾。<br>Action: 取消 GPS 串流訂閱；恢復裝置可用方向；呼叫父類 dispose。 |
+| [L-17] | 目的[方向恢復] | 在 `dispose`[State 生命週期函數] 呼叫 `_restoreOrientation`[State 方法]，離開頁面時解除橫向限制。 | 同 [L-16]。 |
+| [L-18] | 目的[方向控制] | 呼叫 `SystemChrome.setPreferredOrientations`[Flutter services API]，傳入 landscapeLeft 與 landscapeRight。 | 【功能函數】(Action Performer)<br>Purpose: 橫向鎖定。<br>Action: 要求系統只允許左右橫向，讓地圖頁符合橫向地圖檢視。 |
+| [L-19] | 目的[方向恢復] | 呼叫 `SystemChrome.setPreferredOrientations`[Flutter services API]，傳入 `DeviceOrientation.values`[Flutter enum values]。 | 【功能函數】(Action Performer)<br>Purpose: 方向恢復。<br>Action: 解除頁面方向限制，避免影響其他頁面。 |
+| [L-20] | 目的[資料載入] | 在 `_loadLandscapeLocations` 中呼叫 `_suggestionService.loadLocations`[State 欄位 service]，以 `locationJsonPaths`[靜態常數] 取得 `loadedLandmarks`[區域變數]。 | 【功能函數】(Action Performer)<br>Purpose: 地景載入與錯誤回饋。<br>Action: 委派 `JsonToSuggestionService` 讀取與解析 JSON；成功時寫入地景狀態並清除快取；失敗時保存錯誤訊息供面板顯示。 |
+| [L-21] | 目的[狀態更新] | 載入成功且 `mounted`[State 生命週期屬性] 為 true 後，透過 `setState` 寫入 `_landmarks`[State 欄位]、清空 `_landmarkLoadMessage`[State 欄位] 並清除快取。 | 同 [L-20]。 |
+| [L-22] | 目的[異常捕獲] | 捕獲 `error`[catch 變數] 後，確認 `mounted`[State 生命週期屬性]，再透過 `setState` 寫入 `_landmarkLoadMessage`[State 欄位] 並清除快取。 | 同 [L-20]。 |
+| [L-23] | 目的[服務檢查] | 在 `_startLocationTracking` 中呼叫 `Geolocator.isLocationServiceEnabled`[Geolocator API] 取得 `serviceEnabled`[區域變數]；未開啟時寫入 `_locationMessage`[State 欄位] 後返回。 | 【功能函數】(Action Performer)<br>Purpose: 定位初始化與權限處理。<br>Action: 檢查定位服務；檢查與請求權限；無權限時顯示提示；有權限時取得初始位置並建立 GPS 串流。 |
+| [L-24] | 目的[權限請求] | 使用 `permission`[區域變數] 保存 `Geolocator.checkPermission`[Geolocator API] 結果，若為 denied 則呼叫 `Geolocator.requestPermission`[Geolocator API]。 | 同 [L-23]。 |
+| [L-25] | 目的[權限防護] | 檢查 `permission`[區域變數] 是否為 denied 或 deniedForever；若無定位權限則寫入 `_locationMessage`[State 欄位] 後返回。 | 同 [L-23]。 |
+| [L-26] | 目的[初始定位] | 呼叫 `Geolocator.getCurrentPosition`[Geolocator API] 取得 `initialPosition`[區域變數]，並使用導航等級精度設定。 | 同 [L-23]。 |
+| [L-27] | 目的[狀態更新] | 確認 `mounted`[State 生命週期屬性] 後，透過 `setState` 將 `initialPosition`[區域變數] 寫入 `_currentPosition`[State 欄位]，並設定 `_isLocationReady`[State 欄位] 與 `_locationMessage`[State 欄位]。 | 同 [L-23]。 |
+| [L-28] | 目的[串流監聽] | 呼叫 `Geolocator.getPositionStream`[Geolocator API] 建立位置串流，並將訂閱保存到 `_positionSubscription`[State 欄位]。 | 同 [L-23]。 |
+| [L-29] | 目的[更新判斷] | 在 `_handlePositionUpdate` 中使用 `previousPosition`[區域變數]、`position`[函數參數] 與 `locationUpdateMeters`[靜態常數] 計算是否達到更新門檻。 | 【功能函數】(Action Performer)<br>Purpose: 定位更新與效能保護。<br>Action: 比對新舊 GPS 距離；未達門檻或頁面已卸載時停止；達門檻才更新目前位置。 |
+| [L-30] | 目的[重繪防護] | 若 `shouldUpdate`[區域變數] 為 false 或 `mounted`[State 生命週期屬性] 為 false，直接返回避免不必要重繪。 | 同 [L-29]。 |
+| [L-31] | 目的[狀態更新] | 透過 `setState` 將 `position`[函數參數] 寫入 `_currentPosition`[State 欄位]，並更新定位就緒狀態與提示。 | 同 [L-29]。 |
+| [L-32] | 目的[篩選更新] | 在 `_toggleCategory` 中接收 `category`[函數參數] 與 `value`[函數參數]，更新 `_selectedCategories`[State 欄位] 並清除快取。 | 【功能函數】(Action Performer)<br>Purpose: 勾選狀態更新。<br>Action: 接收 checkbox 變更；寫入分類是否顯示；清除地景 marker 快取使下次 build 重新計算。 |
+| [L-33] | 目的[快取重置] | 在 `_clearLandmarkMarkerCache` 中清空 `_cachedLandmarkMapSize`、`_cachedSelectedCategoryKey` 與 `_cachedLandmarkMarkers`[皆來自 State 欄位]。 | 【功能函數】(Action Performer)<br>Purpose: 快取失效。<br>Action: 清除舊地景點位與快取鍵，避免分類、尺寸或資料變更後沿用舊座標。 |
+| [L-34] | 目的[快取鍵產生] | 在 `_selectedCategoryKey` 中從 `_selectedCategories`[State 欄位] 取出已勾選分類，排序後用 `|` 串成快取鍵。 | 【回傳函數】(Data Transformer)<br>Input: 無，使用 `_selectedCategories: Map<String, bool>`[State 欄位]。<br>Process: 過濾已勾選項目、取出分類名稱、排序並串接。<br>Output: `String`，代表目前分類選取狀態的快取鍵。 |
+| [L-35] | 目的[快取命中] | 在 `_visibleLandmarkMarkers` 中比較 `_cachedLandmarkMapSize`、`_cachedSelectedCategoryKey`[State 欄位] 與目前 `mapSize`[函數參數]、`selectedCategoryKey`[區域變數]；命中時回傳 `_cachedLandmarkMarkers`[State 欄位]。 | 【回傳函數】(Data Transformer)<br>Input: `mapSize: Size`，目前地圖實際顯示尺寸。<br>Process: 先檢查快取；未命中時依已選分類篩選地景，將 GPS 轉成圖片座標，最後寫入快取。<br>Output: `List<_LandmarkMarker>`，目前畫面需顯示的固定地景標示。 |
+| [L-36] | 目的[分類集合] | 從 `_selectedCategories`[State 欄位] 建立 `selectedCategories`[區域變數]，只保留值為 true 的分類。 | 同 [L-35]。 |
+| [L-37] | 目的[固定座標計算] | 篩選 `_landmarks`[State 欄位] 中 `category` 符合 `selectedCategories`[區域變數] 的資料，並呼叫 `gpsToImageOffset` 將每筆地景 GPS 轉成圖片座標。 | 同 [L-35]。 |
+| [L-38] | 目的[快取寫入] | 將 `mapSize`[函數參數]、`selectedCategoryKey`[區域變數] 與 `markers`[區域變數] 寫入 State 快取欄位，並回傳 `markers`。 | 同 [L-35]。 |
+| [L-39] | 目的[UI 建構] | 在 `build` 中回傳 `Scaffold`[Widget] 作為頁面根節點，並建立安全區域與尺寸計算容器；Widget 結構見 [Map Widget Tree](#map-widget-tree)。 | 【Build 函數 / Widget 返回函數】(UI Tree)<br>Input: `context: BuildContext`，目前 widget 樹位置。<br>Process: 依 LayoutBuilder 約束計算地圖顯示矩形；將目前 GPS 與固定地景轉為圖片座標；組合地圖、角色標示、地景標籤、篩選面板與定位提示；樣式值從 `MapSuggestionStyle` 讀取。 |
+| [L-40] | 目的[圖片適配] | 呼叫 `calculateContainedMapRect`[頂層函數]，使用 `constraints.biggest`[LayoutBuilder 約束] 與 `mapImageSize`[靜態常數] 取得 `fittedMap`[區域變數]。 | 同 [L-39]。 |
+| [L-41] | 目的[目前位置轉換] | 若 `_currentPosition`[State 欄位] 不為 null，呼叫 `gpsToImageOffset` 取得 `markerOffset`[區域變數]；否則保持 null。 | 同 [L-39]。 |
+| [L-42] | 目的[地景標示準備] | 呼叫 `_visibleLandmarkMarkers`[State 方法] 取得 `landmarkMarkers`[區域變數]，並用 `constraints.maxWidth`[LayoutBuilder 約束] 呼叫 `filterPanelLength`[來自 `MapSuggestionStyle`] 計算 `panelLength`[區域變數]。 | 同 [L-39]。 |
+| [L-43] | 目的[圖層堆疊] | 回傳 `Stack`[Widget]，依序放入地圖圖片、目前位置、地景標籤、篩選面板與定位提示。 | 同 [L-39]。 |
+| [L-44] | 目的[篩選面板 UI] | 在 `_LandmarkFilterPanel.build` 中使用 `selectedCategories`、`loadMessage`、`onCategoryChanged`[皆來自建構子] 建立 checkbox 清單與錯誤訊息，並引用面板樣式[來自 `MapSuggestionStyle`]；Widget 結構見 [Filter Panel Widget Tree](#filter-panel-widget-tree)。 | 【Build 函數 / Widget 返回函數】(UI Tree)<br>Input: `maxPanelHeight: double`、`selectedCategories: Map<String, bool>`、`loadMessage: String?`、`onCategoryChanged: void Function(String, bool?)`[皆來自建構子]。<br>Process: 依分類 map 產生勾選選項；當 checkbox 變更時呼叫父層 callback；若載入訊息存在則顯示提示；所有視覺樣式由 `MapSuggestionStyle` 提供。 |
+| [L-45] | 目的[地景標籤 UI] | 在 `_LandmarkLabel.build` 中使用 `marker`[來自建構子] 建立地景圓點與地景名稱，並引用標籤樣式[來自 `MapSuggestionStyle`]；Widget 結構見 [Landmark Label Widget Tree](#landmark-label-widget-tree)。 | 【Build 函數 / Widget 返回函數】(UI Tree)<br>Input: `marker: _LandmarkMarker`[來自建構子]，包含地景模型與圖片座標。<br>Process: 將圓點中心對齊 marker 座標，並在旁邊顯示地景名稱；圓點、間距與文字樣式由 `MapSuggestionStyle` 提供。 |
+| [L-46] | 目的[邊界檢查] | 在 `calculateContainedMapRect` 中檢查 `containerSize` 與 `imageSize`[皆來自函數參數] 是否為空，若為空則回傳 `Rect.zero`。 | 【回傳函數】(Data Transformer)<br>Input: `containerSize: Size`，可用畫面尺寸；`imageSize: Size`，圖片原始尺寸。<br>Process: 對空尺寸做防護；依 contain 規則取較小縮放比例；計算置中矩形。<br>Output: `Rect`，圖片實際顯示區域。 |
+| [L-47] | 目的[縮放計算] | 使用 `widthScale`、`heightScale` 與 `scale`[區域變數] 計算圖片完整顯示所需縮放比例。 | 同 [L-46]。 |
+| [L-48] | 目的[置中計算] | 根據 `scale`[區域變數] 算出 `fittedSize`、`left` 與 `top`[區域變數]，讓地圖在容器中置中。 | 同 [L-46]。 |
+| [L-49] | 目的[矩形回傳] | 使用 `Offset(left, top)` 與 `fittedSize`[皆來自區域變數] 建立並回傳地圖顯示矩形。 | 同 [L-46]。 |
+| [L-50] | 目的[比例換算] | 在 `gpsToImageOffset` 中使用 `latitude`、`longitude`、`imageSize`[皆來自函數參數] 與 GPS 邊界常數計算經度 X 比例與反向緯度 Y 比例。 | 【回傳函數】(Data Transformer)<br>Input: `latitude: double`、`longitude: double`、`imageSize: Size`，代表待轉換 GPS 與目標圖片尺寸。<br>Process: 將經度線性映射到 X 軸；將緯度反向映射到 Y 軸；比例限制在 0 到 1。<br>Output: `Offset`，標示中心在圖片內的位置。 |
+| [L-51] | 目的[邊界限制] | 將 `longitudeRatio` 與 `latitudeRatio`[區域變數] clamp 到 0.0 到 1.0，避免超出圖片範圍。 | 同 [L-50]。 |
+| [L-52] | 目的[座標回傳] | 使用 `safeLongitudeRatio`、`safeLatitudeRatio`[區域變數] 與 `imageSize`[函數參數] 回傳圖片座標 `Offset`。 | 同 [L-50]。 |
 
 ## 視覺化結構圖
 
@@ -120,7 +99,7 @@ Navigator.push(
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── [Positioned(地圖定位容器)]  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│   └── [Image(地圖圖片)]  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── { IF: markerOffset != null } // [L-41]  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│   └── [Positioned(位置標示容器)]  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│   └── [Positioned(目前位置容器)]  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│       └── [Image(角色標示圖片)]  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── { FOR: landmarkMarkers } // [L-42]  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│   └── [Positioned(地景標示容器)]  
@@ -129,27 +108,27 @@ Navigator.push(
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│   └── [_LandmarkFilterPanel(地景篩選面板)] // [L-44]  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── { IF: !_isLocationReady && _locationMessage != null }  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── [Center(置中容器)]  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── [Text(文字)]
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── [Text(定位提示文字)]
 
 ### <a id="filter-panel-widget-tree"></a>Filter Panel Widget Tree
 
 [ConstrainedBox(尺寸限制容器)] // [L-44]  
-└── [DecoratedBox(裝飾容器)]  
+└── [DecoratedBox(外觀容器)]  
 &nbsp;&nbsp;&nbsp;&nbsp;└── [Column(垂直容器)]  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── { FOR: selectedCategories.entries }  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│   └── [CheckboxListTile(勾選選項)]  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── { IF: loadMessage != null }  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── [Padding(間距容器)]  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── [Align(對齊容器)]  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── [Text(文字)]
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── [Text(載入訊息文字)]
 
 ### <a id="landmark-label-widget-tree"></a>Landmark Label Widget Tree
 
 [Transform(位移容器)] // [L-45]  
 └── [Row(水平容器)]  
-&nbsp;&nbsp;&nbsp;&nbsp;├── [Container(小圓點)]  
+&nbsp;&nbsp;&nbsp;&nbsp;├── [Container(地景圓點)]  
 &nbsp;&nbsp;&nbsp;&nbsp;├── [SizedBox(間距容器)]  
-&nbsp;&nbsp;&nbsp;&nbsp;└── [Text(地景名稱)]
+&nbsp;&nbsp;&nbsp;&nbsp;└── [Text(地景名稱文字)]
 
 ## Task 3: 場景時序圖
 
@@ -160,97 +139,107 @@ sequenceDiagram
   participant Service as JsonToSuggestionService
   participant GPS as Geolocator
   participant UI as Widget Tree
-
-  User->>Page: 開啟頁面
-  Page->>Page: [L-13] 鎖定橫向
+  User->>Page: 開啟地圖頁
+  Page->>Page: [L-13] initState
+  Page->>Page: [L-18] 鎖定橫向
   Page->>Service: [L-20] 載入地景 JSON
-  Service-->>Page: 回傳 SuggestionLocation 清單或丟出錯誤
-  alt 載入成功
-    Page->>Page: [L-21] 寫入 _landmarks
-  else 載入失敗
-    Page->>Page: [L-22] 寫入錯誤提示
+  Service-->>Page: 回傳地景清單或錯誤
+  alt 地景載入成功
+    Page->>Page: [L-21] 寫入 _landmarks 並清除快取
+  else 地景載入失敗
+    Page->>Page: [L-22] 寫入 _landmarkLoadMessage
   end
   Page->>GPS: [L-23] 檢查定位服務
-  GPS-->>Page: [L-24][L-25] 回傳權限狀態
-  Page->>GPS: [L-26] 取得初始位置
-  Page->>Page: [L-27] 寫入目前位置
-  Page->>GPS: [L-28] 建立位置串流
+  alt GPS 未開啟
+    Page->>Page: [L-23] 顯示 GPS 尚未開啟
+  else GPS 已開啟
+    Page->>GPS: [L-24] 檢查並請求權限
+    alt 權限遭拒
+      Page->>Page: [L-25] 顯示尚未取得定位權限
+    else 權限允許
+      Page->>GPS: [L-26] 取得初始位置
+      Page->>Page: [L-27] 寫入目前位置
+      Page->>GPS: [L-28] 建立位置串流
+    end
+  end
   Page->>UI: [L-39] build
   UI->>UI: [L-40] 計算地圖矩形
   UI->>UI: [L-41] 目前位置轉圖片座標
-  UI-->>User: [L-43] 顯示地圖與面板
-
+  UI->>UI: [L-42] 準備地景標示
+  UI-->>User: [L-43] 顯示地圖圖層
   User->>UI: 勾選中大十景
   UI->>Page: [L-32] 更新分類
-  Page->>Page: [L-33] 清除快取
+  Page->>Page: [L-33] 清除地景快取
+  Page->>Page: [L-35] 重新取得可見地景
   Page->>Page: [L-37] 地景 GPS 轉圖片座標
-  Page->>Page: [L-38] 寫入快取
+  Page->>Page: [L-38] 寫入地景快取
   UI-->>User: [L-45] 顯示地景標籤
-
   GPS-->>Page: 新 GPS 位置
   Page->>Page: [L-29] 比對移動距離
-  alt 超過門檻
+  alt 達到更新門檻
     Page->>Page: [L-31] 更新目前位置
-    Page->>Page: [L-35] 固定地景快取命中
-    UI-->>User: 更新角色位置
-  else 未超過門檻
-    Page-->>GPS: [L-30] 不重繪
+    UI-->>User: 更新角色標示
+  else 未達更新門檻或頁面已卸載
+    Page->>Page: [L-30] 不重繪
   end
+  User->>Page: 離開頁面
+  Page->>Page: [L-16] 取消定位串流
+  Page->>Page: [L-19] 恢復方向限制
 ```
 
 ## Task 4: 測資建議表
 
 | ID | 建議測試極端值或狀態 |
 |---|---|
-| [L-01] | 地圖 asset 路徑錯誤 |
-| [L-02] | 角色 asset 路徑錯誤 |
-| [L-03] | 極寬或極高容器 |
-| [L-04] | 緯度等於左下角緯度 |
-| [L-05] | 經度等於左下角經度 |
-| [L-06] | 緯度等於右上角緯度 |
-| [L-07] | 經度等於右上角經度 |
-| [L-08] | 角色圖尺寸過大 |
-| [L-09] | GPS 移動 1.9 公尺與 2.0 公尺 |
-| [L-10] | JSON 種類為不存在分類 |
-| [L-11] | JSON asset 路徑不存在 |
-| [L-12] | 地景圓點尺寸極大 |
-| [L-13] | 直向裝置進入頁面 |
-| [L-14] | JSON 載入延遲或失敗 |
-| [L-15] | 首次開啟且尚未授權定位 |
-| [L-16] | 定位串流啟動後立刻離開頁面 |
-| [L-17] | 離開後開啟直向頁面 |
-| [L-18] | 裝置左右橫向切換 |
-| [L-19] | 離頁後旋轉裝置 |
-| [L-20] | service 回傳空清單 |
-| [L-21] | service 回傳 9 筆中大十景 |
-| [L-22] | service 丟出 FormatException |
-| [L-23] | 系統定位服務關閉 |
-| [L-24] | 權限狀態為 denied |
-| [L-25] | 權限狀態為 deniedForever |
-| [L-26] | 初始定位逾時 |
-| [L-27] | 初始位置在校園中心 |
-| [L-28] | 位置串流高頻更新 |
-| [L-29] | 新舊 GPS 相同 |
-| [L-30] | 頁面已 dispose 後收到定位 |
-| [L-31] | 新 GPS 超過更新門檻 |
-| [L-32] | 快速勾選與取消分類 |
-| [L-33] | 分類切換後檢查舊點位是否消失 |
-| [L-34] | 多分類同時勾選 |
-| [L-35] | GPS 更新但分類與尺寸未變 |
-| [L-36] | 未勾選任何分類 |
-| [L-37] | 地景座標超出校園邊界 |
-| [L-38] | 地圖尺寸改變後重新快取 |
-| [L-39] | 很小的橫向畫面 |
-| [L-40] | LayoutBuilder 給 `Size.zero` |
-| [L-41] | `_currentPosition` 為 null |
-| [L-42] | 面板寬度約為畫面三分之一 |
-| [L-43] | 地景、角色、提示同時存在 |
-| [L-44] | `loadMessage` 不為 null |
-| [L-45] | 地景名稱很長 |
-| [L-46] | 容器或圖片尺寸為空 |
-| [L-47] | 容器比例等於圖片比例 |
-| [L-48] | 容器比圖片寬或高很多 |
-| [L-49] | 矩形 left/top 是否置中 |
-| [L-50] | GPS 為四個邊界角 |
-| [L-51] | GPS 超出邊界 |
-| [L-52] | 顯示尺寸非常小 |
+| [L-01] | 地圖 asset 路徑不存在，確認圖片載入錯誤會被測試捕捉。 |
+| [L-02] | 角色圖片 asset 路徑不存在，確認目前位置圖示載入失敗情境。 |
+| [L-03] | 使用極寬、極高與 `Size.zero` 容器測試 contain 計算。 |
+| [L-04] | GPS 緯度等於 `southwestLatitude`，確認落在圖片底部。 |
+| [L-05] | GPS 經度等於 `southwestLongitude`，確認落在圖片左側。 |
+| [L-06] | GPS 緯度等於 `northeastLatitude`，確認落在圖片頂部。 |
+| [L-07] | GPS 經度等於 `northeastLongitude`，確認落在圖片右側。 |
+| [L-08] | `MapSuggestionStyle.markerSize` 在小螢幕是否仍能正確置中目前位置圖片。 |
+| [L-09] | GPS 移動 1.9 公尺與 2.0 公尺，確認門檻前後行為。 |
+| [L-10] | JSON `category` 為不存在分類，確認不顯示標籤。 |
+| [L-11] | JSON asset 路徑不存在，確認 `_landmarkLoadMessage` 顯示錯誤。 |
+| [L-12] | `MapSuggestionStyle.landmarkDotSize` 在小地圖上仍能以中心對齊地景座標。 |
+| [L-13] | 直向裝置進入頁面，確認初始化會觸發方向鎖定。 |
+| [L-14] | 地景 service 回傳空清單、正常清單與丟出例外。 |
+| [L-15] | 首次開啟且尚未授權定位，確認會進入權限流程。 |
+| [L-16] | 定位串流啟動後立即離開頁面，確認訂閱被取消。 |
+| [L-17] | 離開後開啟直向頁面，確認方向限制已恢復。 |
+| [L-18] | 裝置左右橫向旋轉，確認仍限制在橫向。 |
+| [L-19] | dispose 後旋轉裝置，確認可回到系統允許方向。 |
+| [L-20] | service 載入多個 JSON 路徑或回傳空清單。 |
+| [L-21] | service 回傳多筆地景，確認 `_landmarks` 更新且快取清空。 |
+| [L-22] | service 丟出 `FormatException`，確認錯誤訊息被保存。 |
+| [L-23] | 系統定位服務關閉，確認顯示「GPS 尚未開啟」。 |
+| [L-24] | 權限狀態為 denied，確認會呼叫請求權限流程。 |
+| [L-25] | 權限狀態為 deniedForever，確認顯示無權限提示並返回。 |
+| [L-26] | 初始定位逾時或平台回傳錯誤，確認測試可覆蓋例外風險。 |
+| [L-27] | 初始位置在校園中心，確認狀態變成 ready 且訊息清空。 |
+| [L-28] | 位置串流高頻更新，確認訂閱存在且由 `_handlePositionUpdate` 篩選。 |
+| [L-29] | 新舊 GPS 完全相同，確認 `shouldUpdate` 為 false。 |
+| [L-30] | 頁面已 dispose 後收到定位更新，確認不呼叫 `setState`。 |
+| [L-31] | 新 GPS 超過 2 公尺，確認目前位置更新。 |
+| [L-32] | 快速勾選與取消同一分類，確認 map 狀態跟隨最後值。 |
+| [L-33] | 分類切換後檢查舊快取座標不再被沿用。 |
+| [L-34] | 多分類同時勾選且輸入順序不同，確認快取鍵排序穩定。 |
+| [L-35] | 地圖尺寸與分類未改變時重複呼叫，確認直接回傳快取。 |
+| [L-36] | 未勾選任何分類，確認 selected set 為空。 |
+| [L-37] | 地景座標超出校園 GPS 邊界，確認 offset 被 clamp。 |
+| [L-38] | 地圖尺寸改變後，確認快取寫入新的 `mapSize`。 |
+| [L-39] | 很小的橫向畫面，確認頁面仍建立 Scaffold。 |
+| [L-40] | `LayoutBuilder` 提供 `Size.zero`，確認 `Rect.zero` 路徑。 |
+| [L-41] | `_currentPosition` 為 null，確認不顯示角色標示。 |
+| [L-42] | 地景清單為空與多筆，確認 marker 清單對應正確。 |
+| [L-43] | 地景、角色與定位提示同時存在，確認圖層順序合理。 |
+| [L-44] | `loadMessage` 為 null 與非 null，確認錯誤訊息條件顯示。 |
+| [L-45] | 地景名稱很長，確認文字仍能顯示且圓點中心對齊。 |
+| [L-46] | `containerSize` 或 `imageSize` 為空，確認回傳 `Rect.zero`。 |
+| [L-47] | 容器比例等於圖片比例，確認 scale 一致。 |
+| [L-48] | 容器比圖片寬或高很多，確認 left/top 正確置中。 |
+| [L-49] | 檢查回傳 Rect 的 origin 與 size 是否符合 contain 結果。 |
+| [L-50] | GPS 位於四個邊界角，確認比例換算正確。 |
+| [L-51] | GPS 超出四個邊界，確認比例被限制在 0 到 1。 |
+| [L-52] | `imageSize` 很小或很大，確認 Offset 按比例縮放。 |
