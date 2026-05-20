@@ -4,7 +4,7 @@
 
 ### 0-1. 檔案簡介
 
-`map_suggestions.dart` 是校園地圖建議頁面，負責顯示校園圖片地圖、目前 GPS 位置標示，以及可勾選顯示的固定地景標籤。它會處理頁面方向鎖定、定位權限流程、GPS 座標轉圖片座標、地景資料載入與篩選狀態。它不負責解析單筆 JSON 欄位格式，該工作由 `JsonToSuggestionService` 處理；也不負責維護 UI 樣式常數，樣式集中在 `MapSuggestionStyle`。通常由其他頁面透過 `Navigator` 進入此頁。
+`map_suggestions.dart` 是校園地圖建議頁面，負責顯示校園圖片地圖、目前 GPS 位置標示，以及可勾選顯示的固定地景標籤。它會處理頁面方向鎖定、定位權限流程、GPS 座標轉圖片座標、地景資料載入與篩選狀態，目前支援「中大十景」與「裝置藝術」兩種分類。它不負責解析單筆 JSON 欄位格式，該工作由 `JsonToSuggestionService` 處理；也不負責維護 UI 樣式常數，樣式集中在 `MapSuggestionStyle`。通常由其他頁面透過 `Navigator` 進入此頁。
 
 ### 0-2. 檔案類型判斷
 
@@ -44,8 +44,8 @@ Navigator.push(
 | [L-07] | 目的[GPS 邊界] | 宣告 `northeastLongitude`[來自 `MapSuggestionsVariables` 靜態常數]，表示地圖右上角經度。 | 同 [L-01]。 |
 | [L-08] | 目的[樣式引用] | 在目前位置 `Positioned`[Widget] 中讀取 `markerSize`[來自 `MapSuggestionStyle` 靜態常數]，控制角色圖片定位偏移與顯示尺寸。 | 同 [L-39]。 |
 | [L-09] | 目的[效能優化] | 宣告 `locationUpdateMeters`[來自 `MapSuggestionsVariables` 靜態常數]，作為 GPS 位置更新的最小移動距離門檻。 | 同 [L-01]。 |
-| [L-10] | 目的[分類名稱] | 宣告 `ncuTenViewsCategory`[來自 `MapSuggestionsVariables` 靜態常數]，作為篩選面板分類名稱與地景 `category` 比對值。 | 同 [L-01]。 |
-| [L-11] | 目的[資料來源] | 宣告 `locationJsonPaths`[來自 `MapSuggestionsVariables` 靜態常數]，提供地景 service 載入的 JSON asset 路徑清單。 | 同 [L-01]。 |
+| [L-10] | 目的[分類名稱] | 宣告 `ncuTenViewsCategory`[來自 `MapSuggestionsVariables` 靜態常數]，作為篩選面板「中大十景」分類名稱與地景 `category` 比對值。 | 同 [L-01]。 |
+| [L-11] | 目的[資料來源] | 宣告 `locationJsonPaths`[來自 `MapSuggestionsVariables` 靜態常數]，提供地景 service 載入的 JSON asset 路徑清單，包含 `NCU10view.json` 與 `installation_art.json`。 | 同 [L-01]。 |
 | [L-12] | 目的[樣式引用] | 在 `_LandmarkLabel.build` 中讀取 `landmarkDotSize`[來自 `MapSuggestionStyle` 靜態常數]，作為地景標籤位移與圓點尺寸基準。 | 同 [L-45]。 |
 | [L-13] | 目的[方向控制] | 在 `initState`[State 生命週期函數] 呼叫 `_forceLandscape`[State 方法]，頁面初始化時鎖定橫向。 | 【功能函數】(Action Performer)<br>Purpose: 頁面初始化。<br>Action: 呼叫父類初始化；鎖定橫向；載入地景 JSON；啟動定位權限與位置監聽流程。 |
 | [L-14] | 目的[資料載入] | 在 `initState`[State 生命週期函數] 呼叫 `_loadLandscapeLocations`[State 方法]，非同步載入固定地景資料。 | 同 [L-13]。 |
@@ -87,6 +87,7 @@ Navigator.push(
 | [L-50] | 目的[比例換算] | 在 `gpsToImageOffset` 中使用 `latitude`、`longitude`、`imageSize`[皆來自函數參數] 與 GPS 邊界常數計算經度 X 比例與反向緯度 Y 比例。 | 【回傳函數】(Data Transformer)<br>Input: `latitude: double`、`longitude: double`、`imageSize: Size`，代表待轉換 GPS 與目標圖片尺寸。<br>Process: 將經度線性映射到 X 軸；將緯度反向映射到 Y 軸；比例限制在 0 到 1。<br>Output: `Offset`，標示中心在圖片內的位置。 |
 | [L-51] | 目的[邊界限制] | 將 `longitudeRatio` 與 `latitudeRatio`[區域變數] clamp 到 0.0 到 1.0，避免超出圖片範圍。 | 同 [L-50]。 |
 | [L-52] | 目的[座標回傳] | 使用 `safeLongitudeRatio`、`safeLatitudeRatio`[區域變數] 與 `imageSize`[函數參數] 回傳圖片座標 `Offset`。 | 同 [L-50]。 |
+| [L-53] | 目的[分類名稱] | 宣告 `installationArtCategory`[來自 `MapSuggestionsVariables` 靜態常數]，作為篩選面板「裝置藝術」分類名稱與地景 `category` 比對值。 | 同 [L-01]。 |
 
 ## 視覺化結構圖
 
@@ -167,7 +168,7 @@ sequenceDiagram
   UI->>UI: [L-41] 目前位置轉圖片座標
   UI->>UI: [L-42] 準備地景標示
   UI-->>User: [L-43] 顯示地圖圖層
-  User->>UI: 勾選中大十景
+  User->>UI: 勾選中大十景或裝置藝術
   UI->>Page: [L-32] 更新分類
   Page->>Page: [L-33] 清除地景快取
   Page->>Page: [L-35] 重新取得可見地景
@@ -200,8 +201,8 @@ sequenceDiagram
 | [L-07] | GPS 經度等於 `northeastLongitude`，確認落在圖片右側。 |
 | [L-08] | `MapSuggestionStyle.markerSize` 在小螢幕是否仍能正確置中目前位置圖片。 |
 | [L-09] | GPS 移動 1.9 公尺與 2.0 公尺，確認門檻前後行為。 |
-| [L-10] | JSON `category` 為不存在分類，確認不顯示標籤。 |
-| [L-11] | JSON asset 路徑不存在，確認 `_landmarkLoadMessage` 顯示錯誤。 |
+| [L-10] | JSON `category` 為 `中大十景`，確認勾選該分類後顯示標籤。 |
+| [L-11] | `installation_art.json` asset 路徑不存在或格式錯誤，確認 `_landmarkLoadMessage` 顯示錯誤。 |
 | [L-12] | `MapSuggestionStyle.landmarkDotSize` 在小地圖上仍能以中心對齊地景座標。 |
 | [L-13] | 直向裝置進入頁面，確認初始化會觸發方向鎖定。 |
 | [L-14] | 地景 service 回傳空清單、正常清單與丟出例外。 |
@@ -243,3 +244,4 @@ sequenceDiagram
 | [L-50] | GPS 位於四個邊界角，確認比例換算正確。 |
 | [L-51] | GPS 超出四個邊界，確認比例被限制在 0 到 1。 |
 | [L-52] | `imageSize` 很小或很大，確認 Offset 按比例縮放。 |
+| [L-53] | JSON `category` 為 `裝置藝術`，確認勾選「裝置藝術」後顯示對應地點。 |
