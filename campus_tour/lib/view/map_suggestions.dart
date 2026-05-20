@@ -36,9 +36,13 @@ class MapSuggestionsVariables {
   // [L-10]
   static const String ncuTenViewsCategory = '中大十景';
 
+  // [L-53]
+  static const String installationArtCategory = '裝置藝術';
+
   // [L-11]
   static const List<String> locationJsonPaths = [
     'assets/json/locations/NCU10view.json',
+    'assets/json/locations/installation_art.json',
   ];
 
   static const int step = 10;
@@ -71,6 +75,7 @@ class _MapSuggestionsPageState extends State<MapSuggestionsPage> {
   List<_LandmarkMarker> _cachedLandmarkMarkers = const [];
   final Map<String, bool> _selectedCategories = {
     MapSuggestionsVariables.ncuTenViewsCategory: false,
+    MapSuggestionsVariables.installationArtCategory: false,
   };
 
   @override
@@ -434,7 +439,9 @@ class _LandmarkLabel extends StatelessWidget {
           Container(
             width: MapSuggestionStyle.landmarkDotSize,
             height: MapSuggestionStyle.landmarkDotSize,
-            decoration: MapSuggestionStyle.landmarkDotDecoration,
+            decoration: MapSuggestionStyle.landmarkDotDecoration(
+              marker.landmark.category,
+            ),
           ),
           const SizedBox(width: MapSuggestionStyle.landmarkLabelSpacing),
           Text(

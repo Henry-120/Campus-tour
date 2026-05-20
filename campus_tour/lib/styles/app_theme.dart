@@ -3,13 +3,29 @@ import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
   // 💡 依照「註冊背景圖」風格調整的核心配色
-  static const Color primaryColor = Color(0xFFD99A84);    // 溫暖的黏土紅/棕，來自 LevelStyle.imageIconColor
-  static const Color secondaryColor = Color(0xFFF4C8B8);  // 淺肉粉色，來自 LevelStyle.borderColor
-  static const Color accentColor = Color(0xFFFFEDE2);     // 杏仁白/羊皮紙色，來自 LevelStyle.imagePlaceholderColor
-  static const Color textColor = Color(0xFF5D4037);       // 暖深啡色，保持原有的穩重感
-  static const Color linkColor = Color(0xFF8D6E63);       // 淺啡色
-  static const Color cardColor = Color(0xFFFFFBF7);       // 紙張米白色，來自 LevelStyle.textPanelColor
+  static const Color primaryColor = Color(
+    0xFFD99A84,
+  ); // 溫暖的黏土紅/棕，來自 LevelStyle.imageIconColor
+  static const Color secondaryColor = Color(
+    0xFFF4C8B8,
+  ); // 淺肉粉色，來自 LevelStyle.borderColor
+  static const Color accentColor = Color(
+    0xFFFFEDE2,
+  ); // 杏仁白/羊皮紙色，來自 LevelStyle.imagePlaceholderColor
+  static const Color textColor = Color(0xFF5D4037); // 暖深啡色，保持原有的穩重感
+  static const Color linkColor = Color(0xFF8D6E63); // 淺啡色
+  static const Color cardColor = Color(
+    0xFFFFFBF7,
+  ); // 紙張米白色，來自 LevelStyle.textPanelColor
   static const Color errorColor = Color(0xFFE57373);
+  static const Color mapOverlayBackgroundColor = Colors.black;
+  static const Color mapOverlayBorderColor = Colors.white24;
+  static const Color mapOverlayPrimaryTextColor = Colors.white;
+  static const Color mapOverlaySecondaryTextColor = Colors.white70;
+  static const Color mapOverlayCheckColor = Colors.black;
+  static const Color mapLandmarkDotColor = Colors.amberAccent;
+  static const Color mapLandmarkDotBorderColor = Colors.black;
+  static const Color mapLandmarkTextShadowColor = Colors.black;
 
   // 漸層背景 - 參考自 LevelStyle 的頁面背景
   static const LinearGradient warmGradient = LinearGradient(
@@ -27,7 +43,9 @@ class AppTheme {
   // 陰影 - 使用更溫潤的咖啡色系陰影
   static List<BoxShadow> softShadow = [
     BoxShadow(
-      color: const Color(0x1A8D5A4A).withValues(alpha: 0.1), // 參考 LevelStyle.shadowColor
+      color: const Color(
+        0x1A8D5A4A,
+      ).withValues(alpha: 0.1), // 參考 LevelStyle.shadowColor
       blurRadius: 15,
       offset: const Offset(0, 8),
     ),
