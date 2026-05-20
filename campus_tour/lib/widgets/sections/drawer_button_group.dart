@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:campus_tour/controllers/login_controller.dart';
 import 'package:campus_tour/controllers/user_controller.dart';
 import 'package:campus_tour/styles/LHF_drawer_styles.dart';
+import 'package:campus_tour/view/login_page.dart';
 import 'package:campus_tour/view/map_suggestions.dart';
 import 'package:campus_tour/view/novice_leading_page.dart';
 import 'package:campus_tour/widgets/buttons/LHF_drawer_button.dart';
@@ -238,15 +240,74 @@ void _showFeatureNotImplementedMessage(BuildContext context) {
   messenger.showSnackBar(const SnackBar(content: Text('此功能尚未實做，有問題歡迎聯繫：創作團隊')));
 }
 
-class _LogoutButton extends StatelessWidget {
+class _LogoutButton extends StatefulWidget {
   const _LogoutButton();
 
   @override
+  State<_LogoutButton> createState() => _LogoutButtonState();
+}
+
+class _LogoutButtonState extends State<_LogoutButton> {
+  bool _isLoggingOut = false;
+
+  Future<void> _logout(BuildContext context) async {
+    // [L-01]
+    if (_isLoggingOut) {
+      return;
+    }
+
+    // [L-02]
+    setState(() {
+      _isLoggingOut = true;
+    });
+
+    var didNavigate = false;
+
+    try {
+      // [L-03]
+      await LoginController().logout();
+
+      // [L-04]
+      if (!context.mounted) {
+        return;
+      }
+
+      // [L-05]
+      didNavigate = true;
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (_) => const LoginPage()),
+        (route) => false,
+      );
+    } catch (e) {
+      // [L-06]
+      if (!context.mounted) {
+        return;
+      }
+
+      // [L-07]
+      final messenger = ScaffoldMessenger.of(context);
+      messenger.clearSnackBars();
+      messenger.showSnackBar(const SnackBar(content: Text('登出失敗，請稍後再試')));
+    } finally {
+      // [L-08]
+      if (mounted && !didNavigate) {
+        setState(() {
+          _isLoggingOut = false;
+        });
+      }
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    // [L-09]
     return ElevatedButton.icon(
       style: DrawerStyles.logoutButtonStyle,
-      onPressed: () => _showFeatureNotImplementedMessage(context),
+      // [L-10]
+      onPressed: _isLoggingOut ? null : () => _logout(context),
       icon: const Icon(Icons.logout_rounded),
+      // [L-11]
       label: Text('登出', style: DrawerStyles.logoutButtonText),
     );
   }
