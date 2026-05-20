@@ -28,6 +28,7 @@ class _ArCapturePageState extends State<ArCapturePage> {
 
   String selectedMonsterUrl = "";
   String selectedMonsterImageUrl = "";
+  String selectedMonsterId = "";
 
   // 修改此處：將精靈位置往右 (x=0.6) 且往上 (y=0.4) 移動
   Alignment fairyPosition = const Alignment(0.0, 0.4);
@@ -173,11 +174,12 @@ class _ArCapturePageState extends State<ArCapturePage> {
                       itemBuilder: (context, index) {
                         final userMonster = collection[index];
                         String modelFile = userMonster.videoRef ?? "";
-                        bool isSelected = selectedMonsterUrl == modelFile;
+                        bool isSelected = selectedMonsterId == userMonster.name;
 
                         return GestureDetector(
                           onTap: () {
                             setState(() {
+                              selectedMonsterId = userMonster.name;
                               selectedMonsterUrl = modelFile;
                               selectedMonsterImageUrl = userMonster.imageURL;
                             });

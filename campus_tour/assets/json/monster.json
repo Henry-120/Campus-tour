@@ -183,7 +183,8 @@
     "location": { "latitude": 24.970735, "longitude": 121.194967 },
     "architectureRef": "/architectures/a17",
     "qaRef": "/questions/qa17",
-    "videoRef" : "assets/images/img_frame/grass.png"
+    "videoRef" : "assets/images/img_frame/grass.png",
+    "ARRef":"Sit_on_the_cloud.usdz"
   },
   {
     "id": "m18",
