@@ -6,7 +6,7 @@ import '../widgets/constants/responsive.dart';
 import '../widgets/login/game_link_text.dart';
 import '../widgets/login/game_title.dart';
 import '../widgets/login/wood_register_panel.dart';
-import 'game_main_page.dart';
+import 'after_login.dart';
 import 'login_page.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -31,9 +31,9 @@ class _RegisterPageState extends State<RegisterPage> {
     final isValid = _formKey.currentState?.validate() ?? false;
 
     if (!isValid) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("請確認註冊資料是否正確")),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text("請確認註冊資料是否正確")));
       return;
     }
 
@@ -49,15 +49,11 @@ class _RegisterPageState extends State<RegisterPage> {
       if (!mounted) return;
 
       if (user != null) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("註冊成功！歡迎加入冒險之旅")),
-        );
-
-        Navigator.pushAndRemoveUntil(
+        ScaffoldMessenger.of(
           context,
-          MaterialPageRoute(builder: (context) => const GameMainPage()),
-          (route) => false,
-        );
+        ).showSnackBar(const SnackBar(content: Text("註冊成功！歡迎加入冒險之旅")));
+
+        navigateAfterLogin(context);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text("註冊失敗，該 Email 可能已被使用或網路異常")),
@@ -68,9 +64,9 @@ class _RegisterPageState extends State<RegisterPage> {
 
       if (!mounted) return;
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("註冊失敗: $e")),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text("註冊失敗: $e")));
     } finally {
       if (mounted) {
         setState(() => _isLoading = false);
@@ -87,28 +83,24 @@ class _RegisterPageState extends State<RegisterPage> {
       if (!mounted) return;
 
       if (user != null) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Google 註冊成功！歡迎加入冒險之旅")),
-        );
-
-        Navigator.pushAndRemoveUntil(
+        ScaffoldMessenger.of(
           context,
-          MaterialPageRoute(builder: (context) => const GameMainPage()),
-          (route) => false,
-        );
+        ).showSnackBar(const SnackBar(content: Text("Google 註冊成功！歡迎加入冒險之旅")));
+
+        navigateAfterLogin(context);
       } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Google 註冊失敗，請稍後再試")),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(const SnackBar(content: Text("Google 註冊失敗，請稍後再試")));
       }
     } catch (e) {
       debugPrint("[RegisterPage] Google 登入失敗: $e");
 
       if (!mounted) return;
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Google 登入失敗: $e")),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text("Google 登入失敗: $e")));
     } finally {
       if (mounted) {
         setState(() => _isLoading = false);
@@ -142,10 +134,7 @@ class _RegisterPageState extends State<RegisterPage> {
       body: Stack(
         children: [
           Positioned.fill(
-            child: Image.asset(
-              AssetPaths.loginBg,
-              fit: BoxFit.cover,
-            ),
+            child: Image.asset(AssetPaths.loginBg, fit: BoxFit.cover),
           ),
           SafeArea(
             child: Center(
@@ -173,13 +162,13 @@ class _RegisterPageState extends State<RegisterPage> {
                         text: "Already have account?",
                         onTap: () {},
                         fontSize: 14 * scale,
-                        color:color,
+                        color: color,
                       ),
                       GameLinkText(
                         text: "Return to Login",
                         onTap: _isLoading ? () {} : _goBackToLogin,
                         fontSize: 14 * scale,
-                        color:color,
+                        color: color,
                       ),
                       SizedBox(height: 24 * scale),
                     ],

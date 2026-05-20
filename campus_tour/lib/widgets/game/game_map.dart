@@ -1,4 +1,5 @@
 import 'dart:async'; // 💡 引入 StreamSubscription
+import 'package:campus_tour/widgets/constants/asset_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:geolocator/geolocator.dart'; // 💡 引入 GPS 套件
@@ -9,11 +10,12 @@ import 'package:get/get.dart';
 import '../../view/nearby_monsters_display.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../../models/monster_model.dart';
+import 'user_marker.dart';
 //for mission
 import 'package:campus_tour/view/full_mission_page.dart';
 import 'package:campus_tour/widgets/game/catching_pages/monster_model_cry.dart';
 import 'package:campus_tour/widgets/game/catching_pages/full_mission.dart';
-// import 'package:campus_tour/widgets/game/catching_pages/discovered_item.dart';
+import 'package:campus_tour/widgets/game/catching_pages/discovered_item.dart';
 import 'package:campus_tour/widgets/game/catching_pages/graphics_text_level.dart';
 import 'package:campus_tour/widgets/game/catching_pages/cryptography_level.dart';
 import 'package:campus_tour/widgets/game/catching_pages/plot_level.dart';
@@ -398,34 +400,34 @@ class BuildingMonsterLevel extends StatelessWidget {
     required this.architectureType,
     this.onMissionFinished,
   }) : monsterModelCry = MonsterModelCry(
-    name: monster.name,
-    type: monster.type,
-    imageUrl: monster.imageURL,
-  ),
-        tracePlotMission = PlotLevel(
-          type: PlotLevel.traceType,
-          isPassed: LocalSettingService.autoSkipStory.isEnabled,
-          title: PlotLevel.traceTitle,
-          description: PlotLevel.traceDescription,
-          // discoveredItem: DiscoveredItem.magicStone,
-        ),
-        mission1 = GraphicsTextLevel(
-          firstTracePhoto: MonsterGraphics.graphics[monster.id] ?? '',
-          descriptionText: MonsterText.texts[monster.id] ?? '',
-          // discoveredItem: DiscoveredItem.strategyBook,
-          nfcId: MonsterNFC.nfcIds[monster.id] ?? '',
-        ),
-        battlePlotMission = PlotLevel(
-          type: PlotLevel.battleType,
-          isPassed: LocalSettingService.autoSkipStory.isEnabled,
-          title: PlotLevel.battleTitle,
-          description: PlotLevel.battleDescription,
-        ),
-        mission2 = CryptographyLevel(
-          questionSet: [qa.question],
-          choiceSet: [qa.options],
-          answerSet: [qa.answer],
-        );
+         name: monster.name,
+         type: monster.type,
+         imageUrl: monster.imageURL,
+       ),
+       tracePlotMission = PlotLevel(
+         type: PlotLevel.traceType,
+         isPassed: LocalSettingService.autoSkipStory.isEnabled,
+         title: PlotLevel.traceTitle,
+         description: PlotLevel.traceDescription,
+         discoveredItem: DiscoveredItem.magicStone,
+       ),
+       mission1 = GraphicsTextLevel(
+         firstTracePhoto: MonsterGraphics.graphics[monster.id] ?? '',
+         descriptionText: MonsterText.texts[monster.id] ?? '',
+         discoveredItem: DiscoveredItem.strategyBook,
+         nfcId: MonsterNFC.nfcIds[monster.id] ?? '',
+       ),
+       battlePlotMission = PlotLevel(
+         type: PlotLevel.battleType,
+         isPassed: LocalSettingService.autoSkipStory.isEnabled,
+         title: PlotLevel.battleTitle,
+         description: PlotLevel.battleDescription,
+       ),
+       mission2 = CryptographyLevel(
+         questionSet: [qa.question],
+         choiceSet: [qa.options],
+         answerSet: [qa.answer],
+       );
   List<FullMission> get missions {
     switch (architectureType) {
       case "系管":
@@ -467,5 +469,3 @@ class BuildingMonsterLevel extends StatelessWidget {
 }
 
 //到這裡為止
-
-

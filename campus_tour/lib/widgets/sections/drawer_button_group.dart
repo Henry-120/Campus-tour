@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:campus_tour/controllers/user_controller.dart';
 import 'package:campus_tour/styles/LHF_drawer_styles.dart';
+import 'package:campus_tour/view/map_suggestions.dart';
 import 'package:campus_tour/view/novice_leading_page.dart';
 import 'package:campus_tour/widgets/buttons/LHF_drawer_button.dart';
 import 'package:campus_tour/widgets/common/user_head.dart';
@@ -42,6 +43,7 @@ class DrawerButtonGroup extends StatelessWidget {
                             children: [
                               // const _SettingButton(),
                               const _TutorialButton(),
+                              const _PanoramaMapButton(),
                               const _IssueReportButton(),
                             ], //左選單按鈕列,
                           ),
@@ -194,6 +196,25 @@ class _TutorialButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return DrawerSecondaryButton(
       text: '新手教學',
+      onPressedToDo: () => _onPress(context),
+    );
+  }
+}
+
+class _PanoramaMapButton extends StatelessWidget {
+  const _PanoramaMapButton();
+
+  void _onPress(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const MapSuggestionsPage()),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return DrawerSecondaryButton(
+      text: '校園全景地圖',
       onPressedToDo: () => _onPress(context),
     );
   }
