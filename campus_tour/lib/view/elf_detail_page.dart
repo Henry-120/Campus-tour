@@ -48,6 +48,7 @@ class _ElfDetailPageState extends State<ElfDetailPage> {
         setState(() {
           architecture = arch;
           isLoading = false;
+          debugPrint("architecture: ${architecture?.imageURL}");
         });
       } else {
         if (!mounted) return;
