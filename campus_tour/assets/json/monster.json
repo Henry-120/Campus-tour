@@ -8,40 +8,40 @@
     "architectureRef": "/architectures/a1",
     "qaRef": "/questions/qa1",
     "ARRef": "NCU_Lake.usdz",
-    "videoRef" : ""
+    "videoRef" : "assets/images/img_frame/water.png"
   },
   {
     "id": "m2",
     "name": "客家狗",
-    "type": "金",
+    "type": "火",
     "imageURL": "assets/images/fairy_img/hakka_college.png",
     "location": { "latitude": 24.9707, "longitude": 121.1904 },
     "architectureRef": "/architectures/a6",
     "qaRef": "/questions/qa6",
     "ARRef": "Hakka.usdz",
-    "videoRef" : ""
+    "videoRef" : "assets/images/img_frame/fire.png"
   },
   {
     "id": "m3",
     "name": "小蛋球",
-    "type": "木",
+    "type": "水",
     "imageURL": "assets/images/fairy_img/geoscience.png",
     "location": { "latitude": 24.9670, "longitude": 121.1946 },
     "architectureRef": "/architectures/a3",
     "qaRef": "/questions/qa3",
     "ARRef": "ES.usdz",
-    "videoRef" : ""
+    "videoRef" : "assets/images/img_frame/water.png"
   },
   {
     "id": "m4",
     "name": "大大象",
-    "type": "火",
+    "type": "水",
     "imageURL": "assets/images/fairy_img/elephant_five_forms.png",
     "location": { "latitude": 24.9689, "longitude": 121.1953 },
     "architectureRef": "/architectures/a4",
     "qaRef": "/questions/qa4",
-    "ARRef": "",
-    "videoRef" : ""
+    "ARRef": "Elephant.usdz",
+    "videoRef" : "assets/images/img_frame/water.png"
   },
   {
     "id": "m5",
@@ -51,8 +51,8 @@
     "location": { "latitude": 24.9694, "longitude": 121.1937 },
     "architectureRef": "/architectures/a5",
     "qaRef": "/questions/qa5",
-    "ARRef": "",
-    "videoRef" : ""
+    "ARRef": "Rock.usdz",
+    "videoRef" : "assets/images/img_frame/fire.png"
   },
   {
     "id": "m6",
@@ -61,42 +61,42 @@
     "imageURL": "assets/images/fairy_img/engineering.png",
     "location": { "latitude": 24.9670, "longitude": 121.1875 },
     "architectureRef": "/architectures/a7",
-    "qaRef": "",
+    "qaRef": "/questions/qa7",
     "ARRef": "Mechanical.usdz",
-    "videoRef" : ""
+    "videoRef" : "assets/images/img_frame/fire.png"
   },
   {
     "id": "m7",
     "name": "讀書怪",
-    "type": "火",
+    "type": "草",
     "imageURL": "assets/images/fairy_img/literature.png",
     "location": { "latitude": 24.9691, "longitude": 121.1946 },
     "architectureRef": "/architectures/a8",
     "qaRef": "/questions/qa8",
     "ARRef": "language.usdz",
-    "videoRef" : ""
+    "videoRef" : "assets/images/img_frame/grass.png"
   },
   {
     "id": "m8",
     "name": "嚶嚶嚶",
-    "type": "火",
+    "type": "草",
     "imageURL": "assets/images/fairy_img/friendship_cherry.png",
     "location": { "latitude": 24.9701, "longitude": 121.1918 },
     "architectureRef": "/architectures/a2",
     "qaRef": "/questions/qa2",
     "ARRef": "YMCA.usdz",
-    "videoRef" : ""
+    "videoRef" : "assets/images/img_frame/grass.png"
   },
   {
     "id": "m9",
     "name": "環寶寶",
-    "type": "火",
+    "type": "草",
     "imageURL": "assets/images/fairy_img/sustainability_college.png",
     "location": { "latitude": 24.9684, "longitude": 121.1918 },
     "architectureRef": "/architectures/a9",
     "qaRef": "/questions/qa9",
     "ARRef": "Recycle.usdz",
-    "videoRef" : ""
+    "videoRef" : "assets/images/img_frame/grass.png"
   },
   {
     "id": "m10",
@@ -107,51 +107,51 @@
     "architectureRef": "/architectures/a10",
     "qaRef": "/questions/qa10",
     "ARRef": "Math.usdz",
-    "videoRef" : ""
+    "videoRef" : "assets/images/img_frame/fire.png"
   },
   {
     "id": "m11",
     "name": "大英菌",
-    "type": "火",
+    "type": "草",
     "imageURL": "assets/images/fairy_img/biomedical_college.png",
     "location": { "latitude": 24.9676, "longitude": 121.1876 },
     "architectureRef": "/architectures/a11",
     "qaRef": "/questions/qa11",
-    "ARRef": "",
-    "videoRef" : ""
+    "ARRef": "SE.usdz",
+    "videoRef" : "assets/images/img_frame/grass.png"
   },
   {
     "id": "m12",
     "name": "毛毛精靈",
-    "type": "火",
+    "type": "水",
     "imageURL": "assets/images/fairy_img/baihua_river.png",
     "location": { "latitude": 24.9697, "longitude": 121.1932 },
     "architectureRef": "/architectures/a12",
     "qaRef": "/questions/qa12",
     "ARRef": "flower_river.usdz",
-    "videoRef" : ""
+    "videoRef" : "assets/images/img_frame/water.png"
   },
   {
     "id": "m13",
     "name": "SM獸",
-    "type": "火",
+    "type": "草",
     "imageURL": "assets/images/fairy_img/business_college.png",
     "location": { "latitude": 24.9706, "longitude": 121.1935 },
     "architectureRef": "/architectures/a13",
     "qaRef": "/questions/qa13",
     "ARRef": "Management.usdz",
-    "videoRef" : ""
+    "videoRef" : "assets/images/img_frame/grass.png"
   },
   {
     "id": "m14",
     "name": "亮晶精",
-    "type": "火",
+    "type": "水",
     "imageURL": "assets/images/fairy_img/electrical_college.png",
     "location": { "latitude": 24.9670, "longitude": 121.1916 },
     "architectureRef": "/architectures/a14",
     "qaRef": "/questions/qa14",
-    "ARRef": "Infor_Engineering.usdz",
-    "videoRef" : ""
+    "ARRef": "Infor_Engineer.usdz",
+    "videoRef" : "assets/images/img_frame/water.png"
   },
   {
     "id": "m15",
@@ -161,7 +161,8 @@
     "location": { "latitude": 24.971151, "longitude": 121.192511 },
     "architectureRef": "/architectures/a15",
     "qaRef": "/questions/qa15",
-    "ARRef": "DNA.usdz"
+    "ARRef": "DNA.usdz",
+    "videoRef" : "assets/images/img_frame/fire.png"
   },
   {
     "id": "m16",
@@ -171,56 +172,62 @@
     "location": { "latitude": 24.967536, "longitude": 121.188627 },
     "architectureRef": "/architectures/a16",
     "qaRef": "/questions/qa16",
-    "ARRef":"Feather.usdz"
+    "ARRef":"Feather.usdz",
+    "videoRef" : "assets/images/img_frame/fire.png"
   },
   {
     "id": "m17",
     "name": "坐雲飛想",
-    "type": "火",
+    "type": "草",
     "imageURL": "assets/images/fairy_img/think_above_cloud.png",
     "location": { "latitude": 24.970735, "longitude": 121.194967 },
     "architectureRef": "/architectures/a17",
-    "qaRef": "/questions/qa17"
+    "qaRef": "/questions/qa17",
+    "videoRef" : "assets/images/img_frame/grass.png"
   },
   {
     "id": "m18",
     "name": "坐聽‧松風",
-    "type": "火",
+    "type": "水",
     "imageURL": "assets/images/fairy_img/listening_to_the_pine_wind.png",
     "location": { "latitude": 24.966474, "longitude": 121.191219 },
     "architectureRef": "/architectures/a18",
     "qaRef": "/questions/qa18",
-    "ARRef": "sit_and_listen.usdz"
+    "ARRef": "sit_and_listen.usdz",
+    "videoRef" : "assets/images/img_frame/water.png"
   },
   {
     "id": "m19",
     "name": "為什麼",
-    "type": "火",
+    "type": "草",
     "imageURL": "assets/images/fairy_img/qmark.png",
     "location": { "latitude": 24.967280, "longitude": 121.187633 },
     "architectureRef": "/architectures/a19",
     "qaRef": "/questions/qa19",
-    "ARRef": "qmark.usdz"
+    "ARRef": "qmark.usdz",
+    "videoRef" : "assets/images/img_frame/grass.png"
   },
   {
     "id": "m20",
     "name": "漫步雲端",
-    "type": "火",
+    "type": "水",
     "imageURL": "assets/images/fairy_img/walking_amongst_the_clouds.png",
     "location": { "latitude": 24.966520, "longitude": 121.193801 },
     "architectureRef": "/architectures/a20",
     "qaRef": "/questions/qa20",
-    "ARRef": "clound.usdz"
+    "ARRef": "clound.usdz",
+    "videoRef" : "assets/images/img_frame/water.png"
   },
   {
     "id": "m21",
     "name": "蘊˙行",
-    "type": "火",
+    "type": "草",
     "imageURL": "assets/images/fairy_img/circle_90de_II.png",
     "location": { "latitude": 24.967732, "longitude": 121.193638 },
     "architectureRef": "/architectures/a21",
     "qaRef": "/questions/qa21",
-    "ARRef": "circle_90.usdz"
+    "ARRef": "circle_90.usdz",
+    "videoRef" : "assets/images/img_frame/grass.png"
   },
   {
     "id": "m22",
@@ -230,6 +237,7 @@
     "location": { "latitude": 24.967732, "longitude": 121.193638 },
     "architectureRef": "/architectures/a21",
     "qaRef": "",
-    "ARRef": "squirrel.usdz"
+    "ARRef": "squirrel.usdz",
+    "videoRef" : "assets/images/img_frame/fire.png"
   }
 ]

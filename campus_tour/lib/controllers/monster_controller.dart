@@ -162,6 +162,7 @@ class MonsterController extends GetxController {
         caughtAt: DateTime.now(), // 這裡可以隨機或指定時間
         name: monsterData["name"] ?? "未知怪物",
         imageURL: monsterData["imageURL"] ?? "",
+        videoRef: monsterData["videoRef"] ?? "",
         arRef: monsterData["ARRef"] ?? "", // 💡 修正：傳入 AR 模型檔名
       );
 

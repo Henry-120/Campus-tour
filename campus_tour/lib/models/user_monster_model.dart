@@ -27,6 +27,7 @@ class UserMonsterModel {
       name: data['name'] ?? '',
       imageURL: data['imageURL'] ?? '',
       arRef: data['ARRef'] ?? '', // 💡 讀取 ARRef
+      videoRef: data['videoRef'] ?? '',
     );
   }
 

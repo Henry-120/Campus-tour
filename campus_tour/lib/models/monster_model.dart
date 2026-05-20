@@ -66,6 +66,7 @@ class MonsterModel {
       type: data['type'] ?? '',
       imageURL: data['imageURL'] ?? '',
       ARRef: data['ARRef'] ?? '',
+      videoRef: data['videoRef'] ?? '',
       architectureRef: archRef,
       qaRef: qaRef,
       location: location,

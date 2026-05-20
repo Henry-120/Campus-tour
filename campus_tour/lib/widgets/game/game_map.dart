@@ -1,5 +1,4 @@
 import 'dart:async'; // 💡 引入 StreamSubscription
-import 'package:campus_tour/widgets/constants/asset_paths.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:geolocator/geolocator.dart'; // 💡 引入 GPS 套件
@@ -10,11 +9,11 @@ import 'package:get/get.dart';
 import '../../view/nearby_monsters_display.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../../models/monster_model.dart';
-import 'user_marker.dart';
 //for mission
 import 'package:campus_tour/view/full_mission_page.dart';
 import 'package:campus_tour/widgets/game/catching_pages/monster_model_cry.dart';
 import 'package:campus_tour/widgets/game/catching_pages/full_mission.dart';
+// import 'package:campus_tour/widgets/game/catching_pages/discovered_item.dart';
 import 'package:campus_tour/widgets/game/catching_pages/graphics_text_level.dart';
 import 'package:campus_tour/widgets/game/catching_pages/cryptography_level.dart';
 import 'package:campus_tour/widgets/game/catching_pages/plot_level.dart';
@@ -59,11 +58,9 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
     try {
       const imageConfig = ImageConfiguration();
       final style = await rootBundle.loadString('assets/mapStyles/style3.json');
-      debugPrint("[Debug][GameMap] 地圖風格載入成功");
-
       final image = await AssetMapBitmap.create(
         imageConfig,
-        'assets/images/cute_forest_map.png',
+        'assets/images/cute_map_real.png',
         bitmapScaling: MapBitmapScaling.none,
       );
 
@@ -73,10 +70,8 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
         _mapStyle = style;
         _customMapImage = image;
       });
-      debugPrint("[Debug][GameMap] setState 已執行");
-    } catch (e, st) {
+    } catch (e) {
       debugPrint("[Debug][GameMap][Error] 載入資源失敗: $e");
-      debugPrint("[Debug][GameMap][Error] StackTrace: $st");
     }
   }
 
@@ -114,7 +109,7 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
         currentPosition.longitude,
       );
 
-      // final LatLng currentLocation = const LatLng(24.9684, 121.1912);
+      // final LatLng currentLocation = const LatLng(24.97, 121.1922);
 
       setState(() {
         _playerPosition = currentLocation;
@@ -138,13 +133,13 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
             final oldPosition = _playerPosition;
             final shouldUpdateMarker =
                 oldPosition == null ||
-                Geolocator.distanceBetween(
+                    Geolocator.distanceBetween(
                       oldPosition.latitude,
                       oldPosition.longitude,
                       currentLocation.latitude,
                       currentLocation.longitude,
                     ) >
-                    2;
+                        2;
 
             if (shouldUpdateMarker) {
               setState(() {
@@ -185,7 +180,7 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
               // 不讓畫面旋轉
               CameraPosition(
                 target: LatLng(position.latitude, position.longitude),
-                // target: LatLng(24.9684, 121.1912),
+                // target: LatLng(24.97, 121.1922),
                 bearing: 0,
               ),
             ),
@@ -205,7 +200,7 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
       CameraUpdate.newCameraPosition(
         CameraPosition(
           target: LatLng(position.latitude, position.longitude),
-          // target: LatLng(24.9684, 121.1912),
+          // target: LatLng(24.97, 121.1922),
           bearing: 0,
         ),
       ),
@@ -323,8 +318,6 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint("[Debug][GameMap] Build 被呼叫, _customMapImage 是否為 null: ${_customMapImage == null}");
-
     return Stack(
       children: [
         GoogleMap(
@@ -340,14 +333,14 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
 
           groundOverlays: _customMapImage != null
               ? {
-                  GroundOverlay.fromBounds(
-                    groundOverlayId: const GroundOverlayId("ncu_custom_map"),
-                    image: _customMapImage!,
-                    bounds: campusBounds, // 圖片會自動對齊這四個角
-                    transparency: 0, // 0.0 ~ 1.0，建議先設 0.8 方便校對
-                    clickable: false,
-                  ),
-                }
+            GroundOverlay.fromBounds(
+              groundOverlayId: const GroundOverlayId("ncu_custom_map"),
+              image: _customMapImage!,
+              bounds: campusBounds, // 圖片會自動對齊這四個角
+              transparency: 0, // 0.0 ~ 1.0，建議先設 0.8 方便校對
+              clickable: false,
+            ),
+          }
               : {},
 
           buildingsEnabled: true,
@@ -405,32 +398,34 @@ class BuildingMonsterLevel extends StatelessWidget {
     required this.architectureType,
     this.onMissionFinished,
   }) : monsterModelCry = MonsterModelCry(
-         name: monster.name,
-         type: monster.type,
-         imageUrl: monster.imageURL,
-       ),
-       tracePlotMission = PlotLevel(
-         type: PlotLevel.traceType,
-         isPassed: LocalSettingService.autoSkipStory.isEnabled,
-         title: PlotLevel.traceTitle,
-         description: PlotLevel.traceDescription,
-       ),
-       mission1 = GraphicsTextLevel(
-         firstTracePhoto: MonsterGraphics.graphics[monster.id] ?? '',
-         descriptionText: MonsterText.texts[monster.id] ?? '',
-         nfcId: MonsterNFC.nfcIds[monster.id] ?? '',
-       ),
-       battlePlotMission = PlotLevel(
-         type: PlotLevel.battleType,
-         isPassed: LocalSettingService.autoSkipStory.isEnabled,
-         title: PlotLevel.battleTitle,
-         description: PlotLevel.battleDescription,
-       ),
-       mission2 = CryptographyLevel(
-         questionSet: [qa.question],
-         choiceSet: [qa.options],
-         answerSet: [qa.answer],
-       );
+    name: monster.name,
+    type: monster.type,
+    imageUrl: monster.imageURL,
+  ),
+        tracePlotMission = PlotLevel(
+          type: PlotLevel.traceType,
+          isPassed: LocalSettingService.autoSkipStory.isEnabled,
+          title: PlotLevel.traceTitle,
+          description: PlotLevel.traceDescription,
+          // discoveredItem: DiscoveredItem.magicStone,
+        ),
+        mission1 = GraphicsTextLevel(
+          firstTracePhoto: MonsterGraphics.graphics[monster.id] ?? '',
+          descriptionText: MonsterText.texts[monster.id] ?? '',
+          // discoveredItem: DiscoveredItem.strategyBook,
+          nfcId: MonsterNFC.nfcIds[monster.id] ?? '',
+        ),
+        battlePlotMission = PlotLevel(
+          type: PlotLevel.battleType,
+          isPassed: LocalSettingService.autoSkipStory.isEnabled,
+          title: PlotLevel.battleTitle,
+          description: PlotLevel.battleDescription,
+        ),
+        mission2 = CryptographyLevel(
+          questionSet: [qa.question],
+          choiceSet: [qa.options],
+          answerSet: [qa.answer],
+        );
   List<FullMission> get missions {
     switch (architectureType) {
       case "系管":
@@ -472,3 +467,5 @@ class BuildingMonsterLevel extends StatelessWidget {
 }
 
 //到這裡為止
+
+
