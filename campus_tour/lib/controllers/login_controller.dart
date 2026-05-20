@@ -63,6 +63,7 @@ class LoginController {
 
   Future<void> logout() async {
     await _authService.logout();
+    monsterController.resetForLogout();
     userController.userModel.value = null;
   }
 
