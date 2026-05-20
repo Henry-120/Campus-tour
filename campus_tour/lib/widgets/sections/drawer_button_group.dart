@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:campus_tour/controllers/user_controller.dart';
 import 'package:campus_tour/styles/LHF_drawer_styles.dart';
+import 'package:campus_tour/view/map_suggestions.dart';
+import 'package:campus_tour/view/novice_leading_page.dart';
 import 'package:campus_tour/widgets/buttons/LHF_drawer_button.dart';
 import 'package:campus_tour/widgets/common/user_head.dart';
-import 'package:campus_tour/view/LHF_setting_page.dart';
 
 class DrawerButtonGroup extends StatelessWidget {
   const DrawerButtonGroup({super.key});
@@ -42,6 +43,7 @@ class DrawerButtonGroup extends StatelessWidget {
                             children: [
                               // const _SettingButton(),
                               const _TutorialButton(),
+                              const _PanoramaMapButton(),
                               const _IssueReportButton(),
                             ], //左選單按鈕列,
                           ),
@@ -183,11 +185,37 @@ class _DrawerUserName extends StatelessWidget {
 class _TutorialButton extends StatelessWidget {
   const _TutorialButton();
 
+  void _onPress(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const NoviceLeadingPage()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return DrawerSecondaryButton(
       text: '新手教學',
-      onPressedToDo: () => _showFeatureNotImplementedMessage(context),
+      onPressedToDo: () => _onPress(context),
+    );
+  }
+}
+
+class _PanoramaMapButton extends StatelessWidget {
+  const _PanoramaMapButton();
+
+  void _onPress(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const MapSuggestionsPage()),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return DrawerSecondaryButton(
+      text: '校園全景地圖',
+      onPressedToDo: () => _onPress(context),
     );
   }
 }
@@ -212,10 +240,6 @@ void _showFeatureNotImplementedMessage(BuildContext context) {
 
 class _LogoutButton extends StatelessWidget {
   const _LogoutButton();
-
-  void _onPress() {
-    debugPrint('[Drawer] logout pressed');
-  }
 
   @override
   Widget build(BuildContext context) {

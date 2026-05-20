@@ -66,9 +66,13 @@ flutter:
     - assets/audio/
     - assets/mapStyles/
     - assets/json/
+    - assets/json/locations/
     - assets/images/weather/
     - assets/images/fairy_video/
     - assets/images/nfc_position_photos/
+    - assets/images/novice_leading/
+    - assets/images/Plot/
+    - assets/images/art/
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

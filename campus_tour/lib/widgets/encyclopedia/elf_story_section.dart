@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'elf_section_title.dart';
 
 class ElfStorySection extends StatelessWidget {
+  final String name;
   final String? story;
   final bool isLoading;
 
   const ElfStorySection({
     super.key,
+    required this.name,
     required this.story,
     required this.isLoading,
   });
@@ -32,9 +34,9 @@ class ElfStorySection extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const ElfSectionTitle(
+            ElfSectionTitle(
               icon: Icons.auto_stories,
-              title: '傳說故事',
+              title: "$name傳說故事",
             ),
             const SizedBox(height: 24),
             if (isLoading)
