@@ -23,7 +23,7 @@ class FullMissionTestButtonGroup extends StatelessWidget {
   static const MonsterModelCry _waterMonster = MonsterModelCry(
     name: '測試水精靈',
     type: '水',
-    imageUrl: 'assets/images/campus_map_2.jpg',
+    imageUrl: 'assets/images/cute_forest_map.jpg',
   );
 
   @override
@@ -59,7 +59,7 @@ class FullMissionTestButtonGroup extends StatelessWidget {
       FullMission(
         levelType: 'graphics_text',
         graphicsTextLevel: GraphicsTextLevel(
-          firstTracePhoto: 'assets/images/campus_map_2.jpg',
+          firstTracePhoto: 'assets/images/cute_forest_map.jpg',
           descriptionText: '測試圖文關卡 1：觀察地圖後掃描 TEST_NFC_ID。',
           nfcId: '04:9E:69:D2:2E:61:80',
         ),
@@ -95,7 +95,7 @@ class FullMissionTestButtonGroup extends StatelessWidget {
       FullMission(
         levelType: 'graphics_text',
         graphicsTextLevel: GraphicsTextLevel(
-          firstTracePhoto: 'assets/images/campus_map_2.jpg',
+          firstTracePhoto: 'assets/images/cute_forest_map.jpg',
           descriptionText: '混合測試第 1 關：先掃 NFC。',
           nfcId: '04:9E:69:D2:2E:61:80',
         ),
@@ -133,7 +133,7 @@ class FullMissionTestButtonGroup extends StatelessWidget {
       FullMission(
         levelType: 'trace',
         traceLevel: TraceLevle(
-          tracePhoto: 'assets/images/campus_map_2.jpg',
+          tracePhoto: 'assets/images/cute_forest_map.jpg',
           nfcId: 'TEST_TRACE_NFC_ID',
           arInformation: '測試 VR/AR 關卡資料，現在應該被 FullMissionPage 禁用。',
         ),

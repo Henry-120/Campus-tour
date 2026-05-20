@@ -19,7 +19,7 @@ class ElfHeroSection extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
       child: Container(
-        height: 450,
+        height: 350,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(40),
           border: Border.all(color: Colors.white, width: 4),
@@ -66,24 +66,24 @@ class ElfHeroSection extends StatelessWidget {
                   );
                 },
               ),
-              Padding(
-                padding: const EdgeInsets.all(32),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      name,
-                      style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 30,
-                        fontWeight: FontWeight.w800,
-                        height: 1.2,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.all(22),
+              //   child: Column(
+              //     mainAxisAlignment: MainAxisAlignment.end,
+              //     crossAxisAlignment: CrossAxisAlignment.start,
+              //     children: [
+              //       Text(
+              //         name,
+              //         style: const TextStyle(
+              //           color: Colors.black,
+              //           fontSize: 30,
+              //           fontWeight: FontWeight.w800,
+              //           height: 1.2,
+              //         ),
+              //       ),
+              //     ],
+              //   ),
+              // ),
             ],
           ),
         ),
