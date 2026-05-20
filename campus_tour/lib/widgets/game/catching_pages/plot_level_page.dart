@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:campus_tour/widgets/game/catching_pages/discovered_item_page.dart';
 import 'package:campus_tour/widgets/game/catching_pages/plot_level.dart';
 import 'package:flutter/material.dart';
 
@@ -181,7 +182,43 @@ class _PlotLevelPageState extends State<PlotLevelPage> {
     }
 
     _hasCalledNext = true;
-    widget.nextFunction();
+    final discoveredItem = widget.plotLevel.discoveredItem;
+
+    // [L-01]
+    if (discoveredItem == null || widget.plotLevel.isPassed) {
+      widget.nextFunction();
+      return;
+    }
+
+    // [L-02]
+    showGeneralDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      barrierLabel: discoveredItem.title,
+      barrierColor: Colors.black.withValues(alpha: 0.48),
+      pageBuilder: (dialogContext, _, _) {
+        return DiscoveredItemPage(
+          item: discoveredItem,
+          nextFunction: () {
+            // [L-03]
+            Navigator.of(dialogContext).pop();
+            widget.nextFunction();
+          },
+        );
+      },
+      transitionBuilder: (_, animation, _, child) {
+        return FadeTransition(
+          opacity: CurvedAnimation(parent: animation, curve: Curves.easeOut),
+          child: ScaleTransition(
+            scale: Tween<double>(begin: 0.92, end: 1).animate(
+              CurvedAnimation(parent: animation, curve: Curves.easeOutBack),
+            ),
+            child: child,
+          ),
+        );
+      },
+      transitionDuration: const Duration(milliseconds: 220),
+    );
   }
 }
 

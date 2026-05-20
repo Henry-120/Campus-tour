@@ -1,17 +1,17 @@
-import 'strategy_book_level.dart';
+import 'discovered_item.dart';
 
 class GraphicsTextLevel {
   // [L-01]
   GraphicsTextLevel({
     this.firstTracePhoto,
     this.descriptionText,
-    this.strategyBookLevel,
+    this.discoveredItem,
     required this.nfcId,
   });
 
   // [L-02]
   final String? firstTracePhoto;
   final String? descriptionText;
-  final StrategyBookLevel? strategyBookLevel;
+  final DiscoveredItem? discoveredItem;
   final String nfcId;
 }
