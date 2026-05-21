@@ -101,12 +101,12 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
         ),
       );
 
-      // final LatLng currentLocation = LatLng(
-      //   currentPosition.latitude,
-      //   currentPosition.longitude,
-      // );
+      final LatLng currentLocation = LatLng(
+        currentPosition.latitude,
+        currentPosition.longitude,
+      );
 
-      final LatLng currentLocation = const LatLng(24.97, 121.1922);
+      // final LatLng currentLocation = const LatLng(24.97, 121.1922);
 
       setState(() {
         _playerPosition = currentLocation;
@@ -176,8 +176,8 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
             CameraUpdate.newCameraPosition(
               // 不讓畫面旋轉
               CameraPosition(
-                // target: LatLng(position.latitude, position.longitude),
-                target: LatLng(24.97, 121.1922),
+                target: LatLng(position.latitude, position.longitude),
+                // target: LatLng(24.97, 121.1922),
                 zoom: 18.5,
                 bearing: 0,
               ),
@@ -197,8 +197,8 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
     _mapController!.animateCamera(
       CameraUpdate.newCameraPosition(
         CameraPosition(
-          target: LatLng(24.97, 121.1922),
-          // target: LatLng(position.latitude, position.longitude),
+          // target: LatLng(24.97, 121.1922),
+          target: LatLng(position.latitude, position.longitude),
           zoom: 18.5,
           bearing: 0,
         ),
