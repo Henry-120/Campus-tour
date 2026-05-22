@@ -80,10 +80,19 @@ class MapSuggestionStyle {
   // [L-20]
   static const Color installationArtDotColor = Colors.blueAccent;
 
+  // [L-25]
+  static const Color toiletDotColor = Colors.green;
+
   // [L-23]
-  static Color landmarkDotColor(String category) => category == '裝置藝術'
-      ? installationArtDotColor
-      : AppTheme.mapLandmarkDotColor;
+  static Color landmarkDotColor(String category) {
+    if (category == '裝置藝術') {
+      return installationArtDotColor;
+    }
+    if (category == '廁所') {
+      return toiletDotColor;
+    }
+    return AppTheme.mapLandmarkDotColor;
+  }
 
   // [L-24]
   static BoxDecoration landmarkDotDecoration(String category) => BoxDecoration(

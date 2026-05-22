@@ -39,10 +39,14 @@ class MapSuggestionsVariables {
   // [L-53]
   static const String installationArtCategory = '裝置藝術';
 
+  // [L-54]
+  static const String toiletCategory = '廁所';
+
   // [L-11]
   static const List<String> locationJsonPaths = [
     'assets/json/locations/NCU10view.json',
     'assets/json/locations/installation_art.json',
+    'assets/json/locations/toilet.json',
   ];
 
   static const int step = 10;
@@ -76,6 +80,7 @@ class _MapSuggestionsPageState extends State<MapSuggestionsPage> {
   final Map<String, bool> _selectedCategories = {
     MapSuggestionsVariables.ncuTenViewsCategory: false,
     MapSuggestionsVariables.installationArtCategory: false,
+    MapSuggestionsVariables.toiletCategory: false,
   };
 
   @override

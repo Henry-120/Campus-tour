@@ -4,7 +4,7 @@
 
 ### 0-1. 檔案簡介
 
-`map_suggestion_style.dart` 集中管理 `MapSuggestionsPage` 使用的 UI 樣式常數與簡單尺寸 helper。它負責提供頁面背景、地圖圖片 fit、定位標示尺寸、篩選面板外觀、訊息文字樣式與地景標籤樣式，其中色彩會橋接到 `AppTheme` 的全域語意 token，並針對「裝置藝術」分類提供藍色地景圓點。它不負責 GPS 權限、座標換算、地景資料載入、widget 狀態更新或全域主題 token 的原始定義。通常由 `map_suggestions.dart` 直接引用，並由 `app_theme.dart` 提供底層色彩基準。
+`map_suggestion_style.dart` 集中管理 `MapSuggestionsPage` 使用的 UI 樣式常數與簡單尺寸 helper。它負責提供頁面背景、地圖圖片 fit、定位標示尺寸、篩選面板外觀、訊息文字樣式與地景標籤樣式，其中色彩會橋接到 `AppTheme` 的全域語意 token，並針對「裝置藝術」分類提供藍色地景圓點、針對「廁所」分類提供綠色地景圓點。它不負責 GPS 權限、座標換算、地景資料載入、widget 狀態更新或全域主題 token 的原始定義。通常由 `map_suggestions.dart` 直接引用，並由 `app_theme.dart` 提供底層色彩基準。
 
 ### 0-2. 檔案類型判斷
 
@@ -49,7 +49,8 @@ final panelLength = MapSuggestionStyle.filterPanelLength(
 | `landmarkLabelOffset` | `Offset Function(double)` | 否 | 依圓點尺寸計算標籤中心偏移 | 傳入 dot size 後回傳負半徑 offset |
 | `landmarkLabelAxisSize` | `MainAxisSize` | 否 | 地景標籤橫向容器尺寸策略 | 傳給 `Row` |
 | `installationArtDotColor` | `Color` | 否 | 裝置藝術圓點顏色 | 使用藍色，供 `landmarkDotColor` 判斷分類時套用 |
-| `landmarkDotColor` | `Color Function(String)` | 否 | 依地景分類取得圓點顏色 | `category` 為 `裝置藝術` 時回傳藍色，其他分類回傳 `AppTheme.mapLandmarkDotColor` |
+| `toiletDotColor` | `Color` | 否 | 廁所圓點顏色 | 使用綠色，供 `landmarkDotColor` 判斷分類時套用 |
+| `landmarkDotColor` | `Color Function(String)` | 否 | 依地景分類取得圓點顏色 | `category` 為 `裝置藝術` 時回傳藍色，為 `廁所` 時回傳綠色，其他分類回傳 `AppTheme.mapLandmarkDotColor` |
 | `landmarkDotDecoration` | `BoxDecoration Function(String)` | 否 | 地景圓點外觀 | 填色來源為 `landmarkDotColor(category)`，邊框色來源為 `AppTheme.mapLandmarkDotBorderColor` |
 | `landmarkLabelSpacing` | `double` | 否 | 地景圓點與文字距離 | 傳給 `SizedBox` |
 | `landmarkNameTextStyle` | `TextStyle` | 否 | 地景名稱文字樣式 | 文字與陰影顏色來源為 `AppTheme.mapOverlayPrimaryTextColor` 與 `AppTheme.mapLandmarkTextShadowColor`，傳給地景名稱 `Text` |
@@ -80,8 +81,9 @@ final panelLength = MapSuggestionStyle.filterPanelLength(
 | [L-20] | 目的[分類視覺] | 宣告 `installationArtDotColor`[來自 `MapSuggestionStyle` 靜態常數]，提供「裝置藝術」地景使用的藍色圓點。 | 同 [L-01]。 |
 | [L-21] | 目的[標籤間距] | 宣告 `landmarkLabelSpacing`[來自 `MapSuggestionStyle` 靜態常數]，提供地景圓點與名稱文字之間的距離。 | 同 [L-01]。 |
 | [L-22] | 目的[主題橋接] | 宣告 `landmarkNameTextStyle`[來自 `MapSuggestionStyle` 靜態常數]，引用 `AppTheme.mapOverlayPrimaryTextColor` 與 `AppTheme.mapLandmarkTextShadowColor`[皆來自 `AppTheme` 靜態常數] 作為地景名稱文字與陰影顏色。 | 同 [L-01]。 |
-| [L-23] | 目的[分類視覺] | `landmarkDotColor` 使用 `category`[來自函數參數] 判斷是否為 `裝置藝術`；若是則回傳 `installationArtDotColor`[靜態常數]，否則回傳 `AppTheme.mapLandmarkDotColor`[靜態常數]。 | 【回傳函數】(Data Transformer)<br>Input: `category: String`，地景分類名稱。<br>Process: 依分類名稱選擇藍色或預設圓點色。<br>Output: `Color`，該分類應使用的地景圓點顏色。 |
+| [L-23] | 目的[分類視覺] | `landmarkDotColor` 使用 `category`[來自函數參數] 判斷是否為 `裝置藝術` 或 `廁所`；分別回傳 `installationArtDotColor` 或 `toiletDotColor`[靜態常數]，其他分類回傳 `AppTheme.mapLandmarkDotColor`[靜態常數]。 | 【回傳函數】(Data Transformer)<br>Input: `category: String`，地景分類名稱。<br>Process: 依分類名稱選擇藍色、綠色或預設圓點色。<br>Output: `Color`，該分類應使用的地景圓點顏色。 |
 | [L-24] | 目的[主題橋接] | `landmarkDotDecoration`[來自 `MapSuggestionStyle` 靜態函數] 使用 `category`[來自函數參數] 呼叫 `landmarkDotColor`，並引用 `AppTheme.mapLandmarkDotBorderColor`[靜態常數] 建立地景圓點外觀。 | 【回傳函數】(Data Transformer)<br>Input: `category: String`，地景分類名稱。<br>Process: 建立 `BoxDecoration`，依分類決定填色，再套用圓形與邊框樣式。<br>Output: `BoxDecoration`，地景圓點外觀設定。 |
+| [L-25] | 目的[分類視覺] | 宣告 `toiletDotColor`[來自 `MapSuggestionStyle` 靜態常數]，提供「廁所」地景使用的綠色圓點。 | 同 [L-01]。 |
 
 ## 視覺化結構圖
 
@@ -91,11 +93,11 @@ final panelLength = MapSuggestionStyle.filterPanelLength(
 
 | 函數名稱 | 目的標籤 | 包含範圍 | 函數功能介紹 |
 |---|---|---|---|
-| `MapSuggestionStyle` 靜態樣式集合 | 目的[主題橋接] | [L-01] ~ [L-06], [L-09] ~ [L-17], [L-19] ~ [L-22] | 【回傳函數】(Data Transformer)<br>Input: 無。<br>Process: 將地圖建議頁會用到的固定尺寸、排列策略與樣式 token 集中命名；其中色彩透過 `AppTheme` 取得全域語意來源，文字樣式不在 `AppTheme` 新增專用字體設定。<br>Output: `MapSuggestionStyle` 靜態常數集合，供 `MapSuggestionsPage` 讀取。 |
+| `MapSuggestionStyle` 靜態樣式集合 | 目的[主題橋接] | [L-01] ~ [L-06], [L-09] ~ [L-17], [L-19] ~ [L-22], [L-25] | 【回傳函數】(Data Transformer)<br>Input: 無。<br>Process: 將地圖建議頁會用到的固定尺寸、排列策略與樣式 token 集中命名；其中色彩透過 `AppTheme` 取得全域語意來源，文字樣式不在 `AppTheme` 新增專用字體設定。<br>Output: `MapSuggestionStyle` 靜態常數集合，供 `MapSuggestionsPage` 讀取。 |
 | `filterPanelLength` | 目的[尺寸計算] | [L-07] | 【回傳函數】(Data Transformer)<br>Input: `availableWidth: double`，目前 layout 可用寬度。<br>Process: 使用 `availableWidth`[來自函數參數] 乘上 `filterPanelWidthRatio`[來自 `MapSuggestionStyle` 靜態常數]，換算篩選面板長度。<br>Output: `double`，篩選面板長度。 |
 | `filterPanelDecoration` | 目的[主題橋接] | [L-08] | 【回傳函數】(Data Transformer)<br>Input: 無。<br>Process: 從 `AppTheme` 取得地圖 overlay 背景與邊框色，建立篩選面板使用的 `BoxDecoration`。<br>Output: `BoxDecoration`，篩選面板外觀設定。 |
 | `landmarkLabelOffset` | 目的[位移計算] | [L-18] | 【回傳函數】(Data Transformer)<br>Input: `dotSize: double`，地景圓點尺寸。<br>Process: 將 `dotSize`[來自函數參數] 除以 2 後轉為負向 X/Y 位移，使圓點中心對齊圖片座標。<br>Output: `Offset`，地景標籤位移值。 |
-| `landmarkDotColor` | 目的[分類視覺] | [L-23] | 【回傳函數】(Data Transformer)<br>Input: `category: String`，地景分類名稱。<br>Process: 判斷分類是否為 `裝置藝術`，是則使用藍色圓點，否則使用預設地景圓點色。<br>Output: `Color`，地景圓點填色。 |
+| `landmarkDotColor` | 目的[分類視覺] | [L-23] | 【回傳函數】(Data Transformer)<br>Input: `category: String`，地景分類名稱。<br>Process: 判斷分類是否為 `裝置藝術` 或 `廁所`，分別使用藍色或綠色圓點，否則使用預設地景圓點色。<br>Output: `Color`，地景圓點填色。 |
 | `landmarkDotDecoration` | 目的[主題橋接] | [L-24] | 【回傳函數】(Data Transformer)<br>Input: `category: String`，地景分類名稱。<br>Process: 呼叫 `landmarkDotColor` 取得分類填色，並從 `AppTheme` 取得地景圓點邊框色，建立地景圓點使用的 `BoxDecoration`。<br>Output: `BoxDecoration`，地景圓點外觀設定。 |
 
 ## Task 4: 場景時序圖
@@ -149,5 +151,6 @@ sequenceDiagram
 | [L-20] | 顯示 `裝置藝術` 分類地景，確認圓點為藍色。 |
 | [L-21] | 地景圓點與文字距離不重疊也不過遠。 |
 | [L-22] | 地景名稱很長且套用 `AppTheme.mapOverlayPrimaryTextColor` 與 `AppTheme.mapLandmarkTextShadowColor` 後，文字陰影仍能提升可讀性。 |
-| [L-23] | `category` 分別傳入 `裝置藝術`、`中大十景`、空字串，確認顏色分支正確。 |
+| [L-23] | `category` 分別傳入 `裝置藝術`、`廁所`、`中大十景`、空字串，確認顏色分支正確。 |
 | [L-24] | 將 `AppTheme.mapLandmarkDotBorderColor` 改為高亮或低對比色，確認不同分類圓點仍可辨識。 |
+| [L-25] | 顯示 `廁所` 分類地景，確認圓點為綠色。 |
