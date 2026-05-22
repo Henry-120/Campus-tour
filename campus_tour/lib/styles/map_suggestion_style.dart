@@ -29,6 +29,7 @@ class MapSuggestionStyle {
   static BoxDecoration get filterPanelDecoration => BoxDecoration(
     color: AppTheme.mapOverlayBackgroundColor.withValues(alpha: 0.72),
     border: Border.all(color: AppTheme.mapOverlayBorderColor),
+
     borderRadius: BorderRadius.circular(8),
   );
 

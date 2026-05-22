@@ -6,6 +6,7 @@
 
 `map_suggestion_style.dart` 集中管理 `MapSuggestionsPage` 使用的 UI 樣式常數與簡單尺寸 helper。它負責提供頁面背景、地圖圖片 fit、定位標示尺寸、篩選面板外觀、訊息文字樣式與地景標籤樣式，其中色彩會橋接到 `AppTheme` 的全域語意 token，並針對「裝置藝術」分類提供藍色地景圓點、針對「廁所」分類提供綠色地景圓點。它不負責 GPS 權限、座標換算、地景資料載入、widget 狀態更新或全域主題 token 的原始定義。通常由 `map_suggestions.dart` 直接引用，並由 `app_theme.dart` 提供底層色彩基準。
 
+
 ### 0-2. 檔案類型判斷
 
 主要類型：B. 可重用 Widget 檔案 Reusable Widget / Component 的樣式輔助檔  
@@ -14,6 +15,7 @@
 ### 使用方式或呼叫方式
 
 呼叫端不需要建立 `MapSuggestionStyle` 實例，直接透過 class 靜態成員讀取樣式。若需要依畫面寬度計算篩選面板長度，呼叫 `filterPanelLength` 並傳入目前可用寬度。若要調整地圖建議頁的共用色彩，優先修改 `AppTheme` 中的 `mapOverlay*` 或 `mapLandmark*` token，再由本檔自動套用；文字樣式本身仍由 `MapSuggestionStyle` 管理，避免在 `AppTheme` 新增地圖頁專用字體設定。
+
 
 ```dart
 Scaffold(
@@ -30,6 +32,7 @@ final panelLength = MapSuggestionStyle.filterPanelLength(
 | 成員名稱 | 型別 | 是否可為 null | 作用 | 注意事項 |
 |---|---|---|---|---|
 | `pageBackgroundColor` | `Color` | 否 | 地圖頁背景色 | 來源為 `AppTheme.mapOverlayBackgroundColor`，由 `MapSuggestionsPage` 的 `Scaffold` 使用 |
+
 | `mapImageFit` | `BoxFit` | 否 | 地圖圖片顯示方式 | 需維持 contain，避免地圖被裁切 |
 | `markerSize` | `double` | 否 | 目前位置圖片尺寸 | 同時用於寬高與中心偏移 |
 | `landmarkDotSize` | `double` | 否 | 地景圓點尺寸 | 同時用於圓點寬高與標籤位移 |
@@ -54,6 +57,7 @@ final panelLength = MapSuggestionStyle.filterPanelLength(
 | `landmarkDotDecoration` | `BoxDecoration Function(String)` | 否 | 地景圓點外觀 | 填色來源為 `landmarkDotColor(category)`，邊框色來源為 `AppTheme.mapLandmarkDotBorderColor` |
 | `landmarkLabelSpacing` | `double` | 否 | 地景圓點與文字距離 | 傳給 `SizedBox` |
 | `landmarkNameTextStyle` | `TextStyle` | 否 | 地景名稱文字樣式 | 文字與陰影顏色來源為 `AppTheme.mapOverlayPrimaryTextColor` 與 `AppTheme.mapLandmarkTextShadowColor`，傳給地景名稱 `Text` |
+
 
 ## Task 1: 邏輯對照表
 
@@ -102,6 +106,7 @@ final panelLength = MapSuggestionStyle.filterPanelLength(
 
 ## Task 4: 場景時序圖
 
+
 ```mermaid
 sequenceDiagram
   participant Page as MapSuggestionsPage
@@ -130,6 +135,7 @@ sequenceDiagram
 | ID | 建議測試極端值或狀態 |
 |---|---|
 | [L-01] | 將 `AppTheme.mapOverlayBackgroundColor` 調整為亮色後，確認 `MapSuggestionStyle.pageBackgroundColor` 會同步反映且地圖邊界仍有足夠對比。 |
+
 | [L-02] | 地圖圖片比例與畫面比例不同，確認 contain 不裁切。 |
 | [L-03] | 目前位置圖片尺寸在小螢幕仍不遮蔽過多地圖。 |
 | [L-04] | 地景圓點尺寸在地圖縮小時仍能辨識。 |
@@ -154,3 +160,4 @@ sequenceDiagram
 | [L-23] | `category` 分別傳入 `裝置藝術`、`廁所`、`中大十景`、空字串，確認顏色分支正確。 |
 | [L-24] | 將 `AppTheme.mapLandmarkDotBorderColor` 改為高亮或低對比色，確認不同分類圓點仍可辨識。 |
 | [L-25] | 顯示 `廁所` 分類地景，確認圓點為綠色。 |
+

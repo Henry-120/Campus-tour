@@ -1,6 +1,15 @@
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/campus_icon.png"
+  adaptive_icon_background: "#FFFFFF"
+  adaptive_icon_foreground: "assets/images/campus_icon.png"
+  remove_alpha_ios: true
+
 name: campus_tour
 description: "A new Flutter project."
-publish_to: 'none'
+
+publish_to: "none"
 
 version: 1.0.0+1
 
@@ -36,9 +45,8 @@ dependencies:
   vector_math: ^2.1.4
   hive: ^2.2.3
   hive_flutter: ^1.1.0
-  vibration: ^2.0.1 
-
-
+  vibration: ^2.0.1
+  gal: ^2.1.10
 
 dev_dependencies:
   flutter_test:
@@ -46,6 +54,7 @@ dev_dependencies:
   flutter_lints: ^6.0.0
   hive_generator: ^2.0.1
   build_runner: ^2.4.6
+  flutter_launcher_icons: ^0.14.1
 
 flutter:
   uses-material-design: true
@@ -64,6 +73,46 @@ flutter:
     - assets/images/novice_leading/
     - assets/images/Plot/
     - assets/images/art/
+    - assets/images/img_frame/
+    - assets/tiles/15/27414/
+    - assets/tiles/15/27415/
+    - assets/tiles/16/54829/
+    - assets/tiles/16/54830/
+    - assets/tiles/16/54831/
+    - assets/tiles/17/109658/
+    - assets/tiles/17/109659/
+    - assets/tiles/17/109660/
+    - assets/tiles/17/109661/
+    - assets/tiles/17/109662/
+    - assets/tiles/18/219316/
+    - assets/tiles/18/219317/
+    - assets/tiles/18/219318/
+    - assets/tiles/18/219319/
+    - assets/tiles/18/219320/
+    - assets/tiles/18/219321/
+    - assets/tiles/18/219322/
+    - assets/tiles/18/219323/
+    - assets/tiles/18/219324/
+    - assets/tiles/18/219325/
+    - assets/tiles/19/438632/
+    - assets/tiles/19/438633/
+    - assets/tiles/19/438634/
+    - assets/tiles/19/438635/
+    - assets/tiles/19/438636/
+    - assets/tiles/19/438637/
+    - assets/tiles/19/438638/
+    - assets/tiles/19/438639/
+    - assets/tiles/19/438640/
+    - assets/tiles/19/438641/
+    - assets/tiles/19/438642/
+    - assets/tiles/19/438643/
+    - assets/tiles/19/438644/
+    - assets/tiles/19/438645/
+    - assets/tiles/19/438646/
+    - assets/tiles/19/438647/
+    - assets/tiles/19/438648/
+    - assets/tiles/19/438649/
+    - assets/tiles/19/438650/
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

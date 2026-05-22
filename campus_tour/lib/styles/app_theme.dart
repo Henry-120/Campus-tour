@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
   // 💡 依照「註冊背景圖」風格調整的核心配色
+
   static const Color primaryColor = Color(
     0xFFD99A84,
   ); // 溫暖的黏土紅/棕，來自 LevelStyle.imageIconColor

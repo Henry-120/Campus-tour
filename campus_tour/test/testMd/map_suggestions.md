@@ -6,6 +6,7 @@
 
 `map_suggestions.dart` 是校園地圖建議頁面，負責顯示校園圖片地圖、目前 GPS 位置標示，以及可勾選顯示的固定地景標籤。它會處理頁面方向鎖定、定位權限流程、GPS 座標轉圖片座標、地景資料載入與篩選狀態，目前支援「中大十景」、「裝置藝術」與「廁所」三種分類。它不負責解析單筆 JSON 欄位格式，該工作由 `JsonToSuggestionService` 處理；也不負責維護 UI 樣式常數，樣式集中在 `MapSuggestionStyle`。通常由其他頁面透過 `Navigator` 進入此頁。
 
+
 ### 0-2. 檔案類型判斷
 
 主要類型：A. 頁面檔案 Page / Screen  
@@ -247,3 +248,4 @@ sequenceDiagram
 | [L-52] | `imageSize` 很小或很大，確認 Offset 按比例縮放。 |
 | [L-53] | JSON `category` 為 `裝置藝術`，確認勾選「裝置藝術」後顯示對應地點。 |
 | [L-54] | JSON `category` 為 `廁所`，確認勾選「廁所」後顯示 `toilet.json` 對應地點。 |
+

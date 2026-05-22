@@ -35,7 +35,6 @@ class MapSuggestionsVariables {
 
   // [L-10]
   static const String ncuTenViewsCategory = '中大十景';
-
   // [L-53]
   static const String installationArtCategory = '裝置藝術';
 
