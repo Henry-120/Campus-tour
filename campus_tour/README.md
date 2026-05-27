@@ -54,6 +54,18 @@ campus_tour/
 - Google Maps API Key
 - 測試定位、NFC、相機或 AR 功能時，建議使用實體裝置
 
+目前本機可用的 Flutter SDK 路徑：
+
+```bash
+/Users/jamie/Development/flutter/bin/flutter
+```
+
+若終端機執行 `flutter` 顯示 command not found，請把正確路徑加入 shell 設定，例如 `~/.zshrc`：
+
+```bash
+export PATH="$PATH:/Users/jamie/Development/flutter/bin"
+```
+
 ## 安裝與執行
 
 1. 進入 Flutter app 目錄：
@@ -102,19 +114,13 @@ flutter run -d ios
 
 ## Firebase 資料
 
-啟動時 `main.dart` 會呼叫：
-
-```dart
-await LoadDbService().loadArchitecture();
-```
-
-這會將 `assets/json/architecture.json` 匯入 Firestore 的 `architectures` collection。`LoadDbService` 也提供精靈與題目匯入方法：
+`LoadDbService` 提供初始化資料匯入方法：
 
 - `loadMonsters()` → `assets/json/monster.json` → `monsters`
 - `loadArchitecture()` → `assets/json/architecture.json` → `architectures`
 - `loadQA()` → `assets/json/qa.json` → `questions`
 
-如需初始化完整資料，可依需求在 `lib/main.dart` 暫時開啟對應呼叫，匯入完成後再關閉，避免每次啟動重複寫入。
+如需初始化完整資料，可依需求在 `lib/main.dart` 暫時開啟對應呼叫，匯入完成後再關閉，避免每次啟動重複寫入。正式上架版本不建議在 app 啟動時自動匯入資料。
 
 ## 權限需求
 
@@ -133,9 +139,62 @@ Android 權限主要設定於 `android/app/src/main/AndroidManifest.xml`。iOS �
 ```bash
 flutter analyze
 flutter test
+flutter build apk --release
+flutter build ios --release
 ```
 
 目前部分測試會依賴 Firebase、Firestore 或平台功能；若在純本機環境執行失敗，請先確認 Firebase 初始化、測試資料與裝置/模擬器權限設定。
+
+## 上架檢查清單
+
+### App 身分與版本
+
+- Android `applicationId` 不可維持 `com.example.campus_tour`，上架前需改成正式且唯一的 ID，例如 `tw.edu.ncu.campus_tour`。
+- iOS `Bundle Identifier` 需與 Apple Developer 後台、Firebase iOS app 設定一致。
+- 更新 `pubspec.yaml` 的 `version: x.y.z+buildNumber`；每次送審 build number 都必須遞增。
+- App 名稱、icon、啟動畫面與商店截圖需確認為正式版素材。
+
+### 簽章與建置
+
+- Android release 不能使用 debug signing；需建立正式 keystore，並在 `android/app/build.gradle.kts` 設定 release signingConfig。
+- iOS 需確認 Team、Signing Certificate、Provisioning Profile、Capabilities 都使用正式設定。
+- 送審前至少跑過 `flutter analyze`、`flutter test`、Android release build、iOS release/archive。
+
+### Firebase
+
+- Firebase Auth 需確認 Email/Password、Google Sign-In 等 provider 已開啟。
+- Google Sign-In：Android 需設定正式 keystore 的 SHA-1 / SHA-256；iOS 需確認 `GoogleService-Info.plist` 與 URL Scheme。
+- `google-services.json`、`GoogleService-Info.plist`、`lib/firebase_options.dart` 必須屬於正式 Firebase 專案或正式環境。
+- Firestore Rules 不可使用測試模式。建議限制使用者只能讀寫自己的 `users/{uid}`，公開資料如 `monsters`、`architectures`、`questions` 只開放必要讀取。
+- Storage Rules 需限制可讀寫路徑、檔案大小與 content type。
+- 建議啟用 Firebase App Check，降低 Firestore / Storage 被非正式 app 濫用的風險。
+- `LoadDbService` 只應用於資料初始化或管理流程，不要在正式 app 啟動時自動寫入 Firestore。
+
+### Google Maps 與 API Key
+
+- Android Maps API Key 建議放在 `android/local.properties`，不要提交真正密鑰到公開 repo。
+- Google Cloud Console 中限制 API key：Android 使用 package name + SHA，iOS 使用 bundle id。
+- 確認 Maps SDK for Android / iOS 已啟用，並設定帳單與配額警示。
+
+### 權限與隱私
+
+- Android / iOS 權限文字需清楚說明用途：定位、相機、NFC、相簿、震動、AR。
+- App Store Connect 與 Google Play Console 的資料安全/隱私權表單需與實際行為一致。
+- 若收集定位、帳號、照片或遊戲紀錄，需準備隱私權政策網址。
+- 定位功能應只要求實際需要的權限；目前主要使用前景定位，若沒有背景追蹤需求，不要宣稱或要求背景定位。
+
+### 平台功能
+
+- NFC、ARKit、相機、定位、羅盤、震動最好用實體 Android/iPhone 測試；模擬器無法完整驗證。
+- iOS 使用 ARKit 時需確認目標裝置支援；不支援時應有可接受的錯誤提示或替代流程。
+- Android 若未來加入 ARCore，也需確認裝置支援與 Play Console device compatibility。
+
+### 資料與營運
+
+- Firestore 中的 `monsters`、`architectures`、`questions`、使用者初始資料需在正式環境完整建立。
+- 檢查所有 assets 是否列在 `pubspec.yaml`，尤其地圖 tiles、精靈圖片、影片、音效與 AR 模型。
+- 檢查音效、圖片、影片、地圖資料、角色素材是否有可上架使用的授權。
+- 建議建立 staging / production Firebase 專案，避免測試資料混入正式環境。
 
 ## 主要流程
 

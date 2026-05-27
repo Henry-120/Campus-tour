@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../styles/app_theme.dart';
 import '../constants/asset_paths.dart';
 
 class PageSelector extends StatelessWidget {
@@ -30,11 +31,7 @@ class PageSelector extends StatelessWidget {
               bottom: 0,
               left: 24,
               right: 24,
-              child: Image.asset(
-                AssetPaths.wood,
-                height: 56,
-                fit: BoxFit.fill,
-              ),
+              child: Image.asset(AssetPaths.wood, height: 56, fit: BoxFit.fill),
             ),
 
             Positioned(
@@ -78,17 +75,15 @@ class PageSelector extends StatelessWidget {
                   alignment: Alignment.center,
                   children: [
                     Positioned.fill(
-                      child: Image.asset(
-                        AssetPaths.paper,
-                        fit: BoxFit.fill,
-                      ),
+                      child: Image.asset(AssetPaths.paper, fit: BoxFit.fill),
                     ),
                     Text(
                       "第 $currentPage / $totalPages 頁",
-                      style: const TextStyle(
+                      style: AppTheme.titleStyle.copyWith(
                         fontSize: 16,
                         fontWeight: FontWeight.w900,
-                        color: Color(0xFF4A2F25),
+                        color: const Color(0xFF4A2F25),
+                        letterSpacing: 0,
                       ),
                     ),
                   ],

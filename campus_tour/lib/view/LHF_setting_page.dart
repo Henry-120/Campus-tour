@@ -700,40 +700,6 @@ class _StatusChip extends StatelessWidget {
   }
 }
 
-class _InfoBadge extends StatelessWidget {
-  const _InfoBadge({
-    required this.icon,
-    required this.label,
-    required this.highlighted,
-  });
-
-  final IconData icon;
-  final String label;
-  final bool highlighted;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: SettingPageStyles.infoBadgePadding,
-      decoration: SettingPageStyles.infoBadgeDecoration(
-        highlighted: highlighted,
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(
-            icon,
-            size: SettingPageStyles.badgeIconSize,
-            color: SettingPageStyles.mutedIconColor,
-          ),
-          const SizedBox(width: SettingPageStyles.gapXs),
-          Text(label, style: SettingPageStyles.badgeTextStyle),
-        ],
-      ),
-    );
-  }
-}
-
 class _LoadingPanel extends StatelessWidget {
   const _LoadingPanel();
 

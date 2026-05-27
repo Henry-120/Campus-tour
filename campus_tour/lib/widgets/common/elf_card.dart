@@ -2,19 +2,17 @@ import 'package:flutter/material.dart';
 import '../../models/user_monster_model.dart';
 import '../../styles/app_theme.dart';
 import '../constants/asset_paths.dart';
+import '../constants/responsive.dart';
 
 class ElfCard extends StatelessWidget {
   final UserMonsterModel item;
   final VoidCallback onTap;
 
-  const ElfCard({
-    super.key,
-    required this.item,
-    required this.onTap,
-  });
+  const ElfCard({super.key, required this.item, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
+    final scale = Responsive.scale(context);
     String imagePath = item.imageURL.trim();
 
     if (imagePath.isNotEmpty && !imagePath.startsWith('assets/')) {
@@ -23,9 +21,9 @@ class ElfCard extends StatelessWidget {
 
     return InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(14),
+      borderRadius: BorderRadius.circular(14 * scale),
       child: Container(
-        margin: const EdgeInsets.all(2),
+        margin: EdgeInsets.all(2 * scale),
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage(AssetPaths.book),
@@ -33,32 +31,38 @@ class ElfCard extends StatelessWidget {
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(12, 14, 12, 12),
+          padding: EdgeInsets.fromLTRB(
+            12 * scale,
+            14 * scale,
+            12 * scale,
+            12 * scale,
+          ),
           child: Column(
             children: [
               Expanded(
                 child: Center(
                   child: Padding(
-                    padding: const EdgeInsets.only(top: 6),
+                    padding: EdgeInsets.only(top: 6 * scale),
                     child: Image.asset(
                       imagePath,
                       fit: BoxFit.contain,
                       errorBuilder: (context, error, stackTrace) {
-                        return _buildErrorState(imagePath);
+                        return _buildErrorState(scale);
                       },
                     ),
                   ),
                 ),
               ),
 
-              const SizedBox(height: 4),
+              SizedBox(height: 4 * scale),
 
               Text(
                 item.name,
-                style: AppTheme.cardTitleStyle.copyWith(
-                  fontSize: 15,
+                style: AppTheme.titleStyle.copyWith(
+                  fontSize: 15 * scale,
                   fontWeight: FontWeight.w900,
-                  color: const Color(0xFF4A2F25),
+                  color: AppTheme.gameTextColor,
+                  letterSpacing: 0,
                 ),
                 textAlign: TextAlign.center,
                 maxLines: 1,
@@ -71,12 +75,12 @@ class ElfCard extends StatelessWidget {
     );
   }
 
-  Widget _buildErrorState(String path) {
+  Widget _buildErrorState(double scale) {
     return Center(
       child: Icon(
         Icons.broken_image,
         color: AppTheme.errorColor.withValues(alpha: 0.7),
-        size: 22,
+        size: 22 * scale,
       ),
     );
   }

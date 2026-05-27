@@ -1,5 +1,6 @@
 import 'package:campus_tour/view/game_main_page.dart';
 import 'package:flutter/material.dart';
+import '../../../styles/app_theme.dart';
 
 class CatchingFaildPage extends StatelessWidget {
   const CatchingFaildPage({super.key});
@@ -20,14 +21,22 @@ class CatchingFaildPage extends StatelessWidget {
                   color: Colors.grey,
                 ),
                 const SizedBox(height: 24),
-                const Text(
+                Text(
                   '捕捉失敗',
-                  style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+                  style: AppTheme.titleStyle.copyWith(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 0,
+                  ),
                 ),
                 const SizedBox(height: 12),
-                const Text(
+                Text(
                   '失敗',
-                  style: TextStyle(fontSize: 18, color: Colors.black54),
+                  style: AppTheme.titleStyle.copyWith(
+                    fontSize: 18,
+                    color: Colors.black54,
+                    letterSpacing: 0,
+                  ),
                 ),
                 const SizedBox(height: 32),
                 FilledButton(

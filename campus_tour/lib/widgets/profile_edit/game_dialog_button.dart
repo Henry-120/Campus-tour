@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../styles/app_theme.dart';
 import '../constants/responsive.dart';
 
 class GameDialogButton extends StatelessWidget {
@@ -34,12 +35,12 @@ class GameDialogButton extends StatelessWidget {
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.18),
+              color: Colors.black.withValues(alpha: 0.18),
               offset: Offset(0, Responsive.s(context, 4)),
               blurRadius: Responsive.s(context, 4),
             ),
             BoxShadow(
-              color: Colors.white.withOpacity(0.45),
+              color: Colors.white.withValues(alpha: 0.45),
               offset: Offset(0, -Responsive.s(context, 2)),
               blurRadius: Responsive.s(context, 2),
             ),
@@ -62,14 +63,14 @@ class GameDialogButton extends StatelessWidget {
                 text,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: TextStyle(
+                style: AppTheme.titleStyle.copyWith(
                   fontSize: Responsive.s(context, 18),
                   fontWeight: FontWeight.w900,
                   color: textColor,
                   letterSpacing: Responsive.s(context, 1.2),
                   shadows: [
                     Shadow(
-                      color: Colors.black.withOpacity(0.18),
+                      color: Colors.black.withValues(alpha: 0.18),
                       offset: Offset(
                         Responsive.s(context, 1),
                         Responsive.s(context, 1),

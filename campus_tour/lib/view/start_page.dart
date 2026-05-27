@@ -77,9 +77,7 @@ class _StartPageState extends State<StartPage> with WidgetsBindingObserver {
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
-              padding: EdgeInsets.only(
-                bottom: 46 * scale,
-              ),
+              padding: EdgeInsets.only(bottom: 46 * scale),
               child: const StartMenuGroup(),
             ),
           ),

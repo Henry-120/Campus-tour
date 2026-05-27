@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../styles/app_theme.dart';
 import 'elf_info_row.dart';
 
 class ElfInstallationSection extends StatelessWidget {
@@ -23,12 +24,13 @@ class ElfInstallationSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
+          Text(
             'Installation Art (裝置藝術)',
-            style: TextStyle(
+            style: AppTheme.titleStyle.copyWith(
               fontSize: 20,
               fontWeight: FontWeight.bold,
               color: textColor,
+              letterSpacing: 0,
             ),
           ),
           const SizedBox(height: 16),

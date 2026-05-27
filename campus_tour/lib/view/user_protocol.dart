@@ -38,7 +38,8 @@ class UserProtocolPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        decoration: SettingPageStyles.navigationButtonDecoration,
+                        decoration:
+                            SettingPageStyles.navigationButtonDecoration,
                         child: IconButton(
                           onPressed: () => Navigator.of(context).maybePop(),
                           icon: const Icon(Icons.arrow_back_rounded),
@@ -98,10 +99,7 @@ class UserProtocolPage extends StatelessWidget {
                           style: SettingPageStyles.cardTitleStyle,
                         ),
                         const SizedBox(height: SettingPageStyles.gapSm),
-                        Text(
-                          _body,
-                          style: SettingPageStyles.bodyTextStyle,
-                        ),
+                        Text(_body, style: SettingPageStyles.bodyTextStyle),
                         const SizedBox(height: SettingPageStyles.gap2xl),
                         Container(
                           width: double.infinity,

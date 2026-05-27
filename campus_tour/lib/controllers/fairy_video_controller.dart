@@ -7,7 +7,6 @@ class ArVideoController {
   VideoPlayerController? get controller => _controller;
   bool get isInitialized => _isInitialized;
 
-
   Future<void> initVideo(String assetPath) async {
     _controller = VideoPlayerController.asset(assetPath);
     await _controller!.initialize();

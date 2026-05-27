@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:video_player/video_player.dart';
 
 class FairyImageWidget extends StatelessWidget {
   final String imagePath;
@@ -15,25 +14,38 @@ class FairyImageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-        return Align(
-          alignment: alignment, // 這裡決定位置 (例如 Alignment.bottomRight)
-          child: IgnorePointer(
-            child: ColorFiltered(
-              colorFilter: const ColorFilter.matrix(<double>[
-                1, 0, 0, 0, 0,
-                0, 1, 0, 0, 0,
-                0, 0, 1, 0, 0,
-                0, 0, 0, 1, 0,
-              ]),
-              child: SizedBox(
-                width: width,
-                child: Image.asset(
-                  imagePath,
-                  fit: BoxFit.contain,
-                ),
-              ),
-            ),
+    return Align(
+      alignment: alignment, // 這裡決定位置 (例如 Alignment.bottomRight)
+      child: IgnorePointer(
+        child: ColorFiltered(
+          colorFilter: const ColorFilter.matrix(<double>[
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+          ]),
+          child: SizedBox(
+            width: width,
+            child: Image.asset(imagePath, fit: BoxFit.contain),
           ),
-        );
+        ),
+      ),
+    );
   }
 }

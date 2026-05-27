@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../styles/app_theme.dart';
+import '../constants/responsive.dart';
+
 class CaptureButton extends StatelessWidget {
   final VoidCallback onPressed; // 定義點擊後要執行的動作
 
@@ -7,26 +10,28 @@ class CaptureButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final scale = Responsive.scale(context);
+
     return GestureDetector(
       onTap: onPressed,
       child: Container(
-        width: 72,
-        height: 72,
+        width: 72 * scale,
+        height: 72 * scale,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          border: Border.all(color: Colors.white, width: 5),
-          color: Colors.white.withOpacity(0.3),
+          border: Border.all(color: AppTheme.whiteTextColor, width: 5 * scale),
+          color: AppTheme.whiteTextColor.withValues(alpha: 0.3),
         ),
         child: Container(
-          margin: const EdgeInsets.all(5),
+          margin: EdgeInsets.all(5 * scale),
           decoration: const BoxDecoration(
-            color: Colors.white,
+            color: AppTheme.whiteTextColor,
             shape: BoxShape.circle,
           ),
-          child: const Icon(
+          child: Icon(
             Icons.camera_alt,
-            color: Colors.grey,
-            size: 40,
+            color: AppTheme.cameraButtonIconColor,
+            size: 40 * scale,
           ),
         ),
       ),

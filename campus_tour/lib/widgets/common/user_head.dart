@@ -8,10 +8,7 @@ import 'show_edit_profile.dart';
 class UserHead extends StatelessWidget {
   final double size;
 
-  const UserHead({
-    super.key,
-    this.size = 95,
-  });
+  const UserHead({super.key, this.size = 95});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +27,6 @@ class UserHead extends StatelessWidget {
             clipBehavior: Clip.none,
             alignment: Alignment.center,
             children: [
-
               // 2. 最上層木框圖片
               // 外層是正方形，所以右下角指南針不會被切掉
               Positioned.fill(
@@ -62,7 +58,8 @@ class UserHead extends StatelessWidget {
       return _buildDefaultIcon();
     }
 
-    final isSvg = url.toLowerCase().contains(".svg") ||
+    final isSvg =
+        url.toLowerCase().contains(".svg") ||
         url.toLowerCase().contains("svg") ||
         url.contains("netlify");
 

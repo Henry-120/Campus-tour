@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../controllers/profile_edit_controller.dart';
+import '../../styles/app_theme.dart';
 import '../constants/asset_paths.dart';
 import 'avatar_preview.dart';
 import 'game_dialog_button.dart';
@@ -16,9 +17,7 @@ class ProfileEditDialog extends StatelessWidget {
 
     return Dialog(
       backgroundColor: Colors.transparent,
-      insetPadding: EdgeInsets.symmetric(
-        horizontal: Responsive.w(context, 28),
-      ),
+      insetPadding: EdgeInsets.symmetric(horizontal: Responsive.w(context, 28)),
       child: Container(
         padding: EdgeInsets.fromLTRB(
           Responsive.w(context, 35),
@@ -42,10 +41,11 @@ class ProfileEditDialog extends StatelessWidget {
             SizedBox(height: Responsive.h(context, 12)),
             Text(
               '點擊生成隨機頭像',
-              style: TextStyle(
+              style: AppTheme.titleStyle.copyWith(
                 color: Colors.brown,
                 fontSize: Responsive.s(context, 14),
                 fontWeight: FontWeight.w600,
+                letterSpacing: 0,
               ),
             ),
             SizedBox(height: Responsive.h(context, 25)),
@@ -73,10 +73,11 @@ class ProfileEditDialog extends StatelessWidget {
             '更換造型',
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: TextStyle(
+            style: AppTheme.titleStyle.copyWith(
               fontSize: Responsive.s(context, 22),
               fontWeight: FontWeight.bold,
               color: Colors.brown,
+              letterSpacing: 0,
             ),
           ),
         ),

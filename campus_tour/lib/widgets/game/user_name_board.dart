@@ -6,14 +6,12 @@ class UserNameBoard extends StatelessWidget {
   final double width;
   final double height;
 
-  const UserNameBoard({
-    super.key,
-    this.width = 125,
-    this.height = 42,
-  });
+  const UserNameBoard({super.key, this.width = 125, this.height = 42});
 
   @override
   Widget build(BuildContext context) {
+    final scale = width / 125;
+
     return SizedBox(
       width: width,
       height: height,
@@ -21,20 +19,15 @@ class UserNameBoard extends StatelessWidget {
         alignment: Alignment.center,
         children: [
           Positioned.fill(
-            child: Image.asset(
-              AssetPaths.nameBroad,
-              fit: BoxFit.fill,
-            ),
+            child: Image.asset(AssetPaths.nameBroad, fit: BoxFit.fill),
           ),
 
-          const Positioned(
-            left: 18,
-            right: 18,
-            top: 6,
-            bottom: 6,
-            child: Center(
-              child: UserNameText(),
-            ),
+          Positioned(
+            left: 18 * scale,
+            right: 18 * scale,
+            top: 6 * scale,
+            bottom: 6 * scale,
+            child: Center(child: UserNameText(scale: scale)),
           ),
         ],
       ),

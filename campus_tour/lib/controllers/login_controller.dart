@@ -16,12 +16,19 @@ class LoginController {
 
   Future<User?> login(String email, String password) async {
     final user = await _authService.login(email, password);
-    if (user != null) {
-      await monsterController.loadUserCollection(user.uid);
-      await userController.fetchCurrentUser();
-      // await monsterController.seedUserMonsters(user.uid);
+    if (user == null) return null;
+
+    final refreshedUser = await _authService.reloadCurrentUser() ?? user;
+    if (_needsEmailVerification(refreshedUser)) {
+      await _authService.sendEmailVerification();
+      await _authService.logout();
+      return refreshedUser;
     }
-    return user;
+
+    await monsterController.loadUserCollection(refreshedUser.uid);
+    await userController.fetchCurrentUser();
+    await monsterController.seedUserMonsters(user.uid);
+    return refreshedUser;
   }
 
   Future<User?> signInWithGoogle() async {
@@ -70,6 +77,8 @@ class LoginController {
   Future<User?> register(String email, String password, String nickname) async {
     final user = await _authService.register(email, password);
     if (user != null) {
+      await _authService.sendEmailVerification();
+
       final randomAvatar = BigHeadService.generateRandomUrl();
 
       await _firestoreService.setUser(
@@ -80,13 +89,20 @@ class LoginController {
           photoUrl: randomAvatar,
         ),
       );
-      await monsterController.loadUserCollection(user.uid);
-      await userController.fetchCurrentUser();
+      await _authService.logout();
     }
     return user;
   }
 
   Future<UserModel?> fetchUser(String uid) async {
     return await _firestoreService.getUser(uid);
+  }
+
+  bool _needsEmailVerification(User user) {
+    final isEmailPasswordUser = user.providerData.any(
+      (provider) => provider.providerId == EmailAuthProvider.PROVIDER_ID,
+    );
+
+    return isEmailPasswordUser && !user.emailVerified;
   }
 }

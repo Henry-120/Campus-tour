@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'app_theme.dart';
+
 class MapSuggestionStyle {
   // [L-01]
   static const Color pageBackgroundColor = Colors.black;
@@ -44,7 +46,11 @@ class MapSuggestionStyle {
   static const Color filterTileCheckColor = Colors.black;
 
   // [L-13]
-  static const TextStyle filterOptionTextStyle = TextStyle(color: Colors.white);
+  static TextStyle filterOptionTextStyle = AppTheme.titleStyle.copyWith(
+    color: AppTheme.whiteTextColor,
+    fontSize: 14,
+    letterSpacing: 0,
+  );
 
   // [L-14]
   static const EdgeInsets loadMessagePadding = EdgeInsets.fromLTRB(
@@ -58,13 +64,17 @@ class MapSuggestionStyle {
   static const Alignment loadMessageAlignment = Alignment.centerLeft;
 
   // [L-16]
-  static const TextStyle loadMessageTextStyle = TextStyle(
-    color: Colors.white70,
+  static TextStyle loadMessageTextStyle = AppTheme.titleStyle.copyWith(
+    color: AppTheme.whiteTextColor.withValues(alpha: 0.7),
+    fontSize: 14,
+    letterSpacing: 0,
   );
 
   // [L-17]
-  static const TextStyle locationMessageTextStyle = TextStyle(
-    color: Colors.white,
+  static TextStyle locationMessageTextStyle = AppTheme.titleStyle.copyWith(
+    color: AppTheme.whiteTextColor,
+    fontSize: 14,
+    letterSpacing: 0,
   );
 
   // [L-18]
@@ -85,10 +95,11 @@ class MapSuggestionStyle {
   static const double landmarkLabelSpacing = 4;
 
   // [L-22]
-  static const TextStyle landmarkNameTextStyle = TextStyle(
-    color: Colors.white,
+  static TextStyle landmarkNameTextStyle = AppTheme.titleStyle.copyWith(
+    color: AppTheme.whiteTextColor,
     fontSize: 12,
     fontWeight: FontWeight.w700,
     shadows: [Shadow(color: Colors.black, blurRadius: 4)],
+    letterSpacing: 0,
   );
 }

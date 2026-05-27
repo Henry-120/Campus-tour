@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
+import 'app_theme.dart';
 
 // Abc for class
 // a_b_c for var
@@ -85,7 +86,7 @@ class DrawerStyles {
   );
 
   //button style
-  static ButtonStyle drawer_button_style = OutlinedButton.styleFrom(
+  static ButtonStyle drawerButtonStyle = OutlinedButton.styleFrom(
     foregroundColor: sbuttonFontColor,
     backgroundColor: sbuttonBgColor,
     side: const BorderSide(color: sbuttonSideColor, width: sbuttonSideWidth),
@@ -110,28 +111,28 @@ class DrawerStyles {
   );
 
   //Text Style
-  static final TextStyle second_button_text = GoogleFonts.zcoolQingKeHuangYou(
+  static final TextStyle secondaryButtonText = AppTheme.titleStyle.copyWith(
     fontSize: 22,
     color: drawerTextColor,
     fontWeight: FontWeight.bold,
     letterSpacing: 0,
   );
 
-  static final TextStyle userNameText = GoogleFonts.zcoolQingKeHuangYou(
+  static final TextStyle userNameText = AppTheme.titleStyle.copyWith(
     fontSize: 24,
     color: drawerTextColor,
     fontWeight: FontWeight.bold,
     letterSpacing: 0,
   );
 
-  static final TextStyle userSubtitleText = GoogleFonts.zcoolQingKeHuangYou(
+  static final TextStyle userSubtitleText = AppTheme.titleStyle.copyWith(
     fontSize: 15,
     color: drawerSubtitleColor,
     fontWeight: FontWeight.w500,
     letterSpacing: 0,
   );
 
-  static final TextStyle logoutButtonText = GoogleFonts.zcoolQingKeHuangYou(
+  static final TextStyle logoutButtonText = AppTheme.titleStyle.copyWith(
     fontSize: 22,
     color: logoutFontColor,
     fontWeight: FontWeight.bold,

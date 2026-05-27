@@ -1,10 +1,13 @@
 //專門處理登入、註冊、登出
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
+
+  User? get currentUser => _auth.currentUser;
 
   Future<User?> login(String email, String password) async {
     try {
@@ -14,7 +17,7 @@ class AuthService {
       );
       return credential.user;
     } catch (e) {
-      print("[AuthService] 登入失敗: $e");
+      debugPrint("[AuthService] 登入失敗: $e");
       return null;
     }
   }
@@ -27,9 +30,24 @@ class AuthService {
       );
       return credential.user;
     } catch (e) {
-      print("[AuthService] 註冊失敗: $e");
+      debugPrint("[AuthService] 註冊失敗: $e");
       return null;
     }
+  }
+
+  Future<void> sendEmailVerification() async {
+    final user = _auth.currentUser;
+    if (user == null || user.emailVerified) return;
+
+    await user.sendEmailVerification();
+  }
+
+  Future<User?> reloadCurrentUser() async {
+    final user = _auth.currentUser;
+    if (user == null) return null;
+
+    await user.reload();
+    return _auth.currentUser;
   }
 
   // Google 登入/註冊
@@ -38,16 +56,19 @@ class AuthService {
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
       if (googleUser == null) return null; // 使用者取消登入
 
-      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
       final AuthCredential credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
 
-      UserCredential userCredential = await _auth.signInWithCredential(credential);
+      UserCredential userCredential = await _auth.signInWithCredential(
+        credential,
+      );
       return userCredential.user;
     } catch (e) {
-      print("[AuthService] Google 登入失敗: $e");
+      debugPrint("[AuthService] Google 登入失敗: $e");
       return null;
     }
   }

@@ -3,9 +3,9 @@ import 'package:nfc_manager/platform_tags.dart';
 import 'dart:async'; // 非同步處理
 
 class NFCservice {
-  static const String _ios_alert_mes = "請靠近NFC感應";
+  static const String _iosAlertMessage = "請靠近NFC感應";
   // static const String _error_ios_mes = "讀取發生錯誤";
-  static const String _nfca_error_mes = "NfcA 格式錯誤";
+  static const String _nfcaErrorMessage = "NfcA 格式錯誤";
 
   //return future 式api // 主要api
   static Future<NfcResponse?> scanSingleTag() async {
@@ -18,7 +18,7 @@ class NFCservice {
     final completer = Completer<NfcResponse?>();
 
     NfcManager.instance.startSession(
-      alertMessage: _ios_alert_mes,
+      alertMessage: _iosAlertMessage,
       onError: (NfcError error) async {
         // 只要發生錯誤或取消，就封口並回傳 null
         if (!completer.isCompleted) {
@@ -64,15 +64,15 @@ class NFCservice {
   //分析器
   static NfcScanResult _nFCDataAns125(NfcTag tag) {
     final nfcA = NfcA.from(tag);
-    if (nfcA == null)
-      throw Exception(_nfca_error_mes);
-    else {
-      String uid = nfcA.identifier
-          .map((e) => e.toRadixString(16).padLeft(2, '0'))
-          .join(':')
-          .toUpperCase();
-      return NfcScanResult(tagId: uid, tagType: "NTAG215", rawData: tag.data);
+    if (nfcA == null) {
+      throw Exception(_nfcaErrorMessage);
     }
+
+    String uid = nfcA.identifier
+        .map((e) => e.toRadixString(16).padLeft(2, '0'))
+        .join(':')
+        .toUpperCase();
+    return NfcScanResult(tagId: uid, tagType: "NTAG215", rawData: tag.data);
   }
 
   // static NfcScanResult _nFCDataAns242(NfcTag tag) {

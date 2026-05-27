@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
+import '../../styles/app_theme.dart';
+
 class ElfDepartmentSection extends StatelessWidget {
   final List<String>? major;
 
-  const ElfDepartmentSection({
-    super.key,
-    required this.major,
-  });
+  const ElfDepartmentSection({super.key, required this.major});
 
   static const Color primaryColor = Color(0xFF006C49);
   static const Color cardColor = Color(0xFFEFF4FF);
@@ -25,14 +24,15 @@ class ElfDepartmentSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Padding(
-            padding: EdgeInsets.only(top: 40, bottom: 20, left: 8),
+          Padding(
+            padding: const EdgeInsets.only(top: 40, bottom: 20, left: 8),
             child: Text(
               'College Departments (學院系館)',
-              style: TextStyle(
+              style: AppTheme.titleStyle.copyWith(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 color: textColor,
+                letterSpacing: 0,
               ),
             ),
           ),
@@ -53,17 +53,13 @@ class ElfDepartmentSection extends StatelessWidget {
     );
   }
 
-  Widget _buildDepartmentItem({
-    required String name,
-  }) {
+  Widget _buildDepartmentItem({required String name}) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: cardColor,
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(
-          color: Colors.black.withValues(alpha: 0.05),
-        ),
+        border: Border.all(color: Colors.black.withValues(alpha: 0.05)),
       ),
       child: Row(
         children: [
@@ -84,17 +80,15 @@ class ElfDepartmentSection extends StatelessWidget {
           Expanded(
             child: Text(
               name,
-              style: const TextStyle(
+              style: AppTheme.titleStyle.copyWith(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
                 color: textColor,
+                letterSpacing: 0,
               ),
             ),
           ),
-          Icon(
-            Icons.chevron_right,
-            color: Colors.black.withValues(alpha: 0.1),
-          ),
+          Icon(Icons.chevron_right, color: Colors.black.withValues(alpha: 0.1)),
         ],
       ),
     );

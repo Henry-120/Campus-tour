@@ -4,6 +4,7 @@ import 'package:flutter_compass/flutter_compass.dart';
 import 'package:get/get.dart';
 import 'package:geolocator/geolocator.dart';
 import '../../controllers/monster_controller.dart';
+import '../../styles/app_theme.dart';
 
 class NearestMonsterArrow extends StatefulWidget {
   const NearestMonsterArrow({super.key});
@@ -20,8 +21,9 @@ class _NearestMonsterArrowState extends State<NearestMonsterArrow> {
     super.initState();
     // 監聽羅盤
     FlutterCompass.events?.listen((CompassEvent event) {
-      if (event.heading != null && mounted) {
-        setState(() => _heading = event.heading!);
+      final heading = event.heading;
+      if (heading != null && heading.isFinite && mounted) {
+        setState(() => _heading = heading);
       }
     });
   }
@@ -43,13 +45,16 @@ class _NearestMonsterArrowState extends State<NearestMonsterArrow> {
         nearest.location.latitude,
         nearest.location.longitude,
       );
+      if (!bearing.isFinite) return const SizedBox.shrink();
 
       // 相對於手機螢幕的箭頭角度
-      // final angle = (bearing - _heading) * math.pi / 180.0;
-      final angle = bearing * math.pi / 180.0;
+      final angle = (bearing - _heading) * math.pi / 180.0;
+      if (!angle.isFinite) return const SizedBox.shrink();
+
       const double radius = 70;
       final dx = radius * math.sin(angle);
       final dy = -radius * math.cos(angle);
+      if (!dx.isFinite || !dy.isFinite) return const SizedBox.shrink();
 
       return Center(
         child: SizedBox(
@@ -62,22 +67,26 @@ class _NearestMonsterArrowState extends State<NearestMonsterArrow> {
               Transform.translate(
                 offset: const Offset(0, -110),
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 3,
+                  ),
                   decoration: BoxDecoration(
                     color: Colors.black.withValues(alpha: 0.6),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Text(
                     '${nearest.name}  ${distance?.toStringAsFixed(0)} m',
-                    style: const TextStyle(
-                      color: Colors.white,
+                    style: AppTheme.titleStyle.copyWith(
+                      color: AppTheme.whiteTextColor,
                       fontSize: 11,
                       fontWeight: FontWeight.w600,
+                      letterSpacing: 0,
                     ),
                   ),
                 ),
               ),
-  
+
               // 箭頭沿圓周移動
               Transform.translate(
                 offset: Offset(dx, dy),
@@ -108,27 +117,33 @@ class _AnimatedArrowState extends State<_AnimatedArrow>
   @override
   void initState() {
     super.initState();
-    _previousAngle = widget.angle;
+    _previousAngle = widget.angle.isFinite ? widget.angle : 0;
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 300),
     );
     _animation = Tween<double>(
-      begin: widget.angle,
-      end: widget.angle,
+      begin: _previousAngle,
+      end: _previousAngle,
     ).animate(_controller);
   }
 
   @override
   void didUpdateWidget(_AnimatedArrow oldWidget) {
     super.didUpdateWidget(oldWidget);
+    if (!widget.angle.isFinite) return;
+
     if (oldWidget.angle != widget.angle) {
       // 走短弧，避免跨 ±π 時繞遠路
       double delta = widget.angle - _previousAngle;
+      if (!delta.isFinite) return;
+
       if (delta > math.pi) delta -= 2 * math.pi;
       if (delta < -math.pi) delta += 2 * math.pi;
 
       final target = _previousAngle + delta;
+      if (!target.isFinite) return;
+
       _animation = Tween<double>(
         begin: _previousAngle,
         end: target,
@@ -152,10 +167,9 @@ class _AnimatedArrowState extends State<_AnimatedArrow>
     return AnimatedBuilder(
       animation: _animation,
       builder: (context, child) {
-        return Transform.rotate(
-          angle: _animation.value,
-          child: child,
-        );
+        if (!_animation.value.isFinite) return child ?? const SizedBox.shrink();
+
+        return Transform.rotate(angle: _animation.value, child: child);
       },
       child: Image.asset(
         'assets/images/arrow_global_3.png',

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../styles/app_theme.dart';
 import '../buttons/start_button.dart';
 import '../../view/login_page.dart';
 import '../constants/responsive.dart';
@@ -36,9 +37,10 @@ class StartMenuGroup extends StatelessWidget {
                   Text(
                     "載入失敗: start_text.png\n$error",
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: AppTheme.titleStyle.copyWith(
                       color: Colors.red,
                       fontSize: 12 * scale,
+                      letterSpacing: 0,
                     ),
                   ),
                 ],
@@ -49,10 +51,7 @@ class StartMenuGroup extends StatelessWidget {
 
         SizedBox(height: titleButtonGap),
 
-        const StartButton(
-          label: "開始",
-          destination: LoginPage(),
-        ),
+        const StartButton(label: "開始", destination: LoginPage()),
       ],
     );
   }

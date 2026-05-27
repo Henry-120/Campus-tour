@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../constants/responsive.dart';
 import 'user_avatar.dart';
 import 'user_name_board.dart';
 
@@ -14,23 +15,22 @@ class UserHud extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SizedBox(
-      width: hudWidth,
-      height: hudHeight,
+    final scale = Responsive.scale(context);
+
+    return SizedBox(
+      width: hudWidth * scale,
+      height: hudHeight * scale,
       child: Stack(
         clipBehavior: Clip.none,
         alignment: Alignment.topCenter,
         children: [
-          Positioned(
-            top: 0,
-            child: UserAvatar(size: avatarSize),
-          ),
+          Positioned(top: 0, child: UserAvatar(size: avatarSize * scale)),
 
           Positioned(
-            top: 108,
+            top: 108 * scale,
             child: UserNameBoard(
-              width: boardWidth,
-              height: boardHeight,
+              width: boardWidth * scale,
+              height: boardHeight * scale,
             ),
           ),
         ],
