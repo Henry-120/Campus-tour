@@ -20,6 +20,10 @@
 		BA27D5432F9ABE27009A1F8D /* fairy_beauty.usdz in Resources */ = {isa = PBXBuildFile; fileRef = BA27D5422F9ABE27009A1F8D /* fairy_beauty.usdz */; };
 		BA4F71D92F9CBA4100399639 /* cherry_fairy.usdz in Resources */ = {isa = PBXBuildFile; fileRef = BA4F71D82F9CBA4100399639 /* cherry_fairy.usdz */; };
 		BA8107FF2F9DF230005686B4 /* language.usdz in Resources */ = {isa = PBXBuildFile; fileRef = BA8107FE2F9DF22F005686B4 /* language.usdz */; };
+		BA840BAC2FBF146A002B4E3E /* Fairy_pop_dance.usdz in Resources */ = {isa = PBXBuildFile; fileRef = BA840BAB2FBF146A002B4E3E /* Fairy_pop_dance.usdz */; };
+		BA840BAE2FBF147B002B4E3E /* Fairy_walking.usdz in Resources */ = {isa = PBXBuildFile; fileRef = BA840BAD2FBF147B002B4E3E /* Fairy_walking.usdz */; };
+		BA840BB02FBF1492002B4E3E /* Fairy_running.usdz in Resources */ = {isa = PBXBuildFile; fileRef = BA840BAF2FBF1492002B4E3E /* Fairy_running.usdz */; };
+		BA840BB22FC04175002B4E3E /* Fairy_dancing.usdz in Resources */ = {isa = PBXBuildFile; fileRef = BA840BB12FC04175002B4E3E /* Fairy_dancing.usdz */; };
 		BA8FD28E2FA1E7D1009CDB7B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA8FD28D2FA1E7D1009CDB7B /* GoogleService-Info.plist */; };
 		BAB31A3E2F9BDA6600AF8D91 /* ES.usdz in Resources */ = {isa = PBXBuildFile; fileRef = BAB31A332F9BDA6600AF8D91 /* ES.usdz */; };
 		BAB31A3F2F9BDA6600AF8D91 /* Infor_Engineer.usdz in Resources */ = {isa = PBXBuildFile; fileRef = BAB31A362F9BDA6600AF8D91 /* Infor_Engineer.usdz */; };
@@ -94,6 +98,10 @@
 		BA27D5422F9ABE27009A1F8D /* fairy_beauty.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = fairy_beauty.usdz; sourceTree = "<group>"; };
 		BA4F71D82F9CBA4100399639 /* cherry_fairy.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = cherry_fairy.usdz; sourceTree = "<group>"; };
 		BA8107FE2F9DF22F005686B4 /* language.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = language.usdz; sourceTree = "<group>"; };
+		BA840BAB2FBF146A002B4E3E /* Fairy_pop_dance.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = Fairy_pop_dance.usdz; sourceTree = "<group>"; };
+		BA840BAD2FBF147B002B4E3E /* Fairy_walking.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = Fairy_walking.usdz; sourceTree = "<group>"; };
+		BA840BAF2FBF1492002B4E3E /* Fairy_running.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = Fairy_running.usdz; sourceTree = "<group>"; };
+		BA840BB12FC04175002B4E3E /* Fairy_dancing.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = Fairy_dancing.usdz; sourceTree = "<group>"; };
 		BA8FD28D2FA1E7D1009CDB7B /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BA95F5682FBC4B8300C6C21C /* Runner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Runner.entitlements; sourceTree = "<group>"; };
 		BAB31A312F9BDA6600AF8D91 /* clound.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = clound.usdz; sourceTree = "<group>"; };
@@ -204,7 +212,11 @@
 				BAC29D592FB3087900466301 /* SE.usdz */,
 				BAC29D5F2FB4328E00466301 /* Sit_on_the_cloud.usdz */,
 				BAC29D642FB433B300466301 /* Elephant.usdz */,
+				BA840BB12FC04175002B4E3E /* Fairy_dancing.usdz */,
+				BA840BAD2FBF147B002B4E3E /* Fairy_walking.usdz */,
+				BA840BAF2FBF1492002B4E3E /* Fairy_running.usdz */,
 				BAC29D662FB965D700466301 /* Rock.usdz */,
+				BA840BAB2FBF146A002B4E3E /* Fairy_pop_dance.usdz */,
 			);
 			sourceTree = "<group>";
 		};
@@ -349,16 +361,20 @@
 				BAB31A3E2F9BDA6600AF8D91 /* ES.usdz in Resources */,
 				BAC29D672FB965D700466301 /* Rock.usdz in Resources */,
 				BAB31A3F2F9BDA6600AF8D91 /* Infor_Engineer.usdz in Resources */,
+				BA840BB22FC04175002B4E3E /* Fairy_dancing.usdz in Resources */,
 				BAC29D522FAB7F6B00466301 /* Math.usdz in Resources */,
 				BAB31A402F9BDA6600AF8D91 /* Management.usdz in Resources */,
+				BA840BAC2FBF146A002B4E3E /* Fairy_pop_dance.usdz in Resources */,
 				BAB31A412F9BDA6600AF8D91 /* flower_river.usdz in Resources */,
 				BAB31A422F9BDA6600AF8D91 /* Taichi.usdz in Resources */,
 				BAB31A432F9BDA6600AF8D91 /* DNA.usdz in Resources */,
 				BAC29D562FAB89EF00466301 /* circle_90.usdz in Resources */,
+				BA840BAE2FBF147B002B4E3E /* Fairy_walking.usdz in Resources */,
 				BAB31A452F9BDA6600AF8D91 /* Hakka.usdz in Resources */,
 				BAC29D502FAB7F6500466301 /* sit_and_listen.usdz in Resources */,
 				BAC29D4E2FAB7F5B00466301 /* qmark.usdz in Resources */,
 				BA4F71D92F9CBA4100399639 /* cherry_fairy.usdz in Resources */,
+				BA840BB02FBF1492002B4E3E /* Fairy_running.usdz in Resources */,
 				BAB31A462F9BDA6600AF8D91 /* clound.usdz in Resources */,
 				BAB31A472F9BDA6600AF8D91 /* NCU_Lake.usdz in Resources */,
 				BAC29D542FAB871800466301 /* Feather.usdz in Resources */,
@@ -615,7 +631,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.campusTour;
+				PRODUCT_BUNDLE_IDENTIFIER = com.henryKuo.Campustour;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -664,9 +680,10 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = S89647UY32;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.henry.campusTour.RunnerTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.henryKuo.campusTour;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Runner.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Runner";
@@ -800,7 +817,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.campusTour;
+				PRODUCT_BUNDLE_IDENTIFIER = com.henryKuo.Campustour;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -825,7 +842,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.campusTour;
+				PRODUCT_BUNDLE_IDENTIFIER = com.henryKuo.Campustour;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;

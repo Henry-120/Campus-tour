@@ -24,6 +24,8 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<key>GMSApiKey</key>
+	<string>AIzaSyBqNtak41OqQ8GXrzGNb0Q2FR7usVjFGJw</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NFCReaderUsageDescription</key>
@@ -84,7 +86,5 @@
 	</array>
 	<key>io.flutter.embedded_views_preview</key>
 	<true/>
-	<key>GMSApiKey</key>
-	<string>AIzaSyBqNtak41OqQ8GXrzGNb0Q2FR7usVjFGJw</string>
 </dict>
 </plist>

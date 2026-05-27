@@ -6,6 +6,7 @@ import '../../view/Camera_view.dart';
 import '../../view/encyclopedia_page.dart';
 import '../common/scale_button.dart';
 import 'package:get/get.dart';
+import 'package:campus_tour/widgets/AR_controll/AR_controll_view.dart';
 
 import '../constants/responsive.dart';
 
@@ -70,7 +71,16 @@ class ControlButtons extends StatelessWidget {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (_) => const RealArPage(),
+        builder: (_) => const RealArPage()
+      ),
+    );
+  }
+
+  void _openARControlCamera(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (_) => const ArPage()
       ),
     );
   }

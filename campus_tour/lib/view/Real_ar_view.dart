@@ -3,6 +3,8 @@ import 'package:arkit_plugin/arkit_plugin.dart';
 import 'package:vector_math/vector_math_64.dart' as vector;
 import '../controllers/monster_controller.dart';
 import 'package:get/get.dart';
+import 'package:campus_tour/widgets/AR_controll/AR_controll_view.dart';
+import 'dart:math' as math;
 
 class RealArPage extends StatefulWidget {
   const RealArPage({super.key});
@@ -94,6 +96,14 @@ class _RealArPageState extends State<RealArPage> {
                           onTap: () {
                             setState(() {
                               selectedMonsterUrl = modelFile;
+                              if (selectedMonsterUrl == "YMCA.usdz") {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => const ArPage()
+                                    ),
+                                  );
+                                }
                               debugPrint("💡 已切換精靈模型為: $selectedMonsterUrl");
                             });
                           },
@@ -177,7 +187,7 @@ class _RealArPageState extends State<RealArPage> {
     };
   }
 
-  void _addMonster(ARKitTestResult planeTap) {
+  void _addMonster(ARKitTestResult planeTap) async {
     final position = vector.Vector3(
       planeTap.worldTransform.getColumn(3).x,
       planeTap.worldTransform.getColumn(3).y,
