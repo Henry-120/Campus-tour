@@ -15,6 +15,7 @@ import 'package:campus_tour/view/full_mission_page.dart';
 import 'package:campus_tour/widgets/game/catching_pages/monster_model_cry.dart';
 import 'package:campus_tour/widgets/game/catching_pages/full_mission.dart';
 import 'package:campus_tour/widgets/game/catching_pages/discovered_item.dart';
+import 'package:campus_tour/widgets/game/catching_pages/default_plot.dart';
 import 'package:campus_tour/widgets/game/catching_pages/graphics_text_level.dart';
 import 'package:campus_tour/widgets/game/catching_pages/cryptography_level.dart';
 import 'package:campus_tour/widgets/game/catching_pages/plot_level.dart';
@@ -23,6 +24,7 @@ import 'package:campus_tour/widgets/encyclopedia/all_the_monster/monster_text.da
 import 'package:campus_tour/widgets/encyclopedia/all_the_monster/monster_nfc.dart';
 import 'package:campus_tour/widgets/common/snackbar_builder.dart';
 import 'package:campus_tour/models/qa_model.dart';
+
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 //end for mission
@@ -40,6 +42,7 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
 
   bool _hasLocationPermission = false;
   String? _mapStyle; // 地圖 JSON 風格
+
   // AssetMapBitmap? _customMapImage; // 特製地圖圖片
   double _maxZoomRate = 18.5;
   double _minZoomRate = 18.5;
@@ -199,6 +202,7 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
         CameraPosition(
           // target: LatLng(24.97, 121.1922),
           target: LatLng(position.latitude, position.longitude),
+
           zoom: 18.5,
           bearing: 0,
         ),
@@ -400,7 +404,14 @@ class BuildingMonsterLevel extends StatelessWidget {
          isPassed: LocalSettingService.autoSkipStory.isEnabled,
          title: PlotLevel.traceTitle,
          description: PlotLevel.traceDescription,
+         dialogueSteps: DefaultPlot.magicStonePlotDialogueSteps,
          discoveredItem: DiscoveredItem.magicStone,
+         leftCharacter: PlotSceneCharacter(
+           spritePath: PlotLevel.magicStoneSpritePath,
+         ),
+         rightCharacter: PlotSceneCharacter(
+           spritePath: PlotLevel.squirrelSpritePath,
+         ),
        ),
        mission1 = GraphicsTextLevel(
          firstTracePhoto: MonsterGraphics.graphics[monster.id] ?? '',
@@ -413,6 +424,16 @@ class BuildingMonsterLevel extends StatelessWidget {
          isPassed: LocalSettingService.autoSkipStory.isEnabled,
          title: PlotLevel.battleTitle,
          description: PlotLevel.battleDescription,
+         dialogueSteps: DefaultPlot.battlePlotDialogueSteps(
+           fairyName: monster.name,
+           fairyImagePath: monster.imageURL,
+         ),
+         leftCharacter: PlotSceneCharacter(
+           spritePath: PlotLevel.magicCircleSpritePath,
+         ),
+         rightCharacter: PlotSceneCharacter(
+           spritePath: PlotLevel.squirrelSpritePath,
+         ),
        ),
        mission2 = CryptographyLevel(
          questionSet: [qa.question],

@@ -26,6 +26,14 @@ class AppTheme {
   static const Color arUnselectedTileColor = Colors.black38;
   static const Color cameraButtonIconColor = Colors.grey;
   static const Color transparentColor = Colors.transparent;
+  static const Color mapOverlayBackgroundColor = Colors.black;
+  static const Color mapOverlayBorderColor = Colors.white24;
+  static const Color mapOverlayPrimaryTextColor = Colors.white;
+  static const Color mapOverlaySecondaryTextColor = Colors.white70;
+  static const Color mapOverlayCheckColor = Colors.black;
+  static const Color mapLandmarkDotColor = Colors.amberAccent;
+  static const Color mapLandmarkDotBorderColor = Colors.black;
+  static const Color mapLandmarkTextShadowColor = Colors.black;
 
   // 漸層背景 - 參考自 LevelStyle 的頁面背景
   static const LinearGradient warmGradient = LinearGradient(

@@ -1,17 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
-import 'package:get/get.dart'; // 提供 GetxController、Rxn、Obx 等
+import 'package:get/get.dart';
 import '../services/firestore_service.dart';
-import '../models/monster_model.dart'; // MonsterModel
-import '../models/architecture_model.dart'; // ArchitectureModel
-import '../models/qa_model.dart'; // QAModel
-import 'package:geolocator/geolocator.dart'; // 💡 引入 GPS 套件
+import '../models/monster_model.dart';
+import '../models/architecture_model.dart';
+import '../models/qa_model.dart';
+import 'package:geolocator/geolocator.dart';
 import '../models/user_monster_model.dart';
 import "../services/monster_service.dart";
 
 class MonsterController extends GetxController {
   final FirestoreService _service = FirestoreService();
   final MonsterService _monsterService = MonsterService();
+  int _stateVersion = 0;
 
   var monster = Rxn<MonsterModel>();
   var architecture = Rxn<ArchitectureModel>();
@@ -48,7 +49,7 @@ class MonsterController extends GetxController {
           doc.id,
           doc.data() as Map<String, dynamic>,
         );
-        qa.value = qaData; // 更新 Rxn 狀態供 UI 監聽
+        qa.value = qaData;
         return qaData;
       }
     } catch (e) {
@@ -73,7 +74,7 @@ class MonsterController extends GetxController {
           doc.data() as Map<String, dynamic>,
           id: doc.id,
         );
-        architecture.value = architectureData; // 更新 Rxn 狀態供 UI 監聽
+        architecture.value = architectureData;
         return architectureData;
       }
     } catch (e) {
@@ -84,7 +85,10 @@ class MonsterController extends GetxController {
 
   // 載入使用者的圖鑑（例如從 Firestore）
   Future<void> loadUserCollection(String userId) async {
+    final requestVersion = _stateVersion;
     final result = await _service.getUserMonsters(userId);
+    if (requestVersion != _stateVersion) return;
+
     userMonsterCollection.value = result;
   }
 
@@ -99,8 +103,8 @@ class MonsterController extends GetxController {
 
   // 捕捉怪物 - 從 nearbyMonsters 中選擇要捕捉的怪物
   Future<bool> captureMonster(MonsterModel monsterObj, String userId) async {
+    final requestVersion = _stateVersion;
     try {
-      // 檢查是否已經捕捉過這隻怪物
       final alreadyCaptured = userMonsterCollection.any(
         (m) => m.monsterRef.id == monsterObj.id,
       );
@@ -110,7 +114,6 @@ class MonsterController extends GetxController {
         return false;
       }
 
-      // 建立 UserMonsterModel
       final userMonster = UserMonsterModel(
         monsterRef: FirebaseFirestore.instance
             .collection("monsters")
@@ -123,13 +126,11 @@ class MonsterController extends GetxController {
         caughtAt: DateTime.now(),
       );
 
-      // 新增到 Firestore
       await addUserMonster(userId, userMonster);
 
-      // ✅ 捕捉成功後，自動更新對應怪物的 QA 資料與建築資料
-      await loadMonsterWithRelations(monsterObj);
+      if (requestVersion != _stateVersion) return false;
 
-      // ✅ 捕捉後從 nearbyMonsters 移除 → 地圖上的 Marker 也會消失
+      await loadMonsterWithRelations(monsterObj);
       nearbyMonsters.removeWhere((m) => m.id == monsterObj.id);
 
       debugPrint(
@@ -143,26 +144,23 @@ class MonsterController extends GetxController {
   }
 
   Future<void> updateNearbyMonsters(Position userPosition) async {
-    final monsters = await _service.getAllMonsters(); // 從資料庫抓全部
+    final requestVersion = _stateVersion;
+    final monsters = await _service.getAllMonsters();
+    if (requestVersion != _stateVersion) return;
 
-    // 💡 篩選：只加入「在範圍內」且「使用者尚未捕捉」的怪物
     nearbyMonsters.value = monsters.where((m) {
-      // 1. 檢查是否已在收藏中 (根據 monster id 判斷)
       final isAlreadyCaptured = userMonsterCollection.any(
         (captured) => captured.monsterRef.id == m.id,
       );
 
-      // 2. 必須在距離內 且 尚未捕捉
       return _monsterService.isWithinRange(userPosition, m.location) &&
           !isAlreadyCaptured;
     }).toList();
   }
 
-  //之後要拿掉，用來建立user monster collection 的假資料
+  // 之後要拿掉，用來建立 user monster collection 的假資料。
   Future<void> seedUserMonsters(String uid) async {
     final db = FirebaseFirestore.instance;
-
-    // 從 monsters collection 抓出幾筆資料
     final snapshot = await db.collection("monsters").get();
     debugPrint(
       '[MonsterController] seedUserMonsters 開始，Firebase monsters=${snapshot.docs.length}',
@@ -175,18 +173,16 @@ class MonsterController extends GetxController {
       try {
         final monsterData = doc.data();
 
-        // 建立 UserMonsterModel
         final userMonster = UserMonsterModel(
           monsterRef: doc.reference,
-          caughtAt: DateTime.now(), // 這裡可以隨機或指定時間
+          caughtAt: DateTime.now(),
           name: monsterData["name"] ?? "未知怪物",
           type: monsterData["type"] ?? "",
           imageURL: monsterData["imageURL"] ?? "",
           videoRef: monsterData["videoRef"] ?? "",
-          arRef: monsterData["ARRef"] ?? "", // 💡 修正：傳入 AR 模型檔名
+          arRef: monsterData["ARRef"] ?? "",
         );
 
-        // 用 monster doc id 當收藏 doc id，重複 seed 也只會覆蓋，不會重複新增。
         await _service.setUserMonster(uid, doc.id, userMonster);
         successCount++;
       } catch (e) {
@@ -202,11 +198,15 @@ class MonsterController extends GetxController {
   }
 
   void updateNearestGlobal(Position userPosition) async {
+    final requestVersion = _stateVersion;
     playerPosition.value = userPosition;
     debugPrint(
       '[updateNearestGlobal] playerPosition 已更新: ${playerPosition.value?.latitude}, ${playerPosition.value?.longitude}',
     );
+
     final all = await _service.getAllMonsters();
+    if (requestVersion != _stateVersion) return;
+
     if (all.isEmpty) {
       nearestMonster.value = null;
       nearestDistance.value = null;
@@ -252,5 +252,17 @@ class MonsterController extends GetxController {
     debugPrint(
       '[updateNearestGlobal] 最近精靈: ${nearestMonster.value?.name}, 距離: ${nearestDistance.value}',
     );
+  }
+
+  void resetForLogout() {
+    _stateVersion++;
+    monster.value = null;
+    architecture.value = null;
+    qa.value = null;
+    nearbyMonsters.clear();
+    nearestMonster.value = null;
+    nearestDistance.value = null;
+    userMonsterCollection.clear();
+    playerPosition.value = null;
   }
 }

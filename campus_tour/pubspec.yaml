@@ -8,6 +8,7 @@ flutter_launcher_icons:
 
 name: campus_tour
 description: "A new Flutter project."
+
 publish_to: "none"
 
 version: 1.0.0+1
@@ -34,6 +35,7 @@ dependencies:
   firebase_storage: ^13.2.0
   cloud_firestore: ^6.2.0
   google_sign_in: ^6.0.0
+
   nfc_manager: ^3.3.0
   video_player: ^2.11.1
   camera: ^0.12.0+1

@@ -13,7 +13,7 @@ class MapSuggestionsVariables {
 
   // [L-02]
   // ignore: constant_identifier_names
-  static const String position_char = 'assets/images/component/squirrel.png';
+  static const String position_char = 'assets/images/squirrel_front.png';
 
   // [L-03]
   static const Size mapImageSize = Size(2744, 1568);
@@ -35,10 +35,17 @@ class MapSuggestionsVariables {
 
   // [L-10]
   static const String ncuTenViewsCategory = '中大十景';
+  // [L-53]
+  static const String installationArtCategory = '裝置藝術';
+
+  // [L-54]
+  static const String toiletCategory = '廁所';
 
   // [L-11]
   static const List<String> locationJsonPaths = [
     'assets/json/locations/NCU10view.json',
+    'assets/json/locations/installation_art.json',
+    'assets/json/locations/toilet.json',
   ];
 
   static const int step = 10;
@@ -71,6 +78,8 @@ class _MapSuggestionsPageState extends State<MapSuggestionsPage> {
   List<_LandmarkMarker> _cachedLandmarkMarkers = const [];
   final Map<String, bool> _selectedCategories = {
     MapSuggestionsVariables.ncuTenViewsCategory: false,
+    MapSuggestionsVariables.installationArtCategory: false,
+    MapSuggestionsVariables.toiletCategory: false,
   };
 
   @override
@@ -476,7 +485,9 @@ class _LandmarkLabel extends StatelessWidget {
           Container(
             width: MapSuggestionStyle.landmarkDotSize,
             height: MapSuggestionStyle.landmarkDotSize,
-            decoration: MapSuggestionStyle.landmarkDotDecoration,
+            decoration: MapSuggestionStyle.landmarkDotDecoration(
+              marker.landmark.category,
+            ),
           ),
           const SizedBox(width: MapSuggestionStyle.landmarkLabelSpacing),
           Text(
