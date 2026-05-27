@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../styles/app_theme.dart';
+
 class ElfInfoRow extends StatelessWidget {
   final IconData icon;
   final String label;
@@ -20,24 +22,24 @@ class ElfInfoRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Icon(
-          icon,
-          color: primaryColor,
-          size: 20,
-        ),
+        Icon(icon, color: primaryColor, size: 20),
         const SizedBox(width: 12),
         Text(
           label,
-          style: const TextStyle(
+          style: AppTheme.titleStyle.copyWith(
             fontWeight: FontWeight.bold,
             color: textColor,
+            fontSize: 14,
+            letterSpacing: 0,
           ),
         ),
         Expanded(
           child: Text(
             value,
-            style: const TextStyle(
+            style: AppTheme.titleStyle.copyWith(
               color: subTextColor,
+              fontSize: 14,
+              letterSpacing: 0,
             ),
           ),
         ),

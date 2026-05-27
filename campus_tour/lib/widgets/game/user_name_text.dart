@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../controllers/user_controller.dart';
+import '../../styles/app_theme.dart';
 
 class UserNameText extends StatelessWidget {
-  const UserNameText({super.key});
+  final double scale;
+
+  const UserNameText({super.key, this.scale = 1});
 
   @override
   Widget build(BuildContext context) {
@@ -12,19 +15,13 @@ class UserNameText extends StatelessWidget {
     return Align(
       alignment: Alignment.center,
       child: Obx(() {
-        final nickname =
-            userController.userModel.value?.nickname ?? "冒險者";
+        final nickname = userController.userModel.value?.nickname ?? "冒險者";
 
         return Text(
           nickname,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
-          style: const TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.w600,
-            color: Color(0xFF3A2318),
-            letterSpacing: 0.8,
-          ),
+          style: AppTheme.gameTextStyle(20 * scale),
         );
       }),
     );

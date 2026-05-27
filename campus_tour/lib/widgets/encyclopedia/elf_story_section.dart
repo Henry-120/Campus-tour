@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../styles/app_theme.dart';
 import 'elf_section_title.dart';
 
 class ElfStorySection extends StatelessWidget {
@@ -27,34 +28,28 @@ class ElfStorySection extends StatelessWidget {
         decoration: BoxDecoration(
           color: cardColor,
           borderRadius: BorderRadius.circular(40),
-          border: Border.all(
-            color: Colors.black.withValues(alpha: 0.04),
-          ),
+          border: Border.all(color: Colors.black.withValues(alpha: 0.04)),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ElfSectionTitle(
-              icon: Icons.auto_stories,
-              title: "$name傳說故事",
-            ),
+            ElfSectionTitle(icon: Icons.auto_stories, title: "$name傳說故事"),
             const SizedBox(height: 24),
             if (isLoading)
               const Center(
                 child: Padding(
                   padding: EdgeInsets.all(24),
-                  child: CircularProgressIndicator(
-                    color: primaryColor,
-                  ),
+                  child: CircularProgressIndicator(color: primaryColor),
                 ),
               )
             else
               Text(
                 story ?? "沒有故事資料",
-                style: const TextStyle(
+                style: AppTheme.titleStyle.copyWith(
                   fontSize: 16,
                   color: subTextColor,
                   height: 1.6,
+                  letterSpacing: 0,
                 ),
               ),
           ],

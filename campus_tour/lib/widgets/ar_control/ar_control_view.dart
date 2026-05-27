@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:arkit_plugin/arkit_plugin.dart';
@@ -16,7 +15,7 @@ class ArPage extends StatefulWidget {
 }
 
 class _ArPageState extends State<ArPage> {
-  late ARKitController arkitController;
+  ARKitController? arkitController;
   final monsterController = Get.find<MonsterController>();
 
   String selectedMonsterUrl = "assets/images/img_frame/grass.png";
@@ -30,7 +29,7 @@ class _ArPageState extends State<ArPage> {
 
   @override
   void dispose() {
-    arkitController.dispose();
+    arkitController?.dispose();
     super.dispose();
   }
 
@@ -67,11 +66,7 @@ class _ArPageState extends State<ArPage> {
 
           // 2. 虛擬搖桿與跳舞鍵 - 只有當場上有精靈時才顯示
           if (currentMonsterNode != null) ...[
-            Positioned(
-              left: 40,
-              bottom: 180,
-              child: _buildJoystick(),
-            ),
+            Positioned(left: 40, bottom: 180, child: _buildJoystick()),
             Positioned(
               right: 40, // 放在右下角，跟左邊的搖桿對稱
               bottom: 180,
@@ -129,9 +124,9 @@ class _ArPageState extends State<ArPage> {
 
   void onARKitViewCreated(ARKitController controller) {
     arkitController = controller;
-    arkitController.onARTap = (List<ARKitTestResult> arTapResults) {
+    controller.onARTap = (List<ARKitTestResult> arTapResults) {
       final point = arTapResults.firstWhere(
-            (tap) => tap.type == ARKitHitTestResultType.existingPlaneUsingExtent,
+        (tap) => tap.type == ARKitHitTestResultType.existingPlaneUsingExtent,
         orElse: () => arTapResults.first,
       );
       if (arTapResults.isNotEmpty) {
@@ -148,7 +143,7 @@ class _ArPageState extends State<ArPage> {
     );
 
     if (currentMonsterNode != null) {
-      arkitController.remove(currentMonsterNode!.name);
+      arkitController?.remove(currentMonsterNode!.name);
     }
 
     currentMonsterNode = ARKitReferenceNode(
@@ -158,7 +153,7 @@ class _ArPageState extends State<ArPage> {
       scale: vector.Vector3(0.05, 0.05, 0.05),
     );
 
-    arkitController.add(currentMonsterNode!);
+    arkitController?.add(currentMonsterNode!);
     _currentFairyUrl = "Fairy_walking.usdz";
     setState(() {}); // 刷新 UI 顯示搖桿
   }
@@ -177,7 +172,7 @@ class _ArPageState extends State<ArPage> {
     final String nodeName = node.name;
 
     // 2. 移除舊的 Node
-    arkitController.remove(nodeName);
+    arkitController?.remove(nodeName);
 
     // 3. 建立新的 Node
     currentMonsterNode = ARKitReferenceNode(
@@ -188,7 +183,7 @@ class _ArPageState extends State<ArPage> {
     );
 
     // 4. 加入場景並更新狀態
-    arkitController.add(currentMonsterNode!);
+    arkitController?.add(currentMonsterNode!);
     _currentFairyUrl = newUrl;
 
     debugPrint("💡 模型已切換至: $newUrl");

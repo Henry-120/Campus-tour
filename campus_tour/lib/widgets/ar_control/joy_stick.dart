@@ -19,9 +19,9 @@ class _ArJoystickState extends State<ArJoystick> {
       width: 120,
       height: 120,
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.2),
+        color: Colors.white.withValues(alpha: 0.2),
         shape: BoxShape.circle,
-        border: Border.all(color: Colors.white.withOpacity(0.5)),
+        border: Border.all(color: Colors.white.withValues(alpha: 0.5)),
       ),
       child: Stack(
         children: [
@@ -53,7 +53,9 @@ class _ArJoystickState extends State<ArJoystick> {
                   decoration: const BoxDecoration(
                     color: Colors.white,
                     shape: BoxShape.circle,
-                    boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 5)],
+                    boxShadow: [
+                      BoxShadow(color: Colors.black26, blurRadius: 5),
+                    ],
                   ),
                 ),
               ),

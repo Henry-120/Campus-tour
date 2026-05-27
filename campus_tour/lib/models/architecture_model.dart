@@ -1,5 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 class ArchitectureModel {
   final String id;
   final String name;
@@ -34,9 +32,7 @@ class ArchitectureModel {
       author: data['author'] ?? "",
       date: data['date'] ?? "",
       // 安全地轉換 List<dynamic> 到 List<String>
-      major: data['major'] is List
-          ? List<String>.from(data['major'])
-          : [],
+      major: data['major'] is List ? List<String>.from(data['major']) : [],
     );
   }
 

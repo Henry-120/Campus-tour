@@ -8,7 +8,7 @@ import '../../widgets/game/monster_marker.dart';
 /// 提供給 GameMap 使用的 mixin，負責維護怪物 markers set。
 ///
 /// 使用方式：
-///   class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
+///   `class _GameMapState extends State<GameMap> with MonsterMarkersMixin {`
 ///     @override
 ///     void initState() {
 ///       super.initState();

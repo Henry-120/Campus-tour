@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 
-class DanceButton extends StatefulWidget {final VoidCallback onTap; // 改為點擊觸發
+class DanceButton extends StatefulWidget {
+  final VoidCallback onTap; // 改為點擊觸發
 
-const DanceButton({super.key, required this.onTap});
+  const DanceButton({super.key, required this.onTap});
 
-@override
-State<DanceButton> createState() => _DanceButtonState();
+  @override
+  State<DanceButton> createState() => _DanceButtonState();
 }
 
-class _DanceButtonState extends State<DanceButton> with SingleTickerProviderStateMixin {
+class _DanceButtonState extends State<DanceButton>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _scaleAnimation;
 
@@ -57,7 +59,7 @@ class _DanceButtonState extends State<DanceButton> with SingleTickerProviderStat
             // 💡 外圈發光效果
             boxShadow: [
               BoxShadow(
-                color: Colors.white.withOpacity(0.5),
+                color: Colors.white.withValues(alpha: 0.5),
                 blurRadius: 15,
                 spreadRadius: 2,
               ),
@@ -92,9 +94,7 @@ class _DanceButtonState extends State<DanceButton> with SingleTickerProviderStat
                 Icons.music_note_rounded,
                 color: Colors.white,
                 size: 40,
-                shadows: [
-                  Shadow(color: Colors.black45, blurRadius: 10),
-                ],
+                shadows: [Shadow(color: Colors.black45, blurRadius: 10)],
               ),
             ],
           ),

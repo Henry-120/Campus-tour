@@ -1,8 +1,8 @@
 class QAModel {
   final String id;
-  final String question;       // 問題文字
-  final List<String> options;  // 選項
-  final String answer;         // 正確答案
+  final String question; // 問題文字
+  final List<String> options; // 選項
+  final String answer; // 正確答案
 
   QAModel({
     required this.id,
@@ -21,10 +21,6 @@ class QAModel {
   }
 
   Map<String, dynamic> toMap() {
-    return {
-      'question': question,
-      'options': options,
-      'answer': answer,
-    };
+    return {'question': question, 'options': options, 'answer': answer};
   }
 }

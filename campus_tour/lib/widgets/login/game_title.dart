@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../styles/app_theme.dart';
 import '../constants/responsive.dart';
 
 class GameTitle extends StatelessWidget {
@@ -15,37 +16,21 @@ class GameTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scale = Responsive.scale(context);
-    final fontSize = baseFontSize * scale;
-
     return Stack(
       alignment: Alignment.center,
       children: [
         Text(
           title,
-          style: TextStyle(
-            fontSize: fontSize,
-            fontWeight: FontWeight.w900,
+          style: AppTheme.gameTitleStrokeStyle(scale).copyWith(
+            fontSize: baseFontSize * scale,
             letterSpacing: 1.5 * scale,
-            foreground: Paint()
-              ..style = PaintingStyle.stroke
-              ..strokeWidth = 8 * scale
-              ..color = const Color(0xFF6B3515),
           ),
         ),
         Text(
           title,
-          style: TextStyle(
-            fontSize: fontSize,
-            fontWeight: FontWeight.w900,
+          style: AppTheme.gameTitleFillStyle(scale).copyWith(
+            fontSize: baseFontSize * scale,
             letterSpacing: 1.5 * scale,
-            color: const Color(0xFFFFD36A),
-            shadows: [
-              Shadow(
-                offset: Offset(0, 3 * scale),
-                blurRadius: 0,
-                color: const Color(0xFF9A4F1D),
-              ),
-            ],
           ),
         ),
       ],

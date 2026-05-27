@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import '../../controllers/profile_edit_controller.dart';
+import '../../styles/app_theme.dart';
 import '../constants/asset_paths.dart';
 import '../constants/responsive.dart';
 
 class NicknameField extends StatelessWidget {
   final ProfileEditController controller;
 
-  const NicknameField({
-    super.key,
-    required this.controller,
-  });
+  const NicknameField({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -23,10 +21,11 @@ class NicknameField extends StatelessWidget {
           ),
           child: Text(
             '新的稱呼',
-            style: TextStyle(
+            style: AppTheme.titleStyle.copyWith(
               color: Colors.brown,
               fontWeight: FontWeight.bold,
               fontSize: Responsive.s(context, 14),
+              letterSpacing: 0,
             ),
           ),
         ),
@@ -38,10 +37,7 @@ class NicknameField extends StatelessWidget {
             alignment: Alignment.center,
             children: [
               Positioned.fill(
-                child: Image.asset(
-                  AssetPaths.textDialog,
-                  fit: BoxFit.fill,
-                ),
+                child: Image.asset(AssetPaths.textDialog, fit: BoxFit.fill),
               ),
 
               Padding(
@@ -51,18 +47,20 @@ class NicknameField extends StatelessWidget {
                 ),
                 child: TextField(
                   controller: controller.nameController,
-                  style: TextStyle(
+                  style: AppTheme.titleStyle.copyWith(
                     fontSize: Responsive.s(context, 20),
                     color: Colors.brown.shade800,
                     fontWeight: FontWeight.bold,
+                    letterSpacing: 0,
                   ),
                   cursorColor: Colors.brown,
                   decoration: InputDecoration(
                     hintText:
-                    '目前的暱稱：${controller.userController.userModel.value?.nickname ?? "冒險者"}',
-                    hintStyle: TextStyle(
+                        '目前的暱稱：${controller.userController.userModel.value?.nickname ?? "冒險者"}',
+                    hintStyle: AppTheme.titleStyle.copyWith(
                       color: Colors.brown.shade300,
                       fontSize: Responsive.s(context, 20),
+                      letterSpacing: 0,
                     ),
                     border: InputBorder.none,
                     enabledBorder: InputBorder.none,

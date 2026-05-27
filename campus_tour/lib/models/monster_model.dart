@@ -5,7 +5,7 @@ class MonsterModel {
   final String name;
   final String type;
   final String imageURL;
-  final String? ARRef;
+  final String? arRef;
   final String? videoRef;
   final DocumentReference? architectureRef;
   final DocumentReference? qaRef;
@@ -18,18 +18,20 @@ class MonsterModel {
     required this.imageURL,
     this.architectureRef,
     this.qaRef,
-    this.ARRef,
+    this.arRef,
     this.videoRef,
-    required this.location
+    required this.location,
   });
 
-  factory MonsterModel.fromMap(Map<String, dynamic> data,{String? id}) {
+  factory MonsterModel.fromMap(Map<String, dynamic> data, {String? id}) {
     final loc = data['location'];
     DocumentReference? archRef;
     if (data['architectureRef'] != null) {
       if (data['architectureRef'] is String) {
         // JSON 初始化時是字串路徑
-        archRef = FirebaseFirestore.instance.doc(data['architectureRef'] as String);
+        archRef = FirebaseFirestore.instance.doc(
+          data['architectureRef'] as String,
+        );
       } else if (data['architectureRef'] is DocumentReference) {
         // Firestore 讀取時就是 DocumentReference
         archRef = data['architectureRef'] as DocumentReference;
@@ -65,7 +67,7 @@ class MonsterModel {
       name: data['name'] ?? '',
       type: data['type'] ?? '',
       imageURL: data['imageURL'] ?? '',
-      ARRef: data['ARRef'] ?? '',
+      arRef: data['ARRef'] ?? '',
       videoRef: data['videoRef'] ?? '',
       architectureRef: archRef,
       qaRef: qaRef,
@@ -80,9 +82,9 @@ class MonsterModel {
       'imageURL': imageURL,
       'architectureRef': architectureRef,
       'qaRef': qaRef,
-      'ARRef': ARRef,
+      'ARRef': arRef,
       'videoRef': videoRef,
-      'location': location
+      'location': location,
     };
   }
 }

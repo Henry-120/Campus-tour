@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:gal/gal.dart';
+import '../widgets/common/snackbar_builder.dart';
 
 class PhotoPreviewPage extends StatelessWidget {
   final String imagePath;
@@ -19,21 +20,15 @@ class PhotoPreviewPage extends StatelessWidget {
       await Gal.putImage(imagePath);
 
       if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('照片已成功儲存到相簿！'),
-            backgroundColor: Colors.green,
-          ),
+        SnackBarBuilder.show(
+          context,
+          '照片已成功儲存到相簿！',
+          type: AppToastType.success,
         );
       }
     } catch (e) {
       if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('儲存失敗: $e'),
-            backgroundColor: Colors.red,
-          ),
-        );
+        SnackBarBuilder.show(context, '儲存失敗: $e', type: AppToastType.error);
       }
     }
   }

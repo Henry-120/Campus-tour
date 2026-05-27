@@ -6,9 +6,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_compass/flutter_compass.dart';
 
 enum PlayerDirection {
-  up,    // 手機朝北：角色背面 / 往上走
-  down,  // 手機朝南：角色正面 / 往下走
-  left,  // 手機朝西
+  up, // 手機朝北：角色背面 / 往上走
+  down, // 手機朝南：角色正面 / 往下走
+  left, // 手機朝西
   right, // 手機朝東
 }
 
@@ -22,25 +22,22 @@ class PlayerSprite extends StatefulWidget {
   /// dx < 0 = 左
   /// dy < 0 = 上 / 向後
   /// dy > 0 = 下 / 正面
- 
-  const PlayerSprite({
-    super.key,
-    this.size = 80,
-    this.isMoving = true,
-  });
- 
+
+  const PlayerSprite({super.key, this.size = 80, this.isMoving = true});
+
   @override
   State<PlayerSprite> createState() => _PlayerSpriteState();
 }
 
-class _PlayerSpriteState extends State<PlayerSprite> with SingleTickerProviderStateMixin {
+class _PlayerSpriteState extends State<PlayerSprite>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   StreamSubscription<CompassEvent>? _compassSub;
 
   // Sprite sheet 參數
-  static const int _totalFrames = 4;       // 第一列共 4 幀
-  static const double _frameWidth = 270;   // 每幀寬度（px）
-  static const double _frameHeight = 270;  // 每幀高度（px）
+  static const int _totalFrames = 4; // 第一列共 4 幀
+  static const double _frameWidth = 270; // 每幀寬度（px）
+  static const double _frameHeight = 270; // 每幀高度（px）
 
   PlayerDirection _direction = PlayerDirection.down;
 
@@ -63,7 +60,7 @@ class _PlayerSpriteState extends State<PlayerSprite> with SingleTickerProviderSt
 
     _compassSub = FlutterCompass.events?.listen((event) {
       final heading = event.heading;
-      if (heading == null || !mounted) return;
+      if (heading == null || !heading.isFinite || !mounted) return;
 
       setState(() {
         _direction = _directionFromHeading(heading);
@@ -72,6 +69,8 @@ class _PlayerSpriteState extends State<PlayerSprite> with SingleTickerProviderSt
   }
 
   PlayerDirection _directionFromHeading(double heading) {
+    if (!heading.isFinite) return _direction;
+
     final h = (heading + 360) % 360;
 
     if (h >= 315 || h < 45) {
@@ -144,7 +143,7 @@ class _PlayerSpriteState extends State<PlayerSprite> with SingleTickerProviderSt
                 _totalFrames - 1,
               )
             : 0;
- 
+
         return CustomPaint(
           size: Size(widget.size, widget.size),
           painter: _SpritePainter(
@@ -183,14 +182,14 @@ class _SpritePainter extends CustomPainter {
     // src：從 sprite sheet 裁出的區域
     final src = Rect.fromLTWH(
       frameIndex * frameWidth + offsetX, // X：第幾幀
-      rowIndex * frameHeight + offsetY,               // Y：第幾列
+      rowIndex * frameHeight + offsetY, // Y：第幾列
       frameWidth,
       frameHeight,
     );
- 
+
     // dst：畫到螢幕上的區域（填滿 CustomPaint 的 size）
     final dst = Rect.fromLTWH(0, 0, size.width, size.height);
- 
+
     // 這裡用 drawImageRect，image 透過 _SpriteImage 單例提供
     final image = _SpriteImageCache.instance.image;
     if (image != null) {
@@ -209,10 +208,10 @@ class _SpritePainter extends CustomPainter {
 class _SpriteImageCache {
   _SpriteImageCache._();
   static final _SpriteImageCache instance = _SpriteImageCache._();
- 
+
   ui.Image? image;
   bool _loading = false;
- 
+
   Future<void> load() async {
     if (image != null || _loading) return;
     _loading = true;

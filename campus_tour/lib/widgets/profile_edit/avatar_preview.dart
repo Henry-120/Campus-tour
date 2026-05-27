@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import '../../controllers/profile_edit_controller.dart';
 import '../constants/responsive.dart';
 
-
 class AvatarPreview extends StatelessWidget {
   final ProfileEditController controller;
 
@@ -32,7 +31,7 @@ class AvatarPreview extends StatelessWidget {
               ),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
+                  color: Colors.black.withValues(alpha: 0.1),
                   blurRadius: Responsive.s(context, 10),
                   offset: Offset(0, Responsive.s(context, 4)),
                 ),

@@ -17,9 +17,7 @@ class PrimaryButton extends StatelessWidget {
         minimumSize: const Size(double.infinity, 50),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       ),
-      child: Text(
-        text, 
-        style: AppTheme.buttonTextStyle,),
+      child: Text(text, style: AppTheme.buttonTextStyle),
     );
   }
 }
@@ -28,7 +26,11 @@ class SecondaryButton extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
 
-  const SecondaryButton({super.key, required this.text, required this.onPressed});
+  const SecondaryButton({
+    super.key,
+    required this.text,
+    required this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {

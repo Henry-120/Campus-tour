@@ -24,12 +24,14 @@ class Responsive {
     return value.clamp(0.82, 1.12).toDouble();
   }
 
+  /// Width, height, spacing, radius, and text should share the same scale so
+  /// widgets keep their proportions across device sizes.
   static double w(BuildContext context, double value) {
-    return value * scaleWidth(context);
+    return s(context, value);
   }
 
   static double h(BuildContext context, double value) {
-    return value * scaleHeight(context);
+    return s(context, value);
   }
 
   static double s(BuildContext context, double value) {

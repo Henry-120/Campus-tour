@@ -1,8 +1,7 @@
-import 'dart:async';
-
 import 'package:campus_tour/widgets/game/catching_pages/discovered_item_page.dart';
 import 'package:campus_tour/widgets/game/catching_pages/plot_level.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class PlotLevelPage extends StatefulWidget {
   final PlotLevel plotLevel;
@@ -19,11 +18,7 @@ class PlotLevelPage extends StatefulWidget {
 }
 
 class _PlotLevelPageState extends State<PlotLevelPage> {
-  final List<Timer> _timers = [];
-  bool _showTitle = false;
-  bool _showDescription = false;
-  bool _showPress = false;
-  bool _canContinue = false;
+  int _currentStepIndex = 0;
   bool _hasCalledNext = false;
 
   @override
@@ -32,45 +27,16 @@ class _PlotLevelPageState extends State<PlotLevelPage> {
 
     if (widget.plotLevel.isPassed) {
       WidgetsBinding.instance.addPostFrameCallback((_) => _callNextFunction());
-      return;
     }
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (mounted) {
-        setState(() => _showTitle = true);
-      }
-    });
-
-    _timers.add(
-      Timer(PlotLevel.titleFadeDuration + PlotLevel.sequenceDelay, () {
-        if (mounted) {
-          setState(() => _showDescription = true);
-        }
-      }),
-    );
-
-    _timers.add(
-      Timer(
-        PlotLevel.titleFadeDuration +
-            PlotLevel.descriptionFadeDuration +
-            PlotLevel.sequenceDelay * 2,
-        () {
-          if (mounted) {
-            setState(() {
-              _showPress = true;
-              _canContinue = true;
-            });
-          }
-        },
-      ),
-    );
+    // SystemChrome.setPreferredOrientations([
+    //   DeviceOrientation.landscapeLeft,
+    //   DeviceOrientation.landscapeRight,
+    // ]);
   }
 
   @override
   void dispose() {
-    for (final timer in _timers) {
-      timer.cancel();
-    }
+    _restorePortraitOrientation();
     super.dispose();
   }
 
@@ -80,10 +46,12 @@ class _PlotLevelPageState extends State<PlotLevelPage> {
       return const SizedBox.shrink();
     }
 
+    final step = _currentStep;
+
     return Scaffold(
       body: GestureDetector(
         behavior: HitTestBehavior.opaque,
-        onTap: _canContinue ? _callNextFunction : null,
+        onTap: _advanceStory,
         child: Stack(
           fit: StackFit.expand,
           children: [
@@ -92,65 +60,9 @@ class _PlotLevelPageState extends State<PlotLevelPage> {
             SafeArea(
               child: Stack(
                 children: [
-                  Align(
-                    alignment: Alignment.topRight,
-                    child: Padding(
-                      padding: PlotLevelPageStyle.skipPadding,
-                      child: TextButton(
-                        onPressed: _callNextFunction,
-                        style: PlotLevelPageStyle.skipButtonStyle,
-                        child: Text(
-                          PlotLevel.passLevel,
-                          style: PlotLevelPageStyle.skipTextStyle,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Center(
-                    child: Padding(
-                      padding: PlotLevelPageStyle.contentPadding,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          AnimatedOpacity(
-                            opacity: _showTitle ? 1 : 0,
-                            duration: PlotLevel.titleFadeDuration,
-                            child: Text(
-                              widget.plotLevel.title,
-                              style: PlotLevelPageStyle.titleStyle,
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                          const SizedBox(
-                            height: PlotLevelPageStyle.descriptionTopSpacing,
-                          ),
-                          AnimatedOpacity(
-                            opacity: _showDescription ? 1 : 0,
-                            duration: PlotLevel.descriptionFadeDuration,
-                            child: Text(
-                              widget.plotLevel.description,
-                              style: PlotLevelPageStyle.descriptionStyle,
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Padding(
-                      padding: PlotLevelPageStyle.pressPadding,
-                      child: AnimatedOpacity(
-                        opacity: _showPress ? 1 : 0,
-                        duration: PlotLevel.descriptionFadeDuration,
-                        child: _BlinkingPressText(
-                          isActive: _showPress,
-                          text: _pressText,
-                        ),
-                      ),
-                    ),
-                  ),
+                  _buildSkipButton(),
+                  _buildSpriteStage(step),
+                  _buildDialogueBox(step),
                 ],
               ),
             ),
@@ -158,6 +70,10 @@ class _PlotLevelPageState extends State<PlotLevelPage> {
         ),
       ),
     );
+  }
+
+  PlotDialogueStep get _currentStep {
+    return widget.plotLevel.dialogueSteps[_currentStepIndex];
   }
 
   Widget _buildBackground() {
@@ -170,13 +86,221 @@ class _PlotLevelPageState extends State<PlotLevelPage> {
     );
   }
 
+  Widget _buildSkipButton() {
+    return Align(
+      alignment: Alignment.topRight,
+      child: Padding(
+        padding: PlotLevelPageStyle.skipPadding,
+        child: TextButton(
+          onPressed: _callNextFunction,
+          style: PlotLevelPageStyle.skipButtonStyle,
+          child: Text(
+            PlotLevel.passLevel,
+            style: PlotLevelPageStyle.skipTextStyle,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSpriteStage(PlotDialogueStep step) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final sideWidth =
+            constraints.maxWidth * PlotLevelPageStyle.sideSpriteWidthFactor;
+        final sideHeight =
+            constraints.maxHeight * PlotLevelPageStyle.sideSpriteHeightFactor;
+        final centerWidth =
+            constraints.maxWidth * PlotLevelPageStyle.centerSpriteWidthFactor;
+        final centerHeight =
+            constraints.maxHeight * PlotLevelPageStyle.centerSpriteHeightFactor;
+
+        return Stack(
+          fit: StackFit.expand,
+          children: [
+            Align(
+              alignment: Alignment.bottomLeft,
+              child: Padding(
+                padding: PlotLevelPageStyle.spriteBottomPadding,
+                child: _buildSprite(
+                  keyValue: 'left-${widget.plotLevel.leftCharacter.spritePath}',
+                  imagePath: widget.plotLevel.leftCharacter.spritePath,
+                  isVisible: step.showLeftSprite,
+                  isActive: step.speakerSlot == PlotSpeakerSlot.left,
+                  maxWidth: sideWidth,
+                  maxHeight: sideHeight,
+                ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomRight,
+              child: Padding(
+                padding: PlotLevelPageStyle.spriteBottomPadding,
+                child: _buildSprite(
+                  keyValue:
+                      'right-${widget.plotLevel.rightCharacter.spritePath}',
+                  imagePath: widget.plotLevel.rightCharacter.spritePath,
+                  isVisible: step.showRightSprite,
+                  isActive: step.speakerSlot == PlotSpeakerSlot.right,
+                  maxWidth: sideWidth,
+                  maxHeight: sideHeight,
+                ),
+              ),
+            ),
+            if (step.showsCenterSprite)
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                  padding: PlotLevelPageStyle.spriteBottomPadding,
+                  child: _buildSprite(
+                    keyValue: 'center-${step.centerSpritePath}',
+                    imagePath: step.centerSpritePath!,
+                    isVisible: true,
+                    isActive: step.speakerSlot == PlotSpeakerSlot.center,
+                    maxWidth: centerWidth,
+                    maxHeight: centerHeight,
+                  ),
+                ),
+              ),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget _buildSprite({
+    required String keyValue,
+    required String imagePath,
+    required bool isVisible,
+    required bool isActive,
+    required double maxWidth,
+    required double maxHeight,
+  }) {
+    if (!isVisible || imagePath.trim().isEmpty) {
+      return const SizedBox.shrink();
+    }
+
+    final opacity = isActive
+        ? PlotLevelPageStyle.activeSpriteOpacity
+        : PlotLevelPageStyle.inactiveSpriteOpacity;
+
+    final sprite = ConstrainedBox(
+      constraints: BoxConstraints(maxWidth: maxWidth, maxHeight: maxHeight),
+      child: Image.asset(
+        imagePath,
+        fit: BoxFit.contain,
+        errorBuilder: (_, _, _) => const SizedBox.shrink(),
+      ),
+    );
+
+    return AnimatedOpacity(
+      key: ValueKey(keyValue),
+      opacity: opacity,
+      duration: PlotLevel.spriteSwitchDuration,
+      child: AnimatedScale(
+        scale: isActive ? 1 : 0.96,
+        duration: PlotLevel.spriteSwitchDuration,
+        curve: Curves.easeOutCubic,
+        child: isActive
+            ? sprite
+            : ColorFiltered(
+                colorFilter: const ColorFilter.mode(
+                  Color(0xAA000000),
+                  BlendMode.srcATop,
+                ),
+                child: sprite,
+              ),
+      ),
+    );
+  }
+
+  Widget _buildDialogueBox(PlotDialogueStep step) {
+    return Align(
+      alignment: Alignment.bottomCenter,
+      child: Padding(
+        padding: PlotLevelPageStyle.dialoguePadding,
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(
+            maxWidth: PlotLevelPageStyle.dialogueMaxWidth,
+            minHeight: PlotLevelPageStyle.dialogueMinHeight,
+          ),
+          child: DecoratedBox(
+            decoration: PlotLevelPageStyle.dialogueBoxDecoration,
+            child: Padding(
+              padding: PlotLevelPageStyle.dialogueContentPadding,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildSpeakerName(step),
+                  AnimatedSwitcher(
+                    duration: PlotLevel.dialogueSwitchDuration,
+                    switchInCurve: Curves.easeOut,
+                    switchOutCurve: Curves.easeIn,
+                    child: Text(
+                      step.text,
+                      key: ValueKey('dialogue-$_currentStepIndex-${step.text}'),
+                      style: PlotLevelPageStyle.descriptionStyle,
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: _BlinkingPressText(text: _pressText),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSpeakerName(PlotDialogueStep step) {
+    if (step.speakerSlot == PlotSpeakerSlot.narrator ||
+        step.speakerName.trim().isEmpty) {
+      return const SizedBox.shrink();
+    }
+
+    return Padding(
+      padding: const EdgeInsets.only(
+        bottom: PlotLevelPageStyle.speakerNameBottomSpacing,
+      ),
+      child: Text(step.speakerName, style: PlotLevelPageStyle.speakerNameStyle),
+    );
+  }
+
   String get _pressText {
+    if (_currentStepIndex < widget.plotLevel.dialogueSteps.length - 1) {
+      return PlotLevel.press;
+    }
+
     return widget.plotLevel.type == PlotLevel.battleType
         ? PlotLevel.pressBattle
         : PlotLevel.press;
   }
 
-  void _callNextFunction() {
+  void _advanceStory() {
+    if (_hasCalledNext) {
+      return;
+    }
+
+    if (_currentStepIndex < widget.plotLevel.dialogueSteps.length - 1) {
+      setState(() => _currentStepIndex++);
+      return;
+    }
+
+    _callNextFunction();
+  }
+
+  Future<void> _restorePortraitOrientation() {
+    return SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
+  }
+
+  Future<void> _callNextFunction() async {
     if (_hasCalledNext) {
       return;
     }
@@ -186,6 +310,7 @@ class _PlotLevelPageState extends State<PlotLevelPage> {
 
     // [L-01]
     if (discoveredItem == null || widget.plotLevel.isPassed) {
+      await _restorePortraitOrientation();
       widget.nextFunction();
       return;
     }
@@ -199,9 +324,10 @@ class _PlotLevelPageState extends State<PlotLevelPage> {
       pageBuilder: (dialogContext, _, _) {
         return DiscoveredItemPage(
           item: discoveredItem,
-          nextFunction: () {
+          nextFunction: () async {
             // [L-03]
             Navigator.of(dialogContext).pop();
+            await _restorePortraitOrientation();
             widget.nextFunction();
           },
         );
@@ -223,9 +349,8 @@ class _PlotLevelPageState extends State<PlotLevelPage> {
 }
 
 class _BlinkingPressText extends StatefulWidget {
-  const _BlinkingPressText({required this.isActive, required this.text});
+  const _BlinkingPressText({required this.text});
 
-  final bool isActive;
   final String text;
 
   @override
@@ -243,25 +368,11 @@ class _BlinkingPressTextState extends State<_BlinkingPressText>
     _controller = AnimationController(
       vsync: this,
       duration: PlotLevel.pressBlinkDuration,
-    );
+    )..repeat(reverse: true);
     _opacity = Tween<double>(
       begin: 0.35,
       end: 1,
     ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
-
-    if (widget.isActive) {
-      _controller.repeat(reverse: true);
-    }
-  }
-
-  @override
-  void didUpdateWidget(covariant _BlinkingPressText oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (widget.isActive && !_controller.isAnimating) {
-      _controller.repeat(reverse: true);
-    } else if (!widget.isActive && _controller.isAnimating) {
-      _controller.stop();
-    }
   }
 
   @override
@@ -277,7 +388,7 @@ class _BlinkingPressTextState extends State<_BlinkingPressText>
       child: Text(
         widget.text,
         style: PlotLevelPageStyle.pressTextStyle,
-        textAlign: TextAlign.center,
+        textAlign: TextAlign.right,
       ),
     );
   }

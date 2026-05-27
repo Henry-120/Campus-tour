@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 
+import '../../styles/app_theme.dart';
+
 class FilterBar extends StatelessWidget {
   final int selectedIndex;
   final Function(int) onSelect;
 
-  const FilterBar({super.key, required this.selectedIndex, required this.onSelect});
+  const FilterBar({
+    super.key,
+    required this.selectedIndex,
+    required this.onSelect,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,11 +23,24 @@ class FilterBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-
           //首頁+頁碼+末頁
-          const Text('首頁', style: TextStyle(fontWeight: FontWeight.bold)),
+          Text(
+            '首頁',
+            style: AppTheme.titleStyle.copyWith(
+              fontWeight: FontWeight.bold,
+              fontSize: 14,
+              letterSpacing: 0,
+            ),
+          ),
           ...List.generate(4, (index) => _buildChip(index + 1)),
-          const Text('末頁', style: TextStyle(fontWeight: FontWeight.bold)),
+          Text(
+            '末頁',
+            style: AppTheme.titleStyle.copyWith(
+              fontWeight: FontWeight.bold,
+              fontSize: 14,
+              letterSpacing: 0,
+            ),
+          ),
 
           //根據屬性篩選
           const Icon(Icons.filter_list),
@@ -40,7 +59,14 @@ class FilterBar extends StatelessWidget {
           color: isSelected ? Colors.blue : Colors.transparent,
           borderRadius: BorderRadius.circular(20),
         ),
-        child: Text('$label', style: TextStyle(color: isSelected ? Colors.white : Colors.black)),
+        child: Text(
+          '$label',
+          style: AppTheme.titleStyle.copyWith(
+            color: isSelected ? Colors.white : Colors.black,
+            fontSize: 14,
+            letterSpacing: 0,
+          ),
+        ),
       ),
     );
   }

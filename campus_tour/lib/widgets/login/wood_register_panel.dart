@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../styles/app_theme.dart';
 import '../constants/asset_paths.dart';
 import '../constants/responsive.dart';
 import 'game_button.dart';
@@ -34,7 +35,6 @@ class WoodRegisterPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scale = Responsive.scale(context);
-    final color = Color(0xFFB9F451);
 
     return SizedBox(
       width: 390 * scale,
@@ -44,10 +44,7 @@ class WoodRegisterPanel extends StatelessWidget {
         alignment: Alignment.center,
         children: [
           Positioned.fill(
-            child: Image.asset(
-              AssetPaths.rWoodBoard,
-              fit: BoxFit.fill,
-            ),
+            child: Image.asset(AssetPaths.rWoodBoard, fit: BoxFit.fill),
           ),
 
           Padding(
@@ -66,12 +63,12 @@ class WoodRegisterPanel extends StatelessWidget {
                   controller: nameController,
                   hintText: "Enter your Name",
                   icon: Icons.person,
-                  height: 46 * scale,
+                  height: 50 * scale,
                   fontSize: 16 * scale,
                   hintFontSize: 14 * scale,
                   iconSize: 22 * scale,
                   radius: 12 * scale,
-                  verticalPadding: 13 * scale,
+                  verticalPadding: 0,
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
                       return "請輸入名稱";
@@ -89,12 +86,12 @@ class WoodRegisterPanel extends StatelessWidget {
                   hintText: "Enter your Email",
                   icon: Icons.email,
                   keyboardType: TextInputType.emailAddress,
-                  height: 46 * scale,
+                  height: 50 * scale,
                   fontSize: 16 * scale,
                   hintFontSize: 14 * scale,
                   iconSize: 22 * scale,
                   radius: 12 * scale,
-                  verticalPadding: 13 * scale,
+                  verticalPadding: 0,
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
                       return "請輸入 Email";
@@ -121,12 +118,12 @@ class WoodRegisterPanel extends StatelessWidget {
                   hintText: "Enter your Password",
                   icon: Icons.lock,
                   isPasswordField: true,
-                  height: 46 * scale,
+                  height: 50 * scale,
                   fontSize: 16 * scale,
                   hintFontSize: 14 * scale,
                   iconSize: 22 * scale,
                   radius: 12 * scale,
-                  verticalPadding: 13 * scale,
+                  verticalPadding: 0,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return "請輸入密碼";
@@ -149,12 +146,12 @@ class WoodRegisterPanel extends StatelessWidget {
                   hintText: "Confirm Password",
                   icon: Icons.verified_user,
                   isPasswordField: true,
-                  height: 46 * scale,
+                  height: 50 * scale,
                   fontSize: 16 * scale,
                   hintFontSize: 14 * scale,
                   iconSize: 22 * scale,
                   radius: 12 * scale,
-                  verticalPadding: 13 * scale,
+                  verticalPadding: 0,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return "請再次輸入密碼";
@@ -186,7 +183,7 @@ class WoodRegisterPanel extends StatelessWidget {
                   text: "-- OR REGISTRATION VIA --",
                   onTap: () {},
                   fontSize: 16 * scale,
-                  color:color,
+                  color: AppTheme.loginGlowColor,
                 ),
               ],
             ),
@@ -209,20 +206,6 @@ class WoodRegisterPanel extends StatelessWidget {
   Widget _buildLabel(BuildContext context, String text) {
     final scale = Responsive.scale(context);
 
-    return Text(
-      text,
-      style: TextStyle(
-        fontSize: 21 * scale,
-        fontWeight: FontWeight.w900,
-        color: Colors.white,
-        shadows: [
-          Shadow(
-            offset: Offset(2 * scale, 2 * scale),
-            blurRadius: 1 * scale,
-            color: Colors.black.withValues(alpha: 0.75),
-          ),
-        ],
-      ),
-    );
+    return Text(text, style: AppTheme.loginLabelStyle(scale));
   }
 }

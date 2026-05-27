@@ -25,9 +25,7 @@ class MainBottomMenu extends StatelessWidget {
               ),
             ),
 
-            const Positioned.fill(
-              child: SystemMenu(),
-            ),
+            const Positioned.fill(child: SystemMenu()),
           ],
         ),
       ),

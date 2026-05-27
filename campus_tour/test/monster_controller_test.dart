@@ -1,14 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:campus_tour/controllers/monster_controller.dart';
-import 'package:campus_tour/models/monster_model.dart';
-import 'package:campus_tour/services/firestore_service.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:geolocator/geolocator.dart';
-
 
 void main() {
-  test("updateNearbyMonsters 應該更新附近怪物清單", () async {
+  test("updateLocationMonsters 應該更新附近怪物清單", () async {
     final controller = MonsterController();
 
     final fakePosition = Position(
@@ -26,7 +21,7 @@ void main() {
       isMocked: false,
     );
 
-    await controller.updateNearbyMonsters(fakePosition);
+    await controller.updateLocationMonsters(fakePosition);
 
     expect(controller.nearbyMonsters.isNotEmpty, true);
     expect(controller.nearbyMonsters.first.name, "測試怪物");

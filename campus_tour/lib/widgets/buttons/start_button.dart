@@ -34,12 +34,7 @@ class _StartButtonState extends State<StartButton>
     _scaleAnimation = Tween<double>(
       begin: 1.0,
       end: 0.9,
-    ).animate(
-      CurvedAnimation(
-        parent: _controller,
-        curve: Curves.easeInOut,
-      ),
-    );
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
   }
 
   @override
@@ -64,9 +59,7 @@ class _StartButtonState extends State<StartButton>
 
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(
-        builder: (context) => widget.destination,
-      ),
+      MaterialPageRoute(builder: (context) => widget.destination),
     );
   }
 

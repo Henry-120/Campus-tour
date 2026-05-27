@@ -1,5 +1,5 @@
 import 'package:campus_tour/view/full_mission_page.dart';
-import 'package:campus_tour/widgets/buttons/LHF_drawer_button.dart';
+import 'package:campus_tour/widgets/buttons/lhf_drawer_button.dart';
 import 'package:campus_tour/widgets/game/catching_pages/camara_level.dart';
 import 'package:campus_tour/widgets/game/catching_pages/cryptography_level.dart';
 import 'package:campus_tour/widgets/game/catching_pages/full_mission.dart';
