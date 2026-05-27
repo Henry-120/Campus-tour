@@ -15,14 +15,20 @@ class MonsterMarker {
   });
 
   Marker toMarker() {
+    final markerId = MarkerId('monster_${monster.id}');
+    final position = LatLng(
+      monster.location.latitude,
+      monster.location.longitude,
+    );
+    debugPrint('[MarkerDebug_MonsterMarker] markerId: ${markerId.value}');
+    debugPrint('[MarkerDebug_MonsterMarker] name: ${monster.name}');
     return Marker(
-      markerId: MarkerId('monster_${monster.id}'),
-      position: LatLng(
-        monster.location.latitude,
-        monster.location.longitude,
-      ),
+      markerId: markerId,
+      position: position,
       icon: icon,
       anchor: const Offset(0.5, 1.0), // 圖片底部對齊座標點
+      flat: false,
+      alpha: 1.0,
       infoWindow: InfoWindow(title: monster.name),
       onTap: onTap,
     );

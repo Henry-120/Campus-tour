@@ -302,6 +302,54 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
   }
   //到這裡為止
 
+  Set<Marker> _debugMonsterMarkers(Set<Marker> markers) {
+    debugPrint('========== [MarkerDebug_GameMap] ==========');
+    debugPrint('GoogleMap 收到 marker 數量: ${markers.length}');
+
+    for (final marker in markers) {
+      debugPrint(
+        '[MarkerDebug_GameMap] '
+        'markerId: ${marker.markerId.value}, '
+        'lat: ${marker.position.latitude.toStringAsFixed(6)}, '
+        'lng: ${marker.position.longitude.toStringAsFixed(6)}',
+      );
+    }
+
+    debugPrint('==========================================');
+
+    return markers;
+  }
+
+  Set<Marker> _buildFixedIconMarkers(Set<Marker> markers) {
+    debugPrint('========== [FixedMarkerDebug] ==========');
+    debugPrint('原本 monsterMarkers 數量: ${markers.length}');
+
+    final fixedMarkers = markers.map((marker) {
+      debugPrint(
+        '[FixedMarkerDebug] 產生固定圖示 Marker: '
+        'markerId=${marker.markerId.value}, '
+        'lat=${marker.position.latitude.toStringAsFixed(6)}, '
+        'lng=${marker.position.longitude.toStringAsFixed(6)}',
+      );
+
+      return Marker(
+        markerId: marker.markerId,
+        position: marker.position,
+        icon: BitmapDescriptor.defaultMarkerWithHue(
+          BitmapDescriptor.hueRed,
+        ),
+        anchor: const Offset(0.5, 1.0),
+        infoWindow: marker.infoWindow,
+        onTap: marker.onTap,
+      );
+    }).toSet();
+
+    debugPrint('固定圖示 Marker 數量: ${fixedMarkers.length}');
+    debugPrint('=======================================');
+
+    return fixedMarkers;
+  }
+
   @override
   void initState() {
     super.initState();
@@ -318,6 +366,14 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
 
   @override
   Widget build(BuildContext context) {
+    for (final marker in monsterMarkers) {
+      debugPrint(
+        '[MarkerDebug_GameMap]'
+        'markerId: ${marker.markerId.value}, '
+        'lat: ${marker.position.latitude.toStringAsFixed(6)}, '
+        'lng: ${marker.position.longitude.toStringAsFixed(6)}',
+      );
+    }
     return Stack(
       children: [
         GoogleMap(
@@ -344,10 +400,9 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
               : {},
 
           buildingsEnabled: true,
-          markers: {
-            // if (_playerMarker != null) _playerMarker!.toMarker(),
-            ...monsterMarkers, // 👈 MonsterMarkersMixin 提供的 getter
-          },
+          markers: _debugMonsterMarkers({
+            ...monsterMarkers,
+          }),
           myLocationEnabled: false,
           myLocationButtonEnabled: false,
           zoomControlsEnabled: false,

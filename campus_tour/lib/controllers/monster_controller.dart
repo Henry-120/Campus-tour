@@ -133,6 +133,19 @@ class MonsterController extends GetxController {
       // 2. 必須在距離內 且 尚未捕捉
       return _monsterService.isWithinRange(userPosition, m.location) && !isAlreadyCaptured;
     }).toList();
+
+    debugPrint('========== nearbyMonsters ==========');
+    debugPrint('附近精靈數量: ${nearbyMonsters.length}');
+
+    for (final monster in nearbyMonsters) {
+      debugPrint(
+        '精靈: ${monster.name}, '
+        'id: ${monster.id}, '
+        '位置: ${monster.location.latitude}, ${monster.location.longitude}',
+      );
+    }
+
+    debugPrint('====================================');
   }
 
   //之後要拿掉，用來建立user monster collection 的假資料
