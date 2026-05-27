@@ -27,7 +27,6 @@ class LoginController {
 
     await monsterController.loadUserCollection(refreshedUser.uid);
     await userController.fetchCurrentUser();
-    await monsterController.seedUserMonsters(user.uid);
     return refreshedUser;
   }
 

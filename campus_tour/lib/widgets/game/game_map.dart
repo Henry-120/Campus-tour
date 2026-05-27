@@ -149,9 +149,7 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
 
             _moveCamera(position);
 
-            // 更新附近怪物
-            monsterController.updateNearbyMonsters(position);
-            monsterController.updateNearestGlobal(position);
+            unawaited(monsterController.updateLocationMonsters(position));
           });
 
       debugPrint("[Debug][GameMap]:已開始監聽位置變化");

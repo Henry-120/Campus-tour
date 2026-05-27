@@ -31,8 +31,10 @@ class MonsterController extends GetxController {
 
   Future<void> loadMonsterWithRelations(MonsterModel monsterModel) async {
     monster.value = monsterModel;
-    getQAByMonster(monsterModel);
-    getArchitectureByMonster(monsterModel);
+    await Future.wait([
+      getQAByMonster(monsterModel),
+      getArchitectureByMonster(monsterModel),
+    ]);
   }
 
   /// 傳入 MonsterModel 取得對應的 QA 資料
@@ -143,83 +145,27 @@ class MonsterController extends GetxController {
     }
   }
 
-  Future<void> updateNearbyMonsters(Position userPosition) async {
+  Future<void> updateLocationMonsters(Position userPosition) async {
     final requestVersion = _stateVersion;
+    playerPosition.value = userPosition;
+
     final monsters = await _service.getAllMonsters();
     if (requestVersion != _stateVersion) return;
 
-    nearbyMonsters.value = monsters.where((m) {
-      final isAlreadyCaptured = userMonsterCollection.any(
-        (captured) => captured.monsterRef.id == m.id,
-      );
+    final capturedIds = userMonsterCollection
+        .map((captured) => captured.monsterRef.id)
+        .toSet();
+    final uncaught = monsters
+        .where((monster) => !capturedIds.contains(monster.id))
+        .toList();
 
-      return _monsterService.isWithinRange(userPosition, m.location) &&
-          !isAlreadyCaptured;
-    }).toList();
-  }
-
-  // 之後要拿掉，用來建立 user monster collection 的假資料。
-  Future<void> seedUserMonsters(String uid) async {
-    final db = FirebaseFirestore.instance;
-    final snapshot = await db.collection("monsters").get();
-    debugPrint(
-      '[MonsterController] seedUserMonsters 開始，Firebase monsters=${snapshot.docs.length}',
-    );
-
-    var successCount = 0;
-    var failCount = 0;
-
-    for (var doc in snapshot.docs) {
-      try {
-        final monsterData = doc.data();
-
-        final userMonster = UserMonsterModel(
-          monsterRef: doc.reference,
-          caughtAt: DateTime.now(),
-          name: monsterData["name"] ?? "未知怪物",
-          type: monsterData["type"] ?? "",
-          imageURL: monsterData["imageURL"] ?? "",
-          videoRef: monsterData["videoRef"] ?? "",
-          arRef: monsterData["ARRef"] ?? "",
-        );
-
-        await _service.setUserMonster(uid, doc.id, userMonster);
-        successCount++;
-      } catch (e) {
-        failCount++;
-        debugPrint('[MonsterController] seedUserMonsters 失敗 doc=${doc.id}: $e');
-      }
-    }
-
-    await loadUserCollection(uid);
-    debugPrint(
-      '[MonsterController] seedUserMonsters 完成，成功=$successCount，失敗=$failCount，目前收藏=${userMonsterCollection.length}',
-    );
-  }
-
-  void updateNearestGlobal(Position userPosition) async {
-    final requestVersion = _stateVersion;
-    playerPosition.value = userPosition;
-    debugPrint(
-      '[updateNearestGlobal] playerPosition 已更新: ${playerPosition.value?.latitude}, ${playerPosition.value?.longitude}',
-    );
-
-    final all = await _service.getAllMonsters();
-    if (requestVersion != _stateVersion) return;
-
-    if (all.isEmpty) {
-      nearestMonster.value = null;
-      nearestDistance.value = null;
-      return;
-    }
-
-    final uncaught = all
+    nearbyMonsters.value = uncaught
         .where(
-          (m) => !userMonsterCollection.any(
-            (captured) => captured.monsterRef.id == m.id,
-          ),
+          (monster) =>
+              _monsterService.isWithinRange(userPosition, monster.location),
         )
         .toList();
+
     if (uncaught.isEmpty) {
       nearestMonster.value = null;
       nearestDistance.value = null;
@@ -250,7 +196,7 @@ class MonsterController extends GetxController {
       nearest.location.longitude,
     );
     debugPrint(
-      '[updateNearestGlobal] 最近精靈: ${nearestMonster.value?.name}, 距離: ${nearestDistance.value}',
+      '[MonsterController] 最近精靈: ${nearestMonster.value?.name}, 距離: ${nearestDistance.value}',
     );
   }
 

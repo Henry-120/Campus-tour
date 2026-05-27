@@ -77,42 +77,6 @@ class FirestoreService {
     return null;
   }
 
-  // 取得 Monster + Architecture + QA
-  Future<Map<String, dynamic>?> getMonsterWithRelations(String id) async {
-    final doc = await _db.collection("monsters").doc(id).get();
-    if (!doc.exists) return null;
-
-    // Monster 本身
-    final monster = MonsterModel.fromMap(
-      id: doc.id,
-      doc.data() as Map<String, dynamic>,
-    );
-
-    // Architecture
-    ArchitectureModel? architecture;
-    if (monster.architectureRef != null) {
-      final archSnap = await monster.architectureRef!.get();
-      if (archSnap.exists) {
-        architecture = ArchitectureModel.fromMap(
-          id: archSnap.id,
-          archSnap.data() as Map<String, dynamic>,
-        );
-      }
-    }
-
-    // QA
-    QAModel? qa;
-    if (monster.qaRef != null) {
-      final qaSnap = await monster.qaRef!.get();
-      if (qaSnap.exists) {
-        qa = QAModel.fromMap(qaSnap.id, qaSnap.data() as Map<String, dynamic>);
-      }
-    }
-
-    // 回傳整合資料
-    return {"monster": monster, "architecture": architecture, "qa": qa};
-  }
-
   // ===== UserMonster =====
   Future<void> addUserMonster(String uid, UserMonsterModel userMonster) async {
     final docRef = await _db
@@ -121,20 +85,6 @@ class FirestoreService {
         .collection("monsters")
         .add(userMonster.toMap()); // Firestore 自動生成 id
     userMonster.docId = docRef.id;
-  }
-
-  Future<void> setUserMonster(
-    String uid,
-    String monsterId,
-    UserMonsterModel userMonster,
-  ) async {
-    await _db
-        .collection("users")
-        .doc(uid)
-        .collection("monsters")
-        .doc(monsterId)
-        .set(userMonster.toMap());
-    userMonster.docId = monsterId;
   }
 
   Future<List<UserMonsterModel>> getUserMonsters(String uid) async {

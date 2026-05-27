@@ -3,7 +3,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:campus_tour/controllers/monster_controller.dart';
 
 void main() {
-  test("updateNearbyMonsters 應該更新附近怪物清單", () async {
+  test("updateLocationMonsters 應該更新附近怪物清單", () async {
     final controller = MonsterController();
 
     final fakePosition = Position(
@@ -21,7 +21,7 @@ void main() {
       isMocked: false,
     );
 
-    await controller.updateNearbyMonsters(fakePosition);
+    await controller.updateLocationMonsters(fakePosition);
 
     expect(controller.nearbyMonsters.isNotEmpty, true);
     expect(controller.nearbyMonsters.first.name, "測試怪物");
