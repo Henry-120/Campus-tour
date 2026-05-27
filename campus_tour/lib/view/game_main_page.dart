@@ -4,7 +4,7 @@ import '../widgets/game/user_hud.dart';
 import '../widgets/game/game_map.dart';
 import '../widgets/common/scale_button.dart';
 import '../services/audio_service.dart';
-import 'package:campus_tour/widgets/common/lhf_drawer.dart';
+import 'package:campus_tour/widgets/common/drawer.dart';
 import '../widgets/game/player_sprite.dart';
 import '../widgets/game/nearest_monster_arrow.dart';
 import '../widgets/constants/responsive.dart';
