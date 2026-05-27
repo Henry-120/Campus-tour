@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
+import '../../styles/app_theme.dart';
+
 class ElfTypeTag extends StatelessWidget {
   final String type;
 
-  const ElfTypeTag({
-    super.key,
-    required this.type,
-  });
+  const ElfTypeTag({super.key, required this.type});
 
   static const Color primaryColor = Color(0xFF006C49);
 
@@ -18,9 +17,7 @@ class ElfTypeTag extends StatelessWidget {
         decoration: BoxDecoration(
           color: primaryColor.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(30),
-          border: Border.all(
-            color: primaryColor.withValues(alpha: 0.2),
-          ),
+          border: Border.all(color: primaryColor.withValues(alpha: 0.2)),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
@@ -29,7 +26,7 @@ class ElfTypeTag extends StatelessWidget {
             const SizedBox(width: 8),
             Text(
               type.toUpperCase(),
-              style: const TextStyle(
+              style: AppTheme.titleStyle.copyWith(
                 color: primaryColor,
                 fontWeight: FontWeight.bold,
                 fontSize: 12,

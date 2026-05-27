@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:campus_tour/services/json_to_suggestion.dart';
+import 'package:campus_tour/services/orientation_service.dart';
 import 'package:campus_tour/styles/map_suggestion_style.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 
 class MapSuggestionsVariables {
@@ -13,7 +13,7 @@ class MapSuggestionsVariables {
 
   // [L-02]
   // ignore: constant_identifier_names
-  static const String position_char = 'assets/images/component/squirrel.png';
+  static const String position_char = 'assets/images/squirrel_front.png';
 
   // [L-03]
   static const Size mapImageSize = Size(2744, 1568);
@@ -35,10 +35,17 @@ class MapSuggestionsVariables {
 
   // [L-10]
   static const String ncuTenViewsCategory = '中大十景';
+  // [L-53]
+  static const String installationArtCategory = '裝置藝術';
+
+  // [L-54]
+  static const String toiletCategory = '廁所';
 
   // [L-11]
   static const List<String> locationJsonPaths = [
     'assets/json/locations/NCU10view.json',
+    'assets/json/locations/installation_art.json',
+    'assets/json/locations/toilet.json',
   ];
 
   static const int step = 10;
@@ -71,6 +78,8 @@ class _MapSuggestionsPageState extends State<MapSuggestionsPage> {
   List<_LandmarkMarker> _cachedLandmarkMarkers = const [];
   final Map<String, bool> _selectedCategories = {
     MapSuggestionsVariables.ncuTenViewsCategory: false,
+    MapSuggestionsVariables.installationArtCategory: false,
+    MapSuggestionsVariables.toiletCategory: false,
   };
 
   @override
@@ -95,15 +104,12 @@ class _MapSuggestionsPageState extends State<MapSuggestionsPage> {
 
   Future<void> _forceLandscape() async {
     // [L-18]
-    await SystemChrome.setPreferredOrientations(const [
-      DeviceOrientation.landscapeLeft,
-      DeviceOrientation.landscapeRight,
-    ]);
+    await OrientationService.lockLandscape();
   }
 
   Future<void> _restoreOrientation() async {
     // [L-19]
-    await SystemChrome.setPreferredOrientations(DeviceOrientation.values);
+    await OrientationService.lockPortrait();
   }
 
   Future<void> _loadLandscapeLocations() async {
@@ -352,9 +358,54 @@ class _MapSuggestionsPageState extends State<MapSuggestionsPage> {
                       style: MapSuggestionStyle.locationMessageTextStyle,
                     ),
                   ),
+                Positioned(
+                  top: MapSuggestionStyle.filterPanelInset,
+                  right: MapSuggestionStyle.filterPanelInset,
+                  child: _MapBackButton(
+                    onTap: () => Navigator.maybePop(context),
+                  ),
+                ),
               ],
             );
           },
+        ),
+      ),
+    );
+  }
+}
+
+class _MapBackButton extends StatelessWidget {
+  const _MapBackButton({required this.onTap});
+
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(22),
+        child: Container(
+          width: 44,
+          height: 44,
+          decoration: BoxDecoration(
+            color: Colors.black.withValues(alpha: 0.58),
+            shape: BoxShape.circle,
+            border: Border.all(color: Colors.white70, width: 1.4),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.35),
+                blurRadius: 10,
+                offset: const Offset(0, 4),
+              ),
+            ],
+          ),
+          child: const Icon(
+            Icons.arrow_back_rounded,
+            color: Colors.white,
+            size: 25,
+          ),
         ),
       ),
     );
@@ -434,7 +485,9 @@ class _LandmarkLabel extends StatelessWidget {
           Container(
             width: MapSuggestionStyle.landmarkDotSize,
             height: MapSuggestionStyle.landmarkDotSize,
-            decoration: MapSuggestionStyle.landmarkDotDecoration,
+            decoration: MapSuggestionStyle.landmarkDotDecoration(
+              marker.landmark.category,
+            ),
           ),
           const SizedBox(width: MapSuggestionStyle.landmarkLabelSpacing),
           Text(

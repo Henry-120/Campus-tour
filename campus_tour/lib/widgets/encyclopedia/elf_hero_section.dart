@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../styles/app_theme.dart';
+
 class ElfHeroSection extends StatelessWidget {
   final String imagePath;
   final String name;
@@ -56,9 +58,10 @@ class ElfHeroSection extends StatelessWidget {
                         Text(
                           "圖片路徑錯誤:\n$imagePath",
                           textAlign: TextAlign.center,
-                          style: const TextStyle(
+                          style: AppTheme.titleStyle.copyWith(
                             fontSize: 12,
                             color: Colors.grey,
+                            letterSpacing: 0,
                           ),
                         ),
                       ],

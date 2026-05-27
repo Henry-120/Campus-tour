@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 
+import '../../styles/app_theme.dart';
+
 class CircleIconButton extends StatelessWidget {
   final IconData icon;
   final String label;
   final VoidCallback onTap;
 
-  const CircleIconButton({super.key,required this.icon, required this.label, required this.onTap});
+  const CircleIconButton({
+    super.key,
+    required this.icon,
+    required this.label,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +31,15 @@ class CircleIconButton extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 4),
-        Text(label, style: const TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold)),
+        Text(
+          label,
+          style: AppTheme.titleStyle.copyWith(
+            color: Colors.black,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            letterSpacing: 0,
+          ),
+        ),
       ],
     );
   }

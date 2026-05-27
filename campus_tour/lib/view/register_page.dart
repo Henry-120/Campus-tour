@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../controllers/login_controller.dart';
+import '../styles/app_theme.dart';
 import '../widgets/constants/asset_paths.dart';
 import '../widgets/constants/responsive.dart';
+import '../widgets/common/snackbar_builder.dart';
 import '../widgets/login/game_link_text.dart';
 import '../widgets/login/game_title.dart';
 import '../widgets/login/wood_register_panel.dart';
@@ -31,9 +33,7 @@ class _RegisterPageState extends State<RegisterPage> {
     final isValid = _formKey.currentState?.validate() ?? false;
 
     if (!isValid) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(const SnackBar(content: Text("請確認註冊資料是否正確")));
+      SnackBarBuilder.show(context, "請確認註冊資料是否正確", type: AppToastType.warning);
       return;
     }
 
@@ -49,14 +49,18 @@ class _RegisterPageState extends State<RegisterPage> {
       if (!mounted) return;
 
       if (user != null) {
-        ScaffoldMessenger.of(
+        SnackBarBuilder.show(
           context,
-        ).showSnackBar(const SnackBar(content: Text("註冊成功！歡迎加入冒險之旅")));
+          "驗證信已寄到 ${user.email ?? '你的信箱'}，請完成驗證後再登入",
+          type: AppToastType.success,
+        );
 
-        navigateAfterLogin(context);
+        _goBackToLogin();
       } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("註冊失敗，該 Email 可能已被使用或網路異常")),
+        SnackBarBuilder.show(
+          context,
+          "註冊失敗，該 Email 可能已被使用或網路異常",
+          type: AppToastType.error,
         );
       }
     } catch (e) {
@@ -64,9 +68,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
       if (!mounted) return;
 
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text("註冊失敗: $e")));
+      SnackBarBuilder.show(context, "註冊失敗: $e", type: AppToastType.error);
     } finally {
       if (mounted) {
         setState(() => _isLoading = false);
@@ -83,24 +85,30 @@ class _RegisterPageState extends State<RegisterPage> {
       if (!mounted) return;
 
       if (user != null) {
-        ScaffoldMessenger.of(
+        SnackBarBuilder.show(
           context,
-        ).showSnackBar(const SnackBar(content: Text("Google 註冊成功！歡迎加入冒險之旅")));
+          "Google 註冊成功！歡迎加入冒險之旅",
+          type: AppToastType.success,
+        );
 
         navigateAfterLogin(context);
       } else {
-        ScaffoldMessenger.of(
+        SnackBarBuilder.show(
           context,
-        ).showSnackBar(const SnackBar(content: Text("Google 註冊失敗，請稍後再試")));
+          "Google 註冊失敗，請稍後再試",
+          type: AppToastType.error,
+        );
       }
     } catch (e) {
       debugPrint("[RegisterPage] Google 登入失敗: $e");
 
       if (!mounted) return;
 
-      ScaffoldMessenger.of(
+      SnackBarBuilder.show(
         context,
-      ).showSnackBar(SnackBar(content: Text("Google 登入失敗: $e")));
+        "Google 登入失敗: $e",
+        type: AppToastType.error,
+      );
     } finally {
       if (mounted) {
         setState(() => _isLoading = false);
@@ -127,7 +135,6 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     final scale = Responsive.scale(context);
-    final color = Color(0xFFB9F451);
 
     return Scaffold(
       resizeToAvoidBottomInset: true,
@@ -162,13 +169,13 @@ class _RegisterPageState extends State<RegisterPage> {
                         text: "Already have account?",
                         onTap: () {},
                         fontSize: 14 * scale,
-                        color: color,
+                        color: AppTheme.loginGlowColor,
                       ),
                       GameLinkText(
                         text: "Return to Login",
                         onTap: _isLoading ? () {} : _goBackToLogin,
                         fontSize: 14 * scale,
-                        color: color,
+                        color: AppTheme.loginGlowColor,
                       ),
                       SizedBox(height: 24 * scale),
                     ],

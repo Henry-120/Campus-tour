@@ -5,6 +5,7 @@ import '../controllers/login_controller.dart';
 import '../controllers/user_controller.dart';
 import '../widgets/constants/asset_paths.dart';
 import '../widgets/constants/responsive.dart';
+import '../widgets/common/snackbar_builder.dart';
 import '../widgets/login/game_title.dart';
 import '../widgets/login/wood_login_panel.dart';
 import 'after_login.dart';
@@ -35,6 +36,15 @@ class _LoginPageState extends State<LoginPage> {
       if (!mounted) return;
 
       if (user != null) {
+        if (!user.emailVerified) {
+          SnackBarBuilder.show(
+            context,
+            "請先到 ${user.email ?? '你的信箱'} 點擊驗證信後再登入",
+            type: AppToastType.warning,
+          );
+          return;
+        }
+
         if (Get.isRegistered<UserController>()) {
           debugPrint("[LoginPage] 登入成功，正在獲取資料...");
           await Get.find<UserController>().fetchCurrentUser();
@@ -44,18 +54,14 @@ class _LoginPageState extends State<LoginPage> {
 
         navigateAfterLogin(context);
       } else {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(const SnackBar(content: Text("帳號或密碼錯誤")));
+        SnackBarBuilder.show(context, "帳號或密碼錯誤", type: AppToastType.error);
       }
     } catch (e) {
       debugPrint("[LoginPage] 登入出錯: $e");
 
       if (!mounted) return;
 
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(const SnackBar(content: Text("登入發生錯誤，請稍後再試")));
+      SnackBarBuilder.show(context, "登入發生錯誤，請稍後再試", type: AppToastType.error);
     } finally {
       if (mounted) {
         setState(() => _isLoading = false);
@@ -70,10 +76,38 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  void _forgotPassword() {
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(const SnackBar(content: Text("尚未實作忘記密碼功能")));
+  Future<void> _handleGoogleSignIn() async {
+    setState(() => _isLoading = true);
+
+    try {
+      final user = await _controller.signInWithGoogle();
+
+      if (!mounted) return;
+
+      if (user != null) {
+        navigateAfterLogin(context);
+      } else {
+        SnackBarBuilder.show(
+          context,
+          "Google 登入失敗，請稍後再試",
+          type: AppToastType.error,
+        );
+      }
+    } catch (e) {
+      debugPrint("[LoginPage] Google 登入出錯: $e");
+
+      if (!mounted) return;
+
+      SnackBarBuilder.show(
+        context,
+        "Google 登入發生錯誤，請稍後再試",
+        type: AppToastType.error,
+      );
+    } finally {
+      if (mounted) {
+        setState(() => _isLoading = false);
+      }
+    }
   }
 
   @override
@@ -109,7 +143,7 @@ class _LoginPageState extends State<LoginPage> {
                       isLoading: _isLoading,
                       onLogin: _login,
                       onRegister: _goToRegister,
-                      onForgotPassword: _forgotPassword,
+                      onGoogleSignIn: _handleGoogleSignIn,
                     ),
                     SizedBox(height: 30 * scale),
                   ],

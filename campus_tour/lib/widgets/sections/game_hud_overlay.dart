@@ -11,8 +11,8 @@ class GameHudOverlay extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        UserHud(),     // 來自 lib/widgets/game/
-        SystemMenu(),  // 來自 lib/widgets/game/
+        UserHud(), // 來自 lib/widgets/game/
+        SystemMenu(), // 來自 lib/widgets/game/
       ],
     );
   }

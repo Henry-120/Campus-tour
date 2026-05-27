@@ -7,9 +7,6 @@ class StartTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      title,
-      style: AppTheme.titleStyle,
-    );
+    return Text(title, style: AppTheme.titleStyle);
   }
 }

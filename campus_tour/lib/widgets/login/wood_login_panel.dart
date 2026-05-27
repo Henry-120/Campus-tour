@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
+import '../../styles/app_theme.dart';
 import '../constants/asset_paths.dart';
 import '../constants/responsive.dart';
 import 'game_button.dart';
 import 'game_link_text.dart';
+import 'google_image_button.dart';
 import 'login_text_field.dart';
 
 class WoodLoginPanel extends StatelessWidget {
@@ -14,7 +16,7 @@ class WoodLoginPanel extends StatelessWidget {
     required this.isLoading,
     required this.onLogin,
     required this.onRegister,
-    required this.onForgotPassword,
+    required this.onGoogleSignIn,
   });
 
   final TextEditingController emailController;
@@ -22,31 +24,27 @@ class WoodLoginPanel extends StatelessWidget {
   final bool isLoading;
   final VoidCallback onLogin;
   final VoidCallback onRegister;
-  final VoidCallback onForgotPassword;
+  final VoidCallback onGoogleSignIn;
 
   @override
   Widget build(BuildContext context) {
     final scale = Responsive.scale(context);
-    final color = Color(0xFFB9F451);
 
     return SizedBox(
       width: 390 * scale,
-      height: 560 * scale,
+      height: 580 * scale,
       child: Stack(
         alignment: Alignment.center,
         children: [
           Positioned.fill(
-            child: Image.asset(
-              AssetPaths.woodBoard,
-              fit: BoxFit.fill,
-            ),
+            child: Image.asset(AssetPaths.woodBoard, fit: BoxFit.fill),
           ),
           Padding(
             padding: EdgeInsets.fromLTRB(
               76 * scale,
-              72 * scale,
+              64 * scale,
               60 * scale,
-              42 * scale,
+              80 * scale,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -57,12 +55,12 @@ class WoodLoginPanel extends StatelessWidget {
                   controller: emailController,
                   hintText: "Enter your Username",
                   icon: Icons.eco,
-                  height: 46 * scale,
+                  height: 50 * scale,
                   fontSize: 16 * scale,
                   hintFontSize: 14 * scale,
                   iconSize: 22 * scale,
                   radius: 12 * scale,
-                  verticalPadding: 13 * scale,
+                  verticalPadding: 0,
                 ),
                 SizedBox(height: 18 * scale),
                 _buildLabel(context, "Password"),
@@ -72,14 +70,14 @@ class WoodLoginPanel extends StatelessWidget {
                   hintText: "Enter your Password",
                   icon: Icons.lock,
                   isPasswordField: true,
-                  height: 46 * scale,
+                  height: 50 * scale,
                   fontSize: 16 * scale,
                   hintFontSize: 14 * scale,
                   iconSize: 22 * scale,
                   radius: 12 * scale,
-                  verticalPadding: 13 * scale,
+                  verticalPadding: 0,
                 ),
-                SizedBox(height: 28 * scale),
+                SizedBox(height: 22 * scale),
                 GameButton(
                   text: "LOGIN",
                   isLoading: isLoading,
@@ -98,14 +96,23 @@ class WoodLoginPanel extends StatelessWidget {
                   fontSize: 27 * scale,
                   loadingSize: 26 * scale,
                 ),
-                SizedBox(height: 18 * scale),
+                SizedBox(height: 12 * scale),
                 GameLinkText(
-                  text: "Forgot Password?",
-                  onTap: onForgotPassword,
-                  fontSize: 18 * scale,
-                  color:color,
+                  text: "-- OR LOGIN VIA --",
+                  onTap: () {},
+                  fontSize: 16 * scale,
+                  color: AppTheme.loginGlowColor,
                 ),
               ],
+            ),
+          ),
+          Positioned(
+            bottom: 10 * scale,
+            child: GoogleImageButton(
+              imagePath: AssetPaths.googleLogo,
+              size: 88 * scale,
+              disabled: isLoading,
+              onTap: onGoogleSignIn,
             ),
           ),
         ],
@@ -116,20 +123,6 @@ class WoodLoginPanel extends StatelessWidget {
   Widget _buildLabel(BuildContext context, String text) {
     final scale = Responsive.scale(context);
 
-    return Text(
-      text,
-      style: TextStyle(
-        fontSize: 21 * scale,
-        fontWeight: FontWeight.w900,
-        color: Colors.white,
-        shadows: [
-          Shadow(
-            offset: Offset(2 * scale, 2 * scale),
-            blurRadius: 1 * scale,
-            color: Colors.black.withValues(alpha: 0.75),
-          ),
-        ],
-      ),
-    );
+    return Text(text, style: AppTheme.loginLabelStyle(scale));
   }
 }

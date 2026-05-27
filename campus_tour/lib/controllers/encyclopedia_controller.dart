@@ -1,6 +1,5 @@
 import 'package:campus_tour/models/architecture_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import '../models/user_monster_model.dart';
 import '../controllers/monster_controller.dart';
 import 'package:get/get.dart';
@@ -16,7 +15,8 @@ class EncyclopediaController {
     int endIndex = startIndex + itemsPerPage;
 
     // 使用 .toList() 確保我們操作的是當前快照
-    List<UserMonsterModel> allItems = _monsterController.userMonsterCollection.toList();
+    List<UserMonsterModel> allItems = _monsterController.userMonsterCollection
+        .toList();
 
     if (startIndex >= allItems.length) return [];
     if (endIndex > allItems.length) endIndex = allItems.length;
@@ -31,22 +31,26 @@ class EncyclopediaController {
     return (totalItems / itemsPerPage).ceil();
   }
 
-  Future<MonsterModel?> getMonster (DocumentReference ref) async {
+  Future<MonsterModel?> getMonster(DocumentReference ref) async {
     final snapshot = await ref.get();
     if (!snapshot.exists) return null;
     return MonsterModel.fromMap(snapshot.data() as Map<String, dynamic>);
   }
 
-
-  Future<String?> getStory (DocumentReference ref) async {
+  Future<String?> getStory(DocumentReference ref) async {
     final snapshot = await ref.get();
     if (!snapshot.exists) return null;
-    return ArchitectureModel.fromMap(snapshot.data() as Map<String, dynamic>, id: snapshot.id).story;
+    return ArchitectureModel.fromMap(
+      snapshot.data() as Map<String, dynamic>,
+      id: snapshot.id,
+    ).story;
   }
 
-  Future<ArchitectureModel?> getArchitecture (DocumentReference ref) async {
+  Future<ArchitectureModel?> getArchitecture(DocumentReference ref) async {
     final snapshot = await ref.get();
-    return ArchitectureModel.fromMap(snapshot.data() as Map<String, dynamic>, id: snapshot.id);
+    return ArchitectureModel.fromMap(
+      snapshot.data() as Map<String, dynamic>,
+      id: snapshot.id,
+    );
   }
-
 }

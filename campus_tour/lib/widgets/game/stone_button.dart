@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import '../../styles/app_theme.dart';
 import '../../widgets/common/scale_button.dart';
 
 class StoneButton extends StatelessWidget {
   final String img;
   final String text;
   final double scale;
+  final double baseSize;
   final VoidCallback onTap;
 
   const StoneButton({
@@ -12,12 +14,13 @@ class StoneButton extends StatelessWidget {
     required this.img,
     required this.text,
     required this.scale,
+    this.baseSize = 90,
     required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    final size = 110*scale;
+    final size = baseSize * scale;
     return ScaleButton(
       onTap: onTap,
       child: SizedBox(
@@ -26,14 +29,9 @@ class StoneButton extends StatelessWidget {
         child: Stack(
           alignment: Alignment.center,
           children: [
-            Image.asset(
-              img,
-              width: size,
-              height: size,
-              fit: BoxFit.contain,
-            ),
+            Image.asset(img, width: size, height: size, fit: BoxFit.contain),
             Positioned(
-              bottom: 15 * scale,
+              bottom: 10 * scale,
               left: 6 * scale,
               right: 6 * scale,
               child: Text(
@@ -41,12 +39,7 @@ class StoneButton extends StatelessWidget {
                 textAlign: TextAlign.center,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
-                  color: Color(0xFF3A2318),
-                  letterSpacing: 0.8,
-                ),
+                style: AppTheme.gameTextStyle(20 * scale),
               ),
             ),
           ],

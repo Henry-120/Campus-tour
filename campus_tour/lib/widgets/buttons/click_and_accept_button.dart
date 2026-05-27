@@ -1,24 +1,26 @@
 import 'package:flutter/material.dart';
 
+import '../../styles/app_theme.dart';
+
 class ClickAndAcceptButton extends StatelessWidget {
   const ClickAndAcceptButton({
     super.key,
-    required this.movementFuntion,
-    required this.accept_info,
-    this.AppearanceText,
-    this.AppearanceIcon,
-    this.AppearanceColor,
-    this.AppearanceTextStyle,
-    this.AppearanceIconSize,
+    required this.movementFunction,
+    required this.acceptInfo,
+    this.appearanceText,
+    this.appearanceIcon,
+    this.appearanceColor,
+    this.appearanceTextStyle,
+    this.appearanceIconSize,
   });
 
-  final VoidCallback movementFuntion;
-  final String accept_info;
-  final String? AppearanceText;
-  final IconData? AppearanceIcon;
-  final Color? AppearanceColor;
-  final TextStyle? AppearanceTextStyle;
-  final double? AppearanceIconSize;
+  final VoidCallback movementFunction;
+  final String acceptInfo;
+  final String? appearanceText;
+  final IconData? appearanceIcon;
+  final Color? appearanceColor;
+  final TextStyle? appearanceTextStyle;
+  final double? appearanceIconSize;
 
   Future<void> _showAcceptDialog(BuildContext context) async {
     final shouldMove = await showDialog<bool>(
@@ -30,7 +32,7 @@ class ClickAndAcceptButton extends StatelessWidget {
           backgroundColor: ClickAndAcceptButtonStyle.dialogBackgroundColor,
           shape: ClickAndAcceptButtonStyle.dialogShape,
           content: Text(
-            accept_info,
+            acceptInfo,
             style: ClickAndAcceptButtonStyle.dialogTextStyle,
             textAlign: TextAlign.center,
           ),
@@ -52,27 +54,27 @@ class ClickAndAcceptButton extends StatelessWidget {
     );
 
     if (shouldMove == true) {
-      movementFuntion();
+      movementFunction();
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final color = AppearanceColor ?? ClickAndAcceptButtonStyle.defaultColor;
+    final color = appearanceColor ?? ClickAndAcceptButtonStyle.defaultColor;
     final textStyle =
-        AppearanceTextStyle ?? ClickAndAcceptButtonStyle.buttonTextStyle;
+        appearanceTextStyle ?? ClickAndAcceptButtonStyle.buttonTextStyle;
     final iconSize =
-        AppearanceIconSize ?? ClickAndAcceptButtonStyle.buttonIconSize;
+        appearanceIconSize ?? ClickAndAcceptButtonStyle.buttonIconSize;
 
     return TextButton.icon(
       onPressed: () => _showAcceptDialog(context),
       style: ClickAndAcceptButtonStyle.buttonStyle,
-      icon: AppearanceIcon == null
+      icon: appearanceIcon == null
           ? const SizedBox.shrink()
-          : Icon(AppearanceIcon, size: iconSize, color: color),
-      label: AppearanceText == null
+          : Icon(appearanceIcon, size: iconSize, color: color),
+      label: appearanceText == null
           ? const SizedBox.shrink()
-          : Text(AppearanceText!, style: textStyle.copyWith(color: color)),
+          : Text(appearanceText!, style: textStyle.copyWith(color: color)),
     );
   }
 }
@@ -95,20 +97,26 @@ class ClickAndAcceptButtonStyle {
     borderRadius: BorderRadius.all(Radius.circular(18)),
   );
 
-  static const TextStyle buttonTextStyle = TextStyle(
+  static final TextStyle buttonTextStyle = AppTheme.titleStyle.copyWith(
     fontSize: 13,
     fontWeight: FontWeight.w600,
+    letterSpacing: 0,
   );
 
-  static const TextStyle dialogTextStyle = TextStyle(
+  static final TextStyle dialogTextStyle = AppTheme.titleStyle.copyWith(
     fontSize: 17,
     fontWeight: FontWeight.w600,
     color: Color(0xFF4D2C27),
+    letterSpacing: 0,
   );
 
   static final ButtonStyle dialogActionStyle = TextButton.styleFrom(
     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
     foregroundColor: defaultColor,
-    textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+    textStyle: AppTheme.titleStyle.copyWith(
+      fontSize: 16,
+      fontWeight: FontWeight.w600,
+      letterSpacing: 0,
+    ),
   );
 }

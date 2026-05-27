@@ -3,11 +3,11 @@ import 'package:flutter/services.dart';
 import 'view/start_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
-import 'services/load_db_service.dart';
 import 'controllers/monster_controller.dart';
 import 'controllers/user_controller.dart';
 import 'package:get/get.dart';
 import 'local_information/local_setting.dart';
+import 'services/orientation_service.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,9 +15,10 @@ Future<void> main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+  await OrientationService.lockPortrait();
 
   // 初始化 db
-  await LoadDbService().loadArchitecture();
+
   // await LoadDbService().loadQA();
   // await LoadDbService().loadMonsters();
   // 💡 預先注入 Controller，內部的 onInit 會自動監聽 Firebase Auth 狀態

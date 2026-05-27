@@ -1,12 +1,8 @@
 import 'package:campus_tour/widgets/constants/asset_paths.dart';
 import 'package:flutter/material.dart';
 
-import '../controllers/encyclopedia_controller.dart';
-import '../models/user_monster_model.dart';
+import '../styles/app_theme.dart';
 import '../widgets/encyclopedia/elf_grid.dart';
-import '../widgets/encyclopedia/filter_bar.dart';
-import '../controllers/monster_controller.dart';
-import 'package:get/get.dart';
 
 class EncyclopediaPage extends StatefulWidget {
   const EncyclopediaPage({super.key});
@@ -22,11 +18,12 @@ class _EncyclopediaPageState extends State<EncyclopediaPage> {
       extendBodyBehindAppBar: true,
       backgroundColor: const Color(0xFFFFF6EF),
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           '圖鑑',
-          style: TextStyle(
+          style: AppTheme.titleStyle.copyWith(
             fontWeight: FontWeight.w600,
-            color: Color(0xFF4A3A32),
+            color: const Color(0xFF4A3A32),
+            letterSpacing: 0,
           ),
         ),
         centerTitle: true,
@@ -37,10 +34,7 @@ class _EncyclopediaPageState extends State<EncyclopediaPage> {
       body: Stack(
         children: [
           Positioned.fill(
-            child: Image.asset(
-              AssetPaths.encyclopediaBg,
-              fit: BoxFit.cover,
-            ),
+            child: Image.asset(AssetPaths.encyclopediaBg, fit: BoxFit.cover),
           ),
 
           SafeArea(

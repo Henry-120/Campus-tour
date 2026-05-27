@@ -1,26 +1,25 @@
-import 'package:campus_tour/controllers/NFC_api.dart';
+import 'package:campus_tour/controllers/nfc_api.dart';
 import 'package:flutter/material.dart';
-import 'package:campus_tour/styles/app_theme.dart';
 import 'package:campus_tour/styles/nfc_leading_style.dart';
 import 'package:campus_tour/widgets/common/snackbar_builder.dart';
 
 class NfcButtonAbstract extends StatelessWidget {
-  final Icon nfc_icon = NfcLeadingStyle.nfc_icon;
+  final Icon nfcIcon = NfcLeadingStyle.nfcIcon;
   final String text;
   final VoidCallback onPressedToDo;
-  final ButtonStyle now_style;
+  final ButtonStyle nowStyle;
 
   const NfcButtonAbstract({
     super.key,
     required this.text,
     required this.onPressedToDo,
-    required this.now_style,
+    required this.nowStyle,
   });
   @override
   Widget build(BuildContext context) {
     return OutlinedButton.icon(
-      icon: nfc_icon,
-      style: now_style,
+      icon: nfcIcon,
+      style: nowStyle,
       onPressed: onPressedToDo,
       label: Text(text, style: NfcLeadingStyle.primaryButtonText),
     );
@@ -68,9 +67,11 @@ class _NfcButton1 extends State<NfcButton1> {
               widget.onResult();
             } else {
               // 不符合則顯示錯誤訊息
-              ScaffoldMessenger.of(
+              SnackBarBuilder.show(
                 context,
-              ).showSnackBar(SnackBarBuilder.showOut('ID 不符合，請重新嘗試！'));
+                'ID 不符合，請重新嘗試！',
+                type: AppToastType.warning,
+              );
             }
           } else {
             // --- 失敗：處理錯誤類型 ---
@@ -112,20 +113,24 @@ class _NfcButton1 extends State<NfcButton1> {
     // debugPrint("NFC 掃描失敗: $errorType, 訊息: $message");
 
     // 在這裡根據錯誤類型彈出不同的 mes
-    ScaffoldMessenger.of(
+    SnackBarBuilder.show(
       context,
-    ).showSnackBar(SnackBarBuilder.showOut(message));
+      message,
+      type: errorType == NfcErrorType.userCanceled
+          ? AppToastType.info
+          : AppToastType.error,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return NfcButtonAbstract(
       text: _isScanning
-          ? NfcLeadingStyle.NfcIngString
+          ? NfcLeadingStyle.nfcIngString
           : NfcLeadingStyle.primaryButtonString,
       onPressedToDo: onPressed,
-      now_style: _isScanning
-          ? NfcLeadingStyle.NfcIngStyle
+      nowStyle: _isScanning
+          ? NfcLeadingStyle.nfcIngStyle
           : NfcLeadingStyle.primaryButtonStyle,
     );
   }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../styles/app_theme.dart';
+
 class GameButton extends StatelessWidget {
   const GameButton({
     super.key,
@@ -27,10 +29,7 @@ class GameButton extends StatelessWidget {
       child: Container(
         height: height,
         decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(bg),
-            fit: BoxFit.cover,
-          ),
+          image: DecorationImage(image: AssetImage(bg), fit: BoxFit.cover),
         ),
         alignment: Alignment.center,
         child: isLoading
@@ -47,23 +46,9 @@ class GameButton extends StatelessWidget {
                 children: [
                   Text(
                     text,
-                    style: TextStyle(
-                      fontSize: fontSize,
-                      fontWeight: FontWeight.w900,
-                      foreground: Paint()
-                        ..style = PaintingStyle.stroke
-                        ..strokeWidth = 5
-                        ..color = const Color(0xFF1D2A2F),
-                    ),
+                    style: AppTheme.gameButtonStrokeStyle(fontSize, 1),
                   ),
-                  Text(
-                    text,
-                    style: TextStyle(
-                      fontSize: fontSize,
-                      fontWeight: FontWeight.w900,
-                      color: Colors.white,
-                    ),
-                  ),
+                  Text(text, style: AppTheme.gameButtonTextStyle(fontSize)),
                 ],
               ),
       ),

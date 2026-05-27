@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import "package:campus_tour/styles/LHF_drawer_styles.dart";
+import "package:campus_tour/styles/lhf_drawer_styles.dart";
 
 // Abc for class
 // a_b_c for var
@@ -18,9 +18,9 @@ class DrawerSecondaryButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(
-      style: DrawerStyles.drawer_button_style,
+      style: DrawerStyles.drawerButtonStyle,
       onPressed: onPressedToDo,
-      child: Text(text, style: DrawerStyles.second_button_text),
+      child: Text(text, style: DrawerStyles.secondaryButtonText),
     );
   }
 }

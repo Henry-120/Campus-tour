@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
+import 'app_theme.dart';
+
 class MapSuggestionStyle {
   // [L-01]
-  static const Color pageBackgroundColor = Colors.black;
+  static const Color pageBackgroundColor = AppTheme.mapOverlayBackgroundColor;
 
   // [L-02]
   static const BoxFit mapImageFit = BoxFit.contain;
@@ -25,8 +27,9 @@ class MapSuggestionStyle {
 
   // [L-08]
   static BoxDecoration get filterPanelDecoration => BoxDecoration(
-    color: Colors.black.withValues(alpha: 0.72),
-    border: Border.all(color: Colors.white24),
+    color: AppTheme.mapOverlayBackgroundColor.withValues(alpha: 0.72),
+    border: Border.all(color: AppTheme.mapOverlayBorderColor),
+
     borderRadius: BorderRadius.circular(8),
   );
 
@@ -38,13 +41,19 @@ class MapSuggestionStyle {
       ListTileControlAffinity.leading;
 
   // [L-11]
-  static const Color filterTileActiveColor = Colors.white;
+  static const Color filterTileActiveColor =
+      AppTheme.mapOverlayPrimaryTextColor;
 
   // [L-12]
-  static const Color filterTileCheckColor = Colors.black;
+  static const Color filterTileCheckColor = AppTheme.mapOverlayCheckColor;
 
   // [L-13]
-  static const TextStyle filterOptionTextStyle = TextStyle(color: Colors.white);
+  static TextStyle filterOptionTextStyle = AppTheme.titleStyle.copyWith(
+    color: AppTheme.mapOverlayPrimaryTextColor,
+    fontSize: 14,
+    fontWeight: FontWeight.w700,
+    letterSpacing: 0,
+  );
 
   // [L-14]
   static const EdgeInsets loadMessagePadding = EdgeInsets.fromLTRB(
@@ -58,13 +67,17 @@ class MapSuggestionStyle {
   static const Alignment loadMessageAlignment = Alignment.centerLeft;
 
   // [L-16]
-  static const TextStyle loadMessageTextStyle = TextStyle(
-    color: Colors.white70,
+  static TextStyle loadMessageTextStyle = AppTheme.titleStyle.copyWith(
+    color: AppTheme.mapOverlaySecondaryTextColor,
+    fontSize: 14,
+    letterSpacing: 0,
   );
 
   // [L-17]
-  static const TextStyle locationMessageTextStyle = TextStyle(
-    color: Colors.white,
+  static TextStyle locationMessageTextStyle = AppTheme.titleStyle.copyWith(
+    color: AppTheme.mapOverlayPrimaryTextColor,
+    fontSize: 14,
+    letterSpacing: 0,
   );
 
   // [L-18]
@@ -75,20 +88,40 @@ class MapSuggestionStyle {
   static const MainAxisSize landmarkLabelAxisSize = MainAxisSize.min;
 
   // [L-20]
-  static BoxDecoration get landmarkDotDecoration => BoxDecoration(
-    color: Colors.amberAccent,
+  static const Color installationArtDotColor = Colors.blueAccent;
+
+  // [L-25]
+  static const Color toiletDotColor = Colors.green;
+
+  // [L-23]
+  static Color landmarkDotColor(String category) {
+    if (category == '裝置藝術') {
+      return installationArtDotColor;
+    }
+    if (category == '廁所') {
+      return toiletDotColor;
+    }
+    return AppTheme.mapLandmarkDotColor;
+  }
+
+  // [L-24]
+  static BoxDecoration landmarkDotDecoration(String category) => BoxDecoration(
+    color: landmarkDotColor(category),
     shape: BoxShape.circle,
-    border: Border.all(color: Colors.black, width: 1.5),
+    border: Border.all(color: AppTheme.mapLandmarkDotBorderColor, width: 1.5),
   );
 
   // [L-21]
   static const double landmarkLabelSpacing = 4;
 
   // [L-22]
-  static const TextStyle landmarkNameTextStyle = TextStyle(
-    color: Colors.white,
+  static TextStyle landmarkNameTextStyle = AppTheme.titleStyle.copyWith(
+    color: AppTheme.mapOverlayPrimaryTextColor,
     fontSize: 12,
     fontWeight: FontWeight.w700,
-    shadows: [Shadow(color: Colors.black, blurRadius: 4)],
+    shadows: const [
+      Shadow(color: AppTheme.mapLandmarkTextShadowColor, blurRadius: 4),
+    ],
+    letterSpacing: 0,
   );
 }

@@ -1,6 +1,5 @@
 import 'package:campus_tour/styles/app_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class LevelStyle {
   static const Color pageTopColor = Color(0xFFFFF4EC);
@@ -66,31 +65,33 @@ class LevelStyle {
     border: Border.all(color: borderColor.withValues(alpha: 0.75)),
   );
 
-  static TextStyle titleStyle = GoogleFonts.zenMaruGothic(
+  static TextStyle titleStyle = AppTheme.titleStyle.copyWith(
     fontSize: 30,
     fontWeight: FontWeight.w700,
     color: AppTheme.textColor,
     letterSpacing: 0.8,
   );
 
-  static TextStyle hintStyle = GoogleFonts.zenMaruGothic(
+  static TextStyle hintStyle = AppTheme.titleStyle.copyWith(
     fontSize: 15,
     fontWeight: FontWeight.w400,
     color: AppTheme.textColor.withValues(alpha: 0.72),
     letterSpacing: 0.4,
   );
 
-  static TextStyle descriptionStyle = GoogleFonts.zenMaruGothic(
+  static TextStyle descriptionStyle = AppTheme.titleStyle.copyWith(
     fontSize: 25,
     fontWeight: FontWeight.w400,
     color: AppTheme.textColor,
     height: 1.6,
+    letterSpacing: 0,
   );
 
-  static TextStyle placeholderStyle = GoogleFonts.zenMaruGothic(
+  static TextStyle placeholderStyle = AppTheme.titleStyle.copyWith(
     fontSize: 20,
     fontWeight: FontWeight.w400,
     color: AppTheme.textColor.withValues(alpha: 0.75),
+    letterSpacing: 0,
   );
 
   static const List<Shadow> plotSmallTextShadows = [
@@ -101,33 +102,37 @@ class LevelStyle {
     Shadow(color: Color(0xB3000000), blurRadius: 8, offset: Offset(0, 2)),
   ];
 
-  static TextStyle plotSkipTextStyle = GoogleFonts.zenMaruGothic(
+  static TextStyle plotSkipTextStyle = AppTheme.titleStyle.copyWith(
     fontSize: 16,
     fontWeight: FontWeight.w600,
-    color: Colors.white,
+    color: AppTheme.whiteTextColor,
+    letterSpacing: 0,
     shadows: plotSmallTextShadows,
   );
 
-  static TextStyle plotTitleStyle = GoogleFonts.zenMaruGothic(
+  static TextStyle plotTitleStyle = AppTheme.titleStyle.copyWith(
     fontSize: 34,
     fontWeight: FontWeight.w800,
-    color: Colors.white,
+    color: AppTheme.whiteTextColor,
     height: 1.25,
+    letterSpacing: 0,
     shadows: plotTextShadows,
   );
 
-  static TextStyle plotDescriptionStyle = GoogleFonts.zenMaruGothic(
+  static TextStyle plotDescriptionStyle = AppTheme.titleStyle.copyWith(
     fontSize: 20,
     fontWeight: FontWeight.w600,
-    color: Colors.white,
+    color: AppTheme.whiteTextColor,
     height: 1.55,
+    letterSpacing: 0,
     shadows: plotTextShadows,
   );
 
-  static TextStyle plotPressTextStyle = GoogleFonts.zenMaruGothic(
+  static TextStyle plotPressTextStyle = AppTheme.titleStyle.copyWith(
     fontSize: 23,
     fontWeight: FontWeight.w700,
-    color: Colors.white,
+    color: AppTheme.whiteTextColor,
+    letterSpacing: 0,
     shadows: plotTextShadows,
   );
 
@@ -329,16 +334,17 @@ class LevelStyle {
         borderRadius: const BorderRadius.all(Radius.circular(optionRadius)),
         side: BorderSide(color: border, width: 1.4),
       ),
-      textStyle: GoogleFonts.zenMaruGothic(
+      textStyle: AppTheme.titleStyle.copyWith(
         fontSize: 20,
         fontWeight: FontWeight.w400,
         color: foreground,
+        letterSpacing: 0,
       ),
     );
   }
 
   static TextStyle battleTitleStyle(BattleLevelTheme theme) =>
-      GoogleFonts.zenMaruGothic(
+      AppTheme.titleStyle.copyWith(
         fontSize: 30,
         fontWeight: FontWeight.w700,
         color: theme.text,
@@ -346,7 +352,7 @@ class LevelStyle {
       );
 
   static TextStyle battleHintStyle(BattleLevelTheme theme) =>
-      GoogleFonts.zenMaruGothic(
+      AppTheme.titleStyle.copyWith(
         fontSize: 15,
         fontWeight: FontWeight.w400,
         color: theme.text.withValues(alpha: 0.78),
@@ -354,65 +360,74 @@ class LevelStyle {
       );
 
   static TextStyle battleNameStyle(BattleLevelTheme theme) =>
-      GoogleFonts.zenMaruGothic(
+      AppTheme.titleStyle.copyWith(
         fontSize: 28,
         fontWeight: FontWeight.w700,
-        color: Colors.white,
+        color: AppTheme.whiteTextColor,
+        letterSpacing: 0,
       );
 
   static TextStyle battleTypeStyle(BattleLevelTheme theme) =>
-      GoogleFonts.zenMaruGothic(
+      AppTheme.titleStyle.copyWith(
         fontSize: 16,
         fontWeight: FontWeight.w400,
-        color: Colors.white.withValues(alpha: 0.92),
+        color: AppTheme.whiteTextColor.withValues(alpha: 0.92),
         letterSpacing: 0.8,
       );
 
   static TextStyle sectionLabelStyle(BattleLevelTheme theme) =>
-      GoogleFonts.zenMaruGothic(
+      AppTheme.titleStyle.copyWith(
         fontSize: 16,
         fontWeight: FontWeight.w400,
         color: theme.text.withValues(alpha: 0.76),
+        letterSpacing: 0,
       );
 
   static TextStyle questionStyle(BattleLevelTheme theme) =>
-      GoogleFonts.zenMaruGothic(
+      AppTheme.titleStyle.copyWith(
         fontSize: 24,
         fontWeight: FontWeight.w400,
         color: theme.text,
         height: 1.45,
+        letterSpacing: 0,
       );
 
   static TextStyle lockDigitStyle(
     BattleLevelTheme theme, {
     required bool unlocked,
-  }) => GoogleFonts.zenMaruGothic(
+  }) => AppTheme.titleStyle.copyWith(
     fontSize: 28,
     fontWeight: FontWeight.w700,
-    color: unlocked ? Colors.white : theme.primary.withValues(alpha: 0.34),
+    color: unlocked
+        ? AppTheme.whiteTextColor
+        : theme.primary.withValues(alpha: 0.34),
+    letterSpacing: 0,
   );
 
   static TextStyle hpLabelStyle(BattleLevelTheme theme) =>
-      GoogleFonts.zenMaruGothic(
+      AppTheme.titleStyle.copyWith(
         fontSize: 16,
         fontWeight: FontWeight.w400,
         color: theme.text,
+        letterSpacing: 0,
       );
 
   static TextStyle hpValueStyle(BattleLevelTheme theme) =>
-      GoogleFonts.zenMaruGothic(
+      AppTheme.titleStyle.copyWith(
         fontSize: 16,
         fontWeight: FontWeight.w700,
         color: theme.text,
+        letterSpacing: 0,
       );
 
   static TextStyle feedbackStyle(
     BattleLevelTheme theme, {
     required bool success,
-  }) => GoogleFonts.zenMaruGothic(
+  }) => AppTheme.titleStyle.copyWith(
     fontSize: 18,
     fontWeight: FontWeight.w400,
     color: success ? const Color(0xFF1E7A43) : const Color(0xFFA2382E),
+    letterSpacing: 0,
   );
 
   static BoxDecoration monsterImageFrame(BattleLevelTheme theme) {

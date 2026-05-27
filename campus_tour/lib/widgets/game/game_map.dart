@@ -5,6 +5,7 @@ import 'package:geolocator/geolocator.dart'; // 💡 引入 GPS 套件
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:campus_tour/controllers/monster_controller.dart';
 import 'package:campus_tour/local_information/local_setting.dart';
+import 'package:campus_tour/styles/app_theme.dart';
 import 'package:get/get.dart';
 import '../../view/nearby_monsters_display.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -14,13 +15,18 @@ import 'package:campus_tour/view/full_mission_page.dart';
 import 'package:campus_tour/widgets/game/catching_pages/monster_model_cry.dart';
 import 'package:campus_tour/widgets/game/catching_pages/full_mission.dart';
 import 'package:campus_tour/widgets/game/catching_pages/discovered_item.dart';
+import 'package:campus_tour/widgets/game/catching_pages/default_plot.dart';
 import 'package:campus_tour/widgets/game/catching_pages/graphics_text_level.dart';
 import 'package:campus_tour/widgets/game/catching_pages/cryptography_level.dart';
 import 'package:campus_tour/widgets/game/catching_pages/plot_level.dart';
 import 'package:campus_tour/widgets/encyclopedia/all_the_monster/monster_graphics.dart';
 import 'package:campus_tour/widgets/encyclopedia/all_the_monster/monster_text.dart';
 import 'package:campus_tour/widgets/encyclopedia/all_the_monster/monster_nfc.dart';
+import 'package:campus_tour/widgets/common/snackbar_builder.dart';
 import 'package:campus_tour/models/qa_model.dart';
+
+import 'dart:typed_data';
+import 'dart:ui' as ui;
 //end for mission
 
 class GameMap extends StatefulWidget {
@@ -36,7 +42,8 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
 
   bool _hasLocationPermission = false;
   String? _mapStyle; // 地圖 JSON 風格
-  AssetMapBitmap? _customMapImage; // 特製地圖圖片
+
+  // AssetMapBitmap? _customMapImage; // 特製地圖圖片
   double _maxZoomRate = 18.5;
   double _minZoomRate = 18.5;
 
@@ -56,19 +63,12 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
 
   Future<void> _loadAssets() async {
     try {
-      const imageConfig = ImageConfiguration();
       final style = await rootBundle.loadString('assets/mapStyles/style3.json');
-      final image = await AssetMapBitmap.create(
-        imageConfig,
-        'assets/images/cute_map_real.png',
-        bitmapScaling: MapBitmapScaling.none,
-      );
 
       if (!mounted) return;
 
       setState(() {
         _mapStyle = style;
-        _customMapImage = image;
       });
     } catch (e) {
       debugPrint("[Debug][GameMap][Error] 載入資源失敗: $e");
@@ -109,7 +109,7 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
         currentPosition.longitude,
       );
 
-      // final LatLng currentLocation = const LatLng(24.9684, 121.1912);
+      // final LatLng currentLocation = const LatLng(24.97, 121.1922);
 
       setState(() {
         _playerPosition = currentLocation;
@@ -149,9 +149,7 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
 
             _moveCamera(position);
 
-            // 更新附近怪物
-            monsterController.updateNearbyMonsters(position);
-            monsterController.updateNearestGlobal(position);
+            unawaited(monsterController.updateLocationMonsters(position));
           });
 
       debugPrint("[Debug][GameMap]:已開始監聽位置變化");
@@ -180,7 +178,8 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
               // 不讓畫面旋轉
               CameraPosition(
                 target: LatLng(position.latitude, position.longitude),
-                // target: LatLng(24.9684, 121.1912),
+                // target: LatLng(24.97, 121.1922),
+                zoom: 18.5,
                 bearing: 0,
               ),
             ),
@@ -199,8 +198,10 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
     _mapController!.animateCamera(
       CameraUpdate.newCameraPosition(
         CameraPosition(
+          // target: LatLng(24.97, 121.1922),
           target: LatLng(position.latitude, position.longitude),
-          // target: LatLng(24.9684, 121.1912),
+
+          zoom: 18.5,
           bearing: 0,
         ),
       ),
@@ -247,23 +248,21 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
       if (!mounted) return;
 
       if (qa == null) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('無法載入 ${monster.name} 的題目，請稍後再試'),
-            backgroundColor: Colors.red,
-            duration: const Duration(seconds: 3),
-          ),
+        SnackBarBuilder.show(
+          context,
+          '無法載入 ${monster.name} 的題目，請稍後再試',
+          type: AppToastType.error,
+          duration: const Duration(seconds: 3),
         );
         return;
       }
 
       if (architecture == null) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('無法載入 ${monster.name} 的建築資料，請稍後再試'),
-            backgroundColor: Colors.red,
-            duration: const Duration(seconds: 3),
-          ),
+        SnackBarBuilder.show(
+          context,
+          '無法載入 ${monster.name} 的建築資料，請稍後再試',
+          type: AppToastType.error,
+          duration: const Duration(seconds: 3),
         );
         return;
       }
@@ -277,20 +276,15 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
             architectureType: architecture.type,
             onMissionFinished: () async {
               final navigator = Navigator.of(context);
-              final messenger = ScaffoldMessenger.of(context);
               final success = await controller.captureMonster(monster, uid);
 
               if (!mounted) return;
 
               navigator.pop();
-              messenger.showSnackBar(
-                SnackBar(
-                  content: Text(
-                    success ? '成功捕捉 ${monster.name} ✓' : '${monster.name} 已捕捉過',
-                  ),
-                  backgroundColor: success ? Colors.green : Colors.orange,
-                  duration: const Duration(seconds: 2),
-                ),
+              SnackBarBuilder.show(
+                context,
+                success ? '成功捕捉 ${monster.name}' : '${monster.name} 已捕捉過',
+                type: success ? AppToastType.success : AppToastType.warning,
               );
             },
           ),
@@ -387,17 +381,14 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
           ),
           style: _mapStyle,
 
-          groundOverlays: _customMapImage != null
-              ? {
-                  GroundOverlay.fromBounds(
-                    groundOverlayId: const GroundOverlayId("ncu_custom_map"),
-                    image: _customMapImage!,
-                    bounds: campusBounds, // 圖片會自動對齊這四個角
-                    transparency: 0, // 0.0 ~ 1.0，建議先設 0.8 方便校對
-                    clickable: false,
-                  ),
-                }
-              : {},
+          tileOverlays: {
+            TileOverlay(
+              tileOverlayId: const TileOverlayId('ncu_custom_tiles_v2'),
+              tileProvider: AssetTileProvider(),
+              transparency: 0.0,
+              zIndex: 1,
+            ),
+          },
 
           buildingsEnabled: true,
           markers: _debugMonsterMarkers({
@@ -424,9 +415,13 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
                 color: Colors.white70,
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: const Text(
+              child: Text(
                 '定位權限未授權',
-                style: TextStyle(color: Colors.black87),
+                style: AppTheme.titleStyle.copyWith(
+                  color: Colors.black87,
+                  fontSize: 14,
+                  letterSpacing: 0,
+                ),
               ),
             ),
           ),
@@ -462,7 +457,14 @@ class BuildingMonsterLevel extends StatelessWidget {
          isPassed: LocalSettingService.autoSkipStory.isEnabled,
          title: PlotLevel.traceTitle,
          description: PlotLevel.traceDescription,
+         dialogueSteps: DefaultPlot.magicStonePlotDialogueSteps,
          discoveredItem: DiscoveredItem.magicStone,
+         leftCharacter: PlotSceneCharacter(
+           spritePath: PlotLevel.magicStoneSpritePath,
+         ),
+         rightCharacter: PlotSceneCharacter(
+           spritePath: PlotLevel.squirrelSpritePath,
+         ),
        ),
        mission1 = GraphicsTextLevel(
          firstTracePhoto: MonsterGraphics.graphics[monster.id] ?? '',
@@ -475,6 +477,16 @@ class BuildingMonsterLevel extends StatelessWidget {
          isPassed: LocalSettingService.autoSkipStory.isEnabled,
          title: PlotLevel.battleTitle,
          description: PlotLevel.battleDescription,
+         dialogueSteps: DefaultPlot.battlePlotDialogueSteps(
+           fairyName: monster.name,
+           fairyImagePath: monster.imageURL,
+         ),
+         leftCharacter: PlotSceneCharacter(
+           spritePath: PlotLevel.magicCircleSpritePath,
+         ),
+         rightCharacter: PlotSceneCharacter(
+           spritePath: PlotLevel.squirrelSpritePath,
+         ),
        ),
        mission2 = CryptographyLevel(
          questionSet: [qa.question],
@@ -518,6 +530,83 @@ class BuildingMonsterLevel extends StatelessWidget {
       monsterModelCry: monsterModelCry,
       onMissionFinished: onMissionFinished,
     );
+  }
+}
+
+class AssetTileProvider implements TileProvider {
+  static const int _minTileZoom = 15;
+  static const int _maxTileZoom = 19;
+  static int _debugLogCount = 0;
+
+  @override
+  Future<Tile> getTile(int x, int y, int? zoom) async {
+    final int z = zoom ?? 0;
+    if (z < _minTileZoom) return TileProvider.noTile;
+
+    final int sourceZ = z > _maxTileZoom ? _maxTileZoom : z;
+    final int zoomDelta = z - sourceZ;
+    final int sourceX = zoomDelta > 0 ? x >> zoomDelta : x;
+    final int sourceY = zoomDelta > 0 ? y >> zoomDelta : y;
+    final int tmsY = (1 << sourceZ) - 1 - sourceY;
+
+    for (final tileY in [sourceY, tmsY]) {
+      final path = 'assets/tiles/$sourceZ/$sourceX/$tileY.png';
+      try {
+        final ByteData data = await rootBundle.load(path);
+        final Uint8List bytes = zoomDelta > 0
+            ? await _cropOverzoomTile(
+                data.buffer.asUint8List(),
+                x,
+                y,
+                zoomDelta,
+              )
+            : data.buffer.asUint8List();
+        if (_debugLogCount < 20) {
+          debugPrint('[Debug][TileOverlay] HIT z=$z x=$x y=$y source=$path');
+          _debugLogCount++;
+        }
+        return Tile(256, 256, bytes);
+      } catch (_) {
+        if (_debugLogCount < 20) {
+          debugPrint('[Debug][TileOverlay] MISS z=$z x=$x y=$y tile=$path');
+          _debugLogCount++;
+        }
+      }
+    }
+
+    return TileProvider.noTile;
+  }
+
+  Future<Uint8List> _cropOverzoomTile(
+    Uint8List parentBytes,
+    int requestedX,
+    int requestedY,
+    int zoomDelta,
+  ) async {
+    final codec = await ui.instantiateImageCodec(parentBytes);
+    final frame = await codec.getNextFrame();
+    final parent = frame.image;
+    final recorder = ui.PictureRecorder();
+    final canvas = ui.Canvas(recorder);
+
+    final divisions = 1 << zoomDelta;
+    final cropSize = parent.width / divisions;
+    final cropX = (requestedX % divisions) * cropSize;
+    final cropY = (requestedY % divisions) * cropSize;
+
+    canvas.drawImageRect(
+      parent,
+      ui.Rect.fromLTWH(cropX, cropY, cropSize, cropSize),
+      const ui.Rect.fromLTWH(0, 0, 256, 256),
+      ui.Paint(),
+    );
+
+    final image = await recorder.endRecording().toImage(256, 256);
+    final byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+    parent.dispose();
+    image.dispose();
+
+    return byteData!.buffer.asUint8List();
   }
 }
 

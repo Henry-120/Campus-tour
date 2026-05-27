@@ -8,11 +8,7 @@ class MonsterMarker {
   final BitmapDescriptor icon;
   final VoidCallback? onTap;
 
-  const MonsterMarker({
-    required this.monster,
-    required this.icon,
-    this.onTap,
-  });
+  const MonsterMarker({required this.monster, required this.icon, this.onTap});
 
   Marker toMarker() {
     final markerId = MarkerId('monster_${monster.id}');
@@ -23,8 +19,8 @@ class MonsterMarker {
     debugPrint('[MarkerDebug_MonsterMarker] markerId: ${markerId.value}');
     debugPrint('[MarkerDebug_MonsterMarker] name: ${monster.name}');
     return Marker(
-      markerId: markerId,
-      position: position,
+      markerId: MarkerId('monster_${monster.id}'),
+      position: LatLng(monster.location.latitude, monster.location.longitude),
       icon: icon,
       anchor: const Offset(0.5, 1.0), // 圖片底部對齊座標點
       flat: false,

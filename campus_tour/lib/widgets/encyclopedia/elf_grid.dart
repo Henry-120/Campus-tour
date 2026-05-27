@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../common/elf_card.dart';
 import '../../view/elf_detail_page.dart';
 import '../../controllers/encyclopedia_controller.dart';
-import '../../models/monster_model.dart';
 import 'package:get/get.dart';
 import '../../controllers/monster_controller.dart';
 
@@ -55,7 +54,10 @@ class _ElfGridState extends State<ElfGrid> {
                 return ElfCard(
                   item: userMonster,
                   onTap: () async {
-                    final monster = await _controller.getMonster(userMonster.monsterRef);
+                    final monster = await _controller.getMonster(
+                      userMonster.monsterRef,
+                    );
+                    if (!context.mounted) return;
                     if (monster != null) {
                       Navigator.push(
                         context,
@@ -70,17 +72,17 @@ class _ElfGridState extends State<ElfGrid> {
             ),
           ),
 
-      PageSelector(
-        currentPage: _currentPage,
-        totalPages: totalPages,
-        onPrevious: _currentPage > 1
-        ? () => setState(() => _currentPage--)
-            : null,
-        onNext: _currentPage < totalPages
-        ? () => setState(() => _currentPage++)
-            : null,
-        ),
-      ]
+          PageSelector(
+            currentPage: _currentPage,
+            totalPages: totalPages,
+            onPrevious: _currentPage > 1
+                ? () => setState(() => _currentPage--)
+                : null,
+            onNext: _currentPage < totalPages
+                ? () => setState(() => _currentPage++)
+                : null,
+          ),
+        ],
       );
     });
   }

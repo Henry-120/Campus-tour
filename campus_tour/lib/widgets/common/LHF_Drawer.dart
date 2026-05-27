@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:campus_tour/styles/LHF_drawer_styles.dart';
+import 'package:campus_tour/styles/lhf_drawer_styles.dart';
 import 'package:campus_tour/widgets/sections/drawer_button_group.dart';
 
 class AppDrawer extends StatefulWidget {

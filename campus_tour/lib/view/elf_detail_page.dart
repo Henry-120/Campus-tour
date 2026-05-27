@@ -2,6 +2,7 @@ import 'package:campus_tour/models/monster_model.dart';
 import 'package:flutter/material.dart';
 import '../controllers/encyclopedia_controller.dart';
 import '../models/architecture_model.dart';
+import '../styles/app_theme.dart';
 import '../widgets/encyclopedia/elf_creator_section.dart';
 import '../widgets/encyclopedia/elf_department_section.dart';
 import '../widgets/encyclopedia/elf_hero_section.dart';
@@ -12,10 +13,7 @@ import '../widgets/encyclopedia/elf_type_tag.dart';
 class ElfDetailPage extends StatefulWidget {
   final MonsterModel monsterModel;
 
-  const ElfDetailPage({
-    super.key,
-    required this.monsterModel,
-  });
+  const ElfDetailPage({super.key, required this.monsterModel});
 
   @override
   State<ElfDetailPage> createState() => _ElfDetailPageState();
@@ -83,21 +81,18 @@ class _ElfDetailPageState extends State<ElfDetailPage> {
           child: CircleAvatar(
             backgroundColor: const Color(0xFFDCE9FF),
             child: IconButton(
-              icon: const Icon(
-                Icons.arrow_back,
-                color: primaryColor,
-                size: 20,
-              ),
+              icon: const Icon(Icons.arrow_back, color: primaryColor, size: 20),
               onPressed: () => Navigator.pop(context),
             ),
           ),
         ),
         title: Text(
           widget.monsterModel.name,
-          style: const TextStyle(
+          style: AppTheme.titleStyle.copyWith(
             color: primaryColor,
             fontWeight: FontWeight.bold,
             fontSize: 20,
+            letterSpacing: 0,
           ),
         ),
       ),
@@ -112,12 +107,10 @@ class _ElfDetailPageState extends State<ElfDetailPage> {
               type: widget.monsterModel.type,
             ),
 
-            ElfTypeTag(
-              type: widget.monsterModel.type,
-            ),
+            ElfTypeTag(type: widget.monsterModel.type),
 
             ElfStorySection(
-              name:architecture?.name ??'傳說故事',
+              name: architecture?.name ?? '傳說故事',
               story: architecture?.story ?? '目前沒有此精靈的故事資料。',
               isLoading: isLoading,
             ),
@@ -129,15 +122,11 @@ class _ElfDetailPageState extends State<ElfDetailPage> {
                 year: architecture?.date ?? '',
               ),
 
-              ElfCreatorSection(
-                creatorName: architecture?.author ?? '未知作者',
-              ),
+              ElfCreatorSection(creatorName: architecture?.author ?? '未知作者'),
             ],
 
             if (architecture?.type == '系館') ...[
-              ElfDepartmentSection(
-                major: architecture?.major,
-              ),
+              ElfDepartmentSection(major: architecture?.major),
             ],
           ],
         ),

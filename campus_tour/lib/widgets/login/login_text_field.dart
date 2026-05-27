@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../styles/app_theme.dart';
+
 class LoginTextField extends StatefulWidget {
   const LoginTextField({
     super.key,
@@ -9,12 +11,12 @@ class LoginTextField extends StatefulWidget {
     this.isPasswordField = false,
     this.validator,
     this.keyboardType,
-    this.height = 46,
+    this.height = 50,
     this.fontSize = 16,
     this.hintFontSize = 14,
     this.iconSize = 22,
     this.radius = 12,
-    this.verticalPadding = 13,
+    this.verticalPadding = 0,
   });
 
   final TextEditingController controller;
@@ -63,16 +65,18 @@ class _LoginTextFieldState extends State<LoginTextField> {
     return Container(
       height: widget.height,
       decoration: BoxDecoration(
-        color: const Color(0xFF3B1E12).withValues(alpha: 0.92),
+        color: AppTheme.loginPanelColor.withValues(alpha: 0.92),
         borderRadius: BorderRadius.circular(widget.radius),
         border: Border.all(
-          color: shouldGlow ? const Color(0xFFB9F451) : const Color(0xFF1F100A),
+          color: shouldGlow
+              ? AppTheme.loginGlowColor
+              : AppTheme.loginPanelBorderColor,
           width: shouldGlow ? 2.5 : 2,
         ),
         boxShadow: shouldGlow
             ? [
                 BoxShadow(
-                  color: const Color(0xFFB9F451).withValues(alpha: 0.7),
+                  color: AppTheme.loginGlowColor.withValues(alpha: 0.7),
                   blurRadius: 10,
                   spreadRadius: 1,
                 ),
@@ -91,24 +95,32 @@ class _LoginTextFieldState extends State<LoginTextField> {
         obscureText: _obscureText,
         validator: widget.validator,
         keyboardType: widget.keyboardType,
+        maxLines: 1,
         textAlignVertical: TextAlignVertical.center,
-        style: TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
+        style: AppTheme.loginInputStyle(widget.fontSize),
+        strutStyle: StrutStyle(
           fontSize: widget.fontSize,
+          height: 1.15,
+          forceStrutHeight: true,
         ),
-        cursorColor: const Color(0xFFB9F451),
+        cursorColor: AppTheme.loginGlowColor,
         decoration: InputDecoration(
           prefixIcon: Icon(
             widget.icon,
             size: widget.iconSize,
-            color: shouldGlow ? const Color(0xFFB9F451) : const Color(0xFFEEDCC8),
+            color: shouldGlow
+                ? AppTheme.loginGlowColor
+                : AppTheme.loginIconColor,
+          ),
+          prefixIconConstraints: BoxConstraints(
+            minWidth: widget.height * 0.92,
+            minHeight: widget.height,
           ),
           suffixIcon: widget.isPasswordField
               ? IconButton(
                   icon: Icon(
                     _obscureText ? Icons.visibility : Icons.visibility_off,
-                    color: const Color(0xFFEEDCC8),
+                    color: AppTheme.loginIconColor,
                     size: widget.iconSize * 0.9,
                   ),
                   onPressed: () {
@@ -118,21 +130,21 @@ class _LoginTextFieldState extends State<LoginTextField> {
                   },
                 )
               : null,
-          hintText: widget.hintText,
-          hintStyle: TextStyle(
-            color: Colors.white.withValues(alpha: 0.45),
-            fontWeight: FontWeight.bold,
-            fontSize: widget.hintFontSize,
+          suffixIconConstraints: BoxConstraints(
+            minWidth: widget.height * 0.92,
+            minHeight: widget.height,
           ),
+          hintText: widget.hintText,
+          hintStyle: AppTheme.loginHintStyle(widget.hintFontSize),
           border: InputBorder.none,
           errorBorder: InputBorder.none,
           focusedErrorBorder: InputBorder.none,
           isDense: true,
-          contentPadding: EdgeInsets.symmetric(vertical: widget.verticalPadding),
-          errorStyle: const TextStyle(
-            height: 0,
-            fontSize: 0,
+          contentPadding: EdgeInsets.symmetric(
+            horizontal: 4,
+            vertical: widget.verticalPadding,
           ),
+          errorStyle: AppTheme.zeroErrorStyle,
         ),
       ),
     );
