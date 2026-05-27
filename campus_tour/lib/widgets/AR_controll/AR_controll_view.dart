@@ -19,6 +19,8 @@ class _ArPageState extends State<ArPage> {
   late ARKitController arkitController;
   final monsterController = Get.find<MonsterController>();
 
+  String selectedMonsterUrl = "assets/images/img_frame/grass.png";
+
   // 追蹤目前的精靈節點，以便操控
   ARKitNode? currentMonsterNode;
 
@@ -36,7 +38,7 @@ class _ArPageState extends State<ArPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("操控精靈", style: TextStyle(color: Colors.white)),
+        title: const Text("操控精靈吧！", style: TextStyle(color: Colors.white)),
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
@@ -54,6 +56,14 @@ class _ArPageState extends State<ArPage> {
             onARKitViewCreated: onARKitViewCreated,
             enableTapRecognizer: true,
           ),
+          // Positioned.fill(
+          //   child: IgnorePointer(
+          //     child: Image.asset(
+          //       selectedMonsterUrl,
+          //       fit: BoxFit.contain,
+          //     ),
+          //   ),
+          // ),
 
           // 2. 虛擬搖桿與跳舞鍵 - 只有當場上有精靈時才顯示
           if (currentMonsterNode != null) ...[

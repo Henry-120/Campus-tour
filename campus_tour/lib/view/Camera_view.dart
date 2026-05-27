@@ -86,10 +86,10 @@ class _ArCapturePageState extends State<ArCapturePage> {
                     // 📸 1. 最底層：相機畫面
                     Padding(
                       padding: EdgeInsets.only(
-                        left: constraints.maxWidth * 0.05, // 寬度的 5%
-                        right: constraints.maxWidth * 0.05,
+                        left: constraints.maxWidth * 0.04, // 寬度的 5%
+                        right: constraints.maxWidth * 0.04,
                         top: constraints.maxHeight * 0.08, // 高度的 8%
-                        bottom: constraints.maxHeight * 0.06,
+                        bottom: constraints.maxHeight * 0.07,
                       ), // 💡 根據相框粗細調整，讓相機不超出邊界
                       child: Center(
                         // 💡 使用 AspectRatio 確保相機「比例不變」且「不被裁切」
