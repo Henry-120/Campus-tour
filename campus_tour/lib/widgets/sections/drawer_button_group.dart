@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:campus_tour/controllers/login_controller.dart';
 import 'package:campus_tour/controllers/user_controller.dart';
 import 'package:campus_tour/styles/lhf_drawer_styles.dart';
 import 'package:campus_tour/view/map_suggestions.dart';
 import 'package:campus_tour/view/novice_leading_page.dart';
+import 'package:campus_tour/view/start_page.dart';
 import 'package:campus_tour/widgets/buttons/lhf_drawer_button.dart';
 import 'package:campus_tour/widgets/common/snackbar_builder.dart';
 import 'package:campus_tour/widgets/common/user_head.dart';
@@ -241,16 +243,54 @@ void _showFeatureNotImplementedMessage(BuildContext context) {
   );
 }
 
-class _LogoutButton extends StatelessWidget {
+class _LogoutButton extends StatefulWidget {
   const _LogoutButton();
+
+  @override
+  State<_LogoutButton> createState() => _LogoutButtonState();
+}
+
+class _LogoutButtonState extends State<_LogoutButton> {
+  bool _isLoggingOut = false;
+
+  Future<void> _logout() async {
+    if (_isLoggingOut) return;
+
+    setState(() => _isLoggingOut = true);
+
+    try {
+      await LoginController().logout();
+
+      if (!mounted) return;
+
+      Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (_) => const StartPage()),
+        (_) => false,
+      );
+    } catch (e) {
+      if (!mounted) return;
+
+      SnackBarBuilder.show(context, '登出失敗，請稍後再試', type: AppToastType.error);
+      setState(() => _isLoggingOut = false);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton.icon(
       style: DrawerStyles.logoutButtonStyle,
-      onPressed: () => _showFeatureNotImplementedMessage(context),
-      icon: const Icon(Icons.logout_rounded),
-      label: Text('登出', style: DrawerStyles.logoutButtonText),
+      onPressed: _isLoggingOut ? null : _logout,
+      icon: _isLoggingOut
+          ? const SizedBox(
+              width: 18,
+              height: 18,
+              child: CircularProgressIndicator(strokeWidth: 2),
+            )
+          : const Icon(Icons.logout_rounded),
+      label: Text(
+        _isLoggingOut ? '登出中...' : '登出',
+        style: DrawerStyles.logoutButtonText,
+      ),
     );
   }
 }

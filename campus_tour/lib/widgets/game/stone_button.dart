@@ -6,6 +6,7 @@ class StoneButton extends StatelessWidget {
   final String img;
   final String text;
   final double scale;
+  final double baseSize;
   final VoidCallback onTap;
 
   const StoneButton({
@@ -13,12 +14,13 @@ class StoneButton extends StatelessWidget {
     required this.img,
     required this.text,
     required this.scale,
+    this.baseSize = 90,
     required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    final size = 90 * scale;
+    final size = baseSize * scale;
     return ScaleButton(
       onTap: onTap,
       child: SizedBox(

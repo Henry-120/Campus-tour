@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import '../styles/app_theme.dart';
 import '../widgets/common/snackbar_builder.dart';
 import '../widgets/constants/responsive.dart';
+import 'package:campus_tour/widgets/ar_control/ar_control_view.dart';
 
 class RealArPage extends StatefulWidget {
   const RealArPage({super.key});
@@ -20,16 +21,6 @@ class _RealArPageState extends State<RealArPage> {
 
   // 💡 當前選中的精靈模型路徑 (從 UserMonsterModel.arRef 取得)
   String selectedMonsterUrl = "";
-
-  @override
-  void initState() {
-    super.initState();
-    // 💡 預設選中玩家擁有的第一個精靈
-    final collection = monsterController.userMonsterCollection;
-    if (collection.isNotEmpty) {
-      selectedMonsterUrl = collection.first.arRef ?? "";
-    }
-  }
 
   @override
   void dispose() {
@@ -102,8 +93,16 @@ class _RealArPageState extends State<RealArPage> {
                           onTap: () {
                             setState(() {
                               selectedMonsterUrl = modelFile;
-                              debugPrint("已切換精靈模型為: $selectedMonsterUrl");
+                              debugPrint("💡 已切換精靈模型為: $selectedMonsterUrl");
                             });
+                            if (selectedMonsterUrl == "YMCA.usdz") {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => const ArPage(),
+                                ),
+                              );
+                            }
                           },
                           child: Container(
                             margin: EdgeInsets.only(
@@ -203,7 +202,7 @@ class _RealArPageState extends State<RealArPage> {
     };
   }
 
-  void _addMonster(ARKitTestResult planeTap) {
+  void _addMonster(ARKitTestResult planeTap) async {
     final position = vector.Vector3(
       planeTap.worldTransform.getColumn(3).x,
       planeTap.worldTransform.getColumn(3).y,

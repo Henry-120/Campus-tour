@@ -87,6 +87,20 @@ class FirestoreService {
     userMonster.docId = docRef.id;
   }
 
+  Future<void> setUserMonster(
+    String uid,
+    String monsterId,
+    UserMonsterModel userMonster,
+  ) async {
+    await _db
+        .collection("users")
+        .doc(uid)
+        .collection("monsters")
+        .doc(monsterId)
+        .set(userMonster.toMap());
+    userMonster.docId = monsterId;
+  }
+
   Future<List<UserMonsterModel>> getUserMonsters(String uid) async {
     final snapshot = await _db
         .collection("users")
@@ -106,5 +120,19 @@ class FirestoreService {
         .collection("monsters")
         .doc(monsterDocId)
         .delete();
+  }
+
+  Future<void> deleteAllUserMonsters(String uid) async {
+    final snapshot = await _db
+        .collection("users")
+        .doc(uid)
+        .collection("monsters")
+        .get();
+
+    final batch = _db.batch();
+    for (final doc in snapshot.docs) {
+      batch.delete(doc.reference);
+    }
+    await batch.commit();
   }
 }

@@ -8,7 +8,9 @@ Campus Tour 是一款以中央大學校園為場景的 Flutter 導覽遊戲。�
 - 定位與附近精靈：透過 Geolocator 監聽玩家位置，顯示附近可捕捉精靈與最近精靈方向提示。
 - 任務式捕捉流程：依建築類型組合劇情關卡、圖文線索、NFC 掃描與密碼/問答關卡。
 - 使用者與圖鑑：Firebase Auth、Firestore 與 GetX 管理登入狀態、使用者資料與已捕捉精靈。
-- 多媒體互動：支援 BGM/SFX、相機、AR 相關頁面、震動回饋與相簿儲存。
+- 多媒體互動：支援 BGM/SFX、相機、iOS AR 放置/操控、震動回饋與相簿儲存。
+- 平台差異 UI：iOS 顯示 AR StoneButton；Android 隱藏 AR 功能並放大底部 StoneButton。
+- 開發測試工具：Debug 模式下可在設定中心一鍵將所有精靈加入目前使用者圖鑑。
 
 ## 技術棧
 
@@ -19,6 +21,7 @@ Campus Tour 是一款以中央大學校園為場景的 Flutter 導覽遊戲。�
 - Geolocator、Flutter Compass
 - NFC Manager
 - Camera、Image Picker、Video Player
+- ARKit Plugin、Vector Math
 - Hive 本地設定儲存
 - Audioplayers
 
@@ -33,7 +36,7 @@ campus_tour/
 │   ├── services/           # Firebase、音效、資料匯入、相機等服務
 │   ├── styles/             # 頁面與元件樣式
 │   ├── view/               # 主要頁面
-│   └── widgets/            # 可重用 UI 與遊戲元件
+│   └── widgets/            # 可重用 UI、AR 控制器與遊戲元件
 ├── assets/
 │   ├── audio/              # BGM 與音效
 │   ├── images/             # 角色、背景、圖鑑與 UI 圖像
@@ -53,6 +56,7 @@ campus_tour/
 - Firebase 專案設定
 - Google Maps API Key
 - 測試定位、NFC、相機或 AR 功能時，建議使用實體裝置
+- ARKit 功能僅在 iOS 裝置顯示入口；Android 目前不顯示 AR StoneButton
 
 目前本機可用的 Flutter SDK 路徑：
 
@@ -127,12 +131,25 @@ flutter run -d ios
 此專案會用到下列裝置權限：
 
 - 定位：校園地圖、玩家位置、附近精靈偵測
-- 相機：AR/拍照相關功能
+- 相機：拍照與 iOS AR 相關功能
 - NFC：任務線索掃描
 - 相簿：儲存照片
 - 震動：遊戲互動回饋
 
 Android 權限主要設定於 `android/app/src/main/AndroidManifest.xml`。iOS 權限描述位於 `ios/Runner/Info.plist`。
+
+## 平台功能差異
+
+- iOS：底部系統選單顯示「圖鑑、相機、AR、設定」，StoneButton 基礎尺寸為 `90`。
+- Android：底部系統選單顯示「圖鑑、相機、設定」，不顯示 AR 入口，StoneButton 基礎尺寸為 `110`。
+- AR 頁面不會自動預選精靈；玩家需先手動選擇下方列表中的精靈，再點擊 AR 平面放置。
+- 選到特定支援操控的模型時會進入 AR 操控頁，可使用虛擬搖桿移動精靈並用跳舞按鈕切換動畫。
+
+## 開發測試功能
+
+Debug build 的設定中心會顯示「測試：捕捉全部精靈」卡片。點擊「一鍵捕捉全部」會把 Firestore `monsters` 集合中尚未捕捉的精靈加入目前登入使用者的 `users/{uid}/monsters` 圖鑑子集合。
+
+此功能使用 monster id 作為 user monster document id，因此重複點擊不會洗出重複收藏。Release build 不會顯示此測試卡片。
 
 ## 測試與檢查
 
@@ -205,6 +222,7 @@ flutter build ios --release
 5. `MonsterController` 依位置更新附近精靈、最近精靈與使用者圖鑑狀態。
 6. 玩家接近精靈後進入 `FullMissionPage` 任務流程。
 7. 任務完成後寫入 Firestore，將精靈加入使用者圖鑑。
+8. 登出時會清除 Firebase/Google 登入狀態、使用者資料、怪物/圖鑑狀態，並清空 navigation stack 回到 `StartPage`。
 
 ## 常見問題
 
@@ -227,7 +245,14 @@ flutter build ios --release
 - Android 需開啟系統 NFC。
 - iOS 需確認 App entitlement 與 `NFCReaderUsageDescription` 設定。
 
+### AR 按鈕沒有出現
+
+- 目前 AR 入口只在 iOS 顯示；Android 會隱藏 AR StoneButton。
+- iOS 請確認使用支援 ARKit 的實體裝置。
+- 確認 `ios/Runner/Info.plist` 有相機權限描述，且 AR 模型資源已加入 iOS project resources。
+
 ## 開發備註
 
 - 地圖 tiles 已放在 `assets/tiles/`，新增 zoom/x/y tile 時也要同步更新 `pubspec.yaml` assets。
 - 捕捉任務會依建築類型切換任務組合，核心邏輯在 `BuildingMonsterLevel` 與 `FullMissionPage`。
+- `MonsterController.captureAllMonstersForTesting` 僅供 Debug 測試使用；正式流程仍應透過任務捕捉精靈。

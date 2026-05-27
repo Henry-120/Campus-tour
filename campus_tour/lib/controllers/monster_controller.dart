@@ -145,6 +145,63 @@ class MonsterController extends GetxController {
     }
   }
 
+  Future<int> captureAllMonstersForTesting(String userId) async {
+    final requestVersion = _stateVersion;
+    final monsters = await _service.getAllMonsters();
+    if (requestVersion != _stateVersion) return 0;
+
+    final capturedIds = userMonsterCollection
+        .map((captured) => captured.monsterRef.id)
+        .toSet();
+    final missingMonsters = monsters
+        .where((monster) => !capturedIds.contains(monster.id))
+        .toList();
+    final caughtAt = DateTime.now();
+
+    for (final monsterObj in missingMonsters) {
+      final userMonster = UserMonsterModel(
+        monsterRef: FirebaseFirestore.instance
+            .collection("monsters")
+            .doc(monsterObj.id),
+        name: monsterObj.name,
+        type: monsterObj.type,
+        imageURL: monsterObj.imageURL,
+        arRef: monsterObj.arRef ?? '',
+        videoRef: monsterObj.videoRef ?? '',
+        caughtAt: caughtAt,
+      );
+
+      await _service.setUserMonster(userId, monsterObj.id, userMonster);
+    }
+
+    if (requestVersion != _stateVersion) return 0;
+
+    await loadUserCollection(userId);
+    final missingIds = missingMonsters.map((monster) => monster.id).toSet();
+    nearbyMonsters.removeWhere((monster) => missingIds.contains(monster.id));
+    nearestMonster.value = null;
+    nearestDistance.value = null;
+
+    debugPrint('[MonsterController] 測試功能捕捉全部精靈: ${missingMonsters.length}');
+    return missingMonsters.length;
+  }
+
+  Future<int> deleteAllUserMonstersForTesting(String userId) async {
+    final requestVersion = _stateVersion;
+    final deletedCount = userMonsterCollection.length;
+
+    await _service.deleteAllUserMonsters(userId);
+    if (requestVersion != _stateVersion) return 0;
+
+    userMonsterCollection.clear();
+    nearbyMonsters.clear();
+    nearestMonster.value = null;
+    nearestDistance.value = null;
+
+    debugPrint('[MonsterController] 測試功能刪除全部精靈: $deletedCount');
+    return deletedCount;
+  }
+
   Future<void> updateLocationMonsters(Position userPosition) async {
     final requestVersion = _stateVersion;
     playerPosition.value = userPosition;

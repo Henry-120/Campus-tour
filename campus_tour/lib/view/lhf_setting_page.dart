@@ -1,8 +1,13 @@
+import 'package:campus_tour/controllers/monster_controller.dart';
 import 'package:campus_tour/local_information/local_setting.dart';
 import 'package:campus_tour/styles/app_theme.dart';
 import 'package:campus_tour/styles/setting_page_styles.dart';
 import 'package:campus_tour/view/user_protocol.dart';
+import 'package:campus_tour/widgets/common/snackbar_builder.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class SteeingPageStrings {
@@ -48,6 +53,26 @@ class SteeingPageStrings {
   static const autoSkipStoryDisabledTitle = '保留劇情播放';
   static const autoSkipStoryEnabledMessage = '進入關卡時會略過劇情段落，適合重複挑戰時使用。';
   static const autoSkipStoryDisabledMessage = '劇情段落會正常顯示，適合第一次體驗故事內容。';
+
+  // Debug
+  static const debugCaptureAllTitle = '測試：捕捉全部精靈';
+  static const debugCaptureAllDescription = '開發測試用，會把目前資料庫中的所有精靈加入圖鑑。';
+  static const debugCaptureAllStatus = 'Debug';
+  static const debugCaptureAllButton = '一鍵捕捉全部';
+  static const debugDeleteAllButton = '一鍵刪除全部';
+  static const debugCaptureAllNoUser = '請先登入後再使用測試功能';
+  static const debugCaptureAllRunning = '正在加入所有精靈...';
+  static const debugDeleteAllRunning = '正在刪除圖鑑精靈...';
+  static const debugCaptureAllFailed = '捕捉全部精靈失敗，請稍後再試';
+  static const debugDeleteAllFailed = '刪除全部精靈失敗，請稍後再試';
+
+  static String debugCaptureAllDone(int count) {
+    return count == 0 ? '圖鑑已經擁有全部精靈' : '已新增 $count 隻精靈到圖鑑';
+  }
+
+  static String debugDeleteAllDone(int count) {
+    return count == 0 ? '圖鑑原本就是空的' : '已從圖鑑刪除 $count 隻精靈';
+  }
 
   // Language
   static const languageTitle = '語言';
@@ -100,6 +125,8 @@ class FullPageList {
     FullPageList.vibrationSetCard,
     FullPageList.cardGap,
     FullPageList.autoSkipStorySetCard,
+    if (kDebugMode) FullPageList.cardGap,
+    if (kDebugMode) FullPageList.debugCaptureAllCard,
     FullPageList.cardGap,
     FullPageList.languageSetCard,
     FullPageList.cardGap,
@@ -118,6 +145,7 @@ class FullPageList {
   static const Widget cardGap = SizedBox(height: SettingPageStyles.cardSpacing);
   static const Widget vibrationSetCard = _VibrationSettingCard();
   static const Widget autoSkipStorySetCard = _AutoSkipStorySettingCard();
+  static const Widget debugCaptureAllCard = _DebugCaptureAllMonstersCard();
   static const Widget languageSetCard = _LanguageSettingCard();
   static const Widget userProtocolButton = _UserProtocolButton();
 }
@@ -424,6 +452,154 @@ class _LanguageSettingCard extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+}
+
+class _DebugCaptureAllMonstersCard extends StatefulWidget {
+  const _DebugCaptureAllMonstersCard();
+
+  @override
+  State<_DebugCaptureAllMonstersCard> createState() =>
+      _DebugCaptureAllMonstersCardState();
+}
+
+class _DebugCaptureAllMonstersCardState
+    extends State<_DebugCaptureAllMonstersCard> {
+  bool _isCapturing = false;
+  bool _isDeleting = false;
+
+  Future<void> _captureAllMonsters() async {
+    if (_isCapturing || _isDeleting) return;
+
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) {
+      SnackBarBuilder.show(
+        context,
+        SteeingPageStrings.debugCaptureAllNoUser,
+        type: AppToastType.warning,
+      );
+      return;
+    }
+
+    setState(() => _isCapturing = true);
+    SnackBarBuilder.show(
+      context,
+      SteeingPageStrings.debugCaptureAllRunning,
+      type: AppToastType.info,
+    );
+
+    try {
+      final count = await Get.find<MonsterController>()
+          .captureAllMonstersForTesting(user.uid);
+
+      if (!mounted) return;
+      SnackBarBuilder.show(
+        context,
+        SteeingPageStrings.debugCaptureAllDone(count),
+        type: AppToastType.success,
+      );
+    } catch (e) {
+      if (!mounted) return;
+      debugPrint('[SettingPage] 捕捉全部精靈失敗: $e');
+      SnackBarBuilder.show(
+        context,
+        SteeingPageStrings.debugCaptureAllFailed,
+        type: AppToastType.error,
+      );
+    } finally {
+      if (mounted) setState(() => _isCapturing = false);
+    }
+  }
+
+  Future<void> _deleteAllMonsters() async {
+    if (_isCapturing || _isDeleting) return;
+
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) {
+      SnackBarBuilder.show(
+        context,
+        SteeingPageStrings.debugCaptureAllNoUser,
+        type: AppToastType.warning,
+      );
+      return;
+    }
+
+    setState(() => _isDeleting = true);
+    SnackBarBuilder.show(
+      context,
+      SteeingPageStrings.debugDeleteAllRunning,
+      type: AppToastType.info,
+    );
+
+    try {
+      final count = await Get.find<MonsterController>()
+          .deleteAllUserMonstersForTesting(user.uid);
+
+      if (!mounted) return;
+      SnackBarBuilder.show(
+        context,
+        SteeingPageStrings.debugDeleteAllDone(count),
+        type: AppToastType.success,
+      );
+    } catch (e) {
+      if (!mounted) return;
+      debugPrint('[SettingPage] 刪除全部精靈失敗: $e');
+      SnackBarBuilder.show(
+        context,
+        SteeingPageStrings.debugDeleteAllFailed,
+        type: AppToastType.error,
+      );
+    } finally {
+      if (mounted) setState(() => _isDeleting = false);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return _SettingCard(
+      icon: Icons.bug_report_rounded,
+      title: SteeingPageStrings.debugCaptureAllTitle,
+      description: SteeingPageStrings.debugCaptureAllDescription,
+      status: const _StatusChip(
+        label: SteeingPageStrings.debugCaptureAllStatus,
+        enabled: true,
+      ),
+      child: Align(
+        alignment: Alignment.centerLeft,
+        child: Wrap(
+          spacing: SettingPageStyles.gapMd,
+          runSpacing: SettingPageStyles.gapMd,
+          children: [
+            FilledButton.icon(
+              onPressed: _isCapturing || _isDeleting
+                  ? null
+                  : _captureAllMonsters,
+              icon: _isCapturing
+                  ? const SizedBox(
+                      width: 18,
+                      height: 18,
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    )
+                  : const Icon(Icons.catching_pokemon_rounded),
+              label: const Text(SteeingPageStrings.debugCaptureAllButton),
+            ),
+            OutlinedButton.icon(
+              onPressed: _isCapturing || _isDeleting
+                  ? null
+                  : _deleteAllMonsters,
+              icon: _isDeleting
+                  ? const SizedBox(
+                      width: 18,
+                      height: 18,
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    )
+                  : const Icon(Icons.delete_sweep_rounded),
+              label: const Text(SteeingPageStrings.debugDeleteAllButton),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
