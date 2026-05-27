@@ -19,11 +19,11 @@ class LoginController {
     if (user == null) return null;
 
     final refreshedUser = await _authService.reloadCurrentUser() ?? user;
-    if (_needsEmailVerification(refreshedUser)) {
-      await _authService.sendEmailVerification();
-      await _authService.logout();
-      return refreshedUser;
-    }
+    // if (_needsEmailVerification(refreshedUser)) {
+    //   await _authService.sendEmailVerification();
+    //   await _authService.logout();
+    //   return refreshedUser;
+    // }
 
     await monsterController.loadUserCollection(refreshedUser.uid);
     await userController.fetchCurrentUser();
@@ -77,7 +77,7 @@ class LoginController {
   Future<User?> register(String email, String password, String nickname) async {
     final user = await _authService.register(email, password);
     if (user != null) {
-      await _authService.sendEmailVerification();
+      // await _authService.sendEmailVerification();
 
       final randomAvatar = BigHeadService.generateRandomUrl();
 
@@ -98,11 +98,11 @@ class LoginController {
     return await _firestoreService.getUser(uid);
   }
 
-  bool _needsEmailVerification(User user) {
-    final isEmailPasswordUser = user.providerData.any(
-      (provider) => provider.providerId == EmailAuthProvider.PROVIDER_ID,
-    );
+  // bool _needsEmailVerification(User user) {
+  //   final isEmailPasswordUser = user.providerData.any(
+  //     (provider) => provider.providerId == EmailAuthProvider.PROVIDER_ID,
+  //   );
 
-    return isEmailPasswordUser && !user.emailVerified;
-  }
+  //   return isEmailPasswordUser && !user.emailVerified;
+  // }
 }
