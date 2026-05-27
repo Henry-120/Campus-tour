@@ -15,16 +15,25 @@ class DiscoveredItemPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // [L-01]
-    return Material(
-      color: Colors.transparent,
-      child: SafeArea(
-        child: Center(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(
-              horizontal: LevelStyle.pageHorizontalPadding,
-              vertical: LevelStyle.pageVerticalPadding,
+    return PopScope(
+      canPop: false, // 設定為 false 禁止返回，等同於原本的 async => false
+      onPopInvokedWithResult: (bool didPop, Object? result) {
+        if (didPop) {
+          return;
+        }
+        // 這裡放原本你想要在攔截返回時執行的邏輯
+      },
+      child: Material(
+        color: Colors.transparent,
+        child: SafeArea(
+          child: Center(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(
+                horizontal: LevelStyle.pageHorizontalPadding,
+                vertical: LevelStyle.pageVerticalPadding,
+              ),
+              child: _buildDialogCard(),
             ),
-            child: _buildDialogCard(),
           ),
         ),
       ),

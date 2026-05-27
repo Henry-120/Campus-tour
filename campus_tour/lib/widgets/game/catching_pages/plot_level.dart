@@ -120,6 +120,7 @@ class PlotLevelPageStyle {
   static const double centerSpriteWidthFactor = 0.46;
   static const double sideSpriteHeightFactor = 0.72;
   static const double centerSpriteHeightFactor = 0.76;
+  static const EdgeInsets spriteBottomPadding = EdgeInsets.only(bottom: 128);
   static const double inactiveSpriteOpacity = 0.48;
   static const double activeSpriteOpacity = 1;
 

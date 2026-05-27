@@ -1,6 +1,7 @@
 import 'package:campus_tour/widgets/game/catching_pages/discovered_item_page.dart';
 import 'package:campus_tour/widgets/game/catching_pages/plot_level.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class PlotLevelPage extends StatefulWidget {
   final PlotLevel plotLevel;
@@ -27,6 +28,16 @@ class _PlotLevelPageState extends State<PlotLevelPage> {
     if (widget.plotLevel.isPassed) {
       WidgetsBinding.instance.addPostFrameCallback((_) => _callNextFunction());
     }
+    // SystemChrome.setPreferredOrientations([
+    //   DeviceOrientation.landscapeLeft,
+    //   DeviceOrientation.landscapeRight,
+    // ]);
+  }
+
+  @override
+  void dispose() {
+    _restorePortraitOrientation();
+    super.dispose();
   }
 
   @override
@@ -109,36 +120,46 @@ class _PlotLevelPageState extends State<PlotLevelPage> {
           children: [
             Align(
               alignment: Alignment.bottomLeft,
-              child: _buildSprite(
-                keyValue: 'left-${widget.plotLevel.leftCharacter.spritePath}',
-                imagePath: widget.plotLevel.leftCharacter.spritePath,
-                isVisible: step.showLeftSprite,
-                isActive: step.speakerSlot == PlotSpeakerSlot.left,
-                maxWidth: sideWidth,
-                maxHeight: sideHeight,
+              child: Padding(
+                padding: PlotLevelPageStyle.spriteBottomPadding,
+                child: _buildSprite(
+                  keyValue: 'left-${widget.plotLevel.leftCharacter.spritePath}',
+                  imagePath: widget.plotLevel.leftCharacter.spritePath,
+                  isVisible: step.showLeftSprite,
+                  isActive: step.speakerSlot == PlotSpeakerSlot.left,
+                  maxWidth: sideWidth,
+                  maxHeight: sideHeight,
+                ),
               ),
             ),
             Align(
               alignment: Alignment.bottomRight,
-              child: _buildSprite(
-                keyValue: 'right-${widget.plotLevel.rightCharacter.spritePath}',
-                imagePath: widget.plotLevel.rightCharacter.spritePath,
-                isVisible: step.showRightSprite,
-                isActive: step.speakerSlot == PlotSpeakerSlot.right,
-                maxWidth: sideWidth,
-                maxHeight: sideHeight,
+              child: Padding(
+                padding: PlotLevelPageStyle.spriteBottomPadding,
+                child: _buildSprite(
+                  keyValue:
+                      'right-${widget.plotLevel.rightCharacter.spritePath}',
+                  imagePath: widget.plotLevel.rightCharacter.spritePath,
+                  isVisible: step.showRightSprite,
+                  isActive: step.speakerSlot == PlotSpeakerSlot.right,
+                  maxWidth: sideWidth,
+                  maxHeight: sideHeight,
+                ),
               ),
             ),
             if (step.showsCenterSprite)
               Align(
                 alignment: Alignment.bottomCenter,
-                child: _buildSprite(
-                  keyValue: 'center-${step.centerSpritePath}',
-                  imagePath: step.centerSpritePath!,
-                  isVisible: true,
-                  isActive: step.speakerSlot == PlotSpeakerSlot.center,
-                  maxWidth: centerWidth,
-                  maxHeight: centerHeight,
+                child: Padding(
+                  padding: PlotLevelPageStyle.spriteBottomPadding,
+                  child: _buildSprite(
+                    keyValue: 'center-${step.centerSpritePath}',
+                    imagePath: step.centerSpritePath!,
+                    isVisible: true,
+                    isActive: step.speakerSlot == PlotSpeakerSlot.center,
+                    maxWidth: centerWidth,
+                    maxHeight: centerHeight,
+                  ),
                 ),
               ),
           ],
@@ -273,7 +294,13 @@ class _PlotLevelPageState extends State<PlotLevelPage> {
     _callNextFunction();
   }
 
-  void _callNextFunction() {
+  Future<void> _restorePortraitOrientation() {
+    return SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
+  }
+
+  Future<void> _callNextFunction() async {
     if (_hasCalledNext) {
       return;
     }
@@ -283,6 +310,7 @@ class _PlotLevelPageState extends State<PlotLevelPage> {
 
     // [L-01]
     if (discoveredItem == null || widget.plotLevel.isPassed) {
+      await _restorePortraitOrientation();
       widget.nextFunction();
       return;
     }
@@ -296,9 +324,10 @@ class _PlotLevelPageState extends State<PlotLevelPage> {
       pageBuilder: (dialogContext, _, _) {
         return DiscoveredItemPage(
           item: discoveredItem,
-          nextFunction: () {
+          nextFunction: () async {
             // [L-03]
             Navigator.of(dialogContext).pop();
+            await _restorePortraitOrientation();
             widget.nextFunction();
           },
         );
