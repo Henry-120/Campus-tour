@@ -61,13 +61,27 @@ flutter:
   assets:
     - assets/images/
     - assets/images/fairy_img/
+    - assets/images/fairy_img/furuii/
+    - assets/images/fairy_image/
+    - assets/images/fairy_four_parts/DNA/
+    - assets/images/fairy_four_parts/baihua_river/
+    - assets/images/fairy_four_parts/circle_90de_II/
+    - assets/images/fairy_four_parts/electrical_college/
+    - assets/images/fairy_four_parts/elephant_five_forms/
+    - assets/images/fairy_four_parts/engineering/
+    - assets/images/fairy_four_parts/geoscience/
+    - assets/images/fairy_four_parts/hakka_college/
+    - assets/images/fairy_four_parts/listening_to_the_pine_wind/
+    - assets/images/fairy_four_parts/literature/
+    - assets/images/fairy_four_parts/sustainability_college/
+    - assets/images/fairy_four_parts/taichi_sculpture/
+    - assets/images/fairy_four_parts/zhongda_lake/
     - assets/images/component/
     - assets/images/NCU/
     - assets/audio/
     - assets/mapStyles/
     - assets/json/
     - assets/json/locations/
-    - assets/images/weather/
     - assets/images/fairy_video/
     - assets/images/nfc_position_photos/
     - assets/images/novice_leading/
@@ -113,6 +127,81 @@ flutter:
     - assets/tiles/19/438648/
     - assets/tiles/19/438649/
     - assets/tiles/19/438650/
+    - assets/forest_tiles/16/54829/
+    - assets/forest_tiles/16/54830/
+    - assets/forest_tiles/16/54831/
+    - assets/forest_tiles/17/109658/
+    - assets/forest_tiles/17/109659/
+    - assets/forest_tiles/17/109660/
+    - assets/forest_tiles/17/109661/
+    - assets/forest_tiles/17/109662/
+    - assets/forest_tiles/18/219316/
+    - assets/forest_tiles/18/219317/
+    - assets/forest_tiles/18/219318/
+    - assets/forest_tiles/18/219319/
+    - assets/forest_tiles/18/219320/
+    - assets/forest_tiles/18/219321/
+    - assets/forest_tiles/18/219322/
+    - assets/forest_tiles/18/219323/
+    - assets/forest_tiles/18/219324/
+    - assets/forest_tiles/18/219325/
+    - assets/forest_tiles/19/438632/
+    - assets/forest_tiles/19/438633/
+    - assets/forest_tiles/19/438634/
+    - assets/forest_tiles/19/438635/
+    - assets/forest_tiles/19/438636/
+    - assets/forest_tiles/19/438637/
+    - assets/forest_tiles/19/438638/
+    - assets/forest_tiles/19/438639/
+    - assets/forest_tiles/19/438640/
+    - assets/forest_tiles/19/438641/
+    - assets/forest_tiles/19/438642/
+    - assets/forest_tiles/19/438643/
+    - assets/forest_tiles/19/438644/
+    - assets/forest_tiles/19/438645/
+    - assets/forest_tiles/19/438646/
+    - assets/forest_tiles/19/438647/
+    - assets/forest_tiles/19/438648/
+    - assets/forest_tiles/19/438649/
+    - assets/forest_tiles/19/438650/
+    - assets/forest_tiles/20/877264/
+    - assets/forest_tiles/20/877265/
+    - assets/forest_tiles/20/877266/
+    - assets/forest_tiles/20/877267/
+    - assets/forest_tiles/20/877268/
+    - assets/forest_tiles/20/877269/
+    - assets/forest_tiles/20/877270/
+    - assets/forest_tiles/20/877271/
+    - assets/forest_tiles/20/877272/
+    - assets/forest_tiles/20/877273/
+    - assets/forest_tiles/20/877274/
+    - assets/forest_tiles/20/877275/
+    - assets/forest_tiles/20/877276/
+    - assets/forest_tiles/20/877277/
+    - assets/forest_tiles/20/877278/
+    - assets/forest_tiles/20/877279/
+    - assets/forest_tiles/20/877280/
+    - assets/forest_tiles/20/877281/
+    - assets/forest_tiles/20/877282/
+    - assets/forest_tiles/20/877283/
+    - assets/forest_tiles/20/877284/
+    - assets/forest_tiles/20/877285/
+    - assets/forest_tiles/20/877286/
+    - assets/forest_tiles/20/877287/
+    - assets/forest_tiles/20/877288/
+    - assets/forest_tiles/20/877289/
+    - assets/forest_tiles/20/877290/
+    - assets/forest_tiles/20/877291/
+    - assets/forest_tiles/20/877292/
+    - assets/forest_tiles/20/877293/
+    - assets/forest_tiles/20/877294/
+    - assets/forest_tiles/20/877295/
+    - assets/forest_tiles/20/877296/
+    - assets/forest_tiles/20/877297/
+    - assets/forest_tiles/20/877298/
+    - assets/forest_tiles/20/877299/
+    - assets/forest_tiles/20/877300/
+    - assets/forest_tiles/20/877301/
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
