@@ -440,7 +440,7 @@ class BuildingMonsterLevel extends StatelessWidget {
        );
   List<FullMission> get missions {
     switch (architectureType) {
-      case "系管":
+      case "系館":
         return systemManagementMissions;
       case "裝置藝術":
         return installationArtMissions;

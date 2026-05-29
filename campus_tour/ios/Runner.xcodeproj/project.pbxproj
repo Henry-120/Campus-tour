@@ -19,6 +19,7 @@
 		BA27D5412F9ABD16009A1F8D /* YMCA.usdz in Resources */ = {isa = PBXBuildFile; fileRef = BA27D5402F9ABD16009A1F8D /* YMCA.usdz */; };
 		BA27D5432F9ABE27009A1F8D /* fairy_beauty.usdz in Resources */ = {isa = PBXBuildFile; fileRef = BA27D5422F9ABE27009A1F8D /* fairy_beauty.usdz */; };
 		BA4F71D92F9CBA4100399639 /* cherry_fairy.usdz in Resources */ = {isa = PBXBuildFile; fileRef = BA4F71D82F9CBA4100399639 /* cherry_fairy.usdz */; };
+		BA6E208F2FC7341800732E2C /* Mechanic.usdz in Resources */ = {isa = PBXBuildFile; fileRef = BA6E208E2FC7341800732E2C /* Mechanic.usdz */; };
 		BA8107FF2F9DF230005686B4 /* language.usdz in Resources */ = {isa = PBXBuildFile; fileRef = BA8107FE2F9DF22F005686B4 /* language.usdz */; };
 		BA840BAC2FBF146A002B4E3E /* Fairy_pop_dance.usdz in Resources */ = {isa = PBXBuildFile; fileRef = BA840BAB2FBF146A002B4E3E /* Fairy_pop_dance.usdz */; };
 		BA840BAE2FBF147B002B4E3E /* Fairy_walking.usdz in Resources */ = {isa = PBXBuildFile; fileRef = BA840BAD2FBF147B002B4E3E /* Fairy_walking.usdz */; };
@@ -34,7 +35,6 @@
 		BAB31A452F9BDA6600AF8D91 /* Hakka.usdz in Resources */ = {isa = PBXBuildFile; fileRef = BAB31A352F9BDA6600AF8D91 /* Hakka.usdz */; };
 		BAB31A462F9BDA6600AF8D91 /* clound.usdz in Resources */ = {isa = PBXBuildFile; fileRef = BAB31A312F9BDA6600AF8D91 /* clound.usdz */; };
 		BAB31A472F9BDA6600AF8D91 /* NCU_Lake.usdz in Resources */ = {isa = PBXBuildFile; fileRef = BAB31A3A2F9BDA6600AF8D91 /* NCU_Lake.usdz */; };
-		BAB31A482F9BDA6600AF8D91 /* Mechanical.usdz in Resources */ = {isa = PBXBuildFile; fileRef = BAB31A392F9BDA6600AF8D91 /* Mechanical.usdz */; };
 		BAB31A492F9BDA6600AF8D91 /* Recycle.usdz in Resources */ = {isa = PBXBuildFile; fileRef = BAB31A3B2F9BDA6600AF8D91 /* Recycle.usdz */; };
 		BAC29D4E2FAB7F5B00466301 /* qmark.usdz in Resources */ = {isa = PBXBuildFile; fileRef = BAC29D4D2FAB7F5B00466301 /* qmark.usdz */; };
 		BAC29D502FAB7F6500466301 /* sit_and_listen.usdz in Resources */ = {isa = PBXBuildFile; fileRef = BAC29D4F2FAB7F6500466301 /* sit_and_listen.usdz */; };
@@ -97,6 +97,7 @@
 		BA27D5402F9ABD16009A1F8D /* YMCA.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = YMCA.usdz; sourceTree = "<group>"; };
 		BA27D5422F9ABE27009A1F8D /* fairy_beauty.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = fairy_beauty.usdz; sourceTree = "<group>"; };
 		BA4F71D82F9CBA4100399639 /* cherry_fairy.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = cherry_fairy.usdz; sourceTree = "<group>"; };
+		BA6E208E2FC7341800732E2C /* Mechanic.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = Mechanic.usdz; sourceTree = "<group>"; };
 		BA8107FE2F9DF22F005686B4 /* language.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = language.usdz; sourceTree = "<group>"; };
 		BA840BAB2FBF146A002B4E3E /* Fairy_pop_dance.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = Fairy_pop_dance.usdz; sourceTree = "<group>"; };
 		BA840BAD2FBF147B002B4E3E /* Fairy_walking.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = Fairy_walking.usdz; sourceTree = "<group>"; };
@@ -111,7 +112,6 @@
 		BAB31A352F9BDA6600AF8D91 /* Hakka.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = Hakka.usdz; sourceTree = "<group>"; };
 		BAB31A362F9BDA6600AF8D91 /* Infor_Engineer.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = Infor_Engineer.usdz; sourceTree = "<group>"; };
 		BAB31A382F9BDA6600AF8D91 /* Management.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = Management.usdz; sourceTree = "<group>"; };
-		BAB31A392F9BDA6600AF8D91 /* Mechanical.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = Mechanical.usdz; sourceTree = "<group>"; };
 		BAB31A3A2F9BDA6600AF8D91 /* NCU_Lake.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = NCU_Lake.usdz; sourceTree = "<group>"; };
 		BAB31A3B2F9BDA6600AF8D91 /* Recycle.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = Recycle.usdz; sourceTree = "<group>"; };
 		BAB31A3C2F9BDA6600AF8D91 /* Taichi.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = Taichi.usdz; sourceTree = "<group>"; };
@@ -197,7 +197,6 @@
 				BAB31A352F9BDA6600AF8D91 /* Hakka.usdz */,
 				BAB31A362F9BDA6600AF8D91 /* Infor_Engineer.usdz */,
 				BAB31A382F9BDA6600AF8D91 /* Management.usdz */,
-				BAB31A392F9BDA6600AF8D91 /* Mechanical.usdz */,
 				BAB31A3A2F9BDA6600AF8D91 /* NCU_Lake.usdz */,
 				BAB31A3B2F9BDA6600AF8D91 /* Recycle.usdz */,
 				BAB31A3C2F9BDA6600AF8D91 /* Taichi.usdz */,
@@ -206,6 +205,7 @@
 				BAC29D4D2FAB7F5B00466301 /* qmark.usdz */,
 				BAC29D4F2FAB7F6500466301 /* sit_and_listen.usdz */,
 				BAC29D512FAB7F6B00466301 /* Math.usdz */,
+				BA6E208E2FC7341800732E2C /* Mechanic.usdz */,
 				BAC29D532FAB871800466301 /* Feather.usdz */,
 				BAC29D552FAB89EF00466301 /* circle_90.usdz */,
 				BAC29D572FAB8A1400466301 /* squirrel.usdz */,
@@ -356,6 +356,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA8107FF2F9DF230005686B4 /* language.usdz in Resources */,
+				BA6E208F2FC7341800732E2C /* Mechanic.usdz in Resources */,
 				97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */,
 				BAC29D582FAB8A1400466301 /* squirrel.usdz in Resources */,
 				BAB31A3E2F9BDA6600AF8D91 /* ES.usdz in Resources */,
@@ -378,7 +379,6 @@
 				BAB31A462F9BDA6600AF8D91 /* clound.usdz in Resources */,
 				BAB31A472F9BDA6600AF8D91 /* NCU_Lake.usdz in Resources */,
 				BAC29D542FAB871800466301 /* Feather.usdz in Resources */,
-				BAB31A482F9BDA6600AF8D91 /* Mechanical.usdz in Resources */,
 				BAB31A492F9BDA6600AF8D91 /* Recycle.usdz in Resources */,
 				3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */,
 				BA27D5412F9ABD16009A1F8D /* YMCA.usdz in Resources */,
@@ -631,7 +631,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.henry.campusTour;
+				PRODUCT_BUNDLE_IDENTIFIER = com.henryKuo.Campustour;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -648,7 +648,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.henry.campusTour.RunnerTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.henryKuo.Campustour;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -666,7 +666,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.henry.campusTour.RunnerTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.henryKuo.Campustour;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Runner.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Runner";
@@ -817,7 +817,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.henry.campusTour;
+				PRODUCT_BUNDLE_IDENTIFIER = com.henryKuo.Campustour;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -842,7 +842,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.henry.campusTour;
+				PRODUCT_BUNDLE_IDENTIFIER = com.henryKuo.Campustour;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;

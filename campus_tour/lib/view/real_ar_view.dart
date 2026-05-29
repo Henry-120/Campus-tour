@@ -21,6 +21,7 @@ class _RealArPageState extends State<RealArPage> {
 
   // 💡 當前選中的精靈模型路徑 (從 UserMonsterModel.arRef 取得)
   String selectedMonsterUrl = "";
+  double selectedScale = 0.05; // 預設縮放比例
 
   @override
   void dispose() {
@@ -87,12 +88,14 @@ class _RealArPageState extends State<RealArPage> {
                         String modelFile =
                             userMonster.arRef ?? ""; // 💡 使用 Model 內的 arRef
                         bool isSelected = selectedMonsterUrl == modelFile;
+                        bool isSpecialMonster = userMonster.name == "嚶嚶嚶";
 
                         return GestureDetector(
                           behavior: HitTestBehavior.opaque,
                           onTap: () {
                             setState(() {
                               selectedMonsterUrl = modelFile;
+                              selectedScale = (modelFile == "Elephant.usdz") ? 8 : 0.05;
                               debugPrint("💡 已切換精靈模型為: $selectedMonsterUrl");
                             });
                             if (selectedMonsterUrl == "YMCA.usdz") {
@@ -112,11 +115,11 @@ class _RealArPageState extends State<RealArPage> {
                             ),
                             width: 90 * scale,
                             decoration: BoxDecoration(
-                              color: isSelected
-                                  ? AppTheme.arSelectedTileColor.withValues(
-                                      alpha: 0.2,
-                                    )
-                                  : AppTheme.arUnselectedTileColor,
+                                color: isSelected
+                                    ? AppTheme.arSelectedTileColor.withValues(alpha: 0.2)
+                                    : isSpecialMonster
+                                    ? Colors.pink.shade100.withValues(alpha: 0.7)
+                                      : AppTheme.arUnselectedTileColor,
                               borderRadius: BorderRadius.circular(20 * scale),
                               border: isSelected
                                   ? Border.all(
@@ -214,7 +217,7 @@ class _RealArPageState extends State<RealArPage> {
       url: selectedMonsterUrl,
       position: position,
       eulerAngles: vector.Vector3(0, -1.5708, 0), // 修正躺下的問題
-      scale: vector.Vector3(0.05, 0.05, 0.05),
+        scale: vector.Vector3(selectedScale, selectedScale, selectedScale),
     );
 
     arkitController?.add(node);
