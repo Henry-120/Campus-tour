@@ -6,6 +6,7 @@ class NFCservice {
   static const String _iosAlertMessage = "請靠近NFC感應";
   // static const String _error_ios_mes = "讀取發生錯誤";
   static const String _nfcaErrorMessage = "NfcA 格式錯誤";
+  static bool _isForegroundListening = false;
 
   //return future 式api // 主要api
   static Future<NfcResponse?> scanSingleTag() async {
@@ -28,7 +29,7 @@ class NFCservice {
       onDiscovered: (NfcTag tag) async {
         try {
           //  讀到標籤後，立刻解析
-          final result = _nFCDataAns125(tag);
+          final result = parseTag(tag);
 
           // 讀到就停止，這會自動關閉 iOS 的掃描視窗
           await NfcManager.instance.stopSession();
@@ -61,8 +62,40 @@ class NFCservice {
     return availability;
   }
 
+  // App 在前景時持續攔截 NFC，掃到後交給上層決定是否處理。
+  static Future<NfcResponse?> startForegroundListening({
+    required void Function(NfcScanResult result) onTag,
+    void Function(NfcErrorType errorType, {String? message})? onError,
+  }) async {
+    if (_isForegroundListening) return null;
+
+    if (!await isAvailability()) {
+      return NfcResponse.error(NfcErrorType.hardwareDisabled);
+    }
+
+    _isForegroundListening = true;
+
+    await NfcManager.instance.startSession(
+      alertMessage: _iosAlertMessage,
+      onError: (NfcError error) async {
+        _isForegroundListening = false;
+        onError?.call(NfcErrorType.userCanceled, message: error.message);
+      },
+      onDiscovered: (NfcTag tag) async {
+        try {
+          final result = parseTag(tag);
+          onTag(result);
+        } catch (e) {
+          onError?.call(NfcErrorType.parseFailed, message: e.toString());
+        }
+      },
+    );
+
+    return null;
+  }
+
   //分析器
-  static NfcScanResult _nFCDataAns125(NfcTag tag) {
+  static NfcScanResult parseTag(NfcTag tag) {
     final nfcA = NfcA.from(tag);
     if (nfcA == null) {
       throw Exception(_nfcaErrorMessage);
@@ -81,6 +114,7 @@ class NFCservice {
 
   //觸發停止
   static Future<void> stopScanning() async {
+    _isForegroundListening = false;
     await NfcManager.instance.stopSession();
   }
 }
