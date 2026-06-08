@@ -3,7 +3,7 @@ class MonsterGraphics {
     // "m1": "assets/images/nfc_position_photos/nfc_position.jpg",
     // "m2": "assets/images/nfc_position_photos/nfc_position.jpg",
     // "m3": "assets/images/nfc_position_photos/nfc_position.jpg",
-    "m4": "assets/images/nfc_position_photos/nfc_position.jpg",
+    "m4": "assets/images/nfc_position_photos/The_Five_Elements.jpg",
     "m5": "assets/images/nfc_position_photos/taichi_sculpture.jpg",
     // "m6": "assets/images/nfc_position_photos/nfc_position.jpg",
     // "m7": "assets/images/nfc_position_photos/nfc_position.jpg",
