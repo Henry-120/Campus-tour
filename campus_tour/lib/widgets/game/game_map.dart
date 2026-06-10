@@ -36,6 +36,33 @@ class GameMap extends StatefulWidget {
   State<GameMap> createState() => _GameMapState();
 }
 
+enum MapTileLayer {
+  campus(
+    id: 'campus',
+    label: '校園地圖',
+    assetFolder: 'assets/tiles',
+    maxTileZoom: 19,
+  ),
+  forest(
+    id: 'forest',
+    label: '森林地圖',
+    assetFolder: 'assets/forest_tiles',
+    maxTileZoom: 20,
+  );
+
+  const MapTileLayer({
+    required this.id,
+    required this.label,
+    required this.assetFolder,
+    required this.maxTileZoom,
+  });
+
+  final String id;
+  final String label;
+  final String assetFolder;
+  final int maxTileZoom;
+}
+
 class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
   GoogleMapController? _mapController;
   StreamSubscription<Position>? _positionStream; // 📡 位置監聽器
@@ -49,11 +76,14 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
 
   LatLng? _playerPosition;
   bool _hasCenteredMap = false;
+  MapTileLayer _selectedTileLayer = MapTileLayer.campus;
   // UserMarker? _playerMarker;
   // BitmapDescriptor? _playerIcon;
 
   static const LatLng southwest = LatLng(24.965184, 121.185000); // 左下
   static const LatLng northeast = LatLng(24.971653, 121.197487); // 右上
+  static const bool _useFixedTestLocation = true;
+  static const LatLng _fixedTestLocation = LatLng(24.9691, 121.1945);
 
   final LatLngBounds campusBounds = LatLngBounds(
     southwest: southwest,
@@ -78,6 +108,21 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
   Future<void> _checkPermissionAndListen() async {
     try {
       final monsterController = Get.find<MonsterController>();
+
+      if (_useFixedTestLocation) {
+        final testPosition = _fixedTestPosition();
+        setState(() {
+          _hasLocationPermission = true;
+          _playerPosition = _fixedTestLocation;
+        });
+
+        _moveCamera(testPosition);
+        unawaited(monsterController.updateLocationMonsters(testPosition));
+        debugPrint(
+          '[Debug][GameMap]:使用固定測試定位 ${_fixedTestLocation.latitude}, ${_fixedTestLocation.longitude}',
+        );
+        return;
+      }
 
       bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
       if (!serviceEnabled) {
@@ -108,8 +153,6 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
         currentPosition.latitude,
         currentPosition.longitude,
       );
-
-      // final LatLng currentLocation = const LatLng(24.97, 121.1922);
 
       setState(() {
         _playerPosition = currentLocation;
@@ -178,7 +221,6 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
               // 不讓畫面旋轉
               CameraPosition(
                 target: LatLng(position.latitude, position.longitude),
-                // target: LatLng(24.97, 121.1922),
                 zoom: 18.5,
                 bearing: 0,
               ),
@@ -198,13 +240,28 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
     _mapController!.animateCamera(
       CameraUpdate.newCameraPosition(
         CameraPosition(
-          // target: LatLng(24.97, 121.1922),
           target: LatLng(position.latitude, position.longitude),
-
           zoom: 18.5,
           bearing: 0,
         ),
       ),
+    );
+  }
+
+  Position _fixedTestPosition() {
+    return Position(
+      latitude: _fixedTestLocation.latitude,
+      longitude: _fixedTestLocation.longitude,
+      timestamp: DateTime.now(),
+      accuracy: 1,
+      altitude: 0,
+      altitudeAccuracy: 0,
+      heading: 0,
+      headingAccuracy: 0,
+      speed: 0,
+      speedAccuracy: 0,
+      floor: null,
+      isMocked: true,
     );
   }
 
@@ -375,16 +432,20 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
             _minZoomRate,
             _maxZoomRate,
           ),
-          initialCameraPosition: const CameraPosition(
-            target: LatLng(24.9684, 121.1912),
+          initialCameraPosition: CameraPosition(
+            target: _useFixedTestLocation
+                ? _fixedTestLocation
+                : const LatLng(24.9684, 121.1912),
             zoom: 18.5, // 💡 初始縮放
           ),
           style: _mapStyle,
 
           tileOverlays: {
             TileOverlay(
-              tileOverlayId: const TileOverlayId('ncu_custom_tiles_v2'),
-              tileProvider: AssetTileProvider(),
+              tileOverlayId: TileOverlayId(
+                'ncu_custom_tiles_${_selectedTileLayer.id}',
+              ),
+              tileProvider: AssetTileProvider(layer: _selectedTileLayer),
               transparency: 0.0,
               zIndex: 1,
             ),
@@ -403,12 +464,45 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
           zoomGesturesEnabled: true,
           onMapCreated: (controller) {
             _mapController = controller;
+            final playerPosition = _playerPosition;
+            if (playerPosition != null) {
+              _moveCamera(
+                Position(
+                  latitude: playerPosition.latitude,
+                  longitude: playerPosition.longitude,
+                  timestamp: DateTime.now(),
+                  accuracy: 1,
+                  altitude: 0,
+                  altitudeAccuracy: 0,
+                  heading: 0,
+                  headingAccuracy: 0,
+                  speed: 0,
+                  speedAccuracy: 0,
+                  floor: null,
+                  isMocked: _useFixedTestLocation,
+                ),
+              );
+            }
           },
+        ),
+        Positioned(
+          right: 16,
+          top: 16,
+          child: SafeArea(
+            child: _MapLayerButton(
+              selectedLayer: _selectedTileLayer,
+              onSelected: (layer) {
+                setState(() {
+                  _selectedTileLayer = layer;
+                });
+              },
+            ),
+          ),
         ),
         if (!_hasLocationPermission)
           Positioned(
             right: 16,
-            top: 16,
+            top: 76,
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
               decoration: BoxDecoration(
@@ -426,6 +520,65 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
             ),
           ),
       ],
+    );
+  }
+}
+
+class _MapLayerButton extends StatelessWidget {
+  const _MapLayerButton({
+    required this.selectedLayer,
+    required this.onSelected,
+  });
+
+  final MapTileLayer selectedLayer;
+  final ValueChanged<MapTileLayer> onSelected;
+
+  @override
+  Widget build(BuildContext context) {
+    return PopupMenuButton<MapTileLayer>(
+      tooltip: '切換地圖圖層',
+      initialValue: selectedLayer,
+      onSelected: onSelected,
+      itemBuilder: (context) => [
+        for (final layer in MapTileLayer.values)
+          PopupMenuItem<MapTileLayer>(
+            value: layer,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  layer == selectedLayer
+                      ? Icons.radio_button_checked_rounded
+                      : Icons.radio_button_unchecked_rounded,
+                  size: 18,
+                  color: Colors.black87,
+                ),
+                const SizedBox(width: 10),
+                Text(layer.label),
+              ],
+            ),
+          ),
+      ],
+      child: Container(
+        width: 48,
+        height: 48,
+        decoration: BoxDecoration(
+          color: Colors.white.withValues(alpha: 0.92),
+          shape: BoxShape.circle,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.24),
+              blurRadius: 12,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        child: const Icon(
+          Icons.layers_rounded,
+          color: Colors.black87,
+          size: 26,
+        ),
+      ),
     );
   }
 }
@@ -535,22 +688,25 @@ class BuildingMonsterLevel extends StatelessWidget {
 
 class AssetTileProvider implements TileProvider {
   static const int _minTileZoom = 15;
-  static const int _maxTileZoom = 19;
   static int _debugLogCount = 0;
+
+  const AssetTileProvider({required this.layer});
+
+  final MapTileLayer layer;
 
   @override
   Future<Tile> getTile(int x, int y, int? zoom) async {
     final int z = zoom ?? 0;
     if (z < _minTileZoom) return TileProvider.noTile;
 
-    final int sourceZ = z > _maxTileZoom ? _maxTileZoom : z;
+    final int sourceZ = z > layer.maxTileZoom ? layer.maxTileZoom : z;
     final int zoomDelta = z - sourceZ;
     final int sourceX = zoomDelta > 0 ? x >> zoomDelta : x;
     final int sourceY = zoomDelta > 0 ? y >> zoomDelta : y;
     final int tmsY = (1 << sourceZ) - 1 - sourceY;
 
     for (final tileY in [sourceY, tmsY]) {
-      final path = 'assets/tiles/$sourceZ/$sourceX/$tileY.png';
+      final path = '${layer.assetFolder}/$sourceZ/$sourceX/$tileY.png';
       try {
         final ByteData data = await rootBundle.load(path);
         final Uint8List bytes = zoomDelta > 0

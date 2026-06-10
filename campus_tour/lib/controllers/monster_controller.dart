@@ -198,6 +198,11 @@ class MonsterController extends GetxController {
     nearestMonster.value = null;
     nearestDistance.value = null;
 
+    final currentPosition = playerPosition.value;
+    if (currentPosition != null) {
+      await updateLocationMonsters(currentPosition);
+    }
+
     debugPrint('[MonsterController] 測試功能刪除全部精靈: $deletedCount');
     return deletedCount;
   }
