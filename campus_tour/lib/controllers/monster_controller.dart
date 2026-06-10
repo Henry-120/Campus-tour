@@ -25,9 +25,29 @@ class MonsterController extends GetxController {
 
   // 使用者已捕捉的怪物（圖鑑）
   var userMonsterCollection = <UserMonsterModel>[].obs;
+  var totalMonsterCount = RxnInt();
 
   // 玩家當前位置
   var playerPosition = Rxn<Position>();
+
+  @override
+  void onInit() {
+    super.onInit();
+    loadTotalMonsterCount();
+  }
+
+  Future<void> loadTotalMonsterCount() async {
+    final requestVersion = _stateVersion;
+
+    try {
+      final monsters = await _service.getAllMonsters();
+      if (requestVersion != _stateVersion) return;
+
+      totalMonsterCount.value = monsters.length;
+    } catch (e) {
+      debugPrint('[MonsterController] 載入精靈總數失敗: $e');
+    }
+  }
 
   Future<void> loadMonsterWithRelations(MonsterModel monsterModel) async {
     monster.value = monsterModel;
@@ -149,6 +169,7 @@ class MonsterController extends GetxController {
     final requestVersion = _stateVersion;
     final monsters = await _service.getAllMonsters();
     if (requestVersion != _stateVersion) return 0;
+    totalMonsterCount.value = monsters.length;
 
     final capturedIds = userMonsterCollection
         .map((captured) => captured.monsterRef.id)
@@ -213,6 +234,7 @@ class MonsterController extends GetxController {
 
     final monsters = await _service.getAllMonsters();
     if (requestVersion != _stateVersion) return;
+    totalMonsterCount.value = monsters.length;
 
     final capturedIds = userMonsterCollection
         .map((captured) => captured.monsterRef.id)

@@ -82,8 +82,8 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
 
   static const LatLng southwest = LatLng(24.965184, 121.185000); // 左下
   static const LatLng northeast = LatLng(24.971653, 121.197487); // 右上
-  static const bool _useFixedTestLocation = true;
-  static const LatLng _fixedTestLocation = LatLng(24.9691, 121.1945);
+  static const bool _useFixedTestLocation = false; // 💡 測試用開關：使用固定位置而非真實 GPS
+  static const LatLng _fixedTestLocation = LatLng(24.967731, 121.193638);
 
   final LatLngBounds campusBounds = LatLngBounds(
     southwest: southwest,
@@ -372,6 +372,7 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
     return Stack(
       children: [
         GoogleMap(
+          mapType: MapType.none,
           minMaxZoomPreference: MinMaxZoomPreference(
             _minZoomRate,
             _maxZoomRate,
@@ -395,7 +396,7 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
             ),
           },
 
-          buildingsEnabled: true,
+          buildingsEnabled: false,
           markers: {
             // if (_playerMarker != null) _playerMarker!.toMarker(),
             ...monsterMarkers, // 👈 MonsterMarkersMixin 提供的 getter

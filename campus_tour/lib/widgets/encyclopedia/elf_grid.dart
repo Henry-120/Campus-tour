@@ -24,7 +24,17 @@ class _ElfGridState extends State<ElfGrid> {
       final allUserMonsters = _monsterController.userMonsterCollection;
 
       if (allUserMonsters.isEmpty) {
-        return const Center(child: Text("尚未捕捉任何怪物"));
+        return const Column(
+          children: [
+            Expanded(child: Center(child: Text("尚未捕捉任何怪物"))),
+            PageSelector(
+              currentPage: 1,
+              totalPages: 1,
+              onPrevious: null,
+              onNext: null,
+            ),
+          ],
+        );
       }
 
       // 取得當前頁面的資料

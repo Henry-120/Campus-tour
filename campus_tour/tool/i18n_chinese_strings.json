@@ -1,0 +1,3534 @@
+{
+  "generatedBy": "tool/extract_chinese_strings.dart",
+  "totalUniqueStrings": 312,
+  "entries": [
+    {
+      "key": "controllers.login.controller.s001",
+      "zh": "正在啟動 Google 認證...",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/controllers/login_controller.dart",
+          "line": 35
+        }
+      ]
+    },
+    {
+      "key": "controllers.login.controller.s002",
+      "zh": "Google 認證成功: ${user.uid}",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/controllers/login_controller.dart",
+          "line": 39
+        }
+      ]
+    },
+    {
+      "key": "controllers.login.controller.s003",
+      "zh": "新使用者，正在建立 Firestore 資料...",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/controllers/login_controller.dart",
+          "line": 44
+        }
+      ]
+    },
+    {
+      "key": "controllers.login.controller.s004",
+      "zh": "冒險者",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/controllers/login_controller.dart",
+          "line": 53
+        },
+        {
+          "file": "lib/models/user_model.dart",
+          "line": 18
+        },
+        {
+          "file": "lib/services/google_auth_service.dart",
+          "line": 33
+        },
+        {
+          "file": "lib/widgets/game/user_name_text.dart",
+          "line": 18
+        }
+      ]
+    },
+    {
+      "key": "controllers.login.controller.s005",
+      "zh": "正在載入使用者收藏與資料...",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/controllers/login_controller.dart",
+          "line": 59
+        }
+      ]
+    },
+    {
+      "key": "controllers.login.controller.s006",
+      "zh": "❌ LoginController.signInWithGoogle 失敗: $e",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/controllers/login_controller.dart",
+          "line": 65
+        }
+      ]
+    },
+    {
+      "key": "controllers.monster.controller.s001",
+      "zh": "[MonsterController] 載入精靈總數失敗: $e",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/controllers/monster_controller.dart",
+          "line": 48
+        }
+      ]
+    },
+    {
+      "key": "controllers.monster.controller.s002",
+      "zh": "[MonsterController] 此怪物沒有關聯的 QA",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/controllers/monster_controller.dart",
+          "line": 63
+        }
+      ]
+    },
+    {
+      "key": "controllers.monster.controller.s003",
+      "zh": "[MonsterController] 獲取 QA 失敗: $e",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/controllers/monster_controller.dart",
+          "line": 78
+        }
+      ]
+    },
+    {
+      "key": "controllers.monster.controller.s004",
+      "zh": "[MonsterController] 此怪物沒有關聯的建築資料",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/controllers/monster_controller.dart",
+          "line": 88
+        }
+      ]
+    },
+    {
+      "key": "controllers.monster.controller.s005",
+      "zh": "[MonsterController] 獲取建築資料失敗: $e",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/controllers/monster_controller.dart",
+          "line": 103
+        }
+      ]
+    },
+    {
+      "key": "controllers.monster.controller.s006",
+      "zh": "[MonsterController] 怪物 ${monsterObj.name} 已經被捕捉過",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/controllers/monster_controller.dart",
+          "line": 135
+        }
+      ]
+    },
+    {
+      "key": "controllers.monster.controller.s007",
+      "zh": "[MonsterController] 成功捕捉怪物: ${monsterObj.name} 並已同步更新 QA 與建築資料",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/controllers/monster_controller.dart",
+          "line": 159
+        }
+      ]
+    },
+    {
+      "key": "controllers.monster.controller.s008",
+      "zh": "[MonsterController] 捕捉怪物時出錯: $e",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/controllers/monster_controller.dart",
+          "line": 163
+        }
+      ]
+    },
+    {
+      "key": "controllers.monster.controller.s009",
+      "zh": "[MonsterController] 測試功能捕捉全部精靈: ${missingMonsters.length}",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/controllers/monster_controller.dart",
+          "line": 206
+        }
+      ]
+    },
+    {
+      "key": "controllers.monster.controller.s010",
+      "zh": "[MonsterController] 測試功能刪除全部精靈: $deletedCount",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/controllers/monster_controller.dart",
+          "line": 227
+        }
+      ]
+    },
+    {
+      "key": "controllers.monster.controller.s011",
+      "zh": "[MonsterController] 最近精靈: ${nearestMonster.value?.name}, 距離: ${nearestDistance.value}",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/controllers/monster_controller.dart",
+          "line": 283
+        }
+      ]
+    },
+    {
+      "key": "controllers.nfc.api.s001",
+      "zh": "請靠近NFC感應",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/controllers/NFC_api.dart",
+          "line": 6
+        }
+      ]
+    },
+    {
+      "key": "controllers.nfc.api.s002",
+      "zh": "NFC 標籤格式錯誤",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/controllers/NFC_api.dart",
+          "line": 8
+        }
+      ]
+    },
+    {
+      "key": "controllers.nfc.api.s003",
+      "zh": "錯誤：嘗試在掃描失敗的情況下讀取 Data。請先檢查 isSuccess！",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/controllers/NFC_api.dart",
+          "line": 141
+        }
+      ]
+    },
+    {
+      "key": "controllers.nfc.api.s004",
+      "zh": "錯誤：嘗試在掃描成功的情況下讀取 Error 類型。",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/controllers/NFC_api.dart",
+          "line": 149
+        }
+      ]
+    },
+    {
+      "key": "controllers.profile.edit.controller.s001",
+      "zh": "[profile_edit_controller] 成功載入頭像: ${previewUrl.value}",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/controllers/profile_edit_controller.dart",
+          "line": 21
+        }
+      ]
+    },
+    {
+      "key": "controllers.profile.edit.controller.s002",
+      "zh": "小提示",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/controllers/profile_edit_controller.dart",
+          "line": 54
+        }
+      ]
+    },
+    {
+      "key": "controllers.profile.edit.controller.s003",
+      "zh": "暱稱不能空著喔！",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/controllers/profile_edit_controller.dart",
+          "line": 55
+        }
+      ]
+    },
+    {
+      "key": "controllers.profile.edit.controller.s004",
+      "zh": "[ProfileEdit] 儲存變更：$newNickname",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/controllers/profile_edit_controller.dart",
+          "line": 63
+        }
+      ]
+    },
+    {
+      "key": "controllers.user.controller.s001",
+      "zh": "[UserController] 偵測到使用者登入: ${user.uid}",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/controllers/user_controller.dart",
+          "line": 21
+        }
+      ]
+    },
+    {
+      "key": "controllers.user.controller.s002",
+      "zh": "[UserController] 目前為登出狀態",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/controllers/user_controller.dart",
+          "line": 24
+        }
+      ]
+    },
+    {
+      "key": "controllers.user.controller.s003",
+      "zh": "[UserController] 成功從 Firestore 載入頭像: ${data.photoUrl}",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/controllers/user_controller.dart",
+          "line": 38
+        }
+      ]
+    },
+    {
+      "key": "controllers.user.controller.s004",
+      "zh": "[UserController] 抓取錯誤: $e",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/controllers/user_controller.dart",
+          "line": 42
+        }
+      ]
+    },
+    {
+      "key": "services.camera.service.s001",
+      "zh": "[Camera]: AR捕捉成功！路徑：$path",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/services/camera_service.dart",
+          "line": 13
+        }
+      ]
+    },
+    {
+      "key": "services.camera.service.s002",
+      "zh": "[Camera]:使用者取消了拍照",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/services/camera_service.dart",
+          "line": 31
+        }
+      ]
+    },
+    {
+      "key": "services.camera.service.s003",
+      "zh": "[Camera]:拍照成功！路徑：${photo.path}",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/services/camera_service.dart",
+          "line": 36
+        }
+      ]
+    },
+    {
+      "key": "services.camera.service.s004",
+      "zh": "[Camera]:相機出錯：$e",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/services/camera_service.dart",
+          "line": 40
+        }
+      ]
+    },
+    {
+      "key": "services.firebase.auth.service.s001",
+      "zh": "[AuthService] 登入失敗: $e",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/services/firebase_auth_service.dart",
+          "line": 20
+        }
+      ]
+    },
+    {
+      "key": "services.firebase.auth.service.s002",
+      "zh": "[AuthService] 註冊失敗: $e",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/services/firebase_auth_service.dart",
+          "line": 33
+        }
+      ]
+    },
+    {
+      "key": "services.firebase.auth.service.s003",
+      "zh": "[AuthService] Google 登入失敗: $e",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/services/firebase_auth_service.dart",
+          "line": 71
+        }
+      ]
+    },
+    {
+      "key": "services.google.auth.service.s001",
+      "zh": "Google Sign-In: 初始化新使用者隨機頭像...",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/services/google_auth_service.dart",
+          "line": 32
+        }
+      ]
+    },
+    {
+      "key": "services.google.auth.service.s003",
+      "zh": "❌ Google Sign-In 發生錯誤：$e",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/services/google_auth_service.dart",
+          "line": 55
+        }
+      ]
+    },
+    {
+      "key": "services.json.to.suggestion.s001",
+      "zh": "名稱",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/services/json_to_suggestion.dart",
+          "line": 20
+        }
+      ]
+    },
+    {
+      "key": "services.json.to.suggestion.s002",
+      "zh": "種類",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/services/json_to_suggestion.dart",
+          "line": 21
+        }
+      ]
+    },
+    {
+      "key": "services.json.to.suggestion.s003",
+      "zh": "緯度",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/services/json_to_suggestion.dart",
+          "line": 22
+        }
+      ]
+    },
+    {
+      "key": "services.json.to.suggestion.s004",
+      "zh": "經度",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/services/json_to_suggestion.dart",
+          "line": 23
+        }
+      ]
+    },
+    {
+      "key": "services.json.to.suggestion.s005",
+      "zh": "地景資料缺少有效的「名稱」欄位",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/services/json_to_suggestion.dart",
+          "line": 27
+        }
+      ]
+    },
+    {
+      "key": "services.json.to.suggestion.s006",
+      "zh": "地景資料缺少有效的「種類」欄位",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/services/json_to_suggestion.dart",
+          "line": 32
+        }
+      ]
+    },
+    {
+      "key": "services.json.to.suggestion.s007",
+      "zh": "地景資料缺少有效的「緯度」或「經度」欄位",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/services/json_to_suggestion.dart",
+          "line": 37
+        }
+      ]
+    },
+    {
+      "key": "services.json.to.suggestion.s008",
+      "zh": "地景 JSON 根節點必須是陣列: $assetPath",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/services/json_to_suggestion.dart",
+          "line": 81
+        }
+      ]
+    },
+    {
+      "key": "services.json.to.suggestion.s009",
+      "zh": "地景資料第 ${index + 1} 筆不是物件: $sourceName",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/services/json_to_suggestion.dart",
+          "line": 101
+        }
+      ]
+    },
+    {
+      "key": "styles.level.style.s001",
+      "zh": "火",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/styles/level_style.dart",
+          "line": 148
+        },
+        {
+          "file": "lib/view/Camera_view.dart",
+          "line": 316
+        },
+        {
+          "file": "lib/widgets/sections/monster_test.dart",
+          "line": 19
+        }
+      ]
+    },
+    {
+      "key": "styles.level.style.s002",
+      "zh": "水",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/styles/level_style.dart",
+          "line": 161
+        },
+        {
+          "file": "lib/view/Camera_view.dart",
+          "line": 318
+        },
+        {
+          "file": "lib/widgets/sections/monster_test.dart",
+          "line": 25
+        }
+      ]
+    },
+    {
+      "key": "styles.level.style.s003",
+      "zh": "金",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/styles/level_style.dart",
+          "line": 174
+        }
+      ]
+    },
+    {
+      "key": "styles.map.suggestion.style.s001",
+      "zh": "裝置藝術",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/styles/map_suggestion_style.dart",
+          "line": 98
+        },
+        {
+          "file": "lib/view/elf_detail_page.dart",
+          "line": 118
+        },
+        {
+          "file": "lib/view/map_suggestions.dart",
+          "line": 39
+        },
+        {
+          "file": "lib/widgets/game/game_map.dart",
+          "line": 599
+        }
+      ]
+    },
+    {
+      "key": "styles.map.suggestion.style.s002",
+      "zh": "廁所",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/styles/map_suggestion_style.dart",
+          "line": 101
+        },
+        {
+          "file": "lib/view/map_suggestions.dart",
+          "line": 42
+        }
+      ]
+    },
+    {
+      "key": "styles.nfc.leading.style.s001",
+      "zh": "開始NFC掃描",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/styles/nfc_leading_style.dart",
+          "line": 13
+        }
+      ]
+    },
+    {
+      "key": "styles.nfc.leading.style.s002",
+      "zh": "掃描中",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/styles/nfc_leading_style.dart",
+          "line": 14
+        }
+      ]
+    },
+    {
+      "key": "view.camera.view.s001",
+      "zh": "相機初始化失敗: $e",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/Camera_view.dart",
+          "line": 49
+        }
+      ]
+    },
+    {
+      "key": "view.camera.view.s002",
+      "zh": "影片初始化失敗: $e",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/Camera_view.dart",
+          "line": 56
+        }
+      ]
+    },
+    {
+      "key": "view.camera.view.s003",
+      "zh": "選擇要放出的精靈",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/Camera_view.dart",
+          "line": 159
+        },
+        {
+          "file": "lib/view/real_ar_view.dart",
+          "line": 68
+        }
+      ]
+    },
+    {
+      "key": "view.camera.view.s004",
+      "zh": "目前沒有精靈",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/Camera_view.dart",
+          "line": 168
+        },
+        {
+          "file": "lib/view/real_ar_view.dart",
+          "line": 77
+        }
+      ]
+    },
+    {
+      "key": "view.camera.view.s005",
+      "zh": "拍照截圖失敗: $e",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/Camera_view.dart",
+          "line": 267
+        }
+      ]
+    },
+    {
+      "key": "view.camera.view.s006",
+      "zh": "[CameraView] 讀取精靈相框資料失敗: $e",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/Camera_view.dart",
+          "line": 309
+        }
+      ]
+    },
+    {
+      "key": "view.camera.view.s009",
+      "zh": "草",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/Camera_view.dart",
+          "line": 320
+        }
+      ]
+    },
+    {
+      "key": "view.camera.view.s010",
+      "zh": "返回",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/Camera_view.dart",
+          "line": 336
+        },
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 21
+        },
+        {
+          "file": "lib/view/user_protocol.dart",
+          "line": 47
+        }
+      ]
+    },
+    {
+      "key": "view.elf.detail.page.s001",
+      "zh": "傳說故事",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/elf_detail_page.dart",
+          "line": 113
+        }
+      ]
+    },
+    {
+      "key": "view.elf.detail.page.s002",
+      "zh": "目前沒有此精靈的故事資料。",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/elf_detail_page.dart",
+          "line": 114
+        }
+      ]
+    },
+    {
+      "key": "view.elf.detail.page.s004",
+      "zh": "目前沒有裝置藝術資料",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/elf_detail_page.dart",
+          "line": 121
+        }
+      ]
+    },
+    {
+      "key": "view.elf.detail.page.s005",
+      "zh": "未知作者",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/elf_detail_page.dart",
+          "line": 125
+        }
+      ]
+    },
+    {
+      "key": "view.elf.detail.page.s006",
+      "zh": "系館",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/elf_detail_page.dart",
+          "line": 128
+        },
+        {
+          "file": "lib/widgets/game/game_map.dart",
+          "line": 597
+        }
+      ]
+    },
+    {
+      "key": "view.encyclopedia.page.s001",
+      "zh": "圖鑑",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/encyclopedia_page.dart",
+          "line": 22
+        },
+        {
+          "file": "lib/widgets/game/system_menu.dart",
+          "line": 27
+        }
+      ]
+    },
+    {
+      "key": "view.full.mission.page.s001",
+      "zh": "成功捕捉精靈: ${widget.monsterModelCry.name}",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/full_mission_page.dart",
+          "line": 86
+        }
+      ]
+    },
+    {
+      "key": "view.full.mission.page.s002",
+      "zh": "沒有關卡",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/full_mission_page.dart",
+          "line": 106
+        }
+      ]
+    },
+    {
+      "key": "view.full.mission.page.s003",
+      "zh": "未知關卡類型: ${mission.levelType}",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/full_mission_page.dart",
+          "line": 172
+        }
+      ]
+    },
+    {
+      "key": "view.full.mission.page.s004",
+      "zh": "禁用頁面",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/full_mission_page.dart",
+          "line": 221
+        }
+      ]
+    },
+    {
+      "key": "view.full.mission.page.s005",
+      "zh": "禁用頁面: ${mission.levelType}",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/full_mission_page.dart",
+          "line": 223
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s001",
+      "zh": "設定載入失敗",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 15
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s002",
+      "zh": "本機設定暫時無法讀取，請稍後再試。",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 16
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s003",
+      "zh": "設定載入中",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 17
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s004",
+      "zh": "正在同步本機設定，請稍候。",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 18
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s006",
+      "zh": "設定中心",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 22
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s007",
+      "zh": "冒險體驗偏好",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 26
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s008",
+      "zh": "這些設定會直接影響你在遊戲中的聲音與震動體驗，適合依照目前環境快速調整。",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 27
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s009",
+      "zh": "本機儲存",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 28
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s010",
+      "zh": "立即套用",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 29
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s011",
+      "zh": "音量",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 32
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s012",
+      "zh": "目前此功能尚未完成。",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 33
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s013",
+      "zh": "靜音",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 34
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s014",
+      "zh": "最大",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 35
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s015",
+      "zh": "振動",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 38
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s016",
+      "zh": "控制支援裝置上的觸覺回饋提示。",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 39
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s017",
+      "zh": "已開啟",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 40
+        },
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 50
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s018",
+      "zh": "已關閉",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 41
+        },
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 51
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s019",
+      "zh": "觸覺提示開啟中",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 42
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s020",
+      "zh": "觸覺提示已關閉",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 43
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s021",
+      "zh": "在支援振動的情境中，遊戲可以提供更明顯的回饋。",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 44
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s022",
+      "zh": "目前不會發出震動提示，適合需要安靜的使用情境。",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 45
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s023",
+      "zh": "跳過劇情",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 48
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s024",
+      "zh": "控制是否自動略過劇情對話，快速進入遊戲流程。",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 49
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s027",
+      "zh": "自動跳過劇情中",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 52
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s028",
+      "zh": "保留劇情播放",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 53
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s029",
+      "zh": "進入關卡時會略過劇情段落，適合重複挑戰時使用。",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 54
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s030",
+      "zh": "劇情段落會正常顯示，適合第一次體驗故事內容。",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 55
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s031",
+      "zh": "測試：捕捉全部精靈",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 58
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s032",
+      "zh": "開發測試用，會把目前資料庫中的所有精靈加入圖鑑。",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 59
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s033",
+      "zh": "一鍵捕捉全部",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 61
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s034",
+      "zh": "一鍵刪除全部",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 62
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s035",
+      "zh": "請先登入後再使用測試功能",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 63
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s036",
+      "zh": "正在加入所有精靈...",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 64
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s037",
+      "zh": "正在刪除圖鑑精靈...",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 65
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s038",
+      "zh": "捕捉全部精靈失敗，請稍後再試",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 66
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s039",
+      "zh": "刪除全部精靈失敗，請稍後再試",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 67
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s040",
+      "zh": "圖鑑已經擁有全部精靈",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 70
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s041",
+      "zh": "已新增 $count 隻精靈到圖鑑",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 70
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s042",
+      "zh": "圖鑑原本就是空的",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 74
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s043",
+      "zh": "已從圖鑑刪除 $count 隻精靈",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 74
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s044",
+      "zh": "語言",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 78
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s045",
+      "zh": "選擇遊戲介面的顯示語言。",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 79
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s046",
+      "zh": "中文",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 80
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s047",
+      "zh": "目前語言",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 82
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s048",
+      "zh": "使用者協議",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 85
+        },
+        {
+          "file": "lib/view/user_protocol.dart",
+          "line": 8
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s049",
+      "zh": "查看目前版本的使用者協議與說明內容。",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 86
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s050",
+      "zh": "點擊前往閱讀協議內容",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 87
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s051",
+      "zh": "目前音量 ${volumePercentage(volume)}",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 91
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s052",
+      "zh": "[SettingPage] 捕捉全部精靈失敗: $e",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 504
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s053",
+      "zh": "[SettingPage] 刪除全部精靈失敗: $e",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 547
+        }
+      ]
+    },
+    {
+      "key": "view.login.page.s001",
+      "zh": "[LoginPage] 登入成功，正在獲取資料...",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/login_page.dart",
+          "line": 53
+        }
+      ]
+    },
+    {
+      "key": "view.login.page.s002",
+      "zh": "帳號或密碼錯誤",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/login_page.dart",
+          "line": 61
+        }
+      ]
+    },
+    {
+      "key": "view.login.page.s003",
+      "zh": "[LoginPage] 登入出錯: $e",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/login_page.dart",
+          "line": 64
+        }
+      ]
+    },
+    {
+      "key": "view.login.page.s004",
+      "zh": "登入發生錯誤，請稍後再試",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/login_page.dart",
+          "line": 68
+        }
+      ]
+    },
+    {
+      "key": "view.login.page.s005",
+      "zh": "Google 登入失敗，請稍後再試",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/login_page.dart",
+          "line": 96
+        }
+      ]
+    },
+    {
+      "key": "view.login.page.s006",
+      "zh": "[LoginPage] Google 登入出錯: $e",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/login_page.dart",
+          "line": 101
+        }
+      ]
+    },
+    {
+      "key": "view.login.page.s007",
+      "zh": "Google 登入發生錯誤，請稍後再試",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/login_page.dart",
+          "line": 107
+        }
+      ]
+    },
+    {
+      "key": "view.map.suggestions.s001",
+      "zh": "中大十景",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/map_suggestions.dart",
+          "line": 37
+        }
+      ]
+    },
+    {
+      "key": "view.map.suggestions.s004",
+      "zh": "[Debug][MapSuggestionsPage] 載入地景資料失敗: $error",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/map_suggestions.dart",
+          "line": 130
+        }
+      ]
+    },
+    {
+      "key": "view.map.suggestions.s005",
+      "zh": "地景資料載入失敗：$error",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/map_suggestions.dart",
+          "line": 134
+        }
+      ]
+    },
+    {
+      "key": "view.map.suggestions.s006",
+      "zh": "GPS 尚未開啟",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/map_suggestions.dart",
+          "line": 147
+        }
+      ]
+    },
+    {
+      "key": "view.map.suggestions.s007",
+      "zh": "尚未取得定位權限",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/map_suggestions.dart",
+          "line": 164
+        }
+      ]
+    },
+    {
+      "key": "view.nearby.monsters.display.s001",
+      "zh": "[MonsterMarkers] 動畫精靈圖載入失敗: $animatedPath, $error",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/nearby_monsters_display.dart",
+          "line": 127
+        }
+      ]
+    },
+    {
+      "key": "view.nearby.monsters.display.s002",
+      "zh": "[MonsterMarkers] 靜態精靈圖載入失敗: ${monster.imageURL}, $error",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/nearby_monsters_display.dart",
+          "line": 141
+        }
+      ]
+    },
+    {
+      "key": "view.nearby.monsters.display.s003",
+      "zh": "無法將精靈圖片轉成 PNG bytes",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/nearby_monsters_display.dart",
+          "line": 174
+        }
+      ]
+    },
+    {
+      "key": "view.novice.leading.page.s001",
+      "zh": "這是你現在在的位置，你將帶領它探索校園",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/novice_leading_page.dart",
+          "line": 18
+        }
+      ]
+    },
+    {
+      "key": "view.novice.leading.page.s002",
+      "zh": "這裡可以更改修改個人資訊",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/novice_leading_page.dart",
+          "line": 23
+        }
+      ]
+    },
+    {
+      "key": "view.novice.leading.page.s003",
+      "zh": "這裡可以更改頭像，選一個你心儀的角色吧",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/novice_leading_page.dart",
+          "line": 28
+        }
+      ]
+    },
+    {
+      "key": "view.novice.leading.page.s004",
+      "zh": "這個箭頭將帶領你找到最近的精靈",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/novice_leading_page.dart",
+          "line": 33
+        }
+      ]
+    },
+    {
+      "key": "view.novice.leading.page.s005",
+      "zh": "精靈出現了，點擊它來開始捉捕吧",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/novice_leading_page.dart",
+          "line": 38
+        }
+      ]
+    },
+    {
+      "key": "view.novice.leading.page.s006",
+      "zh": "更多精采體驗等著你去探索",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/novice_leading_page.dart",
+          "line": 41
+        }
+      ]
+    },
+    {
+      "key": "view.novice.leading.page.s007",
+      "zh": "抓到的精靈將會在圖鑑裡面",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/novice_leading_page.dart",
+          "line": 44
+        }
+      ]
+    },
+    {
+      "key": "view.novice.leading.page.s008",
+      "zh": "點擊查看精靈詳情!",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/novice_leading_page.dart",
+          "line": 49
+        }
+      ]
+    },
+    {
+      "key": "view.novice.leading.page.s009",
+      "zh": "更多資訊在這邊!!",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/novice_leading_page.dart",
+          "line": 54
+        }
+      ]
+    },
+    {
+      "key": "view.novice.leading.page.s010",
+      "zh": "更多功能等待你探索!!",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/novice_leading_page.dart",
+          "line": 57
+        }
+      ]
+    },
+    {
+      "key": "view.novice.leading.page.s011",
+      "zh": "結束教學",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/novice_leading_page.dart",
+          "line": 183
+        }
+      ]
+    },
+    {
+      "key": "view.novice.leading.page.s012",
+      "zh": "跳過",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/novice_leading_page.dart",
+          "line": 210
+        }
+      ]
+    },
+    {
+      "key": "view.novice.leading.page.s013",
+      "zh": "上一步",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/novice_leading_page.dart",
+          "line": 232
+        }
+      ]
+    },
+    {
+      "key": "view.novice.leading.page.s014",
+      "zh": "下一步",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/novice_leading_page.dart",
+          "line": 243
+        }
+      ]
+    },
+    {
+      "key": "view.photo.preview.s001",
+      "zh": "照片已成功儲存到相簿！",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/photo_preview.dart",
+          "line": 25
+        }
+      ]
+    },
+    {
+      "key": "view.photo.preview.s002",
+      "zh": "儲存失敗: $e",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/photo_preview.dart",
+          "line": 31
+        }
+      ]
+    },
+    {
+      "key": "view.photo.preview.s003",
+      "zh": "照片預覽",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/photo_preview.dart",
+          "line": 41
+        }
+      ]
+    },
+    {
+      "key": "view.photo.preview.s004",
+      "zh": "重拍",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/photo_preview.dart",
+          "line": 61
+        }
+      ]
+    },
+    {
+      "key": "view.photo.preview.s005",
+      "zh": "儲存",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/photo_preview.dart",
+          "line": 69
+        }
+      ]
+    },
+    {
+      "key": "view.real.ar.view.s001",
+      "zh": "放置精靈",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/real_ar_view.dart",
+          "line": 38
+        }
+      ]
+    },
+    {
+      "key": "view.real.ar.view.s004",
+      "zh": "嚶嚶嚶",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/real_ar_view.dart",
+          "line": 91
+        }
+      ]
+    },
+    {
+      "key": "view.real.ar.view.s005",
+      "zh": "💡 已切換精靈模型為: $selectedMonsterUrl",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/real_ar_view.dart",
+          "line": 99
+        }
+      ]
+    },
+    {
+      "key": "view.real.ar.view.s006",
+      "zh": "請先選擇一隻精靈！",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/real_ar_view.dart",
+          "line": 194
+        }
+      ]
+    },
+    {
+      "key": "view.register.page.s001",
+      "zh": "請確認註冊資料是否正確",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/register_page.dart",
+          "line": 36
+        }
+      ]
+    },
+    {
+      "key": "view.register.page.s002",
+      "zh": "驗證信已寄到 ${user.email ?? '你的信箱'}，請完成驗證後再登入",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/register_page.dart",
+          "line": 54
+        }
+      ]
+    },
+    {
+      "key": "view.register.page.s003",
+      "zh": "註冊失敗，該 Email 可能已被使用或網路異常",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/register_page.dart",
+          "line": 62
+        }
+      ]
+    },
+    {
+      "key": "view.register.page.s004",
+      "zh": "[RegisterPage] 註冊出錯: $e",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/register_page.dart",
+          "line": 67
+        }
+      ]
+    },
+    {
+      "key": "view.register.page.s005",
+      "zh": "註冊失敗: $e",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/register_page.dart",
+          "line": 71
+        }
+      ]
+    },
+    {
+      "key": "view.register.page.s006",
+      "zh": "Google 註冊成功！歡迎加入冒險之旅",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/register_page.dart",
+          "line": 90
+        }
+      ]
+    },
+    {
+      "key": "view.register.page.s007",
+      "zh": "Google 註冊失敗，請稍後再試",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/register_page.dart",
+          "line": 98
+        }
+      ]
+    },
+    {
+      "key": "view.register.page.s008",
+      "zh": "[RegisterPage] Google 登入失敗: $e",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/register_page.dart",
+          "line": 103
+        }
+      ]
+    },
+    {
+      "key": "view.register.page.s009",
+      "zh": "Google 登入失敗: $e",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/register_page.dart",
+          "line": 109
+        }
+      ]
+    },
+    {
+      "key": "view.user.protocol.s002",
+      "zh": "暫時替代頁面",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/user_protocol.dart",
+          "line": 9
+        }
+      ]
+    },
+    {
+      "key": "view.user.protocol.s003",
+      "zh": "協議內容準備中",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/user_protocol.dart",
+          "line": 10
+        }
+      ]
+    },
+    {
+      "key": "view.user.protocol.s004",
+      "zh": "這裡之後會放正式的使用者協議、服務條款與相關說明。",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/user_protocol.dart",
+          "line": 12
+        }
+      ]
+    },
+    {
+      "key": "view.user.protocol.s005",
+      "zh": "\\n\\n目前這是一個暫時性的替代頁面，用來先完成設定頁的跳轉流程與互動測試。",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/user_protocol.dart",
+          "line": 13
+        }
+      ]
+    },
+    {
+      "key": "view.user.protocol.s006",
+      "zh": "\\n\\n之後只要把這裡的內容替換成正式協議即可，不需要再修改設定頁按鈕的跳轉邏輯。",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/user_protocol.dart",
+          "line": 14
+        }
+      ]
+    },
+    {
+      "key": "view.user.protocol.s007",
+      "zh": "目前可先確認",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/user_protocol.dart",
+          "line": 15
+        }
+      ]
+    },
+    {
+      "key": "view.user.protocol.s008",
+      "zh": "按鈕按下時會先縮小，放開後回彈再跳轉。",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/user_protocol.dart",
+          "line": 17
+        }
+      ]
+    },
+    {
+      "key": "view.user.protocol.s009",
+      "zh": "返回設定頁後，不需要額外處理狀態。",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/user_protocol.dart",
+          "line": 18
+        }
+      ]
+    },
+    {
+      "key": "view.user.protocol.s010",
+      "zh": "之後可直接在這個檔案補上正式協議內容。",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/view/user_protocol.dart",
+          "line": 19
+        }
+      ]
+    },
+    {
+      "key": "widgets.ar.control.ar.control.view.s001",
+      "zh": "操控精靈吧！",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/ar_control/ar_control_view.dart",
+          "line": 40
+        }
+      ]
+    },
+    {
+      "key": "widgets.ar.control.ar.control.view.s002",
+      "zh": "💡 模型已切換至: $newUrl",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/ar_control/ar_control_view.dart",
+          "line": 189
+        }
+      ]
+    },
+    {
+      "key": "widgets.buttons.click.and.accept.button.s001",
+      "zh": "確定",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/buttons/click_and_accept_button.dart",
+          "line": 44
+        }
+      ]
+    },
+    {
+      "key": "widgets.buttons.click.and.accept.button.s002",
+      "zh": "取消",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/buttons/click_and_accept_button.dart",
+          "line": 49
+        }
+      ]
+    },
+    {
+      "key": "widgets.buttons.nfc.button.s001",
+      "zh": "ID 不符合，請重新嘗試！",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/buttons/nfc_button.dart",
+          "line": 72
+        }
+      ]
+    },
+    {
+      "key": "widgets.buttons.nfc.button.s002",
+      "zh": "系統層級錯誤: $e",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/buttons/nfc_button.dart",
+          "line": 83
+        }
+      ]
+    },
+    {
+      "key": "widgets.buttons.nfc.button.s003",
+      "zh": "取消感應",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/buttons/nfc_button.dart",
+          "line": 97
+        }
+      ]
+    },
+    {
+      "key": "widgets.buttons.nfc.button.s004",
+      "zh": "NFC權限未開放",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/buttons/nfc_button.dart",
+          "line": 102
+        }
+      ]
+    },
+    {
+      "key": "widgets.buttons.nfc.button.s005",
+      "zh": "標籤格式錯誤",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/buttons/nfc_button.dart",
+          "line": 106
+        }
+      ]
+    },
+    {
+      "key": "widgets.buttons.nfc.button.s006",
+      "zh": "發生未知錯誤",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/buttons/nfc_button.dart",
+          "line": 110
+        },
+        {
+          "file": "lib/widgets/buttons/nfc_button.dart",
+          "line": 111
+        }
+      ]
+    },
+    {
+      "key": "widgets.common.user.head.s001",
+      "zh": "[UserHead] SVG 載入失敗: $error",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/common/user_head.dart",
+          "line": 73
+        }
+      ]
+    },
+    {
+      "key": "widgets.common.user.head.s002",
+      "zh": "[UserHead] 圖片載入失敗: $error",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/common/user_head.dart",
+          "line": 87
+        }
+      ]
+    },
+    {
+      "key": "widgets.encyclopedia.all.the.monster.monster.text.s001",
+      "zh": "精靈經由象群雕塑，匆匆跑向黑盒子，路途中似乎有什麼散發著魔力",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/encyclopedia/all_the_monster/monster_text.dart",
+          "line": 3
+        }
+      ]
+    },
+    {
+      "key": "widgets.encyclopedia.all.the.monster.monster.text.s002",
+      "zh": "沒發現魔法陣嗎？或許可以試試穿過拱門，看看會不會有什麼發現",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/encyclopedia/all_the_monster/monster_text.dart",
+          "line": 4
+        }
+      ]
+    },
+    {
+      "key": "widgets.encyclopedia.all.the.monster.monster.text.s003",
+      "zh": "精靈似乎曾駐足DNA觀賞許久，才又繼續前行，或許可以試著在附近找找看",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/encyclopedia/all_the_monster/monster_text.dart",
+          "line": 5
+        }
+      ]
+    },
+    {
+      "key": "widgets.encyclopedia.all.the.monster.monster.text.s004",
+      "zh": "請根據圖片內容，找到對應位置感應",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/encyclopedia/all_the_monster/monster_text.dart",
+          "line": 6
+        },
+        {
+          "file": "lib/widgets/encyclopedia/all_the_monster/monster_text.dart",
+          "line": 8
+        }
+      ]
+    },
+    {
+      "key": "widgets.encyclopedia.all.the.monster.monster.text.s005",
+      "zh": "雲端上的松果似乎散發著魔力",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/encyclopedia/all_the_monster/monster_text.dart",
+          "line": 7
+        }
+      ]
+    },
+    {
+      "key": "widgets.encyclopedia.all.the.monster.monster.text.s007",
+      "zh": "站在疑問最深處，當屏風完全消失於視野時，向水面反射，疑問自會明朗",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/encyclopedia/all_the_monster/monster_text.dart",
+          "line": 9
+        }
+      ]
+    },
+    {
+      "key": "widgets.encyclopedia.all.the.monster.monster.text.s008",
+      "zh": "圖片中，是不是有一朵雲特別不一樣？",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/encyclopedia/all_the_monster/monster_text.dart",
+          "line": 10
+        }
+      ]
+    },
+    {
+      "key": "widgets.encyclopedia.all.the.monster.monster.text.s009",
+      "zh": "精靈似乎曾望著裝置，期待能看到代表中央大學的「中」字出現",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/encyclopedia/all_the_monster/monster_text.dart",
+          "line": 11
+        }
+      ]
+    },
+    {
+      "key": "widgets.encyclopedia.elf.creator.section.s001",
+      "zh": "Creator Info (創作者資料)",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/encyclopedia/elf_creator_section.dart",
+          "line": 21
+        }
+      ]
+    },
+    {
+      "key": "widgets.encyclopedia.elf.department.section.s001",
+      "zh": "College Departments (學院系館)",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/encyclopedia/elf_department_section.dart",
+          "line": 30
+        }
+      ]
+    },
+    {
+      "key": "widgets.encyclopedia.elf.grid.s001",
+      "zh": "尚未捕捉任何怪物",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/encyclopedia/elf_grid.dart",
+          "line": 29
+        }
+      ]
+    },
+    {
+      "key": "widgets.encyclopedia.elf.hero.section.s001",
+      "zh": "圖片載入失敗路徑: $imagePath",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/encyclopedia/elf_hero_section.dart",
+          "line": 45
+        }
+      ]
+    },
+    {
+      "key": "widgets.encyclopedia.elf.hero.section.s002",
+      "zh": "圖片路徑錯誤:\\n$imagePath",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/encyclopedia/elf_hero_section.dart",
+          "line": 59
+        }
+      ]
+    },
+    {
+      "key": "widgets.encyclopedia.elf.installation.section.s001",
+      "zh": "Installation Art (裝置藝術)",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/encyclopedia/elf_installation_section.dart",
+          "line": 28
+        }
+      ]
+    },
+    {
+      "key": "widgets.encyclopedia.elf.installation.section.s002",
+      "zh": "Location (設置位置):",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/encyclopedia/elf_installation_section.dart",
+          "line": 79
+        }
+      ]
+    },
+    {
+      "key": "widgets.encyclopedia.elf.installation.section.s003",
+      "zh": "Year (設置年代):",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/encyclopedia/elf_installation_section.dart",
+          "line": 85
+        }
+      ]
+    },
+    {
+      "key": "widgets.encyclopedia.elf.story.section.s001",
+      "zh": "$name傳說故事",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/encyclopedia/elf_story_section.dart",
+          "line": 36
+        }
+      ]
+    },
+    {
+      "key": "widgets.encyclopedia.elf.story.section.s002",
+      "zh": "沒有故事資料",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/encyclopedia/elf_story_section.dart",
+          "line": 47
+        }
+      ]
+    },
+    {
+      "key": "widgets.encyclopedia.filter.bar.s001",
+      "zh": "首頁",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/encyclopedia/filter_bar.dart",
+          "line": 28
+        }
+      ]
+    },
+    {
+      "key": "widgets.encyclopedia.filter.bar.s002",
+      "zh": "末頁",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/encyclopedia/filter_bar.dart",
+          "line": 37
+        }
+      ]
+    },
+    {
+      "key": "widgets.encyclopedia.monster.collection.badge.s001",
+      "zh": "精靈 $caughtCount / --",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/encyclopedia/monster_collection_badge.dart",
+          "line": 55
+        }
+      ]
+    },
+    {
+      "key": "widgets.encyclopedia.monster.collection.badge.s002",
+      "zh": "精靈 $caughtCount / $totalCount",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/encyclopedia/monster_collection_badge.dart",
+          "line": 56
+        }
+      ]
+    },
+    {
+      "key": "widgets.encyclopedia.page.selector.s001",
+      "zh": "第 $currentPage / $totalPages 頁",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/encyclopedia/page_selector.dart",
+          "line": 89
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.catching.pages.catching.faild.s001",
+      "zh": "捕捉失敗",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/catching_pages/catching_faild.dart",
+          "line": 25
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.catching.pages.catching.faild.s002",
+      "zh": "失敗",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/catching_pages/catching_faild.dart",
+          "line": 34
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.catching.pages.catching.faild.s003",
+      "zh": "回到首頁",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/catching_pages/catching_faild.dart",
+          "line": 52
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.catching.pages.cryptography.level.s001",
+      "zh": "請根據介紹牌選出正確的選項",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/catching_pages/cryptography_level.dart",
+          "line": 12
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.catching.pages.cryptography.level.s002",
+      "zh": "密碼鎖破解",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/catching_pages/cryptography_level.dart",
+          "line": 13
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.catching.pages.cryptography.level.s003",
+      "zh": "每答對一題就能解開一位數密碼，答錯會扣除自己的血量",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/catching_pages/cryptography_level.dart",
+          "line": 14
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.catching.pages.cryptography.level.s004",
+      "zh": "精靈血量",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/catching_pages/cryptography_level.dart",
+          "line": 15
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.catching.pages.cryptography.level.s005",
+      "zh": "你的血量",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/catching_pages/cryptography_level.dart",
+          "line": 16
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.catching.pages.cryptography.level.s006",
+      "zh": "密碼鎖",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/catching_pages/cryptography_level.dart",
+          "line": 17
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.catching.pages.cryptography.level.s007",
+      "zh": "目前題目",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/catching_pages/cryptography_level.dart",
+          "line": 18
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.catching.pages.cryptography.level.s008",
+      "zh": "答對了，對其造成1點傷害",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/catching_pages/cryptography_level.dart",
+          "line": 19
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.catching.pages.cryptography.level.s009",
+      "zh": "答錯了，自己受到 1 點傷害",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/catching_pages/cryptography_level.dart",
+          "line": 20
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.catching.pages.cryptography.level.s010",
+      "zh": "精靈被成功擊倒",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/catching_pages/cryptography_level.dart",
+          "line": 21
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.catching.pages.cryptography.level.s011",
+      "zh": "血量歸零，挑戰失敗",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/catching_pages/cryptography_level.dart",
+          "line": 22
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.catching.pages.cryptography.level.s012",
+      "zh": "下一題",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/catching_pages/cryptography_level.dart",
+          "line": 23
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.catching.pages.cryptography.level.s013",
+      "zh": "完成戰鬥",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/catching_pages/cryptography_level.dart",
+          "line": 24
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.catching.pages.cryptography.level.s014",
+      "zh": "請重新觀察題目後再作答",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/catching_pages/cryptography_level.dart",
+          "line": 25
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.catching.pages.default.plot.s001",
+      "zh": "我",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/catching_pages/default_plot.dart",
+          "line": 7
+        },
+        {
+          "file": "lib/widgets/game/catching_pages/default_plot.dart",
+          "line": 24
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.catching.pages.default.plot.s002",
+      "zh": "這是什麼？",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/catching_pages/default_plot.dart",
+          "line": 8
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.catching.pages.default.plot.s003",
+      "zh": "神秘石頭",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/catching_pages/default_plot.dart",
+          "line": 12
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.catching.pages.default.plot.s004",
+      "zh": "（散發獨特的氣息）",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/catching_pages/default_plot.dart",
+          "line": 13
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.catching.pages.default.plot.s006",
+      "zh": "(放上魔法石)",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/catching_pages/default_plot.dart",
+          "line": 25
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.catching.pages.default.plot.s007",
+      "zh": "魔法陣",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/catching_pages/default_plot.dart",
+          "line": 29
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.catching.pages.default.plot.s008",
+      "zh": "精靈召喚！",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/catching_pages/default_plot.dart",
+          "line": 30
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.catching.pages.default.plot.s009",
+      "zh": "（怒）",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/catching_pages/default_plot.dart",
+          "line": 35
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.catching.pages.discovered.item.s001",
+      "zh": "意外收穫！你找到了攻略秘集",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/catching_pages/discovered_item.dart",
+          "line": 7
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.catching.pages.discovered.item.s002",
+      "zh": "詳見金屬指示牌",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/catching_pages/discovered_item.dart",
+          "line": 8
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.catching.pages.discovered.item.s003",
+      "zh": "好好研究它",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/catching_pages/discovered_item.dart",
+          "line": 10
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.catching.pages.discovered.item.s004",
+      "zh": "發現道具",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/catching_pages/discovered_item.dart",
+          "line": 16
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.catching.pages.discovered.item.s005",
+      "zh": "一顆發著光的魔法石",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/catching_pages/discovered_item.dart",
+          "line": 17
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.catching.pages.discovered.item.s006",
+      "zh": "帶著它",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/catching_pages/discovered_item.dart",
+          "line": 19
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.catching.pages.graphics.text.level.page.s001",
+      "zh": "探索關卡",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/catching_pages/graphics_text_level_page.dart",
+          "line": 62
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.catching.pages.graphics.text.level.page.s002",
+      "zh": "觀察線索後，前往指定地點感應 NFC",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/catching_pages/graphics_text_level_page.dart",
+          "line": 68
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.catching.pages.graphics.text.level.page.s003",
+      "zh": "是否確定放棄捕捉精靈?",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/catching_pages/graphics_text_level_page.dart",
+          "line": 89
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.catching.pages.graphics.text.level.page.s004",
+      "zh": "放棄捕捉",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/catching_pages/graphics_text_level_page.dart",
+          "line": 91
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.catching.pages.graphics.text.level.page.s005",
+      "zh": "NFC 教學",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/catching_pages/graphics_text_level_page.dart",
+          "line": 108
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.catching.pages.graphics.text.level.page.s006",
+      "zh": "關閉 NFC 教學",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/catching_pages/graphics_text_level_page.dart",
+          "line": 122
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.catching.pages.graphics.text.level.page.s007",
+      "zh": "這個關卡目前沒有可顯示的內容",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/catching_pages/graphics_text_level_page.dart",
+          "line": 293
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.catching.pages.plot.level.s001",
+      "zh": "你找到了一塊魔法石",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/catching_pages/plot_level.dart",
+          "line": 32
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.catching.pages.plot.level.s002",
+      "zh": "找到對應的法陣，將魔法石放上去吧！",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/catching_pages/plot_level.dart",
+          "line": 33
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.catching.pages.plot.level.s003",
+      "zh": "你召喚了精靈",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/catching_pages/plot_level.dart",
+          "line": 34
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.catching.pages.plot.level.s004",
+      "zh": "但它好像很有攻擊性的看著你......",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/catching_pages/plot_level.dart",
+          "line": 35
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.catching.pages.plot.level.s005",
+      "zh": "點擊任意位置繼續",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/catching_pages/plot_level.dart",
+          "line": 36
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.catching.pages.plot.level.s006",
+      "zh": "點擊任意位置開始戰鬥",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/catching_pages/plot_level.dart",
+          "line": 37
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.catching.pages.plot.level.s007",
+      "zh": "跳過>>",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/catching_pages/plot_level.dart",
+          "line": 38
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.catching.pages.plot.level.s008",
+      "zh": "玩家",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/catching_pages/plot_level.dart",
+          "line": 62
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.catching.pages.plot.level.s009",
+      "zh": "夥伴",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/catching_pages/plot_level.dart",
+          "line": 67
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.game.map.s001",
+      "zh": "校園地圖",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/game_map.dart",
+          "line": 42
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.game.map.s002",
+      "zh": "森林地圖",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/game_map.dart",
+          "line": 48
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.game.map.s003",
+      "zh": "[Debug][GameMap][Error] 載入資源失敗: $e",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/game_map.dart",
+          "line": 104
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.game.map.s004",
+      "zh": "[Debug][GameMap]:使用固定測試定位 ${_fixedTestLocation.latitude}, ${_fixedTestLocation.longitude}",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/game_map.dart",
+          "line": 122
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.game.map.s005",
+      "zh": "[Debug][GameMap]:位置更新: ${position.latitude}, ${position.longitude}",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/game_map.dart",
+          "line": 169
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.game.map.s006",
+      "zh": "[Debug][GameMap]:已開始監聽位置變化",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/game_map.dart",
+          "line": 198
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.game.map.s007",
+      "zh": "[Debug][GameMap]:_checkPermissionAndListen 例外：$e",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/game_map.dart",
+          "line": 200
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.game.map.s008",
+      "zh": "無法載入 ${monster.name} 的題目，請稍後再試",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/game_map.dart",
+          "line": 310
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.game.map.s009",
+      "zh": "無法載入 ${monster.name} 的建築資料，請稍後再試",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/game_map.dart",
+          "line": 320
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.game.map.s010",
+      "zh": "成功捕捉 ${monster.name}",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/game_map.dart",
+          "line": 343
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.game.map.s011",
+      "zh": "${monster.name} 已捕捉過",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/game_map.dart",
+          "line": 343
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.game.map.s012",
+      "zh": "定位權限未授權",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/game_map.dart",
+          "line": 459
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.game.map.s013",
+      "zh": "切換地圖圖層",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/game_map.dart",
+          "line": 485
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.game.map.s016",
+      "zh": "景點",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/game_map.dart",
+          "line": 601
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.system.menu.s002",
+      "zh": "相機",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/system_menu.dart",
+          "line": 34
+        }
+      ]
+    },
+    {
+      "key": "widgets.game.system.menu.s003",
+      "zh": "設定",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/system_menu.dart",
+          "line": 49
+        }
+      ]
+    },
+    {
+      "key": "widgets.login.wood.register.panel.s001",
+      "zh": "請輸入名稱",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/login/wood_register_panel.dart",
+          "line": 74
+        }
+      ]
+    },
+    {
+      "key": "widgets.login.wood.register.panel.s002",
+      "zh": "請輸入 Email",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/login/wood_register_panel.dart",
+          "line": 97
+        }
+      ]
+    },
+    {
+      "key": "widgets.login.wood.register.panel.s003",
+      "zh": "Email 格式不正確",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/login/wood_register_panel.dart",
+          "line": 105
+        }
+      ]
+    },
+    {
+      "key": "widgets.login.wood.register.panel.s004",
+      "zh": "請輸入密碼",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/login/wood_register_panel.dart",
+          "line": 129
+        }
+      ]
+    },
+    {
+      "key": "widgets.login.wood.register.panel.s005",
+      "zh": "密碼至少需要 6 位",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/login/wood_register_panel.dart",
+          "line": 133
+        }
+      ]
+    },
+    {
+      "key": "widgets.login.wood.register.panel.s006",
+      "zh": "請再次輸入密碼",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/login/wood_register_panel.dart",
+          "line": 157
+        }
+      ]
+    },
+    {
+      "key": "widgets.login.wood.register.panel.s007",
+      "zh": "兩次密碼不一致",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/login/wood_register_panel.dart",
+          "line": 161
+        }
+      ]
+    },
+    {
+      "key": "widgets.profile.edit.nickname.field.s001",
+      "zh": "新的稱呼",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/profile_edit/nickname_field.dart",
+          "line": 23
+        }
+      ]
+    },
+    {
+      "key": "widgets.profile.edit.nickname.field.s002",
+      "zh": "目前的暱稱：${controller.userController.userModel.value?.nickname ?? \"冒險者\"}",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/profile_edit/nickname_field.dart",
+          "line": 59
+        }
+      ]
+    },
+    {
+      "key": "widgets.profile.edit.profile.edit.dialog.s001",
+      "zh": "點擊生成隨機頭像",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/profile_edit/profile_edit_dialog.dart",
+          "line": 43
+        }
+      ]
+    },
+    {
+      "key": "widgets.profile.edit.profile.edit.dialog.s002",
+      "zh": "更換造型",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/profile_edit/profile_edit_dialog.dart",
+          "line": 73
+        }
+      ]
+    },
+    {
+      "key": "widgets.profile.edit.profile.edit.dialog.s003",
+      "zh": "先不要",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/profile_edit/profile_edit_dialog.dart",
+          "line": 99
+        }
+      ]
+    },
+    {
+      "key": "widgets.profile.edit.profile.edit.dialog.s004",
+      "zh": "確定更換",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/profile_edit/profile_edit_dialog.dart",
+          "line": 110
+        }
+      ]
+    },
+    {
+      "key": "widgets.sections.drawer.button.group.s001",
+      "zh": "使用者名稱",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/sections/drawer_button_group.dart",
+          "line": 152
+        },
+        {
+          "file": "lib/widgets/sections/drawer_button_group.dart",
+          "line": 160
+        }
+      ]
+    },
+    {
+      "key": "widgets.sections.drawer.button.group.s003",
+      "zh": "新手教學",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/sections/drawer_button_group.dart",
+          "line": 201
+        }
+      ]
+    },
+    {
+      "key": "widgets.sections.drawer.button.group.s004",
+      "zh": "校園全景地圖",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/sections/drawer_button_group.dart",
+          "line": 220
+        }
+      ]
+    },
+    {
+      "key": "widgets.sections.drawer.button.group.s005",
+      "zh": "問題回報",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/sections/drawer_button_group.dart",
+          "line": 232
+        }
+      ]
+    },
+    {
+      "key": "widgets.sections.drawer.button.group.s006",
+      "zh": "此功能尚未實做，有問題歡迎聯繫：創作團隊",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/sections/drawer_button_group.dart",
+          "line": 241
+        }
+      ]
+    },
+    {
+      "key": "widgets.sections.drawer.button.group.s007",
+      "zh": "登出失敗，請稍後再試",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/sections/drawer_button_group.dart",
+          "line": 273
+        }
+      ]
+    },
+    {
+      "key": "widgets.sections.drawer.button.group.s008",
+      "zh": "登出中...",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/sections/drawer_button_group.dart",
+          "line": 291
+        }
+      ]
+    },
+    {
+      "key": "widgets.sections.drawer.button.group.s009",
+      "zh": "登出",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/sections/drawer_button_group.dart",
+          "line": 291
+        }
+      ]
+    },
+    {
+      "key": "widgets.sections.monster.test.s001",
+      "zh": "測試火精靈",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/sections/monster_test.dart",
+          "line": 18
+        }
+      ]
+    },
+    {
+      "key": "widgets.sections.monster.test.s003",
+      "zh": "測試水精靈",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/sections/monster_test.dart",
+          "line": 24
+        }
+      ]
+    },
+    {
+      "key": "widgets.sections.monster.test.s005",
+      "zh": "測試圖文關卡 1：觀察地圖後掃描 TEST_NFC_ID。",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/sections/monster_test.dart",
+          "line": 63
+        }
+      ]
+    },
+    {
+      "key": "widgets.sections.monster.test.s006",
+      "zh": "測試圖文關卡 2：純文字線索。",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/sections/monster_test.dart",
+          "line": 70
+        }
+      ]
+    },
+    {
+      "key": "widgets.sections.monster.test.s007",
+      "zh": "第一題：1+1 = ?",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/sections/monster_test.dart",
+          "line": 82
+        }
+      ]
+    },
+    {
+      "key": "widgets.sections.monster.test.s008",
+      "zh": "第二題：首字母是 A 的單字？",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/sections/monster_test.dart",
+          "line": 82
+        }
+      ]
+    },
+    {
+      "key": "widgets.sections.monster.test.s009",
+      "zh": "混合測試第 1 關：先掃 NFC。",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/sections/monster_test.dart",
+          "line": 99
+        }
+      ]
+    },
+    {
+      "key": "widgets.sections.monster.test.s010",
+      "zh": "校園英文是？",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/sections/monster_test.dart",
+          "line": 106
+        }
+      ]
+    },
+    {
+      "key": "widgets.sections.monster.test.s011",
+      "zh": "Flutter 使用哪個語言？",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/sections/monster_test.dart",
+          "line": 106
+        }
+      ]
+    },
+    {
+      "key": "widgets.sections.monster.test.s012",
+      "zh": "混合測試第 3 關：最後再掃一次 NFC。",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/sections/monster_test.dart",
+          "line": 118
+        }
+      ]
+    },
+    {
+      "key": "widgets.sections.monster.test.s013",
+      "zh": "測試 VR/AR 關卡資料，現在應該被 FullMissionPage 禁用。",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/sections/monster_test.dart",
+          "line": 138
+        }
+      ]
+    },
+    {
+      "key": "widgets.sections.start.menu.group.s001",
+      "zh": "❌ [StartMenuGroup] 圖片載入失敗: $error",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/sections/start_menu_group.dart",
+          "line": 28
+        }
+      ]
+    },
+    {
+      "key": "widgets.sections.start.menu.group.s002",
+      "zh": "載入失敗: start_text.png\\n$error",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/sections/start_menu_group.dart",
+          "line": 38
+        }
+      ]
+    },
+    {
+      "key": "widgets.sections.start.menu.group.s003",
+      "zh": "開始",
+      "en": "",
+      "occurrences": [
+        {
+          "file": "lib/widgets/sections/start_menu_group.dart",
+          "line": 54
+        }
+      ]
+    }
+  ]
+}
