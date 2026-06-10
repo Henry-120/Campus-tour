@@ -36,14 +36,14 @@ class _LoginPageState extends State<LoginPage> {
       if (!mounted) return;
 
       if (user != null) {
-        if (!user.emailVerified) {
-          SnackBarBuilder.show(
-            context,
-            "請先到 ${user.email ?? '你的信箱'} 點擊驗證信後再登入",
-            type: AppToastType.warning,
-          );
-          return;
-        }
+        // if (!user.emailVerified) {
+        //   SnackBarBuilder.show(
+        //     context,
+        //     "請先到 ${user.email ?? '你的信箱'} 點擊驗證信後再登入",
+        //     type: AppToastType.warning,
+        //   );
+        //   return;
+        // }
 
         if (Get.isRegistered<UserController>()) {
           debugPrint("[LoginPage] 登入成功，正在獲取資料...");
