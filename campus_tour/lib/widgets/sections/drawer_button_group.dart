@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:campus_tour/controllers/login_controller.dart';
 import 'package:campus_tour/controllers/user_controller.dart';
-import 'package:campus_tour/styles/lhf_drawer_styles.dart';
+import 'package:campus_tour/styles/LHF_drawer_styles.dart';
 import 'package:campus_tour/view/map_suggestions.dart';
 import 'package:campus_tour/view/novice_leading_page.dart';
 import 'package:campus_tour/view/start_page.dart';
-import 'package:campus_tour/widgets/buttons/lhf_drawer_button.dart';
+import 'package:campus_tour/widgets/buttons/LHF_drawer_button.dart';
 import 'package:campus_tour/widgets/common/snackbar_builder.dart';
 import 'package:campus_tour/widgets/common/user_head.dart';
 
