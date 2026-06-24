@@ -299,6 +299,9 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
     if (uid == null) return;
 
     final controller = Get.find<MonsterController>();
+    debugPrint(
+      "[Debug][GameMap]:Nearby Monsters: ${controller.nearbyMonsters.length}",
+    );
     _isCaptureFlowActive = true;
 
     try {
