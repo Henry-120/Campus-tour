@@ -2,8 +2,10 @@ import 'package:campus_tour/view/game_main_page.dart';
 import 'package:flutter/material.dart';
 import '../../../styles/app_theme.dart';
 
+import 'package:get/get.dart';
+
 class CatchingFaildPage extends StatelessWidget {
-  const CatchingFaildPage({super.key});
+  CatchingFaildPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,41 +17,41 @@ class CatchingFaildPage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(
+                Icon(
                   Icons.sentiment_dissatisfied,
                   size: 120,
                   color: Colors.grey,
                 ),
-                const SizedBox(height: 24),
+                SizedBox(height: 24),
                 Text(
-                  '捕捉失敗',
+                  'widgets.game.catching.pages.catching.faild.s001'.tr,
                   style: AppTheme.titleStyle.copyWith(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
                     letterSpacing: 0,
                   ),
                 ),
-                const SizedBox(height: 12),
+                SizedBox(height: 12),
                 Text(
-                  '失敗',
+                  'widgets.game.catching.pages.catching.faild.s002'.tr,
                   style: AppTheme.titleStyle.copyWith(
                     fontSize: 18,
                     color: Colors.black54,
                     letterSpacing: 0,
                   ),
                 ),
-                const SizedBox(height: 32),
+                SizedBox(height: 32),
                 FilledButton(
                   onPressed: () {
                     Navigator.pushAndRemoveUntil(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) => const GameMainPage(),
-                      ),
+                      MaterialPageRoute(builder: (context) => GameMainPage()),
                       (route) => false,
                     );
                   },
-                  child: const Text('回到首頁'),
+                  child: Text(
+                    'widgets.game.catching.pages.catching.faild.s003'.tr,
+                  ),
                 ),
               ],
             ),

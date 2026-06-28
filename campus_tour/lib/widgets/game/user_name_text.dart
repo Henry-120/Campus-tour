@@ -6,7 +6,7 @@ import '../../styles/app_theme.dart';
 class UserNameText extends StatelessWidget {
   final double scale;
 
-  const UserNameText({super.key, this.scale = 1});
+  UserNameText({super.key, this.scale = 1});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,9 @@ class UserNameText extends StatelessWidget {
     return Align(
       alignment: Alignment.center,
       child: Obx(() {
-        final nickname = userController.userModel.value?.nickname ?? "冒險者";
+        final nickname =
+            userController.userModel.value?.nickname ??
+            'controllers.login.controller.s004'.tr;
 
         return Text(
           nickname,

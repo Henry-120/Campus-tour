@@ -3,13 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:campus_tour/styles/nfc_leading_style.dart';
 import 'package:campus_tour/widgets/common/snackbar_builder.dart';
 
+import 'package:get/get.dart';
+
 class NfcButtonAbstract extends StatelessWidget {
   final Icon nfcIcon = NfcLeadingStyle.nfcIcon;
   final String text;
   final VoidCallback onPressedToDo;
   final ButtonStyle nowStyle;
 
-  const NfcButtonAbstract({
+  NfcButtonAbstract({
     super.key,
     required this.text,
     required this.onPressedToDo,
@@ -33,7 +35,7 @@ class NfcButton1 extends StatefulWidget {
   // Called when a matching tag is scanned. No parameters — the button
   // performs the comparison internally.
   final VoidCallback onResult; // 成功感應後的動作 (no args)
-  const NfcButton1({super.key, required this.ans, required this.onResult});
+  NfcButton1({super.key, required this.ans, required this.onResult});
   @override
   State<StatefulWidget> createState() {
     return _NfcButton1();
@@ -69,7 +71,7 @@ class _NfcButton1 extends State<NfcButton1> {
               // 不符合則顯示錯誤訊息
               SnackBarBuilder.show(
                 context,
-                'ID 不符合，請重新嘗試！',
+                'widgets.buttons.nfc.button.s001'.tr,
                 type: AppToastType.warning,
               );
             }
@@ -94,21 +96,21 @@ class _NfcButton1 extends State<NfcButton1> {
     String message;
     switch (errorType) {
       case NfcErrorType.userCanceled:
-        message = "取消感應";
+        message = 'widgets.buttons.nfc.button.s003'.tr;
         break;
 
       case NfcErrorType.hardwareDisabled:
         //_showOpenSettingsDialog(); // 彈出視窗叫使用者去開 NFC
-        message = "NFC權限未開放";
+        message = 'widgets.buttons.nfc.button.s004'.tr;
         break;
 
       case NfcErrorType.parseFailed:
-        message = "標籤格式錯誤";
+        message = 'widgets.buttons.nfc.button.s005'.tr;
         break;
 
       default:
-        debugPrint("發生未知錯誤");
-        message = "發生未知錯誤";
+        debugPrint('widgets.buttons.nfc.button.s006'.tr);
+        message = 'widgets.buttons.nfc.button.s006'.tr;
     }
     // debugPrint("NFC 掃描失敗: $errorType, 訊息: $message");
 

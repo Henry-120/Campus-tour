@@ -8,7 +8,7 @@ import 'joy_stick.dart'; // 💡 引入搖桿組件
 import 'dance_button.dart';
 
 class ArPage extends StatefulWidget {
-  const ArPage({super.key});
+  ArPage({super.key});
 
   @override
   State<ArPage> createState() => _ArPageState();
@@ -37,11 +37,14 @@ class _ArPageState extends State<ArPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("操控精靈吧！", style: TextStyle(color: Colors.white)),
+        title: Text(
+          'widgets.ar.control.ar.control.view.s001'.tr,
+          style: TextStyle(color: Colors.white),
+        ),
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          icon: Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Navigator.pop(context),
         ),
       ),

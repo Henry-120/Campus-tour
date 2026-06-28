@@ -1,8 +1,10 @@
 import 'package:campus_tour/styles/novice_leading_style.dart';
 import 'package:flutter/material.dart';
 
+import 'package:get/get.dart';
+
 class NoviceLeadingPage extends StatefulWidget {
-  const NoviceLeadingPage({super.key, this.onFinish});
+  NoviceLeadingPage({super.key, this.onFinish});
 
   final VoidCallback? onFinish;
 
@@ -12,49 +14,49 @@ class NoviceLeadingPage extends StatefulWidget {
 
 class _NoviceLeadingPageState extends State<NoviceLeadingPage> {
   // [L-01]
-  static const List<_NoviceLeadingStep> _steps = [
+  static List<_NoviceLeadingStep> get _steps => [
     _NoviceLeadingStep.image(
       imageAsset: 'assets/images/novice_leading/squirrel.JPG',
-      message: '這是你現在在的位置，你將帶領它探索校園',
+      message: 'view.novice.leading.page.s001'.tr,
       textAlignment: Alignment.bottomCenter,
     ),
     _NoviceLeadingStep.image(
       imageAsset: 'assets/images/novice_leading/avatar.JPG',
-      message: '這裡可以更改修改個人資訊',
+      message: 'view.novice.leading.page.s002'.tr,
       textAlignment: Alignment.bottomCenter,
     ),
     _NoviceLeadingStep.image(
       imageAsset: 'assets/images/novice_leading/avatar_chageing.JPG',
-      message: '這裡可以更改頭像，選一個你心儀的角色吧',
+      message: 'view.novice.leading.page.s003'.tr,
       textAlignment: Alignment.bottomCenter,
     ),
     _NoviceLeadingStep.image(
       imageAsset: 'assets/images/novice_leading/arrow.JPG',
-      message: '這個箭頭將帶領你找到最近的精靈',
+      message: 'view.novice.leading.page.s004'.tr,
       textAlignment: Alignment.topCenter,
     ),
     _NoviceLeadingStep.image(
       imageAsset: 'assets/images/novice_leading/elf.JPG',
-      message: '精靈出現了，點擊它來開始捉捕吧',
+      message: 'view.novice.leading.page.s005'.tr,
       textAlignment: Alignment.topCenter,
     ),
-    _NoviceLeadingStep.plot(message: '更多精采體驗等著你去探索'),
+    _NoviceLeadingStep.plot(message: 'view.novice.leading.page.s006'.tr),
     _NoviceLeadingStep.image(
       imageAsset: 'assets/images/novice_leading/encyclopedia.JPG',
-      message: '抓到的精靈將會在圖鑑裡面',
+      message: 'view.novice.leading.page.s007'.tr,
       textAlignment: Alignment.topCenter,
     ),
     _NoviceLeadingStep.image(
       imageAsset: 'assets/images/novice_leading/encylopedia_col.JPG',
-      message: '點擊查看精靈詳情!',
+      message: 'view.novice.leading.page.s008'.tr,
       textAlignment: Alignment.bottomCenter,
     ),
     _NoviceLeadingStep.image(
       imageAsset: 'assets/images/novice_leading/story.JPG',
-      message: '更多資訊在這邊!!',
+      message: 'view.novice.leading.page.s009'.tr,
       textAlignment: Alignment.topCenter,
     ),
-    _NoviceLeadingStep.finish(message: '更多功能等待你探索!!'),
+    _NoviceLeadingStep.finish(message: 'view.novice.leading.page.s010'.tr),
   ];
 
   // [L-02]
@@ -119,7 +121,7 @@ class _NoviceLeadingPageState extends State<NoviceLeadingPage> {
       fit: StackFit.expand,
       children: [
         Image.asset(step.imageAsset!, fit: BoxFit.cover),
-        const DecoratedBox(
+        DecoratedBox(
           decoration: BoxDecoration(
             gradient: NoviceLeadingStyle.imageShadeGradient,
           ),
@@ -138,9 +140,7 @@ class _NoviceLeadingPageState extends State<NoviceLeadingPage> {
   Widget _buildPlotLevelPage(_NoviceLeadingStep step) {
     // [L-13]
     return DecoratedBox(
-      decoration: const BoxDecoration(
-        gradient: NoviceLeadingStyle.plotGradient,
-      ),
+      decoration: BoxDecoration(gradient: NoviceLeadingStyle.plotGradient),
       child: SafeArea(
         child: Center(
           child: Padding(
@@ -159,9 +159,7 @@ class _NoviceLeadingPageState extends State<NoviceLeadingPage> {
   Widget _buildFinishPage(_NoviceLeadingStep step) {
     // [L-14]
     return DecoratedBox(
-      decoration: const BoxDecoration(
-        gradient: NoviceLeadingStyle.finishGradient,
-      ),
+      decoration: BoxDecoration(gradient: NoviceLeadingStyle.finishGradient),
       child: SafeArea(
         child: Center(
           child: Padding(
@@ -174,13 +172,13 @@ class _NoviceLeadingPageState extends State<NoviceLeadingPage> {
                   style: NoviceLeadingStyle.finishTextStyle,
                   textAlign: TextAlign.center,
                 ),
-                const SizedBox(height: 28),
+                SizedBox(height: 28),
                 ElevatedButton(
                   // [L-15]
                   onPressed: _finishTutorial,
                   style: NoviceLeadingStyle.finishButtonStyle,
                   child: Text(
-                    '結束教學',
+                    'view.novice.leading.page.s011'.tr,
                     style: NoviceLeadingStyle.finishButtonTextStyle,
                   ),
                 ),
@@ -207,7 +205,10 @@ class _NoviceLeadingPageState extends State<NoviceLeadingPage> {
             // [L-17]
             onPressed: _finishTutorial,
             style: NoviceLeadingStyle.textButtonStyle,
-            child: Text('跳過', style: NoviceLeadingStyle.actionTextStyle),
+            child: Text(
+              'view.novice.leading.page.s012'.tr,
+              style: NoviceLeadingStyle.actionTextStyle,
+            ),
           ),
         ),
       ),
@@ -229,7 +230,7 @@ class _NoviceLeadingPageState extends State<NoviceLeadingPage> {
                 onPressed: _currentIndex == 0 ? null : _goPrevious,
                 style: NoviceLeadingStyle.textButtonStyle,
                 child: Text(
-                  '上一步',
+                  'view.novice.leading.page.s013'.tr,
                   style: _currentIndex == 0
                       ? NoviceLeadingStyle.disabledActionTextStyle
                       : NoviceLeadingStyle.actionTextStyle,
@@ -240,7 +241,10 @@ class _NoviceLeadingPageState extends State<NoviceLeadingPage> {
                   // [L-20]
                   onPressed: _goNext,
                   style: NoviceLeadingStyle.textButtonStyle,
-                  child: Text('下一步', style: NoviceLeadingStyle.actionTextStyle),
+                  child: Text(
+                    'view.novice.leading.page.s014'.tr,
+                    style: NoviceLeadingStyle.actionTextStyle,
+                  ),
                 ),
             ],
           ),

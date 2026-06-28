@@ -4,10 +4,12 @@ import '../../styles/app_theme.dart';
 import '../constants/asset_paths.dart';
 import '../constants/responsive.dart';
 
+import 'package:get/get.dart';
+
 class NicknameField extends StatelessWidget {
   final ProfileEditController controller;
 
-  const NicknameField({super.key, required this.controller});
+  NicknameField({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,7 @@ class NicknameField extends StatelessWidget {
             bottom: Responsive.h(context, 8),
           ),
           child: Text(
-            '新的稱呼',
+            'widgets.profile.edit.nickname.field.s001'.tr,
             style: AppTheme.titleStyle.copyWith(
               color: Colors.brown,
               fontWeight: FontWeight.bold,

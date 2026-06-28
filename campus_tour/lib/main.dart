@@ -5,6 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'controllers/monster_controller.dart';
 import 'controllers/user_controller.dart';
+import 'l10n/app_translations.dart';
 import 'package:get/get.dart';
 import 'local_information/local_setting.dart';
 import 'services/orientation_service.dart';
@@ -33,8 +34,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const GetMaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
+      translations: AppTranslations(),
+      locale: Locale(LocalSettingService.language.current),
+      fallbackLocale: const Locale(LanguageSetting.chinese),
       home: StartPage(),
     );
   }

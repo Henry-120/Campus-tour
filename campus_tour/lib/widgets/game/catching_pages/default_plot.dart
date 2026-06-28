@@ -1,16 +1,18 @@
 import 'package:campus_tour/widgets/game/catching_pages/plot_level.dart';
 
+import 'package:get/get.dart';
+
 class DefaultPlot {
-  static const List<PlotDialogueStep> magicStonePlotDialogueSteps = [
+  static List<PlotDialogueStep> get magicStonePlotDialogueSteps => [
     PlotDialogueStep(
       speakerSlot: PlotSpeakerSlot.right,
-      speakerName: "我",
-      text: "這是什麼？",
+      speakerName: 'widgets.game.catching.pages.default.plot.s001'.tr,
+      text: 'widgets.game.catching.pages.default.plot.s002'.tr,
     ),
     PlotDialogueStep(
       speakerSlot: PlotSpeakerSlot.left,
-      speakerName: "神秘石頭",
-      text: "（散發獨特的氣息）",
+      speakerName: 'widgets.game.catching.pages.default.plot.s003'.tr,
+      text: 'widgets.game.catching.pages.default.plot.s004'.tr,
     ),
   ];
 
@@ -19,20 +21,20 @@ class DefaultPlot {
     required String fairyImagePath,
   }) {
     return [
-      const PlotDialogueStep(
+      PlotDialogueStep(
         speakerSlot: PlotSpeakerSlot.right,
-        speakerName: "我",
-        text: "(放上魔法石)",
+        speakerName: 'widgets.game.catching.pages.default.plot.s001'.tr,
+        text: 'widgets.game.catching.pages.default.plot.s006'.tr,
       ),
-      const PlotDialogueStep(
+      PlotDialogueStep(
         speakerSlot: PlotSpeakerSlot.left,
-        speakerName: "魔法陣",
-        text: "精靈召喚！",
+        speakerName: 'widgets.game.catching.pages.default.plot.s007'.tr,
+        text: 'widgets.game.catching.pages.default.plot.s008'.tr,
       ),
       PlotDialogueStep(
         speakerSlot: PlotSpeakerSlot.center,
         speakerName: fairyName,
-        text: "（怒）",
+        text: 'widgets.game.catching.pages.default.plot.s009'.tr,
         centerSpritePath: fairyImagePath,
       ),
     ];

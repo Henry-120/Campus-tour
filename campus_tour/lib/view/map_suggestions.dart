@@ -6,6 +6,8 @@ import 'package:campus_tour/styles/map_suggestion_style.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 
+import 'package:get/get.dart';
+
 class MapSuggestionsVariables {
   // [L-01]
   // ignore: constant_identifier_names
@@ -16,7 +18,7 @@ class MapSuggestionsVariables {
   static const String position_char = 'assets/images/squirrel_front.png';
 
   // [L-03]
-  static const Size mapImageSize = Size(2744, 1568);
+  static Size get mapImageSize => Size(2744, 1568);
 
   // [L-04]
   static const double southwestLatitude = 24.965184;
@@ -34,15 +36,16 @@ class MapSuggestionsVariables {
   static const double locationUpdateMeters = 2;
 
   // [L-10]
-  static const String ncuTenViewsCategory = '中大十景';
+  static String get ncuTenViewsCategory => 'view.map.suggestions.s001'.tr;
   // [L-53]
-  static const String installationArtCategory = '裝置藝術';
+  static String get installationArtCategory =>
+      'styles.map.suggestion.style.s001'.tr;
 
   // [L-54]
-  static const String toiletCategory = '廁所';
+  static String get toiletCategory => 'styles.map.suggestion.style.s002'.tr;
 
   // [L-11]
-  static const List<String> locationJsonPaths = [
+  static List<String> get locationJsonPaths => [
     'assets/json/locations/NCU10view.json',
     'assets/json/locations/installation_art.json',
     'assets/json/locations/toilet.json',
@@ -59,7 +62,7 @@ class _LandmarkMarker {
 }
 
 class MapSuggestionsPage extends StatefulWidget {
-  const MapSuggestionsPage({super.key});
+  MapSuggestionsPage({super.key});
 
   @override
   State<MapSuggestionsPage> createState() => _MapSuggestionsPageState();
@@ -71,11 +74,11 @@ class _MapSuggestionsPageState extends State<MapSuggestionsPage> {
   StreamSubscription<Position>? _positionSubscription;
   bool _isLocationReady = false;
   String? _locationMessage;
-  List<SuggestionLocation> _landmarks = const [];
+  List<SuggestionLocation> _landmarks = [];
   String? _landmarkLoadMessage;
   Size? _cachedLandmarkMapSize;
   String? _cachedSelectedCategoryKey;
-  List<_LandmarkMarker> _cachedLandmarkMarkers = const [];
+  List<_LandmarkMarker> _cachedLandmarkMarkers = [];
   final Map<String, bool> _selectedCategories = {
     MapSuggestionsVariables.ncuTenViewsCategory: false,
     MapSuggestionsVariables.installationArtCategory: false,
@@ -144,7 +147,7 @@ class _MapSuggestionsPageState extends State<MapSuggestionsPage> {
       if (!mounted) return;
       setState(() {
         _isLocationReady = false;
-        _locationMessage = 'GPS 尚未開啟';
+        _locationMessage = 'view.map.suggestions.s006'.tr;
       });
       return;
     }
@@ -161,14 +164,14 @@ class _MapSuggestionsPageState extends State<MapSuggestionsPage> {
       if (!mounted) return;
       setState(() {
         _isLocationReady = false;
-        _locationMessage = '尚未取得定位權限';
+        _locationMessage = 'view.map.suggestions.s007'.tr;
       });
       return;
     }
 
     // [L-26]
     final initialPosition = await Geolocator.getCurrentPosition(
-      locationSettings: const LocationSettings(
+      locationSettings: LocationSettings(
         accuracy: LocationAccuracy.bestForNavigation,
       ),
     );
@@ -183,7 +186,7 @@ class _MapSuggestionsPageState extends State<MapSuggestionsPage> {
 
     // [L-28]
     _positionSubscription = Geolocator.getPositionStream(
-      locationSettings: const LocationSettings(
+      locationSettings: LocationSettings(
         accuracy: LocationAccuracy.bestForNavigation,
         distanceFilter: 1,
       ),
@@ -226,7 +229,7 @@ class _MapSuggestionsPageState extends State<MapSuggestionsPage> {
     // [L-33]
     _cachedLandmarkMapSize = null;
     _cachedSelectedCategoryKey = null;
-    _cachedLandmarkMarkers = const [];
+    _cachedLandmarkMarkers = [];
   }
 
   String _selectedCategoryKey() {
@@ -397,15 +400,11 @@ class _MapBackButton extends StatelessWidget {
               BoxShadow(
                 color: Colors.black.withValues(alpha: 0.35),
                 blurRadius: 10,
-                offset: const Offset(0, 4),
+                offset: Offset(0, 4),
               ),
             ],
           ),
-          child: const Icon(
-            Icons.arrow_back_rounded,
-            color: Colors.white,
-            size: 25,
-          ),
+          child: Icon(Icons.arrow_back_rounded, color: Colors.white, size: 25),
         ),
       ),
     );
@@ -489,7 +488,7 @@ class _LandmarkLabel extends StatelessWidget {
               marker.landmark.category,
             ),
           ),
-          const SizedBox(width: MapSuggestionStyle.landmarkLabelSpacing),
+          SizedBox(width: MapSuggestionStyle.landmarkLabelSpacing),
           Text(
             marker.landmark.name,
             style: MapSuggestionStyle.landmarkNameTextStyle,

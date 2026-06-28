@@ -2,15 +2,17 @@ import 'package:campus_tour/styles/level_style.dart';
 import 'package:campus_tour/widgets/game/catching_pages/discovered_item.dart';
 import 'package:flutter/material.dart';
 
+import 'package:get/get.dart';
+
 class PlotLevel {
   static const String traceType = "trace";
   static const String battleType = "battle";
-  static const Duration titleFadeDuration = Duration(seconds: 1);
-  static const Duration descriptionFadeDuration = Duration(seconds: 1);
-  static const Duration pressBlinkDuration = Duration(milliseconds: 1200);
-  static const Duration sequenceDelay = Duration(milliseconds: 250);
-  static const Duration dialogueSwitchDuration = Duration(milliseconds: 260);
-  static const Duration spriteSwitchDuration = Duration(milliseconds: 360);
+  static Duration get titleFadeDuration => Duration(seconds: 1);
+  static Duration get descriptionFadeDuration => Duration(seconds: 1);
+  static Duration get pressBlinkDuration => Duration(milliseconds: 1200);
+  static Duration get sequenceDelay => Duration(milliseconds: 250);
+  static Duration get dialogueSwitchDuration => Duration(milliseconds: 260);
+  static Duration get spriteSwitchDuration => Duration(milliseconds: 360);
   final String type; // "trace" or "battle"
   final bool isPassed;
   final String title;
@@ -24,18 +26,25 @@ class PlotLevel {
   static const String battleImageUrl = "assets/images/elf_battle.png";
   static const String magicStoneSpritePath = "assets/images/magicStone.PNG";
   static const String squirrelSpritePath = "assets/images/squirrel_front.png";
-  static const String magicCircleSpritePath = "assets/images/icon_remove_bg.png";
+  static const String magicCircleSpritePath =
+      "assets/images/icon_remove_bg.png";
   static const String defaultLeftSpritePath =
       "assets/images/squirrel_front.png";
   static const String defaultRightSpritePath =
       "assets/images/fairy_img/qmark.png";
-  static const String traceTitle = "你找到了一塊魔法石";
-  static const String traceDescription = "找到對應的法陣，將魔法石放上去吧！";
-  static const String battleTitle = "你召喚了精靈";
-  static const String battleDescription = "但它好像很有攻擊性的看著你......";
-  static const String press = "點擊任意位置繼續";
-  static const String pressBattle = "點擊任意位置開始戰鬥";
-  static const String passLevel = "跳過>>";
+  static String get traceTitle =>
+      'widgets.game.catching.pages.plot.level.s001'.tr;
+  static String get traceDescription =>
+      'widgets.game.catching.pages.plot.level.s002'.tr;
+  static String get battleTitle =>
+      'widgets.game.catching.pages.plot.level.s003'.tr;
+  static String get battleDescription =>
+      'widgets.game.catching.pages.plot.level.s004'.tr;
+  static String get press => 'widgets.game.catching.pages.plot.level.s005'.tr;
+  static String get pressBattle =>
+      'widgets.game.catching.pages.plot.level.s006'.tr;
+  static String get passLevel =>
+      'widgets.game.catching.pages.plot.level.s007'.tr;
 
   static String backgroundImageForType(String type) {
     return type == battleType ? battleImageUrl : traceImageUrl;
@@ -59,12 +68,12 @@ class PlotLevel {
            ? [
                PlotDialogueStep(
                  speakerSlot: PlotSpeakerSlot.left,
-                 speakerName: "玩家",
+                 speakerName: 'widgets.game.catching.pages.plot.level.s008'.tr,
                  text: title,
                ),
                PlotDialogueStep(
                  speakerSlot: PlotSpeakerSlot.right,
-                 speakerName: "夥伴",
+                 speakerName: 'widgets.game.catching.pages.plot.level.s009'.tr,
                  text: description,
                ),
              ]
@@ -87,7 +96,7 @@ class PlotDialogueStep {
   final bool showLeftSprite;
   final bool showRightSprite;
 
-  const PlotDialogueStep({
+  PlotDialogueStep({
     required this.speakerSlot,
     required this.speakerName,
     required this.text,
@@ -102,8 +111,8 @@ class PlotDialogueStep {
 }
 
 class PlotLevelPageStyle {
-  static const Color overlayColor = Color(0x66000000);
-  static const Color fallbackBackgroundColor = Color(0xFF20252C);
+  static Color get overlayColor => Color(0x66000000);
+  static Color get fallbackBackgroundColor => Color(0xFF20252C);
   static const EdgeInsets skipPadding = EdgeInsets.only(top: 8, right: 12);
   static const EdgeInsets dialoguePadding = EdgeInsets.fromLTRB(20, 12, 20, 22);
   static const EdgeInsets dialogueContentPadding = EdgeInsets.fromLTRB(
@@ -132,14 +141,14 @@ class PlotLevelPageStyle {
     backgroundColor: Colors.transparent,
     overlayColor: Colors.transparent,
     shadowColor: Colors.transparent,
-    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
   );
 
   static BoxDecoration get dialogueBoxDecoration => BoxDecoration(
     color: Colors.black.withValues(alpha: 0.68),
     border: Border.all(color: Colors.white.withValues(alpha: 0.78), width: 1.4),
     borderRadius: const BorderRadius.all(Radius.circular(18)),
-    boxShadow: const [
+    boxShadow: [
       BoxShadow(
         color: Color(0x99000000),
         blurRadius: 22,

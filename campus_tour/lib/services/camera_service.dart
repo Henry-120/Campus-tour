@@ -34,7 +34,7 @@ class CameraService {
 
       // 2. 拿到照片路徑 (未來可以用來上傳或顯示)
       debugPrint('[Camera]:拍照成功！路徑：${photo.path}');
-      
+
       // 你可以在這裡加入邏輯，例如：把照片存進圖鑑
     } catch (e) {
       debugPrint('[Camera]:相機出錯：$e');

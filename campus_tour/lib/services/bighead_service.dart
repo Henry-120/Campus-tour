@@ -16,7 +16,11 @@ class BigHeadService {
     const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
     // 建議不要在方法內建立 Random 實例，可以提到類別層級共用，效率更好
     final rnd = Random();
-    return String.fromCharCodes(Iterable.generate(
-        length, (_) => chars.codeUnitAt(rnd.nextInt(chars.length))));
+    return String.fromCharCodes(
+      Iterable.generate(
+        length,
+        (_) => chars.codeUnitAt(rnd.nextInt(chars.length)),
+      ),
+    );
   }
 }

@@ -9,8 +9,10 @@ import 'package:campus_tour/view/real_ar_view.dart';
 import '../constants/asset_paths.dart';
 import '../../widgets/constants/responsive.dart';
 
+import 'package:get/get.dart';
+
 class SystemMenu extends StatelessWidget {
-  const SystemMenu({super.key});
+  SystemMenu({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,14 +26,14 @@ class SystemMenu extends StatelessWidget {
         children: [
           StoneButton(
             img: AssetPaths.pokedexButton,
-            text: "圖鑑",
+            text: 'view.encyclopedia.page.s001'.tr,
             scale: scale,
             baseSize: buttonSize,
             onTap: () => _openPokedex(context),
           ),
           StoneButton(
             img: AssetPaths.cameraButton,
-            text: "相機",
+            text: 'widgets.game.system.menu.s002'.tr,
             scale: scale,
             baseSize: buttonSize,
             onTap: () => _openCamera(context),
@@ -46,7 +48,7 @@ class SystemMenu extends StatelessWidget {
             ),
           StoneButton(
             img: AssetPaths.settingButton,
-            text: "設定",
+            text: 'widgets.game.system.menu.s003'.tr,
             scale: scale,
             baseSize: buttonSize,
             onTap: () => _openSettings(context),
@@ -59,15 +61,12 @@ class SystemMenu extends StatelessWidget {
   void _openPokedex(BuildContext context) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (_) => const EncyclopediaPage()),
+      MaterialPageRoute(builder: (_) => EncyclopediaPage()),
     );
   }
 
   void _openCamera(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (_) => const ArCapturePage()),
-    );
+    Navigator.push(context, MaterialPageRoute(builder: (_) => ArCapturePage()));
   }
 
   // void _openDrawer(BuildContext context) {
@@ -75,16 +74,10 @@ class SystemMenu extends StatelessWidget {
   // }
 
   void _openSettings(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (_) => const SettingPage()),
-    );
+    Navigator.push(context, MaterialPageRoute(builder: (_) => SettingPage()));
   }
 
   void _openARCamera(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (_) => const RealArPage()),
-    );
+    Navigator.push(context, MaterialPageRoute(builder: (_) => RealArPage()));
   }
 }

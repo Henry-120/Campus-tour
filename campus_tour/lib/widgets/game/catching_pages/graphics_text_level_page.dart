@@ -5,8 +5,10 @@ import 'package:campus_tour/widgets/game/catching_pages/discovered_item_page.dar
 import 'package:campus_tour/widgets/game/catching_pages/graphics_text_level.dart';
 import 'package:flutter/material.dart';
 
+import 'package:get/get.dart';
+
 class GraphicsTextLevelPage extends StatefulWidget {
-  const GraphicsTextLevelPage({
+  GraphicsTextLevelPage({
     super.key,
     required this.level,
     required this.nextFunction,
@@ -59,14 +61,22 @@ class _GraphicsTextLevelPageState extends State<GraphicsTextLevelPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Expanded(
-                              child: Text('探索關卡', style: LevelStyle.titleStyle),
+                              child: Text(
+                                'widgets.game.catching.pages.graphics.text.level.page.s001'
+                                    .tr,
+                                style: LevelStyle.titleStyle,
+                              ),
                             ),
                             _buildTeachingButton(),
                           ],
                         ),
-                        const SizedBox(height: 6),
-                        Text('觀察線索後，前往指定地點感應 NFC', style: LevelStyle.hintStyle),
-                        const SizedBox(height: LevelStyle.bodySpacing),
+                        SizedBox(height: 6),
+                        Text(
+                          'widgets.game.catching.pages.graphics.text.level.page.s002'
+                              .tr,
+                          style: LevelStyle.hintStyle,
+                        ),
+                        SizedBox(height: LevelStyle.bodySpacing),
                         Expanded(
                           child: _buildBody(
                             hasImage: hasImage,
@@ -77,18 +87,22 @@ class _GraphicsTextLevelPageState extends State<GraphicsTextLevelPage> {
                     ),
                   ),
                 ),
-                const SizedBox(height: LevelStyle.nfcButtonTopSpacing),
+                SizedBox(height: LevelStyle.nfcButtonTopSpacing),
                 // [L-04]
                 NfcButton1(
                   ans: widget.level.nfcId,
                   onResult: _handleNfcSuccess,
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: 8),
                 ClickAndAcceptButton(
                   movementFunction: widget.loseingFunction,
-                  acceptInfo: '是否確定放棄捕捉精靈?',
+                  acceptInfo:
+                      'widgets.game.catching.pages.graphics.text.level.page.s003'
+                          .tr,
                   appearanceIcon: Icons.close,
-                  appearanceText: '放棄捕捉',
+                  appearanceText:
+                      'widgets.game.catching.pages.graphics.text.level.page.s004'
+                          .tr,
                 ),
               ],
             ),
@@ -105,8 +119,8 @@ class _GraphicsTextLevelPageState extends State<GraphicsTextLevelPage> {
       height: 36,
       child: IconButton(
         padding: EdgeInsets.zero,
-        tooltip: 'NFC 教學',
-        icon: const Icon(Icons.help_outline_rounded),
+        tooltip: 'widgets.game.catching.pages.graphics.text.level.page.s005'.tr,
+        icon: Icon(Icons.help_outline_rounded),
         color: LevelStyle.imageIconColor,
         iconSize: 26,
         onPressed: _showNfcTeachingDialog,
@@ -119,7 +133,8 @@ class _GraphicsTextLevelPageState extends State<GraphicsTextLevelPage> {
     showGeneralDialog<void>(
       context: context,
       barrierDismissible: true,
-      barrierLabel: '關閉 NFC 教學',
+      barrierLabel:
+          'widgets.game.catching.pages.graphics.text.level.page.s006'.tr,
       barrierColor: Colors.black.withValues(alpha: 0.55),
       pageBuilder: (dialogContext, _, _) {
         return GestureDetector(
@@ -130,10 +145,7 @@ class _GraphicsTextLevelPageState extends State<GraphicsTextLevelPage> {
               child: Container(
                 margin: const EdgeInsets.all(28),
                 padding: const EdgeInsets.all(10),
-                constraints: const BoxConstraints(
-                  maxWidth: 360,
-                  maxHeight: 520,
-                ),
+                constraints: BoxConstraints(maxWidth: 360, maxHeight: 520),
                 decoration: BoxDecoration(
                   color: LevelStyle.frameColor,
                   borderRadius: LevelStyle.innerCardRadius,
@@ -162,7 +174,7 @@ class _GraphicsTextLevelPageState extends State<GraphicsTextLevelPage> {
           ),
         );
       },
-      transitionDuration: const Duration(milliseconds: 160),
+      transitionDuration: Duration(milliseconds: 160),
     );
   }
 
@@ -202,7 +214,7 @@ class _GraphicsTextLevelPageState extends State<GraphicsTextLevelPage> {
           ),
         );
       },
-      transitionDuration: const Duration(milliseconds: 220),
+      transitionDuration: Duration(milliseconds: 220),
     );
   }
 
@@ -212,7 +224,7 @@ class _GraphicsTextLevelPageState extends State<GraphicsTextLevelPage> {
       return Column(
         children: [
           Expanded(child: _buildImageSection(widget.level.firstTracePhoto!)),
-          const SizedBox(height: LevelStyle.panelSpacing),
+          SizedBox(height: LevelStyle.panelSpacing),
           Expanded(child: _buildTextSection(widget.level.descriptionText!)),
         ],
       );
@@ -235,7 +247,7 @@ class _GraphicsTextLevelPageState extends State<GraphicsTextLevelPage> {
   Widget _buildImageSection(String imagePath) {
     return Container(
       width: double.infinity,
-      constraints: const BoxConstraints(minHeight: LevelStyle.sectionMinHeight),
+      constraints: BoxConstraints(minHeight: LevelStyle.sectionMinHeight),
       decoration: LevelStyle.imageCardDecoration,
       clipBehavior: Clip.antiAlias,
       child: _buildAdaptiveImage(imagePath),
@@ -268,7 +280,7 @@ class _GraphicsTextLevelPageState extends State<GraphicsTextLevelPage> {
     // [L-16]
     return Container(
       width: double.infinity,
-      constraints: const BoxConstraints(minHeight: LevelStyle.sectionMinHeight),
+      constraints: BoxConstraints(minHeight: LevelStyle.sectionMinHeight),
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 22),
       decoration: LevelStyle.textCardDecoration,
       child: SingleChildScrollView(
@@ -287,10 +299,13 @@ class _GraphicsTextLevelPageState extends State<GraphicsTextLevelPage> {
     // [L-17]
     return Container(
       width: double.infinity,
-      constraints: const BoxConstraints(minHeight: LevelStyle.sectionMinHeight),
+      constraints: BoxConstraints(minHeight: LevelStyle.sectionMinHeight),
       decoration: LevelStyle.imagePlaceholderDecoration,
       child: Center(
-        child: Text('這個關卡目前沒有可顯示的內容', style: LevelStyle.placeholderStyle),
+        child: Text(
+          'widgets.game.catching.pages.graphics.text.level.page.s007'.tr,
+          style: LevelStyle.placeholderStyle,
+        ),
       ),
     );
   }
@@ -299,7 +314,7 @@ class _GraphicsTextLevelPageState extends State<GraphicsTextLevelPage> {
     // [L-18]
     return Container(
       decoration: LevelStyle.imagePlaceholderDecoration,
-      child: const Center(
+      child: Center(
         child: Icon(
           Icons.image_outlined,
           size: 72,

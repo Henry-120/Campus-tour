@@ -1,3 +1,5 @@
+import 'package:get/get.dart';
+
 class CryptographyLevel {
   CryptographyLevel({
     required this.questionSet,
@@ -9,22 +11,36 @@ class CryptographyLevel {
   final List<List<String>> choiceSet;
   final List<String> answerSet;
 
-  static const String introduction = "請根據介紹牌選出正確的選項";
-  static const String battleTitle = "密碼鎖破解";
-  static const String battleSubtitle = "每答對一題就能解開一位數密碼，答錯會扣除自己的血量";
-  static const String enemyHpLabel = "精靈血量";
-  static const String playerHpLabel = "你的血量";
-  static const String lockLabel = "密碼鎖";
-  static const String questionLabel = "目前題目";
-  static const String correctMessage = "答對了，對其造成1點傷害";
-  static const String wrongMessage = "答錯了，自己受到 1 點傷害";
-  static const String finishMessage = "精靈被成功擊倒";
-  static const String loseMessage = "血量歸零，挑戰失敗";
-  static const String nextQuestionButton = "下一題";
-  static const String finishButton = "完成戰鬥";
-  static const String retryHint = "請重新觀察題目後再作答";
+  static String get introduction =>
+      'widgets.game.catching.pages.cryptography.level.s001'.tr;
+  static String get battleTitle =>
+      'widgets.game.catching.pages.cryptography.level.s002'.tr;
+  static String get battleSubtitle =>
+      'widgets.game.catching.pages.cryptography.level.s003'.tr;
+  static String get enemyHpLabel =>
+      'widgets.game.catching.pages.cryptography.level.s004'.tr;
+  static String get playerHpLabel =>
+      'widgets.game.catching.pages.cryptography.level.s005'.tr;
+  static String get lockLabel =>
+      'widgets.game.catching.pages.cryptography.level.s006'.tr;
+  static String get questionLabel =>
+      'widgets.game.catching.pages.cryptography.level.s007'.tr;
+  static String get correctMessage =>
+      'widgets.game.catching.pages.cryptography.level.s008'.tr;
+  static String get wrongMessage =>
+      'widgets.game.catching.pages.cryptography.level.s009'.tr;
+  static String get finishMessage =>
+      'widgets.game.catching.pages.cryptography.level.s010'.tr;
+  static String get loseMessage =>
+      'widgets.game.catching.pages.cryptography.level.s011'.tr;
+  static String get nextQuestionButton =>
+      'widgets.game.catching.pages.cryptography.level.s012'.tr;
+  static String get finishButton =>
+      'widgets.game.catching.pages.cryptography.level.s013'.tr;
+  static String get retryHint =>
+      'widgets.game.catching.pages.cryptography.level.s014'.tr;
   static const int playerMaxHp = 2;
   static const int playerDamageOnWrong = 1;
   static const int enemyDamageOnCorrect = 1;
-  static const Duration feedbackDuration = Duration(milliseconds: 900);
+  static Duration get feedbackDuration => Duration(milliseconds: 900);
 }

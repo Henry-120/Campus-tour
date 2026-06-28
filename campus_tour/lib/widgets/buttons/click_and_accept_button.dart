@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 
 import '../../styles/app_theme.dart';
 
+import 'package:get/get.dart';
+
 class ClickAndAcceptButton extends StatelessWidget {
-  const ClickAndAcceptButton({
+  ClickAndAcceptButton({
     super.key,
     required this.movementFunction,
     required this.acceptInfo,
@@ -41,12 +43,12 @@ class ClickAndAcceptButton extends StatelessWidget {
             TextButton(
               onPressed: () => Navigator.of(context).pop(true),
               style: ClickAndAcceptButtonStyle.dialogActionStyle,
-              child: const Text('確定'),
+              child: Text('widgets.buttons.click.and.accept.button.s001'.tr),
             ),
             TextButton(
               onPressed: () => Navigator.of(context).pop(false),
               style: ClickAndAcceptButtonStyle.dialogActionStyle,
-              child: const Text('取消'),
+              child: Text('widgets.buttons.click.and.accept.button.s002'.tr),
             ),
           ],
         );
@@ -86,7 +88,7 @@ class ClickAndAcceptButtonStyle {
   static const double buttonIconSize = 16;
 
   static final ButtonStyle buttonStyle = TextButton.styleFrom(
-    minimumSize: const Size(0, 32),
+    minimumSize: Size(0, 32),
     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
     visualDensity: VisualDensity.compact,

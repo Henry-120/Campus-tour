@@ -12,7 +12,7 @@ class AudioService {
   /// 播放功能
   Future<void> play({
     required String fileName,
-    bool isBgm = false,         // 💡 新增參數：是否為背景音樂
+    bool isBgm = false, // 💡 新增參數：是否為背景音樂
     double volume = 1.0,
     bool isLooping = false,
     double playbackRate = 1.0,
@@ -22,7 +22,7 @@ class AudioService {
     final player = isBgm ? _bgmPlayer : _sfxPlayer;
 
     await player.setSource(AssetSource(fileName));
-    
+
     // 設定循環與釋放模式
     player.setReleaseMode(isLooping ? ReleaseMode.loop : ReleaseMode.release);
 

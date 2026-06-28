@@ -6,6 +6,7 @@
       "key": "controllers.login.controller.s001",
       "zh": "正在啟動 Google 認證...",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/controllers/login_controller.dart",
@@ -17,6 +18,7 @@
       "key": "controllers.login.controller.s002",
       "zh": "Google 認證成功: ${user.uid}",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/controllers/login_controller.dart",
@@ -28,6 +30,7 @@
       "key": "controllers.login.controller.s003",
       "zh": "新使用者，正在建立 Firestore 資料...",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/controllers/login_controller.dart",
@@ -38,7 +41,8 @@
     {
       "key": "controllers.login.controller.s004",
       "zh": "冒險者",
-      "en": "",
+      "en": "Adventurer",
+      "ja": "冒険者",
       "occurrences": [
         {
           "file": "lib/controllers/login_controller.dart",
@@ -62,6 +66,7 @@
       "key": "controllers.login.controller.s005",
       "zh": "正在載入使用者收藏與資料...",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/controllers/login_controller.dart",
@@ -73,6 +78,7 @@
       "key": "controllers.login.controller.s006",
       "zh": "❌ LoginController.signInWithGoogle 失敗: $e",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/controllers/login_controller.dart",
@@ -84,6 +90,7 @@
       "key": "controllers.monster.controller.s001",
       "zh": "[MonsterController] 載入精靈總數失敗: $e",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/controllers/monster_controller.dart",
@@ -95,6 +102,7 @@
       "key": "controllers.monster.controller.s002",
       "zh": "[MonsterController] 此怪物沒有關聯的 QA",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/controllers/monster_controller.dart",
@@ -106,6 +114,7 @@
       "key": "controllers.monster.controller.s003",
       "zh": "[MonsterController] 獲取 QA 失敗: $e",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/controllers/monster_controller.dart",
@@ -117,6 +126,7 @@
       "key": "controllers.monster.controller.s004",
       "zh": "[MonsterController] 此怪物沒有關聯的建築資料",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/controllers/monster_controller.dart",
@@ -128,6 +138,7 @@
       "key": "controllers.monster.controller.s005",
       "zh": "[MonsterController] 獲取建築資料失敗: $e",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/controllers/monster_controller.dart",
@@ -139,6 +150,7 @@
       "key": "controllers.monster.controller.s006",
       "zh": "[MonsterController] 怪物 ${monsterObj.name} 已經被捕捉過",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/controllers/monster_controller.dart",
@@ -150,6 +162,7 @@
       "key": "controllers.monster.controller.s007",
       "zh": "[MonsterController] 成功捕捉怪物: ${monsterObj.name} 並已同步更新 QA 與建築資料",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/controllers/monster_controller.dart",
@@ -161,6 +174,7 @@
       "key": "controllers.monster.controller.s008",
       "zh": "[MonsterController] 捕捉怪物時出錯: $e",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/controllers/monster_controller.dart",
@@ -172,6 +186,7 @@
       "key": "controllers.monster.controller.s009",
       "zh": "[MonsterController] 測試功能捕捉全部精靈: ${missingMonsters.length}",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/controllers/monster_controller.dart",
@@ -183,6 +198,7 @@
       "key": "controllers.monster.controller.s010",
       "zh": "[MonsterController] 測試功能刪除全部精靈: $deletedCount",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/controllers/monster_controller.dart",
@@ -194,6 +210,7 @@
       "key": "controllers.monster.controller.s011",
       "zh": "[MonsterController] 最近精靈: ${nearestMonster.value?.name}, 距離: ${nearestDistance.value}",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/controllers/monster_controller.dart",
@@ -204,7 +221,8 @@
     {
       "key": "controllers.nfc.api.s001",
       "zh": "請靠近NFC感應",
-      "en": "",
+      "en": "Move closer to the NFC tag",
+      "ja": "NFCタグに近づけてください",
       "occurrences": [
         {
           "file": "lib/controllers/NFC_api.dart",
@@ -215,7 +233,8 @@
     {
       "key": "controllers.nfc.api.s002",
       "zh": "NFC 標籤格式錯誤",
-      "en": "",
+      "en": "Invalid NFC tag format",
+      "ja": "NFCタグの形式が正しくありません",
       "occurrences": [
         {
           "file": "lib/controllers/NFC_api.dart",
@@ -227,6 +246,7 @@
       "key": "controllers.nfc.api.s003",
       "zh": "錯誤：嘗試在掃描失敗的情況下讀取 Data。請先檢查 isSuccess！",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/controllers/NFC_api.dart",
@@ -238,6 +258,7 @@
       "key": "controllers.nfc.api.s004",
       "zh": "錯誤：嘗試在掃描成功的情況下讀取 Error 類型。",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/controllers/NFC_api.dart",
@@ -249,6 +270,7 @@
       "key": "controllers.profile.edit.controller.s001",
       "zh": "[profile_edit_controller] 成功載入頭像: ${previewUrl.value}",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/controllers/profile_edit_controller.dart",
@@ -259,7 +281,8 @@
     {
       "key": "controllers.profile.edit.controller.s002",
       "zh": "小提示",
-      "en": "",
+      "en": "Tip",
+      "ja": "ヒント",
       "occurrences": [
         {
           "file": "lib/controllers/profile_edit_controller.dart",
@@ -270,7 +293,8 @@
     {
       "key": "controllers.profile.edit.controller.s003",
       "zh": "暱稱不能空著喔！",
-      "en": "",
+      "en": "Your nickname cannot be empty!",
+      "ja": "ニックネームを入力してください！",
       "occurrences": [
         {
           "file": "lib/controllers/profile_edit_controller.dart",
@@ -282,6 +306,7 @@
       "key": "controllers.profile.edit.controller.s004",
       "zh": "[ProfileEdit] 儲存變更：$newNickname",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/controllers/profile_edit_controller.dart",
@@ -293,6 +318,7 @@
       "key": "controllers.user.controller.s001",
       "zh": "[UserController] 偵測到使用者登入: ${user.uid}",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/controllers/user_controller.dart",
@@ -304,6 +330,7 @@
       "key": "controllers.user.controller.s002",
       "zh": "[UserController] 目前為登出狀態",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/controllers/user_controller.dart",
@@ -315,6 +342,7 @@
       "key": "controllers.user.controller.s003",
       "zh": "[UserController] 成功從 Firestore 載入頭像: ${data.photoUrl}",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/controllers/user_controller.dart",
@@ -326,6 +354,7 @@
       "key": "controllers.user.controller.s004",
       "zh": "[UserController] 抓取錯誤: $e",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/controllers/user_controller.dart",
@@ -337,6 +366,7 @@
       "key": "services.camera.service.s001",
       "zh": "[Camera]: AR捕捉成功！路徑：$path",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/services/camera_service.dart",
@@ -348,6 +378,7 @@
       "key": "services.camera.service.s002",
       "zh": "[Camera]:使用者取消了拍照",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/services/camera_service.dart",
@@ -359,6 +390,7 @@
       "key": "services.camera.service.s003",
       "zh": "[Camera]:拍照成功！路徑：${photo.path}",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/services/camera_service.dart",
@@ -370,6 +402,7 @@
       "key": "services.camera.service.s004",
       "zh": "[Camera]:相機出錯：$e",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/services/camera_service.dart",
@@ -381,6 +414,7 @@
       "key": "services.firebase.auth.service.s001",
       "zh": "[AuthService] 登入失敗: $e",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/services/firebase_auth_service.dart",
@@ -392,6 +426,7 @@
       "key": "services.firebase.auth.service.s002",
       "zh": "[AuthService] 註冊失敗: $e",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/services/firebase_auth_service.dart",
@@ -403,6 +438,7 @@
       "key": "services.firebase.auth.service.s003",
       "zh": "[AuthService] Google 登入失敗: $e",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/services/firebase_auth_service.dart",
@@ -414,6 +450,7 @@
       "key": "services.google.auth.service.s001",
       "zh": "Google Sign-In: 初始化新使用者隨機頭像...",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/services/google_auth_service.dart",
@@ -425,6 +462,7 @@
       "key": "services.google.auth.service.s003",
       "zh": "❌ Google Sign-In 發生錯誤：$e",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/services/google_auth_service.dart",
@@ -436,6 +474,7 @@
       "key": "services.json.to.suggestion.s001",
       "zh": "名稱",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/services/json_to_suggestion.dart",
@@ -447,6 +486,7 @@
       "key": "services.json.to.suggestion.s002",
       "zh": "種類",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/services/json_to_suggestion.dart",
@@ -458,6 +498,7 @@
       "key": "services.json.to.suggestion.s003",
       "zh": "緯度",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/services/json_to_suggestion.dart",
@@ -469,6 +510,7 @@
       "key": "services.json.to.suggestion.s004",
       "zh": "經度",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/services/json_to_suggestion.dart",
@@ -480,6 +522,7 @@
       "key": "services.json.to.suggestion.s005",
       "zh": "地景資料缺少有效的「名稱」欄位",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/services/json_to_suggestion.dart",
@@ -491,6 +534,7 @@
       "key": "services.json.to.suggestion.s006",
       "zh": "地景資料缺少有效的「種類」欄位",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/services/json_to_suggestion.dart",
@@ -502,6 +546,7 @@
       "key": "services.json.to.suggestion.s007",
       "zh": "地景資料缺少有效的「緯度」或「經度」欄位",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/services/json_to_suggestion.dart",
@@ -513,6 +558,7 @@
       "key": "services.json.to.suggestion.s008",
       "zh": "地景 JSON 根節點必須是陣列: $assetPath",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/services/json_to_suggestion.dart",
@@ -524,6 +570,7 @@
       "key": "services.json.to.suggestion.s009",
       "zh": "地景資料第 ${index + 1} 筆不是物件: $sourceName",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/services/json_to_suggestion.dart",
@@ -534,7 +581,8 @@
     {
       "key": "styles.level.style.s001",
       "zh": "火",
-      "en": "",
+      "en": "Fire",
+      "ja": "火",
       "occurrences": [
         {
           "file": "lib/styles/level_style.dart",
@@ -553,7 +601,8 @@
     {
       "key": "styles.level.style.s002",
       "zh": "水",
-      "en": "",
+      "en": "Water",
+      "ja": "水",
       "occurrences": [
         {
           "file": "lib/styles/level_style.dart",
@@ -572,7 +621,8 @@
     {
       "key": "styles.level.style.s003",
       "zh": "金",
-      "en": "",
+      "en": "Metal",
+      "ja": "金",
       "occurrences": [
         {
           "file": "lib/styles/level_style.dart",
@@ -583,7 +633,8 @@
     {
       "key": "styles.map.suggestion.style.s001",
       "zh": "裝置藝術",
-      "en": "",
+      "en": "Public Art",
+      "ja": "パブリックアート",
       "occurrences": [
         {
           "file": "lib/styles/map_suggestion_style.dart",
@@ -606,7 +657,8 @@
     {
       "key": "styles.map.suggestion.style.s002",
       "zh": "廁所",
-      "en": "",
+      "en": "Restroom",
+      "ja": "トイレ",
       "occurrences": [
         {
           "file": "lib/styles/map_suggestion_style.dart",
@@ -621,7 +673,8 @@
     {
       "key": "styles.nfc.leading.style.s001",
       "zh": "開始NFC掃描",
-      "en": "",
+      "en": "Start NFC Scan",
+      "ja": "NFCスキャンを開始",
       "occurrences": [
         {
           "file": "lib/styles/nfc_leading_style.dart",
@@ -632,7 +685,8 @@
     {
       "key": "styles.nfc.leading.style.s002",
       "zh": "掃描中",
-      "en": "",
+      "en": "Scanning",
+      "ja": "スキャン中",
       "occurrences": [
         {
           "file": "lib/styles/nfc_leading_style.dart",
@@ -643,7 +697,8 @@
     {
       "key": "view.camera.view.s001",
       "zh": "相機初始化失敗: $e",
-      "en": "",
+      "en": "Failed to initialize camera: $e",
+      "ja": "カメラの初期化に失敗しました: $e",
       "occurrences": [
         {
           "file": "lib/view/Camera_view.dart",
@@ -654,7 +709,8 @@
     {
       "key": "view.camera.view.s002",
       "zh": "影片初始化失敗: $e",
-      "en": "",
+      "en": "Failed to initialize video: $e",
+      "ja": "動画の初期化に失敗しました: $e",
       "occurrences": [
         {
           "file": "lib/view/Camera_view.dart",
@@ -665,7 +721,8 @@
     {
       "key": "view.camera.view.s003",
       "zh": "選擇要放出的精靈",
-      "en": "",
+      "en": "Choose a spirit to release",
+      "ja": "呼び出す精霊を選択",
       "occurrences": [
         {
           "file": "lib/view/Camera_view.dart",
@@ -680,7 +737,8 @@
     {
       "key": "view.camera.view.s004",
       "zh": "目前沒有精靈",
-      "en": "",
+      "en": "No spirits available",
+      "ja": "精霊がいません",
       "occurrences": [
         {
           "file": "lib/view/Camera_view.dart",
@@ -695,7 +753,8 @@
     {
       "key": "view.camera.view.s005",
       "zh": "拍照截圖失敗: $e",
-      "en": "",
+      "en": "Failed to capture photo: $e",
+      "ja": "写真の撮影に失敗しました: $e",
       "occurrences": [
         {
           "file": "lib/view/Camera_view.dart",
@@ -707,6 +766,7 @@
       "key": "view.camera.view.s006",
       "zh": "[CameraView] 讀取精靈相框資料失敗: $e",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/view/Camera_view.dart",
@@ -717,7 +777,8 @@
     {
       "key": "view.camera.view.s009",
       "zh": "草",
-      "en": "",
+      "en": "Grass",
+      "ja": "草",
       "occurrences": [
         {
           "file": "lib/view/Camera_view.dart",
@@ -728,7 +789,8 @@
     {
       "key": "view.camera.view.s010",
       "zh": "返回",
-      "en": "",
+      "en": "Back",
+      "ja": "戻る",
       "occurrences": [
         {
           "file": "lib/view/Camera_view.dart",
@@ -747,7 +809,8 @@
     {
       "key": "view.elf.detail.page.s001",
       "zh": "傳說故事",
-      "en": "",
+      "en": "Legend",
+      "ja": "伝説",
       "occurrences": [
         {
           "file": "lib/view/elf_detail_page.dart",
@@ -758,7 +821,8 @@
     {
       "key": "view.elf.detail.page.s002",
       "zh": "目前沒有此精靈的故事資料。",
-      "en": "",
+      "en": "No story is available for this spirit.",
+      "ja": "この精霊の物語データはありません。",
       "occurrences": [
         {
           "file": "lib/view/elf_detail_page.dart",
@@ -769,7 +833,8 @@
     {
       "key": "view.elf.detail.page.s004",
       "zh": "目前沒有裝置藝術資料",
-      "en": "",
+      "en": "No public art information available",
+      "ja": "パブリックアートの情報はありません",
       "occurrences": [
         {
           "file": "lib/view/elf_detail_page.dart",
@@ -780,7 +845,8 @@
     {
       "key": "view.elf.detail.page.s005",
       "zh": "未知作者",
-      "en": "",
+      "en": "Unknown creator",
+      "ja": "作者不明",
       "occurrences": [
         {
           "file": "lib/view/elf_detail_page.dart",
@@ -791,7 +857,8 @@
     {
       "key": "view.elf.detail.page.s006",
       "zh": "系館",
-      "en": "",
+      "en": "Department Building",
+      "ja": "学部棟",
       "occurrences": [
         {
           "file": "lib/view/elf_detail_page.dart",
@@ -806,7 +873,8 @@
     {
       "key": "view.encyclopedia.page.s001",
       "zh": "圖鑑",
-      "en": "",
+      "en": "Spirit Collection",
+      "ja": "精霊図鑑",
       "occurrences": [
         {
           "file": "lib/view/encyclopedia_page.dart",
@@ -821,7 +889,8 @@
     {
       "key": "view.full.mission.page.s001",
       "zh": "成功捕捉精靈: ${widget.monsterModelCry.name}",
-      "en": "",
+      "en": "Successfully captured ${widget.monsterModelCry.name}",
+      "ja": "精霊の捕獲に成功しました: ${widget.monsterModelCry.name}",
       "occurrences": [
         {
           "file": "lib/view/full_mission_page.dart",
@@ -832,7 +901,8 @@
     {
       "key": "view.full.mission.page.s002",
       "zh": "沒有關卡",
-      "en": "",
+      "en": "No level available",
+      "ja": "ステージがありません",
       "occurrences": [
         {
           "file": "lib/view/full_mission_page.dart",
@@ -843,7 +913,8 @@
     {
       "key": "view.full.mission.page.s003",
       "zh": "未知關卡類型: ${mission.levelType}",
-      "en": "",
+      "en": "Unknown level type: ${mission.levelType}",
+      "ja": "不明なステージタイプ: ${mission.levelType}",
       "occurrences": [
         {
           "file": "lib/view/full_mission_page.dart",
@@ -854,7 +925,8 @@
     {
       "key": "view.full.mission.page.s004",
       "zh": "禁用頁面",
-      "en": "",
+      "en": "Page unavailable",
+      "ja": "このページは利用できません",
       "occurrences": [
         {
           "file": "lib/view/full_mission_page.dart",
@@ -865,7 +937,8 @@
     {
       "key": "view.full.mission.page.s005",
       "zh": "禁用頁面: ${mission.levelType}",
-      "en": "",
+      "en": "Page unavailable: ${mission.levelType}",
+      "ja": "このページは利用できません: ${mission.levelType}",
       "occurrences": [
         {
           "file": "lib/view/full_mission_page.dart",
@@ -876,7 +949,8 @@
     {
       "key": "view.lhf.setting.page.s001",
       "zh": "設定載入失敗",
-      "en": "",
+      "en": "Failed to load settings",
+      "ja": "設定の読み込みに失敗しました",
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
@@ -887,7 +961,8 @@
     {
       "key": "view.lhf.setting.page.s002",
       "zh": "本機設定暫時無法讀取，請稍後再試。",
-      "en": "",
+      "en": "Local settings are temporarily unavailable. Please try again later.",
+      "ja": "端末の設定を読み込めません。しばらくしてからもう一度お試しください。",
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
@@ -898,7 +973,8 @@
     {
       "key": "view.lhf.setting.page.s003",
       "zh": "設定載入中",
-      "en": "",
+      "en": "Loading settings",
+      "ja": "設定を読み込み中",
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
@@ -909,7 +985,8 @@
     {
       "key": "view.lhf.setting.page.s004",
       "zh": "正在同步本機設定，請稍候。",
-      "en": "",
+      "en": "Syncing local settings. Please wait.",
+      "ja": "端末の設定を同期しています。しばらくお待ちください。",
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
@@ -920,7 +997,8 @@
     {
       "key": "view.lhf.setting.page.s006",
       "zh": "設定中心",
-      "en": "",
+      "en": "Settings",
+      "ja": "設定",
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
@@ -931,7 +1009,8 @@
     {
       "key": "view.lhf.setting.page.s007",
       "zh": "冒險體驗偏好",
-      "en": "",
+      "en": "Adventure Preferences",
+      "ja": "冒険のプレイ設定",
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
@@ -942,7 +1021,8 @@
     {
       "key": "view.lhf.setting.page.s008",
       "zh": "這些設定會直接影響你在遊戲中的聲音與震動體驗，適合依照目前環境快速調整。",
-      "en": "",
+      "en": "These settings directly affect sound and vibration during gameplay. Adjust them to suit your surroundings.",
+      "ja": "ゲーム内の音量や振動に関する設定です。現在の環境に合わせて調整できます。",
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
@@ -953,7 +1033,8 @@
     {
       "key": "view.lhf.setting.page.s009",
       "zh": "本機儲存",
-      "en": "",
+      "en": "Stored on this device",
+      "ja": "端末に保存",
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
@@ -964,7 +1045,8 @@
     {
       "key": "view.lhf.setting.page.s010",
       "zh": "立即套用",
-      "en": "",
+      "en": "Apply Now",
+      "ja": "今すぐ適用",
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
@@ -975,7 +1057,8 @@
     {
       "key": "view.lhf.setting.page.s011",
       "zh": "音量",
-      "en": "",
+      "en": "Volume",
+      "ja": "音量",
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
@@ -986,7 +1069,8 @@
     {
       "key": "view.lhf.setting.page.s012",
       "zh": "目前此功能尚未完成。",
-      "en": "",
+      "en": "This feature is not available yet.",
+      "ja": "この機能はまだ利用できません。",
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
@@ -997,7 +1081,8 @@
     {
       "key": "view.lhf.setting.page.s013",
       "zh": "靜音",
-      "en": "",
+      "en": "Mute",
+      "ja": "ミュート",
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
@@ -1008,7 +1093,8 @@
     {
       "key": "view.lhf.setting.page.s014",
       "zh": "最大",
-      "en": "",
+      "en": "Max",
+      "ja": "最大",
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
@@ -1019,7 +1105,8 @@
     {
       "key": "view.lhf.setting.page.s015",
       "zh": "振動",
-      "en": "",
+      "en": "Vibration",
+      "ja": "振動",
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
@@ -1030,7 +1117,8 @@
     {
       "key": "view.lhf.setting.page.s016",
       "zh": "控制支援裝置上的觸覺回饋提示。",
-      "en": "",
+      "en": "Control haptic feedback on supported devices.",
+      "ja": "対応端末の触覚フィードバックを設定します。",
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
@@ -1041,7 +1129,8 @@
     {
       "key": "view.lhf.setting.page.s017",
       "zh": "已開啟",
-      "en": "",
+      "en": "On",
+      "ja": "オン",
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
@@ -1056,7 +1145,8 @@
     {
       "key": "view.lhf.setting.page.s018",
       "zh": "已關閉",
-      "en": "",
+      "en": "Off",
+      "ja": "オフ",
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
@@ -1071,7 +1161,8 @@
     {
       "key": "view.lhf.setting.page.s019",
       "zh": "觸覺提示開啟中",
-      "en": "",
+      "en": "Haptic feedback is on",
+      "ja": "触覚フィードバックはオンです",
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
@@ -1082,7 +1173,8 @@
     {
       "key": "view.lhf.setting.page.s020",
       "zh": "觸覺提示已關閉",
-      "en": "",
+      "en": "Haptic feedback is off",
+      "ja": "触覚フィードバックはオフです",
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
@@ -1093,7 +1185,8 @@
     {
       "key": "view.lhf.setting.page.s021",
       "zh": "在支援振動的情境中，遊戲可以提供更明顯的回饋。",
-      "en": "",
+      "en": "The game can provide stronger feedback when vibration is supported.",
+      "ja": "振動に対応した場面で、より明確なフィードバックを受けられます。",
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
@@ -1104,7 +1197,8 @@
     {
       "key": "view.lhf.setting.page.s022",
       "zh": "目前不會發出震動提示，適合需要安靜的使用情境。",
-      "en": "",
+      "en": "Vibration is disabled, which is ideal for quiet environments.",
+      "ja": "振動しないため、静かな環境での利用に適しています。",
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
@@ -1115,7 +1209,8 @@
     {
       "key": "view.lhf.setting.page.s023",
       "zh": "跳過劇情",
-      "en": "",
+      "en": "Skip Story",
+      "ja": "ストーリーをスキップ",
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
@@ -1126,7 +1221,8 @@
     {
       "key": "view.lhf.setting.page.s024",
       "zh": "控制是否自動略過劇情對話，快速進入遊戲流程。",
-      "en": "",
+      "en": "Automatically skip story dialogue and enter gameplay more quickly.",
+      "ja": "ストーリーの会話を自動でスキップし、すぐにゲームを開始します。",
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
@@ -1137,7 +1233,8 @@
     {
       "key": "view.lhf.setting.page.s027",
       "zh": "自動跳過劇情中",
-      "en": "",
+      "en": "Auto-skip is on",
+      "ja": "自動スキップはオンです",
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
@@ -1148,7 +1245,8 @@
     {
       "key": "view.lhf.setting.page.s028",
       "zh": "保留劇情播放",
-      "en": "",
+      "en": "Play story scenes",
+      "ja": "ストーリーを再生",
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
@@ -1159,7 +1257,8 @@
     {
       "key": "view.lhf.setting.page.s029",
       "zh": "進入關卡時會略過劇情段落，適合重複挑戰時使用。",
-      "en": "",
+      "en": "Story scenes will be skipped when entering a level, ideal for repeat challenges.",
+      "ja": "ステージ開始時にストーリーをスキップします。再挑戦時におすすめです。",
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
@@ -1170,7 +1269,8 @@
     {
       "key": "view.lhf.setting.page.s030",
       "zh": "劇情段落會正常顯示，適合第一次體驗故事內容。",
-      "en": "",
+      "en": "Story scenes will play normally, ideal for your first playthrough.",
+      "ja": "ストーリーを通常どおり表示します。初めてプレイする場合におすすめです。",
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
@@ -1181,7 +1281,8 @@
     {
       "key": "view.lhf.setting.page.s031",
       "zh": "測試：捕捉全部精靈",
-      "en": "",
+      "en": "Test: Capture All Spirits",
+      "ja": "テスト：すべての精霊を捕獲",
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
@@ -1192,7 +1293,8 @@
     {
       "key": "view.lhf.setting.page.s032",
       "zh": "開發測試用，會把目前資料庫中的所有精靈加入圖鑑。",
-      "en": "",
+      "en": "Developer test tool that adds every spirit in the current database to your collection.",
+      "ja": "現在のデータベースにあるすべての精霊を図鑑に追加する開発用テスト機能です。",
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
@@ -1203,7 +1305,8 @@
     {
       "key": "view.lhf.setting.page.s033",
       "zh": "一鍵捕捉全部",
-      "en": "",
+      "en": "Capture All",
+      "ja": "すべて捕獲",
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
@@ -1214,7 +1317,8 @@
     {
       "key": "view.lhf.setting.page.s034",
       "zh": "一鍵刪除全部",
-      "en": "",
+      "en": "Delete All",
+      "ja": "すべて削除",
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
@@ -1225,7 +1329,8 @@
     {
       "key": "view.lhf.setting.page.s035",
       "zh": "請先登入後再使用測試功能",
-      "en": "",
+      "en": "Please sign in before using test features",
+      "ja": "テスト機能を使用するにはログインしてください",
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
@@ -1236,7 +1341,8 @@
     {
       "key": "view.lhf.setting.page.s036",
       "zh": "正在加入所有精靈...",
-      "en": "",
+      "en": "Adding all spirits...",
+      "ja": "すべての精霊を追加しています...",
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
@@ -1247,7 +1353,8 @@
     {
       "key": "view.lhf.setting.page.s037",
       "zh": "正在刪除圖鑑精靈...",
-      "en": "",
+      "en": "Removing spirits from your collection...",
+      "ja": "図鑑から精霊を削除しています...",
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
@@ -1258,7 +1365,8 @@
     {
       "key": "view.lhf.setting.page.s038",
       "zh": "捕捉全部精靈失敗，請稍後再試",
-      "en": "",
+      "en": "Failed to capture all spirits. Please try again later.",
+      "ja": "すべての精霊を捕獲できませんでした。しばらくしてからもう一度お試しください。",
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
@@ -1269,7 +1377,8 @@
     {
       "key": "view.lhf.setting.page.s039",
       "zh": "刪除全部精靈失敗，請稍後再試",
-      "en": "",
+      "en": "Failed to delete all spirits. Please try again later.",
+      "ja": "すべての精霊を削除できませんでした。しばらくしてからもう一度お試しください。",
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
@@ -1280,7 +1389,8 @@
     {
       "key": "view.lhf.setting.page.s040",
       "zh": "圖鑑已經擁有全部精靈",
-      "en": "",
+      "en": "You already have every spirit in your collection",
+      "ja": "すでにすべての精霊を捕獲しています",
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
@@ -1291,7 +1401,8 @@
     {
       "key": "view.lhf.setting.page.s041",
       "zh": "已新增 $count 隻精靈到圖鑑",
-      "en": "",
+      "en": "Added $count spirits to your collection",
+      "ja": "$count体の精霊を図鑑に追加しました",
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
@@ -1302,7 +1413,8 @@
     {
       "key": "view.lhf.setting.page.s042",
       "zh": "圖鑑原本就是空的",
-      "en": "",
+      "en": "Your collection was already empty",
+      "ja": "図鑑はすでに空です",
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
@@ -1313,7 +1425,8 @@
     {
       "key": "view.lhf.setting.page.s043",
       "zh": "已從圖鑑刪除 $count 隻精靈",
-      "en": "",
+      "en": "Removed $count spirits from your collection",
+      "ja": "図鑑から$count体の精霊を削除しました",
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
@@ -1324,7 +1437,8 @@
     {
       "key": "view.lhf.setting.page.s044",
       "zh": "語言",
-      "en": "",
+      "en": "Language",
+      "ja": "言語",
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
@@ -1335,7 +1449,8 @@
     {
       "key": "view.lhf.setting.page.s045",
       "zh": "選擇遊戲介面的顯示語言。",
-      "en": "",
+      "en": "Choose the language used in the game interface.",
+      "ja": "ゲーム画面に表示する言語を選択します。",
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
@@ -1346,7 +1461,8 @@
     {
       "key": "view.lhf.setting.page.s046",
       "zh": "中文",
-      "en": "",
+      "en": "Chinese",
+      "ja": "中国語",
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
@@ -1357,7 +1473,8 @@
     {
       "key": "view.lhf.setting.page.s047",
       "zh": "目前語言",
-      "en": "",
+      "en": "Current Language",
+      "ja": "現在の言語",
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
@@ -1368,7 +1485,8 @@
     {
       "key": "view.lhf.setting.page.s048",
       "zh": "使用者協議",
-      "en": "",
+      "en": "User Agreement",
+      "ja": "利用規約",
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
@@ -1383,7 +1501,8 @@
     {
       "key": "view.lhf.setting.page.s049",
       "zh": "查看目前版本的使用者協議與說明內容。",
-      "en": "",
+      "en": "View the current user agreement and related information.",
+      "ja": "現在の利用規約と関連情報を確認します。",
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
@@ -1394,7 +1513,8 @@
     {
       "key": "view.lhf.setting.page.s050",
       "zh": "點擊前往閱讀協議內容",
-      "en": "",
+      "en": "Tap to read the agreement",
+      "ja": "タップして利用規約を読む",
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
@@ -1405,7 +1525,8 @@
     {
       "key": "view.lhf.setting.page.s051",
       "zh": "目前音量 ${volumePercentage(volume)}",
-      "en": "",
+      "en": "Current volume: ${volumePercentage(volume)}",
+      "ja": "現在の音量: ${volumePercentage(volume)}",
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
@@ -1417,6 +1538,7 @@
       "key": "view.lhf.setting.page.s052",
       "zh": "[SettingPage] 捕捉全部精靈失敗: $e",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
@@ -1428,6 +1550,7 @@
       "key": "view.lhf.setting.page.s053",
       "zh": "[SettingPage] 刪除全部精靈失敗: $e",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
@@ -1439,6 +1562,7 @@
       "key": "view.login.page.s001",
       "zh": "[LoginPage] 登入成功，正在獲取資料...",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/view/login_page.dart",
@@ -1449,7 +1573,8 @@
     {
       "key": "view.login.page.s002",
       "zh": "帳號或密碼錯誤",
-      "en": "",
+      "en": "Incorrect email or password",
+      "ja": "メールアドレスまたはパスワードが正しくありません",
       "occurrences": [
         {
           "file": "lib/view/login_page.dart",
@@ -1461,6 +1586,7 @@
       "key": "view.login.page.s003",
       "zh": "[LoginPage] 登入出錯: $e",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/view/login_page.dart",
@@ -1471,7 +1597,8 @@
     {
       "key": "view.login.page.s004",
       "zh": "登入發生錯誤，請稍後再試",
-      "en": "",
+      "en": "An error occurred while signing in. Please try again later.",
+      "ja": "ログイン中にエラーが発生しました。しばらくしてからもう一度お試しください。",
       "occurrences": [
         {
           "file": "lib/view/login_page.dart",
@@ -1482,7 +1609,8 @@
     {
       "key": "view.login.page.s005",
       "zh": "Google 登入失敗，請稍後再試",
-      "en": "",
+      "en": "Google Sign-In failed. Please try again later.",
+      "ja": "Googleログインに失敗しました。しばらくしてからもう一度お試しください。",
       "occurrences": [
         {
           "file": "lib/view/login_page.dart",
@@ -1494,6 +1622,7 @@
       "key": "view.login.page.s006",
       "zh": "[LoginPage] Google 登入出錯: $e",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/view/login_page.dart",
@@ -1504,7 +1633,8 @@
     {
       "key": "view.login.page.s007",
       "zh": "Google 登入發生錯誤，請稍後再試",
-      "en": "",
+      "en": "An error occurred during Google Sign-In. Please try again later.",
+      "ja": "Googleログイン中にエラーが発生しました。しばらくしてからもう一度お試しください。",
       "occurrences": [
         {
           "file": "lib/view/login_page.dart",
@@ -1515,7 +1645,8 @@
     {
       "key": "view.map.suggestions.s001",
       "zh": "中大十景",
-      "en": "",
+      "en": "Top 10 NCU Landmarks",
+      "ja": "中央大学十景",
       "occurrences": [
         {
           "file": "lib/view/map_suggestions.dart",
@@ -1527,6 +1658,7 @@
       "key": "view.map.suggestions.s004",
       "zh": "[Debug][MapSuggestionsPage] 載入地景資料失敗: $error",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/view/map_suggestions.dart",
@@ -1537,7 +1669,8 @@
     {
       "key": "view.map.suggestions.s005",
       "zh": "地景資料載入失敗：$error",
-      "en": "",
+      "en": "Failed to load landmark data: $error",
+      "ja": "スポットデータの読み込みに失敗しました: $error",
       "occurrences": [
         {
           "file": "lib/view/map_suggestions.dart",
@@ -1548,7 +1681,8 @@
     {
       "key": "view.map.suggestions.s006",
       "zh": "GPS 尚未開啟",
-      "en": "",
+      "en": "GPS is turned off",
+      "ja": "GPSがオフになっています",
       "occurrences": [
         {
           "file": "lib/view/map_suggestions.dart",
@@ -1559,7 +1693,8 @@
     {
       "key": "view.map.suggestions.s007",
       "zh": "尚未取得定位權限",
-      "en": "",
+      "en": "Location permission has not been granted",
+      "ja": "位置情報の権限が許可されていません",
       "occurrences": [
         {
           "file": "lib/view/map_suggestions.dart",
@@ -1571,6 +1706,7 @@
       "key": "view.nearby.monsters.display.s001",
       "zh": "[MonsterMarkers] 動畫精靈圖載入失敗: $animatedPath, $error",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/view/nearby_monsters_display.dart",
@@ -1582,6 +1718,7 @@
       "key": "view.nearby.monsters.display.s002",
       "zh": "[MonsterMarkers] 靜態精靈圖載入失敗: ${monster.imageURL}, $error",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/view/nearby_monsters_display.dart",
@@ -1593,6 +1730,7 @@
       "key": "view.nearby.monsters.display.s003",
       "zh": "無法將精靈圖片轉成 PNG bytes",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/view/nearby_monsters_display.dart",
@@ -1603,7 +1741,8 @@
     {
       "key": "view.novice.leading.page.s001",
       "zh": "這是你現在在的位置，你將帶領它探索校園",
-      "en": "",
+      "en": "This is your current location. You will guide your companion as you explore the campus.",
+      "ja": "ここが現在地です。仲間を導いてキャンパスを探索しましょう。",
       "occurrences": [
         {
           "file": "lib/view/novice_leading_page.dart",
@@ -1614,7 +1753,8 @@
     {
       "key": "view.novice.leading.page.s002",
       "zh": "這裡可以更改修改個人資訊",
-      "en": "",
+      "en": "You can edit your profile here.",
+      "ja": "ここでプロフィールを編集できます。",
       "occurrences": [
         {
           "file": "lib/view/novice_leading_page.dart",
@@ -1625,7 +1765,8 @@
     {
       "key": "view.novice.leading.page.s003",
       "zh": "這裡可以更改頭像，選一個你心儀的角色吧",
-      "en": "",
+      "en": "You can change your avatar here. Choose a character you like!",
+      "ja": "ここでアバターを変更できます。お気に入りのキャラクターを選びましょう！",
       "occurrences": [
         {
           "file": "lib/view/novice_leading_page.dart",
@@ -1636,7 +1777,8 @@
     {
       "key": "view.novice.leading.page.s004",
       "zh": "這個箭頭將帶領你找到最近的精靈",
-      "en": "",
+      "en": "This arrow will guide you to the nearest spirit.",
+      "ja": "この矢印が最も近い精霊まで案内します。",
       "occurrences": [
         {
           "file": "lib/view/novice_leading_page.dart",
@@ -1647,7 +1789,8 @@
     {
       "key": "view.novice.leading.page.s005",
       "zh": "精靈出現了，點擊它來開始捉捕吧",
-      "en": "",
+      "en": "A spirit has appeared! Tap it to begin capturing it.",
+      "ja": "精霊が現れました！タップして捕獲を始めましょう。",
       "occurrences": [
         {
           "file": "lib/view/novice_leading_page.dart",
@@ -1658,7 +1801,8 @@
     {
       "key": "view.novice.leading.page.s006",
       "zh": "更多精采體驗等著你去探索",
-      "en": "",
+      "en": "More exciting experiences are waiting for you to discover.",
+      "ja": "さらに楽しい体験があなたを待っています。",
       "occurrences": [
         {
           "file": "lib/view/novice_leading_page.dart",
@@ -1669,7 +1813,8 @@
     {
       "key": "view.novice.leading.page.s007",
       "zh": "抓到的精靈將會在圖鑑裡面",
-      "en": "",
+      "en": "The spirits you capture will appear in your collection.",
+      "ja": "捕まえた精霊は図鑑に登録されます。",
       "occurrences": [
         {
           "file": "lib/view/novice_leading_page.dart",
@@ -1680,7 +1825,8 @@
     {
       "key": "view.novice.leading.page.s008",
       "zh": "點擊查看精靈詳情!",
-      "en": "",
+      "en": "Tap to view spirit details!",
+      "ja": "タップして精霊の詳細を確認！",
       "occurrences": [
         {
           "file": "lib/view/novice_leading_page.dart",
@@ -1691,7 +1837,8 @@
     {
       "key": "view.novice.leading.page.s009",
       "zh": "更多資訊在這邊!!",
-      "en": "",
+      "en": "Find more information here!",
+      "ja": "詳しい情報はこちら！",
       "occurrences": [
         {
           "file": "lib/view/novice_leading_page.dart",
@@ -1702,7 +1849,8 @@
     {
       "key": "view.novice.leading.page.s010",
       "zh": "更多功能等待你探索!!",
-      "en": "",
+      "en": "More features are waiting for you to explore!",
+      "ja": "ほかの機能も探索してみましょう！",
       "occurrences": [
         {
           "file": "lib/view/novice_leading_page.dart",
@@ -1713,7 +1861,8 @@
     {
       "key": "view.novice.leading.page.s011",
       "zh": "結束教學",
-      "en": "",
+      "en": "Finish Tutorial",
+      "ja": "チュートリアルを終了",
       "occurrences": [
         {
           "file": "lib/view/novice_leading_page.dart",
@@ -1724,7 +1873,8 @@
     {
       "key": "view.novice.leading.page.s012",
       "zh": "跳過",
-      "en": "",
+      "en": "Skip",
+      "ja": "スキップ",
       "occurrences": [
         {
           "file": "lib/view/novice_leading_page.dart",
@@ -1735,7 +1885,8 @@
     {
       "key": "view.novice.leading.page.s013",
       "zh": "上一步",
-      "en": "",
+      "en": "Previous",
+      "ja": "前へ",
       "occurrences": [
         {
           "file": "lib/view/novice_leading_page.dart",
@@ -1746,7 +1897,8 @@
     {
       "key": "view.novice.leading.page.s014",
       "zh": "下一步",
-      "en": "",
+      "en": "Next",
+      "ja": "次へ",
       "occurrences": [
         {
           "file": "lib/view/novice_leading_page.dart",
@@ -1757,7 +1909,8 @@
     {
       "key": "view.photo.preview.s001",
       "zh": "照片已成功儲存到相簿！",
-      "en": "",
+      "en": "Photo saved to your gallery!",
+      "ja": "写真をアルバムに保存しました！",
       "occurrences": [
         {
           "file": "lib/view/photo_preview.dart",
@@ -1768,7 +1921,8 @@
     {
       "key": "view.photo.preview.s002",
       "zh": "儲存失敗: $e",
-      "en": "",
+      "en": "Failed to save: $e",
+      "ja": "保存に失敗しました: $e",
       "occurrences": [
         {
           "file": "lib/view/photo_preview.dart",
@@ -1779,7 +1933,8 @@
     {
       "key": "view.photo.preview.s003",
       "zh": "照片預覽",
-      "en": "",
+      "en": "Photo Preview",
+      "ja": "写真プレビュー",
       "occurrences": [
         {
           "file": "lib/view/photo_preview.dart",
@@ -1790,7 +1945,8 @@
     {
       "key": "view.photo.preview.s004",
       "zh": "重拍",
-      "en": "",
+      "en": "Retake",
+      "ja": "撮り直す",
       "occurrences": [
         {
           "file": "lib/view/photo_preview.dart",
@@ -1801,7 +1957,8 @@
     {
       "key": "view.photo.preview.s005",
       "zh": "儲存",
-      "en": "",
+      "en": "Save",
+      "ja": "保存",
       "occurrences": [
         {
           "file": "lib/view/photo_preview.dart",
@@ -1812,7 +1969,8 @@
     {
       "key": "view.real.ar.view.s001",
       "zh": "放置精靈",
-      "en": "",
+      "en": "Place Spirit",
+      "ja": "精霊を配置",
       "occurrences": [
         {
           "file": "lib/view/real_ar_view.dart",
@@ -1823,7 +1981,8 @@
     {
       "key": "view.real.ar.view.s004",
       "zh": "嚶嚶嚶",
-      "en": "",
+      "en": "Sob...",
+      "ja": "えーん...",
       "occurrences": [
         {
           "file": "lib/view/real_ar_view.dart",
@@ -1835,6 +1994,7 @@
       "key": "view.real.ar.view.s005",
       "zh": "💡 已切換精靈模型為: $selectedMonsterUrl",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/view/real_ar_view.dart",
@@ -1845,7 +2005,8 @@
     {
       "key": "view.real.ar.view.s006",
       "zh": "請先選擇一隻精靈！",
-      "en": "",
+      "en": "Please choose a spirit first!",
+      "ja": "先に精霊を選択してください！",
       "occurrences": [
         {
           "file": "lib/view/real_ar_view.dart",
@@ -1856,7 +2017,8 @@
     {
       "key": "view.register.page.s001",
       "zh": "請確認註冊資料是否正確",
-      "en": "",
+      "en": "Please check that your registration information is correct",
+      "ja": "登録情報が正しいか確認してください",
       "occurrences": [
         {
           "file": "lib/view/register_page.dart",
@@ -1867,7 +2029,8 @@
     {
       "key": "view.register.page.s002",
       "zh": "驗證信已寄到 ${user.email ?? '你的信箱'}，請完成驗證後再登入",
-      "en": "",
+      "en": "A verification email has been sent to ${user.email ?? 'your email address'}. Verify your email before signing in.",
+      "ja": "確認メールを${user.email ?? 'メールアドレス'}に送信しました。メール認証を完了してからログインしてください。",
       "occurrences": [
         {
           "file": "lib/view/register_page.dart",
@@ -1878,7 +2041,8 @@
     {
       "key": "view.register.page.s003",
       "zh": "註冊失敗，該 Email 可能已被使用或網路異常",
-      "en": "",
+      "en": "Registration failed. This email may already be in use, or there may be a network issue.",
+      "ja": "登録に失敗しました。このメールアドレスはすでに使用されているか、ネットワークに問題がある可能性があります。",
       "occurrences": [
         {
           "file": "lib/view/register_page.dart",
@@ -1890,6 +2054,7 @@
       "key": "view.register.page.s004",
       "zh": "[RegisterPage] 註冊出錯: $e",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/view/register_page.dart",
@@ -1900,7 +2065,8 @@
     {
       "key": "view.register.page.s005",
       "zh": "註冊失敗: $e",
-      "en": "",
+      "en": "Registration failed: $e",
+      "ja": "登録に失敗しました: $e",
       "occurrences": [
         {
           "file": "lib/view/register_page.dart",
@@ -1911,7 +2077,8 @@
     {
       "key": "view.register.page.s006",
       "zh": "Google 註冊成功！歡迎加入冒險之旅",
-      "en": "",
+      "en": "Google registration successful! Welcome to the adventure!",
+      "ja": "Googleでの登録が完了しました！冒険の世界へようこそ！",
       "occurrences": [
         {
           "file": "lib/view/register_page.dart",
@@ -1922,7 +2089,8 @@
     {
       "key": "view.register.page.s007",
       "zh": "Google 註冊失敗，請稍後再試",
-      "en": "",
+      "en": "Google registration failed. Please try again later.",
+      "ja": "Googleでの登録に失敗しました。しばらくしてからもう一度お試しください。",
       "occurrences": [
         {
           "file": "lib/view/register_page.dart",
@@ -1934,6 +2102,7 @@
       "key": "view.register.page.s008",
       "zh": "[RegisterPage] Google 登入失敗: $e",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/view/register_page.dart",
@@ -1944,7 +2113,8 @@
     {
       "key": "view.register.page.s009",
       "zh": "Google 登入失敗: $e",
-      "en": "",
+      "en": "Google Sign-In failed: $e",
+      "ja": "Googleログインに失敗しました: $e",
       "occurrences": [
         {
           "file": "lib/view/register_page.dart",
@@ -1955,7 +2125,8 @@
     {
       "key": "view.user.protocol.s002",
       "zh": "暫時替代頁面",
-      "en": "",
+      "en": "Temporary Page",
+      "ja": "仮ページ",
       "occurrences": [
         {
           "file": "lib/view/user_protocol.dart",
@@ -1966,7 +2137,8 @@
     {
       "key": "view.user.protocol.s003",
       "zh": "協議內容準備中",
-      "en": "",
+      "en": "Agreement Coming Soon",
+      "ja": "利用規約を準備中",
       "occurrences": [
         {
           "file": "lib/view/user_protocol.dart",
@@ -1977,7 +2149,8 @@
     {
       "key": "view.user.protocol.s004",
       "zh": "這裡之後會放正式的使用者協議、服務條款與相關說明。",
-      "en": "",
+      "en": "The official user agreement, terms of service, and related information will appear here.",
+      "ja": "正式な利用規約、サービス条件、および関連情報は今後ここに掲載されます。",
       "occurrences": [
         {
           "file": "lib/view/user_protocol.dart",
@@ -1988,7 +2161,8 @@
     {
       "key": "view.user.protocol.s005",
       "zh": "\\n\\n目前這是一個暫時性的替代頁面，用來先完成設定頁的跳轉流程與互動測試。",
-      "en": "",
+      "en": "\\n\\nThis is currently a temporary page used to complete and test navigation from the settings screen.",
+      "ja": "\\n\\n現在は、設定画面からの遷移と操作を確認するための仮ページです。",
       "occurrences": [
         {
           "file": "lib/view/user_protocol.dart",
@@ -1999,7 +2173,8 @@
     {
       "key": "view.user.protocol.s006",
       "zh": "\\n\\n之後只要把這裡的內容替換成正式協議即可，不需要再修改設定頁按鈕的跳轉邏輯。",
-      "en": "",
+      "en": "\\n\\nThe official agreement can later replace this content without changing the settings-page navigation.",
+      "ja": "\\n\\n今後ここを正式な規約に置き換えるだけで、設定画面の遷移処理を変更する必要はありません。",
       "occurrences": [
         {
           "file": "lib/view/user_protocol.dart",
@@ -2010,7 +2185,8 @@
     {
       "key": "view.user.protocol.s007",
       "zh": "目前可先確認",
-      "en": "",
+      "en": "For now, you can confirm that",
+      "ja": "現在確認できること",
       "occurrences": [
         {
           "file": "lib/view/user_protocol.dart",
@@ -2021,7 +2197,8 @@
     {
       "key": "view.user.protocol.s008",
       "zh": "按鈕按下時會先縮小，放開後回彈再跳轉。",
-      "en": "",
+      "en": "The button shrinks when pressed, then bounces back before navigating.",
+      "ja": "ボタンを押すと一度縮小し、指を離すと元に戻ってから画面が切り替わります。",
       "occurrences": [
         {
           "file": "lib/view/user_protocol.dart",
@@ -2032,7 +2209,8 @@
     {
       "key": "view.user.protocol.s009",
       "zh": "返回設定頁後，不需要額外處理狀態。",
-      "en": "",
+      "en": "No additional state handling is required when returning to Settings.",
+      "ja": "設定画面へ戻る際に、追加の状態処理は必要ありません。",
       "occurrences": [
         {
           "file": "lib/view/user_protocol.dart",
@@ -2043,7 +2221,8 @@
     {
       "key": "view.user.protocol.s010",
       "zh": "之後可直接在這個檔案補上正式協議內容。",
-      "en": "",
+      "en": "The official agreement can be added directly to this file later.",
+      "ja": "正式な規約は、今後このファイルに直接追加できます。",
       "occurrences": [
         {
           "file": "lib/view/user_protocol.dart",
@@ -2054,7 +2233,8 @@
     {
       "key": "widgets.ar.control.ar.control.view.s001",
       "zh": "操控精靈吧！",
-      "en": "",
+      "en": "Control Your Spirit!",
+      "ja": "精霊を操作しよう！",
       "occurrences": [
         {
           "file": "lib/widgets/ar_control/ar_control_view.dart",
@@ -2066,6 +2246,7 @@
       "key": "widgets.ar.control.ar.control.view.s002",
       "zh": "💡 模型已切換至: $newUrl",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/widgets/ar_control/ar_control_view.dart",
@@ -2076,7 +2257,8 @@
     {
       "key": "widgets.buttons.click.and.accept.button.s001",
       "zh": "確定",
-      "en": "",
+      "en": "Confirm",
+      "ja": "確認",
       "occurrences": [
         {
           "file": "lib/widgets/buttons/click_and_accept_button.dart",
@@ -2087,7 +2269,8 @@
     {
       "key": "widgets.buttons.click.and.accept.button.s002",
       "zh": "取消",
-      "en": "",
+      "en": "Cancel",
+      "ja": "キャンセル",
       "occurrences": [
         {
           "file": "lib/widgets/buttons/click_and_accept_button.dart",
@@ -2098,7 +2281,8 @@
     {
       "key": "widgets.buttons.nfc.button.s001",
       "zh": "ID 不符合，請重新嘗試！",
-      "en": "",
+      "en": "The ID does not match. Please try again!",
+      "ja": "IDが一致しません。もう一度お試しください！",
       "occurrences": [
         {
           "file": "lib/widgets/buttons/nfc_button.dart",
@@ -2109,7 +2293,8 @@
     {
       "key": "widgets.buttons.nfc.button.s002",
       "zh": "系統層級錯誤: $e",
-      "en": "",
+      "en": "System error: $e",
+      "ja": "システムエラー: $e",
       "occurrences": [
         {
           "file": "lib/widgets/buttons/nfc_button.dart",
@@ -2120,7 +2305,8 @@
     {
       "key": "widgets.buttons.nfc.button.s003",
       "zh": "取消感應",
-      "en": "",
+      "en": "Cancel Scan",
+      "ja": "スキャンをキャンセル",
       "occurrences": [
         {
           "file": "lib/widgets/buttons/nfc_button.dart",
@@ -2131,7 +2317,8 @@
     {
       "key": "widgets.buttons.nfc.button.s004",
       "zh": "NFC權限未開放",
-      "en": "",
+      "en": "NFC permission is not enabled",
+      "ja": "NFCの権限が許可されていません",
       "occurrences": [
         {
           "file": "lib/widgets/buttons/nfc_button.dart",
@@ -2142,7 +2329,8 @@
     {
       "key": "widgets.buttons.nfc.button.s005",
       "zh": "標籤格式錯誤",
-      "en": "",
+      "en": "Invalid tag format",
+      "ja": "タグの形式が正しくありません",
       "occurrences": [
         {
           "file": "lib/widgets/buttons/nfc_button.dart",
@@ -2153,7 +2341,8 @@
     {
       "key": "widgets.buttons.nfc.button.s006",
       "zh": "發生未知錯誤",
-      "en": "",
+      "en": "An unknown error occurred",
+      "ja": "不明なエラーが発生しました",
       "occurrences": [
         {
           "file": "lib/widgets/buttons/nfc_button.dart",
@@ -2169,6 +2358,7 @@
       "key": "widgets.common.user.head.s001",
       "zh": "[UserHead] SVG 載入失敗: $error",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/widgets/common/user_head.dart",
@@ -2180,6 +2370,7 @@
       "key": "widgets.common.user.head.s002",
       "zh": "[UserHead] 圖片載入失敗: $error",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/widgets/common/user_head.dart",
@@ -2190,7 +2381,8 @@
     {
       "key": "widgets.encyclopedia.all.the.monster.monster.text.s001",
       "zh": "精靈經由象群雕塑，匆匆跑向黑盒子，路途中似乎有什麼散發著魔力",
-      "en": "",
+      "en": "The spirit hurried past the Elephant Herd sculpture toward the Black Box. Something along the way seemed to radiate magic.",
+      "ja": "精霊は象群の彫刻を通り過ぎ、黒い箱へと急いでいきました。その途中で何かが魔力を放っているようです。",
       "occurrences": [
         {
           "file": "lib/widgets/encyclopedia/all_the_monster/monster_text.dart",
@@ -2201,7 +2393,8 @@
     {
       "key": "widgets.encyclopedia.all.the.monster.monster.text.s002",
       "zh": "沒發現魔法陣嗎？或許可以試試穿過拱門，看看會不會有什麼發現",
-      "en": "",
+      "en": "Haven't found the magic circle? Try passing through the archway and see what you discover.",
+      "ja": "魔法陣が見つかりませんか？アーチをくぐって、何か見つからないか探してみましょう。",
       "occurrences": [
         {
           "file": "lib/widgets/encyclopedia/all_the_monster/monster_text.dart",
@@ -2212,7 +2405,8 @@
     {
       "key": "widgets.encyclopedia.all.the.monster.monster.text.s003",
       "zh": "精靈似乎曾駐足DNA觀賞許久，才又繼續前行，或許可以試著在附近找找看",
-      "en": "",
+      "en": "The spirit once stopped to admire the DNA sculpture for a long time before moving on. Try searching nearby.",
+      "ja": "精霊はDNAの彫刻を長い間眺めてから先へ進んだようです。近くを探してみましょう。",
       "occurrences": [
         {
           "file": "lib/widgets/encyclopedia/all_the_monster/monster_text.dart",
@@ -2223,7 +2417,8 @@
     {
       "key": "widgets.encyclopedia.all.the.monster.monster.text.s004",
       "zh": "請根據圖片內容，找到對應位置感應",
-      "en": "",
+      "en": "Use the image to find the matching location and scan the tag.",
+      "ja": "画像を手掛かりに該当する場所を見つけ、タグをスキャンしてください。",
       "occurrences": [
         {
           "file": "lib/widgets/encyclopedia/all_the_monster/monster_text.dart",
@@ -2238,7 +2433,8 @@
     {
       "key": "widgets.encyclopedia.all.the.monster.monster.text.s005",
       "zh": "雲端上的松果似乎散發著魔力",
-      "en": "",
+      "en": "The pinecone in the clouds seems to radiate magic.",
+      "ja": "雲の上の松ぼっくりが魔力を放っているようです。",
       "occurrences": [
         {
           "file": "lib/widgets/encyclopedia/all_the_monster/monster_text.dart",
@@ -2249,7 +2445,8 @@
     {
       "key": "widgets.encyclopedia.all.the.monster.monster.text.s007",
       "zh": "站在疑問最深處，當屏風完全消失於視野時，向水面反射，疑問自會明朗",
-      "en": "",
+      "en": "Stand at the heart of the question. When the screen disappears completely from view, look toward its reflection on the water and the answer will become clear.",
+      "ja": "問いの最も深い場所に立ち、屏風が視界から完全に消えたとき、水面に映る姿を見れば答えが明らかになるでしょう。",
       "occurrences": [
         {
           "file": "lib/widgets/encyclopedia/all_the_monster/monster_text.dart",
@@ -2260,7 +2457,8 @@
     {
       "key": "widgets.encyclopedia.all.the.monster.monster.text.s008",
       "zh": "圖片中，是不是有一朵雲特別不一樣？",
-      "en": "",
+      "en": "Does one of the clouds in the image look different from the others?",
+      "ja": "画像の中に、ほかとは少し違う雲がありませんか？",
       "occurrences": [
         {
           "file": "lib/widgets/encyclopedia/all_the_monster/monster_text.dart",
@@ -2271,7 +2469,8 @@
     {
       "key": "widgets.encyclopedia.all.the.monster.monster.text.s009",
       "zh": "精靈似乎曾望著裝置，期待能看到代表中央大學的「中」字出現",
-      "en": "",
+      "en": "The spirit once gazed at the installation, waiting for the Chinese character “中,” representing National Central University, to appear.",
+      "ja": "精霊は装置を見つめ、中央大学を表す「中」の文字が現れるのを待っていたようです。",
       "occurrences": [
         {
           "file": "lib/widgets/encyclopedia/all_the_monster/monster_text.dart",
@@ -2282,7 +2481,8 @@
     {
       "key": "widgets.encyclopedia.elf.creator.section.s001",
       "zh": "Creator Info (創作者資料)",
-      "en": "",
+      "en": "Creator Information",
+      "ja": "作者情報",
       "occurrences": [
         {
           "file": "lib/widgets/encyclopedia/elf_creator_section.dart",
@@ -2293,7 +2493,8 @@
     {
       "key": "widgets.encyclopedia.elf.department.section.s001",
       "zh": "College Departments (學院系館)",
-      "en": "",
+      "en": "College Departments",
+      "ja": "学部・学科",
       "occurrences": [
         {
           "file": "lib/widgets/encyclopedia/elf_department_section.dart",
@@ -2304,7 +2505,8 @@
     {
       "key": "widgets.encyclopedia.elf.grid.s001",
       "zh": "尚未捕捉任何怪物",
-      "en": "",
+      "en": "No spirits captured yet",
+      "ja": "まだ精霊を捕獲していません",
       "occurrences": [
         {
           "file": "lib/widgets/encyclopedia/elf_grid.dart",
@@ -2316,6 +2518,7 @@
       "key": "widgets.encyclopedia.elf.hero.section.s001",
       "zh": "圖片載入失敗路徑: $imagePath",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/widgets/encyclopedia/elf_hero_section.dart",
@@ -2326,7 +2529,8 @@
     {
       "key": "widgets.encyclopedia.elf.hero.section.s002",
       "zh": "圖片路徑錯誤:\\n$imagePath",
-      "en": "",
+      "en": "Invalid image path:\\n$imagePath",
+      "ja": "画像パスが正しくありません:\\n$imagePath",
       "occurrences": [
         {
           "file": "lib/widgets/encyclopedia/elf_hero_section.dart",
@@ -2337,7 +2541,8 @@
     {
       "key": "widgets.encyclopedia.elf.installation.section.s001",
       "zh": "Installation Art (裝置藝術)",
-      "en": "",
+      "en": "Public Art",
+      "ja": "パブリックアート",
       "occurrences": [
         {
           "file": "lib/widgets/encyclopedia/elf_installation_section.dart",
@@ -2348,7 +2553,8 @@
     {
       "key": "widgets.encyclopedia.elf.installation.section.s002",
       "zh": "Location (設置位置):",
-      "en": "",
+      "en": "Location:",
+      "ja": "設置場所:",
       "occurrences": [
         {
           "file": "lib/widgets/encyclopedia/elf_installation_section.dart",
@@ -2359,7 +2565,8 @@
     {
       "key": "widgets.encyclopedia.elf.installation.section.s003",
       "zh": "Year (設置年代):",
-      "en": "",
+      "en": "Year:",
+      "ja": "設置年:",
       "occurrences": [
         {
           "file": "lib/widgets/encyclopedia/elf_installation_section.dart",
@@ -2370,7 +2577,8 @@
     {
       "key": "widgets.encyclopedia.elf.story.section.s001",
       "zh": "$name傳說故事",
-      "en": "",
+      "en": "$name's Legend",
+      "ja": "$nameの伝説",
       "occurrences": [
         {
           "file": "lib/widgets/encyclopedia/elf_story_section.dart",
@@ -2381,7 +2589,8 @@
     {
       "key": "widgets.encyclopedia.elf.story.section.s002",
       "zh": "沒有故事資料",
-      "en": "",
+      "en": "No story available",
+      "ja": "物語データがありません",
       "occurrences": [
         {
           "file": "lib/widgets/encyclopedia/elf_story_section.dart",
@@ -2392,7 +2601,8 @@
     {
       "key": "widgets.encyclopedia.filter.bar.s001",
       "zh": "首頁",
-      "en": "",
+      "en": "First",
+      "ja": "最初",
       "occurrences": [
         {
           "file": "lib/widgets/encyclopedia/filter_bar.dart",
@@ -2403,7 +2613,8 @@
     {
       "key": "widgets.encyclopedia.filter.bar.s002",
       "zh": "末頁",
-      "en": "",
+      "en": "Last",
+      "ja": "最後",
       "occurrences": [
         {
           "file": "lib/widgets/encyclopedia/filter_bar.dart",
@@ -2414,7 +2625,8 @@
     {
       "key": "widgets.encyclopedia.monster.collection.badge.s001",
       "zh": "精靈 $caughtCount / --",
-      "en": "",
+      "en": "Spirits $caughtCount / --",
+      "ja": "精霊 $caughtCount / --",
       "occurrences": [
         {
           "file": "lib/widgets/encyclopedia/monster_collection_badge.dart",
@@ -2425,7 +2637,8 @@
     {
       "key": "widgets.encyclopedia.monster.collection.badge.s002",
       "zh": "精靈 $caughtCount / $totalCount",
-      "en": "",
+      "en": "Spirits $caughtCount / $totalCount",
+      "ja": "精霊 $caughtCount / $totalCount",
       "occurrences": [
         {
           "file": "lib/widgets/encyclopedia/monster_collection_badge.dart",
@@ -2436,7 +2649,8 @@
     {
       "key": "widgets.encyclopedia.page.selector.s001",
       "zh": "第 $currentPage / $totalPages 頁",
-      "en": "",
+      "en": "Page $currentPage of $totalPages",
+      "ja": "$currentPage / $totalPages ページ",
       "occurrences": [
         {
           "file": "lib/widgets/encyclopedia/page_selector.dart",
@@ -2447,7 +2661,8 @@
     {
       "key": "widgets.game.catching.pages.catching.faild.s001",
       "zh": "捕捉失敗",
-      "en": "",
+      "en": "Capture Failed",
+      "ja": "捕獲失敗",
       "occurrences": [
         {
           "file": "lib/widgets/game/catching_pages/catching_faild.dart",
@@ -2458,7 +2673,8 @@
     {
       "key": "widgets.game.catching.pages.catching.faild.s002",
       "zh": "失敗",
-      "en": "",
+      "en": "Failed",
+      "ja": "失敗",
       "occurrences": [
         {
           "file": "lib/widgets/game/catching_pages/catching_faild.dart",
@@ -2469,7 +2685,8 @@
     {
       "key": "widgets.game.catching.pages.catching.faild.s003",
       "zh": "回到首頁",
-      "en": "",
+      "en": "Back to Home",
+      "ja": "ホームへ戻る",
       "occurrences": [
         {
           "file": "lib/widgets/game/catching_pages/catching_faild.dart",
@@ -2480,7 +2697,8 @@
     {
       "key": "widgets.game.catching.pages.cryptography.level.s001",
       "zh": "請根據介紹牌選出正確的選項",
-      "en": "",
+      "en": "Use the information board to choose the correct answer.",
+      "ja": "案内板を参考に正しい答えを選んでください。",
       "occurrences": [
         {
           "file": "lib/widgets/game/catching_pages/cryptography_level.dart",
@@ -2491,7 +2709,8 @@
     {
       "key": "widgets.game.catching.pages.cryptography.level.s002",
       "zh": "密碼鎖破解",
-      "en": "",
+      "en": "Crack the Code",
+      "ja": "暗証番号を解読",
       "occurrences": [
         {
           "file": "lib/widgets/game/catching_pages/cryptography_level.dart",
@@ -2502,7 +2721,8 @@
     {
       "key": "widgets.game.catching.pages.cryptography.level.s003",
       "zh": "每答對一題就能解開一位數密碼，答錯會扣除自己的血量",
-      "en": "",
+      "en": "Each correct answer reveals one digit of the code. A wrong answer costs you one health point.",
+      "ja": "正解するたびに暗証番号が1桁判明します。間違えると自分のHPが1減ります。",
       "occurrences": [
         {
           "file": "lib/widgets/game/catching_pages/cryptography_level.dart",
@@ -2513,7 +2733,8 @@
     {
       "key": "widgets.game.catching.pages.cryptography.level.s004",
       "zh": "精靈血量",
-      "en": "",
+      "en": "Spirit HP",
+      "ja": "精霊のHP",
       "occurrences": [
         {
           "file": "lib/widgets/game/catching_pages/cryptography_level.dart",
@@ -2524,7 +2745,8 @@
     {
       "key": "widgets.game.catching.pages.cryptography.level.s005",
       "zh": "你的血量",
-      "en": "",
+      "en": "Your HP",
+      "ja": "あなたのHP",
       "occurrences": [
         {
           "file": "lib/widgets/game/catching_pages/cryptography_level.dart",
@@ -2535,7 +2757,8 @@
     {
       "key": "widgets.game.catching.pages.cryptography.level.s006",
       "zh": "密碼鎖",
-      "en": "",
+      "en": "Code Lock",
+      "ja": "暗証番号",
       "occurrences": [
         {
           "file": "lib/widgets/game/catching_pages/cryptography_level.dart",
@@ -2546,7 +2769,8 @@
     {
       "key": "widgets.game.catching.pages.cryptography.level.s007",
       "zh": "目前題目",
-      "en": "",
+      "en": "Current Question",
+      "ja": "現在の問題",
       "occurrences": [
         {
           "file": "lib/widgets/game/catching_pages/cryptography_level.dart",
@@ -2557,7 +2781,8 @@
     {
       "key": "widgets.game.catching.pages.cryptography.level.s008",
       "zh": "答對了，對其造成1點傷害",
-      "en": "",
+      "en": "Correct! You dealt 1 damage.",
+      "ja": "正解！1ダメージを与えました。",
       "occurrences": [
         {
           "file": "lib/widgets/game/catching_pages/cryptography_level.dart",
@@ -2568,7 +2793,8 @@
     {
       "key": "widgets.game.catching.pages.cryptography.level.s009",
       "zh": "答錯了，自己受到 1 點傷害",
-      "en": "",
+      "en": "Incorrect! You took 1 damage.",
+      "ja": "不正解！1ダメージを受けました。",
       "occurrences": [
         {
           "file": "lib/widgets/game/catching_pages/cryptography_level.dart",
@@ -2579,7 +2805,8 @@
     {
       "key": "widgets.game.catching.pages.cryptography.level.s010",
       "zh": "精靈被成功擊倒",
-      "en": "",
+      "en": "The spirit has been defeated!",
+      "ja": "精霊を倒しました！",
       "occurrences": [
         {
           "file": "lib/widgets/game/catching_pages/cryptography_level.dart",
@@ -2590,7 +2817,8 @@
     {
       "key": "widgets.game.catching.pages.cryptography.level.s011",
       "zh": "血量歸零，挑戰失敗",
-      "en": "",
+      "en": "Your HP reached zero. Challenge failed.",
+      "ja": "HPがゼロになりました。チャレンジ失敗です。",
       "occurrences": [
         {
           "file": "lib/widgets/game/catching_pages/cryptography_level.dart",
@@ -2601,7 +2829,8 @@
     {
       "key": "widgets.game.catching.pages.cryptography.level.s012",
       "zh": "下一題",
-      "en": "",
+      "en": "Next Question",
+      "ja": "次の問題",
       "occurrences": [
         {
           "file": "lib/widgets/game/catching_pages/cryptography_level.dart",
@@ -2612,7 +2841,8 @@
     {
       "key": "widgets.game.catching.pages.cryptography.level.s013",
       "zh": "完成戰鬥",
-      "en": "",
+      "en": "Finish Battle",
+      "ja": "バトルを終了",
       "occurrences": [
         {
           "file": "lib/widgets/game/catching_pages/cryptography_level.dart",
@@ -2623,7 +2853,8 @@
     {
       "key": "widgets.game.catching.pages.cryptography.level.s014",
       "zh": "請重新觀察題目後再作答",
-      "en": "",
+      "en": "Look at the question again before answering.",
+      "ja": "問題をもう一度よく見てから答えてください。",
       "occurrences": [
         {
           "file": "lib/widgets/game/catching_pages/cryptography_level.dart",
@@ -2634,7 +2865,8 @@
     {
       "key": "widgets.game.catching.pages.default.plot.s001",
       "zh": "我",
-      "en": "",
+      "en": "Me",
+      "ja": "私",
       "occurrences": [
         {
           "file": "lib/widgets/game/catching_pages/default_plot.dart",
@@ -2649,7 +2881,8 @@
     {
       "key": "widgets.game.catching.pages.default.plot.s002",
       "zh": "這是什麼？",
-      "en": "",
+      "en": "What is this?",
+      "ja": "これは何？",
       "occurrences": [
         {
           "file": "lib/widgets/game/catching_pages/default_plot.dart",
@@ -2660,7 +2893,8 @@
     {
       "key": "widgets.game.catching.pages.default.plot.s003",
       "zh": "神秘石頭",
-      "en": "",
+      "en": "Mysterious Stone",
+      "ja": "不思議な石",
       "occurrences": [
         {
           "file": "lib/widgets/game/catching_pages/default_plot.dart",
@@ -2671,7 +2905,8 @@
     {
       "key": "widgets.game.catching.pages.default.plot.s004",
       "zh": "（散發獨特的氣息）",
-      "en": "",
+      "en": "(It radiates a mysterious aura.)",
+      "ja": "（不思議な気配を放っている）",
       "occurrences": [
         {
           "file": "lib/widgets/game/catching_pages/default_plot.dart",
@@ -2682,7 +2917,8 @@
     {
       "key": "widgets.game.catching.pages.default.plot.s006",
       "zh": "(放上魔法石)",
-      "en": "",
+      "en": "(Place the magic stone)",
+      "ja": "（魔法石を置く）",
       "occurrences": [
         {
           "file": "lib/widgets/game/catching_pages/default_plot.dart",
@@ -2693,7 +2929,8 @@
     {
       "key": "widgets.game.catching.pages.default.plot.s007",
       "zh": "魔法陣",
-      "en": "",
+      "en": "Magic Circle",
+      "ja": "魔法陣",
       "occurrences": [
         {
           "file": "lib/widgets/game/catching_pages/default_plot.dart",
@@ -2704,7 +2941,8 @@
     {
       "key": "widgets.game.catching.pages.default.plot.s008",
       "zh": "精靈召喚！",
-      "en": "",
+      "en": "Spirit, arise!",
+      "ja": "精霊よ、現れろ！",
       "occurrences": [
         {
           "file": "lib/widgets/game/catching_pages/default_plot.dart",
@@ -2715,7 +2953,8 @@
     {
       "key": "widgets.game.catching.pages.default.plot.s009",
       "zh": "（怒）",
-      "en": "",
+      "en": "(Angry)",
+      "ja": "（怒）",
       "occurrences": [
         {
           "file": "lib/widgets/game/catching_pages/default_plot.dart",
@@ -2726,7 +2965,8 @@
     {
       "key": "widgets.game.catching.pages.discovered.item.s001",
       "zh": "意外收穫！你找到了攻略秘集",
-      "en": "",
+      "en": "Lucky find! You discovered a strategy guide.",
+      "ja": "思わぬ収穫！攻略ガイドを見つけました。",
       "occurrences": [
         {
           "file": "lib/widgets/game/catching_pages/discovered_item.dart",
@@ -2737,7 +2977,8 @@
     {
       "key": "widgets.game.catching.pages.discovered.item.s002",
       "zh": "詳見金屬指示牌",
-      "en": "",
+      "en": "See the metal sign for details",
+      "ja": "詳しくは金属製の案内板を確認",
       "occurrences": [
         {
           "file": "lib/widgets/game/catching_pages/discovered_item.dart",
@@ -2748,7 +2989,8 @@
     {
       "key": "widgets.game.catching.pages.discovered.item.s003",
       "zh": "好好研究它",
-      "en": "",
+      "en": "Study it carefully",
+      "ja": "よく調べてみよう",
       "occurrences": [
         {
           "file": "lib/widgets/game/catching_pages/discovered_item.dart",
@@ -2759,7 +3001,8 @@
     {
       "key": "widgets.game.catching.pages.discovered.item.s004",
       "zh": "發現道具",
-      "en": "",
+      "en": "Item Found",
+      "ja": "アイテム発見",
       "occurrences": [
         {
           "file": "lib/widgets/game/catching_pages/discovered_item.dart",
@@ -2770,7 +3013,8 @@
     {
       "key": "widgets.game.catching.pages.discovered.item.s005",
       "zh": "一顆發著光的魔法石",
-      "en": "",
+      "en": "A glowing magic stone",
+      "ja": "光り輝く魔法石",
       "occurrences": [
         {
           "file": "lib/widgets/game/catching_pages/discovered_item.dart",
@@ -2781,7 +3025,8 @@
     {
       "key": "widgets.game.catching.pages.discovered.item.s006",
       "zh": "帶著它",
-      "en": "",
+      "en": "Take It",
+      "ja": "持っていく",
       "occurrences": [
         {
           "file": "lib/widgets/game/catching_pages/discovered_item.dart",
@@ -2792,7 +3037,8 @@
     {
       "key": "widgets.game.catching.pages.graphics.text.level.page.s001",
       "zh": "探索關卡",
-      "en": "",
+      "en": "Exploration Level",
+      "ja": "探索ステージ",
       "occurrences": [
         {
           "file": "lib/widgets/game/catching_pages/graphics_text_level_page.dart",
@@ -2803,7 +3049,8 @@
     {
       "key": "widgets.game.catching.pages.graphics.text.level.page.s002",
       "zh": "觀察線索後，前往指定地點感應 NFC",
-      "en": "",
+      "en": "Study the clues, then go to the marked location and scan the NFC tag.",
+      "ja": "手掛かりを確認し、指定された場所へ行ってNFCタグをスキャンしてください。",
       "occurrences": [
         {
           "file": "lib/widgets/game/catching_pages/graphics_text_level_page.dart",
@@ -2814,7 +3061,8 @@
     {
       "key": "widgets.game.catching.pages.graphics.text.level.page.s003",
       "zh": "是否確定放棄捕捉精靈?",
-      "en": "",
+      "en": "Are you sure you want to give up capturing this spirit?",
+      "ja": "精霊の捕獲をあきらめますか？",
       "occurrences": [
         {
           "file": "lib/widgets/game/catching_pages/graphics_text_level_page.dart",
@@ -2825,7 +3073,8 @@
     {
       "key": "widgets.game.catching.pages.graphics.text.level.page.s004",
       "zh": "放棄捕捉",
-      "en": "",
+      "en": "Give Up",
+      "ja": "捕獲をあきらめる",
       "occurrences": [
         {
           "file": "lib/widgets/game/catching_pages/graphics_text_level_page.dart",
@@ -2836,7 +3085,8 @@
     {
       "key": "widgets.game.catching.pages.graphics.text.level.page.s005",
       "zh": "NFC 教學",
-      "en": "",
+      "en": "NFC Tutorial",
+      "ja": "NFCチュートリアル",
       "occurrences": [
         {
           "file": "lib/widgets/game/catching_pages/graphics_text_level_page.dart",
@@ -2847,7 +3097,8 @@
     {
       "key": "widgets.game.catching.pages.graphics.text.level.page.s006",
       "zh": "關閉 NFC 教學",
-      "en": "",
+      "en": "Close NFC Tutorial",
+      "ja": "NFCチュートリアルを閉じる",
       "occurrences": [
         {
           "file": "lib/widgets/game/catching_pages/graphics_text_level_page.dart",
@@ -2858,7 +3109,8 @@
     {
       "key": "widgets.game.catching.pages.graphics.text.level.page.s007",
       "zh": "這個關卡目前沒有可顯示的內容",
-      "en": "",
+      "en": "There is no content available for this level.",
+      "ja": "このステージには表示できる内容がありません。",
       "occurrences": [
         {
           "file": "lib/widgets/game/catching_pages/graphics_text_level_page.dart",
@@ -2869,7 +3121,8 @@
     {
       "key": "widgets.game.catching.pages.plot.level.s001",
       "zh": "你找到了一塊魔法石",
-      "en": "",
+      "en": "You found a magic stone.",
+      "ja": "魔法石を見つけました。",
       "occurrences": [
         {
           "file": "lib/widgets/game/catching_pages/plot_level.dart",
@@ -2880,7 +3133,8 @@
     {
       "key": "widgets.game.catching.pages.plot.level.s002",
       "zh": "找到對應的法陣，將魔法石放上去吧！",
-      "en": "",
+      "en": "Find the matching magic circle and place the stone on it!",
+      "ja": "対応する魔法陣を見つけて、魔法石を置きましょう！",
       "occurrences": [
         {
           "file": "lib/widgets/game/catching_pages/plot_level.dart",
@@ -2891,7 +3145,8 @@
     {
       "key": "widgets.game.catching.pages.plot.level.s003",
       "zh": "你召喚了精靈",
-      "en": "",
+      "en": "You summoned a spirit.",
+      "ja": "精霊を召喚しました。",
       "occurrences": [
         {
           "file": "lib/widgets/game/catching_pages/plot_level.dart",
@@ -2902,7 +3157,8 @@
     {
       "key": "widgets.game.catching.pages.plot.level.s004",
       "zh": "但它好像很有攻擊性的看著你......",
-      "en": "",
+      "en": "But it is staring at you aggressively...",
+      "ja": "しかし、攻撃的な目でこちらを見ています……",
       "occurrences": [
         {
           "file": "lib/widgets/game/catching_pages/plot_level.dart",
@@ -2913,7 +3169,8 @@
     {
       "key": "widgets.game.catching.pages.plot.level.s005",
       "zh": "點擊任意位置繼續",
-      "en": "",
+      "en": "Tap anywhere to continue",
+      "ja": "画面をタップして続ける",
       "occurrences": [
         {
           "file": "lib/widgets/game/catching_pages/plot_level.dart",
@@ -2924,7 +3181,8 @@
     {
       "key": "widgets.game.catching.pages.plot.level.s006",
       "zh": "點擊任意位置開始戰鬥",
-      "en": "",
+      "en": "Tap anywhere to start the battle",
+      "ja": "画面をタップしてバトル開始",
       "occurrences": [
         {
           "file": "lib/widgets/game/catching_pages/plot_level.dart",
@@ -2935,7 +3193,8 @@
     {
       "key": "widgets.game.catching.pages.plot.level.s007",
       "zh": "跳過>>",
-      "en": "",
+      "en": "Skip >>",
+      "ja": "スキップ >>",
       "occurrences": [
         {
           "file": "lib/widgets/game/catching_pages/plot_level.dart",
@@ -2946,7 +3205,8 @@
     {
       "key": "widgets.game.catching.pages.plot.level.s008",
       "zh": "玩家",
-      "en": "",
+      "en": "Player",
+      "ja": "プレイヤー",
       "occurrences": [
         {
           "file": "lib/widgets/game/catching_pages/plot_level.dart",
@@ -2957,7 +3217,8 @@
     {
       "key": "widgets.game.catching.pages.plot.level.s009",
       "zh": "夥伴",
-      "en": "",
+      "en": "Companion",
+      "ja": "仲間",
       "occurrences": [
         {
           "file": "lib/widgets/game/catching_pages/plot_level.dart",
@@ -2968,7 +3229,8 @@
     {
       "key": "widgets.game.game.map.s001",
       "zh": "校園地圖",
-      "en": "",
+      "en": "Campus Map",
+      "ja": "キャンパスマップ",
       "occurrences": [
         {
           "file": "lib/widgets/game/game_map.dart",
@@ -2979,7 +3241,8 @@
     {
       "key": "widgets.game.game.map.s002",
       "zh": "森林地圖",
-      "en": "",
+      "en": "Forest Map",
+      "ja": "森林マップ",
       "occurrences": [
         {
           "file": "lib/widgets/game/game_map.dart",
@@ -2991,6 +3254,7 @@
       "key": "widgets.game.game.map.s003",
       "zh": "[Debug][GameMap][Error] 載入資源失敗: $e",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/widgets/game/game_map.dart",
@@ -3002,6 +3266,7 @@
       "key": "widgets.game.game.map.s004",
       "zh": "[Debug][GameMap]:使用固定測試定位 ${_fixedTestLocation.latitude}, ${_fixedTestLocation.longitude}",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/widgets/game/game_map.dart",
@@ -3013,6 +3278,7 @@
       "key": "widgets.game.game.map.s005",
       "zh": "[Debug][GameMap]:位置更新: ${position.latitude}, ${position.longitude}",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/widgets/game/game_map.dart",
@@ -3024,6 +3290,7 @@
       "key": "widgets.game.game.map.s006",
       "zh": "[Debug][GameMap]:已開始監聽位置變化",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/widgets/game/game_map.dart",
@@ -3035,6 +3302,7 @@
       "key": "widgets.game.game.map.s007",
       "zh": "[Debug][GameMap]:_checkPermissionAndListen 例外：$e",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/widgets/game/game_map.dart",
@@ -3045,7 +3313,8 @@
     {
       "key": "widgets.game.game.map.s008",
       "zh": "無法載入 ${monster.name} 的題目，請稍後再試",
-      "en": "",
+      "en": "Unable to load questions for ${monster.name}. Please try again later.",
+      "ja": "${monster.name}の問題を読み込めません。しばらくしてからもう一度お試しください。",
       "occurrences": [
         {
           "file": "lib/widgets/game/game_map.dart",
@@ -3056,7 +3325,8 @@
     {
       "key": "widgets.game.game.map.s009",
       "zh": "無法載入 ${monster.name} 的建築資料，請稍後再試",
-      "en": "",
+      "en": "Unable to load building information for ${monster.name}. Please try again later.",
+      "ja": "${monster.name}の建物情報を読み込めません。しばらくしてからもう一度お試しください。",
       "occurrences": [
         {
           "file": "lib/widgets/game/game_map.dart",
@@ -3067,7 +3337,8 @@
     {
       "key": "widgets.game.game.map.s010",
       "zh": "成功捕捉 ${monster.name}",
-      "en": "",
+      "en": "Successfully captured ${monster.name}",
+      "ja": "${monster.name}を捕獲しました",
       "occurrences": [
         {
           "file": "lib/widgets/game/game_map.dart",
@@ -3078,7 +3349,8 @@
     {
       "key": "widgets.game.game.map.s011",
       "zh": "${monster.name} 已捕捉過",
-      "en": "",
+      "en": "${monster.name} has already been captured",
+      "ja": "${monster.name}はすでに捕獲済みです",
       "occurrences": [
         {
           "file": "lib/widgets/game/game_map.dart",
@@ -3089,7 +3361,8 @@
     {
       "key": "widgets.game.game.map.s012",
       "zh": "定位權限未授權",
-      "en": "",
+      "en": "Location permission not granted",
+      "ja": "位置情報の権限が許可されていません",
       "occurrences": [
         {
           "file": "lib/widgets/game/game_map.dart",
@@ -3100,7 +3373,8 @@
     {
       "key": "widgets.game.game.map.s013",
       "zh": "切換地圖圖層",
-      "en": "",
+      "en": "Switch Map Layer",
+      "ja": "マップレイヤーを切り替える",
       "occurrences": [
         {
           "file": "lib/widgets/game/game_map.dart",
@@ -3111,7 +3385,8 @@
     {
       "key": "widgets.game.game.map.s016",
       "zh": "景點",
-      "en": "",
+      "en": "Landmarks",
+      "ja": "スポット",
       "occurrences": [
         {
           "file": "lib/widgets/game/game_map.dart",
@@ -3122,7 +3397,8 @@
     {
       "key": "widgets.game.system.menu.s002",
       "zh": "相機",
-      "en": "",
+      "en": "Camera",
+      "ja": "カメラ",
       "occurrences": [
         {
           "file": "lib/widgets/game/system_menu.dart",
@@ -3133,7 +3409,8 @@
     {
       "key": "widgets.game.system.menu.s003",
       "zh": "設定",
-      "en": "",
+      "en": "Settings",
+      "ja": "設定",
       "occurrences": [
         {
           "file": "lib/widgets/game/system_menu.dart",
@@ -3144,7 +3421,8 @@
     {
       "key": "widgets.login.wood.register.panel.s001",
       "zh": "請輸入名稱",
-      "en": "",
+      "en": "Please enter your name",
+      "ja": "名前を入力してください",
       "occurrences": [
         {
           "file": "lib/widgets/login/wood_register_panel.dart",
@@ -3155,7 +3433,8 @@
     {
       "key": "widgets.login.wood.register.panel.s002",
       "zh": "請輸入 Email",
-      "en": "",
+      "en": "Please enter your email",
+      "ja": "メールアドレスを入力してください",
       "occurrences": [
         {
           "file": "lib/widgets/login/wood_register_panel.dart",
@@ -3166,7 +3445,8 @@
     {
       "key": "widgets.login.wood.register.panel.s003",
       "zh": "Email 格式不正確",
-      "en": "",
+      "en": "Invalid email format",
+      "ja": "メールアドレスの形式が正しくありません",
       "occurrences": [
         {
           "file": "lib/widgets/login/wood_register_panel.dart",
@@ -3177,7 +3457,8 @@
     {
       "key": "widgets.login.wood.register.panel.s004",
       "zh": "請輸入密碼",
-      "en": "",
+      "en": "Please enter your password",
+      "ja": "パスワードを入力してください",
       "occurrences": [
         {
           "file": "lib/widgets/login/wood_register_panel.dart",
@@ -3188,7 +3469,8 @@
     {
       "key": "widgets.login.wood.register.panel.s005",
       "zh": "密碼至少需要 6 位",
-      "en": "",
+      "en": "Password must be at least 6 characters",
+      "ja": "パスワードは6文字以上で入力してください",
       "occurrences": [
         {
           "file": "lib/widgets/login/wood_register_panel.dart",
@@ -3199,7 +3481,8 @@
     {
       "key": "widgets.login.wood.register.panel.s006",
       "zh": "請再次輸入密碼",
-      "en": "",
+      "en": "Please enter your password again",
+      "ja": "パスワードをもう一度入力してください",
       "occurrences": [
         {
           "file": "lib/widgets/login/wood_register_panel.dart",
@@ -3210,7 +3493,8 @@
     {
       "key": "widgets.login.wood.register.panel.s007",
       "zh": "兩次密碼不一致",
-      "en": "",
+      "en": "Passwords do not match",
+      "ja": "パスワードが一致しません",
       "occurrences": [
         {
           "file": "lib/widgets/login/wood_register_panel.dart",
@@ -3221,7 +3505,8 @@
     {
       "key": "widgets.profile.edit.nickname.field.s001",
       "zh": "新的稱呼",
-      "en": "",
+      "en": "New Nickname",
+      "ja": "新しいニックネーム",
       "occurrences": [
         {
           "file": "lib/widgets/profile_edit/nickname_field.dart",
@@ -3232,7 +3517,8 @@
     {
       "key": "widgets.profile.edit.nickname.field.s002",
       "zh": "目前的暱稱：${controller.userController.userModel.value?.nickname ?? \"冒險者\"}",
-      "en": "",
+      "en": "Current nickname: ${controller.userController.userModel.value?.nickname ?? \"Adventurer\"}",
+      "ja": "現在のニックネーム：${controller.userController.userModel.value?.nickname ?? \"冒険者\"}",
       "occurrences": [
         {
           "file": "lib/widgets/profile_edit/nickname_field.dart",
@@ -3243,7 +3529,8 @@
     {
       "key": "widgets.profile.edit.profile.edit.dialog.s001",
       "zh": "點擊生成隨機頭像",
-      "en": "",
+      "en": "Tap to generate a random avatar",
+      "ja": "タップしてランダムなアバターを作成",
       "occurrences": [
         {
           "file": "lib/widgets/profile_edit/profile_edit_dialog.dart",
@@ -3254,7 +3541,8 @@
     {
       "key": "widgets.profile.edit.profile.edit.dialog.s002",
       "zh": "更換造型",
-      "en": "",
+      "en": "Change Appearance",
+      "ja": "見た目を変更",
       "occurrences": [
         {
           "file": "lib/widgets/profile_edit/profile_edit_dialog.dart",
@@ -3265,7 +3553,8 @@
     {
       "key": "widgets.profile.edit.profile.edit.dialog.s003",
       "zh": "先不要",
-      "en": "",
+      "en": "Not Now",
+      "ja": "あとで",
       "occurrences": [
         {
           "file": "lib/widgets/profile_edit/profile_edit_dialog.dart",
@@ -3276,7 +3565,8 @@
     {
       "key": "widgets.profile.edit.profile.edit.dialog.s004",
       "zh": "確定更換",
-      "en": "",
+      "en": "Confirm Change",
+      "ja": "変更を確定",
       "occurrences": [
         {
           "file": "lib/widgets/profile_edit/profile_edit_dialog.dart",
@@ -3287,7 +3577,8 @@
     {
       "key": "widgets.sections.drawer.button.group.s001",
       "zh": "使用者名稱",
-      "en": "",
+      "en": "Username",
+      "ja": "ユーザー名",
       "occurrences": [
         {
           "file": "lib/widgets/sections/drawer_button_group.dart",
@@ -3302,7 +3593,8 @@
     {
       "key": "widgets.sections.drawer.button.group.s003",
       "zh": "新手教學",
-      "en": "",
+      "en": "Tutorial",
+      "ja": "チュートリアル",
       "occurrences": [
         {
           "file": "lib/widgets/sections/drawer_button_group.dart",
@@ -3313,7 +3605,8 @@
     {
       "key": "widgets.sections.drawer.button.group.s004",
       "zh": "校園全景地圖",
-      "en": "",
+      "en": "Campus Panorama Map",
+      "ja": "キャンパス全景マップ",
       "occurrences": [
         {
           "file": "lib/widgets/sections/drawer_button_group.dart",
@@ -3324,7 +3617,8 @@
     {
       "key": "widgets.sections.drawer.button.group.s005",
       "zh": "問題回報",
-      "en": "",
+      "en": "Report a Problem",
+      "ja": "問題を報告",
       "occurrences": [
         {
           "file": "lib/widgets/sections/drawer_button_group.dart",
@@ -3335,7 +3629,8 @@
     {
       "key": "widgets.sections.drawer.button.group.s006",
       "zh": "此功能尚未實做，有問題歡迎聯繫：創作團隊",
-      "en": "",
+      "en": "This feature is not available yet. Please contact the development team if you need help.",
+      "ja": "この機能はまだ利用できません。問題がある場合は開発チームにお問い合わせください。",
       "occurrences": [
         {
           "file": "lib/widgets/sections/drawer_button_group.dart",
@@ -3346,7 +3641,8 @@
     {
       "key": "widgets.sections.drawer.button.group.s007",
       "zh": "登出失敗，請稍後再試",
-      "en": "",
+      "en": "Sign-out failed. Please try again later.",
+      "ja": "ログアウトに失敗しました。しばらくしてからもう一度お試しください。",
       "occurrences": [
         {
           "file": "lib/widgets/sections/drawer_button_group.dart",
@@ -3357,7 +3653,8 @@
     {
       "key": "widgets.sections.drawer.button.group.s008",
       "zh": "登出中...",
-      "en": "",
+      "en": "Signing out...",
+      "ja": "ログアウト中...",
       "occurrences": [
         {
           "file": "lib/widgets/sections/drawer_button_group.dart",
@@ -3368,7 +3665,8 @@
     {
       "key": "widgets.sections.drawer.button.group.s009",
       "zh": "登出",
-      "en": "",
+      "en": "Sign Out",
+      "ja": "ログアウト",
       "occurrences": [
         {
           "file": "lib/widgets/sections/drawer_button_group.dart",
@@ -3379,7 +3677,8 @@
     {
       "key": "widgets.sections.monster.test.s001",
       "zh": "測試火精靈",
-      "en": "",
+      "en": "Test Fire Spirit",
+      "ja": "テスト用の火の精霊",
       "occurrences": [
         {
           "file": "lib/widgets/sections/monster_test.dart",
@@ -3390,7 +3689,8 @@
     {
       "key": "widgets.sections.monster.test.s003",
       "zh": "測試水精靈",
-      "en": "",
+      "en": "Test Water Spirit",
+      "ja": "テスト用の水の精霊",
       "occurrences": [
         {
           "file": "lib/widgets/sections/monster_test.dart",
@@ -3401,7 +3701,8 @@
     {
       "key": "widgets.sections.monster.test.s005",
       "zh": "測試圖文關卡 1：觀察地圖後掃描 TEST_NFC_ID。",
-      "en": "",
+      "en": "Test visual level 1: Study the map, then scan TEST_NFC_ID.",
+      "ja": "テスト用画像・テキストステージ1：マップを確認してTEST_NFC_IDをスキャン。",
       "occurrences": [
         {
           "file": "lib/widgets/sections/monster_test.dart",
@@ -3412,7 +3713,8 @@
     {
       "key": "widgets.sections.monster.test.s006",
       "zh": "測試圖文關卡 2：純文字線索。",
-      "en": "",
+      "en": "Test visual level 2: Text-only clue.",
+      "ja": "テスト用画像・テキストステージ2：テキストのみの手掛かり。",
       "occurrences": [
         {
           "file": "lib/widgets/sections/monster_test.dart",
@@ -3423,7 +3725,8 @@
     {
       "key": "widgets.sections.monster.test.s007",
       "zh": "第一題：1+1 = ?",
-      "en": "",
+      "en": "Question 1: 1 + 1 = ?",
+      "ja": "第1問：1 + 1 = ?",
       "occurrences": [
         {
           "file": "lib/widgets/sections/monster_test.dart",
@@ -3434,7 +3737,8 @@
     {
       "key": "widgets.sections.monster.test.s008",
       "zh": "第二題：首字母是 A 的單字？",
-      "en": "",
+      "en": "Question 2: Which word begins with A?",
+      "ja": "第2問：Aで始まる単語は？",
       "occurrences": [
         {
           "file": "lib/widgets/sections/monster_test.dart",
@@ -3445,7 +3749,8 @@
     {
       "key": "widgets.sections.monster.test.s009",
       "zh": "混合測試第 1 關：先掃 NFC。",
-      "en": "",
+      "en": "Mixed test stage 1: Scan the NFC tag first.",
+      "ja": "複合テスト第1ステージ：最初にNFCタグをスキャン。",
       "occurrences": [
         {
           "file": "lib/widgets/sections/monster_test.dart",
@@ -3456,7 +3761,8 @@
     {
       "key": "widgets.sections.monster.test.s010",
       "zh": "校園英文是？",
-      "en": "",
+      "en": "What is the English word for 校園?",
+      "ja": "「校園」は英語で？",
       "occurrences": [
         {
           "file": "lib/widgets/sections/monster_test.dart",
@@ -3467,7 +3773,8 @@
     {
       "key": "widgets.sections.monster.test.s011",
       "zh": "Flutter 使用哪個語言？",
-      "en": "",
+      "en": "Which language does Flutter use?",
+      "ja": "Flutterではどの言語を使用しますか？",
       "occurrences": [
         {
           "file": "lib/widgets/sections/monster_test.dart",
@@ -3478,7 +3785,8 @@
     {
       "key": "widgets.sections.monster.test.s012",
       "zh": "混合測試第 3 關：最後再掃一次 NFC。",
-      "en": "",
+      "en": "Mixed test stage 3: Scan the NFC tag one more time.",
+      "ja": "複合テスト第3ステージ：最後にもう一度NFCタグをスキャン。",
       "occurrences": [
         {
           "file": "lib/widgets/sections/monster_test.dart",
@@ -3489,7 +3797,8 @@
     {
       "key": "widgets.sections.monster.test.s013",
       "zh": "測試 VR/AR 關卡資料，現在應該被 FullMissionPage 禁用。",
-      "en": "",
+      "en": "Test VR/AR level data. FullMissionPage should currently disable it.",
+      "ja": "テスト用VR/ARステージデータです。現在はFullMissionPageで無効化される想定です。",
       "occurrences": [
         {
           "file": "lib/widgets/sections/monster_test.dart",
@@ -3501,6 +3810,7 @@
       "key": "widgets.sections.start.menu.group.s001",
       "zh": "❌ [StartMenuGroup] 圖片載入失敗: $error",
       "en": "",
+      "ja": "",
       "occurrences": [
         {
           "file": "lib/widgets/sections/start_menu_group.dart",
@@ -3511,7 +3821,8 @@
     {
       "key": "widgets.sections.start.menu.group.s002",
       "zh": "載入失敗: start_text.png\\n$error",
-      "en": "",
+      "en": "Failed to load start_text.png\\n$error",
+      "ja": "start_text.pngの読み込みに失敗しました\\n$error",
       "occurrences": [
         {
           "file": "lib/widgets/sections/start_menu_group.dart",
@@ -3522,7 +3833,8 @@
     {
       "key": "widgets.sections.start.menu.group.s003",
       "zh": "開始",
-      "en": "",
+      "en": "Start",
+      "ja": "スタート",
       "occurrences": [
         {
           "file": "lib/widgets/sections/start_menu_group.dart",

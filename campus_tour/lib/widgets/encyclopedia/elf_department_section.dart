@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 
 import '../../styles/app_theme.dart';
 
+import 'package:get/get.dart';
+
 class ElfDepartmentSection extends StatelessWidget {
   final List<String>? major;
 
-  const ElfDepartmentSection({super.key, required this.major});
+  ElfDepartmentSection({super.key, required this.major});
 
   static const Color primaryColor = Color(0xFF006C49);
   static const Color cardColor = Color(0xFFEFF4FF);
@@ -27,7 +29,7 @@ class ElfDepartmentSection extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 40, bottom: 20, left: 8),
             child: Text(
-              'College Departments (學院系館)',
+              'widgets.encyclopedia.elf.department.section.s001'.tr,
               style: AppTheme.titleStyle.copyWith(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -70,13 +72,9 @@ class ElfDepartmentSection extends StatelessWidget {
               color: primaryColor.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(16),
             ),
-            child: const Icon(
-              Icons.account_balance,
-              color: primaryColor,
-              size: 26,
-            ),
+            child: Icon(Icons.account_balance, color: primaryColor, size: 26),
           ),
-          const SizedBox(width: 16),
+          SizedBox(width: 16),
           Expanded(
             child: Text(
               name,

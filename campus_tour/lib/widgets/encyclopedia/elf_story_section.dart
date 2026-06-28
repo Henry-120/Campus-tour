@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import '../../styles/app_theme.dart';
 import 'elf_section_title.dart';
 
+import 'package:get/get.dart';
+
 class ElfStorySection extends StatelessWidget {
   final String name;
   final String? story;
   final bool isLoading;
 
-  const ElfStorySection({
+  ElfStorySection({
     super.key,
     required this.name,
     required this.story,
@@ -34,9 +36,9 @@ class ElfStorySection extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ElfSectionTitle(icon: Icons.auto_stories, title: "$name傳說故事"),
-            const SizedBox(height: 24),
+            SizedBox(height: 24),
             if (isLoading)
-              const Center(
+              Center(
                 child: Padding(
                   padding: EdgeInsets.all(24),
                   child: CircularProgressIndicator(color: primaryColor),
@@ -44,7 +46,7 @@ class ElfStorySection extends StatelessWidget {
               )
             else
               Text(
-                story ?? "沒有故事資料",
+                story ?? 'widgets.encyclopedia.elf.story.section.s002'.tr,
                 style: AppTheme.titleStyle.copyWith(
                   fontSize: 16,
                   color: subTextColor,

@@ -33,7 +33,7 @@ mixin MonsterMarkersMixin<T extends StatefulWidget> on State<T> {
   Set<Marker> _monsterMarkers = {};
   Timer? _monsterAnimationTimer;
   Worker? _nearbyMonsterWorker;
-  List<MonsterModel> _visibleMonsters = const [];
+  List<MonsterModel> _visibleMonsters = [];
   void Function(MonsterModel)? _monsterTapHandler;
   int _monsterFrameIndex = 0;
   int _markerBuildToken = 0;
@@ -171,7 +171,7 @@ mixin MonsterMarkersMixin<T extends StatefulWidget> on State<T> {
     image.dispose();
 
     if (byteData == null) {
-      throw StateError('無法將精靈圖片轉成 PNG bytes');
+      throw StateError('view.nearby.monsters.display.s003'.tr);
     }
 
     return byteData.buffer.asUint8List();

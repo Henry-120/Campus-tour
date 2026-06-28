@@ -261,6 +261,7 @@ class LanguageSetting extends LocalSettingItem<String> {
   static const String _key = 'language';
   // [L-58]
   static const String english = 'en';
+  static const String japanese = 'ja';
   static const String chinese = 'zh';
 
   // [L-59]
@@ -270,6 +271,9 @@ class LanguageSetting extends LocalSettingItem<String> {
   bool get isEnglish => current == english;
 
   // [L-61]
+  bool get isJapanese => current == japanese;
+
+  // [L-61]
   bool get isChinese => current == chinese;
 
   // [L-62]
@@ -277,6 +281,9 @@ class LanguageSetting extends LocalSettingItem<String> {
 
   // [L-63]
   Future<void> useEnglish() => setValue(english);
+
+  // [L-64]
+  Future<void> useJapanese() => setValue(japanese);
 
   // [L-64]
   Future<void> useChinese() => setValue(chinese);
@@ -295,7 +302,7 @@ class LanguageSetting extends LocalSettingItem<String> {
   @override
   String normalize(String value) {
     // [L-67]
-    if (value == english || value == chinese) {
+    if (value == english || value == japanese || value == chinese) {
       return value;
     }
 

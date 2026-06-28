@@ -11,7 +11,7 @@ import 'package:campus_tour/widgets/common/snackbar_builder.dart';
 import 'package:campus_tour/widgets/common/user_head.dart';
 
 class DrawerButtonGroup extends StatelessWidget {
-  const DrawerButtonGroup({super.key});
+  DrawerButtonGroup({super.key});
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -97,7 +97,7 @@ class _DrawerUserHeader extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 14),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
+                    children: [
                       _DrawerUserName(),
                       // Text('Campus Tour', style: DrawerStyles.userSubtitleText),
                     ],
@@ -125,7 +125,7 @@ class _DrawerUserAvatar extends StatelessWidget {
       return const _DefaultDrawerAvatar();
     }
 
-    return const UserHead(size: DrawerStyles.drawerAvatarSize);
+    return UserHead(size: DrawerStyles.drawerAvatarSize);
   }
 }
 
@@ -138,7 +138,7 @@ class _DefaultDrawerAvatar extends StatelessWidget {
       width: DrawerStyles.drawerAvatarSize,
       height: DrawerStyles.drawerAvatarSize,
       decoration: DrawerStyles.avatarDecoration,
-      child: const Icon(Icons.person_rounded, color: Colors.white, size: 34),
+      child: Icon(Icons.person_rounded, color: Colors.white, size: 34),
     );
   }
 }
@@ -149,7 +149,10 @@ class _DrawerUserName extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (!Get.isRegistered<UserController>()) {
-      return Text('使用者名稱', style: DrawerStyles.userNameText);
+      return Text(
+        'widgets.sections.drawer.button.group.s001'.tr,
+        style: DrawerStyles.userNameText,
+      );
     }
 
     final userController = Get.find<UserController>();
@@ -157,7 +160,7 @@ class _DrawerUserName extends StatelessWidget {
     return Obx(() {
       final nickname = userController.userModel.value?.nickname.trim();
       final displayName = nickname == null || nickname.isEmpty
-          ? '使用者名稱'
+          ? 'widgets.sections.drawer.button.group.s001'.tr
           : nickname;
 
       return Text(displayName, style: DrawerStyles.userNameText);
@@ -172,7 +175,7 @@ class _DrawerUserName extends StatelessWidget {
 //   void onPress(BuildContext context) {
 //     Navigator.push(
 //       context,
-//       MaterialPageRoute(builder: (context) => const SettingPage()),
+//       MaterialPageRoute(builder: (context) => SettingPage()),
 //     );
 //   }
 
@@ -191,14 +194,14 @@ class _TutorialButton extends StatelessWidget {
   void _onPress(BuildContext context) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const NoviceLeadingPage()),
+      MaterialPageRoute(builder: (context) => NoviceLeadingPage()),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return DrawerSecondaryButton(
-      text: '新手教學',
+      text: 'widgets.sections.drawer.button.group.s003'.tr,
       onPressedToDo: () => _onPress(context),
     );
   }
@@ -210,14 +213,14 @@ class _PanoramaMapButton extends StatelessWidget {
   void _onPress(BuildContext context) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const MapSuggestionsPage()),
+      MaterialPageRoute(builder: (context) => MapSuggestionsPage()),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return DrawerSecondaryButton(
-      text: '校園全景地圖',
+      text: 'widgets.sections.drawer.button.group.s004'.tr,
       onPressedToDo: () => _onPress(context),
     );
   }
@@ -229,7 +232,7 @@ class _IssueReportButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DrawerSecondaryButton(
-      text: '問題回報',
+      text: 'widgets.sections.drawer.button.group.s005'.tr,
       onPressedToDo: () => _showFeatureNotImplementedMessage(context),
     );
   }
@@ -238,7 +241,7 @@ class _IssueReportButton extends StatelessWidget {
 void _showFeatureNotImplementedMessage(BuildContext context) {
   SnackBarBuilder.show(
     context,
-    '此功能尚未實做，有問題歡迎聯繫：創作團隊',
+    'widgets.sections.drawer.button.group.s006'.tr,
     type: AppToastType.info,
   );
 }
@@ -264,13 +267,17 @@ class _LogoutButtonState extends State<_LogoutButton> {
       if (!mounted) return;
 
       Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (_) => const StartPage()),
+        MaterialPageRoute(builder: (_) => StartPage()),
         (_) => false,
       );
     } catch (e) {
       if (!mounted) return;
 
-      SnackBarBuilder.show(context, '登出失敗，請稍後再試', type: AppToastType.error);
+      SnackBarBuilder.show(
+        context,
+        'widgets.sections.drawer.button.group.s007'.tr,
+        type: AppToastType.error,
+      );
       setState(() => _isLoggingOut = false);
     }
   }
@@ -281,14 +288,16 @@ class _LogoutButtonState extends State<_LogoutButton> {
       style: DrawerStyles.logoutButtonStyle,
       onPressed: _isLoggingOut ? null : _logout,
       icon: _isLoggingOut
-          ? const SizedBox(
+          ? SizedBox(
               width: 18,
               height: 18,
               child: CircularProgressIndicator(strokeWidth: 2),
             )
-          : const Icon(Icons.logout_rounded),
+          : Icon(Icons.logout_rounded),
       label: Text(
-        _isLoggingOut ? '登出中...' : '登出',
+        _isLoggingOut
+            ? 'widgets.sections.drawer.button.group.s008'.tr
+            : 'widgets.sections.drawer.button.group.s009'.tr,
         style: DrawerStyles.logoutButtonText,
       ),
     );

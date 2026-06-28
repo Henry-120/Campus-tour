@@ -1,19 +1,29 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:gal/gal.dart';
+import 'package:permission_handler/permission_handler.dart';
 import '../widgets/common/snackbar_builder.dart';
+
+import 'package:get/get.dart';
 
 class PhotoPreviewPage extends StatelessWidget {
   final String imagePath;
 
-  const PhotoPreviewPage({super.key, required this.imagePath});
+  PhotoPreviewPage({super.key, required this.imagePath});
 
   Future<void> _savePhoto(BuildContext context) async {
     try {
       // 檢查並請求權限
-      final hasAccess = await Gal.hasAccess();
+      var hasAccess = await Gal.hasAccess();
       if (!hasAccess) {
-        await Gal.requestAccess();
+        hasAccess = await Gal.requestAccess();
+      }
+
+      if (!hasAccess) {
+        if (context.mounted) {
+          _showPhotoPermissionDialog(context);
+        }
+        return;
       }
 
       // 儲存照片到相簿
@@ -22,7 +32,7 @@ class PhotoPreviewPage extends StatelessWidget {
       if (context.mounted) {
         SnackBarBuilder.show(
           context,
-          '照片已成功儲存到相簿！',
+          'view.photo.preview.s001'.tr,
           type: AppToastType.success,
         );
       }
@@ -33,12 +43,37 @@ class PhotoPreviewPage extends StatelessWidget {
     }
   }
 
+  void _showPhotoPermissionDialog(BuildContext context) {
+    showDialog<void>(
+      context: context,
+      builder: (dialogContext) {
+        return AlertDialog(
+          title: Text('需要相簿權限'),
+          content: Text('需要相簿權限才能儲存照片。請到系統設定開啟相簿存取權後再試一次。'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(dialogContext).pop(),
+              child: Text('稍後再說'),
+            ),
+            FilledButton(
+              onPressed: () {
+                Navigator.of(dialogContext).pop();
+                openAppSettings();
+              },
+              child: Text('開啟設定'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        title: const Text('照片預覽'),
+        title: Text('view.photo.preview.s003'.tr),
         backgroundColor: Colors.black,
         foregroundColor: Colors.white,
       ),
@@ -58,7 +93,7 @@ class PhotoPreviewPage extends StatelessWidget {
                     foregroundColor: Colors.white,
                   ),
                   onPressed: () => Navigator.pop(context), // 回去重拍
-                  child: const Text('重拍'),
+                  child: Text('view.photo.preview.s004'.tr),
                 ),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
@@ -66,7 +101,7 @@ class PhotoPreviewPage extends StatelessWidget {
                     foregroundColor: Colors.white,
                   ),
                   onPressed: () => _savePhoto(context), // 執行儲存邏輯
-                  child: const Text('儲存'),
+                  child: Text('view.photo.preview.s005'.tr),
                 ),
               ],
             ),

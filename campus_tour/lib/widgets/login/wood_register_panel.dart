@@ -8,8 +8,10 @@ import 'game_link_text.dart';
 import 'google_image_button.dart';
 import 'login_text_field.dart';
 
+import 'package:get/get.dart';
+
 class WoodRegisterPanel extends StatelessWidget {
-  const WoodRegisterPanel({
+  WoodRegisterPanel({
     super.key,
     required this.nameController,
     required this.emailController,
@@ -71,7 +73,7 @@ class WoodRegisterPanel extends StatelessWidget {
                   verticalPadding: 0,
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
-                      return "請輸入名稱";
+                      return 'widgets.login.wood.register.panel.s001'.tr;
                     }
                     return null;
                   },
@@ -94,7 +96,7 @@ class WoodRegisterPanel extends StatelessWidget {
                   verticalPadding: 0,
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
-                      return "請輸入 Email";
+                      return 'widgets.login.wood.register.panel.s002'.tr;
                     }
 
                     final emailRegex = RegExp(
@@ -102,7 +104,7 @@ class WoodRegisterPanel extends StatelessWidget {
                     );
 
                     if (!emailRegex.hasMatch(value.trim())) {
-                      return "Email 格式不正確";
+                      return 'widgets.login.wood.register.panel.s003'.tr;
                     }
 
                     return null;
@@ -126,11 +128,11 @@ class WoodRegisterPanel extends StatelessWidget {
                   verticalPadding: 0,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return "請輸入密碼";
+                      return 'widgets.login.wood.register.panel.s004'.tr;
                     }
 
                     if (value.length < 6) {
-                      return "密碼至少需要 6 位";
+                      return 'widgets.login.wood.register.panel.s005'.tr;
                     }
 
                     return null;
@@ -154,11 +156,11 @@ class WoodRegisterPanel extends StatelessWidget {
                   verticalPadding: 0,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return "請再次輸入密碼";
+                      return 'widgets.login.wood.register.panel.s006'.tr;
                     }
 
                     if (value != passwordController.text) {
-                      return "兩次密碼不一致";
+                      return 'widgets.login.wood.register.panel.s007'.tr;
                     }
 
                     return null;

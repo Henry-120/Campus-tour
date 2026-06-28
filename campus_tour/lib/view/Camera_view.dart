@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'dart:io';
 
 import '../../controllers/camera_controller.dart';
@@ -16,7 +17,7 @@ import '../../widgets/constants/responsive.dart';
 import 'package:get/get.dart';
 
 class ArCapturePage extends StatefulWidget {
-  const ArCapturePage({super.key});
+  ArCapturePage({super.key});
 
   @override
   State<ArCapturePage> createState() => _ArCapturePageState();
@@ -31,9 +32,11 @@ class _ArCapturePageState extends State<ArCapturePage> {
   String selectedMonsterUrl = "";
   String selectedMonsterImageUrl = "";
   String selectedMonsterId = "";
+  bool _isRequestingCameraPermission = false;
+  String? _cameraPermissionMessage;
 
   // 修改此處：將精靈位置往右 (x=0.6) 且往上 (y=0.4) 移動
-  Alignment fairyPosition = const Alignment(0.0, 0.4);
+  Alignment fairyPosition = Alignment(0.0, 0.4);
 
   @override
   void initState() {
@@ -42,11 +45,41 @@ class _ArCapturePageState extends State<ArCapturePage> {
   }
 
   Future<void> _startArMode() async {
+    setState(() {
+      _isRequestingCameraPermission = true;
+      _cameraPermissionMessage = null;
+    });
+
     try {
+      var cameraStatus = await Permission.camera.status;
+      if (!cameraStatus.isGranted) {
+        cameraStatus = await Permission.camera.request();
+      }
+
+      if (!cameraStatus.isGranted) {
+        if (!mounted) return;
+        setState(() {
+          _cameraPermissionMessage = '需要相機權限才能使用 AR 拍照功能，請開啟權限後再試一次。';
+          _isRequestingCameraPermission = false;
+        });
+        return;
+      }
+
       await _cameraController.initCamera();
-      if (mounted) setState(() {});
+      if (mounted) {
+        setState(() {
+          _cameraPermissionMessage = null;
+          _isRequestingCameraPermission = false;
+        });
+      }
     } catch (e) {
       debugPrint("相機初始化失敗: $e");
+      if (mounted) {
+        setState(() {
+          _cameraPermissionMessage = '相機無法啟動，請確認系統設定中的相機權限已開啟。';
+          _isRequestingCameraPermission = false;
+        });
+      }
     }
 
     try {
@@ -73,8 +106,10 @@ class _ArCapturePageState extends State<ArCapturePage> {
         backgroundColor: AppTheme.overlayBackgroundColor,
         body: Stack(
           children: [
-            const Center(
-              child: CircularProgressIndicator(color: AppTheme.whiteTextColor),
+            Center(
+              child: _cameraPermissionMessage == null
+                  ? CircularProgressIndicator(color: AppTheme.whiteTextColor)
+                  : _buildCameraPermissionPrompt(scale),
             ),
             _buildBackButton(scale),
           ],
@@ -156,7 +191,10 @@ class _ArCapturePageState extends State<ArCapturePage> {
             right: 0,
             child: Column(
               children: [
-                Text("選擇要放出的精靈", style: AppTheme.overlayTextStyle(18 * scale)),
+                Text(
+                  'view.camera.view.s003'.tr,
+                  style: AppTheme.overlayTextStyle(18 * scale),
+                ),
                 SizedBox(height: 15 * scale),
                 SizedBox(
                   height: 110 * scale,
@@ -165,7 +203,7 @@ class _ArCapturePageState extends State<ArCapturePage> {
                     if (collection.isEmpty) {
                       return Center(
                         child: Text(
-                          "目前沒有精靈",
+                          'view.camera.view.s004'.tr,
                           style: AppTheme.emptyStateStyle(14 * scale),
                         ),
                       );
@@ -270,6 +308,40 @@ class _ArCapturePageState extends State<ArCapturePage> {
     );
   }
 
+  Widget _buildCameraPermissionPrompt(double scale) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 28 * scale),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(
+            Icons.photo_camera_rounded,
+            color: AppTheme.whiteTextColor,
+            size: 54 * scale,
+          ),
+          SizedBox(height: 18 * scale),
+          Text(
+            '需要相機權限',
+            style: AppTheme.overlayTextStyle(22 * scale),
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: 10 * scale),
+          Text(
+            _cameraPermissionMessage!,
+            style: AppTheme.emptyStateStyle(15 * scale),
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: 10 * scale),
+          TextButton.icon(
+            onPressed: openAppSettings,
+            icon: Icon(Icons.settings_rounded),
+            label: Text('開啟系統設定'),
+          ),
+        ],
+      ),
+    );
+  }
+
   Future<void> _selectMonster(UserMonsterModel userMonster) async {
     var framePath = _framePathForUserMonster(userMonster);
 
@@ -333,7 +405,7 @@ class _ArCapturePageState extends State<ArCapturePage> {
           color: Colors.transparent,
           child: IconButton(
             onPressed: () => Navigator.maybePop(context),
-            tooltip: '返回',
+            tooltip: 'view.camera.view.s010'.tr,
             icon: Icon(
               Icons.arrow_back_rounded,
               color: AppTheme.whiteTextColor,

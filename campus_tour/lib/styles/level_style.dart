@@ -2,14 +2,14 @@ import 'package:campus_tour/styles/app_theme.dart';
 import 'package:flutter/material.dart';
 
 class LevelStyle {
-  static const Color pageTopColor = Color(0xFFFFF4EC);
-  static const Color pageBottomColor = Color(0xFFFFE1D6);
+  static Color get pageTopColor => Color(0xFFFFF4EC);
+  static Color get pageBottomColor => Color(0xFFFFE1D6);
   static const Color frameColor = Colors.white;
-  static const Color imagePlaceholderColor = Color(0xFFFFEDE2);
-  static const Color textPanelColor = Color(0xFFFFFBF7);
-  static const Color shadowColor = Color(0x1A8D5A4A);
-  static const Color borderColor = Color(0xFFF4C8B8);
-  static const Color imageIconColor = Color(0xFFD99A84);
+  static Color get imagePlaceholderColor => Color(0xFFFFEDE2);
+  static Color get textPanelColor => Color(0xFFFFFBF7);
+  static Color get shadowColor => Color(0x1A8D5A4A);
+  static Color get borderColor => Color(0xFFF4C8B8);
+  static Color get imageIconColor => Color(0xFFD99A84);
 
   static const double pageHorizontalPadding = 24;
   static const double pageVerticalPadding = 20;
@@ -28,7 +28,7 @@ class LevelStyle {
     Radius.circular(innerRadius),
   );
 
-  static BoxDecoration pageDecoration = const BoxDecoration(
+  static BoxDecoration pageDecoration = BoxDecoration(
     gradient: LinearGradient(
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,
@@ -36,7 +36,7 @@ class LevelStyle {
     ),
   );
 
-  static List<BoxShadow> softShadow = const [
+  static List<BoxShadow> softShadow = [
     BoxShadow(color: shadowColor, blurRadius: 24, offset: Offset(0, 12)),
   ];
 
@@ -94,11 +94,11 @@ class LevelStyle {
     letterSpacing: 0,
   );
 
-  static const List<Shadow> plotSmallTextShadows = [
+  static List<Shadow> get plotSmallTextShadows => [
     Shadow(color: Color(0x99000000), blurRadius: 4, offset: Offset(0, 1)),
   ];
 
-  static const List<Shadow> plotTextShadows = [
+  static List<Shadow> get plotTextShadows => [
     Shadow(color: Color(0xB3000000), blurRadius: 8, offset: Offset(0, 2)),
   ];
 
@@ -146,7 +146,7 @@ class LevelStyle {
   static BattleLevelTheme battleThemeForType(String type) {
     switch (type.trim()) {
       case '火':
-        return const BattleLevelTheme(
+        return BattleLevelTheme(
           topColor: Color(0xFFFFF0E5),
           bottomColor: Color(0xFFFFC7A1),
           primary: Color(0xFFF06B3F),
@@ -159,7 +159,7 @@ class LevelStyle {
           glow: Color(0x33F06B3F),
         );
       case '水':
-        return const BattleLevelTheme(
+        return BattleLevelTheme(
           topColor: Color(0xFFEAF7FF),
           bottomColor: Color(0xFFBFE2FF),
           primary: Color(0xFF3B82C9),
@@ -172,7 +172,7 @@ class LevelStyle {
           glow: Color(0x3348A4E0),
         );
       case '金':
-        return const BattleLevelTheme(
+        return BattleLevelTheme(
           topColor: Color(0xFFFFF8D9),
           bottomColor: Color(0xFFFFE788),
           primary: Color(0xFFE0A600),
@@ -185,7 +185,7 @@ class LevelStyle {
           glow: Color(0x33FFD54F),
         );
       default:
-        return const BattleLevelTheme(
+        return BattleLevelTheme(
           topColor: Color(0xFFF7F0FF),
           bottomColor: Color(0xFFE3D5FF),
           primary: Color(0xFF7C63D7),
@@ -219,11 +219,7 @@ class LevelStyle {
         width: 1.4,
       ),
       boxShadow: [
-        BoxShadow(
-          color: theme.glow,
-          blurRadius: 30,
-          offset: const Offset(0, 18),
-        ),
+        BoxShadow(color: theme.glow, blurRadius: 30, offset: Offset(0, 18)),
       ],
     );
   }
@@ -237,11 +233,7 @@ class LevelStyle {
       ),
       borderRadius: const BorderRadius.all(Radius.circular(26)),
       boxShadow: [
-        BoxShadow(
-          color: theme.glow,
-          blurRadius: 28,
-          offset: const Offset(0, 14),
-        ),
+        BoxShadow(color: theme.glow, blurRadius: 28, offset: Offset(0, 14)),
       ],
     );
   }
@@ -277,13 +269,7 @@ class LevelStyle {
         width: 1.4,
       ),
       boxShadow: unlocked
-          ? [
-              BoxShadow(
-                color: theme.glow,
-                blurRadius: 16,
-                offset: const Offset(0, 8),
-              ),
-            ]
+          ? [BoxShadow(color: theme.glow, blurRadius: 16, offset: Offset(0, 8))]
           : null,
     );
   }
@@ -313,13 +299,13 @@ class LevelStyle {
     Color foreground = theme.text;
 
     if (isCorrect) {
-      background = const Color(0xFFE2F7E7);
-      border = const Color(0xFF31A45B);
-      foreground = const Color(0xFF1C6B39);
+      background = Color(0xFFE2F7E7);
+      border = Color(0xFF31A45B);
+      foreground = Color(0xFF1C6B39);
     } else if (isWrong) {
-      background = const Color(0xFFFFE7E2);
-      border = const Color(0xFFD85A48);
-      foreground = const Color(0xFF8B2E24);
+      background = Color(0xFFFFE7E2);
+      border = Color(0xFFD85A48);
+      foreground = Color(0xFF8B2E24);
     } else if (isSelected) {
       background = theme.accent;
       border = theme.primary;
@@ -426,7 +412,7 @@ class LevelStyle {
   }) => AppTheme.titleStyle.copyWith(
     fontSize: 18,
     fontWeight: FontWeight.w400,
-    color: success ? const Color(0xFF1E7A43) : const Color(0xFFA2382E),
+    color: success ? Color(0xFF1E7A43) : Color(0xFFA2382E),
     letterSpacing: 0,
   );
 
@@ -440,7 +426,7 @@ class LevelStyle {
 }
 
 class BattleLevelTheme {
-  const BattleLevelTheme({
+  BattleLevelTheme({
     required this.topColor,
     required this.bottomColor,
     required this.primary,

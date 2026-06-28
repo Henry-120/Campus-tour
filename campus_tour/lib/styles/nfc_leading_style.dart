@@ -1,17 +1,19 @@
 import 'package:campus_tour/styles/app_theme.dart';
 import 'package:flutter/material.dart';
 
+import 'package:get/get.dart';
+
 class NfcLeadingStyle {
   //color
   static const Color buttonBgColor1 = Color.fromARGB(255, 124, 0, 196);
-  static const Color buttonBgColor2 = Color(0xFF5D5D5D);
+  static Color get buttonBgColor2 => Color(0xFF5D5D5D);
   static const Color buttonFgColor = Colors.white;
   //icon
-  static const Icon nfcIcon = Icon(Icons.nfc);
+  static Icon get nfcIcon => Icon(Icons.nfc);
   //
   //對應的String
-  static const primaryButtonString = "開始NFC掃描";
-  static const nfcIngString = "掃描中";
+  static String get primaryButtonString => 'styles.nfc.leading.style.s001'.tr;
+  static String get nfcIngString => 'styles.nfc.leading.style.s002'.tr;
   //button style
   static ButtonStyle primaryButtonStyle = ElevatedButton.styleFrom(
     backgroundColor: buttonBgColor1,

@@ -7,6 +7,6 @@ void showEditProfileDialog(BuildContext context, UserController controller) {
   showDialog(
     context: context,
     barrierDismissible: true,
-    builder: (context) => const ProfileEditDialog(),
+    builder: (context) => ProfileEditDialog(),
   );
 }

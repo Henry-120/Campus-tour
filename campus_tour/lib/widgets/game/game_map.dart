@@ -30,7 +30,7 @@ import 'dart:ui' as ui;
 //end for mission
 
 class GameMap extends StatefulWidget {
-  const GameMap({super.key});
+  GameMap({super.key});
 
   @override
   State<GameMap> createState() => _GameMapState();
@@ -39,28 +39,30 @@ class GameMap extends StatefulWidget {
 enum MapTileLayer {
   campus(
     id: 'campus',
-    label: '校園地圖',
+    labelKey: 'widgets.game.game.map.s001',
     assetFolder: 'assets/tiles',
     maxTileZoom: 19,
   ),
   forest(
     id: 'forest',
-    label: '森林地圖',
+    labelKey: 'widgets.game.game.map.s002',
     assetFolder: 'assets/forest_tiles',
     maxTileZoom: 20,
   );
 
   const MapTileLayer({
     required this.id,
-    required this.label,
+    required this.labelKey,
     required this.assetFolder,
     required this.maxTileZoom,
   });
 
   final String id;
-  final String label;
+  final String labelKey;
   final String assetFolder;
   final int maxTileZoom;
+
+  String get label => labelKey.tr;
 }
 
 class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
@@ -80,10 +82,10 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
   // UserMarker? _playerMarker;
   // BitmapDescriptor? _playerIcon;
 
-  static const LatLng southwest = LatLng(24.965184, 121.185000); // 左下
-  static const LatLng northeast = LatLng(24.971653, 121.197487); // 右上
-  static const bool _useFixedTestLocation = true; // 💡 測試用開關：使用固定位置而非真實 GPS
-  static const LatLng _fixedTestLocation = LatLng(24.967731, 121.193638);
+  static LatLng get southwest => LatLng(24.965184, 121.185000); // 左下
+  static LatLng get northeast => LatLng(24.971653, 121.197487); // 右上
+  static const bool _useFixedTestLocation = false; // 💡 測試用開關：使用固定位置而非真實 GPS
+  static LatLng get _fixedTestLocation => LatLng(24.967731, 121.193638);
 
   final LatLngBounds campusBounds = LatLngBounds(
     southwest: southwest,
@@ -144,7 +146,7 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
       setState(() => _hasLocationPermission = true);
 
       final Position currentPosition = await Geolocator.getCurrentPosition(
-        locationSettings: const LocationSettings(
+        locationSettings: LocationSettings(
           accuracy: LocationAccuracy.bestForNavigation,
         ),
       );
@@ -160,7 +162,7 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
 
       _positionStream =
           Geolocator.getPositionStream(
-            locationSettings: const LocationSettings(
+            locationSettings: LocationSettings(
               accuracy: LocationAccuracy.bestForNavigation,
               distanceFilter: 0,
             ),
@@ -195,7 +197,7 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
             unawaited(monsterController.updateLocationMonsters(position));
           });
 
-      debugPrint("[Debug][GameMap]:已開始監聽位置變化");
+      debugPrint('widgets.game.game.map.s006'.tr);
     } catch (e, st) {
       debugPrint("[Debug][GameMap]:_checkPermissionAndListen 例外：$e");
       debugPrint("[Debug][GameMap]:stack trace：$st");
@@ -214,7 +216,7 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
       );
 
       // 1 秒後拉近玩家位置，並設定正確縮放倍率以顯示特製地圖
-      Future.delayed(const Duration(seconds: 1), () {
+      Future.delayed(Duration(seconds: 1), () {
         if (_mapController != null && mounted) {
           _mapController!.animateCamera(
             CameraUpdate.newCameraPosition(
@@ -279,7 +281,7 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
   //           success ? '成功捕捉 ${monster.name} ✓' : '${monster.name} 已捕捉過',
   //         ),
   //         backgroundColor: success ? Colors.green : Colors.orange,
-  //         duration: const Duration(seconds: 2),
+  //         duration: Duration(seconds: 2),
   //       ),
   //     );
   //   }
@@ -309,7 +311,7 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
           context,
           '無法載入 ${monster.name} 的題目，請稍後再試',
           type: AppToastType.error,
-          duration: const Duration(seconds: 3),
+          duration: Duration(seconds: 3),
         );
         return;
       }
@@ -319,7 +321,7 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
           context,
           '無法載入 ${monster.name} 的建築資料，請稍後再試',
           type: AppToastType.error,
-          duration: const Duration(seconds: 3),
+          duration: Duration(seconds: 3),
         );
         return;
       }
@@ -380,7 +382,7 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
           initialCameraPosition: CameraPosition(
             target: _useFixedTestLocation
                 ? _fixedTestLocation
-                : const LatLng(24.9684, 121.1912),
+                : LatLng(24.9684, 121.1912),
             zoom: 18.5, // 💡 初始縮放
           ),
           style: _mapStyle,
@@ -456,7 +458,7 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Text(
-                '定位權限未授權',
+                'widgets.game.game.map.s012'.tr,
                 style: AppTheme.titleStyle.copyWith(
                   color: Colors.black87,
                   fontSize: 14,
@@ -482,7 +484,7 @@ class _MapLayerButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton<MapTileLayer>(
-      tooltip: '切換地圖圖層',
+      tooltip: 'widgets.game.game.map.s013'.tr,
       initialValue: selectedLayer,
       onSelected: onSelected,
       itemBuilder: (context) => [
@@ -499,7 +501,7 @@ class _MapLayerButton extends StatelessWidget {
                   size: 18,
                   color: Colors.black87,
                 ),
-                const SizedBox(width: 10),
+                SizedBox(width: 10),
                 Text(layer.label),
               ],
             ),
@@ -515,15 +517,11 @@ class _MapLayerButton extends StatelessWidget {
             BoxShadow(
               color: Colors.black.withValues(alpha: 0.24),
               blurRadius: 12,
-              offset: const Offset(0, 4),
+              offset: Offset(0, 4),
             ),
           ],
         ),
-        child: const Icon(
-          Icons.layers_rounded,
-          color: Colors.black87,
-          size: 26,
-        ),
+        child: Icon(Icons.layers_rounded, color: Colors.black87, size: 26),
       ),
     );
   }
@@ -594,11 +592,11 @@ class BuildingMonsterLevel extends StatelessWidget {
        );
   List<FullMission> get missions {
     switch (architectureType) {
-      case "系館":
+      case '系館':
         return systemManagementMissions;
-      case "裝置藝術":
+      case '裝置藝術':
         return installationArtMissions;
-      case "景點":
+      case '景點':
         return scenicSpotMissions;
       default:
         return installationArtMissions;
@@ -636,7 +634,7 @@ class AssetTileProvider implements TileProvider {
   static const int _minTileZoom = 15;
   static int _debugLogCount = 0;
 
-  const AssetTileProvider({required this.layer});
+  AssetTileProvider({required this.layer});
 
   final MapTileLayer layer;
 

@@ -70,7 +70,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '322346919988',
     projectId: 'campus-tour-679e9',
     storageBucket: 'campus-tour-679e9.firebasestorage.app',
-    iosClientId: '322346919988-d555vambpeuvljnfkm8vujot734fu5el.apps.googleusercontent.com',
+    iosClientId:
+        '322346919988-d555vambpeuvljnfkm8vujot734fu5el.apps.googleusercontent.com',
     iosBundleId: 'com.example.campusTour',
   );
 }

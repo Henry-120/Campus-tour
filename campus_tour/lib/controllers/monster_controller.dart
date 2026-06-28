@@ -155,6 +155,14 @@ class MonsterController extends GetxController {
       await loadMonsterWithRelations(monsterObj);
       nearbyMonsters.removeWhere((m) => m.id == monsterObj.id);
 
+      final currentPosition = playerPosition.value;
+      if (currentPosition != null) {
+        await updateLocationMonsters(currentPosition);
+      } else if (nearestMonster.value?.id == monsterObj.id) {
+        nearestMonster.value = null;
+        nearestDistance.value = null;
+      }
+
       debugPrint(
         '[MonsterController] 成功捕捉怪物: ${monsterObj.name} 並已同步更新 QA 與建築資料',
       );

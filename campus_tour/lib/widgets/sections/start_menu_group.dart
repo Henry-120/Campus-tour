@@ -5,8 +5,10 @@ import '../buttons/start_button.dart';
 import '../../view/login_page.dart';
 import '../constants/responsive.dart';
 
+import 'package:get/get.dart';
+
 class StartMenuGroup extends StatelessWidget {
-  const StartMenuGroup({super.key});
+  StartMenuGroup({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +53,10 @@ class StartMenuGroup extends StatelessWidget {
 
         SizedBox(height: titleButtonGap),
 
-        const StartButton(label: "開始", destination: LoginPage()),
+        StartButton(
+          label: 'widgets.sections.start.menu.group.s003'.tr,
+          destination: LoginPage(),
+        ),
       ],
     );
   }

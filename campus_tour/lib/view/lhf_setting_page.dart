@@ -12,79 +12,87 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 class SteeingPageStrings {
   // State
-  static const loadErrorTitle = '設定載入失敗';
-  static const loadErrorMessage = '本機設定暫時無法讀取，請稍後再試。';
-  static const loadingTitle = '設定載入中';
-  static const loadingMessage = '正在同步本機設定，請稍候。';
+  static String get loadErrorTitle => 'view.lhf.setting.page.s001'.tr;
+  static String get loadErrorMessage => 'view.lhf.setting.page.s002'.tr;
+  static String get loadingTitle => 'view.lhf.setting.page.s003'.tr;
+  static String get loadingMessage => 'view.lhf.setting.page.s004'.tr;
 
   // Header
-  static const backTooltip = '返回';
-  static const pageTitle = '設定中心';
+  static String get backTooltip => 'view.camera.view.s010'.tr;
+  static String get pageTitle => 'view.lhf.setting.page.s006'.tr;
   static const pageSubtitle = '';
 
   // Hero
-  static const heroTitle = '冒險體驗偏好';
-  static const heroDescription = '這些設定會直接影響你在遊戲中的聲音與震動體驗，適合依照目前環境快速調整。';
-  static const heroLocalStorageBadge = '本機儲存';
-  static const heroInstantApplyBadge = '立即套用';
+  static String get heroTitle => 'view.lhf.setting.page.s007'.tr;
+  static String get heroDescription => 'view.lhf.setting.page.s008'.tr;
+  static String get heroLocalStorageBadge => 'view.lhf.setting.page.s009'.tr;
+  static String get heroInstantApplyBadge => 'view.lhf.setting.page.s010'.tr;
 
   // Volume
-  static const volumeTitle = '音量';
-  static const volumeDescription = '目前此功能尚未完成。';
-  static const volumeMuteLabel = '靜音';
-  static const volumeMaxLabel = '最大';
+  static String get volumeTitle => 'view.lhf.setting.page.s011'.tr;
+  static String get volumeDescription => 'view.lhf.setting.page.s012'.tr;
+  static String get volumeMuteLabel => 'view.lhf.setting.page.s013'.tr;
+  static String get volumeMaxLabel => 'view.lhf.setting.page.s014'.tr;
 
   // Vibration
-  static const vibrationTitle = '振動';
-  static const vibrationDescription = '控制支援裝置上的觸覺回饋提示。';
-  static const vibrationEnabledStatus = '已開啟';
-  static const vibrationDisabledStatus = '已關閉';
-  static const vibrationEnabledTitle = '觸覺提示開啟中';
-  static const vibrationDisabledTitle = '觸覺提示已關閉';
-  static const vibrationEnabledMessage = '在支援振動的情境中，遊戲可以提供更明顯的回饋。';
-  static const vibrationDisabledMessage = '目前不會發出震動提示，適合需要安靜的使用情境。';
+  static String get vibrationTitle => 'view.lhf.setting.page.s015'.tr;
+  static String get vibrationDescription => 'view.lhf.setting.page.s016'.tr;
+  static String get vibrationEnabledStatus => 'view.lhf.setting.page.s017'.tr;
+  static String get vibrationDisabledStatus => 'view.lhf.setting.page.s018'.tr;
+  static String get vibrationEnabledTitle => 'view.lhf.setting.page.s019'.tr;
+  static String get vibrationDisabledTitle => 'view.lhf.setting.page.s020'.tr;
+  static String get vibrationEnabledMessage => 'view.lhf.setting.page.s021'.tr;
+  static String get vibrationDisabledMessage => 'view.lhf.setting.page.s022'.tr;
 
   // Auto skip story
-  static const autoSkipStoryTitle = '跳過劇情';
-  static const autoSkipStoryDescription = '控制是否自動略過劇情對話，快速進入遊戲流程。';
-  static const autoSkipStoryEnabledStatus = '已開啟';
-  static const autoSkipStoryDisabledStatus = '已關閉';
-  static const autoSkipStoryEnabledTitle = '自動跳過劇情中';
-  static const autoSkipStoryDisabledTitle = '保留劇情播放';
-  static const autoSkipStoryEnabledMessage = '進入關卡時會略過劇情段落，適合重複挑戰時使用。';
-  static const autoSkipStoryDisabledMessage = '劇情段落會正常顯示，適合第一次體驗故事內容。';
+  static String get autoSkipStoryTitle => 'view.lhf.setting.page.s023'.tr;
+  static String get autoSkipStoryDescription => 'view.lhf.setting.page.s024'.tr;
+  static String get autoSkipStoryEnabledStatus =>
+      'view.lhf.setting.page.s017'.tr;
+  static String get autoSkipStoryDisabledStatus =>
+      'view.lhf.setting.page.s018'.tr;
+  static String get autoSkipStoryEnabledTitle =>
+      'view.lhf.setting.page.s027'.tr;
+  static String get autoSkipStoryDisabledTitle =>
+      'view.lhf.setting.page.s028'.tr;
+  static String get autoSkipStoryEnabledMessage =>
+      'view.lhf.setting.page.s029'.tr;
+  static String get autoSkipStoryDisabledMessage =>
+      'view.lhf.setting.page.s030'.tr;
 
   // Debug
-  static const debugCaptureAllTitle = '測試：捕捉全部精靈';
-  static const debugCaptureAllDescription = '開發測試用，會把目前資料庫中的所有精靈加入圖鑑。';
+  static String get debugCaptureAllTitle => 'view.lhf.setting.page.s031'.tr;
+  static String get debugCaptureAllDescription =>
+      'view.lhf.setting.page.s032'.tr;
   static const debugCaptureAllStatus = 'Debug';
-  static const debugCaptureAllButton = '一鍵捕捉全部';
-  static const debugDeleteAllButton = '一鍵刪除全部';
-  static const debugCaptureAllNoUser = '請先登入後再使用測試功能';
-  static const debugCaptureAllRunning = '正在加入所有精靈...';
-  static const debugDeleteAllRunning = '正在刪除圖鑑精靈...';
-  static const debugCaptureAllFailed = '捕捉全部精靈失敗，請稍後再試';
-  static const debugDeleteAllFailed = '刪除全部精靈失敗，請稍後再試';
+  static String get debugCaptureAllButton => 'view.lhf.setting.page.s033'.tr;
+  static String get debugDeleteAllButton => 'view.lhf.setting.page.s034'.tr;
+  static String get debugCaptureAllNoUser => 'view.lhf.setting.page.s035'.tr;
+  static String get debugCaptureAllRunning => 'view.lhf.setting.page.s036'.tr;
+  static String get debugDeleteAllRunning => 'view.lhf.setting.page.s037'.tr;
+  static String get debugCaptureAllFailed => 'view.lhf.setting.page.s038'.tr;
+  static String get debugDeleteAllFailed => 'view.lhf.setting.page.s039'.tr;
 
   static String debugCaptureAllDone(int count) {
-    return count == 0 ? '圖鑑已經擁有全部精靈' : '已新增 $count 隻精靈到圖鑑';
+    return count == 0 ? 'view.lhf.setting.page.s040'.tr : '已新增 $count 隻精靈到圖鑑';
   }
 
   static String debugDeleteAllDone(int count) {
-    return count == 0 ? '圖鑑原本就是空的' : '已從圖鑑刪除 $count 隻精靈';
+    return count == 0 ? 'view.lhf.setting.page.s042'.tr : '已從圖鑑刪除 $count 隻精靈';
   }
 
   // Language
-  static const languageTitle = '語言';
-  static const languageDescription = '選擇遊戲介面的顯示語言。';
-  static const languageChineseLabel = '中文';
+  static String get languageTitle => 'view.lhf.setting.page.s044'.tr;
+  static String get languageDescription => 'view.lhf.setting.page.s045'.tr;
+  static String get languageChineseLabel => 'view.lhf.setting.page.s046'.tr;
   static const languageEnglishLabel = 'English';
-  static const languageDropdownLabel = '目前語言';
+  static const languageJapaneseLabel = '日本語';
+  static String get languageDropdownLabel => 'view.lhf.setting.page.s047'.tr;
 
   // Protocol
-  static const userProtocolTitle = '使用者協議';
-  static const userProtocolDescription = '查看目前版本的使用者協議與說明內容。';
-  static const userProtocolButtonHint = '點擊前往閱讀協議內容';
+  static String get userProtocolTitle => 'view.lhf.setting.page.s048'.tr;
+  static String get userProtocolDescription => 'view.lhf.setting.page.s049'.tr;
+  static String get userProtocolButtonHint => 'view.lhf.setting.page.s050'.tr;
 
   static String volumePercentage(int volume) => '$volume%';
 
@@ -109,14 +117,16 @@ class SteeingPageStrings {
       enabled ? autoSkipStoryEnabledMessage : autoSkipStoryDisabledMessage;
 
   static String languageLabel(String language) {
-    return language == LanguageSetting.english
-        ? languageEnglishLabel
-        : languageChineseLabel;
+    return switch (language) {
+      LanguageSetting.english => languageEnglishLabel,
+      LanguageSetting.japanese => languageJapaneseLabel,
+      _ => languageChineseLabel,
+    };
   }
 }
 
 class FullPageList {
-  static const List<Widget> stttingList = [
+  static List<Widget> get stttingList => [
     FullPageList.pageHeader,
     FullPageList.sectionGap,
     FullPageList.firstCardGap,
@@ -133,25 +143,23 @@ class FullPageList {
     FullPageList.userProtocolButton,
   ];
 
-  static const Widget pageHeader = _PageHeader();
-  static const Widget sectionGap = SizedBox(
-    height: SettingPageStyles.sectionSpacing,
-  );
-  // static const Widget heroPanel = _HeroPanel();
-  static const Widget firstCardGap = SizedBox(
-    height: SettingPageStyles.cardSpacing,
-  );
-  static const Widget volumeSetCard = _VolumeSettingCard();
-  static const Widget cardGap = SizedBox(height: SettingPageStyles.cardSpacing);
-  static const Widget vibrationSetCard = _VibrationSettingCard();
-  static const Widget autoSkipStorySetCard = _AutoSkipStorySettingCard();
-  static const Widget debugCaptureAllCard = _DebugCaptureAllMonstersCard();
-  static const Widget languageSetCard = _LanguageSettingCard();
-  static const Widget userProtocolButton = _UserProtocolButton();
+  static Widget get pageHeader => _PageHeader();
+  static Widget get sectionGap =>
+      SizedBox(height: SettingPageStyles.sectionSpacing);
+  // static Widget get heroPanel => _HeroPanel();
+  static Widget get firstCardGap =>
+      SizedBox(height: SettingPageStyles.cardSpacing);
+  static Widget get volumeSetCard => _VolumeSettingCard();
+  static Widget get cardGap => SizedBox(height: SettingPageStyles.cardSpacing);
+  static Widget get vibrationSetCard => _VibrationSettingCard();
+  static Widget get autoSkipStorySetCard => _AutoSkipStorySettingCard();
+  static Widget get debugCaptureAllCard => _DebugCaptureAllMonstersCard();
+  static Widget get languageSetCard => _LanguageSettingCard();
+  static Widget get userProtocolButton => _UserProtocolButton();
 }
 
 class SettingPage extends StatelessWidget {
-  const SettingPage({super.key});
+  SettingPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -164,7 +172,7 @@ class SettingPage extends StatelessWidget {
             future: LocalSettingService.initBox(),
             builder: (context, snapshot) {
               if (snapshot.hasError) {
-                return const _StatePanel(
+                return _StatePanel(
                   icon: Icons.error_outline_rounded,
                   title: SteeingPageStrings.loadErrorTitle,
                   message: SteeingPageStrings.loadErrorMessage,
@@ -181,7 +189,7 @@ class SettingPage extends StatelessWidget {
                   constraints: SettingPageStyles.pageContentConstraints,
                   child: ListView(
                     padding: SettingPageStyles.pagePadding,
-                    physics: const BouncingScrollPhysics(),
+                    physics: BouncingScrollPhysics(),
                     children: FullPageList.stttingList,
                   ),
                 ),
@@ -294,7 +302,7 @@ class _VibrationSettingCard extends StatelessWidget {
                           vibrationEnabled,
                         ),
                       ),
-                      const SizedBox(height: SettingPageStyles.gap2xs),
+                      SizedBox(height: SettingPageStyles.gap2xs),
                       Text(
                         SteeingPageStrings.vibrationPanelMessage(
                           vibrationEnabled,
@@ -304,7 +312,7 @@ class _VibrationSettingCard extends StatelessWidget {
                     ],
                   ),
                 ),
-                const SizedBox(width: SettingPageStyles.gapMd),
+                SizedBox(width: SettingPageStyles.gapMd),
                 Switch(
                   value: vibrationEnabled,
                   activeThumbColor: SettingPageStyles.switchActiveThumbColor,
@@ -365,7 +373,7 @@ class _AutoSkipStorySettingCard extends StatelessWidget {
                           autoSkipStoryEnabled,
                         ),
                       ),
-                      const SizedBox(height: SettingPageStyles.gap2xs),
+                      SizedBox(height: SettingPageStyles.gap2xs),
                       Text(
                         SteeingPageStrings.autoSkipStoryPanelMessage(
                           autoSkipStoryEnabled,
@@ -375,7 +383,7 @@ class _AutoSkipStorySettingCard extends StatelessWidget {
                     ],
                   ),
                 ),
-                const SizedBox(width: SettingPageStyles.gapMd),
+                SizedBox(width: SettingPageStyles.gapMd),
                 Switch(
                   value: autoSkipStoryEnabled,
                   activeThumbColor: SettingPageStyles.switchActiveThumbColor,
@@ -405,16 +413,17 @@ class _LanguageSettingCard extends StatelessWidget {
     return ValueListenableBuilder(
       valueListenable: LocalSettingService.settingsBox.listenable(),
       builder: (context, _, child) {
+        final currentLanguage = LocalSettingService.language.current;
         return _SettingCard(
           icon: Icons.language_rounded,
           title: SteeingPageStrings.languageTitle,
           description: SteeingPageStrings.languageDescription,
           status: _StatusChip(
-            label: SteeingPageStrings.languageChineseLabel,
+            label: SteeingPageStrings.languageLabel(currentLanguage),
             enabled: true,
           ),
           child: DropdownButtonFormField<String>(
-            initialValue: LanguageSetting.chinese,
+            initialValue: currentLanguage,
             decoration: InputDecoration(
               labelText: SteeingPageStrings.languageDropdownLabel,
               labelStyle: SettingPageStyles.bodyTextStyle,
@@ -429,26 +438,41 @@ class _LanguageSettingCard extends StatelessWidget {
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: SettingPageStyles.toggleShellBorderRadius,
-                borderSide: const BorderSide(
+                borderSide: BorderSide(
                   color: AppTheme.primaryColor,
                   width: 1.2,
                 ),
               ),
               contentPadding: SettingPageStyles.toggleShellPadding,
             ),
-            icon: const Icon(
+            icon: Icon(
               Icons.keyboard_arrow_down_rounded,
               color: SettingPageStyles.mutedIconColor,
             ),
             dropdownColor: AppTheme.cardColor,
             style: SettingPageStyles.toggleTitleStyle(true),
-            items: const [
+            items: [
               DropdownMenuItem<String>(
                 value: LanguageSetting.chinese,
                 child: Text(SteeingPageStrings.languageChineseLabel),
               ),
+              DropdownMenuItem<String>(
+                value: LanguageSetting.english,
+                child: Text(SteeingPageStrings.languageEnglishLabel),
+              ),
+              DropdownMenuItem<String>(
+                value: LanguageSetting.japanese,
+                child: Text(SteeingPageStrings.languageJapaneseLabel),
+              ),
             ],
-            onChanged: null,
+            onChanged: (language) async {
+              if (language == null || language == currentLanguage) {
+                return;
+              }
+
+              await LocalSettingService.language.update(language);
+              Get.updateLocale(Locale(language));
+            },
           ),
         );
       },
@@ -576,26 +600,26 @@ class _DebugCaptureAllMonstersCardState
                   ? null
                   : _captureAllMonsters,
               icon: _isCapturing
-                  ? const SizedBox(
+                  ? SizedBox(
                       width: 18,
                       height: 18,
                       child: CircularProgressIndicator(strokeWidth: 2),
                     )
-                  : const Icon(Icons.catching_pokemon_rounded),
-              label: const Text(SteeingPageStrings.debugCaptureAllButton),
+                  : Icon(Icons.catching_pokemon_rounded),
+              label: Text(SteeingPageStrings.debugCaptureAllButton),
             ),
             OutlinedButton.icon(
               onPressed: _isCapturing || _isDeleting
                   ? null
                   : _deleteAllMonsters,
               icon: _isDeleting
-                  ? const SizedBox(
+                  ? SizedBox(
                       width: 18,
                       height: 18,
                       child: CircularProgressIndicator(strokeWidth: 2),
                     )
-                  : const Icon(Icons.delete_sweep_rounded),
-              label: const Text(SteeingPageStrings.debugDeleteAllButton),
+                  : Icon(Icons.delete_sweep_rounded),
+              label: Text(SteeingPageStrings.debugDeleteAllButton),
             ),
           ],
         ),
@@ -612,7 +636,7 @@ class _UserProtocolButton extends StatefulWidget {
 }
 
 class _UserProtocolButtonState extends State<_UserProtocolButton> {
-  static const Duration _pressAnimationDuration = Duration(milliseconds: 120);
+  static Duration get _pressAnimationDuration => Duration(milliseconds: 120);
   static const double _pressedScale = 0.96;
 
   bool _isPressed = false;
@@ -634,9 +658,9 @@ class _UserProtocolButtonState extends State<_UserProtocolButton> {
       return;
     }
 
-    await Navigator.of(context).push(
-      MaterialPageRoute<void>(builder: (context) => const UserProtocolPage()),
-    );
+    await Navigator.of(
+      context,
+    ).push(MaterialPageRoute<void>(builder: (context) => UserProtocolPage()));
   }
 
   @override
@@ -654,7 +678,7 @@ class _UserProtocolButtonState extends State<_UserProtocolButton> {
           width: double.infinity,
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
           decoration: BoxDecoration(
-            gradient: const LinearGradient(
+            gradient: LinearGradient(
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
               colors: [
@@ -674,13 +698,13 @@ class _UserProtocolButtonState extends State<_UserProtocolButton> {
                   color: Colors.white.withValues(alpha: 0.18),
                   borderRadius: SettingPageStyles.settingIconBorderRadius,
                 ),
-                child: const Icon(
+                child: Icon(
                   Icons.description_rounded,
                   color: SettingPageStyles.surfaceIconColor,
                   size: SettingPageStyles.settingIconGlyphSize,
                 ),
               ),
-              const SizedBox(width: SettingPageStyles.gapLg),
+              SizedBox(width: SettingPageStyles.gapLg),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -692,7 +716,7 @@ class _UserProtocolButtonState extends State<_UserProtocolButton> {
                         color: Colors.white,
                       ),
                     ),
-                    const SizedBox(height: SettingPageStyles.gap2xs),
+                    SizedBox(height: SettingPageStyles.gap2xs),
                     Text(
                       SteeingPageStrings.userProtocolDescription,
                       style: AppTheme.detailBodyStyle.copyWith(
@@ -704,7 +728,7 @@ class _UserProtocolButtonState extends State<_UserProtocolButton> {
                   ],
                 ),
               ),
-              const SizedBox(width: SettingPageStyles.gapMd),
+              SizedBox(width: SettingPageStyles.gapMd),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
@@ -713,7 +737,7 @@ class _UserProtocolButtonState extends State<_UserProtocolButton> {
                     color: Colors.white.withValues(alpha: 0.92),
                     size: 30,
                   ),
-                  // const SizedBox(height: SettingPageStyles.gap2xs),
+                  // SizedBox(height: SettingPageStyles.gap2xs),
                   // Text(
                   //   SteeingPageStrings.userProtocolButtonHint,
                   //   style: AppTheme.cardTitleStyle.copyWith(
@@ -744,12 +768,12 @@ class _PageHeader extends StatelessWidget {
           decoration: SettingPageStyles.navigationButtonDecoration,
           child: IconButton(
             onPressed: () => Navigator.of(context).maybePop(),
-            icon: const Icon(Icons.arrow_back_rounded),
+            icon: Icon(Icons.arrow_back_rounded),
             color: SettingPageStyles.mutedIconColor,
             tooltip: SteeingPageStrings.backTooltip,
           ),
         ),
-        const SizedBox(width: SettingPageStyles.gapMd),
+        SizedBox(width: SettingPageStyles.gapMd),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -758,7 +782,7 @@ class _PageHeader extends StatelessWidget {
                 SteeingPageStrings.pageTitle,
                 style: SettingPageStyles.pageTitleStyle,
               ),
-              const SizedBox(height: SettingPageStyles.gap2xs),
+              SizedBox(height: SettingPageStyles.gap2xs),
               Text(
                 SteeingPageStrings.pageSubtitle,
                 style: SettingPageStyles.pageSubtitleStyle,
@@ -803,7 +827,7 @@ class _SettingCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(title, style: SettingPageStyles.cardTitleStyle),
-                const SizedBox(height: SettingPageStyles.gap2xs),
+                SizedBox(height: SettingPageStyles.gap2xs),
                 Text(description, style: SettingPageStyles.bodyTextStyle),
               ],
             ),
@@ -831,11 +855,11 @@ class _SettingCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         iconBlock,
-                        const SizedBox(width: SettingPageStyles.gapMd),
+                        SizedBox(width: SettingPageStyles.gapMd),
                         titleBlock,
                       ],
                     ),
-                    const SizedBox(height: SettingPageStyles.gapMd),
+                    SizedBox(height: SettingPageStyles.gapMd),
                     // status,
                   ],
                 )
@@ -844,13 +868,13 @@ class _SettingCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     iconBlock,
-                    const SizedBox(width: SettingPageStyles.gapLg),
+                    SizedBox(width: SettingPageStyles.gapLg),
                     titleBlock,
-                    const SizedBox(width: SettingPageStyles.gapLg),
+                    SizedBox(width: SettingPageStyles.gapLg),
                     status,
                   ],
                 ),
-              const SizedBox(height: SettingPageStyles.gap2xl),
+              SizedBox(height: SettingPageStyles.gap2xl),
               child, //內容插槽
             ],
           );
@@ -881,7 +905,7 @@ class _LoadingPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const _StatePanel(
+    return _StatePanel(
       icon: Icons.tune_rounded,
       title: SteeingPageStrings.loadingTitle,
       message: SteeingPageStrings.loadingMessage,
@@ -926,17 +950,17 @@ class _StatePanel extends StatelessWidget {
                     size: SettingPageStyles.stateIconGlyphSize,
                   ),
                 ),
-                const SizedBox(height: SettingPageStyles.gapXl),
+                SizedBox(height: SettingPageStyles.gapXl),
                 Text(title, style: SettingPageStyles.heroTitleStyle),
-                const SizedBox(height: SettingPageStyles.gapXs),
+                SizedBox(height: SettingPageStyles.gapXs),
                 Text(
                   message,
                   textAlign: TextAlign.center,
                   style: SettingPageStyles.bodyTextStyle,
                 ),
                 if (showLoading) ...[
-                  const SizedBox(height: SettingPageStyles.gapXl),
-                  const CircularProgressIndicator(
+                  SizedBox(height: SettingPageStyles.gapXl),
+                  CircularProgressIndicator(
                     color: SettingPageStyles.loadingIndicatorColor,
                   ),
                 ],

@@ -8,20 +8,22 @@ import 'package:campus_tour/widgets/game/catching_pages/monster_model_cry.dart';
 import 'package:campus_tour/widgets/game/catching_pages/trace_levle.dart';
 import 'package:flutter/material.dart';
 
+import 'package:get/get.dart';
+
 // Temporary FullMissionPage test entries.
 // Remove this file and the FullMissionTestButtonGroup usage in
 // drawer_button_group.dart when the real monster mission data is connected.
 class FullMissionTestButtonGroup extends StatelessWidget {
-  const FullMissionTestButtonGroup({super.key});
+  FullMissionTestButtonGroup({super.key});
 
-  static const MonsterModelCry _fireMonster = MonsterModelCry(
-    name: '測試火精靈',
+  static MonsterModelCry get _fireMonster => MonsterModelCry(
+    name: 'widgets.sections.monster.test.s001'.tr,
     type: '火',
     imageUrl: 'assets/images/Arcana.jpg',
   );
 
-  static const MonsterModelCry _waterMonster = MonsterModelCry(
-    name: '測試水精靈',
+  static MonsterModelCry get _waterMonster => MonsterModelCry(
+    name: 'widgets.sections.monster.test.s003'.tr,
     type: '水',
     imageUrl: 'assets/images/cute_forest_map.jpg',
   );
@@ -60,14 +62,14 @@ class FullMissionTestButtonGroup extends StatelessWidget {
         levelType: 'graphics_text',
         graphicsTextLevel: GraphicsTextLevel(
           firstTracePhoto: 'assets/images/cute_forest_map.jpg',
-          descriptionText: '測試圖文關卡 1：觀察地圖後掃描 TEST_NFC_ID。',
+          descriptionText: 'widgets.sections.monster.test.s005'.tr,
           nfcId: '04:9E:69:D2:2E:61:80',
         ),
       ),
       FullMission(
         levelType: 'graphics_text',
         graphicsTextLevel: GraphicsTextLevel(
-          descriptionText: '測試圖文關卡 2：純文字線索。',
+          descriptionText: 'widgets.sections.monster.test.s006'.tr,
           nfcId: '04:9E:69:D2:2E:61:80',
         ),
       ),
@@ -79,7 +81,10 @@ class FullMissionTestButtonGroup extends StatelessWidget {
       FullMission(
         levelType: 'cryptography',
         cryptographyLevel: CryptographyLevel(
-          questionSet: ['第一題：1+1 = ?', '第二題：首字母是 A 的單字？'],
+          questionSet: [
+            'widgets.sections.monster.test.s007'.tr,
+            'widgets.sections.monster.test.s008'.tr,
+          ],
           choiceSet: [
             ['1', '2', '3'],
             ['Apple', 'Banana', 'Cat'],
@@ -96,14 +101,17 @@ class FullMissionTestButtonGroup extends StatelessWidget {
         levelType: 'graphics_text',
         graphicsTextLevel: GraphicsTextLevel(
           firstTracePhoto: 'assets/images/cute_forest_map.jpg',
-          descriptionText: '混合測試第 1 關：先掃 NFC。',
+          descriptionText: 'widgets.sections.monster.test.s009'.tr,
           nfcId: '04:9E:69:D2:2E:61:80',
         ),
       ),
       FullMission(
         levelType: 'cryptography',
         cryptographyLevel: CryptographyLevel(
-          questionSet: ['校園英文是？', 'Flutter 使用哪個語言？'],
+          questionSet: [
+            'widgets.sections.monster.test.s010'.tr,
+            'widgets.sections.monster.test.s011'.tr,
+          ],
           choiceSet: [
             ['Campus', 'Camera', 'Capture'],
             ['Dart', 'Java', 'Swift'],
@@ -115,7 +123,7 @@ class FullMissionTestButtonGroup extends StatelessWidget {
         levelType: 'graphics_text',
         graphicsTextLevel: GraphicsTextLevel(
           firstTracePhoto: 'assets/images/Arcana.jpg',
-          descriptionText: '混合測試第 3 關：最後再掃一次 NFC。',
+          descriptionText: 'widgets.sections.monster.test.s012'.tr,
           nfcId: '04:A7:5A:4B:57:59:80',
         ),
       ),
@@ -135,7 +143,7 @@ class FullMissionTestButtonGroup extends StatelessWidget {
         traceLevel: TraceLevle(
           tracePhoto: 'assets/images/cute_forest_map.jpg',
           nfcId: 'TEST_TRACE_NFC_ID',
-          arInformation: '測試 VR/AR 關卡資料，現在應該被 FullMissionPage 禁用。',
+          arInformation: 'widgets.sections.monster.test.s013'.tr,
         ),
       ),
     ];

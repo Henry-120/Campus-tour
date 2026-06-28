@@ -9,7 +9,7 @@ import '../widgets/constants/responsive.dart';
 import 'package:campus_tour/widgets/ar_control/ar_control_view.dart';
 
 class RealArPage extends StatefulWidget {
-  const RealArPage({super.key});
+  RealArPage({super.key});
 
   @override
   State<RealArPage> createState() => _RealArPageState();
@@ -35,7 +35,10 @@ class _RealArPageState extends State<RealArPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("放置精靈", style: AppTheme.emptyStateStyle(20 * scale)),
+        title: Text(
+          'view.real.ar.view.s001'.tr,
+          style: AppTheme.emptyStateStyle(20 * scale),
+        ),
         backgroundColor: AppTheme.transparentColor,
         elevation: 0,
         leading: IconButton(
@@ -65,7 +68,10 @@ class _RealArPageState extends State<RealArPage> {
             right: 0,
             child: Column(
               children: [
-                Text("選擇要放出的精靈", style: AppTheme.overlayTextStyle(18 * scale)),
+                Text(
+                  'view.camera.view.s003'.tr,
+                  style: AppTheme.overlayTextStyle(18 * scale),
+                ),
                 SizedBox(height: 15 * scale),
                 SizedBox(
                   height: 110 * scale,
@@ -74,7 +80,7 @@ class _RealArPageState extends State<RealArPage> {
                     if (collection.isEmpty) {
                       return Center(
                         child: Text(
-                          "目前沒有精靈",
+                          'view.camera.view.s004'.tr,
                           style: AppTheme.emptyStateStyle(14 * scale),
                         ),
                       );
@@ -88,22 +94,23 @@ class _RealArPageState extends State<RealArPage> {
                         String modelFile =
                             userMonster.arRef ?? ""; // 💡 使用 Model 內的 arRef
                         bool isSelected = selectedMonsterUrl == modelFile;
-                        bool isSpecialMonster = userMonster.name == "嚶嚶嚶";
+                        bool isSpecialMonster =
+                            userMonster.name == 'view.real.ar.view.s004'.tr;
 
                         return GestureDetector(
                           behavior: HitTestBehavior.opaque,
                           onTap: () {
                             setState(() {
                               selectedMonsterUrl = modelFile;
-                              selectedScale = (modelFile == "Elephant.usdz") ? 8 : 0.05;
+                              selectedScale = (modelFile == "Elephant.usdz")
+                                  ? 8
+                                  : 0.05;
                               debugPrint("💡 已切換精靈模型為: $selectedMonsterUrl");
                             });
                             if (selectedMonsterUrl == "YMCA.usdz") {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(
-                                  builder: (_) => const ArPage(),
-                                ),
+                                MaterialPageRoute(builder: (_) => ArPage()),
                               );
                             }
                           },
@@ -115,11 +122,13 @@ class _RealArPageState extends State<RealArPage> {
                             ),
                             width: 90 * scale,
                             decoration: BoxDecoration(
-                                color: isSelected
-                                    ? AppTheme.arSelectedTileColor.withValues(alpha: 0.2)
-                                    : isSpecialMonster
-                                    ? Colors.pink.shade100.withValues(alpha: 0.7)
-                                      : AppTheme.arUnselectedTileColor,
+                              color: isSelected
+                                  ? AppTheme.arSelectedTileColor.withValues(
+                                      alpha: 0.2,
+                                    )
+                                  : isSpecialMonster
+                                  ? Colors.pink.shade100.withValues(alpha: 0.7)
+                                  : AppTheme.arUnselectedTileColor,
                               borderRadius: BorderRadius.circular(20 * scale),
                               border: isSelected
                                   ? Border.all(
@@ -191,7 +200,11 @@ class _RealArPageState extends State<RealArPage> {
     arkitController = controller;
     controller.onARTap = (List<ARKitTestResult> arTapResults) {
       if (selectedMonsterUrl.isEmpty) {
-        SnackBarBuilder.show(context, "請先選擇一隻精靈！", type: AppToastType.warning);
+        SnackBarBuilder.show(
+          context,
+          'view.real.ar.view.s006'.tr,
+          type: AppToastType.warning,
+        );
         return;
       }
 
@@ -217,7 +230,7 @@ class _RealArPageState extends State<RealArPage> {
       url: selectedMonsterUrl,
       position: position,
       eulerAngles: vector.Vector3(0, -1.5708, 0), // 修正躺下的問題
-        scale: vector.Vector3(selectedScale, selectedScale, selectedScale),
+      scale: vector.Vector3(selectedScale, selectedScale, selectedScale),
     );
 
     arkitController?.add(node);

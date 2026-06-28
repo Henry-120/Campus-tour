@@ -9,7 +9,7 @@ import 'nickname_field.dart';
 import '../constants/responsive.dart';
 
 class ProfileEditDialog extends StatelessWidget {
-  const ProfileEditDialog({super.key});
+  ProfileEditDialog({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class ProfileEditDialog extends StatelessWidget {
           Responsive.h(context, 50),
         ),
         decoration: BoxDecoration(
-          image: const DecorationImage(
+          image: DecorationImage(
             image: AssetImage(AssetPaths.changeNameBg),
             fit: BoxFit.fill,
           ),
@@ -40,7 +40,7 @@ class ProfileEditDialog extends StatelessWidget {
             AvatarPreview(controller: controller),
             SizedBox(height: Responsive.h(context, 12)),
             Text(
-              '點擊生成隨機頭像',
+              'widgets.profile.edit.profile.edit.dialog.s001'.tr,
               style: AppTheme.titleStyle.copyWith(
                 color: Colors.brown,
                 fontSize: Responsive.s(context, 14),
@@ -70,7 +70,7 @@ class ProfileEditDialog extends StatelessWidget {
         SizedBox(width: Responsive.w(context, 8)),
         Flexible(
           child: Text(
-            '更換造型',
+            'widgets.profile.edit.profile.edit.dialog.s002'.tr,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: AppTheme.titleStyle.copyWith(
@@ -96,21 +96,21 @@ class ProfileEditDialog extends StatelessWidget {
       children: [
         Expanded(
           child: GameDialogButton(
-            text: '先不要',
+            text: 'widgets.profile.edit.profile.edit.dialog.s003'.tr,
             icon: Icons.menu_book_rounded,
-            backgroundColor: const Color(0xFFDCE8E2),
-            borderColor: const Color(0xFF7E9188),
-            textColor: const Color(0xFF4F5F5A),
+            backgroundColor: Color(0xFFDCE8E2),
+            borderColor: Color(0xFF7E9188),
+            textColor: Color(0xFF4F5F5A),
             onTap: () => Navigator.pop(context),
           ),
         ),
         SizedBox(width: Responsive.w(context, 18)),
         Expanded(
           child: GameDialogButton(
-            text: '確定更換',
+            text: 'widgets.profile.edit.profile.edit.dialog.s004'.tr,
             icon: Icons.edit_document,
-            backgroundColor: const Color(0xFFEFA640),
-            borderColor: const Color(0xFFB86E22),
+            backgroundColor: Color(0xFFEFA640),
+            borderColor: Color(0xFFB86E22),
             textColor: Colors.white,
             onTap: () async {
               await controller.saveProfile();

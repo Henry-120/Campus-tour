@@ -9,6 +9,8 @@ import 'package:campus_tour/widgets/game/catching_pages/monster_model_cry.dart';
 import 'package:campus_tour/widgets/game/catching_pages/plot_level.dart';
 import 'package:campus_tour/widgets/game/catching_pages/plot_level_page.dart';
 
+import 'package:get/get.dart';
+
 class FullMissionPage extends StatefulWidget {
   final List<FullMission> missions; //任務列表
   final MonsterModelCry monsterModelCry; //精靈資料
@@ -16,7 +18,7 @@ class FullMissionPage extends StatefulWidget {
   final VoidCallback? onMissionFailed;
 
   //建構子
-  const FullMissionPage({
+  FullMissionPage({
     super.key,
     required this.missions,
     required this.monsterModelCry,
@@ -73,7 +75,7 @@ class _FullMissionPageState extends State<FullMissionPage> {
     // [L-08]
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => const CatchingFaildPage()),
+      MaterialPageRoute(builder: (context) => CatchingFaildPage()),
     );
   }
 
@@ -101,9 +103,11 @@ class _FullMissionPageState extends State<FullMissionPage> {
       });
 
       // [L-16]
-      return const PopScope(
+      return PopScope(
         canPop: false,
-        child: Scaffold(body: Center(child: Text('沒有關卡'))),
+        child: Scaffold(
+          body: Center(child: Text('view.full.mission.page.s002'.tr)),
+        ),
       );
     }
 
@@ -218,7 +222,7 @@ class _FullMissionPageState extends State<FullMissionPage> {
 
   Widget _buildDisabledPage(FullMission mission) {
     // [L-34]
-    debugPrint('禁用頁面');
+    debugPrint('view.full.mission.page.s004'.tr);
     // [L-35]
     return ErrorWidget('禁用頁面: ${mission.levelType}');
   }

@@ -11,8 +11,10 @@ import '../widgets/login/wood_register_panel.dart';
 import 'after_login.dart';
 import 'login_page.dart';
 
+import 'package:get/get.dart';
+
 class RegisterPage extends StatefulWidget {
-  const RegisterPage({super.key});
+  RegisterPage({super.key});
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
@@ -33,7 +35,11 @@ class _RegisterPageState extends State<RegisterPage> {
     final isValid = _formKey.currentState?.validate() ?? false;
 
     if (!isValid) {
-      SnackBarBuilder.show(context, "請確認註冊資料是否正確", type: AppToastType.warning);
+      SnackBarBuilder.show(
+        context,
+        'view.register.page.s001'.tr,
+        type: AppToastType.warning,
+      );
       return;
     }
 
@@ -59,7 +65,7 @@ class _RegisterPageState extends State<RegisterPage> {
       } else {
         SnackBarBuilder.show(
           context,
-          "註冊失敗，該 Email 可能已被使用或網路異常",
+          'view.register.page.s003'.tr,
           type: AppToastType.error,
         );
       }
@@ -87,7 +93,7 @@ class _RegisterPageState extends State<RegisterPage> {
       if (user != null) {
         SnackBarBuilder.show(
           context,
-          "Google 註冊成功！歡迎加入冒險之旅",
+          'view.register.page.s006'.tr,
           type: AppToastType.success,
         );
 
@@ -95,7 +101,7 @@ class _RegisterPageState extends State<RegisterPage> {
       } else {
         SnackBarBuilder.show(
           context,
-          "Google 註冊失敗，請稍後再試",
+          'view.register.page.s007'.tr,
           type: AppToastType.error,
         );
       }
@@ -119,7 +125,7 @@ class _RegisterPageState extends State<RegisterPage> {
   void _goBackToLogin() {
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (_) => const LoginPage()),
+      MaterialPageRoute(builder: (_) => LoginPage()),
     );
   }
 
@@ -153,7 +159,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       SizedBox(height: 12 * scale),
-                      const GameTitle(title: "REGISTER"),
+                      GameTitle(title: "REGISTER"),
                       SizedBox(height: 10 * scale),
                       WoodRegisterPanel(
                         nameController: _nameController,

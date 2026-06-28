@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import '../../styles/app_theme.dart';
 import 'elf_info_row.dart';
 
+import 'package:get/get.dart';
+
 class ElfInstallationSection extends StatelessWidget {
   final String imagePath;
   final String location;
   final String year;
 
-  const ElfInstallationSection({
+  ElfInstallationSection({
     super.key,
     required this.imagePath,
     required this.location,
@@ -25,7 +27,7 @@ class ElfInstallationSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Installation Art (裝置藝術)',
+            'widgets.encyclopedia.elf.installation.section.s001'.tr,
             style: AppTheme.titleStyle.copyWith(
               fontSize: 20,
               fontWeight: FontWeight.bold,
@@ -33,7 +35,7 @@ class ElfInstallationSection extends StatelessWidget {
               letterSpacing: 0,
             ),
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
           Container(
             decoration: BoxDecoration(
               color: cardColor,
@@ -61,7 +63,7 @@ class ElfInstallationSection extends StatelessWidget {
                         height: 200,
                         width: double.infinity,
                         color: Colors.grey.shade200,
-                        child: const Icon(
+                        child: Icon(
                           Icons.image_not_supported,
                           color: Colors.grey,
                           size: 48,
@@ -76,13 +78,17 @@ class ElfInstallationSection extends StatelessWidget {
                     children: [
                       ElfInfoRow(
                         icon: Icons.location_on,
-                        label: 'Location (設置位置): ',
+                        label:
+                            'widgets.encyclopedia.elf.installation.section.s002'
+                                .tr,
                         value: location,
                       ),
-                      const SizedBox(height: 12),
+                      SizedBox(height: 12),
                       ElfInfoRow(
                         icon: Icons.calendar_today,
-                        label: 'Year (設置年代): ',
+                        label:
+                            'widgets.encyclopedia.elf.installation.section.s003'
+                                .tr,
                         value: year,
                       ),
                     ],

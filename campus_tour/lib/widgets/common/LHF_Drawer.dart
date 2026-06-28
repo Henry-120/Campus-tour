@@ -45,6 +45,6 @@ class _DarwerButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const DrawerButtonGroup();
+    return DrawerButtonGroup();
   }
 }

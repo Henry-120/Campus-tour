@@ -1,22 +1,24 @@
 import 'package:campus_tour/widgets/constants/asset_paths.dart';
 import 'package:flutter/material.dart';
 
+import 'package:get/get.dart';
+
 class DiscoveredItem {
   // [L-01]
-  static const DiscoveredItem strategyBook = DiscoveredItem(
-    title: '意外收穫！你找到了攻略秘集',
-    noteText: '詳見金屬指示牌',
+  static DiscoveredItem get strategyBook => DiscoveredItem(
+    title: 'widgets.game.catching.pages.discovered.item.s001'.tr,
+    noteText: 'widgets.game.catching.pages.discovered.item.s002'.tr,
     imagePath: AssetPaths.book,
-    buttonText: '好好研究它',
+    buttonText: 'widgets.game.catching.pages.discovered.item.s003'.tr,
     fallbackIcon: Icons.menu_book_rounded,
   );
 
   // [L-02]
-  static const DiscoveredItem magicStone = DiscoveredItem(
-    title: '發現道具',
-    noteText: '一顆發著光的魔法石',
+  static DiscoveredItem get magicStone => DiscoveredItem(
+    title: 'widgets.game.catching.pages.discovered.item.s004'.tr,
+    noteText: 'widgets.game.catching.pages.discovered.item.s005'.tr,
     imagePath: 'assets/images/Plot/magicStone.PNG',
-    buttonText: '帶著它',
+    buttonText: 'widgets.game.catching.pages.discovered.item.s006'.tr,
     fallbackIcon: Icons.diamond_rounded,
   );
 
@@ -28,7 +30,7 @@ class DiscoveredItem {
   final IconData fallbackIcon;
 
   // [L-04]
-  const DiscoveredItem({
+  DiscoveredItem({
     required this.title,
     required this.noteText,
     required this.imagePath,

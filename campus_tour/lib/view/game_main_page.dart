@@ -47,7 +47,7 @@ class _GameMainPageState extends State<GameMainPage> {
         drawerEnableOpenDragGesture: true,
         body: Stack(
           children: [
-            const GameMap(),
+            GameMap(),
 
             // 2. 左上角：使用者頭像與狀態
             Positioned(
@@ -55,7 +55,7 @@ class _GameMainPageState extends State<GameMainPage> {
               left: 20 * scale,
               child: ScaleButton(
                 onTap: null, // UserHud 內部已有點擊邏輯
-                child: const UserHud(),
+                child: UserHud(),
               ),
             ),
 
@@ -63,14 +63,14 @@ class _GameMainPageState extends State<GameMainPage> {
             Center(child: PlayerSprite(size: 90 * scale)),
 
             // 5. 中間：最近怪物箭頭
-            const NearestMonsterArrow(),
+            NearestMonsterArrow(),
 
             // 6. 下方：主選單
             Positioned(
               bottom: 30 * scale,
               left: 0,
               right: 0,
-              child: const SystemMenu(),
+              child: SystemMenu(),
             ),
           ],
         ),

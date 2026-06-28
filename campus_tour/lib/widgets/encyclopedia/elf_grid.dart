@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import '../../controllers/monster_controller.dart';
 
 class ElfGrid extends StatefulWidget {
-  const ElfGrid({super.key});
+  ElfGrid({super.key});
 
   @override
   State<ElfGrid> createState() => _ElfGridState();
@@ -24,9 +24,13 @@ class _ElfGridState extends State<ElfGrid> {
       final allUserMonsters = _monsterController.userMonsterCollection;
 
       if (allUserMonsters.isEmpty) {
-        return const Column(
+        return Column(
           children: [
-            Expanded(child: Center(child: Text("尚未捕捉任何怪物"))),
+            Expanded(
+              child: Center(
+                child: Text('widgets.encyclopedia.elf.grid.s001'.tr),
+              ),
+            ),
             PageSelector(
               currentPage: 1,
               totalPages: 1,
@@ -52,7 +56,7 @@ class _ElfGridState extends State<ElfGrid> {
           Expanded(
             child: GridView.builder(
               padding: const EdgeInsets.all(16),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
                 crossAxisSpacing: 12,
                 mainAxisSpacing: 12,

@@ -10,10 +10,12 @@ import '../widgets/encyclopedia/elf_installation_section.dart';
 import '../widgets/encyclopedia/elf_story_section.dart';
 import '../widgets/encyclopedia/elf_type_tag.dart';
 
+import 'package:get/get.dart';
+
 class ElfDetailPage extends StatefulWidget {
   final MonsterModel monsterModel;
 
-  const ElfDetailPage({super.key, required this.monsterModel});
+  ElfDetailPage({super.key, required this.monsterModel});
 
   @override
   State<ElfDetailPage> createState() => _ElfDetailPageState();
@@ -79,9 +81,9 @@ class _ElfDetailPageState extends State<ElfDetailPage> {
         leading: Padding(
           padding: const EdgeInsets.all(8),
           child: CircleAvatar(
-            backgroundColor: const Color(0xFFDCE9FF),
+            backgroundColor: Color(0xFFDCE9FF),
             child: IconButton(
-              icon: const Icon(Icons.arrow_back, color: primaryColor, size: 20),
+              icon: Icon(Icons.arrow_back, color: primaryColor, size: 20),
               onPressed: () => Navigator.pop(context),
             ),
           ),
@@ -110,22 +112,26 @@ class _ElfDetailPageState extends State<ElfDetailPage> {
             ElfTypeTag(type: widget.monsterModel.type),
 
             ElfStorySection(
-              name: architecture?.name ?? '傳說故事',
-              story: architecture?.story ?? '目前沒有此精靈的故事資料。',
+              name: architecture?.name ?? 'view.elf.detail.page.s001'.tr,
+              story: architecture?.story ?? 'view.elf.detail.page.s002'.tr,
               isLoading: isLoading,
             ),
 
-            if (architecture?.type == '裝置藝術') ...[
+            if (architecture?.type ==
+                'styles.map.suggestion.style.s001'.tr) ...[
               ElfInstallationSection(
                 imagePath: architecture?.imageURL ?? '',
-                location: architecture?.name ?? '目前沒有裝置藝術資料',
+                location: architecture?.name ?? 'view.elf.detail.page.s004'.tr,
                 year: architecture?.date ?? '',
               ),
 
-              ElfCreatorSection(creatorName: architecture?.author ?? '未知作者'),
+              ElfCreatorSection(
+                creatorName:
+                    architecture?.author ?? 'view.elf.detail.page.s005'.tr,
+              ),
             ],
 
-            if (architecture?.type == '系館') ...[
+            if (architecture?.type == 'view.elf.detail.page.s006'.tr) ...[
               ElfDepartmentSection(major: architecture?.major),
             ],
           ],

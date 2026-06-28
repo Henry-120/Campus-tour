@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 
 import '../../styles/app_theme.dart';
 
+import 'package:get/get.dart';
+
 class ElfCreatorSection extends StatelessWidget {
   final String creatorName;
 
-  const ElfCreatorSection({super.key, required this.creatorName});
+  ElfCreatorSection({super.key, required this.creatorName});
 
   static const Color primaryColor = Color(0xFF006C49);
   static const Color textColor = Color(0xFF0B1C30);
@@ -18,7 +20,7 @@ class ElfCreatorSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Creator Info (創作者資料)',
+            'widgets.encyclopedia.elf.creator.section.s001'.tr,
             style: AppTheme.titleStyle.copyWith(
               fontSize: 20,
               fontWeight: FontWeight.bold,
@@ -26,23 +28,23 @@ class ElfCreatorSection extends StatelessWidget {
               letterSpacing: 0,
             ),
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16),
           Container(
             width: double.infinity,
             padding: const EdgeInsets.all(24),
             decoration: BoxDecoration(
-              color: const Color(0xFFD3E4FE).withValues(alpha: 0.3),
+              color: Color(0xFFD3E4FE).withValues(alpha: 0.3),
               borderRadius: BorderRadius.circular(40),
               border: Border.all(color: Colors.white.withValues(alpha: 0.5)),
             ),
             child: Row(
               children: [
-                const CircleAvatar(
+                CircleAvatar(
                   radius: 28,
                   backgroundColor: primaryColor,
                   child: Icon(Icons.person, color: Colors.white, size: 30),
                 ),
-                const SizedBox(width: 16),
+                SizedBox(width: 16),
                 Expanded(
                   child: Text(
                     creatorName,
