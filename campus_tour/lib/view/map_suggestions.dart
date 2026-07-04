@@ -486,17 +486,14 @@ class _LandmarkLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     // [L-45]
     return Transform.translate(
-      offset: MapSuggestionStyle.landmarkLabelOffset(
-        // [L-12]
-        MapSuggestionStyle.landmarkDotSize,
-      ),
+      offset: MapSuggestionStyle.landmarkLabelOffset,
       child: Row(
         mainAxisSize: MapSuggestionStyle.landmarkLabelAxisSize,
         children: [
-          Container(
-            width: MapSuggestionStyle.landmarkDotSize,
-            height: MapSuggestionStyle.landmarkDotSize,
-            decoration: MapSuggestionStyle.landmarkDotDecoration(
+          Icon(
+            Icons.location_on,
+            size: MapSuggestionStyle.landmarkPinSize,
+            color: MapSuggestionStyle.landmarkPinColor(
               marker.landmark.category,
             ),
           ),
