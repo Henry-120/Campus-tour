@@ -51,6 +51,8 @@ dependencies:
   mqtt_client: ^10.0.0
   permission_handler: ^11.3.1
 
+  maplibre_gl: ^0.26.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -90,7 +92,9 @@ flutter:
     - assets/images/novice_leading/
     - assets/images/Plot/
     - assets/images/art/
+    - assets/images/Disaster_Evacuation_Map/
     - assets/images/img_frame/
+    - assets/images/player/
     - assets/tiles/15/27414/
     - assets/tiles/15/27415/
     - assets/tiles/16/54829/
