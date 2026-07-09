@@ -38,16 +38,14 @@ class _AEDMapState extends State<AEDMap> {
   }
   ''';
 
-  // TODO: 這四個座標一定要換成你的校園圖片四個角落的真實經緯度
   //
-  // 注意順序：
+  // 順序：
   // 左上 → 右上 → 右下 → 左下
   static const LatLng _topLeft = LatLng(24.972389, 121.184551);
   static const LatLng _topRight = LatLng(24.972389, 121.198360);
   static const LatLng _bottomRight = LatLng(24.963905, 121.198360);
   static const LatLng _bottomLeft = LatLng(24.963905, 121.184551);
 
-  // TODO: 換成校園中心點
   static const LatLng _initialCenter = LatLng(24.968147, 121.191456);
   static const List<DeviceOrientation> _landscapeOrientations = [
     DeviceOrientation.landscapeLeft,
@@ -63,11 +61,29 @@ class _AEDMapState extends State<AEDMap> {
   );
 
   PlayerSymbolController? _playerSymbolController;
+  late final CampusMapCameraController _cameraController;
+  late final CampusImageLayerController _imageLayerController;
+
+  bool _viewportPrepared = false;
 
   @override
   void initState() {
     super.initState();
     _lockLandscape();
+    _cameraController = CampusMapCameraController(
+      campusBounds: _campusBounds,
+      maxZoom: 20,
+      padding: 24,
+      fallbackMinZoom: 16,
+    );
+
+    _imageLayerController = CampusImageLayerController(
+      assetPath: _campusMapAssetPath,
+      topLeft: _topLeft,
+      topRight: _topRight,
+      bottomRight: _bottomRight,
+      bottomLeft: _bottomLeft,
+    );
   }
 
   @override
@@ -77,33 +93,43 @@ class _AEDMapState extends State<AEDMap> {
     super.dispose();
   }
 
-  Future<void> _addCampusImageLayerBelowSymbols(
-    MapLibreMapController controller,
-  ) async {
-    final symbolLayerIds =
-        controller.symbolManager?.layerIds ?? const <String>[];
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
 
-    if (symbolLayerIds.isNotEmpty) {
-      final symbolLayerId = symbolLayerIds.first;
+    if (_viewportPrepared) return;
 
-      await controller.addImageLayerBelow(
-        'campus-image-layer',
-        'campus-image-source',
-        symbolLayerId,
-      );
+    _cameraController.prepareViewport(context);
 
-      // debugPrint('校園圖片已放在 Symbol layer 下面：$symbolLayerId');
-    } else {
-      // 理論上 onStyleLoadedCallback 後 symbolManager 應該已經建立。
-      // 如果這裡真的拿不到，就先退回普通加入，但可能會蓋住玩家。
-      debugPrint('找不到 symbol layer，暫時使用 addImageLayer');
-
-      await controller.addImageLayer(
-        'campus-image-layer',
-        'campus-image-source',
-      );
-    }
+    _viewportPrepared = true;
   }
+  // Future<void> _addCampusImageLayerBelowSymbols(
+  //   MapLibreMapController controller,
+  // ) async {
+  //   final symbolLayerIds =
+  //       controller.symbolManager?.layerIds ?? const <String>[];
+
+  //   if (symbolLayerIds.isNotEmpty) {
+  //     final symbolLayerId = symbolLayerIds.first;
+
+  //     await controller.addImageLayerBelow(
+  //       'campus-image-layer',
+  //       'campus-image-source',
+  //       symbolLayerId,
+  //     );
+
+  //     // debugPrint('校園圖片已放在 Symbol layer 下面：$symbolLayerId');
+  //   } else {
+  //     // 理論上 onStyleLoadedCallback 後 symbolManager 應該已經建立。
+  //     // 如果這裡真的拿不到，就先退回普通加入，但可能會蓋住玩家。
+  //     debugPrint('找不到 symbol layer，暫時使用 addImageLayer');
+
+  //     await controller.addImageLayer(
+  //       'campus-image-layer',
+  //       'campus-image-source',
+  //     );
+  //   }
+  // }
 
   Future<void> _lockLandscape() async {
     await SystemChrome.setPreferredOrientations(_landscapeOrientations);
@@ -115,29 +141,33 @@ class _AEDMapState extends State<AEDMap> {
 
   void _onMapCreated(MapLibreMapController controller) {
     _controller = controller;
+    _cameraController.attachMapController(controller);
   }
 
   Future<void> _onStyleLoaded() async {
     final controller = _controller;
     if (controller == null) return;
 
-    final byteData = await rootBundle.load(_campusMapAssetPath);
-    final imageBytes = byteData.buffer.asUint8List();
+    await _imageLayerController.addToMap(controller);
 
-    const imageCoordinates = LatLngQuad(
-      topLeft: _topLeft,
-      topRight: _topRight,
-      bottomRight: _bottomRight,
-      bottomLeft: _bottomLeft,
-    );
+    await _cameraController.fitCampusBounds();
+    // final byteData = await rootBundle.load(_campusMapAssetPath);
+    // final imageBytes = byteData.buffer.asUint8List();
 
-    await controller.addImageSource(
-      'campus-image-source',
-      imageBytes,
-      imageCoordinates,
-    );
+    // const imageCoordinates = LatLngQuad(
+    //   topLeft: _topLeft,
+    //   topRight: _topRight,
+    //   bottomRight: _bottomRight,
+    //   bottomLeft: _bottomLeft,
+    // );
 
-    await _addCampusImageLayerBelowSymbols(controller);
+    // await controller.addImageSource(
+    //   'campus-image-source',
+    //   imageBytes,
+    //   imageCoordinates,
+    // );
+
+    // await _addCampusImageLayerBelowSymbols(controller);
 
     _playerSymbolController ??= PlayerSymbolController(controller);
 
@@ -154,9 +184,8 @@ class _AEDMapState extends State<AEDMap> {
         children: [
           MapLibreMap(
             styleString: _blankStyle,
-            initialCameraPosition: const CameraPosition(
-              target: _initialCenter,
-              zoom: 16,
+            initialCameraPosition: _cameraController.getInitialCameraPosition(
+              _initialCenter,
             ),
             onMapCreated: _onMapCreated,
             onStyleLoadedCallback: _onStyleLoaded,
@@ -170,8 +199,14 @@ class _AEDMapState extends State<AEDMap> {
             scrollGesturesEnabled: true,
             zoomGesturesEnabled: true,
             tiltGesturesEnabled: false,
-            cameraTargetBounds: CameraTargetBounds(_campusBounds),
-            // minMaxZoomPreference: MinMaxZoomPreference(_minZoom, _maxZoom),
+            cameraTargetBounds: _cameraController.cameraTargetBounds,
+            minMaxZoomPreference: _cameraController.zoomPreference,
+            annotationOrder: const [
+              AnnotationType.fill,
+              AnnotationType.line,
+              AnnotationType.circle,
+              AnnotationType.symbol,
+            ],
           ),
 
           // 左上角返回
@@ -535,5 +570,66 @@ class CampusMapCameraController {
     final fitZoom = math.min(zoomX, zoomY);
 
     return fitZoom - 0.05;
+  }
+}
+
+class CampusImageLayerController {
+  CampusImageLayerController({
+    required this.assetPath,
+    required this.topLeft,
+    required this.topRight,
+    required this.bottomRight,
+    required this.bottomLeft,
+    this.sourceId = 'campus-image-source',
+    this.layerId = 'campus-image-layer',
+  });
+
+  final String assetPath;
+
+  final LatLng topLeft;
+  final LatLng topRight;
+  final LatLng bottomRight;
+  final LatLng bottomLeft;
+
+  final String sourceId;
+  final String layerId;
+
+  bool _added = false;
+
+  Future<void> addToMap(MapLibreMapController controller) async {
+    if (_added) return;
+    _added = true;
+
+    final byteData = await rootBundle.load(assetPath);
+    final imageBytes = byteData.buffer.asUint8List();
+
+    final imageCoordinates = LatLngQuad(
+      topLeft: topLeft,
+      topRight: topRight,
+      bottomRight: bottomRight,
+      bottomLeft: bottomLeft,
+    );
+
+    await controller.addImageSource(sourceId, imageBytes, imageCoordinates);
+
+    await _addImageLayerBelowSymbols(controller);
+  }
+
+  Future<void> _addImageLayerBelowSymbols(
+    MapLibreMapController controller,
+  ) async {
+    final symbolLayerIds =
+        controller.symbolManager?.layerIds ?? const <String>[];
+
+    if (symbolLayerIds.isNotEmpty) {
+      await controller.addImageLayerBelow(
+        layerId,
+        sourceId,
+        symbolLayerIds.first,
+      );
+      return;
+    }
+
+    await controller.addImageLayer(layerId, sourceId);
   }
 }
