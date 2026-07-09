@@ -49,11 +49,7 @@ class _RegisterPageState extends State<RegisterPage> {
       if (!mounted) return;
 
       if (user != null) {
-        SnackBarBuilder.show(
-          context,
-          "驗證信已寄到 ${user.email ?? '你的信箱'}，請完成驗證後再登入",
-          type: AppToastType.success,
-        );
+        SnackBarBuilder.show(context, "註冊成功，請登入", type: AppToastType.success);
 
         _goBackToLogin();
       } else {

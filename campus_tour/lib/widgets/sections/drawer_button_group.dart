@@ -6,7 +6,7 @@ import 'package:campus_tour/styles/lhf_drawer_styles.dart';
 import 'package:campus_tour/view/map_suggestions.dart';
 import 'package:campus_tour/view/novice_leading_page.dart';
 import 'package:campus_tour/view/start_page.dart';
-import 'package:campus_tour/widgets/buttons/lhf_drawer_button.dart';
+import 'package:campus_tour/widgets/buttons/drawer_button.dart';
 import 'package:campus_tour/widgets/common/snackbar_builder.dart';
 import 'package:campus_tour/widgets/common/user_head.dart';
 

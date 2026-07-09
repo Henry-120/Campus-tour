@@ -19,6 +19,7 @@ class LoginController {
     if (user == null) return null;
 
     final refreshedUser = await _authService.reloadCurrentUser() ?? user;
+
     // if (_needsEmailVerification(refreshedUser)) {
     //   await _authService.sendEmailVerification();
     //   await _authService.logout();

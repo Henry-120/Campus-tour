@@ -1,4 +1,3 @@
-import 'package:campus_tour/view/game_main_page.dart';
 import 'package:flutter/material.dart';
 import '../../../styles/app_theme.dart';
 
@@ -41,13 +40,7 @@ class CatchingFaildPage extends StatelessWidget {
                 const SizedBox(height: 32),
                 FilledButton(
                   onPressed: () {
-                    Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const GameMainPage(),
-                      ),
-                      (route) => false,
-                    );
+                    Navigator.of(context).pop();
                   },
                   child: const Text('回到首頁'),
                 ),

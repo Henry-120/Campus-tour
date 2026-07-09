@@ -1,9 +1,12 @@
 import 'dart:async'; // 💡 引入 StreamSubscription
+import 'package:flutter/foundation.dart'
+    show defaultTargetPlatform, TargetPlatform;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:geolocator/geolocator.dart'; // 💡 引入 GPS 套件
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:campus_tour/controllers/monster_controller.dart';
+import 'package:campus_tour/controllers/nfc_scan_controller.dart';
 import 'package:campus_tour/local_information/local_setting.dart';
 import 'package:campus_tour/styles/app_theme.dart';
 import 'package:get/get.dart';
@@ -296,6 +299,9 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
     if (uid == null) return;
 
     final controller = Get.find<MonsterController>();
+    debugPrint(
+      "[Debug][GameMap]:Nearby Monsters: ${controller.nearbyMonsters.length}",
+    );
     _isCaptureFlowActive = true;
 
     try {
@@ -406,12 +412,18 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
     super.initState();
     _loadAssets(); // 一次性載入 JSON 與 圖片
     _checkPermissionAndListen(); // 初始化時檢查權限並開始監聽
+    if (defaultTargetPlatform == TargetPlatform.android) {
+      unawaited(Get.find<NfcScanController>().startForegroundListening());
+    }
     listenToNearbyMonsters(_handleMonsterCapture);
   }
 
   @override
   void dispose() {
     _positionStream?.cancel();
+    if (defaultTargetPlatform == TargetPlatform.android) {
+      unawaited(Get.find<NfcScanController>().stopForegroundListening());
+    }
     super.dispose();
   }
 
