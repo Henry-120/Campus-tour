@@ -1,18 +1,23 @@
 import 'package:mqtt_client/mqtt_client.dart';
+import 'package:mqtt_client/mqtt_server_client.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:convert';
-import 'package:flutter/services.dart';
 import 'package:campus_tour/config/esp32_scheme.dart';
+import 'package:flutter/material.dart';
 
 class MqttService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   bool get isConnected =>
       _client.connectionStatus?.state == MqttConnectionState.connected;
   bool isConnecting = false;
-  final _client = MqttClient(
+  final _client = MqttServerClient.withPort(
     Esp32MQTT_info.BROKER_ADDRESS,
     Esp32MQTT_info.CLIENT,
+    Esp32MQTT_info.PORT,
   );
+  MqttService() {
+    _client.logging(on: true);
+  }
   Future<String?> get _idToken async {
     final user = _auth.currentUser;
     if (user == null) return null;
@@ -30,6 +35,7 @@ class MqttService {
       await _client.connect();
       return isConnected;
     } catch (e) {
+      debugPrint('[MQTT] Connect error: $e');
       return isConnected;
     } finally {
       isConnecting = false;

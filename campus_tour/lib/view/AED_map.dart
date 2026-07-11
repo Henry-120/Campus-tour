@@ -103,33 +103,6 @@ class _AEDMapState extends State<AEDMap> {
 
     _viewportPrepared = true;
   }
-  // Future<void> _addCampusImageLayerBelowSymbols(
-  //   MapLibreMapController controller,
-  // ) async {
-  //   final symbolLayerIds =
-  //       controller.symbolManager?.layerIds ?? const <String>[];
-
-  //   if (symbolLayerIds.isNotEmpty) {
-  //     final symbolLayerId = symbolLayerIds.first;
-
-  //     await controller.addImageLayerBelow(
-  //       'campus-image-layer',
-  //       'campus-image-source',
-  //       symbolLayerId,
-  //     );
-
-  //     // debugPrint('校園圖片已放在 Symbol layer 下面：$symbolLayerId');
-  //   } else {
-  //     // 理論上 onStyleLoadedCallback 後 symbolManager 應該已經建立。
-  //     // 如果這裡真的拿不到，就先退回普通加入，但可能會蓋住玩家。
-  //     debugPrint('找不到 symbol layer，暫時使用 addImageLayer');
-
-  //     await controller.addImageLayer(
-  //       'campus-image-layer',
-  //       'campus-image-source',
-  //     );
-  //   }
-  // }
 
   Future<void> _lockLandscape() async {
     await SystemChrome.setPreferredOrientations(_landscapeOrientations);
@@ -151,23 +124,6 @@ class _AEDMapState extends State<AEDMap> {
     await _imageLayerController.addToMap(controller);
 
     await _cameraController.fitCampusBounds();
-    // final byteData = await rootBundle.load(_campusMapAssetPath);
-    // final imageBytes = byteData.buffer.asUint8List();
-
-    // const imageCoordinates = LatLngQuad(
-    //   topLeft: _topLeft,
-    //   topRight: _topRight,
-    //   bottomRight: _bottomRight,
-    //   bottomLeft: _bottomLeft,
-    // );
-
-    // await controller.addImageSource(
-    //   'campus-image-source',
-    //   imageBytes,
-    //   imageCoordinates,
-    // );
-
-    // await _addCampusImageLayerBelowSymbols(controller);
 
     _playerSymbolController ??= PlayerSymbolController(controller);
 

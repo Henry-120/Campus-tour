@@ -8,4 +8,5 @@ class Esp32MQTT_info {
   static const BROKER_ADDRESS = '';
   static const CLIENT = 'flutter_client';
   static const TOPIC = 'esp32/actions';
+  static const PORT = 0000;
 }
