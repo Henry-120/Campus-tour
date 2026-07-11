@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:campus_tour/utils/monster_image_path.dart';
 import '../../controllers/monster_controller.dart';
 import '../../models/monster_model.dart';
 import '../../widgets/game/monster_marker.dart';
@@ -49,17 +50,23 @@ mixin MonsterMarkersMixin<T extends StatefulWidget> on State<T> {
   /// [onTap] 是點擊怪物 Marker 時的回呼，通常傳入 _handleMonsterCapture。
   void listenToNearbyMonsters(void Function(MonsterModel) onTap) {
     _monsterTapHandler = onTap;
-    _nearbyMonsterWorker = ever(_monsterController.nearbyMonsters, (monsters) {
-      _visibleMonsters = List<MonsterModel>.from(monsters);
-      if (_visibleMonsters.isEmpty) {
-        _stopMonsterAnimation();
-        if (mounted) setState(() => _monsterMarkers = {});
-        return;
-      }
+    _syncVisibleMonsters(_monsterController.nearbyMonsters);
 
-      _startMonsterAnimation();
-      unawaited(_refreshMonsterMarkers());
+    _nearbyMonsterWorker = ever(_monsterController.nearbyMonsters, (monsters) {
+      _syncVisibleMonsters(monsters);
     });
+  }
+
+  void _syncVisibleMonsters(Iterable<MonsterModel> monsters) {
+    _visibleMonsters = List<MonsterModel>.from(monsters);
+    if (_visibleMonsters.isEmpty) {
+      _stopMonsterAnimation();
+      if (mounted) setState(() => _monsterMarkers = {});
+      return;
+    }
+
+    _startMonsterAnimation();
+    unawaited(_refreshMonsterMarkers());
   }
 
   void _startMonsterAnimation() {
@@ -133,12 +140,13 @@ mixin MonsterMarkersMixin<T extends StatefulWidget> on State<T> {
     final cachedStaticIcon = _monsterIconCache[staticKey];
     if (cachedStaticIcon != null) return cachedStaticIcon;
 
+    final staticImagePath = MonsterImagePath.staticImage(monster.imageURL);
     try {
-      final icon = await _bitmapDescriptorFromAsset(monster.imageURL);
+      final icon = await _bitmapDescriptorFromAsset(staticImagePath);
       _monsterIconCache[staticKey] = icon;
       return icon;
     } catch (error) {
-      debugPrint('[MonsterMarkers] 靜態精靈圖載入失敗: ${monster.imageURL}, $error');
+      debugPrint('[MonsterMarkers] 靜態精靈圖載入失敗: $staticImagePath, $error');
       // 圖示載入失敗時 fallback 為綠色預設 pin
       return BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen);
     }
@@ -178,11 +186,7 @@ mixin MonsterMarkersMixin<T extends StatefulWidget> on State<T> {
   }
 
   String? _animatedFolderName(MonsterModel monster) {
-    final imageFileName = monster.imageURL.split('/').last;
-    final extensionIndex = imageFileName.lastIndexOf('.');
-    if (imageFileName.isEmpty || extensionIndex <= 0) return null;
-
-    return imageFileName.substring(0, extensionIndex);
+    return MonsterImagePath.fourPartsFolderName(monster.imageURL);
   }
 
   @override

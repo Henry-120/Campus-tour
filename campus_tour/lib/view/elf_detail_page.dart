@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../controllers/encyclopedia_controller.dart';
 import '../models/architecture_model.dart';
 import '../styles/app_theme.dart';
+import '../utils/monster_image_path.dart';
 import '../widgets/encyclopedia/elf_creator_section.dart';
 import '../widgets/encyclopedia/elf_department_section.dart';
 import '../widgets/encyclopedia/elf_hero_section.dart';
@@ -15,7 +16,7 @@ import 'package:get/get.dart';
 class ElfDetailPage extends StatefulWidget {
   final MonsterModel monsterModel;
 
-  ElfDetailPage({super.key, required this.monsterModel});
+  const ElfDetailPage({super.key, required this.monsterModel});
 
   @override
   State<ElfDetailPage> createState() => _ElfDetailPageState();
@@ -70,7 +71,9 @@ class _ElfDetailPageState extends State<ElfDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    final imagePath = widget.monsterModel.imageURL;
+    final imagePath = MonsterImagePath.staticImage(
+      widget.monsterModel.imageURL,
+    );
 
     return Scaffold(
       backgroundColor: backgroundColor,

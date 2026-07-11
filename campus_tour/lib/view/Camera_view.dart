@@ -10,6 +10,7 @@ import '../../controllers/fairy_video_controller.dart';
 import '../../controllers/monster_controller.dart';
 import '../../models/user_monster_model.dart';
 import '../../styles/app_theme.dart';
+import '../../utils/monster_image_path.dart';
 import '../../widgets/common/fairy_video.dart';
 import '../../widgets/buttons/capture_button.dart';
 import '../../view/photo_preview.dart';
@@ -17,7 +18,7 @@ import '../../widgets/constants/responsive.dart';
 import 'package:get/get.dart';
 
 class ArCapturePage extends StatefulWidget {
-  ArCapturePage({super.key});
+  const ArCapturePage({super.key});
 
   @override
   State<ArCapturePage> createState() => _ArCapturePageState();
@@ -247,7 +248,9 @@ class _ArCapturePageState extends State<ArCapturePage> {
                                     10 * scale,
                                   ),
                                   child: Image.asset(
-                                    userMonster.imageURL,
+                                    MonsterImagePath.staticImage(
+                                      userMonster.imageURL,
+                                    ),
                                     height: 55 * scale,
                                     width: 55 * scale,
                                     fit: BoxFit.cover,
@@ -354,7 +357,9 @@ class _ArCapturePageState extends State<ArCapturePage> {
     setState(() {
       selectedMonsterId = userMonster.name;
       selectedMonsterUrl = framePath;
-      selectedMonsterImageUrl = userMonster.imageURL;
+      selectedMonsterImageUrl = MonsterImagePath.staticImage(
+        userMonster.imageURL,
+      );
     });
   }
 
