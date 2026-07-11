@@ -48,6 +48,10 @@ dependencies:
   vibration: ^2.0.1
   gal: ^2.1.10
   permission_handler: ^12.0.3
+  flutter_reactive_ble: ^5.0.0
+  mqtt_client: ^10.0.0
+
+  maplibre_gl: ^0.26.2
 
 dev_dependencies:
   flutter_test:
@@ -88,7 +92,9 @@ flutter:
     - assets/images/novice_leading/
     - assets/images/Plot/
     - assets/images/art/
+    - assets/images/Disaster_Evacuation_Map/
     - assets/images/img_frame/
+    - assets/images/player/
     - assets/tiles/15/27414/
     - assets/tiles/15/27415/
     - assets/tiles/16/54829/

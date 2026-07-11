@@ -15,7 +15,7 @@ class MapSuggestionStyle {
   static const double markerSize = 56;
 
   // [L-04]
-  static const double landmarkDotSize = 10;
+  static const double landmarkPinSize = 32;
 
   // [L-05]
   static const double filterPanelInset = 12;
@@ -83,35 +83,31 @@ class MapSuggestionStyle {
   );
 
   // [L-18]
-  static Offset landmarkLabelOffset(double dotSize) =>
-      Offset(-dotSize / 2, -dotSize / 2);
+  static const Offset landmarkLabelOffset = Offset(
+    -landmarkPinSize / 2,
+    -landmarkPinSize,
+  );
 
   // [L-19]
   static const MainAxisSize landmarkLabelAxisSize = MainAxisSize.min;
 
   // [L-20]
-  static const Color installationArtDotColor = Colors.blueAccent;
+  static const Color installationArtPinColor = Colors.blueAccent;
 
   // [L-25]
-  static const Color toiletDotColor = Colors.green;
+  static const Color toiletPinColor = Colors.green;
 
   // [L-23]
-  static Color landmarkDotColor(String category) {
-    if (category == 'styles.map.suggestion.style.s001'.tr) {
-      return installationArtDotColor;
+  static Color landmarkPinColor(String category) {
+    if (category == '裝置藝術' ||
+        category == 'styles.map.suggestion.style.s001'.tr) {
+      return installationArtPinColor;
     }
-    if (category == 'styles.map.suggestion.style.s002'.tr) {
-      return toiletDotColor;
+    if (category == '廁所' || category == 'styles.map.suggestion.style.s002'.tr) {
+      return toiletPinColor;
     }
     return AppTheme.mapLandmarkDotColor;
   }
-
-  // [L-24]
-  static BoxDecoration landmarkDotDecoration(String category) => BoxDecoration(
-    color: landmarkDotColor(category),
-    shape: BoxShape.circle,
-    border: Border.all(color: AppTheme.mapLandmarkDotBorderColor, width: 1.5),
-  );
 
   // [L-21]
   static const double landmarkLabelSpacing = 4;

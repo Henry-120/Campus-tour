@@ -32,7 +32,6 @@ class _ArCapturePageState extends State<ArCapturePage> {
   String selectedMonsterUrl = "";
   String selectedMonsterImageUrl = "";
   String selectedMonsterId = "";
-  bool _isRequestingCameraPermission = false;
   String? _cameraPermissionMessage;
 
   // 修改此處：將精靈位置往右 (x=0.6) 且往上 (y=0.4) 移動
@@ -46,7 +45,6 @@ class _ArCapturePageState extends State<ArCapturePage> {
 
   Future<void> _startArMode() async {
     setState(() {
-      _isRequestingCameraPermission = true;
       _cameraPermissionMessage = null;
     });
 
@@ -60,7 +58,6 @@ class _ArCapturePageState extends State<ArCapturePage> {
         if (!mounted) return;
         setState(() {
           _cameraPermissionMessage = '需要相機權限才能使用 AR 拍照功能，請開啟權限後再試一次。';
-          _isRequestingCameraPermission = false;
         });
         return;
       }
@@ -69,7 +66,6 @@ class _ArCapturePageState extends State<ArCapturePage> {
       if (mounted) {
         setState(() {
           _cameraPermissionMessage = null;
-          _isRequestingCameraPermission = false;
         });
       }
     } catch (e) {
@@ -77,7 +73,6 @@ class _ArCapturePageState extends State<ArCapturePage> {
       if (mounted) {
         setState(() {
           _cameraPermissionMessage = '相機無法啟動，請確認系統設定中的相機權限已開啟。';
-          _isRequestingCameraPermission = false;
         });
       }
     }

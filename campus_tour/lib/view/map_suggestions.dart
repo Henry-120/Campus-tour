@@ -315,34 +315,45 @@ class _MapSuggestionsPageState extends State<MapSuggestionsPage> {
               children: [
                 Positioned.fromRect(
                   rect: fittedMap,
-                  child: Image.asset(
-                    MapSuggestionsVariables.map_path,
-                    fit: MapSuggestionStyle.mapImageFit,
-                  ),
-                ),
-                if (markerOffset != null)
-                  Positioned(
-                    // [L-08]
-                    left:
-                        fittedMap.left +
-                        markerOffset.dx -
-                        MapSuggestionStyle.markerSize / 2,
-                    top:
-                        fittedMap.top +
-                        markerOffset.dy -
-                        MapSuggestionStyle.markerSize / 2,
-                    child: Image.asset(
-                      MapSuggestionsVariables.position_char,
-                      width: MapSuggestionStyle.markerSize,
-                      height: MapSuggestionStyle.markerSize,
+                  child: InteractiveViewer(
+                    minScale: 1,
+                    maxScale: 3,
+                    panEnabled: true,
+                    scaleEnabled: true,
+                    boundaryMargin: EdgeInsets.zero,
+                    clipBehavior: Clip.hardEdge,
+                    child: Stack(
+                      fit: StackFit.expand,
+                      children: [
+                        Image.asset(
+                          MapSuggestionsVariables.map_path,
+                          fit: MapSuggestionStyle.mapImageFit,
+                        ),
+                        if (markerOffset != null)
+                          Positioned(
+                            // [L-08]
+                            left:
+                                markerOffset.dx -
+                                MapSuggestionStyle.markerSize / 2,
+                            top:
+                                markerOffset.dy -
+                                MapSuggestionStyle.markerSize / 2,
+                            child: Image.asset(
+                              MapSuggestionsVariables.position_char,
+                              width: MapSuggestionStyle.markerSize,
+                              height: MapSuggestionStyle.markerSize,
+                            ),
+                          ),
+                        for (final landmarkMarker in landmarkMarkers)
+                          Positioned(
+                            left: landmarkMarker.offset.dx,
+                            top: landmarkMarker.offset.dy,
+                            child: _LandmarkLabel(marker: landmarkMarker),
+                          ),
+                      ],
                     ),
                   ),
-                for (final landmarkMarker in landmarkMarkers)
-                  Positioned(
-                    left: fittedMap.left + landmarkMarker.offset.dx,
-                    top: fittedMap.top + landmarkMarker.offset.dy,
-                    child: _LandmarkLabel(marker: landmarkMarker),
-                  ),
+                ),
                 Positioned(
                   left: MapSuggestionStyle.filterPanelInset,
                   top: MapSuggestionStyle.filterPanelInset,
@@ -474,17 +485,14 @@ class _LandmarkLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     // [L-45]
     return Transform.translate(
-      offset: MapSuggestionStyle.landmarkLabelOffset(
-        // [L-12]
-        MapSuggestionStyle.landmarkDotSize,
-      ),
+      offset: MapSuggestionStyle.landmarkLabelOffset,
       child: Row(
         mainAxisSize: MapSuggestionStyle.landmarkLabelAxisSize,
         children: [
-          Container(
-            width: MapSuggestionStyle.landmarkDotSize,
-            height: MapSuggestionStyle.landmarkDotSize,
-            decoration: MapSuggestionStyle.landmarkDotDecoration(
+          Icon(
+            Icons.location_on,
+            size: MapSuggestionStyle.landmarkPinSize,
+            color: MapSuggestionStyle.landmarkPinColor(
               marker.landmark.category,
             ),
           ),

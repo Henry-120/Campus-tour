@@ -1,8 +1,10 @@
+import 'dart:async';
+
 import 'package:campus_tour/controllers/nfc_api.dart';
+import 'package:campus_tour/controllers/nfc_scan_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:campus_tour/styles/nfc_leading_style.dart';
 import 'package:campus_tour/widgets/common/snackbar_builder.dart';
-
 import 'package:get/get.dart';
 
 class NfcButtonAbstract extends StatelessWidget {
@@ -44,52 +46,103 @@ class NfcButton1 extends StatefulWidget {
 
 class _NfcButton1 extends State<NfcButton1> {
   bool _isScanning = false; // 控制按鈕狀態的關鍵
+  bool _isUsingForegroundWaiting = false;
+  late final NfcScanController _nfcScanController;
+
+  @override
+  void initState() {
+    super.initState();
+    _nfcScanController = Get.find<NfcScanController>();
+  }
 
   Future<void> onPressed() async {
     if (_isScanning) {
-      await NFCservice.stopScanning();
+      if (_isUsingForegroundWaiting) {
+        _nfcScanController.stopWaiting();
+      } else {
+        await NFCservice.stopScanning();
+      }
+      _isUsingForegroundWaiting = false;
       setState(() => _isScanning = false);
       return;
-    } else {
-      // 開始掃描
-      setState(() => _isScanning = true);
+    }
 
-      try {
-        // 呼叫 API 並取得封裝好的 Response
-        NfcResponse? response = await NFCservice.scanSingleTag();
-        if (response == null) throw StateError("Undefult Error return Error");
+    if (!_nfcScanController.isListening) {
+      await _scanSingleTagFallback();
+      return;
+    }
 
-        // 只有在使用者還沒手動按停止 (isScanning 仍為 true) 時才處理結果
-        if (mounted && _isScanning) {
-          if (response.isSuccess) {
-            // --- 成功：透過 .data 取得結果 ---
-            final tagId = response.data.tagId;
-            // 比對是否符合預期的 ans
-            if (tagId == widget.ans) {
-              widget.onResult();
-            } else {
-              // 不符合則顯示錯誤訊息
-              SnackBarBuilder.show(
-                context,
-                'widgets.buttons.nfc.button.s001'.tr,
-                type: AppToastType.warning,
-              );
-            }
-          } else {
-            // --- 失敗：處理錯誤類型 ---
-            _handleError(response.error);
-          }
+    setState(() => _isScanning = true);
+    _isUsingForegroundWaiting = true;
+
+    _nfcScanController.startWaiting(
+      expectedId: widget.ans,
+      onSuccess: () {
+        if (!mounted) return;
+        _isUsingForegroundWaiting = false;
+        setState(() => _isScanning = false);
+        widget.onResult();
+      },
+      onMismatch: (_) {
+        if (!mounted) return;
+        SnackBarBuilder.show(
+          context,
+          'widgets.buttons.nfc.button.s001'.tr,
+          type: AppToastType.warning,
+        );
+      },
+      onError: (errorType, {message}) {
+        if (!mounted) return;
+        _isUsingForegroundWaiting = false;
+        setState(() => _isScanning = false);
+        _handleError(errorType);
+      },
+    );
+  }
+
+  Future<void> _scanSingleTagFallback() async {
+    _isUsingForegroundWaiting = false;
+    setState(() => _isScanning = true);
+
+    try {
+      final response = await NFCservice.scanSingleTag();
+      if (response == null) throw StateError("Undefult Error return Error");
+
+      if (!mounted || !_isScanning) return;
+
+      if (response.isSuccess) {
+        final tagId = response.data.tagId;
+        if (tagId == widget.ans) {
+          widget.onResult();
+        } else {
+          SnackBarBuilder.show(
+            context,
+            'widgets.buttons.nfc.button.s001'.tr,
+            type: AppToastType.warning,
+          );
         }
-      } catch (e) {
-        // 處理未預期的系統異常 (例如網路中斷或實體毀損)
-        debugPrint("系統層級錯誤: $e");
-      } finally {
-        // 3. 結束後務必將狀態改回 false
-        if (mounted) {
-          setState(() => _isScanning = false);
-        }
+      } else {
+        _handleError(response.error);
+      }
+    } catch (e) {
+      debugPrint("系統層級錯誤: $e");
+    } finally {
+      if (mounted) {
+        setState(() => _isScanning = false);
       }
     }
+  }
+
+  @override
+  void dispose() {
+    if (_isScanning) {
+      if (_isUsingForegroundWaiting) {
+        _nfcScanController.stopWaiting();
+      } else {
+        unawaited(NFCservice.stopScanning());
+      }
+    }
+    super.dispose();
   }
 
   void _handleError(NfcErrorType errorType) {

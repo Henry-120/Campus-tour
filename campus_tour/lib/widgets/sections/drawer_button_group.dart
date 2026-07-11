@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:campus_tour/controllers/login_controller.dart';
 import 'package:campus_tour/controllers/user_controller.dart';
-import 'package:campus_tour/styles/LHF_drawer_styles.dart';
+import 'package:campus_tour/styles/lhf_drawer_styles.dart';
 import 'package:campus_tour/view/map_suggestions.dart';
 import 'package:campus_tour/view/novice_leading_page.dart';
 import 'package:campus_tour/view/start_page.dart';
-import 'package:campus_tour/widgets/buttons/LHF_drawer_button.dart';
+import 'package:campus_tour/widgets/buttons/drawer_button.dart';
 import 'package:campus_tour/widgets/common/snackbar_builder.dart';
 import 'package:campus_tour/widgets/common/user_head.dart';
+import 'package:campus_tour/view/AED_map.dart';
 
 class DrawerButtonGroup extends StatelessWidget {
   DrawerButtonGroup({super.key});
@@ -48,6 +49,7 @@ class DrawerButtonGroup extends StatelessWidget {
                               const _TutorialButton(),
                               const _PanoramaMapButton(),
                               const _IssueReportButton(),
+                              const _SecurityButton(),
                             ], //左選單按鈕列,
                           ),
                         ),
@@ -234,6 +236,25 @@ class _IssueReportButton extends StatelessWidget {
     return DrawerSecondaryButton(
       text: 'widgets.sections.drawer.button.group.s005'.tr,
       onPressedToDo: () => _showFeatureNotImplementedMessage(context),
+    );
+  }
+}
+
+class _SecurityButton extends StatelessWidget {
+  const _SecurityButton();
+
+  void _onPress(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const AEDMap()),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return DrawerSecondaryButton(
+      text: '校園安全',
+      onPressedToDo: () => _onPress(context),
     );
   }
 }

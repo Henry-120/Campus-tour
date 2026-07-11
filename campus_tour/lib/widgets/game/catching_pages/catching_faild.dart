@@ -1,4 +1,3 @@
-import 'package:campus_tour/view/game_main_page.dart';
 import 'package:flutter/material.dart';
 import '../../../styles/app_theme.dart';
 
@@ -43,11 +42,7 @@ class CatchingFaildPage extends StatelessWidget {
                 SizedBox(height: 32),
                 FilledButton(
                   onPressed: () {
-                    Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(builder: (context) => GameMainPage()),
-                      (route) => false,
-                    );
+                    Navigator.of(context).pop();
                   },
                   child: Text(
                     'widgets.game.catching.pages.catching.faild.s003'.tr,
