@@ -1,10 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:maplibre_gl/maplibre_gl.dart';
-import 'package:flutter/services.dart';
-import 'dart:math' as math;
 import 'dart:async';
-import 'package:geolocator/geolocator.dart';
+
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_compass/flutter_compass.dart';
+import 'package:geolocator/geolocator.dart';
 
 class AEDMap extends StatefulWidget {
   const AEDMap({super.key});
@@ -14,38 +13,14 @@ class AEDMap extends StatefulWidget {
 }
 
 class _AEDMapState extends State<AEDMap> {
-  MapLibreMapController? _controller;
-  String? _locationMessage;
-
   static const String _campusMapAssetPath =
       'assets/images/Disaster_Evacuation_Map/防災地圖_地圖.jpg';
 
-  // 空白底圖，只給你的圖片當地圖使用
-  static const String _blankStyle = '''
-  {
-    "version": 8,
-    "sources": {},
-    "layers": [
-      {
-        "id": "background",
-        "type": "background",
-        "paint": {
-          "background-color": "#f2f2f2"
-        }
-      }
-    ]
-  }
-  ''';
-
-  //
-  // 順序：
-  // 左上 → 右上 → 右下 → 左下
-  static const LatLng _topLeft = LatLng(24.972389, 121.184551);
-  static const LatLng _topRight = LatLng(24.972389, 121.198360);
-  static const LatLng _bottomRight = LatLng(24.963905, 121.198360);
-  static const LatLng _bottomLeft = LatLng(24.963905, 121.184551);
-
-  static const LatLng _initialCenter = LatLng(24.968147, 121.191456);
+  static const Size _mapImageSize = Size(7734, 5243);
+  static const double _topLatitude = 24.972389;
+  static const double _bottomLatitude = 24.963905;
+  static const double _leftLongitude = 121.184551;
+  static const double _rightLongitude = 121.198360;
   static const List<DeviceOrientation> _landscapeOrientations = [
     DeviceOrientation.landscapeLeft,
     DeviceOrientation.landscapeRight,
@@ -54,53 +29,26 @@ class _AEDMapState extends State<AEDMap> {
     DeviceOrientation.portraitUp,
   ];
 
-  static final LatLngBounds _campusBounds = LatLngBounds(
-    southwest: _bottomLeft,
-    northeast: _topRight,
-  );
-
-  PlayerSymbolController? _playerSymbolController;
-  late final CampusMapCameraController _cameraController;
-  late final CampusImageLayerController _imageLayerController;
-
-  bool _viewportPrepared = false;
+  StreamSubscription<Position>? _positionSubscription;
+  StreamSubscription<CompassEvent>? _compassSubscription;
+  Position? _currentPosition;
+  double? _heading;
+  String? _statusMessage;
 
   @override
   void initState() {
     super.initState();
     _lockLandscape();
-    _cameraController = CampusMapCameraController(
-      campusBounds: _campusBounds,
-      maxZoom: 20,
-      padding: 24,
-      fallbackMinZoom: 16,
-    );
-
-    _imageLayerController = CampusImageLayerController(
-      assetPath: _campusMapAssetPath,
-      topLeft: _topLeft,
-      topRight: _topRight,
-      bottomRight: _bottomRight,
-      bottomLeft: _bottomLeft,
-    );
+    _startLocationTracking();
+    _startCompassTracking();
   }
 
   @override
   void dispose() {
-    _playerSymbolController?.dispose();
+    _positionSubscription?.cancel();
+    _compassSubscription?.cancel();
     _restoreOrientation();
     super.dispose();
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-
-    if (_viewportPrepared) return;
-
-    _cameraController.prepareViewport(context);
-
-    _viewportPrepared = true;
   }
 
   Future<void> _lockLandscape() async {
@@ -111,63 +59,194 @@ class _AEDMapState extends State<AEDMap> {
     await SystemChrome.setPreferredOrientations(_restoreOrientations);
   }
 
-  void _onMapCreated(MapLibreMapController controller) {
-    _controller = controller;
-    _cameraController.attachMapController(controller);
+  Future<void> _startLocationTracking() async {
+    final serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      _setStatus('請先開啟定位服務，才能顯示目前位置。');
+      return;
+    }
+
+    var permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+    }
+
+    if (permission == LocationPermission.denied) {
+      _setStatus('未取得定位權限，無法顯示目前位置。');
+      return;
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      _setStatus('定位權限已被永久拒絕，請到系統設定開啟。');
+      return;
+    }
+
+    try {
+      final initialPosition = await Geolocator.getCurrentPosition(
+        locationSettings: const LocationSettings(
+          accuracy: LocationAccuracy.best,
+        ),
+      );
+
+      if (!mounted) return;
+      setState(() {
+        _currentPosition = initialPosition;
+        _statusMessage = null;
+      });
+    } catch (error) {
+      _setStatus('取得目前位置失敗：$error');
+    }
+
+    _positionSubscription =
+        Geolocator.getPositionStream(
+          locationSettings: const LocationSettings(
+            accuracy: LocationAccuracy.best,
+            distanceFilter: 1,
+          ),
+        ).listen(
+          (position) {
+            if (!mounted) return;
+            setState(() {
+              _currentPosition = position;
+              _statusMessage = null;
+            });
+          },
+          onError: (error) {
+            _setStatus('定位更新失敗：$error');
+          },
+        );
   }
 
-  Future<void> _onStyleLoaded() async {
-    final controller = _controller;
-    if (controller == null) return;
+  void _startCompassTracking() {
+    _compassSubscription = FlutterCompass.events?.listen((event) {
+      final heading = event.heading;
+      if (heading == null || !mounted) return;
 
-    await _imageLayerController.addToMap(controller);
-
-    await _cameraController.fitCampusBounds();
-
-    _playerSymbolController ??= PlayerSymbolController(controller);
-
-    // 註冊玩家圖片、開始定位、開始指南針、開始動畫
-    await _playerSymbolController!.start();
+      setState(() {
+        _heading = heading;
+      });
+    });
   }
 
-  //
+  void _setStatus(String message) {
+    if (!mounted) return;
+
+    setState(() {
+      _statusMessage = message;
+    });
+  }
+
+  Rect _containedMapRect(Size containerSize) {
+    final widthScale = containerSize.width / _mapImageSize.width;
+    final heightScale = containerSize.height / _mapImageSize.height;
+    final scale = widthScale < heightScale ? widthScale : heightScale;
+    final width = _mapImageSize.width * scale;
+    final height = _mapImageSize.height * scale;
+
+    return Rect.fromLTWH(
+      (containerSize.width - width) / 2,
+      (containerSize.height - height) / 2,
+      width,
+      height,
+    );
+  }
+
+  Offset? _positionOffset(Rect mapRect) {
+    final position = _currentPosition;
+    if (position == null) return null;
+
+    final longitudeRatio =
+        (position.longitude - _leftLongitude) /
+        (_rightLongitude - _leftLongitude);
+    final latitudeRatio =
+        (_topLatitude - position.latitude) / (_topLatitude - _bottomLatitude);
+
+    if (longitudeRatio < 0 ||
+        longitudeRatio > 1 ||
+        latitudeRatio < 0 ||
+        latitudeRatio > 1) {
+      return null;
+    }
+
+    return Offset(
+      mapRect.left + mapRect.width * longitudeRatio,
+      mapRect.top + mapRect.height * latitudeRatio,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          MapLibreMap(
-            styleString: _blankStyle,
-            initialCameraPosition: _cameraController.getInitialCameraPosition(
-              _initialCenter,
+      backgroundColor: const Color(0xFF111827),
+      body: SafeArea(
+        child: Stack(
+          children: [
+            Positioned.fill(
+              child: InteractiveViewer(
+                minScale: 1,
+                maxScale: 4,
+                boundaryMargin: const EdgeInsets.all(96),
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    final viewportSize = Size(
+                      constraints.maxWidth,
+                      constraints.maxHeight,
+                    );
+                    final mapRect = _containedMapRect(viewportSize);
+                    final playerOffset = _positionOffset(mapRect);
+
+                    return SizedBox(
+                      width: viewportSize.width,
+                      height: viewportSize.height,
+                      child: Stack(
+                        children: [
+                          Positioned.fromRect(
+                            rect: mapRect,
+                            child: Image.asset(
+                              _campusMapAssetPath,
+                              fit: BoxFit.fill,
+                              errorBuilder: (context, error, stackTrace) {
+                                return ColoredBox(
+                                  color: Colors.white,
+                                  child: Center(
+                                    child: Text(
+                                      '防災地圖載入失敗：$error',
+                                      textAlign: TextAlign.center,
+                                      style: const TextStyle(
+                                        color: Colors.black87,
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                          if (playerOffset != null)
+                            Positioned(
+                              left: playerOffset.dx - 18,
+                              top: playerOffset.dy - 18,
+                              child: Transform.rotate(
+                                angle: ((_heading ?? 0) * 3.1415926535) / 180,
+                                child: const Icon(
+                                  Icons.navigation,
+                                  color: Color(0xFFE11D48),
+                                  size: 36,
+                                  shadows: [
+                                    Shadow(color: Colors.white, blurRadius: 6),
+                                  ],
+                                ),
+                              ),
+                            ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ),
             ),
-            onMapCreated: _onMapCreated,
-            onStyleLoadedCallback: _onStyleLoaded,
-
-            // 玩家定位
-            myLocationEnabled: false,
-            myLocationTrackingMode: MyLocationTrackingMode.none,
-
-            compassEnabled: true,
-            rotateGesturesEnabled: false,
-            scrollGesturesEnabled: true,
-            zoomGesturesEnabled: true,
-            tiltGesturesEnabled: false,
-            cameraTargetBounds: _cameraController.cameraTargetBounds,
-            minMaxZoomPreference: _cameraController.zoomPreference,
-            annotationOrder: const [
-              AnnotationType.fill,
-              AnnotationType.line,
-              AnnotationType.circle,
-              AnnotationType.symbol,
-            ],
-          ),
-
-          // 左上角返回
-          SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.all(12),
+            Positioned(
+              top: 12,
+              left: 12,
               child: CircleAvatar(
                 backgroundColor: Colors.black54,
                 child: IconButton(
@@ -178,413 +257,29 @@ class _AEDMapState extends State<AEDMap> {
                 ),
               ),
             ),
-          ),
-
-          // 定位權限提示
-          if (_locationMessage != null)
-            Positioned(
-              left: 16,
-              right: 16,
-              bottom: 24,
-              child: Material(
-                color: Colors.black87,
-                borderRadius: BorderRadius.circular(12),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 12,
-                  ),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          _locationMessage!,
-                          style: const TextStyle(color: Colors.white),
-                        ),
-                      ),
-                    ],
+            if (_statusMessage != null)
+              Positioned(
+                left: 16,
+                right: 16,
+                bottom: 24,
+                child: Material(
+                  color: Colors.black87,
+                  borderRadius: BorderRadius.circular(12),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 12,
+                    ),
+                    child: Text(
+                      _statusMessage!,
+                      style: const TextStyle(color: Colors.white),
+                    ),
                   ),
                 ),
               ),
-            ),
-        ],
+          ],
+        ),
       ),
     );
-  }
-}
-
-class PlayerSymbolController {
-  //自訂玩家位置
-  bool _started = false;
-  Symbol? _playerSymbol;
-  MapLibreMapController? controller;
-
-  StreamSubscription<Position>? _positionSub;
-  StreamSubscription<CompassEvent>? _compassSub;
-  int _walkFrame = 0;
-  static const int _defaultWalkSpeed = 140;
-  static const double _defaultIconSize = 0.6;
-
-  Timer? _walkAnimationTimer;
-  String _currentDirection = 'right';
-  LatLng? _latestPlayerLatLng;
-
-  PlayerSymbolController(this.controller);
-  String get _currentPlayerIcon {
-    return 'squirrel_${_currentDirection}_$_walkFrame';
-  }
-
-  Future<void> _addPlayerAnimationImages(
-    MapLibreMapController controller,
-  ) async {
-    final directions = ['up', 'right', 'down', 'left'];
-
-    for (final direction in directions) {
-      for (int i = 0; i < 4; i++) {
-        final imageBytes = await rootBundle.load(
-          'assets/images/player/squirrel_${direction}_$i.png',
-        );
-
-        await controller.addImage(
-          'squirrel_${direction}_$i',
-          imageBytes.buffer.asUint8List(),
-        );
-      }
-    }
-  }
-
-  void _startWalkAnimation() {
-    _walkAnimationTimer?.cancel();
-
-    _walkAnimationTimer = Timer.periodic(
-      const Duration(milliseconds: _defaultWalkSpeed),
-      (_) {
-        _walkFrame = (_walkFrame + 1) % 4;
-        _updatePlayerSymbol();
-      },
-    );
-  }
-
-  void _startLocationStream() {
-    const locationSettings = LocationSettings(
-      accuracy: LocationAccuracy.best,
-      distanceFilter: 1,
-    );
-
-    _positionSub =
-        Geolocator.getPositionStream(locationSettings: locationSettings).listen(
-          (position) {
-            final latLng = LatLng(position.latitude, position.longitude);
-            _latestPlayerLatLng = latLng;
-
-            _updatePlayerSymbol();
-          },
-        );
-  }
-
-  void _startCompassStream() {
-    _compassSub = FlutterCompass.events?.listen((event) {
-      final heading = event.heading;
-      if (heading == null) return;
-
-      final nextDirection = _directionFromHeading(heading);
-
-      if (nextDirection == _currentDirection) return;
-
-      _currentDirection = nextDirection;
-      _updatePlayerSymbol();
-    });
-  }
-
-  String _directionFromHeading(double heading) {
-    final normalized = (heading + 360) % 360;
-
-    if (normalized >= 315 || normalized < 45) {
-      return 'up';
-    } else if (normalized >= 45 && normalized < 135) {
-      return 'right';
-    } else if (normalized >= 135 && normalized < 225) {
-      return 'down';
-    } else {
-      return 'left';
-    }
-  }
-
-  Future<void> _updatePlayerSymbol() async {
-    final controller = this.controller;
-    final position = _latestPlayerLatLng;
-
-    if (controller == null || position == null) return;
-
-    final iconName = _currentPlayerIcon;
-
-    if (_playerSymbol == null) {
-      _playerSymbol = await controller.addSymbol(
-        SymbolOptions(
-          geometry: position,
-          iconImage: iconName,
-          iconSize: _defaultIconSize,
-          iconAnchor: 'center',
-          zIndex: 999,
-        ),
-      );
-    } else {
-      await controller.updateSymbol(
-        _playerSymbol!,
-        SymbolOptions(geometry: position, iconImage: iconName),
-      );
-    }
-  }
-
-  Future<void> _setInitialLocation() async {
-    try {
-      final position = await Geolocator.getCurrentPosition(
-        locationSettings: const LocationSettings(
-          accuracy: LocationAccuracy.best,
-        ),
-      );
-
-      _latestPlayerLatLng = LatLng(position.latitude, position.longitude);
-
-      await _updatePlayerSymbol();
-    } catch (e) {
-      debugPrint('取得初始定位失敗：$e');
-    }
-  }
-
-  Future<void> start() async {
-    if (_started) return;
-
-    final mapController = controller;
-    if (mapController == null) {
-      throw StateError('SymbolController 尚未取得 MapLibreMapController');
-    }
-
-    _started = true;
-
-    // 1. 先把玩家動畫圖片註冊進 MapLibre style
-    await _addPlayerAnimationImages(mapController);
-
-    // 2. 先抓一次目前位置，讓玩家 icon 不用等 stream 才出現
-    await _setInitialLocation();
-
-    // 3. 開始走路動畫
-    _startWalkAnimation();
-
-    // 4. 開始監聽 GPS
-    _startLocationStream();
-
-    // 5. 開始監聽指南針方向
-    _startCompassStream();
-  }
-
-  void dispose() {
-    _walkAnimationTimer?.cancel();
-    _positionSub?.cancel();
-    _compassSub?.cancel();
-  }
-}
-
-class CampusMapCameraController {
-  CampusMapCameraController({
-    required this.campusBounds,
-    this.maxZoom = 20,
-    this.padding = 24,
-    this.fallbackMinZoom = 16,
-  }) : _minZoom = fallbackMinZoom;
-
-  final LatLngBounds campusBounds;
-  final double maxZoom;
-  final double padding;
-  final double fallbackMinZoom;
-
-  MapLibreMapController? _mapController;
-
-  double _minZoom;
-  bool _isViewportReady = false;
-
-  double get minZoom => _minZoom;
-
-  bool get isViewportReady => _isViewportReady;
-
-  MinMaxZoomPreference get zoomPreference {
-    return MinMaxZoomPreference(_minZoom, maxZoom);
-  }
-
-  CameraTargetBounds get cameraTargetBounds {
-    return CameraTargetBounds(campusBounds);
-  }
-
-  CameraPosition getInitialCameraPosition(LatLng initialCenter) {
-    return CameraPosition(
-      target: initialCenter,
-      zoom: _minZoom,
-      bearing: 0,
-      tilt: 0,
-    );
-  }
-
-  void attachMapController(MapLibreMapController controller) {
-    _mapController = controller;
-  }
-
-  void prepareViewport(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
-
-    _minZoom = _calculateFitMinZoom(
-      screenSize: screenSize,
-      bounds: campusBounds,
-      padding: padding,
-    );
-
-    _isViewportReady = true;
-  }
-
-  Future<void> fitCampusBounds() async {
-    final controller = _mapController;
-    if (controller == null) return;
-
-    await controller.moveCamera(
-      CameraUpdate.newLatLngBounds(
-        campusBounds,
-        left: padding,
-        top: padding,
-        right: padding,
-        bottom: padding,
-      ),
-    );
-  }
-
-  Future<void> zoomIn() async {
-    final controller = _mapController;
-    if (controller == null) return;
-
-    await controller.animateCamera(CameraUpdate.zoomIn());
-  }
-
-  Future<void> zoomOut() async {
-    final controller = _mapController;
-    if (controller == null) return;
-
-    await controller.animateCamera(CameraUpdate.zoomOut());
-  }
-
-  Future<void> moveTo(LatLng target, {double zoom = 18}) async {
-    final controller = _mapController;
-    if (controller == null) return;
-
-    await controller.animateCamera(CameraUpdate.newLatLngZoom(target, zoom));
-  }
-
-  double _calculateFitMinZoom({
-    required Size screenSize,
-    required LatLngBounds bounds,
-    required double padding,
-  }) {
-    final usableWidth = screenSize.width - padding * 2;
-    final usableHeight = screenSize.height - padding * 2;
-
-    if (usableWidth <= 0 || usableHeight <= 0) {
-      return fallbackMinZoom;
-    }
-
-    const double tileSize = 512;
-
-    double lngToX(double lng) {
-      return (lng + 180.0) / 360.0;
-    }
-
-    double latToY(double lat) {
-      final latRad = lat * math.pi / 180.0;
-
-      return (1.0 -
-              math.log(math.tan(latRad) + 1.0 / math.cos(latRad)) / math.pi) /
-          2.0;
-    }
-
-    final west = bounds.southwest.longitude;
-    final east = bounds.northeast.longitude;
-    final south = bounds.southwest.latitude;
-    final north = bounds.northeast.latitude;
-
-    final x1 = lngToX(west);
-    final x2 = lngToX(east);
-    final y1 = latToY(north);
-    final y2 = latToY(south);
-
-    final lngFraction = (x2 - x1).abs();
-    final latFraction = (y2 - y1).abs();
-
-    if (lngFraction <= 0 || latFraction <= 0) {
-      return fallbackMinZoom;
-    }
-
-    final zoomX = math.log(usableWidth / tileSize / lngFraction) / math.ln2;
-    final zoomY = math.log(usableHeight / tileSize / latFraction) / math.ln2;
-
-    final fitZoom = math.min(zoomX, zoomY);
-
-    return fitZoom - 0.05;
-  }
-}
-
-class CampusImageLayerController {
-  CampusImageLayerController({
-    required this.assetPath,
-    required this.topLeft,
-    required this.topRight,
-    required this.bottomRight,
-    required this.bottomLeft,
-    this.sourceId = 'campus-image-source',
-    this.layerId = 'campus-image-layer',
-  });
-
-  final String assetPath;
-
-  final LatLng topLeft;
-  final LatLng topRight;
-  final LatLng bottomRight;
-  final LatLng bottomLeft;
-
-  final String sourceId;
-  final String layerId;
-
-  bool _added = false;
-
-  Future<void> addToMap(MapLibreMapController controller) async {
-    if (_added) return;
-    _added = true;
-
-    final byteData = await rootBundle.load(assetPath);
-    final imageBytes = byteData.buffer.asUint8List();
-
-    final imageCoordinates = LatLngQuad(
-      topLeft: topLeft,
-      topRight: topRight,
-      bottomRight: bottomRight,
-      bottomLeft: bottomLeft,
-    );
-
-    await controller.addImageSource(sourceId, imageBytes, imageCoordinates);
-
-    await _addImageLayerBelowSymbols(controller);
-  }
-
-  Future<void> _addImageLayerBelowSymbols(
-    MapLibreMapController controller,
-  ) async {
-    final symbolLayerIds =
-        controller.symbolManager?.layerIds ?? const <String>[];
-
-    if (symbolLayerIds.isNotEmpty) {
-      await controller.addImageLayerBelow(
-        layerId,
-        sourceId,
-        symbolLayerIds.first,
-      );
-      return;
-    }
-
-    await controller.addImageLayer(layerId, sourceId);
   }
 }
