@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../models/user_monster_model.dart';
 import '../../styles/app_theme.dart';
+import '../../utils/monster_image_path.dart';
 import '../constants/asset_paths.dart';
 import '../constants/responsive.dart';
 
@@ -13,11 +14,7 @@ class ElfCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scale = Responsive.scale(context);
-    String imagePath = item.imageURL.trim();
-
-    if (imagePath.isNotEmpty && !imagePath.startsWith('assets/')) {
-      imagePath = 'assets/images/fairy_img/$imagePath';
-    }
+    final imagePath = MonsterImagePath.staticImage(item.imageURL);
 
     return InkWell(
       onTap: onTap,

@@ -66,21 +66,31 @@ flutter:
   assets:
     - assets/images/
     - assets/images/fairy_img/
-    - assets/images/fairy_img/furuii/
-    - assets/images/fairy_image/
     - assets/images/fairy_four_parts/DNA/
+    - assets/images/fairy_four_parts/Feather/
     - assets/images/fairy_four_parts/baihua_river/
+    - assets/images/fairy_four_parts/biomedical_college/
+    - assets/images/fairy_four_parts/business_college/
     - assets/images/fairy_four_parts/circle_90de_II/
     - assets/images/fairy_four_parts/electrical_college/
     - assets/images/fairy_four_parts/elephant_five_forms/
     - assets/images/fairy_four_parts/engineering/
+    - assets/images/fairy_four_parts/friendship_cherry/
     - assets/images/fairy_four_parts/geoscience/
     - assets/images/fairy_four_parts/hakka_college/
     - assets/images/fairy_four_parts/listening_to_the_pine_wind/
     - assets/images/fairy_four_parts/literature/
+    - assets/images/fairy_four_parts/qmark/
+    - assets/images/fairy_four_parts/science_college/
+    - assets/images/fairy_four_parts/sqirrel/
     - assets/images/fairy_four_parts/sustainability_college/
     - assets/images/fairy_four_parts/taichi_sculpture/
+    - assets/images/fairy_four_parts/think_above_cloud/
+    - assets/images/fairy_four_parts/walking_amongst_the_clouds/
     - assets/images/fairy_four_parts/zhongda_lake/
+    - assets/images/fairy_four_parts/academic/
+    - assets/images/fairy_four_parts/auditorium/
+    - assets/images/fairy_four_parts/international/
     - assets/images/component/
     - assets/images/NCU/
     - assets/audio/

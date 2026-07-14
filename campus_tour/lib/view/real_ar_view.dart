@@ -4,12 +4,13 @@ import 'package:vector_math/vector_math_64.dart' as vector;
 import '../controllers/monster_controller.dart';
 import 'package:get/get.dart';
 import '../styles/app_theme.dart';
+import '../utils/monster_image_path.dart';
 import '../widgets/common/snackbar_builder.dart';
 import '../widgets/constants/responsive.dart';
 import 'package:campus_tour/widgets/ar_control/ar_control_view.dart';
 
 class RealArPage extends StatefulWidget {
-  RealArPage({super.key});
+  const RealArPage({super.key});
 
   @override
   State<RealArPage> createState() => _RealArPageState();
@@ -163,7 +164,9 @@ class _RealArPageState extends State<RealArPage> {
                                     10 * scale,
                                   ),
                                   child: Image.asset(
-                                    userMonster.imageURL, // 💡 直接使用 Asset 圖片路徑
+                                    MonsterImagePath.staticImage(
+                                      userMonster.imageURL,
+                                    ),
                                     height: 55 * scale,
                                     width: 55 * scale,
                                     fit: BoxFit.cover,

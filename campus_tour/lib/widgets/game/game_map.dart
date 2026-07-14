@@ -9,6 +9,7 @@ import 'package:campus_tour/controllers/monster_controller.dart';
 import 'package:campus_tour/controllers/nfc_scan_controller.dart';
 import 'package:campus_tour/local_information/local_setting.dart';
 import 'package:campus_tour/styles/app_theme.dart';
+import 'package:campus_tour/utils/monster_image_path.dart';
 import 'package:get/get.dart';
 import '../../view/nearby_monsters_display.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -33,7 +34,7 @@ import 'dart:ui' as ui;
 //end for mission
 
 class GameMap extends StatefulWidget {
-  GameMap({super.key});
+  const GameMap({super.key});
 
   @override
   State<GameMap> createState() => _GameMapState();
@@ -68,9 +69,26 @@ enum MapTileLayer {
   String get label => labelKey.tr;
 }
 
+enum BackgroundTileKind {
+  day(id: 'sky', assetPath: 'assets/images/cute_grass.png'),
+  night(id: 'star', assetPath: 'assets/images/cute_star.png');
+
+  const BackgroundTileKind({required this.id, required this.assetPath});
+
+  final String id;
+  final String assetPath;
+
+  static BackgroundTileKind fromLocalTime(DateTime time) {
+    return time.hour >= 6 && time.hour < 18
+        ? BackgroundTileKind.day
+        : BackgroundTileKind.night;
+  }
+}
+
 class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
   GoogleMapController? _mapController;
   StreamSubscription<Position>? _positionStream; // 📡 位置監聽器
+  Timer? _backgroundTileRefreshTimer;
 
   bool _hasLocationPermission = false;
   String? _mapStyle; // 地圖 JSON 風格
@@ -81,7 +99,11 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
 
   LatLng? _playerPosition;
   bool _hasCenteredMap = false;
+  bool _isPlayerInsideCampusBounds = true;
   MapTileLayer _selectedTileLayer = MapTileLayer.campus;
+  BackgroundTileKind _backgroundTileKind = BackgroundTileKind.fromLocalTime(
+    DateTime.now(),
+  );
   // UserMarker? _playerMarker;
   // BitmapDescriptor? _playerIcon;
 
@@ -119,6 +141,9 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
         setState(() {
           _hasLocationPermission = true;
           _playerPosition = _fixedTestLocation;
+          _isPlayerInsideCampusBounds = _isInsideCampusBounds(
+            _fixedTestLocation,
+          );
         });
 
         _moveCamera(testPosition);
@@ -161,6 +186,7 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
 
       setState(() {
         _playerPosition = currentLocation;
+        _isPlayerInsideCampusBounds = _isInsideCampusBounds(currentLocation);
       });
 
       _positionStream =
@@ -188,10 +214,15 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
                       currentLocation.longitude,
                     ) >
                     2;
+            final isInsideCampusBounds = _isInsideCampusBounds(currentLocation);
 
-            if (shouldUpdateMarker) {
+            if (shouldUpdateMarker ||
+                isInsideCampusBounds != _isPlayerInsideCampusBounds) {
               setState(() {
-                _playerPosition = currentLocation;
+                if (shouldUpdateMarker) {
+                  _playerPosition = currentLocation;
+                }
+                _isPlayerInsideCampusBounds = isInsideCampusBounds;
               });
             }
 
@@ -206,6 +237,37 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
       debugPrint("[Debug][GameMap]:stack trace：$st");
       setState(() => _hasLocationPermission = false);
     }
+  }
+
+  bool _isInsideCampusBounds(LatLng position) {
+    return position.latitude >= campusBounds.southwest.latitude &&
+        position.latitude <= campusBounds.northeast.latitude &&
+        position.longitude >= campusBounds.southwest.longitude &&
+        position.longitude <= campusBounds.northeast.longitude;
+  }
+
+  void _scheduleBackgroundTileRefresh() {
+    _backgroundTileRefreshTimer?.cancel();
+
+    final now = DateTime.now();
+    final nextSwitch = _nextBackgroundTileSwitch(now);
+    _backgroundTileRefreshTimer = Timer(nextSwitch.difference(now), () {
+      if (!mounted) return;
+
+      setState(() {
+        _backgroundTileKind = BackgroundTileKind.fromLocalTime(DateTime.now());
+      });
+      _scheduleBackgroundTileRefresh();
+    });
+  }
+
+  DateTime _nextBackgroundTileSwitch(DateTime now) {
+    final todayAt6 = DateTime(now.year, now.month, now.day, 6);
+    final todayAt18 = DateTime(now.year, now.month, now.day, 18);
+
+    if (now.isBefore(todayAt6)) return todayAt6;
+    if (now.isBefore(todayAt18)) return todayAt18;
+    return todayAt6.add(const Duration(days: 1));
   }
 
   void _moveCamera(Position position) {
@@ -369,11 +431,13 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
     if (defaultTargetPlatform == TargetPlatform.android) {
       unawaited(Get.find<NfcScanController>().startForegroundListening());
     }
+    _scheduleBackgroundTileRefresh();
     listenToNearbyMonsters(_handleMonsterCapture);
   }
 
   @override
   void dispose() {
+    _backgroundTileRefreshTimer?.cancel();
     _positionStream?.cancel();
     if (defaultTargetPlatform == TargetPlatform.android) {
       unawaited(Get.find<NfcScanController>().stopForegroundListening());
@@ -400,6 +464,17 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
           style: _mapStyle,
 
           tileOverlays: {
+            TileOverlay(
+              tileOverlayId: TileOverlayId(
+                'background_tiles_${_backgroundTileKind.id}',
+              ),
+              tileProvider: BackgroundTileProvider(
+                tileKind: _backgroundTileKind,
+              ),
+              transparency: 0.0,
+              zIndex: 0,
+              tileSize: 512,
+            ),
             TileOverlay(
               tileOverlayId: TileOverlayId(
                 'ncu_custom_tiles_${_selectedTileLayer.id}',
@@ -479,7 +554,51 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
               ),
             ),
           ),
+        if (_hasLocationPermission && !_isPlayerInsideCampusBounds)
+          const Align(
+            alignment: Alignment(0, -0.4),
+            child: _OutOfCampusNotice(),
+          ),
       ],
+    );
+  }
+}
+
+class _OutOfCampusNotice extends StatelessWidget {
+  const _OutOfCampusNotice();
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      minimum: const EdgeInsets.all(24),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 18),
+        decoration: BoxDecoration(
+          color: AppTheme.cardColor.withValues(alpha: 0.94),
+          borderRadius: BorderRadius.circular(18),
+          border: Border.all(
+            color: AppTheme.primaryColor.withValues(alpha: 0.85),
+            width: 2,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.22),
+              blurRadius: 18,
+              offset: const Offset(0, 8),
+            ),
+          ],
+        ),
+        child: Text(
+          'widgets.game.game.map.s017'.tr,
+          textAlign: TextAlign.center,
+          style: AppTheme.titleStyle.copyWith(
+            color: AppTheme.gameTextColor,
+            fontSize: 22,
+            height: 1.35,
+            letterSpacing: 0,
+          ),
+        ),
+      ),
     );
   }
 }
@@ -559,7 +678,7 @@ class BuildingMonsterLevel extends StatelessWidget {
   }) : monsterModelCry = MonsterModelCry(
          name: monster.name,
          type: monster.type,
-         imageUrl: monster.imageURL,
+         imageUrl: MonsterImagePath.staticImage(monster.imageURL),
        ),
        tracePlotMission = PlotLevel(
          type: PlotLevel.traceType,
@@ -588,7 +707,7 @@ class BuildingMonsterLevel extends StatelessWidget {
          description: PlotLevel.battleDescription,
          dialogueSteps: DefaultPlot.battlePlotDialogueSteps(
            fairyName: monster.name,
-           fairyImagePath: monster.imageURL,
+           fairyImagePath: MonsterImagePath.staticImage(monster.imageURL),
          ),
          leftCharacter: PlotSceneCharacter(
            spritePath: PlotLevel.magicCircleSpritePath,
@@ -719,6 +838,28 @@ class AssetTileProvider implements TileProvider {
     image.dispose();
 
     return byteData!.buffer.asUint8List();
+  }
+}
+
+class BackgroundTileProvider implements TileProvider {
+  static final Map<String, Future<Uint8List>> _tileBytesByPath = {};
+
+  BackgroundTileProvider({required this.tileKind});
+
+  final BackgroundTileKind tileKind;
+
+  @override
+  Future<Tile> getTile(int x, int y, int? zoom) async {
+    final bytes = await _tileBytesByPath.putIfAbsent(
+      tileKind.assetPath,
+      () => _loadTile(tileKind.assetPath),
+    );
+    return Tile(512, 512, bytes);
+  }
+
+  static Future<Uint8List> _loadTile(String assetPath) async {
+    final data = await rootBundle.load(assetPath);
+    return data.buffer.asUint8List();
   }
 }
 

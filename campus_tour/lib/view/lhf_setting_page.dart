@@ -1,5 +1,6 @@
 import 'package:campus_tour/controllers/monster_controller.dart';
 import 'package:campus_tour/local_information/local_setting.dart';
+import 'package:campus_tour/services/load_db_service.dart';
 import 'package:campus_tour/styles/app_theme.dart';
 import 'package:campus_tour/styles/setting_page_styles.dart';
 import 'package:campus_tour/view/user_protocol.dart';
@@ -72,6 +73,10 @@ class SteeingPageStrings {
   static String get debugDeleteAllRunning => 'view.lhf.setting.page.s037'.tr;
   static String get debugCaptureAllFailed => 'view.lhf.setting.page.s038'.tr;
   static String get debugDeleteAllFailed => 'view.lhf.setting.page.s039'.tr;
+  static String get debugImportDbButton => 'view.lhf.setting.page.s054'.tr;
+  static String get debugImportDbRunning => 'view.lhf.setting.page.s055'.tr;
+  static String get debugImportDbDone => 'view.lhf.setting.page.s056'.tr;
+  static String get debugImportDbFailed => 'view.lhf.setting.page.s057'.tr;
 
   static String debugCaptureAllDone(int count) {
     return count == 0 ? 'view.lhf.setting.page.s040'.tr : '已新增 $count 隻精靈到圖鑑';
@@ -159,7 +164,7 @@ class FullPageList {
 }
 
 class SettingPage extends StatelessWidget {
-  SettingPage({super.key});
+  const SettingPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -492,9 +497,12 @@ class _DebugCaptureAllMonstersCardState
     extends State<_DebugCaptureAllMonstersCard> {
   bool _isCapturing = false;
   bool _isDeleting = false;
+  bool _isImportingDb = false;
+
+  bool get _isBusy => _isCapturing || _isDeleting || _isImportingDb;
 
   Future<void> _captureAllMonsters() async {
-    if (_isCapturing || _isDeleting) return;
+    if (_isBusy) return;
 
     final user = FirebaseAuth.instance.currentUser;
     if (user == null) {
@@ -537,7 +545,7 @@ class _DebugCaptureAllMonstersCardState
   }
 
   Future<void> _deleteAllMonsters() async {
-    if (_isCapturing || _isDeleting) return;
+    if (_isBusy) return;
 
     final user = FirebaseAuth.instance.currentUser;
     if (user == null) {
@@ -579,6 +587,51 @@ class _DebugCaptureAllMonstersCardState
     }
   }
 
+  Future<void> _importGameData() async {
+    if (_isBusy) return;
+
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) {
+      SnackBarBuilder.show(
+        context,
+        SteeingPageStrings.debugCaptureAllNoUser,
+        type: AppToastType.warning,
+      );
+      return;
+    }
+
+    setState(() => _isImportingDb = true);
+    SnackBarBuilder.show(
+      context,
+      SteeingPageStrings.debugImportDbRunning,
+      type: AppToastType.info,
+    );
+
+    try {
+      final service = LoadDbService();
+      await service.loadArchitecture();
+      await service.loadQA();
+      await service.loadMonsters();
+
+      if (!mounted) return;
+      SnackBarBuilder.show(
+        context,
+        SteeingPageStrings.debugImportDbDone,
+        type: AppToastType.success,
+      );
+    } catch (e) {
+      if (!mounted) return;
+      debugPrint('[SettingPage] 匯入遊戲資料失敗: $e');
+      SnackBarBuilder.show(
+        context,
+        SteeingPageStrings.debugImportDbFailed,
+        type: AppToastType.error,
+      );
+    } finally {
+      if (mounted) setState(() => _isImportingDb = false);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return _SettingCard(
@@ -596,9 +649,7 @@ class _DebugCaptureAllMonstersCardState
           runSpacing: SettingPageStyles.gapMd,
           children: [
             FilledButton.icon(
-              onPressed: _isCapturing || _isDeleting
-                  ? null
-                  : _captureAllMonsters,
+              onPressed: _isBusy ? null : _captureAllMonsters,
               icon: _isCapturing
                   ? SizedBox(
                       width: 18,
@@ -609,9 +660,7 @@ class _DebugCaptureAllMonstersCardState
               label: Text(SteeingPageStrings.debugCaptureAllButton),
             ),
             OutlinedButton.icon(
-              onPressed: _isCapturing || _isDeleting
-                  ? null
-                  : _deleteAllMonsters,
+              onPressed: _isBusy ? null : _deleteAllMonsters,
               icon: _isDeleting
                   ? SizedBox(
                       width: 18,
@@ -620,6 +669,17 @@ class _DebugCaptureAllMonstersCardState
                     )
                   : Icon(Icons.delete_sweep_rounded),
               label: Text(SteeingPageStrings.debugDeleteAllButton),
+            ),
+            FilledButton.tonalIcon(
+              onPressed: _isBusy ? null : _importGameData,
+              icon: _isImportingDb
+                  ? SizedBox(
+                      width: 18,
+                      height: 18,
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    )
+                  : Icon(Icons.cloud_upload_rounded),
+              label: Text(SteeingPageStrings.debugImportDbButton),
             ),
           ],
         ),
