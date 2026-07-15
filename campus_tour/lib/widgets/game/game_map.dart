@@ -19,6 +19,7 @@ import 'package:campus_tour/widgets/game/catching_pages/monster_model_cry.dart';
 import 'package:campus_tour/widgets/game/catching_pages/full_mission.dart';
 import 'package:campus_tour/widgets/game/catching_pages/discovered_item.dart';
 import 'package:campus_tour/widgets/game/catching_pages/default_plot.dart';
+import 'package:campus_tour/widgets/game/catching_pages/monster_plot.dart';
 import 'package:campus_tour/widgets/game/catching_pages/graphics_text_level.dart';
 import 'package:campus_tour/widgets/game/catching_pages/cryptography_level.dart';
 import 'package:campus_tour/widgets/game/catching_pages/plot_level.dart';
@@ -642,7 +643,13 @@ class BuildingMonsterLevel extends StatelessWidget {
          isPassed: LocalSettingService.autoSkipStory.isEnabled,
          title: PlotLevel.battleTitle,
          description: PlotLevel.battleDescription,
-         dialogueSteps: DefaultPlot.battlePlotDialogueSteps(
+         dialogueSteps:
+          // 優先使用專屬台詞，若未設定則 fallback 到通用版
+          MonsterPlot.battleSteps(
+            monsterId: monster.id,
+            fairyImagePath: monster.imageURL,
+          ) ?? 
+          DefaultPlot.battlePlotDialogueSteps(
            fairyName: monster.name,
            fairyImagePath: monster.imageURL,
          ),
