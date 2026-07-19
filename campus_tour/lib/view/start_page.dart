@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import '../widgets/common/start_background.dart';
 import '../widgets/sections/start_menu_group.dart';
-import '../services/audio_service.dart';
 import '../widgets/constants/responsive.dart';
 
 class StartPage extends StatefulWidget {
@@ -36,12 +35,12 @@ class _StartPageState extends State<StartPage> with WidgetsBindingObserver {
 
     WidgetsBinding.instance.addObserver(this);
 
-    AudioService().play(
-      fileName: 'audio/BGM.mp3',
-      isBgm: true,
-      isLooping: true,
-      volume: 0.65,
-    );
+    // AudioService().play(
+    //   fileName: 'audio/BGM.mp3',
+    //   isBgm: true,
+    //   isLooping: true,
+    //   volume: 0.65,
+    // );
 
     _timer = Timer.periodic(const Duration(seconds: 4), (_) {
       if (mounted) {

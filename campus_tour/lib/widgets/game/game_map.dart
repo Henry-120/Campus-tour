@@ -21,6 +21,7 @@ import 'package:campus_tour/widgets/game/catching_pages/monster_model_cry.dart';
 import 'package:campus_tour/widgets/game/catching_pages/full_mission.dart';
 import 'package:campus_tour/widgets/game/catching_pages/discovered_item.dart';
 import 'package:campus_tour/widgets/game/catching_pages/default_plot.dart';
+import 'package:campus_tour/widgets/game/catching_pages/monster_plot.dart';
 import 'package:campus_tour/widgets/game/catching_pages/graphics_text_level.dart';
 import 'package:campus_tour/widgets/game/catching_pages/cryptography_level.dart';
 import 'package:campus_tour/widgets/game/catching_pages/plot_level.dart';
@@ -424,6 +425,24 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
   }
   //到這裡為止
 
+  Set<Marker> _debugMonsterMarkers(Set<Marker> markers) {
+    debugPrint('========== [MarkerDebug_GameMap] ==========');
+    debugPrint('GoogleMap 收到 marker 數量: ${markers.length}');
+
+    for (final marker in markers) {
+      debugPrint(
+        '[MarkerDebug_GameMap] '
+        'markerId: ${marker.markerId.value}, '
+        'lat: ${marker.position.latitude.toStringAsFixed(6)}, '
+        'lng: ${marker.position.longitude.toStringAsFixed(6)}',
+      );
+    }
+
+    debugPrint('==========================================');
+
+    return markers;
+  }
+
   @override
   void initState() {
     super.initState();
@@ -448,6 +467,14 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
 
   @override
   Widget build(BuildContext context) {
+    for (final marker in monsterMarkers) {
+      debugPrint(
+        '[MarkerDebug_GameMap]'
+        'markerId: ${marker.markerId.value}, '
+        'lat: ${marker.position.latitude.toStringAsFixed(6)}, '
+        'lng: ${marker.position.longitude.toStringAsFixed(6)}',
+      );
+    }
     return Stack(
       children: [
         GoogleMap(
@@ -486,11 +513,8 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
             ),
           },
 
-          buildingsEnabled: false,
-          markers: {
-            // if (_playerMarker != null) _playerMarker!.toMarker(),
-            ...monsterMarkers, // 👈 MonsterMarkersMixin 提供的 getter
-          },
+          buildingsEnabled: true,
+          markers: _debugMonsterMarkers({...monsterMarkers}),
           myLocationEnabled: false,
           myLocationButtonEnabled: false,
           zoomControlsEnabled: false,
@@ -706,10 +730,16 @@ class BuildingMonsterLevel extends StatelessWidget {
          isPassed: LocalSettingService.autoSkipStory.isEnabled,
          title: PlotLevel.battleTitle,
          description: PlotLevel.battleDescription,
-         dialogueSteps: DefaultPlot.battlePlotDialogueSteps(
-           fairyName: monster.name,
-           fairyImagePath: MonsterImagePath.staticImage(monster.imageURL),
-         ),
+         // 優先使用專屬台詞，若未設定則 fallback 到通用版。
+         dialogueSteps:
+             MonsterPlot.battleSteps(
+               monsterId: monster.id,
+               fairyImagePath: MonsterImagePath.staticImage(monster.imageURL),
+             ) ??
+             DefaultPlot.battlePlotDialogueSteps(
+               fairyName: monster.name,
+               fairyImagePath: MonsterImagePath.staticImage(monster.imageURL),
+             ),
          leftCharacter: PlotSceneCharacter(
            spritePath: PlotLevel.magicCircleSpritePath,
          ),

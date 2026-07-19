@@ -104,11 +104,31 @@ mixin MonsterMarkersMixin<T extends StatefulWidget> on State<T> {
     void Function(MonsterModel) onTap,
   ) async {
     final result = <Marker>{};
+    debugPrint('[MarkerDebug] 準備建立 Marker，monsters 數量: ${monsters.length}');
     for (final m in monsters) {
       final icon = await _loadMonsterIcon(m, _monsterFrameIndex + 1);
       result.add(
         MonsterMarker(monster: m, icon: icon, onTap: () => onTap(m)).toMarker(),
       );
+
+      // final icon = await _loadMonsterIcon(m);
+
+      final marker = MonsterMarker(
+        monster: m,
+        icon: icon,
+        onTap: () {
+          debugPrint('[MarkerDebug] 點擊 Marker: ${m.name}');
+          onTap(m);
+        },
+      ).toMarker();
+
+      debugPrint(
+        '[MarkerDebug] Marker position: '
+        '${marker.position.latitude.toStringAsFixed(6)}, '
+        '${marker.position.longitude.toStringAsFixed(6)}',
+      );
+
+      result.add(marker);
     }
     return result;
   }

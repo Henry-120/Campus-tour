@@ -4,7 +4,6 @@ import 'package:campus_tour/styles/app_theme.dart';
 import '../widgets/game/user_hud.dart';
 import '../widgets/game/game_map.dart';
 import '../widgets/common/scale_button.dart';
-import '../services/audio_service.dart';
 import 'package:campus_tour/widgets/common/drawer.dart';
 import '../widgets/game/player_sprite.dart';
 import '../widgets/game/nearest_monster_arrow.dart';
@@ -19,11 +18,11 @@ class GameMainPage extends StatefulWidget {
 
 class _GameMainPageState extends State<GameMainPage> {
   Future<void> _playIntro() async {
-    await AudioService().play(
-      fileName: 'audio/intro.mp3',
-      volume: 1.0,
-      isLooping: false,
-    );
+    // await AudioService().play(
+    //   fileName: 'audio/intro.mp3',
+    //   volume: 1.0,
+    //   isLooping: false,
+    // );
   }
 
   @override

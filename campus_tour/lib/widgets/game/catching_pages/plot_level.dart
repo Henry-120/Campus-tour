@@ -96,7 +96,7 @@ class PlotDialogueStep {
   final bool showLeftSprite;
   final bool showRightSprite;
 
-  PlotDialogueStep({
+  const PlotDialogueStep({
     required this.speakerSlot,
     required this.speakerName,
     required this.text,

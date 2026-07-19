@@ -1,6 +1,6 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
-import 'package:flutter_compass/flutter_compass.dart';
+// import 'package:flutter_compass/flutter_compass.dart';
 import 'package:get/get.dart';
 import 'package:geolocator/geolocator.dart';
 import '../../controllers/monster_controller.dart';
@@ -14,19 +14,19 @@ class NearestMonsterArrow extends StatefulWidget {
 }
 
 class _NearestMonsterArrowState extends State<NearestMonsterArrow> {
-  double _heading = 0; // 手機目前朝向（度，北=0）
+  // static double _heading = 0; // 手機目前朝向（度，北=0）
 
-  @override
-  void initState() {
-    super.initState();
-    // 監聽羅盤
-    FlutterCompass.events?.listen((CompassEvent event) {
-      final heading = event.heading;
-      if (heading != null && heading.isFinite && mounted) {
-        setState(() => _heading = heading);
-      }
-    });
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   // 監聽羅盤
+  //   FlutterCompass.events?.listen((CompassEvent event) {
+  //     final heading = event.heading;
+  //     if (heading != null && heading.isFinite && mounted) {
+  //       setState(() => _heading = heading);
+  //     }
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -35,8 +35,10 @@ class _NearestMonsterArrowState extends State<NearestMonsterArrow> {
       final player = controller.playerPosition.value;
       final nearest = controller.nearestMonster.value;
       final distance = controller.nearestDistance.value;
+      final bool showArrow = distance == null || distance >= 40;
 
       if (player == null || nearest == null) return const SizedBox.shrink();
+      if (!showArrow) return const SizedBox.shrink();
 
       // 玩家 → 精靈的地理方位角
       final bearing = Geolocator.bearingBetween(
@@ -48,7 +50,7 @@ class _NearestMonsterArrowState extends State<NearestMonsterArrow> {
       if (!bearing.isFinite) return const SizedBox.shrink();
 
       // 相對於手機螢幕的箭頭角度
-      final angle = (bearing - _heading) * math.pi / 180.0;
+      final angle = bearing * math.pi / 180.0;
       if (!angle.isFinite) return const SizedBox.shrink();
 
       const double radius = 70;
