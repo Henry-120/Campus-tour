@@ -1,8 +1,20 @@
 import 'package:flutter/material.dart';
 import '../../../styles/app_theme.dart';
+import '../../../services/audio_service.dart';
 
-class CatchingFaildPage extends StatelessWidget {
+class CatchingFaildPage extends StatefulWidget {
   const CatchingFaildPage({super.key});
+
+  @override
+  State<CatchingFaildPage> createState() => _CatchingFaildPageState();
+}
+
+class _CatchingFaildPageState extends State<CatchingFaildPage> {
+  @override
+  void initState() {
+    super.initState();
+    AudioService().playSfx(fileName: 'audio/M10_catch_fail.wav');
+  }
 
   @override
   Widget build(BuildContext context) {

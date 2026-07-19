@@ -1,5 +1,5 @@
 import 'dart:math' as math;
-
+import 'package:campus_tour/services/audio_service.dart';
 import 'package:campus_tour/controllers/shock_controllers.dart';
 import 'package:campus_tour/styles/level_style.dart';
 import 'package:campus_tour/widgets/game/catching_pages/cryptography_level.dart';
@@ -26,7 +26,7 @@ class CryptographyLevelPage extends StatefulWidget {
   State<CryptographyLevelPage> createState() => _CryptographyLevelPageState();
 }
 
-class _CryptographyLevelPageState extends State<CryptographyLevelPage> {
+class _CryptographyLevelPageState extends State<CryptographyLevelPage> with WidgetsBindingObserver {
   final ShockController _shockController = const ShockController();
 
   late int _playerHp;
@@ -40,12 +40,30 @@ class _CryptographyLevelPageState extends State<CryptographyLevelPage> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     // [L-01]
     _playerHp = CryptographyLevel.playerMaxHp;
     // [L-02]
     _enemyHp =
         widget.level.questionSet.length *
         CryptographyLevel.enemyDamageOnCorrect;
+    AudioService().playOverlayBgm(fileName: 'audio/M08_qa_time.wav');
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.paused) {
+      AudioService().pauseAllBgm();
+    } else if (state == AppLifecycleState.resumed) {
+      AudioService().resumeAllBgm();
+    }
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    AudioService().stopOverlayBgm();
+    super.dispose();
   }
 
   @override

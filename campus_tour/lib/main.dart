@@ -10,6 +10,8 @@ import 'package:get/get.dart';
 import 'local_information/local_setting.dart';
 import 'services/orientation_service.dart';
 
+final RouteObserver<ModalRoute> routeObserver = RouteObserver<ModalRoute>();
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await LocalSettingService.initBox();
@@ -35,8 +37,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const GetMaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
+      navigatorObservers: [routeObserver],
       home: StartPage(),
     );
   }

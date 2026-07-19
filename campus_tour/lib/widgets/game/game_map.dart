@@ -618,9 +618,11 @@ class BuildingMonsterLevel extends StatelessWidget {
          type: monster.type,
          imageUrl: monster.imageURL,
        ),
+      
        tracePlotMission = PlotLevel(
          type: PlotLevel.traceType,
-         isPassed: LocalSettingService.autoSkipStory.isEnabled,
+         isPassed: true,  // 先移掉神秘石頭
+         //  isPassed: LocalSettingService.autoSkipStory.isEnabled, 
          title: PlotLevel.traceTitle,
          description: PlotLevel.traceDescription,
          dialogueSteps: DefaultPlot.magicStonePlotDialogueSteps,

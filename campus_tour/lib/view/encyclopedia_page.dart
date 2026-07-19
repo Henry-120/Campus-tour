@@ -1,6 +1,6 @@
 import 'package:campus_tour/widgets/constants/asset_paths.dart';
 import 'package:flutter/material.dart';
-
+import '../services/audio_service.dart';
 import '../styles/app_theme.dart';
 import '../widgets/encyclopedia/elf_grid.dart';
 
@@ -11,7 +11,30 @@ class EncyclopediaPage extends StatefulWidget {
   State<EncyclopediaPage> createState() => _EncyclopediaPageState();
 }
 
-class _EncyclopediaPageState extends State<EncyclopediaPage> {
+class _EncyclopediaPageState extends State<EncyclopediaPage> with WidgetsBindingObserver {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    AudioService().playOverlayBgm(fileName: 'audio/M11_encyclopedia.wav');
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.paused) {
+      AudioService().pauseAllBgm();
+    } else if (state == AppLifecycleState.resumed) {
+      AudioService().resumeAllBgm();
+    }
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    AudioService().stopOverlayBgm();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
