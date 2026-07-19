@@ -18,6 +18,9 @@
 		97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */; };
 		BA27D5412F9ABD16009A1F8D /* YMCA.usdz in Resources */ = {isa = PBXBuildFile; fileRef = BA27D5402F9ABD16009A1F8D /* YMCA.usdz */; };
 		BA27D5432F9ABE27009A1F8D /* fairy_beauty.usdz in Resources */ = {isa = PBXBuildFile; fileRef = BA27D5422F9ABE27009A1F8D /* fairy_beauty.usdz */; };
+		BA409BDC300B9DEB0066605C /* school_landing.usdz in Resources */ = {isa = PBXBuildFile; fileRef = BA409BDB300B9DEB0066605C /* school_landing.usdz */; };
+		BA409BDE300B9DFD0066605C /* global_bboy.usdz in Resources */ = {isa = PBXBuildFile; fileRef = BA409BDD300B9DFD0066605C /* global_bboy.usdz */; };
+		BA409BE0300B9E0B0066605C /* pine_cone.usdz in Resources */ = {isa = PBXBuildFile; fileRef = BA409BDF300B9E0B0066605C /* pine_cone.usdz */; };
 		BA4F71D92F9CBA4100399639 /* cherry_fairy.usdz in Resources */ = {isa = PBXBuildFile; fileRef = BA4F71D82F9CBA4100399639 /* cherry_fairy.usdz */; };
 		BA6E208F2FC7341800732E2C /* Mechanic.usdz in Resources */ = {isa = PBXBuildFile; fileRef = BA6E208E2FC7341800732E2C /* Mechanic.usdz */; };
 		BA8107FF2F9DF230005686B4 /* language.usdz in Resources */ = {isa = PBXBuildFile; fileRef = BA8107FE2F9DF22F005686B4 /* language.usdz */; };
@@ -96,6 +99,9 @@
 		97C147021CF9000F007C117D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA27D5402F9ABD16009A1F8D /* YMCA.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = YMCA.usdz; sourceTree = "<group>"; };
 		BA27D5422F9ABE27009A1F8D /* fairy_beauty.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = fairy_beauty.usdz; sourceTree = "<group>"; };
+		BA409BDB300B9DEB0066605C /* school_landing.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = school_landing.usdz; sourceTree = "<group>"; };
+		BA409BDD300B9DFD0066605C /* global_bboy.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = global_bboy.usdz; sourceTree = "<group>"; };
+		BA409BDF300B9E0B0066605C /* pine_cone.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = pine_cone.usdz; sourceTree = "<group>"; };
 		BA4F71D82F9CBA4100399639 /* cherry_fairy.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = cherry_fairy.usdz; sourceTree = "<group>"; };
 		BA6E208E2FC7341800732E2C /* Mechanic.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = Mechanic.usdz; sourceTree = "<group>"; };
 		BA8107FE2F9DF22F005686B4 /* language.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = language.usdz; sourceTree = "<group>"; };
@@ -211,7 +217,10 @@
 				BAC29D572FAB8A1400466301 /* squirrel.usdz */,
 				BAC29D592FB3087900466301 /* SE.usdz */,
 				BAC29D5F2FB4328E00466301 /* Sit_on_the_cloud.usdz */,
+				BA409BDB300B9DEB0066605C /* school_landing.usdz */,
+				BA409BDD300B9DFD0066605C /* global_bboy.usdz */,
 				BAC29D642FB433B300466301 /* Elephant.usdz */,
+				BA409BDF300B9E0B0066605C /* pine_cone.usdz */,
 				BA840BB12FC04175002B4E3E /* Fairy_dancing.usdz */,
 				BA840BAD2FBF147B002B4E3E /* Fairy_walking.usdz */,
 				BA840BAF2FBF1492002B4E3E /* Fairy_running.usdz */,
@@ -355,8 +364,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA409BDE300B9DFD0066605C /* global_bboy.usdz in Resources */,
 				BA8107FF2F9DF230005686B4 /* language.usdz in Resources */,
 				BA6E208F2FC7341800732E2C /* Mechanic.usdz in Resources */,
+				BA409BDC300B9DEB0066605C /* school_landing.usdz in Resources */,
 				97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */,
 				BAC29D582FAB8A1400466301 /* squirrel.usdz in Resources */,
 				BAB31A3E2F9BDA6600AF8D91 /* ES.usdz in Resources */,
@@ -376,6 +387,7 @@
 				BAC29D4E2FAB7F5B00466301 /* qmark.usdz in Resources */,
 				BA4F71D92F9CBA4100399639 /* cherry_fairy.usdz in Resources */,
 				BA840BB02FBF1492002B4E3E /* Fairy_running.usdz in Resources */,
+				BA409BE0300B9E0B0066605C /* pine_cone.usdz in Resources */,
 				BAB31A462F9BDA6600AF8D91 /* clound.usdz in Resources */,
 				BAB31A472F9BDA6600AF8D91 /* NCU_Lake.usdz in Resources */,
 				BAC29D542FAB871800466301 /* Feather.usdz in Resources */,

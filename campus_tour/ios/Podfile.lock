@@ -1468,6 +1468,8 @@ PODS:
     - SwiftProtobuf (~> 1.0)
   - RecaptchaInterop (101.0.0)
   - SwiftProtobuf (1.38.1)
+  - url_launcher_ios (0.0.1):
+    - Flutter
   - vibration (1.7.5):
     - Flutter
   - video_player_avfoundation (0.0.1):
@@ -1495,6 +1497,7 @@ DEPENDENCIES:
   - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
   - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
   - reactive_ble_mobile (from `.symlinks/plugins/reactive_ble_mobile/darwin`)
+  - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
   - vibration (from `.symlinks/plugins/vibration/ios`)
   - video_player_avfoundation (from `.symlinks/plugins/video_player_avfoundation/darwin`)
 
@@ -1573,6 +1576,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/permission_handler_apple/ios"
   reactive_ble_mobile:
     :path: ".symlinks/plugins/reactive_ble_mobile/darwin"
+  url_launcher_ios:
+    :path: ".symlinks/plugins/url_launcher_ios/ios"
   vibration:
     :path: ".symlinks/plugins/vibration/ios"
   video_player_avfoundation:
@@ -1630,6 +1635,7 @@ SPEC CHECKSUMS:
   reactive_ble_mobile: c6a561a56b81d802642823cd3455a6dee24629d7
   RecaptchaInterop: 11e0b637842dfb48308d242afc3f448062325aba
   SwiftProtobuf: 409d3aaec90e51b1705b1dd8065b56893450e77c
+  url_launcher_ios: 7a95fa5b60cc718a708b8f2966718e93db0cef1b
   vibration: 8e2f50fc35bb736f9eecb7dd9f7047fbb6a6e888
   video_player_avfoundation: dd410b52df6d2466a42d28550e33e4146928280a
 

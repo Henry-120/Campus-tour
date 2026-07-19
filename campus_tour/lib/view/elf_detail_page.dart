@@ -74,6 +74,8 @@ class _ElfDetailPageState extends State<ElfDetailPage> {
     final imagePath = MonsterImagePath.staticImage(
       widget.monsterModel.imageURL,
     );
+    final displayName = architecture?.name ?? widget.monsterModel.name;
+    final displayType = architecture?.type ?? widget.monsterModel.type;
 
     return Scaffold(
       backgroundColor: backgroundColor,
@@ -92,7 +94,7 @@ class _ElfDetailPageState extends State<ElfDetailPage> {
           ),
         ),
         title: Text(
-          widget.monsterModel.name,
+          displayName,
           style: AppTheme.titleStyle.copyWith(
             color: primaryColor,
             fontWeight: FontWeight.bold,
@@ -108,11 +110,11 @@ class _ElfDetailPageState extends State<ElfDetailPage> {
           children: [
             ElfHeroSection(
               imagePath: imagePath,
-              name: widget.monsterModel.name,
-              type: widget.monsterModel.type,
+              name: displayName,
+              type: displayType,
             ),
 
-            ElfTypeTag(type: widget.monsterModel.type),
+            ElfTypeTag(type: displayType),
 
             ElfStorySection(
               name: architecture?.name ?? 'view.elf.detail.page.s001'.tr,
@@ -120,8 +122,8 @@ class _ElfDetailPageState extends State<ElfDetailPage> {
               isLoading: isLoading,
             ),
 
-            if (architecture?.type ==
-                'styles.map.suggestion.style.s001'.tr) ...[
+            if (architecture?.canonicalType ==
+                ArchitectureModel.installationArt) ...[
               ElfInstallationSection(
                 imagePath: architecture?.imageURL ?? '',
                 location: architecture?.name ?? 'view.elf.detail.page.s004'.tr,
@@ -134,7 +136,8 @@ class _ElfDetailPageState extends State<ElfDetailPage> {
               ),
             ],
 
-            if (architecture?.type == 'view.elf.detail.page.s006'.tr) ...[
+            if (architecture?.canonicalType ==
+                ArchitectureModel.departmentBuilding) ...[
               ElfDepartmentSection(major: architecture?.major),
             ],
           ],

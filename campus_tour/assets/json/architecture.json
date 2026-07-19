@@ -1,30 +1,51 @@
 [
   {
     "id": "a1",
-    "name": "中大湖",
+    "name": {
+      "zh": "中大湖",
+      "en": "NCU Lake",
+      "ja": "中大湖"
+    },
     "type": "景點",
-    "story": "就原埤塘順勢而建，中大湖景色絕美，湖光映碧；環湖步道，柳條拂衣；花開時節，逢例假日，遊客如織。",
-    "preStory": "玩家必須先完成森林試煉，才能進入神殿。",
+    "story": {
+      "zh": "就原埤塘順勢而建，中大湖景色絕美，湖光映碧；環湖步道，柳條拂衣；花開時節，逢例假日，遊客如織。",
+      "en": "Built around an existing irrigation pond, NCU Lake offers beautiful scenery with shimmering water and lush reflections. A walking path circles the lake, where willow branches sway gently along the way. During the blooming season and on holidays, the lakeside becomes a lively destination filled with visitors.",
+      "ja": "もともとあったため池を生かして造られた中大湖は、湖面に緑が映える美しい景観が魅力です。湖を一周する遊歩道では、柳の枝がそよ風に揺れ、花の季節や休日になると多くの人々でにぎわいます。"
+    },
     "imageURL": "",
     "author": "",
     "date": ""
   },
   {
     "id": "a2",
-    "name": "友好之櫻",
+    "name": {
+      "zh": "友好之櫻",
+      "en": "Cherry Blossoms of Friendship",
+      "ja": "友好の桜"
+    },
     "type": "景點",
-    "story": "中大湖畔旁的河津櫻，為本校與日本中央大學締結姐妹校所栽種，2011年日本前首相海部俊樹來台命名。其花型高雅脫俗，深受民眾喜愛。",
-    "preStory": "需要收集火焰石才能進入洞窟。",
+    "story": {
+      "zh": "中大湖畔旁的河津櫻，為本校與日本中央大學締結姐妹校所栽種，2011年日本前首相海部俊樹來台命名。其花型高雅脫俗，深受民眾喜愛。",
+      "en": "The Kawazu cherry trees beside NCU Lake were planted to commemorate the sister-school partnership between National Central University and Chuo University in Japan. In 2011, former Japanese Prime Minister Toshiki Kaifu visited Taiwan and named them the Cherry Blossoms of Friendship. Their elegant and graceful flowers are deeply loved by visitors.",
+      "ja": "中大湖のほとりに咲く河津桜は、本学と日本の中央大学との姉妹校提携を記念して植えられました。2011年には日本の海部俊樹元首相が台湾を訪れ、「友好の桜」と命名しました。気品あふれる美しい花は、多くの人々に親しまれています。"
+    },
     "imageURL": "",
     "author": "",
     "date": ""
   },
   {
     "id": "a3",
-    "name": "地球科學學院",
+    "name": {
+      "zh": "地球科學學院",
+      "en": "College of Earth Sciences",
+      "ja": "地球科学学院"
+    },
     "type": "系館",
-    "story": "中央大學地球科學學院是台灣唯一的地球科學學院，長期致力於地球、氣候、海洋與太空等領域的研究與教育。多年來逐漸發展成國內重要的地球科學研究基地，結合理論與實務，培養具備國際視野與永續理念的人才，持續推動人類對地球環境的探索與理解。",
-    "preStory": "必須先完成湖泊的淨化任務，才能靠近祭壇。",
+    "story": {
+      "zh": "中央大學地球科學學院是台灣唯一的地球科學學院，長期致力於地球、氣候、海洋與太空等領域的研究與教育。多年來逐漸發展成國內重要的地球科學研究基地，結合理論與實務，培養具備國際視野與永續理念的人才，持續推動人類對地球環境的探索與理解。",
+      "en": "The College of Earth Sciences at National Central University is the only college of its kind in Taiwan. It has long been dedicated to research and education in fields such as the Earth, climate, oceans, and space. Over the years, it has developed into a major center for earth science research in Taiwan, combining theory with practice to cultivate internationally minded professionals committed to sustainability and to advancing humanity's understanding of the Earth and its environment.",
+      "ja": "国立中央大学地球科学学院は、台湾で唯一の地球科学を専門とする学院です。地球、気候、海洋、宇宙などの分野における研究と教育に長年取り組み、台湾を代表する地球科学研究拠点へと発展してきました。理論と実践を結び付け、国際的な視野と持続可能性への意識を備えた人材を育成し、地球環境への探究と理解を深め続けています。"
+    },
     "major": [
       "地球科學學系",
       "大氣科學學系",
@@ -37,38 +58,69 @@
   },
   {
     "id": "a4",
-    "name": "大象五形",
+    "name": {
+      "zh": "大象五形",
+      "en": "Five Forms of Elephants",
+      "ja": "象の五形"
+    },
     "type": "裝置藝術",
-    "story": "藝術家引用老子格言「執大象，天下往」與「大象無形；道隱無名」的道家哲學思想，設計了五座造形互異、抽象簡潔的象群雕塑，並以行進的排列姿態，詮釋出中國五形(金、木、水、火、土)中的倫理道德觀。",
-    "preStory": "必須先完成湖泊的淨化任務，才能靠近祭壇。",
+    "story": {
+      "zh": "這五隻生物要去哪裡？藝術家以《道德經》為靈感，創作五座造形各異的大象雕塑。牠們一步步向前，不僅象徵成長與同行，也融入五行（金、木、水、火、土）的智慧，邀請你從不同角度發現哲學其實就在生活中。",
+      "en": "Where are these five creatures heading? Inspired by Lao Tzu's Tao Te Ching, the artist created five elephant sculptures, each with a unique form. As they move forward together, they symbolize growth and companionship while embodying the wisdom of the Five Elements—Metal, Wood, Water, Fire, and Earth. The work invites you to discover philosophy in everyday life from new perspectives.",
+      "ja": "この5頭の象は、どこへ向かっているのでしょうか。芸術家は『道徳経』から着想を得て、それぞれ異なる形を持つ5体の象の彫刻を制作しました。一歩ずつ共に進む姿は、成長と仲間との歩みを象徴し、五行（木・火・土・金・水）の知恵も表現しています。日常の中に息づく哲学を、さまざまな角度から見つけてみてください。"
+    },
     "imageURL": "assets/images/art/FiveElephant.jpg",
     "author": "",
     "date": ""
   },
   {
     "id": "a5",
-    "name": "太極銅雕",
+    "name": {
+      "zh": "太極銅雕",
+      "en": "Taichi Sculpture",
+      "ja": "太極彫刻"
+    },
     "type": "裝置藝術",
-    "story": "本件作品於1988年設置於文學院草坪上，作為中央大學推動校園公共藝術之發軔。雕刻家朱銘自修習太極拳的過程中得到靈感，從1977年開始創作一系列的「太極」雕塑作品。朱銘的創作體現了太極重氣息，借力使力，且不拘泥表面形象的精神，同時將東方的文化思維與西方的藝術形式，融入造型簡約的作品中，為觀者提供豐富的想像與感受。《太極拱門》因規模宏大，須將一塊塊青銅拼裝，再以焊接的方式修整完成，表面顆粒狀的粗礪質感，也透露作品將切割後的塊狀保麗龍，翻模成青銅的製作過程。在整體造型上，彷如兩個形體的雙手連接起來，使氣流和肌肉的牽動相互貫通合為一體。朱銘採用建築內部中空的「拱門」，賦予作品完整又開放的空間結構。",
-    "preStory": "必須先完成湖泊的淨化任務，才能靠近祭壇。",
+    "story": {
+      "zh": "走過文學院旁的草坪時，別忘了和這座「太極拱門」打個招呼！它自1988年起守護校園，是中央大學公共藝術的重要起點，所以這塊草坪稱之為「太極草坪」。朱銘從太極拳中找靈感，以簡潔有力的線條展現氣韻流動。穿過拱門，就像走進一場東方哲學與現代雕塑的對話，感受力量與平衡的美好。",
+      "en": "When you pass the lawn beside the College of Liberal Arts, don't forget to greet the Taichi Arch! It has stood watch over the campus since 1988 and marks an important starting point for public art at National Central University, which is why the area is known as Taichi Lawn. Inspired by Tai Chi, artist Ju Ming uses simple yet powerful forms to express the flow of energy. Walking through the arch is like entering a dialogue between Eastern philosophy and modern sculpture, revealing the beauty of strength and balance.",
+      "ja": "文学院のそばの芝生を通るときは、この「太極アーチ」にぜひご注目ください。1988年からキャンパスを見守り、国立中央大学におけるパブリックアートの重要な出発点となったことから、この芝生は「太極芝生」と呼ばれています。朱銘は太極拳から着想を得て、簡潔で力強い造形によって気の流れを表現しました。アーチをくぐれば、東洋哲学と現代彫刻の対話の中で、力と均衡の美しさを感じられるでしょう。"
+    },
     "imageURL": "assets/images/art/TaiChi.jpg",
     "author": "朱銘",
     "date": "1988年"
   },
   {
     "id": "a6",
-    "name": "客家學院",
+    "name": {
+      "zh": "客家學院",
+      "en": "College of Hakka Studies",
+      "ja": "客家学院"
+    },
     "type": "系館",
-    "story": "客家學院成立於2003年，是全球首創的客家學院，致力於客家文化的研究、保存與推廣。學院以人文與社會科學為核心，結合文化、語言、法律與社會等多元領域，推動跨領域的客家研究與學術交流。除了重視理論研究，也強調文化實踐與社會連結，期望培養兼具文化素養、國際視野與社會關懷的人才，持續推動客家文化的傳承與永續發展。",
-    "preStory": "必須先完成湖泊的淨化任務，才能靠近祭壇。",
-    "major": ["客家語文暨社會科學學系", "法律與政府研究所"]
+    "story": {
+      "zh": "客家學院成立於2003年，是全球首創的客家學院，致力於客家文化的研究、保存與推廣。學院以人文與社會科學為核心，結合文化、語言、法律與社會等多元領域，推動跨領域的客家研究與學術交流。除了重視理論研究，也強調文化實踐與社會連結，期望培養兼具文化素養、國際視野與社會關懷的人才，持續推動客家文化的傳承與永續發展。",
+      "en": "Founded in 2003, the College of Hakka Studies was the first college of its kind in the world and is dedicated to the research, preservation, and promotion of Hakka culture. Centered on the humanities and social sciences, it brings together culture, language, law, society, and other fields to encourage interdisciplinary research and academic exchange. Alongside theoretical study, the college emphasizes cultural practice and social engagement, aiming to cultivate professionals with cultural awareness, an international outlook, and a strong sense of social responsibility while advancing the continued heritage and sustainable development of Hakka culture.",
+      "ja": "2003年に設立された客家学院は、世界で初めて創設された客家研究の学院であり、客家文化の研究・保存・普及に取り組んでいます。人文・社会科学を中心に、文化、言語、法律、社会など多様な分野を結び付け、学際的な客家研究と学術交流を推進しています。理論研究だけでなく文化実践と社会との連携も重視し、文化的素養、国際的視野、社会への思いやりを備えた人材を育成しながら、客家文化の継承と持続可能な発展を支えています。"
+    },
+    "major": [
+      "客家語文暨社會科學學系",
+      "法律與政府研究所"
+    ]
   },
   {
     "id": "a7",
-    "name": "工學院",
+    "name": {
+      "zh": "工學院",
+      "en": "College of Engineering",
+      "ja": "工学院"
+    },
     "type": "系館",
-    "story": "工學院自1969年成立以來，經過多年發展，已成為中央大學重要的工程教育與研究基地。學院涵蓋多元工程領域，結合理論、實作與跨域整合，致力於培養具備創新能力與實務經驗的人才。近年更積極因應產業趨勢，聚焦智慧機械、能源材料、永續防災與綠色科技等方向，推動科技研發與永續發展。",
-    "preStory": "必須先完成湖泊的淨化任務，才能靠近祭壇。",
+    "story": {
+      "zh": "工學院自1969年成立以來，經過多年發展，已成為中央大學重要的工程教育與研究基地。學院涵蓋多元工程領域，結合理論、實作與跨域整合，致力於培養具備創新能力與實務經驗的人才。近年更積極因應產業趨勢，聚焦智慧機械、能源材料、永續防災與綠色科技等方向，推動科技研發與永續發展。",
+      "en": "Since its establishment in 1969, the College of Engineering has grown into a major center for engineering education and research at National Central University. Covering a wide range of engineering disciplines, it combines theory, hands-on practice, and interdisciplinary collaboration to cultivate innovative professionals with practical experience. In recent years, the college has actively responded to industry trends by focusing on smart machinery, energy materials, sustainable disaster prevention, and green technology, promoting both technological innovation and sustainable development.",
+      "ja": "工学院は1969年の設立以来、長年の発展を経て、国立中央大学を代表する工学教育・研究拠点となりました。幅広い工学分野を擁し、理論、実践、分野横断的な連携を組み合わせ、革新力と実務経験を備えた人材の育成に努めています。近年は産業の動向に応え、スマート機械、エネルギー材料、持続可能な防災、グリーンテクノロジーなどに重点を置き、技術開発と持続可能な発展を推進しています。"
+    },
     "major": [
       "土木工程學系",
       "機械工程學系",
@@ -81,10 +133,17 @@
   },
   {
     "id": "a8",
-    "name": "文學院",
+    "name": {
+      "zh": "文學院",
+      "en": "College of Liberal Arts",
+      "ja": "文学院"
+    },
     "type": "系館",
-    "story": "文學院擁有深厚的人文歷史背景，承襲中央大學百年學術傳統，長期致力於文學、語言、歷史、哲學與藝術等領域的研究與教育。學院重視人文素養的培養，強調跨領域思維、文化創新與國際交流，期望學生在專業知識之外，也能具備獨立思考與人文關懷的能力。\n>\n> 多年來，文學院持續推動學術研究、藝文展演與文化活動，營造濃厚的人文氛圍，成為校園中重要的文化與思想交流中心。院內設有多元教學與藝文空間，融合古樸典雅的建築特色與現代化設施，不僅提供良好的學習環境，也為校園增添豐富的人文氣息，是中央大學極具代表性的人文地標之一",
-    "preStory": "必須先完成湖泊的淨化任務，才能靠近祭壇。",
+    "story": {
+      "zh": "文學院擁有深厚的人文歷史背景，承襲中央大學百年學術傳統，長期致力於文學、語言、歷史、哲學與藝術等領域的研究與教育。學院重視人文素養的培養，強調跨領域思維、文化創新與國際交流，期望學生在專業知識之外，也能具備獨立思考與人文關懷的能力。\n>\n> 多年來，文學院持續推動學術研究、藝文展演與文化活動，營造濃厚的人文氛圍，成為校園中重要的文化與思想交流中心。院內設有多元教學與藝文空間，融合古樸典雅的建築特色與現代化設施，不僅提供良好的學習環境，也為校園增添豐富的人文氣息，是中央大學極具代表性的人文地標之一",
+      "en": "With a rich humanistic heritage, the College of Liberal Arts carries forward National Central University's century-long academic tradition and has long been devoted to research and education in literature, languages, history, philosophy, and the arts. It values humanistic literacy, interdisciplinary thinking, cultural innovation, and international exchange, encouraging students to develop independent thought and compassion alongside professional knowledge.\n>\n> Over the years, the college has promoted academic research, artistic performances, exhibitions, and cultural events, creating a vibrant humanistic atmosphere and serving as an important center for cultural and intellectual exchange on campus. Its diverse teaching and arts spaces blend elegant traditional architecture with modern facilities, providing an excellent learning environment and making the college one of National Central University's most distinctive cultural landmarks.",
+      "ja": "文学院は豊かな人文的・歴史的背景を持ち、国立中央大学の百年にわたる学術の伝統を受け継ぎながら、文学、言語、歴史、哲学、芸術などの研究と教育に長年取り組んでいます。人文的素養の育成を重視し、学際的な思考、文化的な創造、国際交流を通じて、専門知識に加え、自立した思考力と人間への深い関心を備えた学生を育てています。\n>\n> 長年にわたり、学術研究、芸術公演、展示、文化活動を推進し、豊かな人文的雰囲気を育んできました。多様な教育・芸術空間には、趣のある建築と現代的な設備が調和しており、優れた学習環境を提供するとともに、国立中央大学を代表する人文ランドマークの一つとなっています。"
+    },
     "major": [
       "中國文學系",
       "英美語文學系",
@@ -98,18 +157,34 @@
   },
   {
     "id": "a9",
-    "name": "永續與綠能科技研究學院",
+    "name": {
+      "zh": "永續與綠能科技研究學院",
+      "en": "Graduate College of Sustainability and Green Energy",
+      "ja": "持続可能・グリーンエネルギー技術研究学院"
+    },
     "type": "系館",
-    "story": "台灣《氣候變遷因應法》於2023年通過施行，正式將2050年淨零排放目標入法，開啟橫跨能源、產業、社會與經濟系統的全面重構。中央大學「永續及綠能科技研究學院（SAGE）」因應「國家重點領域產學合作及人才培育創新條例」而生，承擔政策落實永續、去碳與綠能技術研發與人才培育的三重任務，致力於打造國家邁向2050淨零的技術中樞與智識平台。在這重要的轉型之中，SAGE 將以科學引領 × 工程落實 × 管理整合 × 政策對接為核心，主要推動以下八大關鍵技術方向，為台灣與全球開創永續綠能的展新經濟典範。",
-    "preStory": "必須先完成湖泊的淨化任務，才能靠近祭壇。",
-    "major": ["永續與綠能科技研究學院"]
+    "story": {
+      "zh": "台灣《氣候變遷因應法》於2023年通過施行，正式將2050年淨零排放目標入法，開啟橫跨能源、產業、社會與經濟系統的全面重構。中央大學「永續及綠能科技研究學院（SAGE）」因應「國家重點領域產學合作及人才培育創新條例」而生，承擔政策落實永續、去碳與綠能技術研發與人才培育的三重任務，致力於打造國家邁向2050淨零的技術中樞與智識平台。在這重要的轉型之中，SAGE 將以科學引領 × 工程落實 × 管理整合 × 政策對接為核心，主要推動以下八大關鍵技術方向，為台灣與全球開創永續綠能的展新經濟典範。",
+      "en": "Taiwan enacted the Climate Change Response Act in 2023, formally writing the goal of net-zero emissions by 2050 into law and beginning a comprehensive transformation across its energy, industrial, social, and economic systems. National Central University's Graduate College of Sustainability and Green Energy (SAGE) was established in response to national legislation promoting industry-academia collaboration and talent development in key fields. It carries three major missions: advancing sustainability, decarbonization, and green-energy technologies; putting policy into practice; and cultivating specialized talent. With science-led innovation, engineering implementation, management integration, and policy alignment at its core, SAGE promotes eight key technology areas and strives to become a national hub of technology and knowledge for the transition toward net zero, creating a new model for a sustainable green economy in Taiwan and around the world.",
+      "ja": "台湾では2023年に「気候変動対応法」が施行され、2050年までのネットゼロ排出目標が正式に法制化されました。これにより、エネルギー、産業、社会、経済の各システムにまたがる大規模な転換が始まっています。国立中央大学の持続可能・グリーンエネルギー技術研究学院（SAGE）は、国家重点分野における産学連携と人材育成を促進する政策に応えて設立され、持続可能性、脱炭素、グリーンエネルギー技術の研究開発と人材育成を担っています。科学による先導、工学による実装、管理の統合、政策との連携を柱に8つの重要技術分野を推進し、台湾と世界に新たな持続可能なグリーン経済モデルを築くことを目指しています。"
+    },
+    "major": [
+      "永續與綠能科技研究學院"
+    ]
   },
   {
     "id": "a10",
-    "name": "理學院",
+    "name": {
+      "zh": "理學院",
+      "en": "College of Science",
+      "ja": "理学院"
+    },
     "type": "系館",
-    "story": "中央大學理學院成立於1968年，為校內成立的第一個學院。本院擁有從最基礎知識擴大到最尖端應用的系所，理學院內有國際級的高能與強場物理研究中心，與量子技術中心。教師皆具研究實力與教學及服務熱忱，是台灣最具知名度的學院之一，歡迎有理想有熱誠的學生就讀。",
-    "preStory": "必須先完成湖泊的淨化任務，才能靠近祭壇。",
+    "story": {
+      "zh": "中央大學理學院成立於1968年，為校內成立的第一個學院。本院擁有從最基礎知識擴大到最尖端應用的系所，理學院內有國際級的高能與強場物理研究中心，與量子技術中心。教師皆具研究實力與教學及服務熱忱，是台灣最具知名度的學院之一，歡迎有理想有熱誠的學生就讀。",
+      "en": "Established in 1968, the College of Science was the first college founded at National Central University. Its departments and institutes span fundamental knowledge and cutting-edge applications, and the college is home to internationally recognized research centers for high-energy and strong-field physics as well as quantum technology. Its faculty members are accomplished researchers who are equally passionate about teaching and service, making it one of Taiwan's most renowned colleges and an inspiring place for ambitious students.",
+      "ja": "1968年に設立された理学院は、国立中央大学で最初に創設された学院です。基礎知識から最先端の応用までを幅広く扱う学科・研究所を擁し、国際水準の高エネルギー・強磁場物理研究センターや量子技術センターも設置されています。教員は優れた研究力に加え、教育と社会貢献への情熱も備えており、台湾でも特に高い知名度を誇る学院の一つです。理想と熱意を持つ学生を歓迎しています。"
+    },
     "major": [
       "物理學系",
       "數學系",
@@ -122,28 +197,53 @@
   },
   {
     "id": "a11",
-    "name": "生醫理工學院",
+    "name": {
+      "zh": "生醫理工學院",
+      "en": "College of Health Sciences and Technology",
+      "ja": "生医理工学院"
+    },
     "type": "系館",
-    "story": "生醫理工學院成立於2014年,現為國立中央大學最新成立的學院。隨著經濟社會轉型,21世紀的醫療保健將是一大挑戰。但由於傳統科學領域的急速發展,也為應付這些挑戰提供了新的契機。生醫理工學院成立的宗旨為利用新的理念整合跨領域基礎科學與工程技術來開創新的醫療照護模式,以造福社會並協助研究與產業轉型。訓練跨領域基礎科學研究人員、工程師、臨床醫師,並研發創新技術,協助臺灣的生醫科技產業發展。",
-    "preStory": "必須先完成湖泊的淨化任務，才能靠近祭壇。",
-    "major": ["生命科學系", "生醫科學與工程學系", "認知神經科學研究所"]
+    "story": {
+      "zh": "生醫理工學院成立於2014年,現為國立中央大學最新成立的學院。隨著經濟社會轉型,21世紀的醫療保健將是一大挑戰。但由於傳統科學領域的急速發展,也為應付這些挑戰提供了新的契機。生醫理工學院成立的宗旨為利用新的理念整合跨領域基礎科學與工程技術來開創新的醫療照護模式,以造福社會並協助研究與產業轉型。訓練跨領域基礎科學研究人員、工程師、臨床醫師,並研發創新技術,協助臺灣的生醫科技產業發展。",
+      "en": "Founded in 2014, the College of Health Sciences and Technology is the newest college at National Central University. As economic and social conditions evolve, healthcare has become one of the major challenges of the twenty-first century. Rapid advances in traditional scientific fields, however, have also created new opportunities to address these challenges. The college integrates fundamental science and engineering across disciplines to develop new models of healthcare, benefit society, and support the transformation of research and industry. It trains interdisciplinary scientists, engineers, and clinicians while developing innovative technologies to advance Taiwan's biomedical technology sector.",
+      "ja": "2014年に設立された生医理工学院は、国立中央大学で最も新しい学院です。経済と社会が変化する中、21世紀の医療・健康分野は大きな課題に直面しています。一方で、従来の科学分野の急速な発展は、これらの課題に対応する新たな機会も生み出しています。本学院は、基礎科学と工学技術を分野横断的に統合し、新しい医療モデルを創出することで社会に貢献し、研究と産業の変革を支援します。また、学際的な研究者、技術者、臨床医を育成し、革新的な技術の開発を通じて台湾のバイオメディカル産業の発展に貢献しています。"
+    },
+    "major": [
+      "生命科學系",
+      "生醫科學與工程學系",
+      "認知神經科學研究所"
+    ]
   },
   {
     "id": "a12",
-    "name": "百花川",
+    "name": {
+      "zh": "百花川",
+      "en": "Baihua Stream",
+      "ja": "百花川"
+    },
     "type": "景點",
-    "story": "百花川為連接石門大圳的引水渠道，橫貫校園，左側為學子上下課必經之路；右側為新建之百花川文學步道，十位文壇校友作品鑄刻其上，更添人文勝景。",
-    "preStory": "必須先完成湖泊的淨化任務，才能靠近祭壇。",
+    "story": {
+      "zh": "百花川為連接石門大圳的引水渠道，橫貫校園，左側為學子上下課必經之路；右側為新建之百花川文學步道，十位文壇校友作品鑄刻其上，更添人文勝景。",
+      "en": "Baihua Stream is a water channel connected to the Shimen irrigation system that runs across the campus. On its left is a route students regularly take to and from class; on its right is the newly created Baihua Stream Literary Walk, where works by ten distinguished alumni from Taiwan's literary community have been cast and displayed, adding a rich humanistic character to the scenery.",
+      "ja": "百花川は石門大圳につながる導水路で、キャンパスを横切るように流れています。左側には学生が授業への行き帰りに通る道があり、右側には新しく整備された百花川文学遊歩道があります。そこには文壇で活躍する10名の卒業生の作品が刻まれ、景観に豊かな文学と人文の趣を添えています。"
+    },
     "imageURL": "",
     "author": "",
     "date": ""
   },
   {
     "id": "a13",
-    "name": "管院",
+    "name": {
+      "zh": "管院",
+      "en": "College of Management",
+      "ja": "管理学院"
+    },
     "type": "系館",
-    "story": "管理學院成立多年來，已發展成中央大學重要的商管教育與研究基地，涵蓋企業管理、資訊管理、財務金融、經濟、人力資源與工業管理等多元領域。學院重視理論與實務並重，積極推動國際交流、數位科技與跨領域整合，培養具備專業能力、領導力與國際視野的管理人才。\n>\n> 除了完善的教學與研究資源外，管理學院也持續與產業接軌，強調創新思維、團隊合作與實務應用，提供學生多元的學習與發展機會。多年來在學術研究、產學合作與人才培育方面皆有優異表現，為校內具代表性的學院之一。",
-    "preStory": "必須先完成湖泊的淨化任務，才能靠近祭壇。",
+    "story": {
+      "zh": "管理學院成立多年來，已發展成中央大學重要的商管教育與研究基地，涵蓋企業管理、資訊管理、財務金融、經濟、人力資源與工業管理等多元領域。學院重視理論與實務並重，積極推動國際交流、數位科技與跨領域整合，培養具備專業能力、領導力與國際視野的管理人才。\n>\n> 除了完善的教學與研究資源外，管理學院也持續與產業接軌，強調創新思維、團隊合作與實務應用，提供學生多元的學習與發展機會。多年來在學術研究、產學合作與人才培育方面皆有優異表現，為校內具代表性的學院之一。",
+      "en": "Over the years, the College of Management has developed into a major center for business and management education and research at National Central University. Its fields include business administration, information management, finance, economics, human resources, and industrial management. The college places equal emphasis on theory and practice while actively promoting international exchange, digital technology, and interdisciplinary collaboration to cultivate management professionals with expertise, leadership skills, and a global outlook.\n>\n> In addition to comprehensive teaching and research resources, the college maintains close ties with industry and emphasizes innovative thinking, teamwork, and practical application, offering students diverse opportunities for learning and professional growth. Its strong achievements in academic research, industry collaboration, and talent development have made it one of the university's most representative colleges.",
+      "ja": "管理学院は長年にわたる発展を経て、国立中央大学を代表する経営・管理教育と研究の拠点となりました。経営管理、情報管理、財務・金融、経済、人材資源、工業管理など幅広い分野を擁しています。理論と実務の両方を重視し、国際交流、デジタル技術、分野横断的な連携を積極的に推進することで、専門性、リーダーシップ、国際的視野を備えた人材を育成しています。\n>\n> 充実した教育・研究資源に加えて、産業界との連携を深め、革新的な思考、チームワーク、実践的な応用を重視しています。学生に多様な学習と成長の機会を提供し、学術研究、産学連携、人材育成の各分野で優れた成果を上げてきた、大学を代表する学院の一つです。"
+    },
     "major": [
       "經濟學系",
       "資訊管理學系",
@@ -157,10 +257,17 @@
   },
   {
     "id": "a14",
-    "name": "資訊電機學院",
+    "name": {
+      "zh": "資訊電機學院",
+      "en": "College of Electrical Engineering and Computer Science",
+      "ja": "情報電機学院"
+    },
     "type": "系館",
-    "story": "資訊電機學院為中央大學重要的科技與工程學術重鎮，涵蓋資訊、電機、通訊等多元領域，致力於培養具備創新能力與國際視野的科技人才。隨著科技快速發展，學院持續推動前瞻研究與跨領域整合，在人工智慧、資訊安全、通訊系統、晶片設計、雲端運算與智慧科技等方向皆有亮眼成果。\n>\n> 學院除了重視理論基礎，也強調實作能力與產學合作，提供完善的研究設備與學習環境，並積極推動國際交流，與多所海外知名大學建立合作關係。多年來培育出眾多優秀人才，在學術研究與科技產業領域皆有卓越表現，是中央大學極具代表性的學院之一。",
-    "preStory": "必須先完成湖泊的淨化任務，才能靠近祭壇。",
+    "story": {
+      "zh": "資訊電機學院為中央大學重要的科技與工程學術重鎮，涵蓋資訊、電機、通訊等多元領域，致力於培養具備創新能力與國際視野的科技人才。隨著科技快速發展，學院持續推動前瞻研究與跨領域整合，在人工智慧、資訊安全、通訊系統、晶片設計、雲端運算與智慧科技等方向皆有亮眼成果。\n>\n> 學院除了重視理論基礎，也強調實作能力與產學合作，提供完善的研究設備與學習環境，並積極推動國際交流，與多所海外知名大學建立合作關係。多年來培育出眾多優秀人才，在學術研究與科技產業領域皆有卓越表現，是中央大學極具代表性的學院之一。",
+      "en": "The College of Electrical Engineering and Computer Science is a major center for technology and engineering at National Central University. Covering fields such as computer science, electrical engineering, and communications, it is committed to cultivating innovative technology professionals with a global outlook. As technology advances rapidly, the college continues to promote forward-looking research and interdisciplinary integration, achieving outstanding results in artificial intelligence, cybersecurity, communication systems, chip design, cloud computing, and smart technologies.\n>\n> Alongside a strong theoretical foundation, the college emphasizes practical skills and industry collaboration. It provides comprehensive research facilities and a supportive learning environment while actively pursuing international exchange and partnerships with renowned universities overseas. Over the years, it has educated many outstanding professionals who have excelled in both academic research and the technology industry, making it one of National Central University's most distinguished colleges.",
+      "ja": "資訊電機学院は、国立中央大学における情報・電気・通信分野の重要な教育研究拠点であり、革新力と国際的視野を備えた技術人材の育成に取り組んでいます。急速な技術発展に対応し、先端研究と分野横断的な連携を推進することで、人工知能、サイバーセキュリティ、通信システム、半導体設計、クラウドコンピューティング、スマートテクノロジーなどの分野で優れた成果を上げています。\n>\n> 理論的基礎に加えて実践力と産学連携も重視し、充実した研究設備と学習環境を提供しています。また、国際交流を積極的に進め、海外の著名大学とも協力関係を築いています。長年にわたり、学術研究とテクノロジー産業の双方で活躍する優秀な人材を数多く輩出してきた、国立中央大学を代表する学院の一つです。"
+    },
     "major": [
       "電機工程學系",
       "資訊工程學系",
@@ -171,110 +278,187 @@
   },
   {
     "id": "a15",
-    "name": "DNA交響曲",
+    "name": {
+      "zh": "DNA交響曲",
+      "en": "DNA Symphony",
+      "ja": "DNA交響曲"
+    },
     "type": "裝置藝術",
-    "story": "為了展示生命科學學科的研究動向，即科學五館師生所投入的活動成果，楊奉琛以DNA纏繞而上的雙螺旋體為作品的發想概念。《DNA交響曲》以不鏽鋼材料創作虛實交錯的螺旋體造型，營造出富有律動性與豐富變化的視覺效果，其材質表面會隨著光線產生變化。",
-    "preStory": "必須先完成湖泊的淨化任務，才能靠近祭壇。",
+    "story": {
+      "zh": "校園裡也藏著一段「生命密碼」！《DNA交響曲》以DNA雙螺旋為靈感，將科五館師生的研究精神化為不鏽鋼藝術。作品像一首凝固的旋律，隨著光線變化展現不同風貌，旋轉交織的線條彷彿訴說生命的奧妙，也邀請你探索科學與藝術的奇妙相遇。",
+      "en": "Discover a “code of life” hidden on campus! Inspired by the double-helix structure of DNA, DNA Symphony transforms the spirit of scientific exploration into stainless steel art. Its flowing spiral forms create a sense of rhythm, while the surface changes with the light. Like a frozen melody, the sculpture reveals the beauty of life and the fascinating connection between science and art.",
+      "ja": "キャンパスに隠された「生命の暗号」を見つけてみませんか。『DNA交響曲』はDNAの二重らせん構造から着想を得て、科学五館の教員と学生が持つ探究の精神をステンレスの芸術作品へと昇華しています。光によって表情を変える作品は、まるで静止した旋律のよう。絡み合うらせんの線が生命の神秘を語り、科学と芸術が出会う不思議な世界へと誘います。"
+    },
     "imageURL": "assets/images/art/DNA.jpg",
     "author": "楊奉琛",
     "date": "2005年7月15日"
   },
   {
     "id": "a16",
-    "name": "Cycle-90° 羽翼",
+    "name": {
+      "zh": "Cycle-90° 羽翼",
+      "en": "Cycle-90° Wings",
+      "ja": "Cycle-90° 羽翼"
+    },
     "type": "裝置藝術",
-    "story": "人們親近自然，學習自然，挑戰自然，及被自然所療癒，在無限的反覆周期中，朝著這個方向，緩慢地逐步向前邁進。自然界存在著無數的幾何世界，像是雪的結晶及蜂巢的六角形，氣泡的圓形構造等等，都是適存於自然界最佳化的形態。作品以最適於自然界的幾何形體，受風而動，隨風而摸索出其運動的方向性。期望透過作品，帶來藝術與科技間更深層的對話與省思。",
-    "preStory": "必須先完成湖泊的淨化任務，才能靠近祭壇。",
+    "story": {
+      "zh": "風來了，Cycle-90° 羽翼也開始跳舞！從大自然的幾何奧妙中尋找靈感，像雪花、蜂巢與氣泡般，運用自然界最美好的形態設計而成。作品隨風輕盈轉動，探索風的方向與節奏，觀察自然，也開啟科學與藝術的有趣對話。",
+      "en": "When the wind arrives, the Cycle-90°  begin to dance! Inspired by the geometric wonders of nature—such as snowflakes, honeycombs, and bubbles—the artwork is shaped by nature’s most elegant forms. Gently rotating with the wind, it explores the direction and rhythm of air movement, inviting us to observe nature and discover an inspiring dialogue between science and art.",
+      "ja": "風が吹くと、『Cycle-90° 羽翼』が踊り始めます。雪の結晶、ハチの巣、気泡など、自然界に見られる幾何学の不思議から着想を得て、自然が生み出す美しい形をもとにデザインされました。風に合わせて軽やかに回転し、その方向とリズムを探る作品を通して自然を観察し、科学と芸術の興味深い対話を感じてみてください。"
+    },
     "imageURL": "assets/images/art/Wings.jpg",
     "author": "松本薰",
     "date": "2017年"
   },
   {
     "id": "a17",
-    "name": "坐雲飛想",
+    "name": {
+      "zh": "坐雲飛想",
+      "en": "Soaring Thoughts on Clouds",
+      "ja": "雲上の想い"
+    },
     "type": "裝置藝術",
-    "story": "《坐雲飛想》融合東方文化的意象，透過停駐於雲端上的松果，指涉時間的流動與生命的起落。中國傳統的捲曲雲朵圖案，與形象類似香爐的種子，共同以具像形體，重新鑄造生命旅程的記憶。張乃文的《坐雲飛想》以白雲浮雕，結合金屬、大理石的立體雕塑，為中大會館與校園空間增添了別具禪意與超現實的趣味想像。",
-    "preStory": "必須先完成湖泊的淨化任務，才能靠近祭壇。",
+    "story": {
+      "zh": "抬頭看看，雲朵也能帶你展開想像旅行！停留在雲端上的果實，是誰的最愛？作品結合中國傳統雲紋、金屬與大理石材質，創造出帶有禪意又充滿幻想的空間。坐在雲上飛翔，也許能遇見不一樣的自己。",
+      "en": "Look up—clouds can take you on an imaginative journey! Who does this fruit resting on the clouds belong to? Combining traditional Chinese cloud patterns with metal and marble, the artwork creates a space filled with tranquility and fantasy. Sit on the clouds and let your imagination fly—you may discover a different side of yourself.",
+      "ja": "空を見上げてみてください。雲が想像の旅へ連れて行ってくれるかもしれません。雲の上にとどまるこの実は、いったい誰のお気に入りなのでしょう。中国の伝統的な雲文様に金属と大理石を組み合わせ、禅の趣と幻想に満ちた空間を創り出しています。雲に座って想像の翼を広げれば、これまで知らなかった自分に出会えるかもしれません。"
+    },
     "imageURL": "assets/images/art/CloudsFlyingThoughts.jpg",
     "author": "張乃文",
     "date": "2009年"
   },
   {
     "id": "a18",
-    "name": "坐聽‧松風",
+    "name": {
+      "zh": "坐聽‧松風",
+      "en": "Listening to the Pine Wind",
+      "ja": "松風を聴く"
+    },
     "type": "裝置藝術",
-    "story": "藝術家以環境藝術的概念和隨情寫意的手法，將作品融入場域以呈現出閒逸雅致情境。同時賦予作品一種古樸簡拙的特質，隱喻著治學除了對知識的追求，更須注重內在個性的涵養與智慧的圓融。",
-    "preStory": "必須先完成湖泊的淨化任務，才能靠近祭壇。",
+    "story": {
+      "zh": "在這一片松樹林中，有一棵堅挺的松，正在和你玩著捉迷藏，就是要你找到他。樹梢會隨風擺動，偶爾周圍也會散落一地松果。藝術家以環境藝術的概念和隨情寫意的手法，將作品融入場域以呈現出閒逸雅致情境。",
+      "en": "In this pine forest, a strong and graceful pine tree is playing hide-and-seek with you, waiting to be discovered. Its branches sway gently with the breeze, while pinecones may occasionally scatter across the ground nearby. Inspired by the concept of environmental art and the expressive spirit of traditional aesthetics, the artist integrates the work into its surroundings, creating a serene and elegant atmosphere.",
+      "ja": "この松林には、一本の凛とした松があなたとかくれんぼをしながら、見つけてもらうのを待っています。梢は風に揺れ、ときには周囲に松ぼっくりが散らばります。芸術家は環境芸術の考え方と自由で情趣豊かな表現を用いて作品を風景に溶け込ませ、ゆったりと上品な空間を生み出しました。"
+    },
     "imageURL": "assets/images/art/ListeningToPineWind.jpg",
     "author": "林鴻文",
     "date": "2011年07月18日"
   },
   {
     "id": "a19",
-    "name": "為什麼",
+    "name": {
+      "zh": "為什麼",
+      "en": "Why?",
+      "ja": "なぜ？"
+    },
     "type": "裝置藝術",
-    "story": "有新的發現都是從『為什麼』開始。此三件一組的《為什麼》包含三個造型各異之立體裝置，分別是以鏡面材質反射四周事物的＜水滴＞；可供休憩，表面光滑如水面的＜長凳＞；以及能接收環境聲音的圓弧狀＜屏風＞。黎志文藉簡練的抽象造型，傳達人類以收集、觀察、研究、實驗來了解和改善世界運行的現象及理想，在累積的過程中不斷好奇探問，進而改善整體人類的生存條件。在藝術家的巧思設計下，《為什麼》雖然是靜態的作品，但卻能與觀者產生互動，可說審美、娛樂、與實用價值兼備。",
-    "preStory": "必須先完成湖泊的淨化任務，才能靠近祭壇。",
+    "story": {
+      "zh": "進了大學，也要保持你的好奇心，持續問「為什麼」！你可以望著映照校園景色的〈水滴〉找靈感，可以坐在〈長凳〉上休息，也可靠近〈屏風〉聆聽周圍環境告訴你的答案。透過觀察、思考與體驗，發現科學、藝術與生活之間有趣的連結。",
+      "en": "Keep your curiosity alive after entering university, and never stop asking “Why?”! Find inspiration in the Droplet, which reflects the campus scenery; take a break on the Bench; or get closer to the Screen and listen as the surrounding environment shares its stories. Through observation, reflection, and experience, discover the fascinating connections between science, art, and everyday life.",
+      "ja": "大学に入っても好奇心を忘れず、「なぜ？」と問い続けてみましょう。キャンパスの風景を映す〈水滴〉を眺めて着想を得たり、〈ベンチ〉に座って休んだり、〈スクリーン〉に近づいて周囲の環境が語る答えに耳を澄ませたりできます。観察し、考え、体験することで、科学・芸術・日常生活を結ぶ興味深いつながりを見つけてください。"
+    },
     "imageURL": "assets/images/art/Why.jpg",
     "author": "黎志文",
     "date": "2005年7月15日"
   },
   {
     "id": "a20",
-    "name": "漫步雲端",
+    "name": {
+      "zh": "漫步雲端",
+      "en": "Strolling in the Clouds",
+      "ja": "雲上散歩"
+    },
     "type": "裝置藝術",
-    "story": "雲朵般造形的多組件石雕，恣意散落在松蔭綠地間，引人走入漫步雲端的詩境。坐臥之間仰望藍天、浮雲，緊張忙碌的思緒在此獲得片刻休憩。到了夜晚，作品底部的LED燈光明滅虛實閃動著，更增添了幾許浪漫情懷。",
-    "preStory": "必須先完成湖泊的淨化任務，才能靠近祭壇。",
+    "story": {
+      "zh": "累了嗎？來松蔭綠地「躺平一下」吧！落入凡間的白雲，正悠閒散落林間，邀請你坐下、躺下，仰望藍天浮雲，讓忙碌的思緒暫時放慢腳步。夜晚時分，作品底部燈光如呼吸般閃動，為校園添上一抹浪漫星光，也提醒你別忘了偶爾漫步雲端、喘口氣。",
+      "en": "Need a break? Come and “lie down among the clouds” at Songyin Green Lawn! These cloud-like stone sculptures seem to have fallen from the sky and are resting peacefully among the trees. Sit or lie back, look up at the sky, and let your busy thoughts slow down. At night, the lights beneath the sculptures glow like gentle breaths, adding a romantic touch and reminding you to pause and enjoy the moment.",
+      "ja": "少し疲れたら、松蔭緑地で「雲の上に寝転ぶ」ひとときを過ごしてみませんか。空から舞い降りたような白い雲の石彫が木々の間に静かに佇み、座ったり横になったりしながら青空と流れる雲を眺めるよう誘っています。忙しい思考をしばし休ませてください。夜になると作品の下の光が呼吸するように明滅し、キャンパスにロマンチックな輝きを添えます。ときには雲の上を散歩するように、立ち止まってひと息つくことも忘れずに。"
+    },
     "imageURL": "assets/images/art/StrollingInTheClouds.jpg",
     "author": "林建榮",
     "date": "2011年07月18日"
   },
   {
     "id": "a21",
-    "name": "蘊˙行",
+    "name": {
+      "zh": "蘊˙行",
+      "en": "Rhythm in Motion",
+      "ja": "蘊・行"
+    },
     "type": "裝置藝術",
-    "story": "松本薰的機動藝術擅於運用自然界的風，使作品隨風運行，並與周遭環境的光影互動，創造出豐富的視覺效果。作品在環境中隨風舞動的韻律感，象徵剛毅堅強、生生不息之道，同時對應了自然與人類之間的對話關係。",
-    "preStory": "必須先完成湖泊的淨化任務，才能靠近祭壇。",
+    "story": {
+      "zh": "有時像個安靜的觀察者，有時又像個閃耀的舞者。為什麼會動？因為有風！位於校園中央的作品，捕捉風的蹤跡，隨著光影變化展現太陽的軌跡。藝術家松本薰讓作品隨風起舞，以輕盈律動象徵堅毅與生命力，邀請你一起聆聽自然與人類的奇妙對話。",
+      "en": "Sometimes a quiet observer, sometimes a shining dancer—why does it move? Because of the wind! Located at the heart of the campus, this kinetic artwork captures the traces of wind and reflects the path of sunlight through changing movements and shadows. Artist Kaoru Matsumoto transforms nature’s energy into motion, symbolizing resilience and vitality while inviting us to experience a unique dialogue between nature and humanity.",
+      "ja": "あるときは静かな観察者、またあるときは輝くダンサーのよう。なぜ動くのでしょうか。それは風があるからです。キャンパスの中心に置かれたこの作品は、風の軌跡を捉え、光と影の変化を通して太陽の動きを映し出します。芸術家・松本薫は作品を風に舞わせ、その軽やかなリズムで強さと生命力を表現しました。自然と人間が交わす不思議な対話に耳を澄ませてみてください。"
+    },
     "imageURL": "assets/images/art/FiveElephant.jpg",
     "author": "松本薰",
     "date": "2011年07月18日"
   },
   {
     "id": "a22",
-    "name": "鼠來寶",
+    "name": {
+      "zh": "筆墨紙硯",
+      "en": "The Four Treasures of the Study",
+      "ja": "文房四宝"
+    },
     "type": "裝置藝術",
-    "story": "",
-    "preStory": "必須先完成湖泊的淨化任務，才能靠近祭壇。",
-    "imageURL": "assets/images/art/FiveElephant.jpg",
+    "story": {
+      "zh": "",
+      "en": "",
+      "ja": ""
+    },
+    "imageURL": "",
     "author": "",
     "date": ""
   },
   {
     "id": "a23",
-    "name": "國際處",
+    "name": {
+      "zh": "國際處",
+      "en": "Office of International Affairs",
+      "ja": "国際事務所"
+    },
     "type": "裝置藝術",
-    "story": "",
-    "preStory": "必須先完成湖泊的淨化任務，才能靠近祭壇。",
+    "story": {
+      "zh": "",
+      "en": "",
+      "ja": ""
+    },
     "imageURL": "assets/images/art/FiveElephant.jpg",
     "author": "",
     "date": ""
   },
   {
     "id": "a24",
-    "name": "學務處",
+    "name": {
+      "zh": "學務處",
+      "en": "Office of Student Affairs",
+      "ja": "学生事務所"
+    },
     "type": "裝置藝術",
-    "story": "",
-    "preStory": "必須先完成湖泊的淨化任務，才能靠近祭壇。",
+    "story": {
+      "zh": "",
+      "en": "",
+      "ja": ""
+    },
     "imageURL": "assets/images/art/FiveElephant.jpg",
     "author": "",
     "date": ""
   },
   {
     "id": "a25",
-    "name": "大講堂",
+    "name": {
+      "zh": "大講堂",
+      "en": "Auditorium",
+      "ja": "大講堂"
+    },
     "type": "裝置藝術",
-    "story": "",
-    "preStory": "必須先完成湖泊的淨化任務，才能靠近祭壇。",
+    "story": {
+      "zh": "",
+      "en": "",
+      "ja": ""
+    },
     "imageURL": "assets/images/art/FiveElephant.jpg",
     "author": "",
     "date": ""

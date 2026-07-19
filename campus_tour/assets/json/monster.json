@@ -309,7 +309,7 @@
   },
   {
     "id": "m23",
-    "name": "國際處",
+    "name": "地球村村長",
     "type": "火",
     "imageURL": "assets/images/fairy_four_parts/international/1.png",
     "location": {
@@ -318,12 +318,12 @@
     },
     "architectureRef": "/architectures/a23",
     "qaRef": "/questions/qa23",
-    "ARRef": "international.usdz",
+    "ARRef": "global_bboy.usdz",
     "videoRef": "assets/images/img_frame/fire.png"
   },
   {
     "id": "m24",
-    "name": "學務處",
+    "name": "學分廢",
     "type": "火",
     "imageURL": "assets/images/fairy_four_parts/academic/1.png",
     "location": {
@@ -332,12 +332,12 @@
     },
     "architectureRef": "/architectures/a24",
     "qaRef": "/questions/qa24",
-    "ARRef": "academic.usdz",
+    "ARRef": "school_landing.usdz",
     "videoRef": "assets/images/img_frame/fire.png"
   },
   {
     "id": "m25",
-    "name": "大講堂",
+    "name": "大講糖",
     "type": "火",
     "imageURL": "assets/images/fairy_four_parts/auditorium/1.png",
     "location": {
@@ -346,7 +346,7 @@
     },
     "architectureRef": "/architectures/a25",
     "qaRef": "/questions/qa25",
-    "ARRef": "auditorium.usdz",
+    "ARRef": "pine_cone.usdz",
     "videoRef": "assets/images/img_frame/fire.png"
   }
 ]

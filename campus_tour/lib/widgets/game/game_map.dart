@@ -8,6 +8,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:campus_tour/controllers/monster_controller.dart';
 import 'package:campus_tour/controllers/nfc_scan_controller.dart';
 import 'package:campus_tour/local_information/local_setting.dart';
+import 'package:campus_tour/models/architecture_model.dart';
 import 'package:campus_tour/styles/app_theme.dart';
 import 'package:campus_tour/utils/monster_image_path.dart';
 import 'package:get/get.dart';
@@ -400,7 +401,7 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
           builder: (_) => BuildingMonsterLevel(
             monster: monster,
             qa: qa,
-            architectureType: architecture.type,
+            architectureType: architecture.canonicalType,
             onMissionFinished: () async {
               final navigator = Navigator.of(context);
               final success = await controller.captureMonster(monster, uid);
@@ -723,11 +724,11 @@ class BuildingMonsterLevel extends StatelessWidget {
        );
   List<FullMission> get missions {
     switch (architectureType) {
-      case '系館':
+      case ArchitectureModel.departmentBuilding:
         return systemManagementMissions;
-      case '裝置藝術':
+      case ArchitectureModel.installationArt:
         return installationArtMissions;
-      case '景點':
+      case ArchitectureModel.scenicSpot:
         return scenicSpotMissions;
       default:
         return installationArtMissions;

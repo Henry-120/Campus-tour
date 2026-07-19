@@ -1,167 +1,827 @@
 [
   {
     "id": "qa1",
-    "question": "中大湖原本是___？",
-    "options": ["水溝", "水井", "埤塘", "海灘"],
-    "answer": "埤塘"
+    "question": {
+      "zh": "中大湖原本是___？",
+      "en": "What was NCU Lake originally?",
+      "ja": "中大湖はもともと何だったでしょうか？"
+    },
+    "options": {
+      "zh": [
+        "水溝",
+        "水井",
+        "埤塘",
+        "海灘"
+      ],
+      "en": [
+        "A drainage ditch",
+        "A well",
+        "An irrigation pond",
+        "A beach"
+      ],
+      "ja": [
+        "排水溝",
+        "井戸",
+        "ため池",
+        "海岸"
+      ]
+    },
+    "answer": {
+      "zh": "埤塘",
+      "en": "An irrigation pond",
+      "ja": "ため池"
+    }
   },
   {
     "id": "qa2",
-    "question": "友好之櫻是在哪一年被命名的？",
-    "options": ["2011", "2013", "2015", "2017"],
-    "answer": "2011"
+    "question": {
+      "zh": "友好之櫻是在哪一年被命名的？",
+      "en": "In which year were the Cherry Blossoms of Friendship named?",
+      "ja": "「友好の桜」は何年に命名されましたか？"
+    },
+    "options": {
+      "zh": [
+        "2011",
+        "2013",
+        "2015",
+        "2017"
+      ],
+      "en": [
+        "2011",
+        "2013",
+        "2015",
+        "2017"
+      ],
+      "ja": [
+        "2011",
+        "2013",
+        "2015",
+        "2017"
+      ]
+    },
+    "answer": {
+      "zh": "2011",
+      "en": "2011",
+      "ja": "2011"
+    }
   },
   {
     "id": "qa3",
-    "question": "以下哪一個不是地球科學學院的科系？",
-    "options": [
-      "大氣科學系",
-      "地球科學系",
-      "資訊工程學系",
-      "太空科學與工程學系"
-    ],
-    "answer": "資訊工程學系"
+    "question": {
+      "zh": "以下哪一個不是地球科學學院的科系？",
+      "en": "Which of the following is not a department in the College of Earth Sciences?",
+      "ja": "次のうち、地球科学学院に属していない学科はどれですか？"
+    },
+    "options": {
+      "zh": [
+        "大氣科學系",
+        "地球科學系",
+        "資訊工程學系",
+        "太空科學與工程學系"
+      ],
+      "en": [
+        "Department of Atmospheric Sciences",
+        "Department of Earth Sciences",
+        "Department of Computer Science and Information Engineering",
+        "Department of Space Science and Engineering"
+      ],
+      "ja": [
+        "大気科学科",
+        "地球科学科",
+        "情報工学科",
+        "宇宙科学工学科"
+      ]
+    },
+    "answer": {
+      "zh": "資訊工程學系",
+      "en": "Department of Computer Science and Information Engineering",
+      "ja": "情報工学科"
+    }
   },
   {
     "id": "qa4",
-    "question": "以下哪一個不屬於「中國五形」？",
-    "options": ["火", "土", "金", "石"],
-    "answer": "石"
+    "question": {
+      "zh": "以下哪一個不屬於「中國五形」？",
+      "en": "Which of the following is not one of the Chinese Five Elements?",
+      "ja": "次のうち、中国の五行に含まれないものはどれですか？"
+    },
+    "options": {
+      "zh": [
+        "火",
+        "土",
+        "金",
+        "石"
+      ],
+      "en": [
+        "Fire",
+        "Earth",
+        "Metal",
+        "Stone"
+      ],
+      "ja": [
+        "火",
+        "土",
+        "金",
+        "石"
+      ]
+    },
+    "answer": {
+      "zh": "石",
+      "en": "Stone",
+      "ja": "石"
+    }
   },
   {
     "id": "qa5",
-    "question": "太極銅雕是哪一位藝術家的作品？",
-    "options": ["朱銘", "畢卡索", "草間彌生", "黎志文"],
-    "answer": "朱銘"
+    "question": {
+      "zh": "太極銅雕是哪一位藝術家的作品？",
+      "en": "Which artist created the Taichi Sculpture?",
+      "ja": "太極彫刻を制作した芸術家は誰ですか？"
+    },
+    "options": {
+      "zh": [
+        "朱銘",
+        "畢卡索",
+        "草間彌生",
+        "黎志文"
+      ],
+      "en": [
+        "Ju Ming",
+        "Pablo Picasso",
+        "Yayoi Kusama",
+        "Lai Chi-Man"
+      ],
+      "ja": [
+        "朱銘",
+        "パブロ・ピカソ",
+        "草間彌生",
+        "黎志文"
+      ]
+    },
+    "answer": {
+      "zh": "朱銘",
+      "en": "Ju Ming",
+      "ja": "朱銘"
+    }
   },
   {
     "id": "qa6",
-    "question": "下列何者是客家學院自成立以來所秉持的核心研究目標？",
-    "options": ["真、善、美", "騎士精神", "客家本質", "慈悲為懷"],
-    "answer": "客家本質"
+    "question": {
+      "zh": "下列何者是客家學院自成立以來所秉持的核心研究目標？",
+      "en": "Which of the following has been a core research goal of the College of Hakka Studies since its establishment?",
+      "ja": "客家学院が設立以来掲げてきた中核的な研究目標はどれですか？"
+    },
+    "options": {
+      "zh": [
+        "真、善、美",
+        "騎士精神",
+        "客家本質",
+        "慈悲為懷"
+      ],
+      "en": [
+        "Truth, goodness, and beauty",
+        "Chivalry",
+        "The essence of Hakka culture",
+        "Compassion"
+      ],
+      "ja": [
+        "真・善・美",
+        "騎士道精神",
+        "客家文化の本質",
+        "慈悲の心"
+      ]
+    },
+    "answer": {
+      "zh": "客家本質",
+      "en": "The essence of Hakka culture",
+      "ja": "客家文化の本質"
+    }
   },
   {
     "id": "qa7",
-    "question": "以下哪一個是工學院最早成立的科系？",
-    "options": [
-      "化學工程與材料工程學系",
-      "土木工程學系",
-      "資訊工程學系",
-      "機械工程學系"
-    ],
-    "answer": "化學工程與材料工程學系"
+    "question": {
+      "zh": "以下哪一個是工學院最早成立的科系？",
+      "en": "Which department was established first in the College of Engineering?",
+      "ja": "工学院で最も早く設立された学科はどれですか？"
+    },
+    "options": {
+      "zh": [
+        "化學工程與材料工程學系",
+        "土木工程學系",
+        "資訊工程學系",
+        "機械工程學系"
+      ],
+      "en": [
+        "Department of Chemical and Materials Engineering",
+        "Department of Civil Engineering",
+        "Department of Computer Science and Information Engineering",
+        "Department of Mechanical Engineering"
+      ],
+      "ja": [
+        "化学工学・材料工学科",
+        "土木工学科",
+        "情報工学科",
+        "機械工学科"
+      ]
+    },
+    "answer": {
+      "zh": "化學工程與材料工程學系",
+      "en": "Department of Chemical and Materials Engineering",
+      "ja": "化学工学・材料工学科"
+    }
   },
   {
     "id": "qa8",
-    "question": "以下哪一個不是文學院的科系？",
-    "options": ["中國文學系", "法國語文學系", "英美語文學系", "泰國語文學系"],
-    "answer": "泰國語文學系"
+    "question": {
+      "zh": "以下哪一個不是文學院的科系？",
+      "en": "Which of the following is not a department in the College of Liberal Arts?",
+      "ja": "次のうち、文学院に属していない学科はどれですか？"
+    },
+    "options": {
+      "zh": [
+        "中國文學系",
+        "法國語文學系",
+        "英美語文學系",
+        "泰國語文學系"
+      ],
+      "en": [
+        "Department of Chinese Literature",
+        "Department of French Language and Literature",
+        "Department of English",
+        "Department of Thai Language and Literature"
+      ],
+      "ja": [
+        "中国文学科",
+        "フランス語文学科",
+        "英米語文学科",
+        "タイ語文学科"
+      ]
+    },
+    "answer": {
+      "zh": "泰國語文學系",
+      "en": "Department of Thai Language and Literature",
+      "ja": "タイ語文学科"
+    }
   },
   {
     "id": "qa9",
-    "question": "《氣候變遷因應法》於哪一年通過施行？",
-    "options": ["2003", "2013", "2023", "2033"],
-    "answer": "2023"
+    "question": {
+      "zh": "《氣候變遷因應法》於哪一年通過施行？",
+      "en": "In which year was the Climate Change Response Act enacted?",
+      "ja": "「気候変動対応法」が施行されたのは何年ですか？"
+    },
+    "options": {
+      "zh": [
+        "2003",
+        "2013",
+        "2023",
+        "2033"
+      ],
+      "en": [
+        "2003",
+        "2013",
+        "2023",
+        "2033"
+      ],
+      "ja": [
+        "2003",
+        "2013",
+        "2023",
+        "2033"
+      ]
+    },
+    "answer": {
+      "zh": "2023",
+      "en": "2023",
+      "ja": "2023"
+    }
   },
   {
     "id": "qa10",
-    "question": "以下哪一個是國立中央大學在台復校後第一個成立的學院？",
-    "options": ["工學院", "理學院", "管理學院", "文學院"],
-    "answer": "理學院"
+    "question": {
+      "zh": "以下哪一個是國立中央大學在台復校後第一個成立的學院？",
+      "en": "Which was the first college established after National Central University was re-established in Taiwan?",
+      "ja": "国立中央大学が台湾で再開校した後、最初に設立された学院はどれですか？"
+    },
+    "options": {
+      "zh": [
+        "工學院",
+        "理學院",
+        "管理學院",
+        "文學院"
+      ],
+      "en": [
+        "College of Engineering",
+        "College of Science",
+        "College of Management",
+        "College of Liberal Arts"
+      ],
+      "ja": [
+        "工学院",
+        "理学院",
+        "管理学院",
+        "文学院"
+      ]
+    },
+    "answer": {
+      "zh": "理學院",
+      "en": "College of Science",
+      "ja": "理学院"
+    }
   },
   {
     "id": "qa11",
-    "question": "生醫理工學院成立於哪一年？",
-    "options": ["2014", "2015", "2016", "2017"],
-    "answer": "2014"
+    "question": {
+      "zh": "生醫理工學院成立於哪一年？",
+      "en": "In which year was the College of Health Sciences and Technology established?",
+      "ja": "生医理工学院が設立されたのは何年ですか？"
+    },
+    "options": {
+      "zh": [
+        "2014",
+        "2015",
+        "2016",
+        "2017"
+      ],
+      "en": [
+        "2014",
+        "2015",
+        "2016",
+        "2017"
+      ],
+      "ja": [
+        "2014",
+        "2015",
+        "2016",
+        "2017"
+      ]
+    },
+    "answer": {
+      "zh": "2014",
+      "en": "2014",
+      "ja": "2014"
+    }
   },
   {
     "id": "qa12",
-    "question": "下列哪一個是百花川右側的步道名稱？",
-    "options": ["宵夜街", "百花川畔文學步道", "八通關古道", "武士道"],
-    "answer": "百花川畔文學步道"
+    "question": {
+      "zh": "下列哪一個是百花川右側的步道名稱？",
+      "en": "What is the name of the path on the right side of Baihua Stream?",
+      "ja": "百花川の右側にある遊歩道の名前は何ですか？"
+    },
+    "options": {
+      "zh": [
+        "宵夜街",
+        "百花川畔文學步道",
+        "八通關古道",
+        "武士道"
+      ],
+      "en": [
+        "Late-Night Snack Street",
+        "Baihua Stream Literary Walk",
+        "Batongguan Historic Trail",
+        "Bushido"
+      ],
+      "ja": [
+        "夜食街",
+        "百花川文学遊歩道",
+        "八通関古道",
+        "武士道"
+      ]
+    },
+    "answer": {
+      "zh": "百花川畔文學步道",
+      "en": "Baihua Stream Literary Walk",
+      "ja": "百花川文学遊歩道"
+    }
   },
   {
     "id": "qa13",
-    "question": "管理學院成立於哪一年？",
-    "options": ["1985", "1995", "2005", "2015"],
-    "answer": "1985"
+    "question": {
+      "zh": "管理學院成立於哪一年？",
+      "en": "In which year was the College of Management established?",
+      "ja": "管理学院が設立されたのは何年ですか？"
+    },
+    "options": {
+      "zh": [
+        "1985",
+        "1995",
+        "2005",
+        "2015"
+      ],
+      "en": [
+        "1985",
+        "1995",
+        "2005",
+        "2015"
+      ],
+      "ja": [
+        "1985",
+        "1995",
+        "2005",
+        "2015"
+      ]
+    },
+    "answer": {
+      "zh": "1985",
+      "en": "1985",
+      "ja": "1985"
+    }
   },
   {
     "id": "qa14",
-    "question": "資訊（電腦）、通訊、電子電機等相關工業，在我國通稱為___？",
-    "options": ["製造業", "資訊電機工業", "農業", "服務業"],
-    "answer": "資訊電機工業"
+    "question": {
+      "zh": "資訊（電腦）、通訊、電子電機等相關工業，在我國通稱為___？",
+      "en": "What is the collective term used in Taiwan for industries related to computing, communications, electronics, and electrical engineering?",
+      "ja": "台湾では、コンピューター、通信、電子・電気工学に関連する産業を総称して何と呼びますか？"
+    },
+    "options": {
+      "zh": [
+        "製造業",
+        "資訊電機工業",
+        "農業",
+        "服務業"
+      ],
+      "en": [
+        "Manufacturing",
+        "Information and electrical engineering industry",
+        "Agriculture",
+        "Service industry"
+      ],
+      "ja": [
+        "製造業",
+        "情報電機産業",
+        "農業",
+        "サービス業"
+      ]
+    },
+    "answer": {
+      "zh": "資訊電機工業",
+      "en": "Information and electrical engineering industry",
+      "ja": "情報電機産業"
+    }
   },
   {
     "id": "qa15",
-    "question": "以下何者是「DNA交響曲」的發想概念？",
-    "options": ["DNA", "細胞核", "粒線體", "紅血球"],
-    "answer": "DNA"
+    "question": {
+      "zh": "以下何者是「DNA交響曲」的發想概念？",
+      "en": "What inspired the concept of DNA Symphony?",
+      "ja": "『DNA交響曲』の発想のもとになったものは何ですか？"
+    },
+    "options": {
+      "zh": [
+        "DNA",
+        "細胞核",
+        "粒線體",
+        "紅血球"
+      ],
+      "en": [
+        "DNA",
+        "Cell nucleus",
+        "Mitochondria",
+        "Red blood cells"
+      ],
+      "ja": [
+        "DNA",
+        "細胞核",
+        "ミトコンドリア",
+        "赤血球"
+      ]
+    },
+    "answer": {
+      "zh": "DNA",
+      "en": "DNA",
+      "ja": "DNA"
+    }
   },
   {
     "id": "qa16",
-    "question": "「Cycle-90° 羽翼」設置於___？",
-    "options": ["學校正門口", "松苑餐廳前", "機械系館前", "文學一館後"],
-    "answer": "機械系館前"
+    "question": {
+      "zh": "「Cycle-90° 羽翼」設置於___？",
+      "en": "Where is Cycle-90° Wings installed?",
+      "ja": "『Cycle-90° 羽翼』はどこに設置されていますか？"
+    },
+    "options": {
+      "zh": [
+        "學校正門口",
+        "松苑餐廳前",
+        "機械系館前",
+        "文學一館後"
+      ],
+      "en": [
+        "At the main school entrance",
+        "In front of Songyuan Restaurant",
+        "In front of the Department of Mechanical Engineering",
+        "Behind Liberal Arts Building 1"
+      ],
+      "ja": [
+        "大学正門",
+        "松苑レストラン前",
+        "機械工学科棟前",
+        "文学院一号館の裏"
+      ]
+    },
+    "answer": {
+      "zh": "機械系館前",
+      "en": "In front of the Department of Mechanical Engineering",
+      "ja": "機械工学科棟前"
+    }
   },
   {
     "id": "qa17",
-    "question": "「坐雲飛想」是校內哪一棟宿舍前的裝置藝術？",
-    "options": ["女十四舍", "中大會館", "男十一舍", "曦望居"],
-    "answer": "中大會館"
+    "question": {
+      "zh": "「坐雲飛想」是校內哪一棟宿舍前的裝置藝術？",
+      "en": "In front of which campus residence is Soaring Thoughts on Clouds installed?",
+      "ja": "『坐雲飛想』はキャンパス内のどの宿舎の前に設置されていますか？"
+    },
+    "options": {
+      "zh": [
+        "女十四舍",
+        "中大會館",
+        "男十一舍",
+        "曦望居"
+      ],
+      "en": [
+        "Women's Dormitory 14",
+        "NCU Guest House",
+        "Men's Dormitory 11",
+        "Xi Wang Residence"
+      ],
+      "ja": [
+        "女子第14寮",
+        "中大会館",
+        "男子第11寮",
+        "曦望居"
+      ]
+    },
+    "answer": {
+      "zh": "中大會館",
+      "en": "NCU Guest House",
+      "ja": "中大会館"
+    }
   },
   {
     "id": "qa18",
-    "question": "以下何者是「坐聽‧松風」所要傳達的理念之一？",
-    "options": [
-      "友愛同學",
-      "多說請、謝謝、對不起",
-      "維持好個人儀態",
-      "注重內在個性的涵養與智慧的圓融"
-    ],
-    "answer": "注重內在個性的涵養與智慧的圓融"
+    "question": {
+      "zh": "以下何者是「坐聽‧松風」所要傳達的理念之一？",
+      "en": "Which of the following is one of the ideas conveyed by Listening to the Pine Wind?",
+      "ja": "次のうち、『坐聴・松風』が伝えようとしている理念の一つはどれですか？"
+    },
+    "options": {
+      "zh": [
+        "友愛同學",
+        "多說請、謝謝、對不起",
+        "維持好個人儀態",
+        "注重內在個性的涵養與智慧的圓融"
+      ],
+      "en": [
+        "Be friendly to classmates",
+        "Say please, thank you, and sorry more often",
+        "Maintain a neat personal appearance",
+        "Cultivate inner character and well-rounded wisdom"
+      ],
+      "ja": [
+        "仲間を大切にする",
+        "お願いします・ありがとう・ごめんなさいをよく使う",
+        "身だしなみを整える",
+        "内面の人格を磨き、円熟した知恵を育む"
+      ]
+    },
+    "answer": {
+      "zh": "注重內在個性的涵養與智慧的圓融",
+      "en": "Cultivate inner character and well-rounded wisdom",
+      "ja": "内面の人格を磨き、円熟した知恵を育む"
+    }
   },
   {
     "id": "qa19",
-    "question": "「為什麼」包含幾件不同的立體裝置？",
-    "options": ["2", "3", "4", "5"],
-    "answer": "3"
+    "question": {
+      "zh": "「為什麼」包含幾件不同的立體裝置？",
+      "en": "How many different three-dimensional installations make up Why?",
+      "ja": "『なぜ？』はいくつの異なる立体作品で構成されていますか？"
+    },
+    "options": {
+      "zh": [
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "en": [
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "ja": [
+        "2",
+        "3",
+        "4",
+        "5"
+      ]
+    },
+    "answer": {
+      "zh": "3",
+      "en": "3",
+      "ja": "3"
+    }
   },
   {
     "id": "qa20",
-    "question": "以下哪一個是「漫步雲端」的造型取材？",
-    "options": ["雲朵", "綿羊", "仙女棒", "燈泡"],
-    "answer": "雲朵"
+    "question": {
+      "zh": "以下哪一個是「漫步雲端」的造型取材？",
+      "en": "What form inspired Strolling in the Clouds?",
+      "ja": "『漫歩雲端』の造形は何をモチーフにしていますか？"
+    },
+    "options": {
+      "zh": [
+        "雲朵",
+        "綿羊",
+        "仙女棒",
+        "燈泡"
+      ],
+      "en": [
+        "Clouds",
+        "Sheep",
+        "Sparklers",
+        "Light bulbs"
+      ],
+      "ja": [
+        "雲",
+        "羊",
+        "線香花火",
+        "電球"
+      ]
+    },
+    "answer": {
+      "zh": "雲朵",
+      "en": "Clouds",
+      "ja": "雲"
+    }
   },
   {
     "id": "qa21",
-    "question": "「蘊˙行」是哪一位藝術家的作品？",
-    "options": ["松本薰", "達文西", "張大千", "村上隆"],
-    "answer": "松本薰"
+    "question": {
+      "zh": "「蘊˙行」是哪一位藝術家的作品？",
+      "en": "Which artist created Rhythm in Motion?",
+      "ja": "『蘊・行』を制作した芸術家は誰ですか？"
+    },
+    "options": {
+      "zh": [
+        "松本薰",
+        "達文西",
+        "張大千",
+        "村上隆"
+      ],
+      "en": [
+        "Kaoru Matsumoto",
+        "Leonardo da Vinci",
+        "Zhang Daqian",
+        "Takashi Murakami"
+      ],
+      "ja": [
+        "松本薫",
+        "レオナルド・ダ・ヴィンチ",
+        "張大千",
+        "村上隆"
+      ]
+    },
+    "answer": {
+      "zh": "松本薰",
+      "en": "Kaoru Matsumoto",
+      "ja": "松本薫"
+    }
   },
   {
     "id": "qa22",
-    "question": "「蘊˙行」是哪一位藝術家的作品？",
-    "options": ["松本薰", "達文西", "張大千", "村上隆"],
-    "answer": "松本薰"
+    "question": {
+      "zh": "「蘊˙行」是哪一位藝術家的作品？",
+      "en": "Which artist created Rhythm in Motion?",
+      "ja": "『蘊・行』を制作した芸術家は誰ですか？"
+    },
+    "options": {
+      "zh": [
+        "松本薰",
+        "達文西",
+        "張大千",
+        "村上隆"
+      ],
+      "en": [
+        "Kaoru Matsumoto",
+        "Leonardo da Vinci",
+        "Zhang Daqian",
+        "Takashi Murakami"
+      ],
+      "ja": [
+        "松本薫",
+        "レオナルド・ダ・ヴィンチ",
+        "張大千",
+        "村上隆"
+      ]
+    },
+    "answer": {
+      "zh": "松本薰",
+      "en": "Kaoru Matsumoto",
+      "ja": "松本薫"
+    }
   },
   {
     "id": "qa23",
-    "question": "「蘊˙行」是哪一位藝術家的作品？",
-    "options": ["松本薰", "達文西", "張大千", "村上隆"],
-    "answer": "松本薰"
+    "question": {
+      "zh": "「蘊˙行」是哪一位藝術家的作品？",
+      "en": "Which artist created Rhythm in Motion?",
+      "ja": "『蘊・行』を制作した芸術家は誰ですか？"
+    },
+    "options": {
+      "zh": [
+        "松本薰",
+        "達文西",
+        "張大千",
+        "村上隆"
+      ],
+      "en": [
+        "Kaoru Matsumoto",
+        "Leonardo da Vinci",
+        "Zhang Daqian",
+        "Takashi Murakami"
+      ],
+      "ja": [
+        "松本薫",
+        "レオナルド・ダ・ヴィンチ",
+        "張大千",
+        "村上隆"
+      ]
+    },
+    "answer": {
+      "zh": "松本薰",
+      "en": "Kaoru Matsumoto",
+      "ja": "松本薫"
+    }
   },
   {
     "id": "qa24",
-    "question": "「蘊˙行」是哪一位藝術家的作品？",
-    "options": ["松本薰", "達文西", "張大千", "村上隆"],
-    "answer": "松本薰"
+    "question": {
+      "zh": "「蘊˙行」是哪一位藝術家的作品？",
+      "en": "Which artist created Rhythm in Motion?",
+      "ja": "『蘊・行』を制作した芸術家は誰ですか？"
+    },
+    "options": {
+      "zh": [
+        "松本薰",
+        "達文西",
+        "張大千",
+        "村上隆"
+      ],
+      "en": [
+        "Kaoru Matsumoto",
+        "Leonardo da Vinci",
+        "Zhang Daqian",
+        "Takashi Murakami"
+      ],
+      "ja": [
+        "松本薫",
+        "レオナルド・ダ・ヴィンチ",
+        "張大千",
+        "村上隆"
+      ]
+    },
+    "answer": {
+      "zh": "松本薰",
+      "en": "Kaoru Matsumoto",
+      "ja": "松本薫"
+    }
   },
   {
     "id": "qa25",
-    "question": "「蘊˙行」是哪一位藝術家的作品？",
-    "options": ["松本薰", "達文西", "張大千", "村上隆"],
-    "answer": "松本薰"
+    "question": {
+      "zh": "「蘊˙行」是哪一位藝術家的作品？",
+      "en": "Which artist created Rhythm in Motion?",
+      "ja": "『蘊・行』を制作した芸術家は誰ですか？"
+    },
+    "options": {
+      "zh": [
+        "松本薰",
+        "達文西",
+        "張大千",
+        "村上隆"
+      ],
+      "en": [
+        "Kaoru Matsumoto",
+        "Leonardo da Vinci",
+        "Zhang Daqian",
+        "Takashi Murakami"
+      ],
+      "ja": [
+        "松本薫",
+        "レオナルド・ダ・ヴィンチ",
+        "張大千",
+        "村上隆"
+      ]
+    },
+    "answer": {
+      "zh": "松本薰",
+      "en": "Kaoru Matsumoto",
+      "ja": "松本薫"
+    }
   }
 ]
