@@ -112,7 +112,8 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
   static LatLng get southwest => LatLng(24.965184, 121.185000); // 左下
   static LatLng get northeast => LatLng(24.971653, 121.197487); // 右上
   static const bool _useFixedTestLocation = false; // 💡 測試用開關：使用固定位置而非真實 GPS
-  static LatLng get _fixedTestLocation => LatLng(24.967731, 121.193638);
+  // static LatLng get _fixedTestLocation => LatLng(24.967731, 121.193638);
+  // static LatLng get _fixedTestLocation => LatLng(24.9706, 121.1935);
 
   final LatLngBounds campusBounds = LatLngBounds(
     southwest: southwest,
