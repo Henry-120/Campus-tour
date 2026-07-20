@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:arkit_plugin/arkit_plugin.dart';
 import 'package:vector_math/vector_math_64.dart' as vector;
 import '../controllers/monster_controller.dart';
+import '../services/audio_service.dart';
 import 'package:get/get.dart';
 import '../styles/app_theme.dart';
 import '../utils/monster_image_path.dart';
@@ -16,7 +17,7 @@ class RealArPage extends StatefulWidget {
   State<RealArPage> createState() => _RealArPageState();
 }
 
-class _RealArPageState extends State<RealArPage> {
+class _RealArPageState extends State<RealArPage> with WidgetsBindingObserver {
   ARKitController? arkitController;
   final monsterController = Get.find<MonsterController>();
 
@@ -25,7 +26,25 @@ class _RealArPageState extends State<RealArPage> {
   double selectedScale = 0.05; // 預設縮放比例
 
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    AudioService().playOverlayBgm(fileName: 'audio/M12_AR_camera.wav');
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.paused) {
+      AudioService().pauseAllBgm();
+    } else if (state == AppLifecycleState.resumed) {
+      AudioService().resumeAllBgm();
+    }
+  }
+
+  @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    AudioService().stopOverlayBgm();
     arkitController?.dispose();
     super.dispose();
   }
@@ -111,7 +130,10 @@ class _RealArPageState extends State<RealArPage> {
                             if (selectedMonsterUrl == "YMCA.usdz") {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (_) => ArPage()),
+                                MaterialPageRoute(
+                                  builder: (_) =>
+                                      const ArPage(inheritArAudio: true),
+                                ),
                               );
                             }
                           },

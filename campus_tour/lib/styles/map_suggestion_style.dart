@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'app_theme.dart';
 
-import 'package:get/get.dart';
-
 class MapSuggestionStyle {
   // [L-01]
   static const Color pageBackgroundColor = AppTheme.mapOverlayBackgroundColor;
@@ -99,11 +97,10 @@ class MapSuggestionStyle {
 
   // [L-23]
   static Color landmarkPinColor(String category) {
-    if (category == '裝置藝術' ||
-        category == 'styles.map.suggestion.style.s001'.tr) {
+    if (category == '裝置藝術') {
       return installationArtPinColor;
     }
-    if (category == '廁所' || category == 'styles.map.suggestion.style.s002'.tr) {
+    if (category == '廁所') {
       return toiletPinColor;
     }
     return AppTheme.mapLandmarkDotColor;

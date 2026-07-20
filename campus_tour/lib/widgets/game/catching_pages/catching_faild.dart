@@ -15,7 +15,10 @@ class _CatchingFaildPageState extends State<CatchingFaildPage> {
   @override
   void initState() {
     super.initState();
-    AudioService().playSfx(fileName: 'audio/M10_catch_fail.wav');
+    AudioService().playSfx(
+      fileName: 'audio/M10_catch_fail.wav',
+      pauseBgmUntilComplete: true,
+    );
   }
 
   @override

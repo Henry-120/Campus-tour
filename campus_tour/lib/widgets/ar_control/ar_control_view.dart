@@ -3,18 +3,22 @@ import 'package:flutter/material.dart';
 import 'package:arkit_plugin/arkit_plugin.dart';
 import 'package:vector_math/vector_math_64.dart' as vector;
 import '../../controllers/monster_controller.dart';
+import '../../services/audio_service.dart';
 import 'package:get/get.dart';
 import 'joy_stick.dart'; // 💡 引入搖桿組件
 import 'dance_button.dart';
 
 class ArPage extends StatefulWidget {
-  ArPage({super.key});
+  const ArPage({super.key, this.inheritArAudio = false});
+
+  /// 從已播放 M12 的 AR 頁面進入時設為 true，避免重播或誤停父頁音樂。
+  final bool inheritArAudio;
 
   @override
   State<ArPage> createState() => _ArPageState();
 }
 
-class _ArPageState extends State<ArPage> {
+class _ArPageState extends State<ArPage> with WidgetsBindingObserver {
   ARKitController? arkitController;
   final monsterController = Get.find<MonsterController>();
 
@@ -28,7 +32,31 @@ class _ArPageState extends State<ArPage> {
   String _currentFairyUrl = "Fairy_walking.usdz";
 
   @override
+  void initState() {
+    super.initState();
+    if (!widget.inheritArAudio) {
+      WidgetsBinding.instance.addObserver(this);
+      AudioService().playOverlayBgm(fileName: 'audio/M12_AR_camera.wav');
+    }
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (widget.inheritArAudio) return;
+
+    if (state == AppLifecycleState.paused) {
+      AudioService().pauseAllBgm();
+    } else if (state == AppLifecycleState.resumed) {
+      AudioService().resumeAllBgm();
+    }
+  }
+
+  @override
   void dispose() {
+    if (!widget.inheritArAudio) {
+      WidgetsBinding.instance.removeObserver(this);
+      AudioService().stopOverlayBgm();
+    }
     arkitController?.dispose();
     super.dispose();
   }

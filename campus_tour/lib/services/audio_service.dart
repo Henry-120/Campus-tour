@@ -14,6 +14,7 @@ class AudioService {
   String? _currentMainBgmFile;
 
   bool _isOverlayActive = false;
+  bool _isBgmSuppressedForSfx = false;
 
   // ── 主 BGM（例如 GameMainPage 的 walk_daytime）──────────────────────
   //   進入主畫面呼叫 playMainBgm，可以持續播放。
@@ -26,7 +27,9 @@ class AudioService {
   }) async {
     // 如果已經在播同一首，就不重設 source，直接 resume
     if (_currentMainBgmFile == fileName) {
-      await _mainBgmPlayer.resume();
+      if (!_isBgmSuppressedForSfx) {
+        await _mainBgmPlayer.resume();
+      }
       return;
     }
     _currentMainBgmFile = fileName;
@@ -34,11 +37,18 @@ class AudioService {
     _mainBgmPlayer.setReleaseMode(ReleaseMode.loop);
     await _mainBgmPlayer.setVolume(volume);
     await _mainBgmPlayer.setPlaybackRate(playbackRate);
-    await _mainBgmPlayer.resume();
+    if (!_isBgmSuppressedForSfx) {
+      await _mainBgmPlayer.resume();
+    }
   }
 
   Future<void> pauseMainBgm() async => await _mainBgmPlayer.pause();
-  Future<void> resumeMainBgm() async => await _mainBgmPlayer.resume();
+  Future<void> resumeMainBgm() async {
+    if (!_isBgmSuppressedForSfx) {
+      await _mainBgmPlayer.resume();
+    }
+  }
+
   Future<void> stopMainBgm() async {
     await _mainBgmPlayer.stop();
     _currentMainBgmFile = null;
@@ -60,7 +70,9 @@ class AudioService {
     );
     await _overlayBgmPlayer.setVolume(volume);
     await _overlayBgmPlayer.setPlaybackRate(playbackRate);
-    await _overlayBgmPlayer.resume();
+    if (!_isBgmSuppressedForSfx) {
+      await _overlayBgmPlayer.resume();
+    }
   }
 
   Future<void> pauseOverlayBgm() async => await _overlayBgmPlayer.pause();
@@ -75,15 +87,34 @@ class AudioService {
   Future<void> playSfx({
     required String fileName,
     double volume = 1.0,
+    bool pauseBgmUntilComplete = false,
     Function? onComplete,
   }) async {
-    await _sfxPlayer.setSource(AssetSource(fileName));
-    _sfxPlayer.setReleaseMode(ReleaseMode.release);
-    await _sfxPlayer.setVolume(volume);
-    if (onComplete != null) {
-      _sfxPlayer.onPlayerComplete.first.then((_) => onComplete());
+    if (pauseBgmUntilComplete) {
+      _isBgmSuppressedForSfx = true;
+      await pauseAllBgm();
     }
-    await _sfxPlayer.resume();
+
+    try {
+      await _sfxPlayer.setSource(AssetSource(fileName));
+      _sfxPlayer.setReleaseMode(ReleaseMode.release);
+      await _sfxPlayer.setVolume(volume);
+
+      final completed = _sfxPlayer.onPlayerComplete.first;
+      await _sfxPlayer.resume();
+
+      if (pauseBgmUntilComplete) {
+        await completed;
+        onComplete?.call();
+      } else if (onComplete != null) {
+        completed.then((_) => onComplete());
+      }
+    } finally {
+      if (pauseBgmUntilComplete) {
+        _isBgmSuppressedForSfx = false;
+        await resumeAllBgm();
+      }
+    }
   }
 
   // ── 綜合控制 ──────────────────────────────────────────────────────
@@ -96,6 +127,8 @@ class AudioService {
 
   /// 恢復所有 BGM（app 回到前景時呼叫）
   Future<void> resumeAllBgm() async {
+    if (_isBgmSuppressedForSfx) return;
+
     if (_isOverlayActive) {
       await _overlayBgmPlayer.resume();
     } else {
