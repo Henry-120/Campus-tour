@@ -16,6 +16,7 @@ import '../../widgets/buttons/capture_button.dart';
 import '../../view/photo_preview.dart';
 import '../../widgets/constants/responsive.dart';
 import 'package:get/get.dart';
+import '../../services/audio_service.dart';
 
 class ArCapturePage extends StatefulWidget {
   const ArCapturePage({super.key});
@@ -24,7 +25,8 @@ class ArCapturePage extends StatefulWidget {
   State<ArCapturePage> createState() => _ArCapturePageState();
 }
 
-class _ArCapturePageState extends State<ArCapturePage> {
+class _ArCapturePageState extends State<ArCapturePage>
+    with WidgetsBindingObserver {
   final ArCameraController _cameraController = ArCameraController();
   final ArVideoController _videoController = ArVideoController();
   final ScreenshotController _screenshotController = ScreenshotController();
@@ -41,6 +43,8 @@ class _ArCapturePageState extends State<ArCapturePage> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    AudioService().playOverlayBgm(fileName: 'audio/M12_AR_camera.wav');
     _startArMode();
   }
 
@@ -87,9 +91,20 @@ class _ArCapturePageState extends State<ArCapturePage> {
   }
 
   @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.paused) {
+      AudioService().pauseAllBgm();
+    } else if (state == AppLifecycleState.resumed) {
+      AudioService().resumeAllBgm();
+    }
+  }
+
+  @override
   void dispose() {
+    AudioService().stopOverlayBgm();
     _cameraController.dispose();
     _videoController.dispose();
+    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
 

@@ -11,6 +11,8 @@ import 'package:get/get.dart';
 import 'local_information/local_setting.dart';
 import 'services/orientation_service.dart';
 
+final RouteObserver<ModalRoute> routeObserver = RouteObserver<ModalRoute>();
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await LocalSettingService.initBox();
@@ -37,6 +39,7 @@ class MyApp extends StatelessWidget {
       translations: AppTranslations(),
       locale: Locale(LocalSettingService.language.current),
       fallbackLocale: const Locale(LanguageSetting.chinese),
+      navigatorObservers: [routeObserver],
       home: StartPage(),
     );
   }
