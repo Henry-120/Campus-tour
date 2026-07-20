@@ -35,7 +35,12 @@ class ElfStorySection extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ElfSectionTitle(icon: Icons.auto_stories, title: "$name傳說故事"),
+            ElfSectionTitle(
+              icon: Icons.auto_stories,
+              title: 'widgets.encyclopedia.elf.story.section.s001'.trParams({
+                'name': name,
+              }),
+            ),
             SizedBox(height: 24),
             if (isLoading)
               Center(

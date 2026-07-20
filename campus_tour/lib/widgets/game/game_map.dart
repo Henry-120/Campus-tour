@@ -560,10 +560,15 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
             ),
           ),
         ),
+        Positioned(
+          right: 16,
+          top: 76,
+          child: SafeArea(child: _DrawerHintButton()),
+        ),
         if (!_hasLocationPermission)
           Positioned(
             right: 16,
-            top: 76,
+            top: 136,
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
               decoration: BoxDecoration(
@@ -586,6 +591,23 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
             child: _OutOfCampusNotice(),
           ),
       ],
+    );
+  }
+}
+
+class _DrawerHintButton extends StatelessWidget {
+  const _DrawerHintButton();
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => Scaffold.of(context).openDrawer(),
+      child: Image.asset(
+        'assets/images/component/side_bar.png',
+        width: 52,
+        height: 52,
+        fit: BoxFit.contain,
+      ),
     );
   }
 }
@@ -664,21 +686,11 @@ class _MapLayerButton extends StatelessWidget {
             ),
           ),
       ],
-      child: Container(
-        width: 48,
-        height: 48,
-        decoration: BoxDecoration(
-          color: Colors.white.withValues(alpha: 0.92),
-          shape: BoxShape.circle,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withValues(alpha: 0.24),
-              blurRadius: 12,
-              offset: Offset(0, 4),
-            ),
-          ],
-        ),
-        child: Icon(Icons.layers_rounded, color: Colors.black87, size: 26),
+      child: Image.asset(
+        'assets/images/component/layers.png',
+        width: 52,
+        height: 52,
+        fit: BoxFit.contain,
       ),
     );
   }
@@ -703,7 +715,7 @@ class BuildingMonsterLevel extends StatelessWidget {
     this.onMissionFinished,
   }) : monsterModelCry = MonsterModelCry(
          name: monster.name,
-         type: monster.type,
+         type: monster.canonicalType,
          imageUrl: MonsterImagePath.staticImage(monster.imageURL),
        ),
 

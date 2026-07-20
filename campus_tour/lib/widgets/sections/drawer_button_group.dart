@@ -278,7 +278,7 @@ class _SecurityButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return _DrawerActionTile(
       icon: Icons.health_and_safety_rounded,
-      title: '校園安全',
+      title: 'widgets.sections.drawer.button.group.s010'.tr,
       onTap: () => _onPress(context),
     );
   }

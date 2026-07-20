@@ -52,8 +52,13 @@ class MonsterCollectionBadge extends StatelessWidget {
             SizedBox(width: 6 * scale),
             Text(
               totalCount == null
-                  ? '精靈 $caughtCount / --'
-                  : '精靈 $caughtCount / $totalCount',
+                  ? 'widgets.encyclopedia.monster.collection.badge.s001'
+                        .trParams({'caughtCount': '$caughtCount'})
+                  : 'widgets.encyclopedia.monster.collection.badge.s002'
+                        .trParams({
+                          'caughtCount': '$caughtCount',
+                          'totalCount': '$totalCount',
+                        }),
               style: AppTheme.titleStyle.copyWith(
                 fontSize: 14 * scale,
                 fontWeight: FontWeight.w900,

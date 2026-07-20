@@ -63,15 +63,14 @@ class DefaultFirebaseOptions {
     projectId: 'campus-tour-679e9',
     storageBucket: 'campus-tour-679e9.firebasestorage.app',
   );
-
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyC3dYSvWuMjfJuuvHLJgty3z_eKIaWRSD4',
-    appId: '1:322346919988:ios:4497d9fd152c52b7240261',
+    appId: '1:322346919988:ios:c0610a44476602fd240261',
     messagingSenderId: '322346919988',
     projectId: 'campus-tour-679e9',
     storageBucket: 'campus-tour-679e9.firebasestorage.app',
-    iosClientId:
-        '322346919988-d555vambpeuvljnfkm8vujot734fu5el.apps.googleusercontent.com',
-    iosBundleId: 'com.example.campusTour',
+    androidClientId: '322346919988-hk2tpub7785r2cfcd7tmcho3r4ttijso.apps.googleusercontent.com',
+    iosClientId: '322346919988-lmlmfqi4qb82o8u8jtg41ce47stpuioj.apps.googleusercontent.com',
+    iosBundleId: 'com.henryKuo.Campustour',
   );
 }

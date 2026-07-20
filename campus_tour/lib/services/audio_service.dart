@@ -49,7 +49,10 @@ class AudioService {
     }
   }
 
-  Future<void> stopMainBgm() async {
+  Future<void> stopMainBgm({String? onlyIfPlaying}) async {
+    if (onlyIfPlaying != null && _currentMainBgmFile != onlyIfPlaying) {
+      return;
+    }
     await _mainBgmPlayer.stop();
     _currentMainBgmFile = null;
   }

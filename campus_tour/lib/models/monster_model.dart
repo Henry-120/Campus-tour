@@ -1,9 +1,32 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:campus_tour/local_information/local_setting.dart';
 
 class MonsterModel {
+  static const String waterType = '水';
+  static const String fireType = '火';
+  static const String grassType = '草';
+
+  static const Map<String, Map<String, String>> _typeTranslations = {
+    waterType: {
+      LanguageSetting.chinese: waterType,
+      LanguageSetting.english: 'Water',
+      LanguageSetting.japanese: '水',
+    },
+    fireType: {
+      LanguageSetting.chinese: fireType,
+      LanguageSetting.english: 'Fire',
+      LanguageSetting.japanese: '火',
+    },
+    grassType: {
+      LanguageSetting.chinese: grassType,
+      LanguageSetting.english: 'Grass',
+      LanguageSetting.japanese: '草',
+    },
+  };
+
   final String id;
-  final String name;
-  final String type;
+  final Map<String, String> names;
+  final Map<String, String> types;
   final String imageURL;
   final String? arRef;
   final String? videoRef;
@@ -13,8 +36,8 @@ class MonsterModel {
 
   MonsterModel({
     required this.id,
-    required this.name,
-    required this.type,
+    required this.names,
+    required this.types,
     required this.imageURL,
     this.architectureRef,
     this.qaRef,
@@ -22,6 +45,18 @@ class MonsterModel {
     this.videoRef,
     required this.location,
   });
+
+  String get name => _localizedValue(names);
+
+  String get canonicalType =>
+      types[LanguageSetting.chinese] ?? _firstValue(types);
+
+  String get type {
+    final language = LocalSettingService.language.current;
+    final stored = types[language];
+    if (stored != null && stored.isNotEmpty) return stored;
+    return _typeTranslations[canonicalType]?[language] ?? canonicalType;
+  }
 
   factory MonsterModel.fromMap(Map<String, dynamic> data, {String? id}) {
     final loc = data['location'];
@@ -64,8 +99,8 @@ class MonsterModel {
 
     return MonsterModel(
       id: id ?? data['id'] ?? '',
-      name: data['name'] ?? '',
-      type: data['type'] ?? '',
+      names: _stringMap(data['name']),
+      types: _stringMap(data['type']),
       imageURL: data['imageURL'] ?? '',
       arRef: data['ARRef'] ?? '',
       videoRef: data['videoRef'] ?? '',
@@ -77,8 +112,8 @@ class MonsterModel {
 
   Map<String, dynamic> toMap() {
     return {
-      'name': name,
-      'type': type,
+      'name': names,
+      'type': _storedTypes,
       'imageURL': imageURL,
       'architectureRef': architectureRef,
       'qaRef': qaRef,
@@ -87,4 +122,27 @@ class MonsterModel {
       'location': location,
     };
   }
+
+  Map<String, String> get _storedTypes {
+    final knownTranslations = _typeTranslations[canonicalType];
+    return knownTranslations == null ? types : {...knownTranslations, ...types};
+  }
+
+  String _localizedValue(Map<String, String> values) {
+    final localized = values[LocalSettingService.language.current];
+    if (localized != null && localized.isNotEmpty) return localized;
+    return values[LanguageSetting.chinese] ?? _firstValue(values);
+  }
+
+  static Map<String, String> _stringMap(dynamic value) {
+    if (value is Map) {
+      return value.map(
+        (key, item) => MapEntry(key.toString(), item?.toString() ?? ''),
+      );
+    }
+    return {LanguageSetting.chinese: value?.toString() ?? ''};
+  }
+
+  static String _firstValue(Map<String, String> values) =>
+      values.isEmpty ? '' : values.values.first;
 }

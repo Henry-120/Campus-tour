@@ -391,7 +391,11 @@ class _ArCapturePageState extends State<ArCapturePage>
       final videoRef = (data['videoRef'] ?? '').toString().trim();
       if (videoRef.isNotEmpty) return videoRef;
 
-      return _framePathForType((data['type'] ?? '').toString());
+      final rawType = data['type'];
+      final canonicalType = rawType is Map
+          ? rawType['zh']?.toString() ?? ''
+          : rawType?.toString() ?? '';
+      return _framePathForType(canonicalType);
     } catch (e) {
       debugPrint("[CameraView] 讀取精靈相框資料失敗: $e");
       return '';

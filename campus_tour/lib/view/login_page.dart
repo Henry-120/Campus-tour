@@ -138,7 +138,7 @@ class _LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
-    AudioService().stopMainBgm();
+    AudioService().stopMainBgm(onlyIfPlaying: 'audio/M01_login.wav');
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();

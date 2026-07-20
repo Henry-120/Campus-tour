@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../styles/app_theme.dart';
 import '../constants/responsive.dart';
@@ -86,7 +87,10 @@ class PageSelector extends StatelessWidget {
                       child: Image.asset(AssetPaths.paper, fit: BoxFit.fill),
                     ),
                     Text(
-                      "第 $currentPage / $totalPages 頁",
+                      'widgets.encyclopedia.page.selector.s001'.trParams({
+                        'currentPage': '$currentPage',
+                        'totalPages': '$totalPages',
+                      }),
                       style: AppTheme.titleStyle.copyWith(
                         fontSize: 16 * scale,
                         fontWeight: FontWeight.w900,

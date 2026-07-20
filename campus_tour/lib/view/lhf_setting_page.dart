@@ -101,7 +101,8 @@ class SteeingPageStrings {
 
   static String volumePercentage(int volume) => '$volume%';
 
-  static String currentVolume(int volume) => '目前音量 ${volumePercentage(volume)}';
+  static String currentVolume(int volume) => 'view.lhf.setting.page.s051'
+      .trParams({'volume': volumePercentage(volume)});
 
   static String vibrationStatus(bool enabled) =>
       enabled ? vibrationEnabledStatus : vibrationDisabledStatus;
