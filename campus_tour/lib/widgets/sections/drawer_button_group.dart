@@ -11,6 +11,8 @@ import 'package:campus_tour/widgets/common/snackbar_builder.dart';
 import 'package:campus_tour/widgets/common/user_head.dart';
 import 'package:campus_tour/view/campus_safty.dart';
 
+import 'package:campus_tour/widgets/game/catching_pages/catching_faild.dart';
+
 class DrawerButtonGroup extends StatelessWidget {
   const DrawerButtonGroup({super.key});
 
@@ -38,6 +40,8 @@ class DrawerButtonGroup extends StatelessWidget {
                         _IssueReportButton(),
                         SizedBox(height: SettingPageStyles.gapMd),
                         _SecurityButton(),
+                        SizedBox(height: SettingPageStyles.gapMd),
+                        TestButton(),
                       ],
                     ),
                   ),
@@ -367,6 +371,26 @@ class _LogoutButtonState extends State<_LogoutButton> {
                 ],
               ),
       ),
+    );
+  }
+}
+
+class TestButton extends StatelessWidget {
+  const TestButton();
+
+  void _onPress(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const CatchingFaildPage()),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return _DrawerActionTile(
+      icon: Icons.health_and_safety_rounded,
+      title: 'try',
+      onTap: () => _onPress(context),
     );
   }
 }

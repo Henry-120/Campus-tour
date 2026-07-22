@@ -50,23 +50,30 @@ class _CatchingFaildPageState extends State<CatchingFaildPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                if (_videoController.value.isInitialized)
-                  ConstrainedBox(
-                    constraints: const BoxConstraints(
-                      maxWidth: 320,
-                      maxHeight: 260,
-                    ),
-                    child: AspectRatio(
-                      aspectRatio: _videoController.value.aspectRatio,
-                      child: VideoPlayer(_videoController),
-                    ),
-                  )
-                else
-                  const SizedBox(
-                    width: 120,
-                    height: 120,
-                    child: Center(child: CircularProgressIndicator()),
-                  ),
+                // if (_videoController.value.isInitialized)
+                //   ConstrainedBox(
+                //     constraints: const BoxConstraints(
+                //       maxWidth: 320,
+                //       maxHeight: 260,
+                //     ),
+                //     child: AspectRatio(
+                //       aspectRatio: _videoController.value.aspectRatio,
+                //       child: VideoPlayer(_videoController),
+                //     ),
+                //   )
+                // else
+                //   const SizedBox(
+                //     width: 120,
+                //     height: 120,
+                //     child: Center(child: CircularProgressIndicator()),
+                //   ),
+                Image.asset(
+                  'assets/images/failed_image/Fall_off_transparent2.png',
+                  width: 320,
+                  height: 260,
+                  fit: BoxFit.contain,
+                ),
+
                 const SizedBox(height: 24),
                 Text(
                   'widgets.game.catching.pages.catching.faild.s001'.tr,
