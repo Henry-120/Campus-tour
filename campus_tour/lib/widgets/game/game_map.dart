@@ -33,6 +33,8 @@ import 'package:campus_tour/models/qa_model.dart';
 
 import 'dart:typed_data';
 import 'dart:ui' as ui;
+
+import 'package:campus_tour/services/audio_service.dart';
 //end for mission
 
 class GameMap extends StatefulWidget {
@@ -556,6 +558,11 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
                 setState(() {
                   _selectedTileLayer = layer;
                 });
+                if (layer == MapTileLayer.forest) {
+                  AudioService().playMainBgm(fileName: 'audio/M05_walk_night.wav');
+                } else {
+                  AudioService().playMainBgm(fileName: 'audio/M04_walk_daytime.wav');
+                }
               },
             ),
           ),
