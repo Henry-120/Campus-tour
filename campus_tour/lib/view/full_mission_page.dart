@@ -8,6 +8,7 @@ import 'package:campus_tour/widgets/game/catching_pages/graphics_text_level_page
 import 'package:campus_tour/widgets/game/catching_pages/monster_model_cry.dart';
 import 'package:campus_tour/widgets/game/catching_pages/plot_level.dart';
 import 'package:campus_tour/widgets/game/catching_pages/plot_level_page.dart';
+import '../services/audio_service.dart';
 
 import 'package:get/get.dart';
 
@@ -87,6 +88,10 @@ class _FullMissionPageState extends State<FullMissionPage> {
     // [L-11]
     debugPrint('成功捕捉精靈: ${widget.monsterModelCry.name}');
     // [L-12]
+    AudioService().playSfx(
+      fileName: 'audio/M09_catch_success.wav',
+      pauseBgmUntilComplete: true,
+    );
     await widget.onMissionFinished?.call();
   }
 

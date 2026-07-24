@@ -1,5 +1,6 @@
 import 'package:campus_tour/styles/novice_leading_style.dart';
 import 'package:flutter/material.dart';
+import '../services/audio_service.dart';
 
 import 'package:get/get.dart';
 
@@ -12,7 +13,8 @@ class NoviceLeadingPage extends StatefulWidget {
   State<NoviceLeadingPage> createState() => _NoviceLeadingPageState();
 }
 
-class _NoviceLeadingPageState extends State<NoviceLeadingPage> {
+class _NoviceLeadingPageState extends State<NoviceLeadingPage>
+    with WidgetsBindingObserver {
   // [L-01]
   static List<_NoviceLeadingStep> get _steps => [
     _NoviceLeadingStep.image(
@@ -64,8 +66,28 @@ class _NoviceLeadingPageState extends State<NoviceLeadingPage> {
   int _currentIndex = 0;
 
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      AudioService().playOverlayBgm(fileName: 'audio/M03_tutorial.wav');
+    });
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.paused) {
+      AudioService().pauseAllBgm();
+    } else if (state == AppLifecycleState.resumed) {
+      AudioService().resumeAllBgm();
+    }
+  }
+
+  @override
   void dispose() {
     // [L-03]
+    WidgetsBinding.instance.removeObserver(this);
+    AudioService().stopOverlayBgm();
     _pageController.dispose();
     super.dispose();
   }

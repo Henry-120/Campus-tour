@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:video_player/video_player.dart';
 
 import '../../../styles/app_theme.dart';
+import '../../../services/audio_service.dart';
 
 class CatchingFaildPage extends StatefulWidget {
   const CatchingFaildPage({super.key});
@@ -12,32 +12,13 @@ class CatchingFaildPage extends StatefulWidget {
 }
 
 class _CatchingFaildPageState extends State<CatchingFaildPage> {
-  late final VideoPlayerController _videoController;
-
   @override
   void initState() {
     super.initState();
-    _videoController = VideoPlayerController.asset(
-      'assets/video/faiedl_anime.mp4',
+    AudioService().playSfx(
+      fileName: 'audio/M10_catch_fail.wav',
+      pauseBgmUntilComplete: true,
     );
-    _initializeVideo();
-  }
-
-  Future<void> _initializeVideo() async {
-    await _videoController.initialize();
-    await _videoController.setLooping(true);
-    await _videoController.setVolume(1);
-    await _videoController.play();
-
-    if (mounted) {
-      setState(() {});
-    }
-  }
-
-  @override
-  void dispose() {
-    _videoController.dispose();
-    super.dispose();
   }
 
   @override
@@ -50,23 +31,6 @@ class _CatchingFaildPageState extends State<CatchingFaildPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // if (_videoController.value.isInitialized)
-                //   ConstrainedBox(
-                //     constraints: const BoxConstraints(
-                //       maxWidth: 320,
-                //       maxHeight: 260,
-                //     ),
-                //     child: AspectRatio(
-                //       aspectRatio: _videoController.value.aspectRatio,
-                //       child: VideoPlayer(_videoController),
-                //     ),
-                //   )
-                // else
-                //   const SizedBox(
-                //     width: 120,
-                //     height: 120,
-                //     child: Center(child: CircularProgressIndicator()),
-                //   ),
                 Image.asset(
                   'assets/images/failed_image/Fall_off_transparent2.png',
                   width: 320,

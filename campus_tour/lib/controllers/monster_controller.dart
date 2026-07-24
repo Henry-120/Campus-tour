@@ -108,10 +108,24 @@ class MonsterController extends GetxController {
   // 載入使用者的圖鑑（例如從 Firestore）
   Future<void> loadUserCollection(String userId) async {
     final requestVersion = _stateVersion;
-    final result = await _service.getUserMonsters(userId);
+    final results = await Future.wait([
+      _service.getUserMonsters(userId),
+      _service.getAllMonsters(),
+    ]);
     if (requestVersion != _stateVersion) return;
 
-    userMonsterCollection.value = result;
+    final userMonsters = results[0] as List<UserMonsterModel>;
+    final monsters = results[1] as List<MonsterModel>;
+    final monstersById = {for (final monster in monsters) monster.id: monster};
+
+    userMonsterCollection.value = userMonsters.map((userMonster) {
+      final monster = monstersById[userMonster.monsterRef.id];
+      if (monster == null) return userMonster;
+      return userMonster.withTranslations(
+        names: monster.names,
+        types: monster.types,
+      );
+    }).toList();
   }
 
   // 抓到怪物時更新圖鑑
@@ -140,8 +154,8 @@ class MonsterController extends GetxController {
         monsterRef: FirebaseFirestore.instance
             .collection("monsters")
             .doc(monsterObj.id),
-        name: monsterObj.name,
-        type: monsterObj.type,
+        names: monsterObj.names,
+        types: monsterObj.types,
         imageURL: monsterObj.imageURL,
         arRef: monsterObj.arRef ?? '',
         videoRef: monsterObj.videoRef ?? '',
@@ -192,8 +206,8 @@ class MonsterController extends GetxController {
         monsterRef: FirebaseFirestore.instance
             .collection("monsters")
             .doc(monsterObj.id),
-        name: monsterObj.name,
-        type: monsterObj.type,
+        names: monsterObj.names,
+        types: monsterObj.types,
         imageURL: monsterObj.imageURL,
         arRef: monsterObj.arRef ?? '',
         videoRef: monsterObj.videoRef ?? '',

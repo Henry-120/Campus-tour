@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import '../services/audio_service.dart';
 import '../controllers/login_controller.dart';
 import '../controllers/user_controller.dart';
 import '../widgets/constants/asset_paths.dart';
@@ -18,10 +18,14 @@ class LoginPage extends StatefulWidget {
   State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
   final LoginController _controller = LoginController();
-  final TextEditingController _emailController = TextEditingController(text: "uuu@gmail.com");
-  final TextEditingController _passwordController = TextEditingController(text: "uuuuuuuu");
+  final TextEditingController _emailController = TextEditingController(
+    text: "uuu@gmail.com",
+  );
+  final TextEditingController _passwordController = TextEditingController(
+    text: "uuuuuuuu",
+  );
   bool _isLoading = false;
 
   Future<void> _login() async {
@@ -116,7 +120,25 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    AudioService().playMainBgm(fileName: 'audio/M01_login.wav');
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.paused) {
+      AudioService().pauseAllBgm();
+    } else if (state == AppLifecycleState.resumed) {
+      AudioService().resumeAllBgm();
+    }
+  }
+
+  @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    AudioService().stopMainBgm(onlyIfPlaying: 'audio/M01_login.wav');
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();

@@ -28,8 +28,8 @@ class ArchitectureModel {
   final Map<String, String> stories;
   final Map<String, String> types;
   final Map<String, List<String>> majorSets;
+  final Map<String, String> authors;
   final String? imageURL;
-  final String? author;
   final String? date;
 
   ArchitectureModel({
@@ -38,14 +38,16 @@ class ArchitectureModel {
     required this.stories,
     required this.types,
     required this.majorSets,
+    required this.authors,
     this.imageURL,
-    this.author,
     this.date,
   });
 
   String get name => _localizedValue(names);
 
   String get story => _localizedValue(stories);
+
+  String get author => _localizedValue(authors);
 
   String get canonicalType =>
       types[LanguageSetting.chinese] ?? _firstValue(types);
@@ -69,8 +71,8 @@ class ArchitectureModel {
       stories: _stringMap(data['story']),
       types: _stringMap(data['type']),
       majorSets: _stringListMap(data['major']),
+      authors: _stringMap(data['author']),
       imageURL: data['imageURL']?.toString() ?? '',
-      author: data['author']?.toString() ?? '',
       date: data['date']?.toString() ?? '',
     );
   }
@@ -81,7 +83,7 @@ class ArchitectureModel {
       'type': _storedTypes,
       'story': stories,
       'imageURL': imageURL,
-      'author': author,
+      'author': authors,
       'date': date,
       'major': majorSets,
     };

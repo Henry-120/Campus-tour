@@ -76,6 +76,10 @@ class _ElfDetailPageState extends State<ElfDetailPage> {
     );
     final displayName = architecture?.name ?? widget.monsterModel.name;
     final displayType = architecture?.type ?? widget.monsterModel.type;
+    final localizedAuthor = architecture?.author ?? '';
+    final displayAuthor = localizedAuthor.isNotEmpty
+        ? localizedAuthor
+        : 'view.elf.detail.page.s005'.tr;
 
     return Scaffold(
       backgroundColor: backgroundColor,
@@ -130,10 +134,7 @@ class _ElfDetailPageState extends State<ElfDetailPage> {
                 year: architecture?.date ?? '',
               ),
 
-              ElfCreatorSection(
-                creatorName:
-                    architecture?.author ?? 'view.elf.detail.page.s005'.tr,
-              ),
+              ElfCreatorSection(creatorName: displayAuthor),
             ],
 
             if (architecture?.canonicalType ==

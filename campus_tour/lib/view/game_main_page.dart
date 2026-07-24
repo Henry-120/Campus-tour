@@ -1,6 +1,7 @@
+import 'package:campus_tour/main.dart';
 import 'package:campus_tour/widgets/game/system_menu.dart';
 import 'package:flutter/material.dart';
-import 'package:campus_tour/styles/app_theme.dart';
+import '../services/audio_service.dart';
 import '../widgets/game/user_hud.dart';
 import '../widgets/game/game_map.dart';
 import '../widgets/common/scale_button.dart';
@@ -16,30 +17,51 @@ class GameMainPage extends StatefulWidget {
   State<GameMainPage> createState() => _GameMainPageState();
 }
 
-class _GameMainPageState extends State<GameMainPage> {
-  Future<void> _playIntro() async {
-    // await AudioService().play(
-    //   fileName: 'audio/intro.mp3',
-    //   volume: 1.0,
-    //   isLooping: false,
-    // );
-  }
-
+class _GameMainPageState extends State<GameMainPage>
+    with WidgetsBindingObserver, RouteAware {
   @override
   void initState() {
     super.initState();
-    _playIntro();
+    WidgetsBinding.instance.addObserver(this);
+    AudioService().playMainBgm(fileName: 'audio/M04_walk_daytime.wav');
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.paused) {
+      AudioService().pauseAllBgm();
+    } else if (state == AppLifecycleState.resumed) {
+      AudioService().resumeAllBgm();
+    }
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    routeObserver.subscribe(this, ModalRoute.of(context)!);
+  }
+
+  @override
+  void didPushNext() {
+    AudioService().pauseMainBgm();
+  }
+
+  @override
+  void didPopNext() {
+    AudioService().resumeMainBgm();
   }
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    routeObserver.unsubscribe(this);
+    AudioService().stopMainBgm();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     final scale = Responsive.scale(context);
-
     return PopScope(
       canPop: false,
       child: Scaffold(
@@ -59,14 +81,6 @@ class _GameMainPageState extends State<GameMainPage> {
               ),
             ),
 
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                padding: EdgeInsets.only(left: 10 * scale),
-                child: _DrawerHintButton(scale: scale),
-              ),
-            ),
-
             // 4. 中間：松鼠
             Center(child: PlayerSprite(size: 90 * scale)),
 
@@ -81,43 +95,6 @@ class _GameMainPageState extends State<GameMainPage> {
               child: SystemMenu(),
             ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class _DrawerHintButton extends StatelessWidget {
-  const _DrawerHintButton({required this.scale});
-
-  final double scale;
-
-  @override
-  Widget build(BuildContext context) {
-    final size = (42 * scale).clamp(36.0, 48.0);
-
-    return Material(
-      color: Colors.transparent,
-      child: InkWell(
-        customBorder: const CircleBorder(),
-        onTap: () => Scaffold.of(context).openDrawer(),
-        child: Ink(
-          width: size,
-          height: size,
-          decoration: BoxDecoration(
-            color: AppTheme.cardColor.withValues(alpha: 0.88),
-            shape: BoxShape.circle,
-            border: Border.all(
-              color: AppTheme.accentColor.withValues(alpha: 0.95),
-              width: 1.4,
-            ),
-            boxShadow: AppTheme.softShadow,
-          ),
-          child: Icon(
-            Icons.keyboard_double_arrow_right_rounded,
-            color: AppTheme.primaryColor,
-            size: size * 0.62,
-          ),
         ),
       ),
     );

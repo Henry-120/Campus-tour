@@ -1524,9 +1524,9 @@
     },
     {
       "key": "view.lhf.setting.page.s051",
-      "zh": "目前音量 ${volumePercentage(volume)}",
-      "en": "Current volume: ${volumePercentage(volume)}",
-      "ja": "現在の音量: ${volumePercentage(volume)}",
+      "zh": "目前音量 @volume",
+      "en": "Current volume: @volume",
+      "ja": "現在の音量: @volume",
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
@@ -2576,9 +2576,9 @@
     },
     {
       "key": "widgets.encyclopedia.elf.story.section.s001",
-      "zh": "$name傳說故事",
-      "en": "$name's Legend",
-      "ja": "$nameの伝説",
+      "zh": "@name傳說故事",
+      "en": "@name's Legend",
+      "ja": "@nameの伝説",
       "occurrences": [
         {
           "file": "lib/widgets/encyclopedia/elf_story_section.dart",
@@ -2624,9 +2624,9 @@
     },
     {
       "key": "widgets.encyclopedia.monster.collection.badge.s001",
-      "zh": "精靈 $caughtCount / --",
-      "en": "Spirits $caughtCount / --",
-      "ja": "精霊 $caughtCount / --",
+      "zh": "精靈 @caughtCount / --",
+      "en": "Spirits @caughtCount / --",
+      "ja": "精霊 @caughtCount / --",
       "occurrences": [
         {
           "file": "lib/widgets/encyclopedia/monster_collection_badge.dart",
@@ -2636,9 +2636,9 @@
     },
     {
       "key": "widgets.encyclopedia.monster.collection.badge.s002",
-      "zh": "精靈 $caughtCount / $totalCount",
-      "en": "Spirits $caughtCount / $totalCount",
-      "ja": "精霊 $caughtCount / $totalCount",
+      "zh": "精靈 @caughtCount / @totalCount",
+      "en": "Spirits @caughtCount / @totalCount",
+      "ja": "精霊 @caughtCount / @totalCount",
       "occurrences": [
         {
           "file": "lib/widgets/encyclopedia/monster_collection_badge.dart",
@@ -2648,9 +2648,9 @@
     },
     {
       "key": "widgets.encyclopedia.page.selector.s001",
-      "zh": "第 $currentPage / $totalPages 頁",
-      "en": "Page $currentPage of $totalPages",
-      "ja": "$currentPage / $totalPages ページ",
+      "zh": "第 @currentPage / @totalPages 頁",
+      "en": "Page @currentPage of @totalPages",
+      "ja": "@currentPage / @totalPages ページ",
       "occurrences": [
         {
           "file": "lib/widgets/encyclopedia/page_selector.dart",
@@ -3671,6 +3671,18 @@
         {
           "file": "lib/widgets/sections/drawer_button_group.dart",
           "line": 291
+        }
+      ]
+    },
+    {
+      "key": "widgets.sections.drawer.button.group.s010",
+      "zh": "校園安全",
+      "en": "Campus Safety",
+      "ja": "キャンパス安全",
+      "occurrences": [
+        {
+          "file": "lib/widgets/sections/drawer_button_group.dart",
+          "line": 281
         }
       ]
     },

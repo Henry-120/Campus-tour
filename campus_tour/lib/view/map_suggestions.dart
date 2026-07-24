@@ -36,13 +36,27 @@ class MapSuggestionsVariables {
   static const double locationUpdateMeters = 2;
 
   // [L-10]
-  static String get ncuTenViewsCategory => 'view.map.suggestions.s001'.tr;
+  // 分類值必須與 locations JSON 保持一致，不可使用翻譯後文字作為資料 key。
+  static const String ncuTenViewsCategory = '中大十景';
+
   // [L-53]
-  static String get installationArtCategory =>
-      'styles.map.suggestion.style.s001'.tr;
+  static const String installationArtCategory = '裝置藝術';
 
   // [L-54]
-  static String get toiletCategory => 'styles.map.suggestion.style.s002'.tr;
+  static const String toiletCategory = '廁所';
+
+  static String categoryLabel(String category) {
+    switch (category) {
+      case ncuTenViewsCategory:
+        return 'view.map.suggestions.s001'.tr;
+      case installationArtCategory:
+        return 'styles.map.suggestion.style.s001'.tr;
+      case toiletCategory:
+        return 'styles.map.suggestion.style.s002'.tr;
+      default:
+        return category;
+    }
+  }
 
   // [L-11]
   static List<String> get locationJsonPaths => [
@@ -454,7 +468,7 @@ class _LandmarkFilterPanel extends StatelessWidget {
                 activeColor: MapSuggestionStyle.filterTileActiveColor,
                 checkColor: MapSuggestionStyle.filterTileCheckColor,
                 title: Text(
-                  entry.key,
+                  MapSuggestionsVariables.categoryLabel(entry.key),
                   style: MapSuggestionStyle.filterOptionTextStyle,
                 ),
               ),
