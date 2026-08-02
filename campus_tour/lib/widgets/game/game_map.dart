@@ -33,6 +33,8 @@ import 'package:campus_tour/models/qa_model.dart';
 
 import 'dart:typed_data';
 import 'dart:ui' as ui;
+
+import 'package:campus_tour/services/audio_service.dart';
 //end for mission
 
 class GameMap extends StatefulWidget {
@@ -111,7 +113,7 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
 
   static LatLng get southwest => LatLng(24.965184, 121.185000); // 左下
   static LatLng get northeast => LatLng(24.971653, 121.197487); // 右上
-  static const bool _useFixedTestLocation = false; // 💡 測試用開關：使用固定位置而非真實 GPS
+  static const bool _useFixedTestLocation = true; // 💡 測試用開關：使用固定位置而非真實 GPS
   static LatLng get _fixedTestLocation => LatLng(24.967731, 121.193638);
   // static LatLng get _fixedTestLocation => LatLng(24.9691, 121.1946);
 
@@ -556,6 +558,11 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
                 setState(() {
                   _selectedTileLayer = layer;
                 });
+                if (layer == MapTileLayer.forest) {
+                  AudioService().playMainBgm(fileName: 'audio/M05_walk_night.wav');
+                } else {
+                  AudioService().playMainBgm(fileName: 'audio/M04_walk_daytime.wav');
+                }
               },
             ),
           ),

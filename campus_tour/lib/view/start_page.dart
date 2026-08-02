@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../widgets/common/start_background.dart';
 import '../widgets/sections/start_menu_group.dart';
 import '../widgets/constants/responsive.dart';
+import '../services/audio_service.dart';
 
 class StartPage extends StatefulWidget {
   const StartPage({super.key});
@@ -32,15 +33,8 @@ class _StartPageState extends State<StartPage> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
-
     WidgetsBinding.instance.addObserver(this);
-
-    // AudioService().play(
-    //   fileName: 'audio/BGM.mp3',
-    //   isBgm: true,
-    //   isLooping: true,
-    //   volume: 0.65,
-    // );
+    AudioService().playMainBgm(fileName: 'audio/M07_opening.wav');
 
     _timer = Timer.periodic(const Duration(seconds: 4), (_) {
       if (mounted) {
@@ -49,6 +43,15 @@ class _StartPageState extends State<StartPage> with WidgetsBindingObserver {
         });
       }
     });
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.paused) {
+      AudioService().pauseAllBgm();
+    } else if (state == AppLifecycleState.resumed) {
+      AudioService().resumeAllBgm();
+    }
   }
 
   @override

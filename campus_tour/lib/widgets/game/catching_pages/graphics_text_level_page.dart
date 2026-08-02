@@ -4,11 +4,12 @@ import 'package:campus_tour/widgets/buttons/nfc_button.dart';
 import 'package:campus_tour/widgets/game/catching_pages/discovered_item_page.dart';
 import 'package:campus_tour/widgets/game/catching_pages/graphics_text_level.dart';
 import 'package:flutter/material.dart';
+import 'package:campus_tour/services/audio_service.dart';
 
 import 'package:get/get.dart';
 
 class GraphicsTextLevelPage extends StatefulWidget {
-  GraphicsTextLevelPage({
+  const GraphicsTextLevelPage({
     super.key,
     required this.level,
     required this.nextFunction,
@@ -23,8 +24,31 @@ class GraphicsTextLevelPage extends StatefulWidget {
   State<GraphicsTextLevelPage> createState() => _GraphicsTextLevelPageState();
 }
 
-class _GraphicsTextLevelPageState extends State<GraphicsTextLevelPage> {
+class _GraphicsTextLevelPageState extends State<GraphicsTextLevelPage> with WidgetsBindingObserver {
   static const String _nfcTeachingGifPath = 'assets/images/nfc_teaching.gif';
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    AudioService().playOverlayBgm(fileName: 'audio/M06_find_monster.wav');
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.paused) {
+      AudioService().pauseAllBgm();
+    } else if (state == AppLifecycleState.resumed) {
+      AudioService().resumeAllBgm();
+    }
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    AudioService().stopOverlayBgm();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

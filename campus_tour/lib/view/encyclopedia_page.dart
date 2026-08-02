@@ -3,23 +3,37 @@ import 'package:flutter/material.dart';
 import '../services/audio_service.dart';
 import '../styles/app_theme.dart';
 import '../widgets/encyclopedia/elf_grid.dart';
-
+import '../controllers/monster_controller.dart';
 import 'package:get/get.dart';
 
 class EncyclopediaPage extends StatefulWidget {
-  EncyclopediaPage({super.key});
+  const EncyclopediaPage({super.key});
 
   @override
   State<EncyclopediaPage> createState() => _EncyclopediaPageState();
 }
 
-class _EncyclopediaPageState extends State<EncyclopediaPage>
-    with WidgetsBindingObserver {
+class _EncyclopediaPageState extends State<EncyclopediaPage> with WidgetsBindingObserver {
+  void _playBgmByProgress() {
+    final controller = Get.find<MonsterController>();
+    final caughtCount = controller.userMonsterCollection.length;
+    final totalCount = controller.totalMonsterCount.value;
+
+    final isComplete =
+        totalCount != null && totalCount > 0 && caughtCount >= totalCount;
+
+    if (isComplete) {
+      AudioService().playOverlayBgm(fileName: 'audio/M13_final_stage_BPM130.wav');
+    } else {
+      AudioService().playOverlayBgm(fileName: 'audio/M11_encyclopedia.wav');
+    }
+  }
+  
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    AudioService().playOverlayBgm(fileName: 'audio/M11_encyclopedia.wav');
+    _playBgmByProgress();
   }
 
   @override
