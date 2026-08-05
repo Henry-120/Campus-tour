@@ -28,6 +28,7 @@ class MonsterModel {
   final Map<String, String> names;
   final Map<String, String> types;
   final String imageURL;
+  final String? nfcAns;
   final String? arRef;
   final String? videoRef;
   final DocumentReference? architectureRef;
@@ -39,6 +40,7 @@ class MonsterModel {
     required this.names,
     required this.types,
     required this.imageURL,
+    this.nfcAns,
     this.architectureRef,
     this.qaRef,
     this.arRef,
@@ -102,6 +104,7 @@ class MonsterModel {
       names: _stringMap(data['name']),
       types: _stringMap(data['type']),
       imageURL: data['imageURL'] ?? '',
+      nfcAns: _nfcAnswer(data['nfcAns']),
       arRef: data['ARRef'] ?? '',
       videoRef: data['videoRef'] ?? '',
       architectureRef: archRef,
@@ -115,6 +118,7 @@ class MonsterModel {
       'name': names,
       'type': _storedTypes,
       'imageURL': imageURL,
+      'nfcAns': nfcAns,
       'architectureRef': architectureRef,
       'qaRef': qaRef,
       'ARRef': arRef,
@@ -141,6 +145,11 @@ class MonsterModel {
       );
     }
     return {LanguageSetting.chinese: value?.toString() ?? ''};
+  }
+
+  static String? _nfcAnswer(dynamic value) {
+    final answer = value?.toString().trim() ?? '';
+    return answer.isEmpty ? null : answer;
   }
 
   static String _firstValue(Map<String, String> values) =>

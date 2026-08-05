@@ -27,7 +27,6 @@ import 'package:campus_tour/widgets/game/catching_pages/cryptography_level.dart'
 import 'package:campus_tour/widgets/game/catching_pages/plot_level.dart';
 import 'package:campus_tour/widgets/encyclopedia/all_the_monster/monster_graphics.dart';
 import 'package:campus_tour/widgets/encyclopedia/all_the_monster/monster_text.dart';
-import 'package:campus_tour/widgets/encyclopedia/all_the_monster/monster_nfc.dart';
 import 'package:campus_tour/widgets/common/snackbar_builder.dart';
 import 'package:campus_tour/models/qa_model.dart';
 
@@ -559,9 +558,13 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
                   _selectedTileLayer = layer;
                 });
                 if (layer == MapTileLayer.forest) {
-                  AudioService().playMainBgm(fileName: 'audio/M05_walk_night.wav');
+                  AudioService().playMainBgm(
+                    fileName: 'audio/M05_walk_night.wav',
+                  );
                 } else {
-                  AudioService().playMainBgm(fileName: 'audio/M04_walk_daytime.wav');
+                  AudioService().playMainBgm(
+                    fileName: 'audio/M04_walk_daytime.wav',
+                  );
                 }
               },
             ),
@@ -745,7 +748,7 @@ class BuildingMonsterLevel extends StatelessWidget {
          firstTracePhoto: MonsterGraphics.graphics[monster.id] ?? '',
          descriptionText: MonsterText.texts[monster.id] ?? '',
          discoveredItem: DiscoveredItem.strategyBook,
-         nfcId: MonsterNFC.nfcIds[monster.id] ?? '',
+         nfcId: monster.nfcAns ?? '',
        ),
        battlePlotMission = PlotLevel(
          type: PlotLevel.battleType,
@@ -794,7 +797,8 @@ class BuildingMonsterLevel extends StatelessWidget {
 
   List<FullMission> get installationArtMissions => [
     FullMission(levelType: "plotLevel", plotLevel: tracePlotMission),
-    FullMission(levelType: "graphicsTextLevel", graphicsTextLevel: mission1),
+    if (monster.nfcAns != null)
+      FullMission(levelType: "graphicsTextLevel", graphicsTextLevel: mission1),
     FullMission(levelType: "plotLevel", plotLevel: battlePlotMission),
     FullMission(levelType: "cryptographyLevel", cryptographyLevel: mission2),
   ];
