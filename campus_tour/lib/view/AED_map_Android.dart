@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:maplibre_gl/maplibre_gl.dart';
 import 'package:flutter/services.dart';
-import 'package:permission_handler/permission_handler.dart';
+import 'package:get/get.dart';
 import 'dart:math' as math;
 import 'dart:async';
 import 'package:geolocator/geolocator.dart';
@@ -61,6 +61,7 @@ class _AEDMapState extends State<AEDMap> {
   );
 
   PlayerSymbolController? _playerSymbolController;
+  late final PlayerLocationController _playerLocationController;
   late final CampusMapCameraController _cameraController;
   late final CampusImageLayerController _imageLayerController;
 
@@ -70,6 +71,8 @@ class _AEDMapState extends State<AEDMap> {
   void initState() {
     super.initState();
     _lockLandscape();
+    _playerLocationController = PlayerLocationController();
+    _playerLocationController.state.addListener(_handleLocationChanged);
     _cameraController = CampusMapCameraController(
       campusBounds: _campusBounds,
       maxZoom: 20,
@@ -88,6 +91,8 @@ class _AEDMapState extends State<AEDMap> {
 
   @override
   void dispose() {
+    _playerLocationController.state.removeListener(_handleLocationChanged);
+    _playerLocationController.dispose();
     _playerSymbolController?.dispose();
     _restoreOrientation();
     super.dispose();
@@ -127,11 +132,45 @@ class _AEDMapState extends State<AEDMap> {
 
     _playerSymbolController ??= PlayerSymbolController(controller);
 
-    // 註冊玩家圖片、開始定位、開始指南針、開始動畫
-    await _playerSymbolController!.start();
+    await _playerSymbolController!.initialize();
+    await _playerLocationController.start();
   }
 
-  //
+  void _handleLocationChanged() {
+    final locationState = _playerLocationController.state.value;
+    final position = locationState.position;
+
+    if (position != null) {
+      _playerSymbolController?.updatePosition(
+        LatLng(position.latitude, position.longitude),
+      );
+    }
+
+    if (!mounted) return;
+
+    setState(() {
+      _locationMessage = _messageForLocationState(locationState);
+    });
+  }
+
+  String? _messageForLocationState(PlayerLocationState locationState) {
+    switch (locationState.status) {
+      case PlayerLocationStatus.idle:
+      case PlayerLocationStatus.requestingPermission:
+      case PlayerLocationStatus.ready:
+        return null;
+      case PlayerLocationStatus.serviceDisabled:
+        return 'view.aed.map.s001'.tr;
+      case PlayerLocationStatus.permissionDenied:
+        return 'view.aed.map.s002'.tr;
+      case PlayerLocationStatus.permissionDeniedForever:
+        return 'view.aed.map.s003'.tr;
+      case PlayerLocationStatus.error:
+        return 'view.aed.map.s004'.trParams({
+          'error': locationState.errorMessage ?? '',
+        });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -214,13 +253,120 @@ class _AEDMapState extends State<AEDMap> {
   }
 }
 
+enum PlayerLocationStatus {
+  idle,
+  requestingPermission,
+  ready,
+  serviceDisabled,
+  permissionDenied,
+  permissionDeniedForever,
+  error,
+}
+
+class PlayerLocationState {
+  const PlayerLocationState({
+    required this.status,
+    this.position,
+    this.errorMessage,
+  });
+
+  final PlayerLocationStatus status;
+  final Position? position;
+  final String? errorMessage;
+}
+
+class PlayerLocationController {
+  PlayerLocationController()
+    : state = ValueNotifier<PlayerLocationState>(
+        const PlayerLocationState(status: PlayerLocationStatus.idle),
+      );
+
+  final ValueNotifier<PlayerLocationState> state;
+
+  StreamSubscription<Position>? _positionSubscription;
+  bool _started = false;
+
+  Future<void> start() async {
+    if (_started) return;
+    _started = true;
+
+    final serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      state.value = const PlayerLocationState(
+        status: PlayerLocationStatus.serviceDisabled,
+      );
+      return;
+    }
+
+    var permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      state.value = const PlayerLocationState(
+        status: PlayerLocationStatus.requestingPermission,
+      );
+      permission = await Geolocator.requestPermission();
+    }
+
+    if (permission == LocationPermission.denied) {
+      state.value = const PlayerLocationState(
+        status: PlayerLocationStatus.permissionDenied,
+      );
+      return;
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      state.value = const PlayerLocationState(
+        status: PlayerLocationStatus.permissionDeniedForever,
+      );
+      return;
+    }
+
+    try {
+      final initialPosition = await Geolocator.getCurrentPosition(
+        locationSettings: const LocationSettings(
+          accuracy: LocationAccuracy.best,
+        ),
+      );
+      _setPosition(initialPosition);
+    } catch (error) {
+      _setError(error);
+    }
+
+    const locationSettings = LocationSettings(
+      accuracy: LocationAccuracy.best,
+      distanceFilter: 1,
+    );
+
+    _positionSubscription = Geolocator.getPositionStream(
+      locationSettings: locationSettings,
+    ).listen(_setPosition, onError: _setError);
+  }
+
+  void _setPosition(Position position) {
+    state.value = PlayerLocationState(
+      status: PlayerLocationStatus.ready,
+      position: position,
+    );
+  }
+
+  void _setError(Object error) {
+    state.value = PlayerLocationState(
+      status: PlayerLocationStatus.error,
+      errorMessage: '$error',
+    );
+  }
+
+  void dispose() {
+    _positionSubscription?.cancel();
+    state.dispose();
+  }
+}
+
 class PlayerSymbolController {
   //自訂玩家位置
   bool _started = false;
   Symbol? _playerSymbol;
   MapLibreMapController? controller;
 
-  StreamSubscription<Position>? _positionSub;
   StreamSubscription<CompassEvent>? _compassSub;
   int _walkFrame = 0;
   static const int _defaultWalkSpeed = 140;
@@ -264,23 +410,6 @@ class PlayerSymbolController {
         _updatePlayerSymbol();
       },
     );
-  }
-
-  void _startLocationStream() {
-    const locationSettings = LocationSettings(
-      accuracy: LocationAccuracy.best,
-      distanceFilter: 1,
-    );
-
-    _positionSub =
-        Geolocator.getPositionStream(locationSettings: locationSettings).listen(
-          (position) {
-            final latLng = LatLng(position.latitude, position.longitude);
-            _latestPlayerLatLng = latLng;
-
-            _updatePlayerSymbol();
-          },
-        );
   }
 
   void _startCompassStream() {
@@ -337,23 +466,12 @@ class PlayerSymbolController {
     }
   }
 
-  Future<void> _setInitialLocation() async {
-    try {
-      final position = await Geolocator.getCurrentPosition(
-        locationSettings: const LocationSettings(
-          accuracy: LocationAccuracy.best,
-        ),
-      );
-
-      _latestPlayerLatLng = LatLng(position.latitude, position.longitude);
-
-      await _updatePlayerSymbol();
-    } catch (e) {
-      debugPrint('取得初始定位失敗：$e');
-    }
+  Future<void> updatePosition(LatLng position) async {
+    _latestPlayerLatLng = position;
+    await _updatePlayerSymbol();
   }
 
-  Future<void> start() async {
+  Future<void> initialize() async {
     if (_started) return;
 
     final mapController = controller;
@@ -366,22 +484,15 @@ class PlayerSymbolController {
     // 1. 先把玩家動畫圖片註冊進 MapLibre style
     await _addPlayerAnimationImages(mapController);
 
-    // 2. 先抓一次目前位置，讓玩家 icon 不用等 stream 才出現
-    await _setInitialLocation();
-
-    // 3. 開始走路動畫
+    // 2. 開始走路動畫
     _startWalkAnimation();
 
-    // 4. 開始監聽 GPS
-    _startLocationStream();
-
-    // 5. 開始監聽指南針方向
+    // 3. 開始監聽指南針方向
     _startCompassStream();
   }
 
   void dispose() {
     _walkAnimationTimer?.cancel();
-    _positionSub?.cancel();
     _compassSub?.cancel();
   }
 }
