@@ -246,21 +246,6 @@ class AppTranslations extends Translations {
       'widgets.buttons.nfc.button.s006': '發生未知錯誤',
       'widgets.common.user.head.s001': '[UserHead] SVG 載入失敗: \$error',
       'widgets.common.user.head.s002': '[UserHead] 圖片載入失敗: \$error',
-      'widgets.encyclopedia.all.the.monster.monster.text.s001':
-          '精靈經由象群雕塑，匆匆跑向黑盒子，路途中似乎有什麼散發著魔力',
-      'widgets.encyclopedia.all.the.monster.monster.text.s002':
-          '沒發現魔法陣嗎？或許可以試試穿過拱門，看看會不會有什麼發現',
-      'widgets.encyclopedia.all.the.monster.monster.text.s003':
-          '精靈似乎曾駐足DNA觀賞許久，才又繼續前行，或許可以試著在附近找找看',
-      'widgets.encyclopedia.all.the.monster.monster.text.s004':
-          '請根據圖片內容，找到對應位置感應',
-      'widgets.encyclopedia.all.the.monster.monster.text.s005': '雲端上的松果似乎散發著魔力',
-      'widgets.encyclopedia.all.the.monster.monster.text.s007':
-          '站在疑問最深處，當屏風完全消失於視野時，向水面反射，疑問自會明朗',
-      'widgets.encyclopedia.all.the.monster.monster.text.s008':
-          '圖片中，是不是有一朵雲特別不一樣？',
-      'widgets.encyclopedia.all.the.monster.monster.text.s009':
-          '精靈似乎曾望著裝置，期待能看到代表中央大學的「中」字出現',
       'widgets.encyclopedia.elf.creator.section.s001': 'Creator Info (創作者資料)',
       'widgets.encyclopedia.elf.department.section.s001':
           'College Departments (學院系館)',
@@ -323,8 +308,36 @@ class AppTranslations extends Translations {
       'widgets.game.catching.pages.graphics.text.level.page.s006': '關閉 NFC 教學',
       'widgets.game.catching.pages.graphics.text.level.page.s007':
           '這個關卡目前沒有可顯示的內容',
-      'widgets.game.catching.pages.plot.level.s001': '你找到了一塊魔法石',
-      'widgets.game.catching.pages.plot.level.s002': '找到對應的法陣，將魔法石放上去吧！',
+      'widgets.game.catching.pages.graphics.text.level.page.s008': '劇情回顧',
+      'widgets.game.catching.pages.graphics.text.level.page.s009': '關閉劇情回顧',
+      'widgets.game.catching.pages.monster.trace.plot.s001': '你',
+      'widgets.game.catching.pages.monster.trace.plot.s002': '這裡好像留下了一些奇怪的痕跡……',
+      'widgets.game.catching.pages.monster.trace.plot.s003':
+          '（你蹲下來仔細觀察，發現附近留有特殊的線索。）',
+      'widgets.game.catching.pages.monster.trace.plot.s004': '這應該就是那隻精靈留下的蹤跡。',
+      'widgets.game.catching.pages.monster.trace.plot.s005':
+          '（你將發現的蹤跡收進了蹤跡收集罐。）',
+      'widgets.game.catching.pages.monster.trace.plot.s006': '（繼續尋找下一個蹤跡吧。）',
+      'widgets.game.catching.pages.monster.trace.plot.s007':
+          '精靈經由象群雕塑，匆匆跑向黑盒子，路途中似乎有什麼散發著魔力。',
+      'widgets.game.catching.pages.monster.trace.plot.s008':
+          '沒發現蹤跡嗎？或許可以試試穿過拱門，看看會不會有什麼發現。',
+      'widgets.game.catching.pages.monster.trace.plot.s009':
+          '精靈似乎曾駐足 DNA 觀賞許久，才又繼續前行，或許可以試著在附近找找看。',
+      'widgets.game.catching.pages.monster.trace.plot.s010':
+          '這道蹤跡指向照片中的位置，前往附近仔細調查吧。',
+      'widgets.game.catching.pages.monster.trace.plot.s011':
+          '雲端上的松果似乎留有精靈的特殊氣息。',
+      'widgets.game.catching.pages.monster.trace.plot.s012':
+          '這道蹤跡指向照片中的位置，前往附近仔細調查吧。',
+      'widgets.game.catching.pages.monster.trace.plot.s013':
+          '站在疑問最深處，當屏風完全消失於視野時，向水面反射，疑問自會明朗。',
+      'widgets.game.catching.pages.monster.trace.plot.s014':
+          '視野中，是不是有一朵雲特別不一樣？',
+      'widgets.game.catching.pages.monster.trace.plot.s015':
+          '精靈似乎曾望著裝置，期待能看到代表中央大學的「中」字出現。',
+      'widgets.game.catching.pages.plot.level.s001': '收集精靈蹤跡',
+      'widgets.game.catching.pages.plot.level.s002': '調查附近留下的特殊線索',
       'widgets.game.catching.pages.plot.level.s003': '你召喚了精靈',
       'widgets.game.catching.pages.plot.level.s004': '但它好像很有攻擊性的看著你......',
       'widgets.game.catching.pages.plot.level.s005': '點擊任意位置繼續',
@@ -677,22 +690,6 @@ class AppTranslations extends Translations {
       'widgets.buttons.nfc.button.s006': 'An unknown error occurred',
       'widgets.common.user.head.s001': '[UserHead] SVG 載入失敗: \$error',
       'widgets.common.user.head.s002': '[UserHead] 圖片載入失敗: \$error',
-      'widgets.encyclopedia.all.the.monster.monster.text.s001':
-          'The spirit hurried past the Elephant Herd sculpture toward the Black Box. Something along the way seemed to radiate magic.',
-      'widgets.encyclopedia.all.the.monster.monster.text.s002':
-          'Haven\'t found the magic circle? Try passing through the archway and see what you discover.',
-      'widgets.encyclopedia.all.the.monster.monster.text.s003':
-          'The spirit once stopped to admire the DNA sculpture for a long time before moving on. Try searching nearby.',
-      'widgets.encyclopedia.all.the.monster.monster.text.s004':
-          'Use the image to find the matching location and scan the tag.',
-      'widgets.encyclopedia.all.the.monster.monster.text.s005':
-          'The pinecone in the clouds seems to radiate magic.',
-      'widgets.encyclopedia.all.the.monster.monster.text.s007':
-          'Stand at the heart of the question. When the screen disappears completely from view, look toward its reflection on the water and the answer will become clear.',
-      'widgets.encyclopedia.all.the.monster.monster.text.s008':
-          'Does one of the clouds in the image look different from the others?',
-      'widgets.encyclopedia.all.the.monster.monster.text.s009':
-          'The spirit once gazed at the installation, waiting for the Chinese character “中,” representing National Central University, to appear.',
       'widgets.encyclopedia.elf.creator.section.s001': 'Creator Information',
       'widgets.encyclopedia.elf.department.section.s001': 'College Departments',
       'widgets.encyclopedia.elf.grid.s001': 'No spirits captured yet',
@@ -768,9 +765,42 @@ class AppTranslations extends Translations {
           'Close NFC Tutorial',
       'widgets.game.catching.pages.graphics.text.level.page.s007':
           'There is no content available for this level.',
-      'widgets.game.catching.pages.plot.level.s001': 'You found a magic stone.',
+      'widgets.game.catching.pages.graphics.text.level.page.s008':
+          'Story Review',
+      'widgets.game.catching.pages.graphics.text.level.page.s009':
+          'Close Story Review',
+      'widgets.game.catching.pages.monster.trace.plot.s001': 'You',
+      'widgets.game.catching.pages.monster.trace.plot.s002':
+          'It looks like something left strange tracks here...',
+      'widgets.game.catching.pages.monster.trace.plot.s003':
+          '(You crouch down for a closer look and discover unusual clues nearby.)',
+      'widgets.game.catching.pages.monster.trace.plot.s004':
+          'These must be the tracks left by that spirit.',
+      'widgets.game.catching.pages.monster.trace.plot.s005':
+          '(You place the tracks you found into the trace collection jar.)',
+      'widgets.game.catching.pages.monster.trace.plot.s006':
+          '(Keep searching for the next trace.)',
+      'widgets.game.catching.pages.monster.trace.plot.s007':
+          'The spirit hurried past the Elephant Herd sculpture toward the Black Box. Something along the way seemed to radiate magic.',
+      'widgets.game.catching.pages.monster.trace.plot.s008':
+          'Still no trace? Try passing through the archway and see what you discover.',
+      'widgets.game.catching.pages.monster.trace.plot.s009':
+          'The spirit once stopped to admire the DNA sculpture for a long time before moving on. Try searching nearby.',
+      'widgets.game.catching.pages.monster.trace.plot.s010':
+          'This trace points toward the place in the photo. Search the area carefully.',
+      'widgets.game.catching.pages.monster.trace.plot.s011':
+          'The pinecone in the clouds seems to carry a spirit\'s unusual presence.',
+      'widgets.game.catching.pages.monster.trace.plot.s012':
+          'This trace points toward the place in the photo. Search the area carefully.',
+      'widgets.game.catching.pages.monster.trace.plot.s013':
+          'Stand at the heart of the question. When the screen disappears completely from view, look toward its reflection on the water and the answer will become clear.',
+      'widgets.game.catching.pages.monster.trace.plot.s014':
+          'Does one of the clouds in your field of view look different from the others?',
+      'widgets.game.catching.pages.monster.trace.plot.s015':
+          'The spirit once gazed at the installation, waiting for the Chinese character “中,” representing National Central University, to appear.',
+      'widgets.game.catching.pages.plot.level.s001': 'Collect Spirit Traces',
       'widgets.game.catching.pages.plot.level.s002':
-          'Find the matching magic circle and place the stone on it!',
+          'Investigate the unusual clues left nearby.',
       'widgets.game.catching.pages.plot.level.s003': 'You summoned a spirit.',
       'widgets.game.catching.pages.plot.level.s004':
           'But it is staring at you aggressively...',
@@ -1097,22 +1127,6 @@ class AppTranslations extends Translations {
       'widgets.buttons.nfc.button.s006': '不明なエラーが発生しました',
       'widgets.common.user.head.s001': '[UserHead] SVG 載入失敗: \$error',
       'widgets.common.user.head.s002': '[UserHead] 圖片載入失敗: \$error',
-      'widgets.encyclopedia.all.the.monster.monster.text.s001':
-          '精霊は象群の彫刻を通り過ぎ、黒い箱へと急いでいきました。その途中で何かが魔力を放っているようです。',
-      'widgets.encyclopedia.all.the.monster.monster.text.s002':
-          '魔法陣が見つかりませんか？アーチをくぐって、何か見つからないか探してみましょう。',
-      'widgets.encyclopedia.all.the.monster.monster.text.s003':
-          '精霊はDNAの彫刻を長い間眺めてから先へ進んだようです。近くを探してみましょう。',
-      'widgets.encyclopedia.all.the.monster.monster.text.s004':
-          '画像を手掛かりに該当する場所を見つけ、タグをスキャンしてください。',
-      'widgets.encyclopedia.all.the.monster.monster.text.s005':
-          '雲の上の松ぼっくりが魔力を放っているようです。',
-      'widgets.encyclopedia.all.the.monster.monster.text.s007':
-          '問いの最も深い場所に立ち、屏風が視界から完全に消えたとき、水面に映る姿を見れば答えが明らかになるでしょう。',
-      'widgets.encyclopedia.all.the.monster.monster.text.s008':
-          '画像の中に、ほかとは少し違う雲がありませんか？',
-      'widgets.encyclopedia.all.the.monster.monster.text.s009':
-          '精霊は装置を見つめ、中央大学を表す「中」の文字が現れるのを待っていたようです。',
       'widgets.encyclopedia.elf.creator.section.s001': '作者情報',
       'widgets.encyclopedia.elf.department.section.s001': '学部・学科',
       'widgets.encyclopedia.elf.grid.s001': 'まだ精霊を捕獲していません',
@@ -1178,8 +1192,38 @@ class AppTranslations extends Translations {
           'NFCチュートリアルを閉じる',
       'widgets.game.catching.pages.graphics.text.level.page.s007':
           'このステージには表示できる内容がありません。',
-      'widgets.game.catching.pages.plot.level.s001': '魔法石を見つけました。',
-      'widgets.game.catching.pages.plot.level.s002': '対応する魔法陣を見つけて、魔法石を置きましょう！',
+      'widgets.game.catching.pages.graphics.text.level.page.s008': '物語を振り返る',
+      'widgets.game.catching.pages.graphics.text.level.page.s009': '物語を閉じる',
+      'widgets.game.catching.pages.monster.trace.plot.s001': 'あなた',
+      'widgets.game.catching.pages.monster.trace.plot.s002':
+          'ここに何か奇妙な痕跡が残されている……',
+      'widgets.game.catching.pages.monster.trace.plot.s003':
+          '（しゃがんで注意深く観察すると、近くに特別な手がかりが残されていた。）',
+      'widgets.game.catching.pages.monster.trace.plot.s004':
+          'これは、あの精霊が残した痕跡に違いない。',
+      'widgets.game.catching.pages.monster.trace.plot.s005':
+          '（見つけた痕跡を痕跡収集びんに収めた。）',
+      'widgets.game.catching.pages.monster.trace.plot.s006': '（次の痕跡を探し続けよう。）',
+      'widgets.game.catching.pages.monster.trace.plot.s007':
+          '精霊は象群の彫刻を通り過ぎ、黒い箱へと急いでいきました。その途中で何かが魔力を放っているようです。',
+      'widgets.game.catching.pages.monster.trace.plot.s008':
+          'まだ痕跡が見つかりませんか？アーチをくぐって、何か見つからないか探してみましょう。',
+      'widgets.game.catching.pages.monster.trace.plot.s009':
+          '精霊は DNA の彫刻を長い間眺めてから先へ進んだようです。近くを探してみましょう。',
+      'widgets.game.catching.pages.monster.trace.plot.s010':
+          'この痕跡は写真の場所へ続いているようです。近くを注意深く調べてみましょう。',
+      'widgets.game.catching.pages.monster.trace.plot.s011':
+          '雲の上の松ぼっくりに、精霊の特別な気配が残っているようです。',
+      'widgets.game.catching.pages.monster.trace.plot.s012':
+          'この痕跡は写真の場所へ続いているようです。近くを注意深く調べてみましょう。',
+      'widgets.game.catching.pages.monster.trace.plot.s013':
+          '問いの最も深い場所に立ち、屏風が視界から完全に消えたとき、水面に映る姿を見れば答えが明らかになるでしょう。',
+      'widgets.game.catching.pages.monster.trace.plot.s014':
+          '視野の中に、ほかとは少し違う雲がありませんか？',
+      'widgets.game.catching.pages.monster.trace.plot.s015':
+          '精霊は装置を見つめ、中央大学を表す「中」の文字が現れるのを待っていたようです。',
+      'widgets.game.catching.pages.plot.level.s001': '精霊の痕跡を集める',
+      'widgets.game.catching.pages.plot.level.s002': '近くに残された特別な手がかりを調べよう。',
       'widgets.game.catching.pages.plot.level.s003': '精霊を召喚しました。',
       'widgets.game.catching.pages.plot.level.s004': 'しかし、攻撃的な目でこちらを見ています……',
       'widgets.game.catching.pages.plot.level.s005': '画面をタップして続ける',

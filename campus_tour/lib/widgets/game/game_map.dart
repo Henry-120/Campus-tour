@@ -22,11 +22,11 @@ import 'package:campus_tour/widgets/game/catching_pages/full_mission.dart';
 import 'package:campus_tour/widgets/game/catching_pages/discovered_item.dart';
 import 'package:campus_tour/widgets/game/catching_pages/default_plot.dart';
 import 'package:campus_tour/widgets/game/catching_pages/monster_plot.dart';
+import 'package:campus_tour/widgets/game/catching_pages/monster_trace_plot.dart';
 import 'package:campus_tour/widgets/game/catching_pages/graphics_text_level.dart';
 import 'package:campus_tour/widgets/game/catching_pages/cryptography_level.dart';
 import 'package:campus_tour/widgets/game/catching_pages/plot_level.dart';
 import 'package:campus_tour/widgets/encyclopedia/all_the_monster/monster_graphics.dart';
-import 'package:campus_tour/widgets/encyclopedia/all_the_monster/monster_text.dart';
 import 'package:campus_tour/widgets/common/snackbar_builder.dart';
 import 'package:campus_tour/models/qa_model.dart';
 
@@ -731,22 +731,19 @@ class BuildingMonsterLevel extends StatelessWidget {
 
        tracePlotMission = PlotLevel(
          type: PlotLevel.traceType,
-         isPassed: true, // 先移掉神秘石頭
-         //  isPassed: LocalSettingService.autoSkipStory.isEnabled,
+         isPassed: LocalSettingService.autoSkipStory.isEnabled,
          title: PlotLevel.traceTitle,
          description: PlotLevel.traceDescription,
-         dialogueSteps: DefaultPlot.magicStonePlotDialogueSteps,
-         discoveredItem: DiscoveredItem.magicStone,
-         leftCharacter: PlotSceneCharacter(
-           spritePath: PlotLevel.magicStoneSpritePath,
-         ),
+         dialogueSteps: MonsterTracePlot.steps(monsterId: monster.id),
+         leftCharacter: const PlotSceneCharacter(spritePath: ''),
          rightCharacter: PlotSceneCharacter(
            spritePath: PlotLevel.squirrelSpritePath,
          ),
        ),
        mission1 = GraphicsTextLevel(
          firstTracePhoto: MonsterGraphics.graphics[monster.id] ?? '',
-         descriptionText: MonsterText.texts[monster.id] ?? '',
+         storyReviewSteps:
+             MonsterTracePlot.steps(monsterId: monster.id) ?? const [],
          discoveredItem: DiscoveredItem.strategyBook,
          nfcId: monster.nfcAns ?? '',
        ),
