@@ -1,5 +1,4 @@
-import 'dart:async';
-
+import 'package:campus_tour/controllers/location_controller.dart';
 import 'package:campus_tour/services/json_to_suggestion.dart';
 import 'package:campus_tour/services/orientation_service.dart';
 import 'package:campus_tour/styles/map_suggestion_style.dart';
@@ -84,8 +83,9 @@ class MapSuggestionsPage extends StatefulWidget {
 
 class _MapSuggestionsPageState extends State<MapSuggestionsPage> {
   final JsonToSuggestionService _suggestionService = JsonToSuggestionService();
+  late final LocationController _locationController;
+  late final Worker _locationWorker;
   Position? _currentPosition;
-  StreamSubscription<Position>? _positionSubscription;
   bool _isLocationReady = false;
   String? _locationMessage;
   List<SuggestionLocation> _landmarks = [];
@@ -102,18 +102,23 @@ class _MapSuggestionsPageState extends State<MapSuggestionsPage> {
   @override
   void initState() {
     super.initState();
+    _locationController = Get.find<LocationController>();
+    _locationWorker = ever<AppLocationState>(
+      _locationController.state,
+      _handleLocationState,
+    );
+    _handleLocationState(_locationController.state.value);
     // [L-13]
     _forceLandscape();
     // [L-14]
     _loadLandscapeLocations();
     // [L-15]
-    _startLocationTracking();
+    _locationController.startTracking();
   }
 
   @override
   void dispose() {
-    // [L-16]
-    _positionSubscription?.cancel();
+    _locationWorker.dispose();
     // [L-17]
     _restoreOrientation();
     super.dispose();
@@ -154,57 +159,29 @@ class _MapSuggestionsPageState extends State<MapSuggestionsPage> {
     }
   }
 
-  Future<void> _startLocationTracking() async {
-    // [L-23]
-    final serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      if (!mounted) return;
-      setState(() {
-        _isLocationReady = false;
-        _locationMessage = 'view.map.suggestions.s006'.tr;
-      });
+  void _handleLocationState(AppLocationState locationState) {
+    final position = locationState.position;
+    if (position != null) {
+      _handlePositionUpdate(position);
       return;
     }
 
-    // [L-24]
-    LocationPermission permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-    }
+    final message = switch (locationState.status) {
+      AppLocationStatus.serviceDisabled => 'view.map.suggestions.s006'.tr,
+      AppLocationStatus.permissionDenied ||
+      AppLocationStatus.permissionDeniedForever =>
+        'view.map.suggestions.s007'.tr,
+      AppLocationStatus.error => 'view.aed.map.s004'.trParams({
+        'error': locationState.errorMessage ?? '',
+      }),
+      _ => null,
+    };
 
-    // [L-25]
-    if (permission == LocationPermission.denied ||
-        permission == LocationPermission.deniedForever) {
-      if (!mounted) return;
-      setState(() {
-        _isLocationReady = false;
-        _locationMessage = 'view.map.suggestions.s007'.tr;
-      });
-      return;
-    }
-
-    // [L-26]
-    final initialPosition = await Geolocator.getCurrentPosition(
-      locationSettings: LocationSettings(
-        accuracy: LocationAccuracy.bestForNavigation,
-      ),
-    );
-
-    if (!mounted) return;
-    // [L-27]
+    if (!mounted || message == _locationMessage) return;
     setState(() {
-      _currentPosition = initialPosition;
-      _isLocationReady = true;
-      _locationMessage = null;
+      _isLocationReady = false;
+      _locationMessage = message;
     });
-
-    // [L-28]
-    _positionSubscription = Geolocator.getPositionStream(
-      locationSettings: LocationSettings(
-        accuracy: LocationAccuracy.bestForNavigation,
-        distanceFilter: 1,
-      ),
-    ).listen(_handlePositionUpdate);
   }
 
   void _handlePositionUpdate(Position position) {
@@ -212,11 +189,9 @@ class _MapSuggestionsPageState extends State<MapSuggestionsPage> {
     final previousPosition = _currentPosition;
     final shouldUpdate =
         previousPosition == null ||
-        Geolocator.distanceBetween(
-              previousPosition.latitude,
-              previousPosition.longitude,
-              position.latitude,
-              position.longitude,
+        LocationController.distanceBetweenPositions(
+              previousPosition,
+              position,
             ) >=
             MapSuggestionsVariables.locationUpdateMeters;
 

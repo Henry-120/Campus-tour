@@ -2,7 +2,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 // import 'package:flutter_compass/flutter_compass.dart';
 import 'package:get/get.dart';
-import 'package:geolocator/geolocator.dart';
+import '../../controllers/location_controller.dart';
 import '../../controllers/monster_controller.dart';
 import '../../styles/app_theme.dart';
 
@@ -32,7 +32,7 @@ class _NearestMonsterArrowState extends State<NearestMonsterArrow> {
   Widget build(BuildContext context) {
     return Obx(() {
       final controller = Get.find<MonsterController>();
-      final player = controller.playerPosition.value;
+      final player = Get.find<LocationController>().position;
       final nearest = controller.nearestMonster.value;
       final distance = controller.nearestDistance.value;
       final bool showArrow = distance == null || distance >= 40;
@@ -41,7 +41,7 @@ class _NearestMonsterArrowState extends State<NearestMonsterArrow> {
       if (!showArrow) return const SizedBox.shrink();
 
       // 玩家 → 精靈的地理方位角
-      final bearing = Geolocator.bearingBetween(
+      final bearing = LocationController.bearingBetweenCoordinates(
         player.latitude,
         player.longitude,
         nearest.location.latitude,

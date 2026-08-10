@@ -36,7 +36,7 @@ class _ArPageState extends State<ArPage> with WidgetsBindingObserver {
     super.initState();
     if (!widget.inheritArAudio) {
       WidgetsBinding.instance.addObserver(this);
-      AudioService().playOverlayBgm(fileName: 'audio/M12_AR_camera.wav');
+      AudioService().playOverlayBgm(fileName: 'audio/M12_AR_camera.flac');
     }
   }
 

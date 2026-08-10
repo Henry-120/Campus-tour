@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
+import 'location_controller.dart';
 import '../services/firestore_service.dart';
 import '../models/monster_model.dart';
 import '../models/architecture_model.dart';
@@ -26,9 +27,6 @@ class MonsterController extends GetxController {
   // 使用者已捕捉的怪物（圖鑑）
   var userMonsterCollection = <UserMonsterModel>[].obs;
   var totalMonsterCount = RxnInt();
-
-  // 玩家當前位置
-  var playerPosition = Rxn<Position>();
 
   @override
   void onInit() {
@@ -169,7 +167,7 @@ class MonsterController extends GetxController {
       await loadMonsterWithRelations(monsterObj);
       nearbyMonsters.removeWhere((m) => m.id == monsterObj.id);
 
-      final currentPosition = playerPosition.value;
+      final currentPosition = Get.find<LocationController>().position;
       if (currentPosition != null) {
         await updateLocationMonsters(currentPosition);
       } else if (nearestMonster.value?.id == monsterObj.id) {
@@ -241,7 +239,7 @@ class MonsterController extends GetxController {
     nearestMonster.value = null;
     nearestDistance.value = null;
 
-    final currentPosition = playerPosition.value;
+    final currentPosition = Get.find<LocationController>().position;
     if (currentPosition != null) {
       await updateLocationMonsters(currentPosition);
     }
@@ -252,7 +250,6 @@ class MonsterController extends GetxController {
 
   Future<void> updateLocationMonsters(Position userPosition) async {
     final requestVersion = _stateVersion;
-    playerPosition.value = userPosition;
 
     final monsters = await _service.getAllMonsters();
     if (requestVersion != _stateVersion) return;
@@ -279,13 +276,13 @@ class MonsterController extends GetxController {
     }
 
     final nearest = uncaught.reduce((a, b) {
-      final da = Geolocator.distanceBetween(
+      final da = LocationController.distanceBetweenCoordinates(
         userPosition.latitude,
         userPosition.longitude,
         a.location.latitude,
         a.location.longitude,
       );
-      final db = Geolocator.distanceBetween(
+      final db = LocationController.distanceBetweenCoordinates(
         userPosition.latitude,
         userPosition.longitude,
         b.location.latitude,
@@ -295,7 +292,7 @@ class MonsterController extends GetxController {
     });
 
     nearestMonster.value = nearest;
-    nearestDistance.value = Geolocator.distanceBetween(
+    nearestDistance.value = LocationController.distanceBetweenCoordinates(
       userPosition.latitude,
       userPosition.longitude,
       nearest.location.latitude,
@@ -315,6 +312,5 @@ class MonsterController extends GetxController {
     nearestMonster.value = null;
     nearestDistance.value = null;
     userMonsterCollection.clear();
-    playerPosition.value = null;
   }
 }
