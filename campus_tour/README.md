@@ -149,7 +149,7 @@ Android 權限主要設定於 `android/app/src/main/AndroidManifest.xml`。iOS �
 
 Debug build 的設定中心會顯示「測試：捕捉全部精靈」卡片。點擊「一鍵捕捉全部」會把 Firestore `monsters` 集合中尚未捕捉的精靈加入目前登入使用者的 `users/{uid}/monsters` 圖鑑子集合。
 
-此功能使用 monster id 作為 user monster document id，因此重複點擊不會洗出重複收藏。Release build 不會顯示此測試卡片。
+此功能使用 monster id 作為 user monster document id，因此重複點擊不會洗出重複收藏。Release build 預設不顯示此測試卡片；內部測試版可在建置時加上 `--dart-define=SHOW_MONSTER_COLLECTION_CONTROLS=true` 來保留「新增全部」與「刪除全部」。「匯入遊戲資料」仍只會出現在 Debug build。
 
 ## 測試與檢查
 

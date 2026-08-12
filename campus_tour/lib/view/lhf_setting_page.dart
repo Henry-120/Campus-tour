@@ -163,8 +163,9 @@ class FullPageList {
     FullPageList.autoSkipStorySetCard,
     if (LocationTestConfig.showControls) FullPageList.cardGap,
     if (LocationTestConfig.showControls) FullPageList.locationOffsetTestCard,
-    if (kDebugMode) FullPageList.cardGap,
-    if (kDebugMode) FullPageList.debugCaptureAllCard,
+    if (MonsterCollectionTestConfig.showControls) FullPageList.cardGap,
+    if (MonsterCollectionTestConfig.showControls)
+      FullPageList.debugCaptureAllCard,
     FullPageList.cardGap,
     FullPageList.languageSetCard,
     FullPageList.cardGap,
@@ -812,17 +813,18 @@ class _DebugCaptureAllMonstersCardState
                   : Icon(Icons.delete_sweep_rounded),
               label: Text(SteeingPageStrings.debugDeleteAllButton),
             ),
-            FilledButton.tonalIcon(
-              onPressed: _isBusy ? null : _importGameData,
-              icon: _isImportingDb
-                  ? SizedBox(
-                      width: 18,
-                      height: 18,
-                      child: CircularProgressIndicator(strokeWidth: 2),
-                    )
-                  : Icon(Icons.cloud_upload_rounded),
-              label: Text(SteeingPageStrings.debugImportDbButton),
-            ),
+            if (kDebugMode)
+              FilledButton.tonalIcon(
+                onPressed: _isBusy ? null : _importGameData,
+                icon: _isImportingDb
+                    ? SizedBox(
+                        width: 18,
+                        height: 18,
+                        child: CircularProgressIndicator(strokeWidth: 2),
+                      )
+                    : Icon(Icons.cloud_upload_rounded),
+                label: Text(SteeingPageStrings.debugImportDbButton),
+              ),
           ],
         ),
       ),

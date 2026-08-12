@@ -10,6 +10,18 @@ import 'package:geolocator/geolocator.dart';
 import '../models/user_monster_model.dart';
 import "../services/monster_service.dart";
 
+/// Controls whether the add-all/delete-all collection test UI is compiled into
+/// the app.
+///
+/// Debug builds show the controls by default. Release builds must opt in with
+/// `--dart-define=SHOW_MONSTER_COLLECTION_CONTROLS=true`.
+abstract final class MonsterCollectionTestConfig {
+  static const bool showControls = bool.fromEnvironment(
+    'SHOW_MONSTER_COLLECTION_CONTROLS',
+    defaultValue: kDebugMode,
+  );
+}
+
 class MonsterController extends GetxController {
   final FirestoreService _service = FirestoreService();
   final MonsterService _monsterService = MonsterService();
