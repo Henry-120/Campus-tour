@@ -2,14 +2,18 @@ package tw.edu.ncu.campustour
 
 import android.os.Handler
 import android.os.Looper
-import io.flutter.embedding.android.FlutterActivity
+import com.example.campus_tour.ar.ArCoreChannelHandler
+import com.example.campus_tour.ar.CampusArPlatformViewFactory
+import io.flutter.embedding.android.FlutterFragmentActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
 import java.io.File
 import java.io.IOException
 import java.util.concurrent.Executors
 
-class MainActivity : FlutterActivity() {
+// FlutterFragmentActivity provides the lifecycle/saved-state owners required by
+// the Compose-based SceneView embedded in the AR PlatformView.
+class MainActivity : FlutterFragmentActivity() {
     companion object {
         private const val CHANNEL = "tw.edu.ncu.campustour/pad_audio"
         private const val PREPARE_AUDIO_ASSET = "prepareAudioAsset"
@@ -17,11 +21,23 @@ class MainActivity : FlutterActivity() {
 
     private val ioExecutor = Executors.newSingleThreadExecutor()
     private val mainHandler = Handler(Looper.getMainLooper())
+    private var arCoreChannelHandler: ArCoreChannelHandler? = null
 
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
 
-        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL)
+        val binaryMessenger = flutterEngine.dartExecutor.binaryMessenger
+        flutterEngine.platformViewsController.registry.registerViewFactory(
+            CampusArPlatformViewFactory.VIEW_TYPE,
+            CampusArPlatformViewFactory(
+                activity = this,
+                binaryMessenger = binaryMessenger,
+            ),
+        )
+        arCoreChannelHandler?.dispose()
+        arCoreChannelHandler = ArCoreChannelHandler(this, binaryMessenger)
+
+        MethodChannel(binaryMessenger, CHANNEL)
             .setMethodCallHandler { call, result ->
                 if (call.method != PREPARE_AUDIO_ASSET) {
                     result.notImplemented()
@@ -109,6 +125,8 @@ class MainActivity : FlutterActivity() {
     }
 
     override fun onDestroy() {
+        arCoreChannelHandler?.dispose()
+        arCoreChannelHandler = null
         ioExecutor.shutdown()
         super.onDestroy()
     }

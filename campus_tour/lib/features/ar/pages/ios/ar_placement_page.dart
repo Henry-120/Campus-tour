@@ -1,23 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:arkit_plugin/arkit_plugin.dart';
 import 'package:vector_math/vector_math_64.dart' as vector;
-import '../controllers/monster_controller.dart';
-import '../services/audio_service.dart';
+import 'package:campus_tour/controllers/monster_controller.dart';
+import 'package:campus_tour/services/audio_service.dart';
 import 'package:get/get.dart';
-import '../styles/app_theme.dart';
-import '../utils/monster_image_path.dart';
-import '../widgets/common/snackbar_builder.dart';
-import '../widgets/constants/responsive.dart';
-import 'package:campus_tour/widgets/ar_control/ar_control_view.dart';
+import 'package:campus_tour/styles/app_theme.dart';
+import 'package:campus_tour/utils/monster_image_path.dart';
+import 'package:campus_tour/widgets/common/snackbar_builder.dart';
+import 'package:campus_tour/widgets/constants/responsive.dart';
 
-class RealArPage extends StatefulWidget {
-  const RealArPage({super.key});
+import 'fairy_control_page.dart';
+
+class IosArPlacementPage extends StatefulWidget {
+  const IosArPlacementPage({super.key});
 
   @override
-  State<RealArPage> createState() => _RealArPageState();
+  State<IosArPlacementPage> createState() => _IosArPlacementPageState();
 }
 
-class _RealArPageState extends State<RealArPage> with WidgetsBindingObserver {
+class _IosArPlacementPageState extends State<IosArPlacementPage>
+    with WidgetsBindingObserver {
   ARKitController? arkitController;
   final monsterController = Get.find<MonsterController>();
 
@@ -131,8 +133,9 @@ class _RealArPageState extends State<RealArPage> with WidgetsBindingObserver {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (_) =>
-                                      const ArPage(inheritArAudio: true),
+                                  builder: (_) => const IosFairyControlPage(
+                                    inheritArAudio: true,
+                                  ),
                                 ),
                               );
                             }

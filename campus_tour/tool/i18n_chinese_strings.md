@@ -62,8 +62,8 @@ Total unique strings: 312
 | `styles.nfc.leading.style.s002` | 掃描中 |  | lib/styles/nfc_leading_style.dart:14 |
 | `view.camera.view.s001` | 相機初始化失敗: $e |  | lib/view/Camera_view.dart:49 |
 | `view.camera.view.s002` | 影片初始化失敗: $e |  | lib/view/Camera_view.dart:56 |
-| `view.camera.view.s003` | 選擇要放出的精靈 |  | lib/view/Camera_view.dart:159<br>lib/view/real_ar_view.dart:68 |
-| `view.camera.view.s004` | 目前沒有精靈 |  | lib/view/Camera_view.dart:168<br>lib/view/real_ar_view.dart:77 |
+| `view.camera.view.s003` | 選擇要放出的精靈 |  | lib/view/Camera_view.dart:159<br>lib/features/ar/pages/ios/ar_placement_page.dart:94 |
+| `view.camera.view.s004` | 目前沒有精靈 |  | lib/view/Camera_view.dart:168<br>lib/features/ar/pages/ios/ar_placement_page.dart:105 |
 | `view.camera.view.s005` | 拍照截圖失敗: $e |  | lib/view/Camera_view.dart:267 |
 | `view.camera.view.s006` | [CameraView] 讀取精靈相框資料失敗: $e |  | lib/view/Camera_view.dart:309 |
 | `view.camera.view.s009` | 草 |  | lib/view/Camera_view.dart:320 |
@@ -163,10 +163,10 @@ Total unique strings: 312
 | `view.photo.preview.s003` | 照片預覽 |  | lib/view/photo_preview.dart:41 |
 | `view.photo.preview.s004` | 重拍 |  | lib/view/photo_preview.dart:61 |
 | `view.photo.preview.s005` | 儲存 |  | lib/view/photo_preview.dart:69 |
-| `view.real.ar.view.s001` | 放置精靈 |  | lib/view/real_ar_view.dart:38 |
-| `view.real.ar.view.s004` | 嚶嚶嚶 |  | lib/view/real_ar_view.dart:91 |
-| `view.real.ar.view.s005` | 💡 已切換精靈模型為: $selectedMonsterUrl |  | lib/view/real_ar_view.dart:99 |
-| `view.real.ar.view.s006` | 請先選擇一隻精靈！ |  | lib/view/real_ar_view.dart:194 |
+| `view.real.ar.view.s001` | 放置精靈 |  | lib/features/ar/pages/ios/ar_placement_page.dart:61 |
+| `view.real.ar.view.s004` | 嚶嚶嚶 |  | lib/features/ar/pages/ios/ar_placement_page.dart:120 |
+| `view.real.ar.view.s005` | 💡 已切換精靈模型為: $selectedMonsterUrl |  | lib/features/ar/pages/ios/ar_placement_page.dart:130 |
+| `view.real.ar.view.s006` | 請先選擇一隻精靈！ |  | lib/features/ar/pages/ios/ar_placement_page.dart:233 |
 | `view.register.page.s001` | 請確認註冊資料是否正確 |  | lib/view/register_page.dart:36 |
 | `view.register.page.s002` | 驗證信已寄到 ${user.email ?? '你的信箱'}，請完成驗證後再登入 |  | lib/view/register_page.dart:54 |
 | `view.register.page.s003` | 註冊失敗，該 Email 可能已被使用或網路異常 |  | lib/view/register_page.dart:62 |
@@ -185,8 +185,8 @@ Total unique strings: 312
 | `view.user.protocol.s008` | 按鈕按下時會先縮小，放開後回彈再跳轉。 |  | lib/view/user_protocol.dart:17 |
 | `view.user.protocol.s009` | 返回設定頁後，不需要額外處理狀態。 |  | lib/view/user_protocol.dart:18 |
 | `view.user.protocol.s010` | 之後可直接在這個檔案補上正式協議內容。 |  | lib/view/user_protocol.dart:19 |
-| `widgets.ar.control.ar.control.view.s001` | 操控精靈吧！ |  | lib/widgets/ar_control/ar_control_view.dart:40 |
-| `widgets.ar.control.ar.control.view.s002` | 💡 模型已切換至: $newUrl |  | lib/widgets/ar_control/ar_control_view.dart:189 |
+| `widgets.ar.control.ar.control.view.s001` | 操控精靈吧！ |  | lib/features/ar/pages/ios/fairy_control_page.dart:70 |
+| `widgets.ar.control.ar.control.view.s002` | 💡 模型已切換至: $newUrl |  | lib/features/ar/pages/ios/fairy_control_page.dart:221 |
 | `widgets.buttons.click.and.accept.button.s001` | 確定 |  | lib/widgets/buttons/click_and_accept_button.dart:44 |
 | `widgets.buttons.click.and.accept.button.s002` | 取消 |  | lib/widgets/buttons/click_and_accept_button.dart:49 |
 | `widgets.buttons.nfc.button.s001` | ID 不符合，請重新嘗試！ |  | lib/widgets/buttons/nfc_button.dart:72 |

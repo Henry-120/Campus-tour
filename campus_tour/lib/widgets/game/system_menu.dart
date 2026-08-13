@@ -1,10 +1,10 @@
 import 'package:campus_tour/widgets/game/stone_button.dart';
+import 'package:campus_tour/features/ar/ar.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:campus_tour/view/encyclopedia_page.dart';
 import 'package:campus_tour/view/camera_view.dart';
 import 'package:campus_tour/view/lhf_setting_page.dart';
-import 'package:campus_tour/view/real_ar_view.dart';
 
 import '../constants/asset_paths.dart';
 import '../../widgets/constants/responsive.dart';
@@ -12,13 +12,15 @@ import '../../widgets/constants/responsive.dart';
 import 'package:get/get.dart';
 
 class SystemMenu extends StatelessWidget {
-  SystemMenu({super.key});
+  const SystemMenu({super.key});
 
   @override
   Widget build(BuildContext context) {
     final scale = Responsive.scale(context);
-    final isIos = defaultTargetPlatform == TargetPlatform.iOS;
-    final buttonSize = isIos ? 90.0 : 110.0;
+    final supportsAr =
+        defaultTargetPlatform == TargetPlatform.iOS ||
+        defaultTargetPlatform == TargetPlatform.android;
+    final buttonSize = supportsAr ? 90.0 : 110.0;
 
     return SafeArea(
       child: Row(
@@ -38,7 +40,7 @@ class SystemMenu extends StatelessWidget {
             baseSize: buttonSize,
             onTap: () => _openCamera(context),
           ),
-          if (isIos)
+          if (supportsAr)
             StoneButton(
               img: AssetPaths.cameraButton,
               text: "AR",
@@ -77,7 +79,7 @@ class SystemMenu extends StatelessWidget {
     Navigator.push(context, MaterialPageRoute(builder: (_) => SettingPage()));
   }
 
-  void _openARCamera(BuildContext context) {
-    Navigator.push(context, MaterialPageRoute(builder: (_) => RealArPage()));
+  Future<void> _openARCamera(BuildContext context) async {
+    await ArLauncher.open(context);
   }
 }
