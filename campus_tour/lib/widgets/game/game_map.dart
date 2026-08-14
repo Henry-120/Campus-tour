@@ -119,7 +119,6 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
     southwest: southwest,
     northeast: northeast,
   );
-  // static const double playerSize = 60;
 
   Future<void> _loadAssets() async {
     try {
