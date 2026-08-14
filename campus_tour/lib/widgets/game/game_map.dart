@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:geolocator/geolocator.dart'; // 💡 引入 GPS 套件
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:campus_tour/controllers/location_controller.dart';
 import 'package:campus_tour/controllers/monster_controller.dart';
 import 'package:campus_tour/controllers/nfc_scan_controller.dart';
 import 'package:campus_tour/local_information/local_setting.dart';
@@ -22,12 +23,11 @@ import 'package:campus_tour/widgets/game/catching_pages/full_mission.dart';
 import 'package:campus_tour/widgets/game/catching_pages/discovered_item.dart';
 import 'package:campus_tour/widgets/game/catching_pages/default_plot.dart';
 import 'package:campus_tour/widgets/game/catching_pages/monster_plot.dart';
+import 'package:campus_tour/widgets/game/catching_pages/monster_trace_plot.dart';
 import 'package:campus_tour/widgets/game/catching_pages/graphics_text_level.dart';
 import 'package:campus_tour/widgets/game/catching_pages/cryptography_level.dart';
 import 'package:campus_tour/widgets/game/catching_pages/plot_level.dart';
 import 'package:campus_tour/widgets/encyclopedia/all_the_monster/monster_graphics.dart';
-import 'package:campus_tour/widgets/encyclopedia/all_the_monster/monster_text.dart';
-import 'package:campus_tour/widgets/encyclopedia/all_the_monster/monster_nfc.dart';
 import 'package:campus_tour/widgets/common/snackbar_builder.dart';
 import 'package:campus_tour/models/qa_model.dart';
 
@@ -91,7 +91,8 @@ enum BackgroundTileKind {
 
 class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
   GoogleMapController? _mapController;
-  StreamSubscription<Position>? _positionStream; // 📡 位置監聽器
+  late final LocationController _locationController;
+  late final Worker _locationWorker;
   Timer? _backgroundTileRefreshTimer;
 
   bool _hasLocationPermission = false;
@@ -113,9 +114,6 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
 
   static LatLng get southwest => LatLng(24.965184, 121.185000); // 左下
   static LatLng get northeast => LatLng(24.971653, 121.197487); // 右上
-  static const bool _useFixedTestLocation = false; // 💡 測試用開關：使用固定位置而非真實 GPS
-  static LatLng get _fixedTestLocation => LatLng(24.967731, 121.193638);
-  // static LatLng get _fixedTestLocation => LatLng(24.9691, 121.1946);
 
   final LatLngBounds campusBounds = LatLngBounds(
     southwest: southwest,
@@ -137,111 +135,52 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
     }
   }
 
-  Future<void> _checkPermissionAndListen() async {
-    try {
-      final monsterController = Get.find<MonsterController>();
+  void _handleLocationState(AppLocationState locationState) {
+    if (!mounted) return;
 
-      if (_useFixedTestLocation) {
-        final testPosition = _fixedTestPosition();
-        setState(() {
-          _hasLocationPermission = true;
-          _playerPosition = _fixedTestLocation;
-          _isPlayerInsideCampusBounds = _isInsideCampusBounds(
-            _fixedTestLocation,
-          );
-        });
-
-        _moveCamera(testPosition);
-        unawaited(monsterController.updateLocationMonsters(testPosition));
-        debugPrint(
-          '[Debug][GameMap]:使用固定測試定位 ${_fixedTestLocation.latitude}, ${_fixedTestLocation.longitude}',
-        );
-        return;
-      }
-
-      bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
-      if (!serviceEnabled) {
+    final position = locationState.position;
+    if (position == null) {
+      final unavailable = switch (locationState.status) {
+        AppLocationStatus.serviceDisabled ||
+        AppLocationStatus.permissionDenied ||
+        AppLocationStatus.permissionDeniedForever ||
+        AppLocationStatus.error => true,
+        _ => false,
+      };
+      if (unavailable && _hasLocationPermission) {
         setState(() => _hasLocationPermission = false);
-        return;
       }
-
-      LocationPermission permission = await Geolocator.checkPermission();
-      if (permission == LocationPermission.denied) {
-        permission = await Geolocator.requestPermission();
-      }
-
-      if (permission == LocationPermission.denied ||
-          permission == LocationPermission.deniedForever) {
-        setState(() => _hasLocationPermission = false);
-        return;
-      }
-
-      setState(() => _hasLocationPermission = true);
-
-      final Position currentPosition = await Geolocator.getCurrentPosition(
-        locationSettings: LocationSettings(
-          accuracy: LocationAccuracy.bestForNavigation,
-        ),
-      );
-
-      final LatLng currentLocation = LatLng(
-        currentPosition.latitude,
-        currentPosition.longitude,
-      );
-
-      setState(() {
-        _playerPosition = currentLocation;
-        _isPlayerInsideCampusBounds = _isInsideCampusBounds(currentLocation);
-      });
-
-      _positionStream =
-          Geolocator.getPositionStream(
-            locationSettings: LocationSettings(
-              accuracy: LocationAccuracy.bestForNavigation,
-              distanceFilter: 0,
-            ),
-          ).listen((Position position) {
-            debugPrint(
-              '[Debug][GameMap]:位置更新: ${position.latitude}, ${position.longitude}',
-            );
-
-            final currentLocation = LatLng(
-              position.latitude,
-              position.longitude,
-            );
-            final oldPosition = _playerPosition;
-            final shouldUpdateMarker =
-                oldPosition == null ||
-                Geolocator.distanceBetween(
-                      oldPosition.latitude,
-                      oldPosition.longitude,
-                      currentLocation.latitude,
-                      currentLocation.longitude,
-                    ) >
-                    2;
-            final isInsideCampusBounds = _isInsideCampusBounds(currentLocation);
-
-            if (shouldUpdateMarker ||
-                isInsideCampusBounds != _isPlayerInsideCampusBounds) {
-              setState(() {
-                if (shouldUpdateMarker) {
-                  _playerPosition = currentLocation;
-                }
-                _isPlayerInsideCampusBounds = isInsideCampusBounds;
-              });
-            }
-
-            _moveCamera(position);
-
-            unawaited(monsterController.updateLocationMonsters(position));
-          });
-
-      debugPrint('widgets.game.game.map.s006'.tr);
-    } catch (e, st) {
-      debugPrint("[Debug][GameMap]:_checkPermissionAndListen 例外：$e");
-      debugPrint("[Debug][GameMap]:stack trace：$st");
-      setState(() => _hasLocationPermission = false);
+      return;
     }
+
+    final currentLocation = LatLng(position.latitude, position.longitude);
+    final oldPosition = _playerPosition;
+    final shouldUpdateMarker =
+        oldPosition == null ||
+        LocationController.distanceBetweenCoordinates(
+              oldPosition.latitude,
+              oldPosition.longitude,
+              currentLocation.latitude,
+              currentLocation.longitude,
+            ) >
+            2;
+    final isInsideCampusBounds = _isInsideCampusBounds(currentLocation);
+
+    if (!_hasLocationPermission ||
+        shouldUpdateMarker ||
+        isInsideCampusBounds != _isPlayerInsideCampusBounds) {
+      setState(() {
+        _hasLocationPermission = true;
+        if (shouldUpdateMarker) _playerPosition = currentLocation;
+        _isPlayerInsideCampusBounds = isInsideCampusBounds;
+      });
+    }
+
+    debugPrint(
+      '[Debug][GameMap]:位置更新: ${position.latitude}, ${position.longitude}',
+    );
+    _moveCamera(position);
+    unawaited(Get.find<MonsterController>().updateLocationMonsters(position));
   }
 
   bool _isInsideCampusBounds(LatLng position) {
@@ -317,23 +256,6 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
           bearing: 0,
         ),
       ),
-    );
-  }
-
-  Position _fixedTestPosition() {
-    return Position(
-      latitude: _fixedTestLocation.latitude,
-      longitude: _fixedTestLocation.longitude,
-      timestamp: DateTime.now(),
-      accuracy: 1,
-      altitude: 0,
-      altitudeAccuracy: 0,
-      heading: 0,
-      headingAccuracy: 0,
-      speed: 0,
-      speedAccuracy: 0,
-      floor: null,
-      isMocked: true,
     );
   }
 
@@ -449,8 +371,14 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
   @override
   void initState() {
     super.initState();
+    _locationController = Get.find<LocationController>();
+    _locationWorker = ever<AppLocationState>(
+      _locationController.state,
+      _handleLocationState,
+    );
+    _handleLocationState(_locationController.state.value);
     _loadAssets(); // 一次性載入 JSON 與 圖片
-    _checkPermissionAndListen(); // 初始化時檢查權限並開始監聽
+    unawaited(_locationController.startTracking());
     if (defaultTargetPlatform == TargetPlatform.android) {
       unawaited(Get.find<NfcScanController>().startForegroundListening());
     }
@@ -461,7 +389,7 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
   @override
   void dispose() {
     _backgroundTileRefreshTimer?.cancel();
-    _positionStream?.cancel();
+    _locationWorker.dispose();
     if (defaultTargetPlatform == TargetPlatform.android) {
       unawaited(Get.find<NfcScanController>().stopForegroundListening());
     }
@@ -487,9 +415,7 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
             _maxZoomRate,
           ),
           initialCameraPosition: CameraPosition(
-            target: _useFixedTestLocation
-                ? _fixedTestLocation
-                : LatLng(24.9684, 121.1912),
+            target: LatLng(24.9684, 121.1912),
             zoom: 18.5, // 💡 初始縮放
           ),
           style: _mapStyle,
@@ -527,25 +453,8 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
           zoomGesturesEnabled: true,
           onMapCreated: (controller) {
             _mapController = controller;
-            final playerPosition = _playerPosition;
-            if (playerPosition != null) {
-              _moveCamera(
-                Position(
-                  latitude: playerPosition.latitude,
-                  longitude: playerPosition.longitude,
-                  timestamp: DateTime.now(),
-                  accuracy: 1,
-                  altitude: 0,
-                  altitudeAccuracy: 0,
-                  heading: 0,
-                  headingAccuracy: 0,
-                  speed: 0,
-                  speedAccuracy: 0,
-                  floor: null,
-                  isMocked: _useFixedTestLocation,
-                ),
-              );
-            }
+            final position = _locationController.position;
+            if (position != null) _moveCamera(position);
           },
         ),
         Positioned(
@@ -732,24 +641,21 @@ class BuildingMonsterLevel extends StatelessWidget {
 
        tracePlotMission = PlotLevel(
          type: PlotLevel.traceType,
-         isPassed: true, // 先移掉神秘石頭
-         //  isPassed: LocalSettingService.autoSkipStory.isEnabled,
+         isPassed: LocalSettingService.autoSkipStory.isEnabled,
          title: PlotLevel.traceTitle,
          description: PlotLevel.traceDescription,
-         dialogueSteps: DefaultPlot.magicStonePlotDialogueSteps,
-         discoveredItem: DiscoveredItem.magicStone,
-         leftCharacter: PlotSceneCharacter(
-           spritePath: PlotLevel.magicStoneSpritePath,
-         ),
+         dialogueSteps: MonsterTracePlot.steps(monsterId: monster.id),
+         leftCharacter: const PlotSceneCharacter(spritePath: ''),
          rightCharacter: PlotSceneCharacter(
            spritePath: PlotLevel.squirrelSpritePath,
          ),
        ),
        mission1 = GraphicsTextLevel(
          firstTracePhoto: MonsterGraphics.graphics[monster.id] ?? '',
-         descriptionText: MonsterText.texts[monster.id] ?? '',
+         storyReviewSteps:
+             MonsterTracePlot.steps(monsterId: monster.id) ?? const [],
          discoveredItem: DiscoveredItem.strategyBook,
-         nfcId: MonsterNFC.nfcIds[monster.id] ?? '',
+         nfcId: monster.nfcAns ?? '',
        ),
        battlePlotMission = PlotLevel(
          type: PlotLevel.battleType,
@@ -798,7 +704,8 @@ class BuildingMonsterLevel extends StatelessWidget {
 
   List<FullMission> get installationArtMissions => [
     FullMission(levelType: "plotLevel", plotLevel: tracePlotMission),
-    FullMission(levelType: "graphicsTextLevel", graphicsTextLevel: mission1),
+    if (monster.nfcAns != null)
+      FullMission(levelType: "graphicsTextLevel", graphicsTextLevel: mission1),
     FullMission(levelType: "plotLevel", plotLevel: battlePlotMission),
     FullMission(levelType: "cryptographyLevel", cryptographyLevel: mission2),
   ];

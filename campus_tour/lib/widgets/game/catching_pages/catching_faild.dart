@@ -31,12 +31,14 @@ class _CatchingFaildPageState extends State<CatchingFaildPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(
-                  Icons.sentiment_dissatisfied,
-                  size: 120,
-                  color: Colors.grey,
+                Image.asset(
+                  'assets/images/failed_image/Fall_off_transparent2.png',
+                  width: 320,
+                  height: 260,
+                  fit: BoxFit.contain,
                 ),
-                SizedBox(height: 24),
+
+                const SizedBox(height: 24),
                 Text(
                   'widgets.game.catching.pages.catching.faild.s001'.tr,
                   style: AppTheme.titleStyle.copyWith(
@@ -45,7 +47,7 @@ class _CatchingFaildPageState extends State<CatchingFaildPage> {
                     letterSpacing: 0,
                   ),
                 ),
-                SizedBox(height: 12),
+                const SizedBox(height: 12),
                 Text(
                   'widgets.game.catching.pages.catching.faild.s002'.tr,
                   style: AppTheme.titleStyle.copyWith(
@@ -54,7 +56,7 @@ class _CatchingFaildPageState extends State<CatchingFaildPage> {
                     letterSpacing: 0,
                   ),
                 ),
-                SizedBox(height: 32),
+                const SizedBox(height: 32),
                 FilledButton(
                   onPressed: () {
                     Navigator.of(context).pop();

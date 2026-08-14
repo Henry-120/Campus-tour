@@ -122,7 +122,10 @@ class _FullMissionPageState extends State<FullMissionPage> {
       child: Stack(
         children: [
           // [L-18]
-          _buildMissionPage(widget.missions[_missionIndex]),
+          KeyedSubtree(
+            key: ValueKey(_missionIndex),
+            child: _buildMissionPage(widget.missions[_missionIndex]),
+          ),
           // [L-19]
           if (_showBattleTransition)
             BattleStartTransition(

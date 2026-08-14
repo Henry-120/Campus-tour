@@ -9,7 +9,7 @@ import 'package:campus_tour/view/novice_leading_page.dart';
 import 'package:campus_tour/view/start_page.dart';
 import 'package:campus_tour/widgets/common/snackbar_builder.dart';
 import 'package:campus_tour/widgets/common/user_head.dart';
-import 'package:campus_tour/view/AED_map.dart';
+import 'package:campus_tour/view/campus_safty.dart';
 
 class DrawerButtonGroup extends StatelessWidget {
   const DrawerButtonGroup({super.key});
@@ -270,7 +270,7 @@ class _SecurityButton extends StatelessWidget {
   void _onPress(BuildContext context) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const AEDMap()),
+      MaterialPageRoute(builder: (context) => const CampusSafetyPage()),
     );
   }
 

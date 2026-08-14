@@ -11,7 +11,7 @@ description: "A new Flutter project."
 
 publish_to: "none"
 
-version: 1.0.0+2
+version: 1.0.0+4
 
 environment:
   sdk: ^3.11.3
@@ -98,6 +98,7 @@ flutter:
     - assets/mapStyles/
     - assets/json/
     - assets/json/locations/
+    - assets/images/failed_image/
     - assets/images/fairy_video/
     - assets/images/nfc_position_photos/
     - assets/images/novice_leading/

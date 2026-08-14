@@ -3928,6 +3928,21 @@
     },
     {
       "key": "widgets.game.game.map.s017", "zh": "超出探索範圍！\n返回校園即可繼續冒險", "en": "Out of exploration range!\nReturn to campus to continue your adventure", "ja": "探索範囲外です！\nキャンパスに戻ると冒険を続けられます", "occurrences": [{"file": "lib/widgets/game/game_map.dart", "line": 593}]
+    },
+    {
+      "key": "widgets.sections.drawer.button.group.s010", "zh": "校園安全", "en": "Campus Safety", "ja": "キャンパス安全", "occurrences": [{"file": "lib/widgets/sections/drawer_button_group.dart", "line": 281}]
+    },
+    {
+      "key": "view.campus.safety.s001", "zh": "校園安全", "en": "Campus Safety", "ja": "キャンパス安全", "occurrences": [{"file": "lib/view/campus_safty.dart", "line": 30}]
+    },
+    {
+      "key": "view.campus.safety.s002", "zh": "緊急地圖", "en": "Emergency Map", "ja": "緊急マップ", "occurrences": [{"file": "lib/view/campus_safty.dart", "line": 53}]
+    },
+    {
+      "key": "view.campus.safety.s003", "zh": "呼叫與回報", "en": "Call and Report", "ja": "電話と通報", "occurrences": [{"file": "lib/view/campus_safty.dart", "line": 59}]
+    },
+    {
+      "key": "view.call.and.email.s001", "zh": "呼叫與回報", "en": "Call and Report", "ja": "電話と通報", "occurrences": [{"file": "lib/view/call_and_email.dart", "line": 86}]
     }
   ]
 }

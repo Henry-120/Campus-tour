@@ -1,8 +1,8 @@
 import 'package:campus_tour/styles/level_style.dart';
-import 'package:campus_tour/widgets/buttons/click_and_accept_button.dart';
 import 'package:campus_tour/widgets/buttons/nfc_button.dart';
 import 'package:campus_tour/widgets/game/catching_pages/discovered_item_page.dart';
 import 'package:campus_tour/widgets/game/catching_pages/graphics_text_level.dart';
+import 'package:campus_tour/widgets/game/catching_pages/plot_level.dart';
 import 'package:flutter/material.dart';
 import 'package:campus_tour/services/audio_service.dart';
 
@@ -24,7 +24,8 @@ class GraphicsTextLevelPage extends StatefulWidget {
   State<GraphicsTextLevelPage> createState() => _GraphicsTextLevelPageState();
 }
 
-class _GraphicsTextLevelPageState extends State<GraphicsTextLevelPage> with WidgetsBindingObserver {
+class _GraphicsTextLevelPageState extends State<GraphicsTextLevelPage>
+    with WidgetsBindingObserver {
   static const String _nfcTeachingGifPath = 'assets/images/nfc_teaching.gif';
 
   @override
@@ -52,103 +53,127 @@ class _GraphicsTextLevelPageState extends State<GraphicsTextLevelPage> with Widg
 
   @override
   Widget build(BuildContext context) {
-    // [L-01]
-    final hasImage =
-        widget.level.firstTracePhoto != null &&
-        widget.level.firstTracePhoto!.trim().isNotEmpty;
-    // [L-02]
-    final hasText =
-        widget.level.descriptionText != null &&
-        widget.level.descriptionText!.trim().isNotEmpty;
-
-    // [L-03]
     return Scaffold(
-      body: Container(
-        decoration: LevelStyle.pageDecoration,
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: LevelStyle.pageHorizontalPadding,
-              vertical: LevelStyle.pageVerticalPadding,
-            ),
-            child: Column(
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          _buildBackgroundImage(),
+          Container(color: Colors.black.withValues(alpha: 0.2)),
+          SafeArea(
+            minimum: const EdgeInsets.all(20),
+            child: Stack(
               children: [
-                Expanded(
-                  child: Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.all(20),
-                    decoration: LevelStyle.mainCardDecoration,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              child: Text(
-                                'widgets.game.catching.pages.graphics.text.level.page.s001'
-                                    .tr,
-                                style: LevelStyle.titleStyle,
-                              ),
-                            ),
-                            _buildTeachingButton(),
-                          ],
-                        ),
-                        SizedBox(height: 6),
-                        Text(
-                          'widgets.game.catching.pages.graphics.text.level.page.s002'
-                              .tr,
-                          style: LevelStyle.hintStyle,
-                        ),
-                        SizedBox(height: LevelStyle.bodySpacing),
-                        Expanded(
-                          child: _buildBody(
-                            hasImage: hasImage,
-                            hasText: hasText,
-                          ),
-                        ),
-                      ],
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    'widgets.game.catching.pages.graphics.text.level.page.s001'
+                        .tr,
+                    style: LevelStyle.titleStyle.copyWith(
+                      color: Colors.white,
+                      shadows: LevelStyle.plotTextShadows,
                     ),
                   ),
                 ),
-                SizedBox(height: LevelStyle.nfcButtonTopSpacing),
-                // [L-04]
-                NfcButton1(
-                  ans: widget.level.nfcId,
-                  onResult: _handleNfcSuccess,
+                Align(
+                  alignment: Alignment.topRight,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      _buildTeachingButton(),
+                      const SizedBox(width: 8),
+                      _buildAbandonButton(),
+                    ],
+                  ),
                 ),
-                SizedBox(height: 8),
-                ClickAndAcceptButton(
-                  movementFunction: widget.loseingFunction,
-                  acceptInfo:
-                      'widgets.game.catching.pages.graphics.text.level.page.s003'
+                Align(
+                  alignment: const Alignment(1, 0.68),
+                  child: FilledButton.icon(
+                    onPressed: _showStoryReviewDialog,
+                    icon: const Icon(Icons.menu_book_rounded),
+                    label: Text(
+                      'widgets.game.catching.pages.graphics.text.level.page.s008'
                           .tr,
-                  appearanceIcon: Icons.close,
-                  appearanceText:
-                      'widgets.game.catching.pages.graphics.text.level.page.s004'
-                          .tr,
+                    ),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: NfcButton1(
+                    ans: widget.level.nfcId,
+                    onResult: _handleNfcSuccess,
+                  ),
                 ),
               ],
             ),
           ),
-        ),
+        ],
       ),
     );
   }
 
   Widget _buildTeachingButton() {
-    // [L-05]
-    return SizedBox(
-      width: 36,
-      height: 36,
+    return _buildTopIconButton(
       child: IconButton(
-        padding: EdgeInsets.zero,
         tooltip: 'widgets.game.catching.pages.graphics.text.level.page.s005'.tr,
-        icon: Icon(Icons.help_outline_rounded),
-        color: LevelStyle.imageIconColor,
-        iconSize: 26,
+        icon: const Icon(Icons.help_outline_rounded),
+        color: Colors.white,
         onPressed: _showNfcTeachingDialog,
       ),
+    );
+  }
+
+  Widget _buildAbandonButton() {
+    return _buildTopIconButton(
+      child: IconButton(
+        tooltip: 'widgets.game.catching.pages.graphics.text.level.page.s004'.tr,
+        padding: EdgeInsets.zero,
+        constraints: const BoxConstraints.expand(),
+        icon: const Icon(Icons.close_rounded),
+        color: Colors.white,
+        iconSize: 26,
+        onPressed: _showAbandonDialog,
+      ),
+    );
+  }
+
+  Future<void> _showAbandonDialog() async {
+    final shouldAbandon = await showDialog<bool>(
+      context: context,
+      barrierDismissible: true,
+      builder: (dialogContext) => AlertDialog(
+        content: Text(
+          'widgets.game.catching.pages.graphics.text.level.page.s003'.tr,
+          textAlign: TextAlign.center,
+        ),
+        actionsAlignment: MainAxisAlignment.center,
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(dialogContext).pop(true),
+            child: Text('widgets.buttons.click.and.accept.button.s001'.tr),
+          ),
+          TextButton(
+            onPressed: () => Navigator.of(dialogContext).pop(false),
+            child: Text('widgets.buttons.click.and.accept.button.s002'.tr),
+          ),
+        ],
+      ),
+    );
+
+    if (shouldAbandon == true && mounted) {
+      widget.loseingFunction();
+    }
+  }
+
+  Widget _buildTopIconButton({required Widget child}) {
+    return Container(
+      width: 44,
+      height: 44,
+      decoration: BoxDecoration(
+        color: Colors.black.withValues(alpha: 0.48),
+        shape: BoxShape.circle,
+      ),
+      alignment: Alignment.center,
+      child: child,
     );
   }
 
@@ -242,50 +267,12 @@ class _GraphicsTextLevelPageState extends State<GraphicsTextLevelPage> with Widg
     );
   }
 
-  Widget _buildBody({required bool hasImage, required bool hasText}) {
-    // [L-10]
-    if (hasImage && hasText) {
-      return Column(
-        children: [
-          Expanded(child: _buildImageSection(widget.level.firstTracePhoto!)),
-          SizedBox(height: LevelStyle.panelSpacing),
-          Expanded(child: _buildTextSection(widget.level.descriptionText!)),
-        ],
-      );
-    }
-
-    // [L-11]
-    if (hasImage) {
-      return _buildImageSection(widget.level.firstTracePhoto!);
-    }
-
-    // [L-12]
-    if (hasText) {
-      return _buildTextSection(widget.level.descriptionText!);
-    }
-
-    // [L-13]
-    return _buildEmptySection();
-  }
-
-  Widget _buildImageSection(String imagePath) {
-    return Container(
-      width: double.infinity,
-      constraints: BoxConstraints(minHeight: LevelStyle.sectionMinHeight),
-      decoration: LevelStyle.imageCardDecoration,
-      clipBehavior: Clip.antiAlias,
-      child: _buildAdaptiveImage(imagePath),
-    );
-  }
-
-  Widget _buildAdaptiveImage(String imagePath) {
-    // [L-14]
-    final trimmedPath = imagePath.trim();
+  Widget _buildBackgroundImage() {
+    final trimmedPath = widget.level.firstTracePhoto?.trim() ?? '';
+    if (trimmedPath.isEmpty) return _buildImageFallback();
     final isNetworkImage =
         trimmedPath.startsWith('http://') || trimmedPath.startsWith('https://');
-
-    // [L-15]
-    final image = isNetworkImage
+    return isNetworkImage
         ? Image.network(
             trimmedPath,
             fit: BoxFit.cover,
@@ -296,40 +283,48 @@ class _GraphicsTextLevelPageState extends State<GraphicsTextLevelPage> with Widg
             fit: BoxFit.cover,
             errorBuilder: (_, _, _) => _buildImageFallback(),
           );
-
-    return SizedBox.expand(child: image);
   }
 
-  Widget _buildTextSection(String text) {
-    // [L-16]
-    return Container(
-      width: double.infinity,
-      constraints: BoxConstraints(minHeight: LevelStyle.sectionMinHeight),
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 22),
-      decoration: LevelStyle.textCardDecoration,
-      child: SingleChildScrollView(
-        child: Center(
-          child: Text(
-            text,
-            style: LevelStyle.descriptionStyle,
-            textAlign: TextAlign.center,
+  void _showStoryReviewDialog() {
+    showDialog<void>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: Text(
+          'widgets.game.catching.pages.graphics.text.level.page.s008'.tr,
+        ),
+        content: SizedBox(
+          width: double.maxFinite,
+          child: widget.level.storyReviewSteps.isEmpty
+              ? Text(
+                  'widgets.game.catching.pages.graphics.text.level.page.s007'
+                      .tr,
+                )
+              : ListView.separated(
+                  shrinkWrap: true,
+                  itemCount: widget.level.storyReviewSteps.length,
+                  separatorBuilder: (_, _) => const SizedBox(height: 12),
+                  itemBuilder: (_, index) {
+                    final step = widget.level.storyReviewSteps[index];
+                    final hasSpeaker =
+                        step.speakerSlot != PlotSpeakerSlot.narrator &&
+                        step.speakerName.trim().isNotEmpty;
+                    return Text(
+                      hasSpeaker
+                          ? '${step.speakerName}：${step.text}'
+                          : step.text,
+                      style: LevelStyle.descriptionStyle.copyWith(fontSize: 18),
+                    );
+                  },
+                ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(dialogContext).pop(),
+            child: Text(
+              'widgets.game.catching.pages.graphics.text.level.page.s009'.tr,
+            ),
           ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildEmptySection() {
-    // [L-17]
-    return Container(
-      width: double.infinity,
-      constraints: BoxConstraints(minHeight: LevelStyle.sectionMinHeight),
-      decoration: LevelStyle.imagePlaceholderDecoration,
-      child: Center(
-        child: Text(
-          'widgets.game.catching.pages.graphics.text.level.page.s007'.tr,
-          style: LevelStyle.placeholderStyle,
-        ),
+        ],
       ),
     );
   }

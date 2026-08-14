@@ -24,7 +24,6 @@ class PlotLevel {
   final DiscoveredItem? discoveredItem;
   static const String traceImageUrl = "assets/images/elf_trail.png";
   static const String battleImageUrl = "assets/images/elf_battle.png";
-  static const String magicStoneSpritePath = "assets/images/magicStone.PNG";
   static const String squirrelSpritePath = "assets/images/squirrel_front.png";
   static const String magicCircleSpritePath =
       "assets/images/icon_remove_bg.png";

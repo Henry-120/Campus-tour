@@ -1,4 +1,5 @@
 import 'package:campus_tour/controllers/monster_controller.dart';
+import 'package:campus_tour/controllers/location_controller.dart';
 import 'package:campus_tour/local_information/local_setting.dart';
 import 'package:campus_tour/services/load_db_service.dart';
 import 'package:campus_tour/styles/app_theme.dart';
@@ -79,6 +80,24 @@ class SteeingPageStrings {
   static String get debugImportDbDone => 'view.lhf.setting.page.s056'.tr;
   static String get debugImportDbFailed => 'view.lhf.setting.page.s057'.tr;
 
+  // Location offset test
+  static String get locationTestTitle => 'view.lhf.setting.page.s058'.tr;
+  static String get locationTestDescription =>
+      'view.lhf.setting.page.s059'.trParams({
+        'latitude': '${LocationTestConfig.anchorLatitude}',
+        'longitude': '${LocationTestConfig.anchorLongitude}',
+      });
+  static String get locationTestEnabledStatus =>
+      'view.lhf.setting.page.s060'.tr;
+  static String get locationTestDisabledStatus =>
+      'view.lhf.setting.page.s061'.tr;
+  static String get locationTestStartButton => 'view.lhf.setting.page.s062'.tr;
+  static String get locationTestStopButton => 'view.lhf.setting.page.s063'.tr;
+  static String get locationTestStarting => 'view.lhf.setting.page.s064'.tr;
+  static String get locationTestStarted => 'view.lhf.setting.page.s065'.tr;
+  static String get locationTestStopped => 'view.lhf.setting.page.s066'.tr;
+  static String get locationTestFailed => 'view.lhf.setting.page.s067'.tr;
+
   static String debugCaptureAllDone(int count) {
     return count == 0 ? 'view.lhf.setting.page.s040'.tr : '已新增 $count 隻精靈到圖鑑';
   }
@@ -142,8 +161,11 @@ class FullPageList {
     FullPageList.vibrationSetCard,
     FullPageList.cardGap,
     FullPageList.autoSkipStorySetCard,
-    if (kDebugMode) FullPageList.cardGap,
-    if (kDebugMode) FullPageList.debugCaptureAllCard,
+    if (LocationTestConfig.showControls) FullPageList.cardGap,
+    if (LocationTestConfig.showControls) FullPageList.locationOffsetTestCard,
+    if (MonsterCollectionTestConfig.showControls) FullPageList.cardGap,
+    if (MonsterCollectionTestConfig.showControls)
+      FullPageList.debugCaptureAllCard,
     FullPageList.cardGap,
     FullPageList.languageSetCard,
     FullPageList.cardGap,
@@ -160,6 +182,7 @@ class FullPageList {
   static Widget get cardGap => SizedBox(height: SettingPageStyles.cardSpacing);
   static Widget get vibrationSetCard => _VibrationSettingCard();
   static Widget get autoSkipStorySetCard => _AutoSkipStorySettingCard();
+  static Widget get locationOffsetTestCard => _LocationOffsetTestCard();
   static Widget get debugCaptureAllCard => _DebugCaptureAllMonstersCard();
   static Widget get languageSetCard => _LanguageSettingCard();
   static Widget get userProtocolButton => _UserProtocolButton();
@@ -440,6 +463,96 @@ class _AutoSkipStorySettingCard extends StatelessWidget {
   }
 }
 
+class _LocationOffsetTestCard extends StatefulWidget {
+  const _LocationOffsetTestCard();
+
+  @override
+  State<_LocationOffsetTestCard> createState() =>
+      _LocationOffsetTestCardState();
+}
+
+class _LocationOffsetTestCardState extends State<_LocationOffsetTestCard> {
+  late final LocationController _locationController;
+  bool _isStarting = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _locationController = Get.find<LocationController>();
+  }
+
+  Future<void> _startOffset() async {
+    if (_isStarting) return;
+
+    setState(() => _isStarting = true);
+    SnackBarBuilder.show(
+      context,
+      SteeingPageStrings.locationTestStarting,
+      type: AppToastType.info,
+    );
+
+    final started = await _locationController.enableTestOffset();
+    if (!mounted) return;
+
+    setState(() => _isStarting = false);
+    SnackBarBuilder.show(
+      context,
+      started
+          ? SteeingPageStrings.locationTestStarted
+          : SteeingPageStrings.locationTestFailed,
+      type: started ? AppToastType.success : AppToastType.error,
+    );
+  }
+
+  void _stopOffset() {
+    _locationController.disableTestOffset();
+    SnackBarBuilder.show(
+      context,
+      SteeingPageStrings.locationTestStopped,
+      type: AppToastType.success,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Obx(() {
+      final enabled = _locationController.isTestOffsetEnabled.value;
+
+      return _SettingCard(
+        icon: Icons.my_location_rounded,
+        title: SteeingPageStrings.locationTestTitle,
+        description: SteeingPageStrings.locationTestDescription,
+        status: _StatusChip(
+          label: enabled
+              ? SteeingPageStrings.locationTestEnabledStatus
+              : SteeingPageStrings.locationTestDisabledStatus,
+          enabled: enabled,
+        ),
+        child: Align(
+          alignment: Alignment.centerLeft,
+          child: enabled
+              ? OutlinedButton.icon(
+                  onPressed: _stopOffset,
+                  icon: const Icon(Icons.location_disabled_rounded),
+                  label: Text(SteeingPageStrings.locationTestStopButton),
+                )
+              : FilledButton.icon(
+                  onPressed: _isStarting ? null : _startOffset,
+                  icon: _isStarting
+                      ? const SizedBox(
+                          width: 18,
+                          height: 18,
+                          child: CircularProgressIndicator(strokeWidth: 2),
+                        )
+                      : const Icon(Icons.add_location_alt_rounded),
+                  label: Text(SteeingPageStrings.locationTestStartButton),
+                ),
+        ),
+      );
+    });
+  }
+}
+
 class _LanguageSettingCard extends StatelessWidget {
   const _LanguageSettingCard();
 
@@ -700,17 +813,18 @@ class _DebugCaptureAllMonstersCardState
                   : Icon(Icons.delete_sweep_rounded),
               label: Text(SteeingPageStrings.debugDeleteAllButton),
             ),
-            FilledButton.tonalIcon(
-              onPressed: _isBusy ? null : _importGameData,
-              icon: _isImportingDb
-                  ? SizedBox(
-                      width: 18,
-                      height: 18,
-                      child: CircularProgressIndicator(strokeWidth: 2),
-                    )
-                  : Icon(Icons.cloud_upload_rounded),
-              label: Text(SteeingPageStrings.debugImportDbButton),
-            ),
+            if (kDebugMode)
+              FilledButton.tonalIcon(
+                onPressed: _isBusy ? null : _importGameData,
+                icon: _isImportingDb
+                    ? SizedBox(
+                        width: 18,
+                        height: 18,
+                        child: CircularProgressIndicator(strokeWidth: 2),
+                      )
+                    : Icon(Icons.cloud_upload_rounded),
+                label: Text(SteeingPageStrings.debugImportDbButton),
+              ),
           ],
         ),
       ),
@@ -748,9 +862,9 @@ class _UserProtocolButtonState extends State<_UserProtocolButton> {
       return;
     }
 
-    await Navigator.of(
-      context,
-    ).push(MaterialPageRoute<void>(builder: (context) => UserProtocolPage()));
+    await Navigator.of(context).push(
+      MaterialPageRoute<void>(builder: (context) => UserProtocolPage()),
+    );
   }
 
   @override

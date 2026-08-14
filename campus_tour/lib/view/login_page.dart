@@ -21,10 +21,10 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
   final LoginController _controller = LoginController();
   final TextEditingController _emailController = TextEditingController(
-    text: "uuu@gmail.com",
+    text: "",
   );
   final TextEditingController _passwordController = TextEditingController(
-    text: "uuuuuuuu",
+    text: "",
   );
   bool _isLoading = false;
 
