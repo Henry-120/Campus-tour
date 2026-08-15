@@ -1,5 +1,6 @@
 //專門處理登入、註冊、登出
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthService {
@@ -49,12 +50,51 @@ class AuthService {
     return userCredential.user;
   }
 
+  // Apple 登入/註冊。iOS、Android 使用原生 Provider 流程，Web 使用彈出視窗。
+  Future<User?> signInWithApple() async {
+    final appleProvider = AppleAuthProvider()
+      ..addScope('email')
+      ..addScope('name');
+
+    final userCredential = kIsWeb
+        ? await _auth.signInWithPopup(appleProvider)
+        : await _auth.signInWithProvider(appleProvider);
+    return userCredential.user;
+  }
+
   bool hasPasswordProvider([User? user]) {
     final target = user ?? _auth.currentUser;
     return target?.providerData.any(
           (provider) => provider.providerId == EmailAuthProvider.PROVIDER_ID,
         ) ??
         false;
+  }
+
+  bool hasAppleProvider([User? user]) {
+    final target = user ?? _auth.currentUser;
+    return target?.providerData.any(
+          (provider) => provider.providerId == AppleAuthProvider.PROVIDER_ID,
+        ) ??
+        false;
+  }
+
+  Future<User> linkAppleProvider() async {
+    final user = _auth.currentUser;
+    if (user == null) {
+      throw FirebaseAuthException(
+        code: 'user-not-found',
+        message: '目前沒有可連結 Apple 登入的帳號。',
+      );
+    }
+    if (hasAppleProvider(user)) return user;
+
+    final appleProvider = AppleAuthProvider()
+      ..addScope('email')
+      ..addScope('name');
+    final result = kIsWeb
+        ? await user.linkWithPopup(appleProvider)
+        : await user.linkWithProvider(appleProvider);
+    return result.user ?? user;
   }
 
   Future<User> linkEmailPassword(String password) async {

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../services/audio_service.dart';
 import '../controllers/login_controller.dart';
-import '../controllers/user_controller.dart';
+import '../utils/account_data_sync_exception.dart';
 import '../widgets/constants/asset_paths.dart';
 import '../widgets/constants/responsive.dart';
 import '../widgets/common/snackbar_builder.dart';
@@ -14,7 +14,7 @@ import 'after_login.dart';
 import 'register_page.dart';
 
 class LoginPage extends StatefulWidget {
-  LoginPage({super.key});
+  const LoginPage({super.key});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -36,7 +36,7 @@ class _LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
     try {
       final user = await _controller.login(
         _emailController.text.trim(),
-        _passwordController.text.trim(),
+        _passwordController.text,
       );
 
       if (!mounted) return;
@@ -45,18 +45,14 @@ class _LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
         if (!user.emailVerified) {
           SnackBarBuilder.show(
             context,
-            "請先到 ${user.email ?? '你的信箱'} 完成 Email 驗證；驗證信已重新寄出",
+            'view.login.page.s008'.trParams({
+              'email': user.email ?? 'view.login.page.s009'.tr,
+            }),
             type: AppToastType.warning,
+            duration: const Duration(seconds: 5),
           );
           return;
         }
-
-        if (Get.isRegistered<UserController>()) {
-          debugPrint('view.login.page.s001'.tr);
-          await Get.find<UserController>().fetchCurrentUser();
-        }
-
-        if (!mounted) return;
 
         navigateAfterLogin(context);
       } else {
@@ -66,6 +62,15 @@ class _LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
           type: AppToastType.error,
         );
       }
+    } on AccountDataSyncException catch (error) {
+      debugPrint('[LoginPage] 登入成功，但同步資料失敗: $error');
+      if (!mounted) return;
+      SnackBarBuilder.show(
+        context,
+        accountDataSyncErrorMessage(error),
+        type: AppToastType.error,
+        duration: const Duration(seconds: 6),
+      );
     } catch (error) {
       debugPrint("[LoginPage] 登入出錯: $error");
 
@@ -84,7 +89,10 @@ class _LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
   }
 
   void _goToRegister() {
-    Navigator.push(context, MaterialPageRoute(builder: (_) => RegisterPage()));
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (_) => const RegisterPage()),
+    );
   }
 
   Future<void> _handleGoogleSignIn() async {
@@ -98,8 +106,21 @@ class _LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
       if (user != null) {
         navigateAfterLogin(context);
       } else {
-        SnackBarBuilder.show(context, '已取消 Google 登入', type: AppToastType.info);
+        SnackBarBuilder.show(
+          context,
+          'utils.firebase.auth.error.message.s033'.tr,
+          type: AppToastType.info,
+        );
       }
+    } on AccountDataSyncException catch (error) {
+      debugPrint('[LoginPage] Google 登入成功，但同步資料失敗: $error');
+      if (!mounted) return;
+      SnackBarBuilder.show(
+        context,
+        accountDataSyncErrorMessage(error),
+        type: AppToastType.error,
+        duration: const Duration(seconds: 6),
+      );
     } catch (error) {
       debugPrint("[LoginPage] Google 登入出錯: $error");
 
@@ -107,8 +128,55 @@ class _LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
 
       SnackBarBuilder.show(
         context,
-        firebaseAuthErrorMessage(error),
+        googleAuthErrorMessage(error),
+        type: isGoogleSignInCancellation(error)
+            ? AppToastType.info
+            : AppToastType.error,
+      );
+    } finally {
+      if (mounted) {
+        setState(() => _isLoading = false);
+      }
+    }
+  }
+
+  Future<void> _handleAppleSignIn() async {
+    setState(() => _isLoading = true);
+
+    try {
+      final user = await _controller.signInWithApple();
+
+      if (!mounted) return;
+
+      if (user != null) {
+        navigateAfterLogin(context);
+      } else {
+        SnackBarBuilder.show(
+          context,
+          'utils.firebase.auth.error.message.s011'.tr,
+          type: AppToastType.error,
+        );
+      }
+    } on AccountDataSyncException catch (error) {
+      debugPrint('[LoginPage] Apple 登入成功，但同步資料失敗: $error');
+      if (!mounted) return;
+      SnackBarBuilder.show(
+        context,
+        accountDataSyncErrorMessage(error),
         type: AppToastType.error,
+        duration: const Duration(seconds: 6),
+      );
+    } catch (error) {
+      debugPrint('[LoginPage] Apple 登入出錯: $error');
+
+      if (!mounted) return;
+
+      SnackBarBuilder.show(
+        context,
+        appleAuthErrorMessage(error),
+        type: isAppleSignInCancellation(error)
+            ? AppToastType.info
+            : AppToastType.error,
       );
     } finally {
       if (mounted) {
@@ -131,7 +199,7 @@ class _LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
       if (!mounted) return;
       SnackBarBuilder.show(
         context,
-        '如果此 Email 已註冊，密碼重設信將會寄到信箱。',
+        'view.login.page.s010'.tr,
         type: AppToastType.success,
         duration: const Duration(seconds: 4),
       );
@@ -198,6 +266,7 @@ class _LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
                       onLogin: _login,
                       onRegister: _goToRegister,
                       onGoogleSignIn: _handleGoogleSignIn,
+                      onAppleSignIn: _handleAppleSignIn,
                       onForgotPassword: _showForgotPasswordDialog,
                     ),
                     SizedBox(height: 30 * scale),

@@ -5,7 +5,7 @@ void main() {
   group('account security translations', () {
     final translations = AppTranslations().keys;
     final accountKeys = [
-      for (var index = 68; index <= 108; index++)
+      for (var index = 68; index <= 114; index++)
         'view.lhf.setting.page.s${index.toString().padLeft(3, '0')}',
     ];
 

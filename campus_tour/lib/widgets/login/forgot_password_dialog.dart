@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ForgotPasswordDialog extends StatefulWidget {
   const ForgotPasswordDialog({super.key, this.initialEmail = ''});
@@ -33,7 +34,7 @@ class _ForgotPasswordDialogState extends State<ForgotPasswordDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text('忘記密碼'),
+      title: Text('widgets.login.forgot.password.dialog.s001'.tr),
       content: Form(
         key: _formKey,
         child: TextFormField(
@@ -41,15 +42,19 @@ class _ForgotPasswordDialogState extends State<ForgotPasswordDialog> {
           keyboardType: TextInputType.emailAddress,
           autofocus: true,
           textInputAction: TextInputAction.done,
-          decoration: const InputDecoration(
-            labelText: 'Email',
-            hintText: '請輸入註冊時使用的 Email',
-            prefixIcon: Icon(Icons.email_rounded),
+          decoration: InputDecoration(
+            labelText: 'widgets.login.forgot.password.dialog.s002'.tr,
+            hintText: 'widgets.login.forgot.password.dialog.s003'.tr,
+            prefixIcon: const Icon(Icons.email_rounded),
           ),
           validator: (value) {
             final email = value?.trim() ?? '';
-            if (email.isEmpty) return '請輸入 Email';
-            if (!email.contains('@')) return 'Email 格式不正確';
+            if (email.isEmpty) {
+              return 'widgets.login.forgot.password.dialog.s004'.tr;
+            }
+            if (!email.contains('@')) {
+              return 'widgets.login.forgot.password.dialog.s005'.tr;
+            }
             return null;
           },
           onFieldSubmitted: (_) => _submit(),
@@ -58,9 +63,12 @@ class _ForgotPasswordDialogState extends State<ForgotPasswordDialog> {
       actions: [
         TextButton(
           onPressed: () => Navigator.of(context).pop(),
-          child: const Text('取消'),
+          child: Text('widgets.login.forgot.password.dialog.s006'.tr),
         ),
-        FilledButton(onPressed: _submit, child: const Text('寄送重設信')),
+        FilledButton(
+          onPressed: _submit,
+          child: Text('widgets.login.forgot.password.dialog.s007'.tr),
+        ),
       ],
     );
   }

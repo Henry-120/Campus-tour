@@ -47,9 +47,33 @@
       "ja": "国立中央大学地球科学学院は、台湾で唯一の地球科学を専門とする学院です。地球、気候、海洋、宇宙などの分野における研究と教育に長年取り組み、台湾を代表する地球科学研究拠点へと発展してきました。理論と実践を結び付け、国際的な視野と持続可能性への意識を備えた人材を育成し、地球環境への探究と理解を深め続けています。"
     },
     "major": {
-      "zh": ["地球科學學系", "大氣科學學系", "地球科學院學士班", "應用地質研究所", "太空科學研究所", "水文與海洋科學研究所", "太空科學與工程學系"],
-      "en": ["Department of Earth Sciences", "Department of Atmospheric Sciences", "Interdisciplinary Program of Earth System Science", "Graduate Institute of Applied Geology", "Graduate Institute of Space Science", "Graduate Institute of Hydrological and Oceanic Sciences", "Department of Space Science and Engineering"],
-      "ja": ["地球科学科", "大気科学科", "地球科学学院学士課程", "応用地質学研究所", "宇宙科学研究所", "水文・海洋科学研究所", "宇宙科学工学科"]
+      "zh": [
+        "地球科學學系",
+        "大氣科學學系",
+        "地球科學院學士班",
+        "應用地質研究所",
+        "太空科學研究所",
+        "水文與海洋科學研究所",
+        "太空科學與工程學系"
+      ],
+      "en": [
+        "Department of Earth Sciences",
+        "Department of Atmospheric Sciences",
+        "Interdisciplinary Program of Earth System Science",
+        "Graduate Institute of Applied Geology",
+        "Graduate Institute of Space Science",
+        "Graduate Institute of Hydrological and Oceanic Sciences",
+        "Department of Space Science and Engineering"
+      ],
+      "ja": [
+        "地球科学科",
+        "大気科学科",
+        "地球科学学院学士課程",
+        "応用地質学研究所",
+        "宇宙科学研究所",
+        "水文・海洋科学研究所",
+        "宇宙科学工学科"
+      ]
     }
   },
   {
@@ -83,7 +107,7 @@
       "ja": "文学院のそばの芝生を通るときは、この「太極アーチ」にぜひご注目ください。1988年からキャンパスを見守り、国立中央大学におけるパブリックアートの重要な出発点となったことから、この芝生は「太極芝生」と呼ばれています。朱銘は太極拳から着想を得て、簡潔で力強い造形によって気の流れを表現しました。アーチをくぐれば、東洋哲学と現代彫刻の対話の中で、力と均衡の美しさを感じられるでしょう。"
     },
     "imageURL": "assets/images/art/TaiChi.jpg",
-    "author": {"zh": "朱銘", "en": "Ju Ming", "ja": "朱銘"},
+    "author": { "zh": "朱銘", "en": "Ju Ming", "ja": "朱銘" },
     "date": "1988年"
   },
   {
@@ -101,7 +125,10 @@
     },
     "major": {
       "zh": ["客家語文暨社會科學學系", "法律與政府研究所"],
-      "en": ["Department of Hakka Language and Social Sciences", "Graduate Institute of Law and Government"],
+      "en": [
+        "Department of Hakka Language and Social Sciences",
+        "Graduate Institute of Law and Government"
+      ],
       "ja": ["客家言語・社会科学科", "法律・政府研究所"]
     }
   },
@@ -119,9 +146,33 @@
       "ja": "工学院は1969年の設立以来、長年の発展を経て、国立中央大学を代表する工学教育・研究拠点となりました。幅広い工学分野を擁し、理論、実践、分野横断的な連携を組み合わせ、革新力と実務経験を備えた人材の育成に努めています。近年は産業の動向に応え、スマート機械、エネルギー材料、持続可能な防災、グリーンテクノロジーなどに重点を置き、技術開発と持続可能な発展を推進しています。"
     },
     "major": {
-      "zh": ["土木工程學系", "機械工程學系", "化學工程與材料工程學系", "環境工程研究所", "營建管理研究所", "能源工程研究所", "材料科學與工程研究所"],
-      "en": ["Department of Civil Engineering", "Department of Mechanical Engineering", "Department of Chemical and Materials Engineering", "Graduate Institute of Environmental Engineering", "Graduate Institute of Construction Engineering and Management", "Graduate Institute of Energy Engineering", "Graduate Institute of Materials Science and Engineering"],
-      "ja": ["土木工学科", "機械工学科", "化学工学・材料工学科", "環境工学研究所", "建設管理研究所", "エネルギー工学研究所", "材料科学工学研究所"]
+      "zh": [
+        "土木工程學系",
+        "機械工程學系",
+        "化學工程與材料工程學系",
+        "環境工程研究所",
+        "營建管理研究所",
+        "能源工程研究所",
+        "材料科學與工程研究所"
+      ],
+      "en": [
+        "Department of Civil Engineering",
+        "Department of Mechanical Engineering",
+        "Department of Chemical and Materials Engineering",
+        "Graduate Institute of Environmental Engineering",
+        "Graduate Institute of Construction Engineering and Management",
+        "Graduate Institute of Energy Engineering",
+        "Graduate Institute of Materials Science and Engineering"
+      ],
+      "ja": [
+        "土木工学科",
+        "機械工学科",
+        "化学工学・材料工学科",
+        "環境工学研究所",
+        "建設管理研究所",
+        "エネルギー工学研究所",
+        "材料科学工学研究所"
+      ]
     }
   },
   {
@@ -138,9 +189,36 @@
       "ja": "文学院は豊かな人文的・歴史的背景を持ち、国立中央大学の百年にわたる学術の伝統を受け継ぎながら、文学、言語、歴史、哲学、芸術などの研究と教育に長年取り組んでいます。人文的素養の育成を重視し、学際的な思考、文化的な創造、国際交流を通じて、専門知識に加え、自立した思考力と人間への深い関心を備えた学生を育てています。\n>\n> 長年にわたり、学術研究、芸術公演、展示、文化活動を推進し、豊かな人文的雰囲気を育んできました。多様な教育・芸術空間には、趣のある建築と現代的な設備が調和しており、優れた学習環境を提供するとともに、国立中央大学を代表する人文ランドマークの一つとなっています。"
     },
     "major": {
-      "zh": ["中國文學系", "英美語文學系", "法國語文學系", "歷史研究所", "哲學研究所", "藝術學研究所", "學習與教學研究所", "文學院學士班"],
-      "en": ["Department of Chinese Literature", "Department of English", "Department of French", "Graduate Institute of History", "Graduate Institute of Philosophy", "Graduate Institute of Art Studies", "Graduate Institute of Learning and Instruction", "Interdisciplinary Program of Liberal Arts"],
-      "ja": ["中国文学科", "英米言語文学科", "フランス言語文学科", "歴史学研究所", "哲学研究所", "芸術学研究所", "学習・教授研究所", "文学院学士課程"]
+      "zh": [
+        "中國文學系",
+        "英美語文學系",
+        "法國語文學系",
+        "歷史研究所",
+        "哲學研究所",
+        "藝術學研究所",
+        "學習與教學研究所",
+        "文學院學士班"
+      ],
+      "en": [
+        "Department of Chinese Literature",
+        "Department of English",
+        "Department of French",
+        "Graduate Institute of History",
+        "Graduate Institute of Philosophy",
+        "Graduate Institute of Art Studies",
+        "Graduate Institute of Learning and Instruction",
+        "Interdisciplinary Program of Liberal Arts"
+      ],
+      "ja": [
+        "中国文学科",
+        "英米言語文学科",
+        "フランス言語文学科",
+        "歴史学研究所",
+        "哲学研究所",
+        "芸術学研究所",
+        "学習・教授研究所",
+        "文学院学士課程"
+      ]
     }
   },
   {
@@ -176,9 +254,33 @@
       "ja": "1968年に設立された理学院は、国立中央大学で最初に創設された学院です。基礎知識から最先端の応用までを幅広く扱う学科・研究所を擁し、国際水準の高エネルギー・強磁場物理研究センターや量子技術センターも設置されています。教員は優れた研究力に加え、教育と社会貢献への情熱も備えており、台湾でも特に高い知名度を誇る学院の一つです。理想と熱意を持つ学生を歓迎しています。"
     },
     "major": {
-      "zh": ["物理學系", "數學系", "化學系", "光電科學與工程學系", "理學院學士班", "統計研究所", "天文研究所"],
-      "en": ["Department of Physics", "Department of Mathematics", "Department of Chemistry", "Department of Optics and Photonics", "Interdisciplinary Program of Science", "Graduate Institute of Statistics", "Graduate Institute of Astronomy"],
-      "ja": ["物理学科", "数学科", "化学科", "光電子科学工学科", "理学院学士課程", "統計学研究所", "天文学研究所"]
+      "zh": [
+        "物理學系",
+        "數學系",
+        "化學系",
+        "光電科學與工程學系",
+        "理學院學士班",
+        "統計研究所",
+        "天文研究所"
+      ],
+      "en": [
+        "Department of Physics",
+        "Department of Mathematics",
+        "Department of Chemistry",
+        "Department of Optics and Photonics",
+        "Interdisciplinary Program of Science",
+        "Graduate Institute of Statistics",
+        "Graduate Institute of Astronomy"
+      ],
+      "ja": [
+        "物理学科",
+        "数学科",
+        "化学科",
+        "光電子科学工学科",
+        "理学院学士課程",
+        "統計学研究所",
+        "天文学研究所"
+      ]
     }
   },
   {
@@ -196,7 +298,11 @@
     },
     "major": {
       "zh": ["生命科學系", "生醫科學與工程學系", "認知神經科學研究所"],
-      "en": ["Department of Life Sciences", "Department of Biomedical Sciences and Engineering", "Institute of Cognitive Neuroscience"],
+      "en": [
+        "Department of Life Sciences",
+        "Department of Biomedical Sciences and Engineering",
+        "Institute of Cognitive Neuroscience"
+      ],
       "ja": ["生命科学科", "生物医学科学工学科", "認知神経科学研究所"]
     }
   },
@@ -231,9 +337,36 @@
       "ja": "管理学院は長年にわたる発展を経て、国立中央大学を代表する経営・管理教育と研究の拠点となりました。経営管理、情報管理、財務・金融、経済、人材資源、工業管理など幅広い分野を擁しています。理論と実務の両方を重視し、国際交流、デジタル技術、分野横断的な連携を積極的に推進することで、専門性、リーダーシップ、国際的視野を備えた人材を育成しています。\n>\n> 充実した教育・研究資源に加えて、産業界との連携を深め、革新的な思考、チームワーク、実践的な応用を重視しています。学生に多様な学習と成長の機会を提供し、学術研究、産学連携、人材育成の各分野で優れた成果を上げてきた、大学を代表する学院の一つです。"
     },
     "major": {
-      "zh": ["經濟學系", "資訊管理學系", "財務金融學系", "企業管理學系", "產業經濟研究所", "人力資源管理研究所", "工業管理研究所", "會計研究所"],
-      "en": ["Department of Economics", "Department of Information Management", "Department of Finance", "Department of Business Administration", "Graduate Institute of Industrial Economics", "Graduate Institute of Human Resource Management", "Graduate Institute of Industrial Management", "Graduate Institute of Accounting"],
-      "ja": ["経済学科", "情報管理学科", "財務金融学科", "経営管理学科", "産業経済学研究所", "人的資源管理研究所", "工業管理研究所", "会計学研究所"]
+      "zh": [
+        "經濟學系",
+        "資訊管理學系",
+        "財務金融學系",
+        "企業管理學系",
+        "產業經濟研究所",
+        "人力資源管理研究所",
+        "工業管理研究所",
+        "會計研究所"
+      ],
+      "en": [
+        "Department of Economics",
+        "Department of Information Management",
+        "Department of Finance",
+        "Department of Business Administration",
+        "Graduate Institute of Industrial Economics",
+        "Graduate Institute of Human Resource Management",
+        "Graduate Institute of Industrial Management",
+        "Graduate Institute of Accounting"
+      ],
+      "ja": [
+        "経済学科",
+        "情報管理学科",
+        "財務金融学科",
+        "経営管理学科",
+        "産業経済学研究所",
+        "人的資源管理研究所",
+        "工業管理研究所",
+        "会計学研究所"
+      ]
     }
   },
   {
@@ -250,9 +383,27 @@
       "ja": "資訊電機学院は、国立中央大学における情報・電気・通信分野の重要な教育研究拠点であり、革新力と国際的視野を備えた技術人材の育成に取り組んでいます。急速な技術発展に対応し、先端研究と分野横断的な連携を推進することで、人工知能、サイバーセキュリティ、通信システム、半導体設計、クラウドコンピューティング、スマートテクノロジーなどの分野で優れた成果を上げています。\n>\n> 理論的基礎に加えて実践力と産学連携も重視し、充実した研究設備と学習環境を提供しています。また、国際交流を積極的に進め、海外の著名大学とも協力関係を築いています。長年にわたり、学術研究とテクノロジー産業の双方で活躍する優秀な人材を数多く輩出してきた、国立中央大学を代表する学院の一つです。"
     },
     "major": {
-      "zh": ["電機工程學系", "資訊工程學系", "通訊工程學系", "網路學習科技研究所", "資訊電機學院學士班"],
-      "en": ["Department of Electrical Engineering", "Department of Computer Science and Information Engineering", "Department of Communication Engineering", "Graduate Institute of Network Learning Technology", "Interdisciplinary Program of Electrical Engineering and Computer Science"],
-      "ja": ["電気工学科", "情報工学科", "通信工学科", "ネットワーク学習科学技術研究所", "情報電気工学学院学士課程"]
+      "zh": [
+        "電機工程學系",
+        "資訊工程學系",
+        "通訊工程學系",
+        "網路學習科技研究所",
+        "資訊電機學院學士班"
+      ],
+      "en": [
+        "Department of Electrical Engineering",
+        "Department of Computer Science and Information Engineering",
+        "Department of Communication Engineering",
+        "Graduate Institute of Network Learning Technology",
+        "Interdisciplinary Program of Electrical Engineering and Computer Science"
+      ],
+      "ja": [
+        "電気工学科",
+        "情報工学科",
+        "通信工学科",
+        "ネットワーク学習科学技術研究所",
+        "情報電気工学学院学士課程"
+      ]
     }
   },
   {
@@ -269,7 +420,7 @@
       "ja": "キャンパスに隠された「生命の暗号」を見つけてみませんか。『DNA交響曲』はDNAの二重らせん構造から着想を得て、科学五館の教員と学生が持つ探究の精神をステンレスの芸術作品へと昇華しています。光によって表情を変える作品は、まるで静止した旋律のよう。絡み合うらせんの線が生命の神秘を語り、科学と芸術が出会う不思議な世界へと誘います。"
     },
     "imageURL": "assets/images/art/DNA.jpg",
-    "author": {"zh": "楊奉琛", "en": "Yang Feng-Chen", "ja": "楊奉琛"},
+    "author": { "zh": "楊奉琛", "en": "Yang Feng-Chen", "ja": "楊奉琛" },
     "date": "2005年7月15日"
   },
   {
@@ -286,7 +437,7 @@
       "ja": "風が吹くと、『Cycle-90° 羽翼』が踊り始めます。雪の結晶、ハチの巣、気泡など、自然界に見られる幾何学の不思議から着想を得て、自然が生み出す美しい形をもとにデザインされました。風に合わせて軽やかに回転し、その方向とリズムを探る作品を通して自然を観察し、科学と芸術の興味深い対話を感じてみてください。"
     },
     "imageURL": "assets/images/art/Wings.jpg",
-    "author": {"zh": "松本薰", "en": "Kaoru Matsumoto", "ja": "松本薰"},
+    "author": { "zh": "松本薰", "en": "Kaoru Matsumoto", "ja": "松本薰" },
     "date": "2017年"
   },
   {
@@ -303,7 +454,7 @@
       "ja": "空を見上げてみてください。雲が想像の旅へ連れて行ってくれるかもしれません。雲の上にとどまるこの実は、いったい誰のお気に入りなのでしょう。中国の伝統的な雲文様に金属と大理石を組み合わせ、禅の趣と幻想に満ちた空間を創り出しています。雲に座って想像の翼を広げれば、これまで知らなかった自分に出会えるかもしれません。"
     },
     "imageURL": "assets/images/art/CloudsFlyingThoughts.jpg",
-    "author": {"zh": "張乃文", "en": "Nai-Wen Chang", "ja": "張乃文"},
+    "author": { "zh": "張乃文", "en": "Nai-Wen Chang", "ja": "張乃文" },
     "date": "2009年"
   },
   {
@@ -320,7 +471,7 @@
       "ja": "この松林には、一本の凛とした松があなたとかくれんぼをしながら、見つけてもらうのを待っています。梢は風に揺れ、ときには周囲に松ぼっくりが散らばります。芸術家は環境芸術の考え方と自由で情趣豊かな表現を用いて作品を風景に溶け込ませ、ゆったりと上品な空間を生み出しました。"
     },
     "imageURL": "assets/images/art/ListeningToPineWind.jpg",
-    "author": {"zh": "林鴻文", "en": "Hung-Wen Lin", "ja": "林鴻文"},
+    "author": { "zh": "林鴻文", "en": "Hung-Wen Lin", "ja": "林鴻文" },
     "date": "2011年07月18日"
   },
   {
@@ -337,7 +488,7 @@
       "ja": "大学に入っても好奇心を忘れず、「なぜ？」と問い続けてみましょう。キャンパスの風景を映す〈水滴〉を眺めて着想を得たり、〈ベンチ〉に座って休んだり、〈スクリーン〉に近づいて周囲の環境が語る答えに耳を澄ませたりできます。観察し、考え、体験することで、科学・芸術・日常生活を結ぶ興味深いつながりを見つけてください。"
     },
     "imageURL": "assets/images/art/Why.jpg",
-    "author": {"zh": "黎志文", "en": "Lai Chi-Man", "ja": "黎志文"},
+    "author": { "zh": "黎志文", "en": "Lai Chi-Man", "ja": "黎志文" },
     "date": "2005年7月15日"
   },
   {
@@ -354,7 +505,7 @@
       "ja": "少し疲れたら、松蔭緑地で「雲の上に寝転ぶ」ひとときを過ごしてみませんか。空から舞い降りたような白い雲の石彫が木々の間に静かに佇み、座ったり横になったりしながら青空と流れる雲を眺めるよう誘っています。忙しい思考をしばし休ませてください。夜になると作品の下の光が呼吸するように明滅し、キャンパスにロマンチックな輝きを添えます。ときには雲の上を散歩するように、立ち止まってひと息つくことも忘れずに。"
     },
     "imageURL": "assets/images/art/StrollingInTheClouds.jpg",
-    "author": {"zh": "林建榮", "en": "Chien-Jung Lin", "ja": "林建榮"},
+    "author": { "zh": "林建榮", "en": "Chien-Jung Lin", "ja": "林建榮" },
     "date": "2011年07月18日"
   },
   {
@@ -371,7 +522,7 @@
       "ja": "あるときは静かな観察者、またあるときは輝くダンサーのよう。なぜ動くのでしょうか。それは風があるからです。キャンパスの中心に置かれたこの作品は、風の軌跡を捉え、光と影の変化を通して太陽の動きを映し出します。芸術家・松本薫は作品を風に舞わせ、その軽やかなリズムで強さと生命力を表現しました。自然と人間が交わす不思議な対話に耳を澄ませてみてください。"
     },
     "imageURL": "assets/images/art/FiveElephant.jpg",
-    "author": {"zh": "松本薰", "en": "Kaoru Matsumoto", "ja": "松本薰"},
+    "author": { "zh": "松本薰", "en": "Kaoru Matsumoto", "ja": "松本薰" },
     "date": "2011年07月18日"
   },
   {
@@ -383,11 +534,11 @@
     },
     "type": "裝置藝術",
     "story": {
-      "zh": "",
-      "en": "",
-      "ja": ""
+      "zh": "「筆墨紙硯」是中央大學正門入口處極具代表性的人文景觀。它巧妙結合地形與周邊建築，將傳統文房四寶藏進校園：高聳的「在臺復校紀念碑」如同一支筆，磚紅色警衛室宛如一塊墨，行政大樓的鏤空方格外牆象徵九宮格宣紙，而修剪出「中央大學」校名的綠色花圃則是一方硯台。四者共同迎接每位走進校園的人，也寓意中大學子在這張紙上揮毫，寫下屬於自己的大學篇章。",
+      "en": "The Four Treasures of the Study is one of the most distinctive cultural landscapes at National Central University's main entrance. The terrain and surrounding architecture cleverly evoke the four traditional tools of Chinese calligraphy: the towering Monument Commemorating NCU's Re-establishment in Taiwan represents a brush; the red-brick guardhouse resembles an ink stick; the open-grid facade of the Administration Building suggests gridded calligraphy paper; and the green flower bed trimmed to display the university's name forms an inkstone. Together, they welcome everyone entering the campus and symbolize NCU students writing their own university stories upon this sheet of paper.",
+      "ja": "「筆墨紙硯」は、国立中央大学の正門入口を代表する人文景観です。地形と周囲の建築を巧みに組み合わせ、中国の伝統的な文房四宝をキャンパスの風景に表現しています。高くそびえる「台湾復校記念碑」は筆、赤れんがの守衛室は墨、行政大楼の格子状の外壁は升目入りの宣紙、そして「中央大學」の文字に刈り込まれた緑の花壇は硯を象徴しています。四つの景観はキャンパスを訪れる人々を迎えるとともに、中大の学生がこの紙の上に自らの大学生活を描いていくという意味も込められています。"
     },
-    "imageURL": "",
+    "imageURL": "assets/images/art/Treasures.jpg",
     "author": "",
     "date": ""
   },
@@ -398,13 +549,13 @@
       "en": "Office of International Affairs",
       "ja": "国際事務所"
     },
-    "type": "裝置藝術",
+    "type": "景點",
     "story": {
       "zh": "",
       "en": "",
       "ja": ""
     },
-    "imageURL": "assets/images/art/FiveElephant.jpg",
+    "imageURL": "",
     "author": "",
     "date": ""
   },
@@ -415,31 +566,31 @@
       "en": "Office of Student Affairs",
       "ja": "学生事務所"
     },
-    "type": "裝置藝術",
+    "type": "景點",
     "story": {
       "zh": "",
       "en": "",
       "ja": ""
     },
-    "imageURL": "assets/images/art/FiveElephant.jpg",
+    "imageURL": "",
     "author": "",
     "date": ""
   },
   {
     "id": "a25",
     "name": {
-      "zh": "大講堂",
+      "zh": "大禮堂",
       "en": "Auditorium",
-      "ja": "大講堂"
+      "ja": "大礼堂"
     },
     "type": "裝置藝術",
     "story": {
-      "zh": "",
-      "en": "",
-      "ja": ""
+      "zh": "大禮堂是中央大學教學研究綜合大樓的一部分，於2020年啟用。建築以校園常見的松果為設計意象，層層交疊的外觀呼應中大「以松立校」的精神，也象徵知識種子的孕育。館內設有約1,500個座位，並運用多角度的聲學反射設計，可供集會、演講、劇場與音樂演出使用，是校園中央的重要地標，也是桃園地區具規模的展演空間。",
+      "en": "The Auditorium is part of National Central University's Teaching and Research Complex and opened in 2020. Inspired by the pine cones commonly found across campus, its layered exterior reflects NCU's tradition of taking the pine tree as its symbol and represents the nurturing of seeds of knowledge. The hall seats approximately 1,500 people and features multi-angled acoustic reflectors. Designed for assemblies, lectures, theatrical productions, and concerts, it is both a major campus landmark and one of the largest performance venues in the Taoyuan area.",
+      "ja": "大礼堂は、国立中央大学の教育研究総合棟を構成する施設の一つで、2020年に開館しました。キャンパスでよく見られる松ぼっくりをモチーフとした重層的な外観は、松を大学の精神的象徴とする中大の伝統を表し、知識の種を育むという意味も込められています。館内には約1,500席が設けられ、多角度の音響反射設計が採用されています。集会や講演、演劇、音楽公演などに利用される、キャンパス中央の重要なランドマークであり、桃園地域でも有数の規模を誇る上演施設です。"
     },
-    "imageURL": "assets/images/art/FiveElephant.jpg",
-    "author": "",
-    "date": ""
+    "imageURL": "assets/images/art/Auditorium.jpg",
+    "author": "潘冀",
+    "date": "1981年"
   }
 ]

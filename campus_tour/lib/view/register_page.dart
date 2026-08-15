@@ -5,6 +5,7 @@ import '../styles/app_theme.dart';
 import '../widgets/constants/asset_paths.dart';
 import '../widgets/constants/responsive.dart';
 import '../widgets/common/snackbar_builder.dart';
+import '../utils/account_data_sync_exception.dart';
 import '../utils/firebase_auth_error_message.dart';
 import '../widgets/login/game_link_text.dart';
 import '../widgets/login/game_title.dart';
@@ -15,7 +16,7 @@ import 'login_page.dart';
 import 'package:get/get.dart';
 
 class RegisterPage extends StatefulWidget {
-  RegisterPage({super.key});
+  const RegisterPage({super.key});
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
@@ -49,7 +50,7 @@ class _RegisterPageState extends State<RegisterPage> {
     try {
       final user = await _controller.register(
         _emailController.text.trim(),
-        _passwordController.text.trim(),
+        _passwordController.text,
         _nameController.text.trim(),
       );
 
@@ -58,7 +59,9 @@ class _RegisterPageState extends State<RegisterPage> {
       if (user != null) {
         SnackBarBuilder.show(
           context,
-          "驗證信已寄到 ${user.email ?? '你的信箱'}，請完成驗證後再登入",
+          'view.register.page.s002'.trParams({
+            'email': user.email ?? 'view.login.page.s009'.tr,
+          }),
           type: AppToastType.success,
         );
 
@@ -70,6 +73,16 @@ class _RegisterPageState extends State<RegisterPage> {
           type: AppToastType.error,
         );
       }
+    } on AccountDataSyncException catch (error) {
+      debugPrint('[RegisterPage] 帳號建立成功，但初始化資料失敗: $error');
+      if (!mounted) return;
+      SnackBarBuilder.show(
+        context,
+        accountDataSyncErrorMessage(error),
+        type: AppToastType.error,
+        duration: const Duration(seconds: 6),
+      );
+      _goBackToLogin();
     } catch (error) {
       debugPrint("[RegisterPage] 註冊出錯: $error");
 
@@ -106,10 +119,19 @@ class _RegisterPageState extends State<RegisterPage> {
       } else {
         SnackBarBuilder.show(
           context,
-          'view.register.page.s007'.tr,
-          type: AppToastType.error,
+          'utils.firebase.auth.error.message.s033'.tr,
+          type: AppToastType.info,
         );
       }
+    } on AccountDataSyncException catch (error) {
+      debugPrint('[RegisterPage] Google 登入成功，但同步資料失敗: $error');
+      if (!mounted) return;
+      SnackBarBuilder.show(
+        context,
+        accountDataSyncErrorMessage(error),
+        type: AppToastType.error,
+        duration: const Duration(seconds: 6),
+      );
     } catch (error) {
       debugPrint("[RegisterPage] Google 登入失敗: $error");
 
@@ -117,8 +139,61 @@ class _RegisterPageState extends State<RegisterPage> {
 
       SnackBarBuilder.show(
         context,
-        firebaseAuthErrorMessage(error),
+        googleAuthErrorMessage(error),
+        type: isGoogleSignInCancellation(error)
+            ? AppToastType.info
+            : AppToastType.error,
+      );
+    } finally {
+      if (mounted) {
+        setState(() => _isLoading = false);
+      }
+    }
+  }
+
+  Future<void> _handleAppleSignIn() async {
+    setState(() => _isLoading = true);
+
+    try {
+      final user = await _controller.signInWithApple();
+
+      if (!mounted) return;
+
+      if (user != null) {
+        SnackBarBuilder.show(
+          context,
+          'view.register.page.s010'.tr,
+          type: AppToastType.success,
+        );
+
+        navigateAfterLogin(context);
+      } else {
+        SnackBarBuilder.show(
+          context,
+          'utils.firebase.auth.error.message.s011'.tr,
+          type: AppToastType.error,
+        );
+      }
+    } on AccountDataSyncException catch (error) {
+      debugPrint('[RegisterPage] Apple 登入成功，但同步資料失敗: $error');
+      if (!mounted) return;
+      SnackBarBuilder.show(
+        context,
+        accountDataSyncErrorMessage(error),
         type: AppToastType.error,
+        duration: const Duration(seconds: 6),
+      );
+    } catch (error) {
+      debugPrint('[RegisterPage] Apple 登入失敗: $error');
+
+      if (!mounted) return;
+
+      SnackBarBuilder.show(
+        context,
+        appleAuthErrorMessage(error),
+        type: isAppleSignInCancellation(error)
+            ? AppToastType.info
+            : AppToastType.error,
       );
     } finally {
       if (mounted) {
@@ -130,7 +205,7 @@ class _RegisterPageState extends State<RegisterPage> {
   void _goBackToLogin() {
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (_) => LoginPage()),
+      MaterialPageRoute(builder: (_) => const LoginPage()),
     );
   }
 
@@ -174,6 +249,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         isLoading: _isLoading,
                         onRegister: _register,
                         onGoogleSignIn: _handleGoogleSignIn,
+                        onAppleSignIn: _handleAppleSignIn,
                         onBackToLogin: _goBackToLogin,
                       ),
                       GameLinkText(

@@ -5,8 +5,10 @@ import '../constants/asset_paths.dart';
 import '../constants/responsive.dart';
 import 'game_button.dart';
 import 'game_link_text.dart';
-import 'google_image_button.dart';
 import 'login_text_field.dart';
+import 'official_apple_sign_in_button.dart';
+import 'social_image_button.dart';
+import 'package:get/get.dart';
 
 class WoodLoginPanel extends StatelessWidget {
   const WoodLoginPanel({
@@ -17,6 +19,7 @@ class WoodLoginPanel extends StatelessWidget {
     required this.onLogin,
     required this.onRegister,
     required this.onGoogleSignIn,
+    required this.onAppleSignIn,
     required this.onForgotPassword,
   });
 
@@ -26,6 +29,7 @@ class WoodLoginPanel extends StatelessWidget {
   final VoidCallback onLogin;
   final VoidCallback onRegister;
   final VoidCallback onGoogleSignIn;
+  final VoidCallback onAppleSignIn;
   final VoidCallback onForgotPassword;
 
   @override
@@ -121,11 +125,27 @@ class WoodLoginPanel extends StatelessWidget {
           ),
           Positioned(
             bottom: 10 * scale,
-            child: GoogleImageButton(
-              imagePath: AssetPaths.googleLogo,
-              size: 88 * scale,
-              disabled: isLoading,
-              onTap: onGoogleSignIn,
+            left: 68 * scale,
+            right: 68 * scale,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                SocialImageButton(
+                  imagePath: AssetPaths.googleLogo,
+                  semanticsLabel: 'widgets.login.social.buttons.s001'.tr,
+                  size: 88 * scale,
+                  disabled: isLoading,
+                  onTap: onGoogleSignIn,
+                ),
+                OfficialAppleSignInButton(
+                  text: 'widgets.login.social.buttons.s002'.tr,
+                  width: 80 * scale,
+                  height: 80 * scale,
+                  disabled: isLoading,
+                  logoOnly: true,
+                  onPressed: onAppleSignIn,
+                ),
+              ],
             ),
           ),
         ],

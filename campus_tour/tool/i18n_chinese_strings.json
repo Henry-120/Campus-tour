@@ -1,6 +1,6 @@
 {
   "generatedBy": "tool/extract_chinese_strings.dart",
-  "totalUniqueStrings": 376,
+  "totalUniqueStrings": 458,
   "entries": [
     {
       "key": "controllers.login.controller.s001",
@@ -2028,9 +2028,9 @@
     },
     {
       "key": "view.register.page.s002",
-      "zh": "驗證信已寄到 ${user.email ?? '你的信箱'}，請完成驗證後再登入",
-      "en": "A verification email has been sent to ${user.email ?? 'your email address'}. Verify your email before signing in.",
-      "ja": "確認メールを${user.email ?? 'メールアドレス'}に送信しました。メール認証を完了してからログインしてください。",
+      "zh": "驗證信已寄到 @email，請完成驗證後再登入",
+      "en": "A verification email has been sent to @email. Verify your email before signing in.",
+      "ja": "確認メールを@emailに送信しました。メール認証を完了してからログインしてください。",
       "occurrences": [
         {
           "file": "lib/view/register_page.dart",
@@ -4066,6 +4066,231 @@
     },
     {
       "key": "view.call.and.email.s001", "zh": "呼叫與回報", "en": "Call and Report", "ja": "電話と通報", "occurrences": [{"file": "lib/view/call_and_email.dart", "line": 86}]
+    },
+    {
+      "key": "widgets.login.social.buttons.s001", "zh": "使用 Google 登入", "en": "Sign in with Google", "ja": "Googleでログイン", "occurrences": [{"file": "lib/widgets/login/wood_login_panel.dart"}, {"file": "lib/widgets/login/wood_register_panel.dart"}]
+    },
+    {
+      "key": "widgets.login.social.buttons.s002", "zh": "使用 Apple 登入", "en": "Sign in with Apple", "ja": "Appleでサインイン", "occurrences": [{"file": "lib/widgets/login/wood_login_panel.dart"}, {"file": "lib/widgets/login/wood_register_panel.dart"}]
+    },
+    {
+      "key": "view.register.page.s010", "zh": "Apple 登入成功！歡迎加入冒險之旅", "en": "Apple Sign-In successful! Welcome to the adventure!", "ja": "Appleでのログインが完了しました！冒険の世界へようこそ！", "occurrences": [{"file": "lib/view/register_page.dart"}]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s001", "zh": "發生未預期的錯誤，請稍後再試。", "en": "An unexpected error occurred. Please try again later.", "ja": "予期しないエラーが発生しました。しばらくしてからもう一度お試しください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s002", "zh": "已取消 Apple 登入。", "en": "Apple Sign-In was canceled.", "ja": "Appleでのサインインをキャンセルしました。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s003", "zh": "這個 Email 已使用其他登入方式，請先使用原本的方式登入。", "en": "This email already uses another sign-in method. Sign in with the original method first.", "ja": "このメールアドレスは別のログイン方法で使用されています。先に元の方法でログインしてください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s004", "zh": "這個 Apple 帳號已連結到另一個帳號。", "en": "This Apple Account is already linked to another account.", "ja": "このApple Accountは別のアカウントにすでに連携されています。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s005", "zh": "Firebase 尚未啟用 Apple 登入。", "en": "Apple Sign-In is not enabled in Firebase.", "ja": "FirebaseでAppleログインが有効になっていません。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s006", "zh": "網路連線失敗，請確認網路後再試。", "en": "Network connection failed. Check your connection and try again.", "ja": "ネットワーク接続に失敗しました。接続を確認してもう一度お試しください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s007", "zh": "嘗試次數過多，請稍後再試。", "en": "Too many attempts. Please try again later.", "ja": "試行回数が多すぎます。しばらくしてからもう一度お試しください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s008", "zh": "Apple 登入憑證無效，請重新嘗試。", "en": "The Apple Sign-In credential is invalid. Please try again.", "ja": "Appleのログイン認証情報が無効です。もう一度お試しください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s009", "zh": "Apple 登入網域尚未獲得授權，請檢查 Apple 與 Firebase 設定。", "en": "The Apple Sign-In domain is not authorized. Check the Apple and Firebase settings.", "ja": "Appleログインのドメインが承認されていません。AppleとFirebaseの設定を確認してください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s010", "zh": "已有 Apple 登入流程正在進行，請完成後再試。", "en": "An Apple Sign-In flow is already in progress. Complete it before trying again.", "ja": "Appleログインの処理がすでに進行中です。完了してからもう一度お試しください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s011", "zh": "Apple 登入失敗，請稍後再試。", "en": "Apple Sign-In failed. Please try again later.", "ja": "Appleログインに失敗しました。しばらくしてからもう一度お試しください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
+    },
+    {
+      "key": "view.lhf.setting.page.s109", "zh": "Apple 登入已連結", "en": "Apple Sign-In linked", "ja": "Appleログイン連携済み", "occurrences": [{"file": "lib/view/lhf_setting_page.dart"}]
+    },
+    {
+      "key": "view.lhf.setting.page.s110", "zh": "此帳號可以使用 Apple 登入，並會載入相同的使用者與遊戲資料。", "en": "This account can sign in with Apple and load the same user and game data.", "ja": "このアカウントはAppleでログインして、同じユーザー情報とゲームデータを読み込めます。", "occurrences": [{"file": "lib/view/lhf_setting_page.dart"}]
+    },
+    {
+      "key": "view.lhf.setting.page.s111", "zh": "連結 Apple 登入後，之後可以用 Apple 登入目前這個帳號。", "en": "Link Apple Sign-In to use Apple to access this account in the future.", "ja": "Appleログインを連携すると、今後Appleを使って現在のアカウントにログインできます。", "occurrences": [{"file": "lib/view/lhf_setting_page.dart"}]
+    },
+    {
+      "key": "view.lhf.setting.page.s112", "zh": "Apple 登入連結成功，Firebase UID 與原有資料維持不變。", "en": "Apple Sign-In was linked successfully. Your Firebase UID and existing data are unchanged.", "ja": "Appleログインを連携しました。Firebase UIDと既存データは変更されていません。", "occurrences": [{"file": "lib/view/lhf_setting_page.dart"}]
+    },
+    {
+      "key": "view.lhf.setting.page.s113", "zh": "正在連結 Apple 登入…", "en": "Linking Apple Sign-In…", "ja": "Appleログインを連携しています…", "occurrences": [{"file": "lib/view/lhf_setting_page.dart"}]
+    },
+    {
+      "key": "view.lhf.setting.page.s114", "zh": "Apple 登入", "en": "Apple Sign-In", "ja": "Appleログイン", "occurrences": [{"file": "lib/view/lhf_setting_page.dart"}]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s012", "zh": "目前帳號已經連結 Apple 登入。", "en": "Apple Sign-In is already linked to this account.", "ja": "現在のアカウントにはすでにAppleログインが連携されています。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s013", "zh": "找不到目前登入的帳號，請重新登入後再試。", "en": "The signed-in account could not be found. Sign in again and retry.", "ja": "現在ログインしているアカウントが見つかりません。もう一度ログインしてお試しください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s014", "zh": "Email 格式不正確。", "en": "Enter a valid email address.", "ja": "有効なメールアドレスを入力してください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s015", "zh": "請輸入密碼。", "en": "Enter your password.", "ja": "パスワードを入力してください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s016", "zh": "密碼強度不足，請至少輸入 6 位。", "en": "The password is too weak. Enter at least 6 characters.", "ja": "パスワードが短すぎます。6文字以上で入力してください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s017", "zh": "找不到這個 Email 的帳號。", "en": "No account was found for this email address.", "ja": "このメールアドレスのアカウントが見つかりません。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s018", "zh": "Email 或密碼不正確。", "en": "The email address or password is incorrect.", "ja": "メールアドレスまたはパスワードが正しくありません。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s019", "zh": "這個 Email 已經註冊，請直接登入或使用忘記密碼。", "en": "This email is already registered. Sign in or use Forgot Password.", "ja": "このメールアドレスは登録済みです。ログインするか、パスワードを再設定してください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s020", "zh": "這個 Email 已使用其他登入方式，請先使用原本的登入方式。", "en": "This email already uses another sign-in method. Sign in with the original method first.", "ja": "このメールアドレスは別のログイン方法で使用されています。先に元の方法でログインしてください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s021", "zh": "這個登入方式已經連結到目前帳號。", "en": "This sign-in method is already linked to the current account.", "ja": "このログイン方法は現在のアカウントにすでに連携されています。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s022", "zh": "這組登入資料已連結到其他帳號。", "en": "These sign-in credentials are linked to another account.", "ja": "このログイン情報は別のアカウントに連携されています。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s023", "zh": "為了帳號安全，請重新登入後再試一次。", "en": "For account security, sign in again and retry.", "ja": "アカウント保護のため、もう一度ログインしてからお試しください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s024", "zh": "Firebase 尚未啟用這種登入方式。", "en": "This sign-in method is not enabled in Firebase.", "ja": "このログイン方法はFirebaseで有効になっていません。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s025", "zh": "這個帳號已被停用，請聯絡客服或管理員。", "en": "This account has been disabled. Contact support or an administrator.", "ja": "このアカウントは無効化されています。サポートまたは管理者にお問い合わせください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s026", "zh": "登入狀態已失效，請重新登入。", "en": "Your sign-in session has expired. Sign in again.", "ja": "ログイン状態の有効期限が切れました。もう一度ログインしてください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s027", "zh": "App 的 Firebase 驗證設定不正確，請聯絡客服。", "en": "The app's Firebase Authentication configuration is invalid. Contact support.", "ja": "アプリのFirebase認証設定が正しくありません。サポートにお問い合わせください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s028", "zh": "驗證服務已達使用上限，請稍後再試。", "en": "The authentication service quota has been reached. Try again later.", "ja": "認証サービスの利用上限に達しました。しばらくしてからもう一度お試しください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s029", "zh": "Firebase 驗證服務發生內部錯誤，請稍後再試。", "en": "Firebase Authentication encountered an internal error. Try again later.", "ja": "Firebase認証で内部エラーが発生しました。しばらくしてからもう一度お試しください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s030", "zh": "登入驗證失敗，請稍後再試。", "en": "Authentication failed. Try again later.", "ja": "ログイン認証に失敗しました。しばらくしてからもう一度お試しください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s031", "zh": "請輸入 Email。", "en": "Enter your email address.", "ja": "メールアドレスを入力してください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s032", "zh": "密碼不符合安全規則，請依畫面提示設定更安全的密碼。", "en": "The password does not meet the security requirements. Follow the on-screen password rules.", "ja": "パスワードがセキュリティ要件を満たしていません。画面のルールに従って設定してください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s033", "zh": "已取消 Google 登入。", "en": "Google Sign-In was canceled.", "ja": "Googleログインをキャンセルしました。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}, {"file": "lib/view/login_page.dart"}, {"file": "lib/view/register_page.dart"}]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s034", "zh": "Google 登入設定不正確，請檢查 iOS URL Scheme、Client ID 與 Firebase 設定。", "en": "Google Sign-In is misconfigured. Check the iOS URL scheme, client ID, and Firebase settings.", "ja": "Googleログインの設定が正しくありません。iOSのURL Scheme、クライアントID、Firebase設定を確認してください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s035", "zh": "Google 登入失敗，請稍後再試。", "en": "Google Sign-In failed. Try again later.", "ja": "Googleログインに失敗しました。しばらくしてからもう一度お試しください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s036", "zh": "Google 登入憑證無效，請重新登入。", "en": "The Google Sign-In credential is invalid. Sign in again.", "ja": "Googleのログイン認証情報が無効です。もう一度ログインしてください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s037", "zh": "Firebase 尚未啟用 Google 登入。", "en": "Google Sign-In is not enabled in Firebase.", "ja": "FirebaseでGoogleログインが有効になっていません。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s038", "zh": "請選擇目前登入的 Google 帳號。", "en": "Select the Google account currently signed in.", "ja": "現在ログインしているGoogleアカウントを選択してください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s039", "zh": "找不到目前登入的帳號，請重新登入後再試。", "en": "The signed-in account could not be found. Sign in again and retry.", "ja": "現在ログインしているアカウントが見つかりません。もう一度ログインしてお試しください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s040", "zh": "這個帳號已經可以使用 Email 和密碼登入。", "en": "This account can already sign in with email and password.", "ja": "このアカウントはすでにメールアドレスとパスワードでログインできます。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s041", "zh": "登入驗證已成功，但無法同步帳號資料。@detail", "en": "Authentication succeeded, but the account data could not be synchronized. @detail", "ja": "ログイン認証には成功しましたが、アカウントデータを同期できませんでした。@detail", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s042", "zh": "帳號已建立且驗證信已寄出，但玩家資料初始化失敗。@detail", "en": "The account was created and the verification email was sent, but player data initialization failed. @detail", "ja": "アカウントを作成して確認メールを送信しましたが、プレイヤーデータの初期化に失敗しました。@detail", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s043", "zh": "目前沒有存取資料的權限，請檢查 Firestore 安全規則。", "en": "Data access was denied. Check the Firestore security rules.", "ja": "データへのアクセス権限がありません。Firestoreのセキュリティルールを確認してください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s044", "zh": "資料服務暫時無法使用，請確認網路後重新登入。", "en": "The data service is temporarily unavailable. Check your connection and sign in again.", "ja": "データサービスを一時的に利用できません。ネットワークを確認して、もう一度ログインしてください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s045", "zh": "讀取資料逾時，請稍後重新登入。", "en": "The data request timed out. Sign in again later.", "ja": "データの読み込みがタイムアウトしました。しばらくしてからもう一度ログインしてください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s046", "zh": "Firestore 認證狀態已失效，請重新登入。", "en": "The Firestore authentication session has expired. Sign in again.", "ja": "Firestoreの認証状態が失効しました。もう一度ログインしてください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s047", "zh": "資料服務已達使用上限，請稍後再試。", "en": "The data service quota has been reached. Try again later.", "ja": "データサービスの利用上限に達しました。しばらくしてからもう一度お試しください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s048", "zh": "找不到必要的帳號資料，請聯絡客服。", "en": "Required account data could not be found. Contact support.", "ja": "必要なアカウントデータが見つかりません。サポートにお問い合わせください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s049", "zh": "Firestore 設定尚未完成，請檢查安全規則或索引。", "en": "Firestore setup is incomplete. Check the security rules or indexes.", "ja": "Firestoreの設定が完了していません。セキュリティルールまたはインデックスを確認してください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s050", "zh": "帳號資料可能已損毀，請聯絡客服。", "en": "The account data may be corrupted. Contact support.", "ja": "アカウントデータが破損している可能性があります。サポートにお問い合わせください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s051", "zh": "Firestore 發生內部錯誤，請稍後再試。", "en": "Firestore encountered an internal error. Try again later.", "ja": "Firestoreで内部エラーが発生しました。しばらくしてからもう一度お試しください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s052", "zh": "讀取帳號資料失敗，請稍後重新登入。", "en": "Account data could not be loaded. Sign in again later.", "ja": "アカウントデータを読み込めませんでした。しばらくしてからもう一度ログインしてください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s053", "zh": "瀏覽器封鎖了 Apple 登入視窗，請允許彈出式視窗後再試。", "en": "The browser blocked the Apple Sign-In window. Allow pop-ups and try again.", "ja": "ブラウザがAppleログイン画面をブロックしました。ポップアップを許可してからもう一度お試しください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s054", "zh": "Apple 登入設定不正確，請檢查 Apple Developer 與 Firebase 設定。", "en": "Apple Sign-In is misconfigured. Check the Apple Developer and Firebase settings.", "ja": "Appleログインの設定が正しくありません。Apple DeveloperとFirebaseの設定を確認してください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s055", "zh": "瀏覽器不支援 Apple 登入所需的儲存功能。", "en": "This browser does not support the storage required for Apple Sign-In.", "ja": "このブラウザはAppleログインに必要なストレージ機能をサポートしていません。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
+    },
+    {
+      "key": "view.login.page.s008", "zh": "請先到 @email 完成 Email 驗證；驗證信已重新寄出。", "en": "Verify your email at @email before signing in. A new verification email has been sent.", "ja": "@emailでメール認証を完了してからログインしてください。確認メールを再送しました。", "occurrences": [{"file": "lib/view/login_page.dart"}]
+    },
+    {
+      "key": "view.login.page.s009", "zh": "你的信箱", "en": "your email address", "ja": "メールアドレス", "occurrences": [{"file": "lib/view/login_page.dart"}, {"file": "lib/view/register_page.dart"}]
+    },
+    {
+      "key": "view.login.page.s010", "zh": "如果此 Email 已註冊，密碼重設信將會寄到信箱。", "en": "If this email is registered, a password reset email will be sent.", "ja": "このメールアドレスが登録済みの場合、パスワード再設定メールが送信されます。", "occurrences": [{"file": "lib/view/login_page.dart"}]
+    },
+    {
+      "key": "widgets.login.forgot.password.dialog.s001", "zh": "忘記密碼", "en": "Forgot Password", "ja": "パスワードを忘れた場合", "occurrences": [{"file": "lib/widgets/login/forgot_password_dialog.dart"}]
+    },
+    {
+      "key": "widgets.login.forgot.password.dialog.s002", "zh": "Email", "en": "Email", "ja": "メールアドレス", "occurrences": [{"file": "lib/widgets/login/forgot_password_dialog.dart"}]
+    },
+    {
+      "key": "widgets.login.forgot.password.dialog.s003", "zh": "請輸入註冊時使用的 Email", "en": "Enter the email address used to register", "ja": "登録時に使用したメールアドレスを入力してください", "occurrences": [{"file": "lib/widgets/login/forgot_password_dialog.dart"}]
+    },
+    {
+      "key": "widgets.login.forgot.password.dialog.s004", "zh": "請輸入 Email", "en": "Enter your email address", "ja": "メールアドレスを入力してください", "occurrences": [{"file": "lib/widgets/login/forgot_password_dialog.dart"}]
+    },
+    {
+      "key": "widgets.login.forgot.password.dialog.s005", "zh": "Email 格式不正確", "en": "Enter a valid email address", "ja": "有効なメールアドレスを入力してください", "occurrences": [{"file": "lib/widgets/login/forgot_password_dialog.dart"}]
+    },
+    {
+      "key": "widgets.login.forgot.password.dialog.s006", "zh": "取消", "en": "Cancel", "ja": "キャンセル", "occurrences": [{"file": "lib/widgets/login/forgot_password_dialog.dart"}]
+    },
+    {
+      "key": "widgets.login.forgot.password.dialog.s007", "zh": "寄送重設信", "en": "Send Reset Email", "ja": "再設定メールを送信", "occurrences": [{"file": "lib/widgets/login/forgot_password_dialog.dart"}]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s056", "zh": "Google 登入狀態已失效，請重新選擇 Google 帳號。", "en": "Your Google sign-in session has expired. Select your Google account again.", "ja": "Googleのログイン状態が失効しました。Googleアカウントをもう一度選択してください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
     }
   ]
 }

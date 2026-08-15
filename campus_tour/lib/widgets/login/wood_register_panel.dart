@@ -5,8 +5,9 @@ import '../constants/asset_paths.dart';
 import '../constants/responsive.dart';
 import 'game_button.dart';
 import 'game_link_text.dart';
-import 'google_image_button.dart';
 import 'login_text_field.dart';
+import 'official_apple_sign_in_button.dart';
+import 'social_image_button.dart';
 
 import 'package:get/get.dart';
 
@@ -20,6 +21,7 @@ class WoodRegisterPanel extends StatelessWidget {
     required this.isLoading,
     required this.onRegister,
     required this.onGoogleSignIn,
+    required this.onAppleSignIn,
     required this.onBackToLogin,
   });
 
@@ -32,6 +34,7 @@ class WoodRegisterPanel extends StatelessWidget {
 
   final VoidCallback onRegister;
   final VoidCallback onGoogleSignIn;
+  final VoidCallback onAppleSignIn;
   final VoidCallback onBackToLogin;
 
   @override
@@ -119,11 +122,17 @@ class WoodRegisterPanel extends StatelessWidget {
                   children: [
                     _buildLabel(context, "Password"),
                     SizedBox(width: 6 * scale),
-                    Text(
-                      "(at least 6 characters)",
-                      style: AppTheme.loginLabelStyle(
-                        scale,
-                      ).copyWith(fontSize: 10 * scale),
+                    Expanded(
+                      child: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          "(at least 6 characters)",
+                          style: AppTheme.loginLabelStyle(
+                            scale,
+                          ).copyWith(fontSize: 10 * scale),
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -206,11 +215,27 @@ class WoodRegisterPanel extends StatelessWidget {
 
           Positioned(
             bottom: 10 * scale,
-            child: GoogleImageButton(
-              imagePath: AssetPaths.googleLogo,
-              size: 100 * scale,
-              disabled: isLoading,
-              onTap: onGoogleSignIn,
+            left: 68 * scale,
+            right: 68 * scale,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                SocialImageButton(
+                  imagePath: AssetPaths.googleLogo,
+                  semanticsLabel: 'widgets.login.social.buttons.s001'.tr,
+                  size: 88 * scale,
+                  disabled: isLoading,
+                  onTap: onGoogleSignIn,
+                ),
+                OfficialAppleSignInButton(
+                  text: 'widgets.login.social.buttons.s002'.tr,
+                  width: 80 * scale,
+                  height: 80 * scale,
+                  disabled: isLoading,
+                  logoOnly: true,
+                  onPressed: onAppleSignIn,
+                ),
+              ],
             ),
           ),
         ],
