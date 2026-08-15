@@ -468,11 +468,11 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
                 });
                 if (layer == MapTileLayer.forest) {
                   AudioService().playMainBgm(
-                    fileName: 'audio/M05_walk_night.wav',
+                    fileName: 'audio/M05_walk_night.m4a',
                   );
                 } else {
                   AudioService().playMainBgm(
-                    fileName: 'audio/M04_walk_daytime.wav',
+                    fileName: 'audio/M04_walk_daytime.m4a',
                   );
                 }
               },

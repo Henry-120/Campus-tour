@@ -1,6 +1,6 @@
 {
   "generatedBy": "tool/extract_chinese_strings.dart",
-  "totalUniqueStrings": 337,
+  "totalUniqueStrings": 376,
   "entries": [
     {
       "key": "controllers.login.controller.s001",
@@ -3925,6 +3925,129 @@
     },
     {
       "key": "view.lhf.setting.page.s057", "zh": "遊戲資料匯入失敗，請確認帳號權限", "en": "Failed to import game data. Check account permissions.", "ja": "ゲームデータのインポートに失敗しました。アカウント権限を確認してください。", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 79}]
+    },
+    {
+      "key": "view.lhf.setting.page.s068", "zh": "Email 登入密碼設定完成，現在可以使用 Google 或 Email 登入。", "en": "Email sign-in password set. You can now sign in with Google or email.", "ja": "メールログイン用パスワードを設定しました。Google またはメールアドレスでログインできます。", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 872}]
+    },
+    {
+      "key": "view.lhf.setting.page.s069", "zh": "目前沒有登入帳號。", "en": "No account is currently signed in.", "ja": "現在ログインしているアカウントはありません。", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 888}]
+    },
+    {
+      "key": "view.lhf.setting.page.s070", "zh": "Email 已完成驗證，現在可以使用 Email＋密碼登入。", "en": "Email verified. You can now sign in with your email and password.", "ja": "メール認証が完了しました。メールアドレスとパスワードでログインできます。", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 897}]
+    },
+    {
+      "key": "view.lhf.setting.page.s071", "zh": "密碼設定完成，驗證信已寄出；請完成驗證後再使用 Email＋密碼登入。", "en": "Password set and verification email sent. Verify your email before signing in with email and password.", "ja": "パスワードを設定し、認証メールを送信しました。メールアドレスとパスワードでログインする前に、メール認証を完了してください。", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 909}]
+    },
+    {
+      "key": "view.lhf.setting.page.s072", "zh": "驗證信已重新寄出，請前往信箱完成驗證。", "en": "Verification email resent. Check your inbox to complete verification.", "ja": "認証メールを再送しました。受信トレイを確認して認証を完了してください。", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 910}]
+    },
+    {
+      "key": "view.lhf.setting.page.s073", "zh": "密碼已設定，但驗證信寄送失敗：@error", "en": "Password set, but the verification email could not be sent: @error", "ja": "パスワードは設定されましたが、認証メールを送信できませんでした：@error", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 919}]
+    },
+    {
+      "key": "view.lhf.setting.page.s074", "zh": "帳號安全", "en": "Account Security", "ja": "アカウントセキュリティ", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 945}]
+    },
+    {
+      "key": "view.lhf.setting.page.s075", "zh": "登入 Email：@email", "en": "Sign-in email: @email", "ja": "ログイン用メールアドレス：@email", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 948}]
+    },
+    {
+      "key": "view.lhf.setting.page.s076", "zh": "待驗證", "en": "Verification pending", "ja": "メール認証待ち", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 951}]
+    },
+    {
+      "key": "view.lhf.setting.page.s077", "zh": "Email 密碼已設定", "en": "Email password set", "ja": "メールパスワード設定済み", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 953}]
+    },
+    {
+      "key": "view.lhf.setting.page.s078", "zh": "尚未設定密碼", "en": "Password not set", "ja": "パスワード未設定", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 954}]
+    },
+    {
+      "key": "view.lhf.setting.page.s079", "zh": "密碼已設定。請完成 Email 驗證後，再使用 Email＋密碼登入；Google 登入不受影響。", "en": "Your password is set. Verify your email before signing in with email and password. Google Sign-In is not affected.", "ja": "パスワードは設定済みです。メールアドレスとパスワードでログインする前に、メール認証を完了してください。Google ログインには影響しません。", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 971}]
+    },
+    {
+      "key": "view.lhf.setting.page.s080", "zh": "重新寄送驗證信", "en": "Resend verification email", "ja": "認証メールを再送", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 989}]
+    },
+    {
+      "key": "view.lhf.setting.page.s081", "zh": "此帳號可以使用 Google 或 Email＋密碼登入。", "en": "This account can sign in with Google or email and password.", "ja": "このアカウントは、Google またはメールアドレスとパスワードでログインできます。", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 1001}]
+    },
+    {
+      "key": "view.lhf.setting.page.s082", "zh": "此帳號可以使用 Email＋密碼登入。", "en": "This account can sign in with email and password.", "ja": "このアカウントは、メールアドレスとパスワードでログインできます。", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 1002}]
+    },
+    {
+      "key": "view.lhf.setting.page.s083", "zh": "設定 Email 登入密碼", "en": "Set Email Sign-In Password", "ja": "メールログイン用パスワードを設定", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 1013}]
+    },
+    {
+      "key": "view.lhf.setting.page.s084", "zh": "此 Email", "en": "this email address", "ja": "このメールアドレス", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 1075}]
+    },
+    {
+      "key": "view.lhf.setting.page.s085", "zh": "設定後可使用 @email 與新密碼登入。", "en": "After setup, you can sign in with @email and your new password.", "ja": "設定後は、@email と新しいパスワードでログインできます。", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 1074}]
+    },
+    {
+      "key": "view.lhf.setting.page.s086", "zh": "新密碼", "en": "New password", "ja": "新しいパスワード", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 1082}]
+    },
+    {
+      "key": "view.lhf.setting.page.s087", "zh": "至少 6 位", "en": "At least 6 characters", "ja": "6文字以上", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 1083}]
+    },
+    {
+      "key": "view.lhf.setting.page.s088", "zh": "請輸入新密碼", "en": "Enter a new password", "ja": "新しいパスワードを入力してください", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 1097}]
+    },
+    {
+      "key": "view.lhf.setting.page.s089", "zh": "密碼至少需要 6 位", "en": "Password must be at least 6 characters", "ja": "パスワードは6文字以上で入力してください", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 1098}]
+    },
+    {
+      "key": "view.lhf.setting.page.s090", "zh": "確認新密碼", "en": "Confirm new password", "ja": "新しいパスワードを確認", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 1108}]
+    },
+    {
+      "key": "view.lhf.setting.page.s091", "zh": "請再次輸入新密碼", "en": "Enter the new password again", "ja": "新しいパスワードをもう一度入力してください", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 1122}]
+    },
+    {
+      "key": "view.lhf.setting.page.s092", "zh": "兩次輸入的密碼不一致", "en": "The passwords do not match", "ja": "入力したパスワードが一致しません", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 1123}]
+    },
+    {
+      "key": "view.lhf.setting.page.s093", "zh": "取消", "en": "Cancel", "ja": "キャンセル", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 1140}]
+    },
+    {
+      "key": "view.lhf.setting.page.s094", "zh": "確認設定", "en": "Set Password", "ja": "パスワードを設定", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 1151}]
+    },
+    {
+      "key": "view.lhf.setting.page.s095", "zh": "發生未預期的錯誤，請稍後再試。", "en": "An unexpected error occurred. Try again later.", "ja": "予期しないエラーが発生しました。しばらくしてからもう一度お試しください。", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 143}]
+    },
+    {
+      "key": "view.lhf.setting.page.s096", "zh": "Email 格式不正確。", "en": "Enter a valid email address.", "ja": "有効なメールアドレスを入力してください。", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 147}]
+    },
+    {
+      "key": "view.lhf.setting.page.s097", "zh": "請輸入密碼。", "en": "Enter your password.", "ja": "パスワードを入力してください。", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 148}]
+    },
+    {
+      "key": "view.lhf.setting.page.s098", "zh": "密碼強度不足，請至少輸入 6 位。", "en": "Password is too weak. Enter at least 6 characters.", "ja": "パスワードが短すぎます。6文字以上で入力してください。", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 149}]
+    },
+    {
+      "key": "view.lhf.setting.page.s099", "zh": "找不到目前登入的帳號。", "en": "The signed-in account could not be found.", "ja": "現在ログインしているアカウントが見つかりません。", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 150}]
+    },
+    {
+      "key": "view.lhf.setting.page.s100", "zh": "這個帳號已經可以使用 Email 和密碼登入。", "en": "This account can already sign in with email and password.", "ja": "このアカウントはすでにメールアドレスとパスワードでログインできます。", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 151}]
+    },
+    {
+      "key": "view.lhf.setting.page.s101", "zh": "這組登入資料已連結到其他帳號。", "en": "These sign-in credentials are linked to another account.", "ja": "このログイン情報は別のアカウントに連携されています。", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 152}]
+    },
+    {
+      "key": "view.lhf.setting.page.s102", "zh": "為了帳號安全，請重新登入後再試一次。", "en": "For account security, sign in again and retry.", "ja": "アカウント保護のため、もう一度ログインしてからお試しください。", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 153}]
+    },
+    {
+      "key": "view.lhf.setting.page.s103", "zh": "嘗試次數過多，請稍後再試。", "en": "Too many attempts. Try again later.", "ja": "試行回数が多すぎます。しばらくしてからもう一度お試しください。", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 154}]
+    },
+    {
+      "key": "view.lhf.setting.page.s104", "zh": "網路連線失敗，請確認網路後再試。", "en": "Network connection failed. Check your connection and retry.", "ja": "ネットワーク接続に失敗しました。接続を確認してからもう一度お試しください。", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 155}]
+    },
+    {
+      "key": "view.lhf.setting.page.s105", "zh": "Firebase 尚未啟用這種登入方式。", "en": "This sign-in method is not enabled in Firebase.", "ja": "このログイン方法はFirebaseで有効になっていません。", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 156}]
+    },
+    {
+      "key": "view.lhf.setting.page.s106", "zh": "已取消 Google 身分確認。", "en": "Google identity verification was canceled.", "ja": "Googleでの本人確認をキャンセルしました。", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 157}]
+    },
+    {
+      "key": "view.lhf.setting.page.s107", "zh": "請選擇目前登入的 Google 帳號。", "en": "Select the Google account currently signed in.", "ja": "現在ログインしているGoogleアカウントを選択してください。", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 158}]
+    },
+    {
+      "key": "view.lhf.setting.page.s108", "zh": "帳號驗證失敗，請稍後再試。", "en": "Account verification failed. Try again later.", "ja": "アカウント認証に失敗しました。しばらくしてからもう一度お試しください。", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 159}]
     },
     {
       "key": "widgets.game.game.map.s017", "zh": "超出探索範圍！\n返回校園即可繼續冒險", "en": "Out of exploration range!\nReturn to campus to continue your adventure", "ja": "探索範囲外です！\nキャンパスに戻ると冒険を続けられます", "occurrences": [{"file": "lib/widgets/game/game_map.dart", "line": 593}]

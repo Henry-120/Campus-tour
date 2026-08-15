@@ -175,17 +175,48 @@ class AppTranslations extends Translations {
       'view.lhf.setting.page.s055': '正在匯入遊戲資料...',
       'view.lhf.setting.page.s056': '遊戲資料匯入完成',
       'view.lhf.setting.page.s057': '遊戲資料匯入失敗，請確認帳號權限',
-      'view.lhf.setting.page.s058': '異地定位測試',
-      'view.lhf.setting.page.s059':
-          '將啟用當下的真實位置映射到中央大學 @latitude, @longitude，之後的移動距離與方向維持不變。重新啟動 App 後會自動關閉。',
-      'view.lhf.setting.page.s060': '測試定位中',
-      'view.lhf.setting.page.s061': '使用真實定位',
-      'view.lhf.setting.page.s062': '開始定位偏移',
-      'view.lhf.setting.page.s063': '停止定位偏移',
-      'view.lhf.setting.page.s064': '正在取得目前位置...',
-      'view.lhf.setting.page.s065': '定位偏移已啟用',
-      'view.lhf.setting.page.s066': '已恢復真實定位',
-      'view.lhf.setting.page.s067': '無法啟用定位偏移，請確認 GPS 與定位權限',
+      'view.lhf.setting.page.s068': 'Email 登入密碼設定完成，現在可以使用 Google 或 Email 登入。',
+      'view.lhf.setting.page.s069': '目前沒有登入帳號。',
+      'view.lhf.setting.page.s070': 'Email 已完成驗證，現在可以使用 Email＋密碼登入。',
+      'view.lhf.setting.page.s071': '密碼設定完成，驗證信已寄出；請完成驗證後再使用 Email＋密碼登入。',
+      'view.lhf.setting.page.s072': '驗證信已重新寄出，請前往信箱完成驗證。',
+      'view.lhf.setting.page.s073': '密碼已設定，但驗證信寄送失敗：@error',
+      'view.lhf.setting.page.s074': '帳號安全',
+      'view.lhf.setting.page.s075': '登入 Email：@email',
+      'view.lhf.setting.page.s076': '待驗證',
+      'view.lhf.setting.page.s077': 'Email 密碼已設定',
+      'view.lhf.setting.page.s078': '尚未設定密碼',
+      'view.lhf.setting.page.s079':
+          '密碼已設定。請完成 Email 驗證後，再使用 Email＋密碼登入；Google 登入不受影響。',
+      'view.lhf.setting.page.s080': '重新寄送驗證信',
+      'view.lhf.setting.page.s081': '此帳號可以使用 Google 或 Email＋密碼登入。',
+      'view.lhf.setting.page.s082': '此帳號可以使用 Email＋密碼登入。',
+      'view.lhf.setting.page.s083': '設定 Email 登入密碼',
+      'view.lhf.setting.page.s084': '此 Email',
+      'view.lhf.setting.page.s085': '設定後可使用 @email 與新密碼登入。',
+      'view.lhf.setting.page.s086': '新密碼',
+      'view.lhf.setting.page.s087': '至少 6 位',
+      'view.lhf.setting.page.s088': '請輸入新密碼',
+      'view.lhf.setting.page.s089': '密碼至少需要 6 位',
+      'view.lhf.setting.page.s090': '確認新密碼',
+      'view.lhf.setting.page.s091': '請再次輸入新密碼',
+      'view.lhf.setting.page.s092': '兩次輸入的密碼不一致',
+      'view.lhf.setting.page.s093': '取消',
+      'view.lhf.setting.page.s094': '確認設定',
+      'view.lhf.setting.page.s095': '發生未預期的錯誤，請稍後再試。',
+      'view.lhf.setting.page.s096': 'Email 格式不正確。',
+      'view.lhf.setting.page.s097': '請輸入密碼。',
+      'view.lhf.setting.page.s098': '密碼強度不足，請至少輸入 6 位。',
+      'view.lhf.setting.page.s099': '找不到目前登入的帳號。',
+      'view.lhf.setting.page.s100': '這個帳號已經可以使用 Email 和密碼登入。',
+      'view.lhf.setting.page.s101': '這組登入資料已連結到其他帳號。',
+      'view.lhf.setting.page.s102': '為了帳號安全，請重新登入後再試一次。',
+      'view.lhf.setting.page.s103': '嘗試次數過多，請稍後再試。',
+      'view.lhf.setting.page.s104': '網路連線失敗，請確認網路後再試。',
+      'view.lhf.setting.page.s105': 'Firebase 尚未啟用這種登入方式。',
+      'view.lhf.setting.page.s106': '已取消 Google 身分確認。',
+      'view.lhf.setting.page.s107': '請選擇目前登入的 Google 帳號。',
+      'view.lhf.setting.page.s108': '帳號驗證失敗，請稍後再試。',
       'view.login.page.s001': '[LoginPage] 登入成功，正在獲取資料...',
       'view.login.page.s002': '帳號或密碼錯誤',
       'view.login.page.s003': '[LoginPage] 登入出錯: \$e',
@@ -257,6 +288,21 @@ class AppTranslations extends Translations {
       'widgets.buttons.nfc.button.s006': '發生未知錯誤',
       'widgets.common.user.head.s001': '[UserHead] SVG 載入失敗: \$error',
       'widgets.common.user.head.s002': '[UserHead] 圖片載入失敗: \$error',
+      'widgets.encyclopedia.all.the.monster.monster.text.s001':
+          '精靈經由象群雕塑，匆匆跑向黑盒子，路途中似乎有什麼散發著魔力',
+      'widgets.encyclopedia.all.the.monster.monster.text.s002':
+          '沒發現魔法陣嗎？或許可以試試穿過拱門，看看會不會有什麼發現',
+      'widgets.encyclopedia.all.the.monster.monster.text.s003':
+          '精靈似乎曾駐足DNA觀賞許久，才又繼續前行，或許可以試著在附近找找看',
+      'widgets.encyclopedia.all.the.monster.monster.text.s004':
+          '請根據圖片內容，找到對應位置感應',
+      'widgets.encyclopedia.all.the.monster.monster.text.s005': '雲端上的松果似乎散發著魔力',
+      'widgets.encyclopedia.all.the.monster.monster.text.s007':
+          '站在疑問最深處，當屏風完全消失於視野時，向水面反射，疑問自會明朗',
+      'widgets.encyclopedia.all.the.monster.monster.text.s008':
+          '圖片中，是不是有一朵雲特別不一樣？',
+      'widgets.encyclopedia.all.the.monster.monster.text.s009':
+          '精靈似乎曾望著裝置，期待能看到代表中央大學的「中」字出現',
       'widgets.encyclopedia.elf.creator.section.s001': 'Creator Info (創作者資料)',
       'widgets.encyclopedia.elf.department.section.s001':
           'College Departments (學院系館)',
@@ -319,36 +365,8 @@ class AppTranslations extends Translations {
       'widgets.game.catching.pages.graphics.text.level.page.s006': '關閉 NFC 教學',
       'widgets.game.catching.pages.graphics.text.level.page.s007':
           '這個關卡目前沒有可顯示的內容',
-      'widgets.game.catching.pages.graphics.text.level.page.s008': '劇情回顧',
-      'widgets.game.catching.pages.graphics.text.level.page.s009': '關閉劇情回顧',
-      'widgets.game.catching.pages.monster.trace.plot.s001': '你',
-      'widgets.game.catching.pages.monster.trace.plot.s002': '這裡好像留下了一些奇怪的痕跡……',
-      'widgets.game.catching.pages.monster.trace.plot.s003':
-          '（你蹲下來仔細觀察，發現附近留有特殊的線索。）',
-      'widgets.game.catching.pages.monster.trace.plot.s004': '這應該就是那隻精靈留下的蹤跡。',
-      'widgets.game.catching.pages.monster.trace.plot.s005':
-          '（你將發現的蹤跡收進了蹤跡收集罐。）',
-      'widgets.game.catching.pages.monster.trace.plot.s006': '（繼續尋找下一個蹤跡吧。）',
-      'widgets.game.catching.pages.monster.trace.plot.s007':
-          '精靈經由象群雕塑，匆匆跑向黑盒子，路途中似乎有什麼散發著魔力。',
-      'widgets.game.catching.pages.monster.trace.plot.s008':
-          '沒發現蹤跡嗎？或許可以試試穿過拱門，看看會不會有什麼發現。',
-      'widgets.game.catching.pages.monster.trace.plot.s009':
-          '精靈似乎曾駐足 DNA 觀賞許久，才又繼續前行，或許可以試著在附近找找看。',
-      'widgets.game.catching.pages.monster.trace.plot.s010':
-          '這道蹤跡指向照片中的位置，前往附近仔細調查吧。',
-      'widgets.game.catching.pages.monster.trace.plot.s011':
-          '雲端上的松果似乎留有精靈的特殊氣息。',
-      'widgets.game.catching.pages.monster.trace.plot.s012':
-          '這道蹤跡指向照片中的位置，前往附近仔細調查吧。',
-      'widgets.game.catching.pages.monster.trace.plot.s013':
-          '站在疑問最深處，當屏風完全消失於視野時，向水面反射，疑問自會明朗。',
-      'widgets.game.catching.pages.monster.trace.plot.s014':
-          '視野中，是不是有一朵雲特別不一樣？',
-      'widgets.game.catching.pages.monster.trace.plot.s015':
-          '精靈似乎曾望著裝置，期待能看到代表中央大學的「中」字出現。',
-      'widgets.game.catching.pages.plot.level.s001': '收集精靈蹤跡',
-      'widgets.game.catching.pages.plot.level.s002': '調查附近留下的特殊線索',
+      'widgets.game.catching.pages.plot.level.s001': '你找到了一塊魔法石',
+      'widgets.game.catching.pages.plot.level.s002': '找到對應的法陣，將魔法石放上去吧！',
       'widgets.game.catching.pages.plot.level.s003': '你召喚了精靈',
       'widgets.game.catching.pages.plot.level.s004': '但它好像很有攻擊性的看著你......',
       'widgets.game.catching.pages.plot.level.s005': '點擊任意位置繼續',
@@ -609,18 +627,66 @@ class AppTranslations extends Translations {
       'view.lhf.setting.page.s056': 'Game data import complete',
       'view.lhf.setting.page.s057':
           'Failed to import game data. Check account permissions.',
-      'view.lhf.setting.page.s058': 'Remote Location Test',
-      'view.lhf.setting.page.s059':
-          'Maps your real position at activation to NCU @latitude, @longitude. Subsequent movement keeps the same distance and direction. The mode turns off after restarting the app.',
-      'view.lhf.setting.page.s060': 'Test location active',
-      'view.lhf.setting.page.s061': 'Using real location',
-      'view.lhf.setting.page.s062': 'Start location offset',
-      'view.lhf.setting.page.s063': 'Stop location offset',
-      'view.lhf.setting.page.s064': 'Getting current location...',
-      'view.lhf.setting.page.s065': 'Location offset enabled',
-      'view.lhf.setting.page.s066': 'Real location restored',
-      'view.lhf.setting.page.s067':
-          'Unable to enable the location offset. Check GPS and location permission.',
+      'view.lhf.setting.page.s068':
+          'Email sign-in password set. You can now sign in with Google or email.',
+      'view.lhf.setting.page.s069': 'No account is currently signed in.',
+      'view.lhf.setting.page.s070':
+          'Email verified. You can now sign in with your email and password.',
+      'view.lhf.setting.page.s071':
+          'Password set and verification email sent. Verify your email before signing in with email and password.',
+      'view.lhf.setting.page.s072':
+          'Verification email resent. Check your inbox to complete verification.',
+      'view.lhf.setting.page.s073':
+          'Password set, but the verification email could not be sent: @error',
+      'view.lhf.setting.page.s074': 'Account Security',
+      'view.lhf.setting.page.s075': 'Sign-in email: @email',
+      'view.lhf.setting.page.s076': 'Verification pending',
+      'view.lhf.setting.page.s077': 'Email password set',
+      'view.lhf.setting.page.s078': 'Password not set',
+      'view.lhf.setting.page.s079':
+          'Your password is set. Verify your email before signing in with email and password. Google Sign-In is not affected.',
+      'view.lhf.setting.page.s080': 'Resend verification email',
+      'view.lhf.setting.page.s081':
+          'This account can sign in with Google or email and password.',
+      'view.lhf.setting.page.s082':
+          'This account can sign in with email and password.',
+      'view.lhf.setting.page.s083': 'Set Email Sign-In Password',
+      'view.lhf.setting.page.s084': 'this email address',
+      'view.lhf.setting.page.s085':
+          'After setup, you can sign in with @email and your new password.',
+      'view.lhf.setting.page.s086': 'New password',
+      'view.lhf.setting.page.s087': 'At least 6 characters',
+      'view.lhf.setting.page.s088': 'Enter a new password',
+      'view.lhf.setting.page.s089': 'Password must be at least 6 characters',
+      'view.lhf.setting.page.s090': 'Confirm new password',
+      'view.lhf.setting.page.s091': 'Enter the new password again',
+      'view.lhf.setting.page.s092': 'The passwords do not match',
+      'view.lhf.setting.page.s093': 'Cancel',
+      'view.lhf.setting.page.s094': 'Set Password',
+      'view.lhf.setting.page.s095':
+          'An unexpected error occurred. Try again later.',
+      'view.lhf.setting.page.s096': 'Enter a valid email address.',
+      'view.lhf.setting.page.s097': 'Enter your password.',
+      'view.lhf.setting.page.s098':
+          'Password is too weak. Enter at least 6 characters.',
+      'view.lhf.setting.page.s099': 'The signed-in account could not be found.',
+      'view.lhf.setting.page.s100':
+          'This account can already sign in with email and password.',
+      'view.lhf.setting.page.s101':
+          'These sign-in credentials are linked to another account.',
+      'view.lhf.setting.page.s102':
+          'For account security, sign in again and retry.',
+      'view.lhf.setting.page.s103': 'Too many attempts. Try again later.',
+      'view.lhf.setting.page.s104':
+          'Network connection failed. Check your connection and retry.',
+      'view.lhf.setting.page.s105':
+          'This sign-in method is not enabled in Firebase.',
+      'view.lhf.setting.page.s106':
+          'Google identity verification was canceled.',
+      'view.lhf.setting.page.s107':
+          'Select the Google account currently signed in.',
+      'view.lhf.setting.page.s108':
+          'Account verification failed. Try again later.',
       'view.login.page.s001': '[LoginPage] 登入成功，正在獲取資料...',
       'view.login.page.s002': 'Incorrect email or password',
       'view.login.page.s003': '[LoginPage] 登入出錯: \$e',
@@ -713,6 +779,22 @@ class AppTranslations extends Translations {
       'widgets.buttons.nfc.button.s006': 'An unknown error occurred',
       'widgets.common.user.head.s001': '[UserHead] SVG 載入失敗: \$error',
       'widgets.common.user.head.s002': '[UserHead] 圖片載入失敗: \$error',
+      'widgets.encyclopedia.all.the.monster.monster.text.s001':
+          'The spirit hurried past the Elephant Herd sculpture toward the Black Box. Something along the way seemed to radiate magic.',
+      'widgets.encyclopedia.all.the.monster.monster.text.s002':
+          'Haven\'t found the magic circle? Try passing through the archway and see what you discover.',
+      'widgets.encyclopedia.all.the.monster.monster.text.s003':
+          'The spirit once stopped to admire the DNA sculpture for a long time before moving on. Try searching nearby.',
+      'widgets.encyclopedia.all.the.monster.monster.text.s004':
+          'Use the image to find the matching location and scan the tag.',
+      'widgets.encyclopedia.all.the.monster.monster.text.s005':
+          'The pinecone in the clouds seems to radiate magic.',
+      'widgets.encyclopedia.all.the.monster.monster.text.s007':
+          'Stand at the heart of the question. When the screen disappears completely from view, look toward its reflection on the water and the answer will become clear.',
+      'widgets.encyclopedia.all.the.monster.monster.text.s008':
+          'Does one of the clouds in the image look different from the others?',
+      'widgets.encyclopedia.all.the.monster.monster.text.s009':
+          'The spirit once gazed at the installation, waiting for the Chinese character “中,” representing National Central University, to appear.',
       'widgets.encyclopedia.elf.creator.section.s001': 'Creator Information',
       'widgets.encyclopedia.elf.department.section.s001': 'College Departments',
       'widgets.encyclopedia.elf.grid.s001': 'No spirits captured yet',
@@ -788,42 +870,9 @@ class AppTranslations extends Translations {
           'Close NFC Tutorial',
       'widgets.game.catching.pages.graphics.text.level.page.s007':
           'There is no content available for this level.',
-      'widgets.game.catching.pages.graphics.text.level.page.s008':
-          'Story Review',
-      'widgets.game.catching.pages.graphics.text.level.page.s009':
-          'Close Story Review',
-      'widgets.game.catching.pages.monster.trace.plot.s001': 'You',
-      'widgets.game.catching.pages.monster.trace.plot.s002':
-          'It looks like something left strange tracks here...',
-      'widgets.game.catching.pages.monster.trace.plot.s003':
-          '(You crouch down for a closer look and discover unusual clues nearby.)',
-      'widgets.game.catching.pages.monster.trace.plot.s004':
-          'These must be the tracks left by that spirit.',
-      'widgets.game.catching.pages.monster.trace.plot.s005':
-          '(You place the tracks you found into the trace collection jar.)',
-      'widgets.game.catching.pages.monster.trace.plot.s006':
-          '(Keep searching for the next trace.)',
-      'widgets.game.catching.pages.monster.trace.plot.s007':
-          'The spirit hurried past the Elephant Herd sculpture toward the Black Box. Something along the way seemed to radiate magic.',
-      'widgets.game.catching.pages.monster.trace.plot.s008':
-          'Still no trace? Try passing through the archway and see what you discover.',
-      'widgets.game.catching.pages.monster.trace.plot.s009':
-          'The spirit once stopped to admire the DNA sculpture for a long time before moving on. Try searching nearby.',
-      'widgets.game.catching.pages.monster.trace.plot.s010':
-          'This trace points toward the place in the photo. Search the area carefully.',
-      'widgets.game.catching.pages.monster.trace.plot.s011':
-          'The pinecone in the clouds seems to carry a spirit\'s unusual presence.',
-      'widgets.game.catching.pages.monster.trace.plot.s012':
-          'This trace points toward the place in the photo. Search the area carefully.',
-      'widgets.game.catching.pages.monster.trace.plot.s013':
-          'Stand at the heart of the question. When the screen disappears completely from view, look toward its reflection on the water and the answer will become clear.',
-      'widgets.game.catching.pages.monster.trace.plot.s014':
-          'Does one of the clouds in your field of view look different from the others?',
-      'widgets.game.catching.pages.monster.trace.plot.s015':
-          'The spirit once gazed at the installation, waiting for the Chinese character “中,” representing National Central University, to appear.',
-      'widgets.game.catching.pages.plot.level.s001': 'Collect Spirit Traces',
+      'widgets.game.catching.pages.plot.level.s001': 'You found a magic stone.',
       'widgets.game.catching.pages.plot.level.s002':
-          'Investigate the unusual clues left nearby.',
+          'Find the matching magic circle and place the stone on it!',
       'widgets.game.catching.pages.plot.level.s003': 'You summoned a spirit.',
       'widgets.game.catching.pages.plot.level.s004':
           'But it is staring at you aggressively...',
@@ -1076,17 +1125,51 @@ class AppTranslations extends Translations {
       'view.lhf.setting.page.s055': 'ゲームデータをインポートしています...',
       'view.lhf.setting.page.s056': 'ゲームデータのインポートが完了しました',
       'view.lhf.setting.page.s057': 'ゲームデータのインポートに失敗しました。アカウント権限を確認してください。',
-      'view.lhf.setting.page.s058': '遠隔位置情報テスト',
-      'view.lhf.setting.page.s059':
-          '有効化時の実際の位置を中央大学 @latitude, @longitude に対応させ、その後の移動距離と方向を維持します。アプリを再起動すると自動的にオフになります。',
-      'view.lhf.setting.page.s060': 'テスト位置情報を使用中',
-      'view.lhf.setting.page.s061': '実際の位置情報を使用中',
-      'view.lhf.setting.page.s062': '位置オフセットを開始',
-      'view.lhf.setting.page.s063': '位置オフセットを停止',
-      'view.lhf.setting.page.s064': '現在地を取得しています...',
-      'view.lhf.setting.page.s065': '位置オフセットを有効にしました',
-      'view.lhf.setting.page.s066': '実際の位置情報に戻しました',
-      'view.lhf.setting.page.s067': '位置オフセットを有効にできません。GPSと位置情報の権限を確認してください。',
+      'view.lhf.setting.page.s068':
+          'メールログイン用パスワードを設定しました。Google またはメールアドレスでログインできます。',
+      'view.lhf.setting.page.s069': '現在ログインしているアカウントはありません。',
+      'view.lhf.setting.page.s070': 'メール認証が完了しました。メールアドレスとパスワードでログインできます。',
+      'view.lhf.setting.page.s071':
+          'パスワードを設定し、認証メールを送信しました。メールアドレスとパスワードでログインする前に、メール認証を完了してください。',
+      'view.lhf.setting.page.s072': '認証メールを再送しました。受信トレイを確認して認証を完了してください。',
+      'view.lhf.setting.page.s073': 'パスワードは設定されましたが、認証メールを送信できませんでした：@error',
+      'view.lhf.setting.page.s074': 'アカウントセキュリティ',
+      'view.lhf.setting.page.s075': 'ログイン用メールアドレス：@email',
+      'view.lhf.setting.page.s076': 'メール認証待ち',
+      'view.lhf.setting.page.s077': 'メールパスワード設定済み',
+      'view.lhf.setting.page.s078': 'パスワード未設定',
+      'view.lhf.setting.page.s079':
+          'パスワードは設定済みです。メールアドレスとパスワードでログインする前に、メール認証を完了してください。Google ログインには影響しません。',
+      'view.lhf.setting.page.s080': '認証メールを再送',
+      'view.lhf.setting.page.s081':
+          'このアカウントは、Google またはメールアドレスとパスワードでログインできます。',
+      'view.lhf.setting.page.s082': 'このアカウントは、メールアドレスとパスワードでログインできます。',
+      'view.lhf.setting.page.s083': 'メールログイン用パスワードを設定',
+      'view.lhf.setting.page.s084': 'このメールアドレス',
+      'view.lhf.setting.page.s085': '設定後は、@email と新しいパスワードでログインできます。',
+      'view.lhf.setting.page.s086': '新しいパスワード',
+      'view.lhf.setting.page.s087': '6文字以上',
+      'view.lhf.setting.page.s088': '新しいパスワードを入力してください',
+      'view.lhf.setting.page.s089': 'パスワードは6文字以上で入力してください',
+      'view.lhf.setting.page.s090': '新しいパスワードを確認',
+      'view.lhf.setting.page.s091': '新しいパスワードをもう一度入力してください',
+      'view.lhf.setting.page.s092': '入力したパスワードが一致しません',
+      'view.lhf.setting.page.s093': 'キャンセル',
+      'view.lhf.setting.page.s094': 'パスワードを設定',
+      'view.lhf.setting.page.s095': '予期しないエラーが発生しました。しばらくしてからもう一度お試しください。',
+      'view.lhf.setting.page.s096': '有効なメールアドレスを入力してください。',
+      'view.lhf.setting.page.s097': 'パスワードを入力してください。',
+      'view.lhf.setting.page.s098': 'パスワードが短すぎます。6文字以上で入力してください。',
+      'view.lhf.setting.page.s099': '現在ログインしているアカウントが見つかりません。',
+      'view.lhf.setting.page.s100': 'このアカウントはすでにメールアドレスとパスワードでログインできます。',
+      'view.lhf.setting.page.s101': 'このログイン情報は別のアカウントに連携されています。',
+      'view.lhf.setting.page.s102': 'アカウント保護のため、もう一度ログインしてからお試しください。',
+      'view.lhf.setting.page.s103': '試行回数が多すぎます。しばらくしてからもう一度お試しください。',
+      'view.lhf.setting.page.s104': 'ネットワーク接続に失敗しました。接続を確認してからもう一度お試しください。',
+      'view.lhf.setting.page.s105': 'このログイン方法はFirebaseで有効になっていません。',
+      'view.lhf.setting.page.s106': 'Googleでの本人確認をキャンセルしました。',
+      'view.lhf.setting.page.s107': '現在ログインしているGoogleアカウントを選択してください。',
+      'view.lhf.setting.page.s108': 'アカウント認証に失敗しました。しばらくしてからもう一度お試しください。',
       'view.login.page.s001': '[LoginPage] 登入成功，正在獲取資料...',
       'view.login.page.s002': 'メールアドレスまたはパスワードが正しくありません',
       'view.login.page.s003': '[LoginPage] 登入出錯: \$e',
@@ -1161,6 +1244,22 @@ class AppTranslations extends Translations {
       'widgets.buttons.nfc.button.s006': '不明なエラーが発生しました',
       'widgets.common.user.head.s001': '[UserHead] SVG 載入失敗: \$error',
       'widgets.common.user.head.s002': '[UserHead] 圖片載入失敗: \$error',
+      'widgets.encyclopedia.all.the.monster.monster.text.s001':
+          '精霊は象群の彫刻を通り過ぎ、黒い箱へと急いでいきました。その途中で何かが魔力を放っているようです。',
+      'widgets.encyclopedia.all.the.monster.monster.text.s002':
+          '魔法陣が見つかりませんか？アーチをくぐって、何か見つからないか探してみましょう。',
+      'widgets.encyclopedia.all.the.monster.monster.text.s003':
+          '精霊はDNAの彫刻を長い間眺めてから先へ進んだようです。近くを探してみましょう。',
+      'widgets.encyclopedia.all.the.monster.monster.text.s004':
+          '画像を手掛かりに該当する場所を見つけ、タグをスキャンしてください。',
+      'widgets.encyclopedia.all.the.monster.monster.text.s005':
+          '雲の上の松ぼっくりが魔力を放っているようです。',
+      'widgets.encyclopedia.all.the.monster.monster.text.s007':
+          '問いの最も深い場所に立ち、屏風が視界から完全に消えたとき、水面に映る姿を見れば答えが明らかになるでしょう。',
+      'widgets.encyclopedia.all.the.monster.monster.text.s008':
+          '画像の中に、ほかとは少し違う雲がありませんか？',
+      'widgets.encyclopedia.all.the.monster.monster.text.s009':
+          '精霊は装置を見つめ、中央大学を表す「中」の文字が現れるのを待っていたようです。',
       'widgets.encyclopedia.elf.creator.section.s001': '作者情報',
       'widgets.encyclopedia.elf.department.section.s001': '学部・学科',
       'widgets.encyclopedia.elf.grid.s001': 'まだ精霊を捕獲していません',
@@ -1226,38 +1325,8 @@ class AppTranslations extends Translations {
           'NFCチュートリアルを閉じる',
       'widgets.game.catching.pages.graphics.text.level.page.s007':
           'このステージには表示できる内容がありません。',
-      'widgets.game.catching.pages.graphics.text.level.page.s008': '物語を振り返る',
-      'widgets.game.catching.pages.graphics.text.level.page.s009': '物語を閉じる',
-      'widgets.game.catching.pages.monster.trace.plot.s001': 'あなた',
-      'widgets.game.catching.pages.monster.trace.plot.s002':
-          'ここに何か奇妙な痕跡が残されている……',
-      'widgets.game.catching.pages.monster.trace.plot.s003':
-          '（しゃがんで注意深く観察すると、近くに特別な手がかりが残されていた。）',
-      'widgets.game.catching.pages.monster.trace.plot.s004':
-          'これは、あの精霊が残した痕跡に違いない。',
-      'widgets.game.catching.pages.monster.trace.plot.s005':
-          '（見つけた痕跡を痕跡収集びんに収めた。）',
-      'widgets.game.catching.pages.monster.trace.plot.s006': '（次の痕跡を探し続けよう。）',
-      'widgets.game.catching.pages.monster.trace.plot.s007':
-          '精霊は象群の彫刻を通り過ぎ、黒い箱へと急いでいきました。その途中で何かが魔力を放っているようです。',
-      'widgets.game.catching.pages.monster.trace.plot.s008':
-          'まだ痕跡が見つかりませんか？アーチをくぐって、何か見つからないか探してみましょう。',
-      'widgets.game.catching.pages.monster.trace.plot.s009':
-          '精霊は DNA の彫刻を長い間眺めてから先へ進んだようです。近くを探してみましょう。',
-      'widgets.game.catching.pages.monster.trace.plot.s010':
-          'この痕跡は写真の場所へ続いているようです。近くを注意深く調べてみましょう。',
-      'widgets.game.catching.pages.monster.trace.plot.s011':
-          '雲の上の松ぼっくりに、精霊の特別な気配が残っているようです。',
-      'widgets.game.catching.pages.monster.trace.plot.s012':
-          'この痕跡は写真の場所へ続いているようです。近くを注意深く調べてみましょう。',
-      'widgets.game.catching.pages.monster.trace.plot.s013':
-          '問いの最も深い場所に立ち、屏風が視界から完全に消えたとき、水面に映る姿を見れば答えが明らかになるでしょう。',
-      'widgets.game.catching.pages.monster.trace.plot.s014':
-          '視野の中に、ほかとは少し違う雲がありませんか？',
-      'widgets.game.catching.pages.monster.trace.plot.s015':
-          '精霊は装置を見つめ、中央大学を表す「中」の文字が現れるのを待っていたようです。',
-      'widgets.game.catching.pages.plot.level.s001': '精霊の痕跡を集める',
-      'widgets.game.catching.pages.plot.level.s002': '近くに残された特別な手がかりを調べよう。',
+      'widgets.game.catching.pages.plot.level.s001': '魔法石を見つけました。',
+      'widgets.game.catching.pages.plot.level.s002': '対応する魔法陣を見つけて、魔法石を置きましょう！',
       'widgets.game.catching.pages.plot.level.s003': '精霊を召喚しました。',
       'widgets.game.catching.pages.plot.level.s004': 'しかし、攻撃的な目でこちらを見ています……',
       'widgets.game.catching.pages.plot.level.s005': '画面をタップして続ける',

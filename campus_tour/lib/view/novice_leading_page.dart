@@ -70,7 +70,7 @@ class _NoviceLeadingPageState extends State<NoviceLeadingPage>
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      AudioService().playOverlayBgm(fileName: 'audio/M03_tutorial.wav');
+      AudioService().playOverlayBgm(fileName: 'audio/M03_tutorial.m4a');
     });
   }
 

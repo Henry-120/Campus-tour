@@ -6,7 +6,9 @@ import '../controllers/user_controller.dart';
 import '../widgets/constants/asset_paths.dart';
 import '../widgets/constants/responsive.dart';
 import '../widgets/common/snackbar_builder.dart';
+import '../utils/firebase_auth_error_message.dart';
 import '../widgets/login/game_title.dart';
+import '../widgets/login/forgot_password_dialog.dart';
 import '../widgets/login/wood_login_panel.dart';
 import 'after_login.dart';
 import 'register_page.dart';
@@ -40,14 +42,14 @@ class _LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
       if (!mounted) return;
 
       if (user != null) {
-        // if (!user.emailVerified) {
-        //   SnackBarBuilder.show(
-        //     context,
-        //     "請先到 ${user.email ?? '你的信箱'} 點擊驗證信後再登入",
-        //     type: AppToastType.warning,
-        //   );
-        //   return;
-        // }
+        if (!user.emailVerified) {
+          SnackBarBuilder.show(
+            context,
+            "請先到 ${user.email ?? '你的信箱'} 完成 Email 驗證；驗證信已重新寄出",
+            type: AppToastType.warning,
+          );
+          return;
+        }
 
         if (Get.isRegistered<UserController>()) {
           debugPrint('view.login.page.s001'.tr);
@@ -64,14 +66,14 @@ class _LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
           type: AppToastType.error,
         );
       }
-    } catch (e) {
-      debugPrint("[LoginPage] 登入出錯: $e");
+    } catch (error) {
+      debugPrint("[LoginPage] 登入出錯: $error");
 
       if (!mounted) return;
 
       SnackBarBuilder.show(
         context,
-        'view.login.page.s004'.tr,
+        firebaseAuthErrorMessage(error),
         type: AppToastType.error,
       );
     } finally {
@@ -96,20 +98,16 @@ class _LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
       if (user != null) {
         navigateAfterLogin(context);
       } else {
-        SnackBarBuilder.show(
-          context,
-          'view.login.page.s005'.tr,
-          type: AppToastType.error,
-        );
+        SnackBarBuilder.show(context, '已取消 Google 登入', type: AppToastType.info);
       }
-    } catch (e) {
-      debugPrint("[LoginPage] Google 登入出錯: $e");
+    } catch (error) {
+      debugPrint("[LoginPage] Google 登入出錯: $error");
 
       if (!mounted) return;
 
       SnackBarBuilder.show(
         context,
-        'view.login.page.s007'.tr,
+        firebaseAuthErrorMessage(error),
         type: AppToastType.error,
       );
     } finally {
@@ -119,11 +117,41 @@ class _LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
     }
   }
 
+  Future<void> _showForgotPasswordDialog() async {
+    final email = await showDialog<String>(
+      context: context,
+      builder: (_) =>
+          ForgotPasswordDialog(initialEmail: _emailController.text.trim()),
+    );
+    if (email == null || !mounted) return;
+
+    setState(() => _isLoading = true);
+    try {
+      await _controller.sendPasswordResetEmail(email);
+      if (!mounted) return;
+      SnackBarBuilder.show(
+        context,
+        '如果此 Email 已註冊，密碼重設信將會寄到信箱。',
+        type: AppToastType.success,
+        duration: const Duration(seconds: 4),
+      );
+    } catch (error) {
+      if (!mounted) return;
+      SnackBarBuilder.show(
+        context,
+        firebaseAuthErrorMessage(error),
+        type: AppToastType.error,
+      );
+    } finally {
+      if (mounted) setState(() => _isLoading = false);
+    }
+  }
+
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    AudioService().playMainBgm(fileName: 'audio/M01_login.wav');
+    AudioService().playMainBgm(fileName: 'audio/M01_login.m4a');
   }
 
   @override
@@ -170,6 +198,7 @@ class _LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
                       onLogin: _login,
                       onRegister: _goToRegister,
                       onGoogleSignIn: _handleGoogleSignIn,
+                      onForgotPassword: _showForgotPasswordDialog,
                     ),
                     SizedBox(height: 30 * scale),
                   ],

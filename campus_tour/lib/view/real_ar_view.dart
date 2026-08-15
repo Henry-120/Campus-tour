@@ -29,7 +29,7 @@ class _RealArPageState extends State<RealArPage> with WidgetsBindingObserver {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    AudioService().playOverlayBgm(fileName: 'audio/M12_AR_camera.wav');
+    AudioService().playOverlayBgm(fileName: 'audio/M12_AR_camera.m4a');
   }
 
   @override

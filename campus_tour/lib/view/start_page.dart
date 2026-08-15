@@ -34,7 +34,7 @@ class _StartPageState extends State<StartPage> with WidgetsBindingObserver {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    AudioService().playMainBgm(fileName: 'audio/M07_opening.wav');
+    AudioService().playMainBgm(fileName: 'audio/M07_opening.m4a');
 
     _timer = Timer.periodic(const Duration(seconds: 4), (_) {
       if (mounted) {

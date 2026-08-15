@@ -89,7 +89,7 @@ class _FullMissionPageState extends State<FullMissionPage> {
     debugPrint('成功捕捉精靈: ${widget.monsterModelCry.name}');
     // [L-12]
     AudioService().playSfx(
-      fileName: 'audio/M09_catch_success.wav',
+      fileName: 'audio/M09_catch_success.m4a',
       pauseBgmUntilComplete: true,
     );
     await widget.onMissionFinished?.call();
