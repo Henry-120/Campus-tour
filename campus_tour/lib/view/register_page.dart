@@ -7,6 +7,7 @@ import '../widgets/constants/responsive.dart';
 import '../widgets/common/snackbar_builder.dart';
 import '../widgets/login/game_link_text.dart';
 import '../widgets/login/game_title.dart';
+import '../widgets/login/legal_document_links.dart';
 import '../widgets/login/wood_register_panel.dart';
 import 'after_login.dart';
 import 'login_page.dart';
@@ -14,7 +15,7 @@ import 'login_page.dart';
 import 'package:get/get.dart';
 
 class RegisterPage extends StatefulWidget {
-  RegisterPage({super.key});
+  const RegisterPage({super.key});
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
@@ -118,6 +119,31 @@ class _RegisterPageState extends State<RegisterPage> {
     }
   }
 
+  Future<void> _handleAppleSignIn() async {
+    setState(() => _isLoading = true);
+    try {
+      final user = await _controller.signInWithApple();
+      if (!mounted) return;
+      if (user != null) {
+        SnackBarBuilder.show(
+          context,
+          'Apple 註冊成功！歡迎加入冒險之旅',
+          type: AppToastType.success,
+        );
+        navigateAfterLogin(context);
+      }
+    } catch (e) {
+      if (!mounted) return;
+      SnackBarBuilder.show(
+        context,
+        'Apple 登入失敗，請稍後再試',
+        type: AppToastType.error,
+      );
+    } finally {
+      if (mounted) setState(() => _isLoading = false);
+    }
+  }
+
   void _goBackToLogin() {
     Navigator.pushReplacement(
       context,
@@ -165,6 +191,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         isLoading: _isLoading,
                         onRegister: _register,
                         onGoogleSignIn: _handleGoogleSignIn,
+                        onAppleSignIn: _handleAppleSignIn,
                         onBackToLogin: _goBackToLogin,
                       ),
                       GameLinkText(
@@ -179,6 +206,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         fontSize: 14 * scale,
                         color: AppTheme.loginGlowColor,
                       ),
+                      const LegalDocumentLinks(),
                       SizedBox(height: 24 * scale),
                     ],
                   ),

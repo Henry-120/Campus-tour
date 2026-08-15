@@ -1,10 +1,12 @@
 import 'package:campus_tour/controllers/monster_controller.dart';
 import 'package:campus_tour/controllers/location_controller.dart';
+import 'package:campus_tour/controllers/login_controller.dart';
 import 'package:campus_tour/local_information/local_setting.dart';
 import 'package:campus_tour/services/load_db_service.dart';
 import 'package:campus_tour/styles/app_theme.dart';
 import 'package:campus_tour/styles/setting_page_styles.dart';
 import 'package:campus_tour/view/user_protocol.dart';
+import 'package:campus_tour/view/start_page.dart';
 import 'package:campus_tour/widgets/common/snackbar_builder.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
@@ -119,6 +121,21 @@ class SteeingPageStrings {
   static String get userProtocolDescription => 'view.lhf.setting.page.s049'.tr;
   static String get userProtocolButtonHint => 'view.lhf.setting.page.s050'.tr;
 
+  // Account deletion
+  static String get deleteAccountTitle => 'view.lhf.setting.page.s068'.tr;
+  static String get deleteAccountDescription => 'view.lhf.setting.page.s069'.tr;
+  static String get deleteAccountButton => 'view.lhf.setting.page.s070'.tr;
+  static String get deleteAccountConfirmTitle =>
+      'view.lhf.setting.page.s071'.tr;
+  static String get deleteAccountConfirmMessage =>
+      'view.lhf.setting.page.s072'.tr;
+  static String get deleteAccountPassword => 'view.lhf.setting.page.s073'.tr;
+  static String get deleteAccountCancel => 'view.lhf.setting.page.s074'.tr;
+  static String get deleteAccountConfirm => 'view.lhf.setting.page.s075'.tr;
+  static String get deleteAccountFailed => 'view.lhf.setting.page.s076'.tr;
+  static String get deleteAccountWrongPassword =>
+      'view.lhf.setting.page.s077'.tr;
+
   static String volumePercentage(int volume) => '$volume%';
 
   static String currentVolume(int volume) => 'view.lhf.setting.page.s051'
@@ -170,6 +187,8 @@ class FullPageList {
     FullPageList.languageSetCard,
     FullPageList.cardGap,
     FullPageList.userProtocolButton,
+    FullPageList.cardGap,
+    FullPageList.deleteAccountCard,
   ];
 
   static Widget get pageHeader => _PageHeader();
@@ -186,6 +205,7 @@ class FullPageList {
   static Widget get debugCaptureAllCard => _DebugCaptureAllMonstersCard();
   static Widget get languageSetCard => _LanguageSettingCard();
   static Widget get userProtocolButton => _UserProtocolButton();
+  static Widget get deleteAccountCard => _DeleteAccountCard();
 }
 
 class SettingPage extends StatefulWidget {
@@ -863,7 +883,7 @@ class _UserProtocolButtonState extends State<_UserProtocolButton> {
     }
 
     await Navigator.of(context).push(
-      MaterialPageRoute<void>(builder: (context) => UserProtocolPage()),
+      MaterialPageRoute<void>(builder: (context) => const UserProtocolPage()),
     );
   }
 
@@ -954,6 +974,138 @@ class _UserProtocolButtonState extends State<_UserProtocolButton> {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class _DeleteAccountCard extends StatefulWidget {
+  const _DeleteAccountCard();
+
+  @override
+  State<_DeleteAccountCard> createState() => _DeleteAccountCardState();
+}
+
+class _DeleteAccountCardState extends State<_DeleteAccountCard> {
+  bool _isDeleting = false;
+
+  bool get _usesPassword {
+    final user = FirebaseAuth.instance.currentUser;
+    final providers = user?.providerData.map((info) => info.providerId).toSet();
+    if (providers == null ||
+        providers.contains(AppleAuthProvider.PROVIDER_ID) ||
+        providers.contains(GoogleAuthProvider.PROVIDER_ID)) {
+      return false;
+    }
+    return providers.contains(EmailAuthProvider.PROVIDER_ID);
+  }
+
+  Future<void> _requestDeletion() async {
+    if (_isDeleting) return;
+
+    final passwordController = TextEditingController();
+    final passwordRequired = _usesPassword;
+    final confirmed = await showDialog<bool>(
+      context: context,
+      barrierDismissible: false,
+      builder: (dialogContext) => AlertDialog(
+        title: Text(SteeingPageStrings.deleteAccountConfirmTitle),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(SteeingPageStrings.deleteAccountConfirmMessage),
+            if (passwordRequired) ...[
+              const SizedBox(height: 18),
+              TextField(
+                controller: passwordController,
+                obscureText: true,
+                autofillHints: const [AutofillHints.password],
+                decoration: InputDecoration(
+                  labelText: SteeingPageStrings.deleteAccountPassword,
+                  border: const OutlineInputBorder(),
+                ),
+              ),
+            ],
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext, false),
+            child: Text(SteeingPageStrings.deleteAccountCancel),
+          ),
+          FilledButton(
+            style: FilledButton.styleFrom(backgroundColor: Colors.red.shade700),
+            onPressed: () => Navigator.pop(dialogContext, true),
+            child: Text(SteeingPageStrings.deleteAccountConfirm),
+          ),
+        ],
+      ),
+    );
+
+    final password = passwordController.text;
+    passwordController.dispose();
+    if (confirmed != true || !mounted) return;
+
+    setState(() => _isDeleting = true);
+    try {
+      await LoginController().deleteAccount(
+        password: passwordRequired ? password : null,
+      );
+      if (!mounted) return;
+      Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (_) => const StartPage()),
+        (_) => false,
+      );
+    } on FirebaseAuthException catch (e) {
+      if (!mounted) return;
+      final isPasswordError =
+          e.code == 'wrong-password' ||
+          e.code == 'invalid-credential' ||
+          e.code == 'invalid-login-credentials';
+      SnackBarBuilder.show(
+        context,
+        isPasswordError
+            ? SteeingPageStrings.deleteAccountWrongPassword
+            : SteeingPageStrings.deleteAccountFailed,
+        type: AppToastType.error,
+      );
+    } catch (_) {
+      if (!mounted) return;
+      SnackBarBuilder.show(
+        context,
+        SteeingPageStrings.deleteAccountFailed,
+        type: AppToastType.error,
+      );
+    } finally {
+      if (mounted) setState(() => _isDeleting = false);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return _SettingCard(
+      icon: Icons.delete_forever_rounded,
+      title: SteeingPageStrings.deleteAccountTitle,
+      description: SteeingPageStrings.deleteAccountDescription,
+      status: const SizedBox.shrink(),
+      child: SizedBox(
+        width: double.infinity,
+        child: OutlinedButton.icon(
+          style: OutlinedButton.styleFrom(
+            foregroundColor: Colors.red.shade800,
+            side: BorderSide(color: Colors.red.shade300),
+            padding: const EdgeInsets.symmetric(vertical: 14),
+          ),
+          onPressed: _isDeleting ? null : _requestDeletion,
+          icon: _isDeleting
+              ? const SizedBox.square(
+                  dimension: 18,
+                  child: CircularProgressIndicator(strokeWidth: 2),
+                )
+              : const Icon(Icons.delete_forever_rounded),
+          label: Text(SteeingPageStrings.deleteAccountButton),
         ),
       ),
     );

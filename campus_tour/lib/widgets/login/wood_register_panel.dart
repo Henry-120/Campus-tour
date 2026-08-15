@@ -4,6 +4,7 @@ import '../../styles/app_theme.dart';
 import '../constants/asset_paths.dart';
 import '../constants/responsive.dart';
 import 'game_button.dart';
+import 'apple_sign_in_button.dart';
 import 'game_link_text.dart';
 import 'google_image_button.dart';
 import 'login_text_field.dart';
@@ -20,6 +21,7 @@ class WoodRegisterPanel extends StatelessWidget {
     required this.isLoading,
     required this.onRegister,
     required this.onGoogleSignIn,
+    required this.onAppleSignIn,
     required this.onBackToLogin,
   });
 
@@ -32,6 +34,7 @@ class WoodRegisterPanel extends StatelessWidget {
 
   final VoidCallback onRegister;
   final VoidCallback onGoogleSignIn;
+  final VoidCallback onAppleSignIn;
   final VoidCallback onBackToLogin;
 
   @override
@@ -193,11 +196,22 @@ class WoodRegisterPanel extends StatelessWidget {
 
           Positioned(
             bottom: 10 * scale,
-            child: GoogleImageButton(
-              imagePath: AssetPaths.googleLogo,
-              size: 100 * scale,
-              disabled: isLoading,
-              onTap: onGoogleSignIn,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                GoogleImageButton(
+                  imagePath: AssetPaths.googleLogo,
+                  size: 100 * scale,
+                  disabled: isLoading,
+                  onTap: onGoogleSignIn,
+                ),
+                SizedBox(width: 12 * scale),
+                AppleSignInButton(
+                  size: 70 * scale,
+                  disabled: isLoading,
+                  onTap: onAppleSignIn,
+                ),
+              ],
             ),
           ),
         ],

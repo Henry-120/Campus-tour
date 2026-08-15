@@ -4,6 +4,7 @@ import '../../styles/app_theme.dart';
 import '../constants/asset_paths.dart';
 import '../constants/responsive.dart';
 import 'game_button.dart';
+import 'apple_sign_in_button.dart';
 import 'game_link_text.dart';
 import 'google_image_button.dart';
 import 'login_text_field.dart';
@@ -17,6 +18,7 @@ class WoodLoginPanel extends StatelessWidget {
     required this.onLogin,
     required this.onRegister,
     required this.onGoogleSignIn,
+    required this.onAppleSignIn,
   });
 
   final TextEditingController emailController;
@@ -25,6 +27,7 @@ class WoodLoginPanel extends StatelessWidget {
   final VoidCallback onLogin;
   final VoidCallback onRegister;
   final VoidCallback onGoogleSignIn;
+  final VoidCallback onAppleSignIn;
 
   @override
   Widget build(BuildContext context) {
@@ -108,11 +111,22 @@ class WoodLoginPanel extends StatelessWidget {
           ),
           Positioned(
             bottom: 10 * scale,
-            child: GoogleImageButton(
-              imagePath: AssetPaths.googleLogo,
-              size: 88 * scale,
-              disabled: isLoading,
-              onTap: onGoogleSignIn,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                GoogleImageButton(
+                  imagePath: AssetPaths.googleLogo,
+                  size: 88 * scale,
+                  disabled: isLoading,
+                  onTap: onGoogleSignIn,
+                ),
+                SizedBox(width: 14 * scale),
+                AppleSignInButton(
+                  size: 66 * scale,
+                  disabled: isLoading,
+                  onTap: onAppleSignIn,
+                ),
+              ],
             ),
           ),
         ],

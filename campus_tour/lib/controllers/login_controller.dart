@@ -38,28 +38,7 @@ class LoginController {
 
       if (user != null) {
         debugPrint("Google 認證成功: ${user.uid}");
-
-        // 檢查使用者是否已存在於 Firestore
-        final existingUser = await _firestoreService.getUser(user.uid);
-        if (existingUser == null) {
-          debugPrint("新使用者，正在建立 Firestore 資料...");
-
-          // 💡 強制使用生成的 SVG 頭像，不論 Google 是否有提供照片
-          final photoUrl = BigHeadService.generateRandomUrl();
-
-          await _firestoreService.setUser(
-            UserModel(
-              uid: user.uid,
-              email: user.email ?? "",
-              nickname: user.displayName ?? "冒險者",
-              photoUrl: photoUrl,
-            ),
-          );
-        }
-
-        debugPrint("正在載入使用者收藏與資料...");
-        await monsterController.loadUserCollection(user.uid);
-        await userController.fetchCurrentUser();
+        await _prepareSocialUser(user);
       }
       return user;
     } catch (e) {
@@ -68,8 +47,59 @@ class LoginController {
     }
   }
 
+  Future<User?> signInWithApple() async {
+    try {
+      final user = await _authService.signInWithApple();
+      if (user != null) {
+        await _prepareSocialUser(user);
+      }
+      return user;
+    } catch (e) {
+      debugPrint("LoginController.signInWithApple 失敗: $e");
+      rethrow;
+    }
+  }
+
+  Future<void> _prepareSocialUser(User user) async {
+    final existingUser = await _firestoreService.getUser(user.uid);
+    if (existingUser == null) {
+      await _firestoreService.setUser(
+        UserModel(
+          uid: user.uid,
+          email: user.email ?? "",
+          nickname: user.displayName?.trim().isNotEmpty == true
+              ? user.displayName!.trim()
+              : "冒險者",
+          photoUrl: BigHeadService.generateRandomUrl(),
+        ),
+      );
+    }
+    await monsterController.loadUserCollection(user.uid);
+    await userController.fetchCurrentUser();
+  }
+
   Future<void> logout() async {
     await _authService.logout();
+    monsterController.resetForLogout();
+    userController.userModel.value = null;
+  }
+
+  Future<void> deleteAccount({String? password}) async {
+    final user = _authService.currentUser;
+    if (user == null) throw StateError('No signed-in user');
+
+    // Reauthenticate before deleting any data so a stale session cannot leave
+    // the account present while its Firestore profile has already been erased.
+    final appleAuthorizationCode = await _authService
+        .reauthenticateForAccountDeletion(password: password);
+
+    await _firestoreService.deleteUserData(user.uid);
+
+    if (appleAuthorizationCode != null && appleAuthorizationCode.isNotEmpty) {
+      await _authService.revokeAppleAuthorization(appleAuthorizationCode);
+    }
+
+    await _authService.deleteCurrentUser();
     monsterController.resetForLogout();
     userController.userModel.value = null;
   }

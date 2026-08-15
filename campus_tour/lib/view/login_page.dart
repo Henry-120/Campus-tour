@@ -7,12 +7,13 @@ import '../widgets/constants/asset_paths.dart';
 import '../widgets/constants/responsive.dart';
 import '../widgets/common/snackbar_builder.dart';
 import '../widgets/login/game_title.dart';
+import '../widgets/login/legal_document_links.dart';
 import '../widgets/login/wood_login_panel.dart';
 import 'after_login.dart';
 import 'register_page.dart';
 
 class LoginPage extends StatefulWidget {
-  LoginPage({super.key});
+  const LoginPage({super.key});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -119,6 +120,26 @@ class _LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
     }
   }
 
+  Future<void> _handleAppleSignIn() async {
+    setState(() => _isLoading = true);
+    try {
+      final user = await _controller.signInWithApple();
+      if (!mounted) return;
+      if (user != null) {
+        navigateAfterLogin(context);
+      }
+    } catch (e) {
+      if (!mounted) return;
+      SnackBarBuilder.show(
+        context,
+        'Apple 登入失敗，請稍後再試',
+        type: AppToastType.error,
+      );
+    } finally {
+      if (mounted) setState(() => _isLoading = false);
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -170,8 +191,11 @@ class _LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
                       onLogin: _login,
                       onRegister: _goToRegister,
                       onGoogleSignIn: _handleGoogleSignIn,
+                      onAppleSignIn: _handleAppleSignIn,
                     ),
-                    SizedBox(height: 30 * scale),
+                    SizedBox(height: 8 * scale),
+                    const LegalDocumentLinks(),
+                    SizedBox(height: 18 * scale),
                   ],
                 ),
               ),
