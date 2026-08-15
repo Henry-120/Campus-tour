@@ -116,7 +116,20 @@ class WoodRegisterPanel extends StatelessWidget {
 
                 SizedBox(height: 11 * scale),
 
-                _buildLabel(context, "Password"),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.baseline,
+                  textBaseline: TextBaseline.alphabetic,
+                  children: [
+                    _buildLabel(context, "Password"),
+                    SizedBox(width: 6 * scale),
+                    Text(
+                      "(at least 6 characters)",
+                      style: AppTheme.loginLabelStyle(
+                        scale,
+                      ).copyWith(fontSize: 10 * scale),
+                    ),
+                  ],
+                ),
                 SizedBox(height: 6 * scale),
                 LoginTextField(
                   controller: passwordController,

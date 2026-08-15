@@ -5,6 +5,7 @@ import '../styles/app_theme.dart';
 import '../widgets/constants/asset_paths.dart';
 import '../widgets/constants/responsive.dart';
 import '../widgets/common/snackbar_builder.dart';
+import '../utils/firebase_auth_error_message.dart';
 import '../widgets/login/game_link_text.dart';
 import '../widgets/login/game_title.dart';
 import '../widgets/login/legal_document_links.dart';
@@ -56,7 +57,11 @@ class _RegisterPageState extends State<RegisterPage> {
       if (!mounted) return;
 
       if (user != null) {
-        SnackBarBuilder.show(context, "註冊成功，請登入", type: AppToastType.success);
+        SnackBarBuilder.show(
+          context,
+          "驗證信已寄到 ${user.email ?? '你的信箱'}，請完成驗證後再登入",
+          type: AppToastType.success,
+        );
 
         _goBackToLogin();
       } else {
@@ -66,12 +71,16 @@ class _RegisterPageState extends State<RegisterPage> {
           type: AppToastType.error,
         );
       }
-    } catch (e) {
-      debugPrint("[RegisterPage] 註冊出錯: $e");
+    } catch (error) {
+      debugPrint("[RegisterPage] 註冊出錯: $error");
 
       if (!mounted) return;
 
-      SnackBarBuilder.show(context, "註冊失敗: $e", type: AppToastType.error);
+      SnackBarBuilder.show(
+        context,
+        firebaseAuthErrorMessage(error),
+        type: AppToastType.error,
+      );
     } finally {
       if (mounted) {
         setState(() => _isLoading = false);
@@ -102,14 +111,14 @@ class _RegisterPageState extends State<RegisterPage> {
           type: AppToastType.error,
         );
       }
-    } catch (e) {
-      debugPrint("[RegisterPage] Google 登入失敗: $e");
+    } catch (error) {
+      debugPrint("[RegisterPage] Google 登入失敗: $error");
 
       if (!mounted) return;
 
       SnackBarBuilder.show(
         context,
-        "Google 登入失敗: $e",
+        firebaseAuthErrorMessage(error),
         type: AppToastType.error,
       );
     } finally {

@@ -32,7 +32,7 @@ class _GraphicsTextLevelPageState extends State<GraphicsTextLevelPage>
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    AudioService().playOverlayBgm(fileName: 'audio/M06_find_monster.wav');
+    AudioService().playOverlayBgm(fileName: 'audio/M06_find_monster.m4a');
   }
 
   @override

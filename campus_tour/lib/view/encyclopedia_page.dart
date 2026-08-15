@@ -23,9 +23,9 @@ class _EncyclopediaPageState extends State<EncyclopediaPage> with WidgetsBinding
         totalCount != null && totalCount > 0 && caughtCount >= totalCount;
 
     if (isComplete) {
-      AudioService().playOverlayBgm(fileName: 'audio/M13_final_stage_BPM130.wav');
+      AudioService().playOverlayBgm(fileName: 'audio/M13_final_stage_BPM130.m4a');
     } else {
-      AudioService().playOverlayBgm(fileName: 'audio/M11_encyclopedia.wav');
+      AudioService().playOverlayBgm(fileName: 'audio/M11_encyclopedia.m4a');
     }
   }
   

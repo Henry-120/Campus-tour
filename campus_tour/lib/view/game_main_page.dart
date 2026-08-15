@@ -23,7 +23,7 @@ class _GameMainPageState extends State<GameMainPage>
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    AudioService().playMainBgm(fileName: 'audio/M04_walk_daytime.wav');
+    AudioService().playMainBgm(fileName: 'audio/M04_walk_daytime.m4a');
   }
 
   @override

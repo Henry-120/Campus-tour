@@ -19,6 +19,7 @@ class WoodLoginPanel extends StatelessWidget {
     required this.onRegister,
     required this.onGoogleSignIn,
     required this.onAppleSignIn,
+    required this.onForgotPassword,
   });
 
   final TextEditingController emailController;
@@ -28,6 +29,7 @@ class WoodLoginPanel extends StatelessWidget {
   final VoidCallback onRegister;
   final VoidCallback onGoogleSignIn;
   final VoidCallback onAppleSignIn;
+  final VoidCallback onForgotPassword;
 
   @override
   Widget build(BuildContext context) {
@@ -52,12 +54,13 @@ class WoodLoginPanel extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                _buildLabel(context, "Username"),
+                _buildLabel(context, "Email"),
                 SizedBox(height: 8 * scale),
                 LoginTextField(
                   controller: emailController,
-                  hintText: "Enter your Username",
-                  icon: Icons.eco,
+                  hintText: "Enter your Email",
+                  icon: Icons.email,
+                  keyboardType: TextInputType.emailAddress,
                   height: 50 * scale,
                   fontSize: 16 * scale,
                   hintFontSize: 14 * scale,
@@ -80,7 +83,17 @@ class WoodLoginPanel extends StatelessWidget {
                   radius: 12 * scale,
                   verticalPadding: 0,
                 ),
-                SizedBox(height: 22 * scale),
+                SizedBox(height: 5 * scale),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: GameLinkText(
+                    text: "Forgot password?",
+                    onTap: isLoading ? () {} : onForgotPassword,
+                    fontSize: 13 * scale,
+                    color: AppTheme.loginGlowColor,
+                  ),
+                ),
+                SizedBox(height: 8 * scale),
                 GameButton(
                   text: "LOGIN",
                   isLoading: isLoading,
