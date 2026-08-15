@@ -100,6 +100,25 @@ class LoginController {
     userController.userModel.value = null;
   }
 
+  Future<void> deleteAccount({String? password}) async {
+    final user = _authService.currentUser;
+    if (user == null) throw StateError('No signed-in user');
+
+    // 先重新驗證，避免過期登入狀態造成帳號仍存在、資料卻已刪除。
+    final appleAuthorizationCode = await _authService
+        .reauthenticateForAccountDeletion(password: password);
+
+    await _firestoreService.deleteUserData(user.uid);
+
+    if (appleAuthorizationCode != null && appleAuthorizationCode.isNotEmpty) {
+      await _authService.revokeAppleAuthorization(appleAuthorizationCode);
+    }
+
+    await _authService.deleteCurrentUser();
+    monsterController.resetForLogout();
+    userController.userModel.value = null;
+  }
+
   // 一般註冊
   Future<User?> register(String email, String password, String nickname) async {
     final user = await _authService.register(email, password);

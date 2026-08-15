@@ -8,6 +8,7 @@ import '../widgets/constants/responsive.dart';
 import '../widgets/common/snackbar_builder.dart';
 import '../utils/firebase_auth_error_message.dart';
 import '../widgets/login/game_title.dart';
+import '../widgets/login/legal_document_links.dart';
 import '../widgets/login/forgot_password_dialog.dart';
 import '../widgets/login/wood_login_panel.dart';
 import 'after_login.dart';
@@ -269,7 +270,9 @@ class _LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
                       onAppleSignIn: _handleAppleSignIn,
                       onForgotPassword: _showForgotPasswordDialog,
                     ),
-                    SizedBox(height: 30 * scale),
+                    SizedBox(height: 8 * scale),
+                    const LegalDocumentLinks(),
+                    SizedBox(height: 18 * scale),
                   ],
                 ),
               ),

@@ -9,6 +9,7 @@ import '../utils/account_data_sync_exception.dart';
 import '../utils/firebase_auth_error_message.dart';
 import '../widgets/login/game_link_text.dart';
 import '../widgets/login/game_title.dart';
+import '../widgets/login/legal_document_links.dart';
 import '../widgets/login/wood_register_panel.dart';
 import 'after_login.dart';
 import 'login_page.dart';
@@ -264,6 +265,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         fontSize: 14 * scale,
                         color: AppTheme.loginGlowColor,
                       ),
+                      const LegalDocumentLinks(),
                       SizedBox(height: 24 * scale),
                     ],
                   ),

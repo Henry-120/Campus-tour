@@ -229,8 +229,8 @@ class WoodRegisterPanel extends StatelessWidget {
                 ),
                 OfficialAppleSignInButton(
                   text: 'widgets.login.social.buttons.s002'.tr,
-                  width: 80 * scale,
-                  height: 80 * scale,
+                  width: 88 * scale,
+                  height: 88 * scale,
                   disabled: isLoading,
                   logoOnly: true,
                   onPressed: onAppleSignIn,

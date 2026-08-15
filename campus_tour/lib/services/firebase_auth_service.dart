@@ -168,4 +168,56 @@ class AuthService {
     await _auth.signOut();
     await _googleSignIn.signOut();
   }
+
+  /// Reauthenticates using the account's existing provider. Returns an Apple
+  /// authorization code when one is available so it can be revoked on delete.
+  Future<String?> reauthenticateForAccountDeletion({String? password}) async {
+    final user = _auth.currentUser;
+    if (user == null) throw StateError('No signed-in user');
+
+    final providerIds = user.providerData
+        .map((info) => info.providerId)
+        .toSet();
+
+    if (providerIds.contains(AppleAuthProvider.PROVIDER_ID)) {
+      final provider = AppleAuthProvider()
+        ..addScope('email')
+        ..addScope('name');
+      final credential = await user.reauthenticateWithProvider(provider);
+      return credential.additionalUserInfo?.authorizationCode;
+    }
+
+    if (providerIds.contains(GoogleAuthProvider.PROVIDER_ID)) {
+      final googleUser = await _googleSignIn.signIn();
+      if (googleUser == null) throw StateError('Reauthentication cancelled');
+      final googleAuth = await googleUser.authentication;
+      await user.reauthenticateWithCredential(
+        GoogleAuthProvider.credential(
+          accessToken: googleAuth.accessToken,
+          idToken: googleAuth.idToken,
+        ),
+      );
+      return null;
+    }
+
+    final email = user.email;
+    if (email == null || password == null || password.isEmpty) {
+      throw StateError('Password required');
+    }
+    await user.reauthenticateWithCredential(
+      EmailAuthProvider.credential(email: email, password: password),
+    );
+    return null;
+  }
+
+  Future<void> revokeAppleAuthorization(String authorizationCode) async {
+    await _auth.revokeTokenWithAuthorizationCode(authorizationCode);
+  }
+
+  Future<void> deleteCurrentUser() async {
+    final user = _auth.currentUser;
+    if (user == null) throw StateError('No signed-in user');
+    await user.delete();
+    await _googleSignIn.signOut();
+  }
 }
