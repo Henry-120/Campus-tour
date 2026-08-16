@@ -1,6 +1,7 @@
 import 'package:campus_tour/controllers/monster_controller.dart';
 import 'package:campus_tour/controllers/location_controller.dart';
 import 'package:campus_tour/controllers/login_controller.dart';
+import 'package:campus_tour/controllers/reviewer_access_controller.dart';
 import 'package:campus_tour/local_information/local_setting.dart';
 import 'package:campus_tour/services/load_db_service.dart';
 import 'package:campus_tour/services/firebase_auth_service.dart';
@@ -237,8 +238,7 @@ class FullPageList {
     FullPageList.vibrationSetCard,
     FullPageList.cardGap,
     FullPageList.autoSkipStorySetCard,
-    if (LocationTestConfig.showControls) FullPageList.cardGap,
-    if (LocationTestConfig.showControls) FullPageList.locationOffsetTestCard,
+    FullPageList.reviewerLocationSection,
     if (MonsterCollectionTestConfig.showControls) FullPageList.cardGap,
     if (MonsterCollectionTestConfig.showControls)
       FullPageList.debugCaptureAllCard,
@@ -263,6 +263,7 @@ class FullPageList {
   static Widget get vibrationSetCard => _VibrationSettingCard();
   static Widget get autoSkipStorySetCard => _AutoSkipStorySettingCard();
   static Widget get locationOffsetTestCard => _LocationOffsetTestCard();
+  static Widget get reviewerLocationSection => _ReviewerLocationSection();
   static Widget get debugCaptureAllCard => _DebugCaptureAllMonstersCard();
   static Widget get languageSetCard => _LanguageSettingCard();
   static Widget get accountSecurityCard => _AccountSecurityCard();
@@ -551,6 +552,28 @@ class _LocationOffsetTestCard extends StatefulWidget {
   @override
   State<_LocationOffsetTestCard> createState() =>
       _LocationOffsetTestCardState();
+}
+
+class _ReviewerLocationSection extends StatelessWidget {
+  const _ReviewerLocationSection();
+
+  @override
+  Widget build(BuildContext context) {
+    final reviewerAccess = Get.find<ReviewerAccessController>();
+    return Obx(() {
+      // Read the observable before combining it with the compile-time debug
+      // flag. Otherwise short-circuit evaluation in debug builds leaves this
+      // Obx without a reactive dependency and GetX throws at runtime.
+      final isReviewer = reviewerAccess.isReviewer.value;
+      if (!LocationTestConfig.showControls && !isReviewer) {
+        return const SizedBox.shrink();
+      }
+      return Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [FullPageList.cardGap, FullPageList.locationOffsetTestCard],
+      );
+    });
+  }
 }
 
 class _LocationOffsetTestCardState extends State<_LocationOffsetTestCard> {

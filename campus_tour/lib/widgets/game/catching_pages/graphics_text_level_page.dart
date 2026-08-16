@@ -85,22 +85,30 @@ class _GraphicsTextLevelPageState extends State<GraphicsTextLevelPage>
                     ],
                   ),
                 ),
-                Align(
-                  alignment: const Alignment(1, 0.68),
-                  child: FilledButton.icon(
-                    onPressed: _showStoryReviewDialog,
-                    icon: const Icon(Icons.menu_book_rounded),
-                    label: Text(
-                      'widgets.game.catching.pages.graphics.text.level.page.s008'
-                          .tr,
-                    ),
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: NfcButton1(
-                    ans: widget.level.nfcId,
-                    onResult: _handleNfcSuccess,
+                Positioned(
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: FilledButton.icon(
+                          onPressed: _showStoryReviewDialog,
+                          icon: const Icon(Icons.menu_book_rounded),
+                          label: Text(
+                            'widgets.game.catching.pages.graphics.text.level.page.s008'
+                                .tr,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      NfcButton1(
+                        ans: widget.level.nfcId,
+                        onResult: _handleNfcSuccess,
+                      ),
+                    ],
                   ),
                 ),
               ],

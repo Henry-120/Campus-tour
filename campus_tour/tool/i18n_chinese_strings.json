@@ -2542,23 +2542,23 @@
     },
     {
       "key": "view.lhf.setting.page.s058",
-      "zh": "異地定位測試",
-      "en": "Remote Location Test",
-      "ja": "遠隔位置情報テスト",
+      "zh": "Apple 審核展示模式",
+      "en": "Apple Review Demo Mode",
+      "ja": "Apple審査デモモード",
       "occurrences": []
     },
     {
       "key": "view.lhf.setting.page.s059",
-      "zh": "目前位置將偏移至中央大學附近，僅供測試使用。",
-      "en": "Your location will be offset near National Central University for testing only.",
-      "ja": "テスト用に現在地を国立中央大学付近へずらします。",
+      "zh": "供 App Review 體驗校園核心流程，將目前位置安全映射至中央大學。",
+      "en": "Maps your current location to National Central University so App Review can experience the core campus flow.",
+      "ja": "App Reviewでキャンパスの主要機能を体験できるよう、現在地を国立中央大学に安全にマッピングします。",
       "occurrences": []
     },
     {
       "key": "view.lhf.setting.page.s060",
-      "zh": "測試定位中",
-      "en": "Test location active",
-      "ja": "テスト位置情報を使用中",
+      "zh": "校園位置映射中",
+      "en": "Campus location mapped",
+      "ja": "キャンパス位置にマッピング中",
       "occurrences": []
     },
     {
@@ -2570,16 +2570,16 @@
     },
     {
       "key": "view.lhf.setting.page.s062",
-      "zh": "開始定位偏移",
-      "en": "Start location offset",
-      "ja": "位置オフセットを開始",
+      "zh": "將位置映射至校園",
+      "en": "Map Location to Campus",
+      "ja": "位置をキャンパスにマッピング",
       "occurrences": []
     },
     {
       "key": "view.lhf.setting.page.s063",
-      "zh": "停止定位偏移",
-      "en": "Stop location offset",
-      "ja": "位置オフセットを停止",
+      "zh": "停止展示模式",
+      "en": "Stop Demo Mode",
+      "ja": "デモモードを停止",
       "occurrences": []
     },
     {
@@ -2591,9 +2591,9 @@
     },
     {
       "key": "view.lhf.setting.page.s065",
-      "zh": "定位偏移已啟用",
-      "en": "Location offset enabled",
-      "ja": "位置オフセットを有効にしました",
+      "zh": "Apple 審核位置映射已啟用",
+      "en": "Apple Review location mapping enabled",
+      "ja": "Apple審査用の位置マッピングを有効にしました",
       "occurrences": []
     },
     {
@@ -2605,9 +2605,9 @@
     },
     {
       "key": "view.lhf.setting.page.s067",
-      "zh": "無法啟用定位偏移，請確認 GPS 與定位權限",
-      "en": "Could not enable location offset. Check GPS and location permissions.",
-      "ja": "位置オフセットを有効にできません。GPSと位置情報の権限を確認してください。",
+      "zh": "無法啟用位置映射，請確認 GPS 與定位權限",
+      "en": "Could not map the location. Check GPS and location permissions.",
+      "ja": "位置をマッピングできません。GPSと位置情報の権限を確認してください。",
       "occurrences": []
     },
     {
@@ -4126,6 +4126,18 @@
         {
           "file": "lib/widgets/buttons/nfc_button.dart",
           "line": 111
+        }
+      ]
+    },
+    {
+      "key": "widgets.buttons.nfc.button.s007",
+      "zh": "Apple 審核：模擬 NFC 感應",
+      "en": "Apple Review: Simulate NFC Tag",
+      "ja": "Apple審査：NFCタグをシミュレート",
+      "occurrences": [
+        {
+          "file": "lib/widgets/buttons/nfc_button.dart",
+          "line": 0
         }
       ]
     },

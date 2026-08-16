@@ -3,12 +3,14 @@ import '../services/firestore_service.dart';
 import '../models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../controllers/monster_controller.dart';
+import '../controllers/location_controller.dart';
 import '../controllers/user_controller.dart';
 import '../services/bighead_service.dart';
 import '../services/account_deletion_service.dart';
 import '../services/audio_service.dart';
 import '../local_information/local_setting.dart';
 import '../controllers/nfc_scan_controller.dart';
+import '../controllers/reviewer_access_controller.dart';
 import '../utils/account_data_sync_exception.dart';
 import 'package:get/get.dart';
 import 'package:flutter/foundation.dart';
@@ -103,6 +105,12 @@ class LoginController {
 
   Future<void> logout() async {
     await _authService.logout();
+    if (Get.isRegistered<ReviewerAccessController>()) {
+      Get.find<ReviewerAccessController>().clear();
+    }
+    if (Get.isRegistered<LocationController>()) {
+      Get.find<LocationController>().disableTestOffset();
+    }
     monsterController.resetForLogout();
     userController.userModel.value = null;
   }
@@ -123,6 +131,12 @@ class LoginController {
     await _accountDeletionService.deleteCurrentAccountData();
 
     await _authService.logout();
+    if (Get.isRegistered<ReviewerAccessController>()) {
+      Get.find<ReviewerAccessController>().clear();
+    }
+    if (Get.isRegistered<LocationController>()) {
+      Get.find<LocationController>().disableTestOffset();
+    }
     monsterController.resetForLogout();
     userController.userModel.value = null;
     if (Get.isRegistered<NfcScanController>()) {

@@ -2,6 +2,8 @@ import 'package:campus_tour/controllers/nfc_api.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
+import 'reviewer_access_controller.dart';
+
 class NfcScanController extends GetxController {
   bool _isListening = false;
   bool _isWaiting = false;
@@ -75,6 +77,27 @@ class NfcScanController extends GetxController {
     }
 
     _onMismatch?.call(result.tagId);
+  }
+
+  /// Exercises the same expected-tag success path used by a physical scan.
+  /// Access fails closed unless the current Firebase token has the reviewer
+  /// custom claim.
+  bool simulateExpectedTagForReviewer() {
+    if (!Get.isRegistered<ReviewerAccessController>() ||
+        !Get.find<ReviewerAccessController>().isReviewer.value ||
+        !_isWaiting ||
+        _expectedId == null) {
+      return false;
+    }
+
+    _handleTag(
+      NfcScanResult(
+        tagId: _expectedId!,
+        tagType: 'APPLE_REVIEW_DEMO',
+        rawData: const {'reviewDemo': true},
+      ),
+    );
+    return true;
   }
 
   @override
