@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 class ElfDepartmentSection extends StatelessWidget {
   final List<String>? major;
 
-  ElfDepartmentSection({super.key, required this.major});
+  const ElfDepartmentSection({super.key, required this.major});
 
   static const Color primaryColor = Color(0xFF006C49);
   static const Color cardColor = Color(0xFFEFF4FF);

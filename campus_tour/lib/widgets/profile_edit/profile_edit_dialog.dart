@@ -9,7 +9,7 @@ import 'nickname_field.dart';
 import '../constants/responsive.dart';
 
 class ProfileEditDialog extends StatelessWidget {
-  ProfileEditDialog({super.key});
+  const ProfileEditDialog({super.key});
 
   @override
   Widget build(BuildContext context) {

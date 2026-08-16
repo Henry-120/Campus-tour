@@ -7,6 +7,8 @@ import 'package:campus_tour/styles/nfc_leading_style.dart';
 import 'package:campus_tour/widgets/common/snackbar_builder.dart';
 import 'package:get/get.dart';
 
+import '../../controllers/reviewer_access_controller.dart';
+
 class NfcButtonAbstract extends StatelessWidget {
   final Icon nfcIcon = NfcLeadingStyle.nfcIcon;
   final String text;
@@ -37,7 +39,7 @@ class NfcButton1 extends StatefulWidget {
   // Called when a matching tag is scanned. No parameters — the button
   // performs the comparison internally.
   final VoidCallback onResult; // 成功感應後的動作 (no args)
-  NfcButton1({super.key, required this.ans, required this.onResult});
+  const NfcButton1({super.key, required this.ans, required this.onResult});
   @override
   State<StatefulWidget> createState() {
     return _NfcButton1();
@@ -133,6 +135,31 @@ class _NfcButton1 extends State<NfcButton1> {
     }
   }
 
+  void _simulateReviewerTag() {
+    if (_isScanning) return;
+
+    setState(() {
+      _isScanning = true;
+      _isUsingForegroundWaiting = true;
+    });
+    _nfcScanController.startWaiting(
+      expectedId: widget.ans,
+      onSuccess: () {
+        if (!mounted) return;
+        _isUsingForegroundWaiting = false;
+        setState(() => _isScanning = false);
+        widget.onResult();
+      },
+      onMismatch: (_) {},
+    );
+
+    if (!_nfcScanController.simulateExpectedTagForReviewer() && mounted) {
+      _nfcScanController.stopWaiting();
+      _isUsingForegroundWaiting = false;
+      setState(() => _isScanning = false);
+    }
+  }
+
   @override
   void dispose() {
     if (_isScanning) {
@@ -179,14 +206,32 @@ class _NfcButton1 extends State<NfcButton1> {
 
   @override
   Widget build(BuildContext context) {
-    return NfcButtonAbstract(
-      text: _isScanning
-          ? NfcLeadingStyle.nfcIngString
-          : NfcLeadingStyle.primaryButtonString,
-      onPressedToDo: onPressed,
-      nowStyle: _isScanning
-          ? NfcLeadingStyle.nfcIngStyle
-          : NfcLeadingStyle.primaryButtonStyle,
+    final reviewerAccess = Get.find<ReviewerAccessController>();
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        NfcButtonAbstract(
+          text: _isScanning
+              ? NfcLeadingStyle.nfcIngString
+              : NfcLeadingStyle.primaryButtonString,
+          onPressedToDo: onPressed,
+          nowStyle: _isScanning
+              ? NfcLeadingStyle.nfcIngStyle
+              : NfcLeadingStyle.primaryButtonStyle,
+        ),
+        Obx(
+          () => reviewerAccess.isReviewer.value
+              ? Padding(
+                  padding: const EdgeInsets.only(top: 12),
+                  child: FilledButton.icon(
+                    onPressed: _isScanning ? null : _simulateReviewerTag,
+                    icon: const Icon(Icons.developer_mode_rounded),
+                    label: Text('widgets.buttons.nfc.button.s007'.tr),
+                  ),
+                )
+              : const SizedBox.shrink(),
+        ),
+      ],
     );
   }
 }

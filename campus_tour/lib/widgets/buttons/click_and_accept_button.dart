@@ -5,7 +5,7 @@ import '../../styles/app_theme.dart';
 import 'package:get/get.dart';
 
 class ClickAndAcceptButton extends StatelessWidget {
-  ClickAndAcceptButton({
+  const ClickAndAcceptButton({
     super.key,
     required this.movementFunction,
     required this.acceptInfo,

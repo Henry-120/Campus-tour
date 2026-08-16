@@ -6,7 +6,7 @@ import '../../styles/app_theme.dart';
 class UserNameText extends StatelessWidget {
   final double scale;
 
-  UserNameText({super.key, this.scale = 1});
+  const UserNameText({super.key, this.scale = 1});
 
   @override
   Widget build(BuildContext context) {

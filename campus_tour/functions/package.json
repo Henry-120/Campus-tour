@@ -8,6 +8,8 @@
   "scripts": {
     "build": "tsc",
     "lint": "eslint src --ext .ts",
+    "reviewer:grant": "node scripts/set-reviewer-claim.js caijamie22+appreview@gmail.com true",
+    "reviewer:revoke": "node scripts/set-reviewer-claim.js caijamie22+appreview@gmail.com false",
     "serve": "npm run build && firebase emulators:start --only functions",
     "deploy": "firebase deploy --only functions"
   },

@@ -9,7 +9,7 @@ class ElfStorySection extends StatelessWidget {
   final String? story;
   final bool isLoading;
 
-  ElfStorySection({
+  const ElfStorySection({
     super.key,
     required this.name,
     required this.story,

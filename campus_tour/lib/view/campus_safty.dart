@@ -1,5 +1,5 @@
 import 'package:campus_tour/styles/app_theme.dart';
-import 'package:campus_tour/view/AED_map.dart';
+import 'package:campus_tour/view/aed_map.dart';
 import 'package:campus_tour/view/call_and_email.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

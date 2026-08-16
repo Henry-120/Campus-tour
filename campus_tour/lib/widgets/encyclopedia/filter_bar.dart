@@ -8,7 +8,11 @@ class FilterBar extends StatelessWidget {
   final int selectedIndex;
   final Function(int) onSelect;
 
-  FilterBar({super.key, required this.selectedIndex, required this.onSelect});
+  const FilterBar({
+    super.key,
+    required this.selectedIndex,
+    required this.onSelect,
+  });
 
   @override
   Widget build(BuildContext context) {

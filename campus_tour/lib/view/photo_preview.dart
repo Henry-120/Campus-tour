@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 class PhotoPreviewPage extends StatelessWidget {
   final String imagePath;
 
-  PhotoPreviewPage({super.key, required this.imagePath});
+  const PhotoPreviewPage({super.key, required this.imagePath});
 
   Future<void> _savePhoto(BuildContext context) async {
     try {

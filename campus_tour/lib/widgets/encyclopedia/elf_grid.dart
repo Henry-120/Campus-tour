@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import '../../controllers/monster_controller.dart';
 
 class ElfGrid extends StatefulWidget {
-  ElfGrid({super.key});
+  const ElfGrid({super.key});
 
   @override
   State<ElfGrid> createState() => _ElfGridState();

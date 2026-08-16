@@ -18,9 +18,9 @@ class MqttService {
     _clientId = _generateClientId();
 
     _client = MqttServerClient.withPort(
-      Esp32MQTT_info.BROKER_ADDRESS,
+      Esp32MqttInfo.brokerAddress,
       _clientId,
-      Esp32MQTT_info.PORT,
+      Esp32MqttInfo.port,
     );
     _client.logging(on: true);
   }
@@ -41,7 +41,7 @@ class MqttService {
         .toRadixString(16)
         .padLeft(6, '0');
 
-    return '${Esp32MQTT_info.CLIENT}_${timestamp}_${randomPart}';
+    return '${Esp32MqttInfo.client}_${timestamp}_$randomPart';
   }
 
   Future<bool> connect() async {
@@ -81,7 +81,7 @@ class MqttService {
     final builder = MqttClientPayloadBuilder();
     builder.addString(message);
     _client.publishMessage(
-      Esp32MQTT_info.TOPIC,
+      Esp32MqttInfo.topic,
       MqttQos.atLeastOnce,
       builder.payload!,
     );
