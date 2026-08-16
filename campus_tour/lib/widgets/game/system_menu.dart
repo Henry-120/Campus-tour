@@ -12,7 +12,7 @@ import '../../widgets/constants/responsive.dart';
 import 'package:get/get.dart';
 
 class SystemMenu extends StatelessWidget {
-  SystemMenu({super.key});
+  const SystemMenu({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -19,7 +19,7 @@ class FullMissionPage extends StatefulWidget {
   final VoidCallback? onMissionFailed;
 
   //建構子
-  FullMissionPage({
+  const FullMissionPage({
     super.key,
     required this.missions,
     required this.monsterModelCry,

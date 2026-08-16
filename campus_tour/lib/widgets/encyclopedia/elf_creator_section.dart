@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 class ElfCreatorSection extends StatelessWidget {
   final String creatorName;
 
-  ElfCreatorSection({super.key, required this.creatorName});
+  const ElfCreatorSection({super.key, required this.creatorName});
 
   static const Color primaryColor = Color(0xFF006C49);
   static const Color textColor = Color(0xFF0B1C30);

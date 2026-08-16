@@ -12,7 +12,7 @@ import 'social_image_button.dart';
 import 'package:get/get.dart';
 
 class WoodRegisterPanel extends StatelessWidget {
-  WoodRegisterPanel({
+  const WoodRegisterPanel({
     super.key,
     required this.nameController,
     required this.emailController,

@@ -75,7 +75,7 @@ class _LandmarkMarker {
 }
 
 class MapSuggestionsPage extends StatefulWidget {
-  MapSuggestionsPage({super.key});
+  const MapSuggestionsPage({super.key});
 
   @override
   State<MapSuggestionsPage> createState() => _MapSuggestionsPageState();
