@@ -172,6 +172,8 @@ class AppTranslations extends Translations {
       'view.camera.view.s006': '[CameraView] 讀取精靈相框資料失敗: \$e',
       'view.camera.view.s009': '草',
       'view.camera.view.s010': '返回',
+      'view.camera.view.s011': '開啟系統設定',
+      'view.camera.view.s012': '需要相機權限',
       'view.campus.safety.s001': '校園安全',
       'view.campus.safety.s002': '緊急地圖',
       'view.campus.safety.s003': '呼叫與回報',
@@ -223,15 +225,15 @@ class AppTranslations extends Translations {
       'view.lhf.setting.page.s038': '捕捉全部精靈失敗，請稍後再試',
       'view.lhf.setting.page.s039': '刪除全部精靈失敗，請稍後再試',
       'view.lhf.setting.page.s040': '圖鑑已經擁有全部精靈',
-      'view.lhf.setting.page.s041': '已新增 \$count 隻精靈到圖鑑',
+      'view.lhf.setting.page.s041': '已新增 @count 隻精靈到圖鑑',
       'view.lhf.setting.page.s042': '圖鑑原本就是空的',
-      'view.lhf.setting.page.s043': '已從圖鑑刪除 \$count 隻精靈',
+      'view.lhf.setting.page.s043': '已從圖鑑刪除 @count 隻精靈',
       'view.lhf.setting.page.s044': '語言',
       'view.lhf.setting.page.s045': '選擇遊戲介面的顯示語言。',
       'view.lhf.setting.page.s046': '中文',
       'view.lhf.setting.page.s047': '目前語言',
-      'view.lhf.setting.page.s048': '使用者協議',
-      'view.lhf.setting.page.s049': '查看目前版本的使用者協議與說明內容。',
+      'view.lhf.setting.page.s048': '法律與隱私',
+      'view.lhf.setting.page.s049': '查看服務條款、隱私權政策與您的資料權利。',
       'view.lhf.setting.page.s050': '點擊前往閱讀協議內容',
       'view.lhf.setting.page.s051': '目前音量 @volume',
       'view.lhf.setting.page.s052': '[SettingPage] 捕捉全部精靈失敗: \$e',
@@ -298,10 +300,16 @@ class AppTranslations extends Translations {
       'view.lhf.setting.page.s112': 'Apple 登入連結成功，Firebase UID 與原有資料維持不變。',
       'view.lhf.setting.page.s113': '正在連結 Apple 登入…',
       'view.lhf.setting.page.s114': 'Apple 登入',
-      'view.lhf.setting.page.s115': '取消',
-      'view.lhf.setting.page.s116': '確認刪除',
-      'view.lhf.setting.page.s117': '無法刪除帳號，請重新登入後再試一次',
-      'view.lhf.setting.page.s118': '密碼不正確，請重新輸入',
+      'view.lhf.setting.page.s119': '刪除帳號',
+      'view.lhf.setting.page.s120': '永久刪除帳號、個人資料與所有精靈收藏。此操作無法復原。',
+      'view.lhf.setting.page.s121': '永久刪除我的帳號',
+      'view.lhf.setting.page.s122': '確定要刪除帳號嗎？',
+      'view.lhf.setting.page.s123': '帳號、個人資料與遊戲收藏將永久刪除，且無法復原。',
+      'view.lhf.setting.page.s124': '請輸入目前密碼',
+      'view.lhf.setting.page.s125': '取消',
+      'view.lhf.setting.page.s126': '確認刪除',
+      'view.lhf.setting.page.s127': '無法刪除帳號，請重新登入後再試一次',
+      'view.lhf.setting.page.s128': '密碼不正確，請重新輸入',
       'view.login.page.s001': '[LoginPage] 登入成功，正在獲取資料...',
       'view.login.page.s002': '帳號或密碼錯誤',
       'view.login.page.s003': '[LoginPage] 登入出錯: \$e',
@@ -338,10 +346,14 @@ class AppTranslations extends Translations {
       'view.novice.leading.page.s013': '上一步',
       'view.novice.leading.page.s014': '下一步',
       'view.photo.preview.s001': '照片已成功儲存到相簿！',
-      'view.photo.preview.s002': '儲存失敗: \$e',
+      'view.photo.preview.s002': '儲存失敗：@error',
       'view.photo.preview.s003': '照片預覽',
       'view.photo.preview.s004': '重拍',
       'view.photo.preview.s005': '儲存',
+      'view.photo.preview.s006': '需要相簿權限',
+      'view.photo.preview.s007': '需要相簿權限才能儲存照片。請到系統設定開啟相簿存取權後再試一次。',
+      'view.photo.preview.s008': '稍後再說',
+      'view.photo.preview.s009': '開啟設定',
       'view.real.ar.view.s001': '放置精靈',
       'view.real.ar.view.s004': '嚶嚶嚶',
       'view.real.ar.view.s005': '💡 已切換精靈模型為: \$selectedMonsterUrl',
@@ -356,15 +368,16 @@ class AppTranslations extends Translations {
       'view.register.page.s008': '[RegisterPage] Google 登入失敗: \$e',
       'view.register.page.s009': 'Google 登入失敗: \$e',
       'view.register.page.s010': 'Apple 登入成功！歡迎加入冒險之旅',
-      'view.user.protocol.s002': '暫時替代頁面',
-      'view.user.protocol.s003': '協議內容準備中',
-      'view.user.protocol.s004': '這裡之後會放正式的使用者協議、服務條款與相關說明。',
-      'view.user.protocol.s005': '\\n\\n目前這是一個暫時性的替代頁面，用來先完成設定頁的跳轉流程與互動測試。',
-      'view.user.protocol.s006': '\\n\\n之後只要把這裡的內容替換成正式協議即可，不需要再修改設定頁按鈕的跳轉邏輯。',
-      'view.user.protocol.s007': '目前可先確認',
-      'view.user.protocol.s008': '按鈕按下時會先縮小，放開後回彈再跳轉。',
-      'view.user.protocol.s009': '返回設定頁後，不需要額外處理狀態。',
-      'view.user.protocol.s010': '之後可直接在這個檔案補上正式協議內容。',
+      'view.user.protocol.s002': '法律文件與資料權利',
+      'view.user.protocol.s003': '透明、安心地使用校園導覽服務',
+      'view.user.protocol.s004': '請在使用服務前閱讀下列文件。內容說明服務規則、資料處理方式、帳號刪除流程及您的權利。',
+      'view.user.protocol.s005': '使用者服務協議',
+      'view.user.protocol.s006': '說明帳號責任、服務使用規則、智慧財產權、安全注意事項、服務變更及責任限制。',
+      'view.user.protocol.s007': '隱私權政策',
+      'view.user.protocol.s008':
+          '說明帳號、精確位置、相機與照片、NFC／藍牙權限、Firebase 與 Google 服務、保存期限及資料刪除。',
+      'view.user.protocol.s009': '營運單位：中央大學校園導覽團隊｜聯絡信箱：ideasky716@gmail.com',
+      'view.user.protocol.s010': '生效及最後更新日期：2026 年 8 月 16 日',
       'widgets.ar.control.ar.control.view.s001': '操控精靈吧！',
       'widgets.ar.control.ar.control.view.s002': '💡 模型已切換至: \$newUrl',
       'widgets.buttons.click.and.accept.button.s001': '確定',
@@ -454,6 +467,34 @@ class AppTranslations extends Translations {
       'widgets.game.catching.pages.graphics.text.level.page.s006': '關閉 NFC 教學',
       'widgets.game.catching.pages.graphics.text.level.page.s007':
           '這個關卡目前沒有可顯示的內容',
+      'widgets.game.catching.pages.graphics.text.level.page.s008': '劇情回顧',
+      'widgets.game.catching.pages.graphics.text.level.page.s009': '關閉劇情回顧',
+      'widgets.game.catching.pages.monster.trace.plot.s001': '你',
+      'widgets.game.catching.pages.monster.trace.plot.s002': '這裡好像留下了一些奇怪的痕跡……',
+      'widgets.game.catching.pages.monster.trace.plot.s003':
+          '（你蹲下來仔細觀察，發現附近留有特殊的線索。）',
+      'widgets.game.catching.pages.monster.trace.plot.s004': '這應該就是那隻精靈留下的蹤跡。',
+      'widgets.game.catching.pages.monster.trace.plot.s005':
+          '（你將發現的蹤跡收進了蹤跡收集罐。）',
+      'widgets.game.catching.pages.monster.trace.plot.s006': '（繼續尋找下一個蹤跡吧。）',
+      'widgets.game.catching.pages.monster.trace.plot.s007':
+          '精靈經由象群雕塑，匆匆跑向黑盒子，路途中似乎有什麼散發著魔力。',
+      'widgets.game.catching.pages.monster.trace.plot.s008':
+          '沒發現蹤跡嗎？或許可以試試穿過拱門，看看會不會有什麼發現。',
+      'widgets.game.catching.pages.monster.trace.plot.s009':
+          '精靈似乎曾駐足 DNA 觀賞許久，才又繼續前行，或許可以試著在附近找找看。',
+      'widgets.game.catching.pages.monster.trace.plot.s010':
+          '這道蹤跡指向照片中的位置，前往附近仔細調查吧。',
+      'widgets.game.catching.pages.monster.trace.plot.s011':
+          '雲端上的松果似乎留有精靈的特殊氣息。',
+      'widgets.game.catching.pages.monster.trace.plot.s012':
+          '這道蹤跡指向照片中的位置，前往附近仔細調查吧。',
+      'widgets.game.catching.pages.monster.trace.plot.s013':
+          '站在疑問最深處，當屏風完全消失於視野時，向水面反射，疑問自會明朗。',
+      'widgets.game.catching.pages.monster.trace.plot.s014':
+          '視野中，是不是有一朵雲特別不一樣？',
+      'widgets.game.catching.pages.monster.trace.plot.s015':
+          '精靈似乎曾望著裝置，期待能看到代表中央大學的「中」字出現。',
       'widgets.game.catching.pages.plot.level.s001': '你找到了一塊魔法石',
       'widgets.game.catching.pages.plot.level.s002': '找到對應的法陣，將魔法石放上去吧！',
       'widgets.game.catching.pages.plot.level.s003': '你召喚了精靈',
@@ -490,6 +531,11 @@ class AppTranslations extends Translations {
       'widgets.login.forgot.password.dialog.s005': 'Email 格式不正確',
       'widgets.login.forgot.password.dialog.s006': '取消',
       'widgets.login.forgot.password.dialog.s007': '寄送重設信',
+      'widgets.login.legal.document.links.s001': '無法開啟文件，請稍後再試',
+      'widgets.login.legal.document.links.s002': '使用者服務協議',
+      'widgets.login.legal.document.links.s003': '隱私權政策',
+      'widgets.login.legal.document.links.s004': '法律文件與支援',
+      'widgets.login.legal.document.links.s005': '支援',
       'widgets.login.social.buttons.s001': '使用 Google 登入',
       'widgets.login.social.buttons.s002': '使用 Apple 登入',
       'widgets.login.wood.register.panel.s001': '請輸入名稱',
@@ -534,68 +580,86 @@ class AppTranslations extends Translations {
       'widgets.sections.start.menu.group.s003': '開始',
     },
     'en': {
-      'controllers.login.controller.s001': '正在啟動 Google 認證...',
-      'controllers.login.controller.s002': 'Google 認證成功: \${user.uid}',
-      'controllers.login.controller.s003': '新使用者，正在建立 Firestore 資料...',
+      'controllers.login.controller.s001': 'Starting Google authentication...',
+      'controllers.login.controller.s002':
+          'Google authentication succeeded: \${user.uid}',
+      'controllers.login.controller.s003':
+          'New user; creating Firestore data...',
       'controllers.login.controller.s004': 'Adventurer',
-      'controllers.login.controller.s005': '正在載入使用者收藏與資料...',
+      'controllers.login.controller.s005':
+          'Loading user collection and data...',
       'controllers.login.controller.s006':
-          '❌ LoginController.signInWithGoogle 失敗: \$e',
+          '❌ LoginController.signInWithGoogle failed: \$e',
       'controllers.monster.controller.s001':
-          '[MonsterController] 載入精靈總數失敗: \$e',
-      'controllers.monster.controller.s002': '[MonsterController] 此怪物沒有關聯的 QA',
+          '[MonsterController] Failed to load total spirit count: \$e',
+      'controllers.monster.controller.s002':
+          '[MonsterController] This spirit has no associated QA',
       'controllers.monster.controller.s003':
-          '[MonsterController] 獲取 QA 失敗: \$e',
-      'controllers.monster.controller.s004': '[MonsterController] 此怪物沒有關聯的建築資料',
+          '[MonsterController] Failed to retrieve QA: \$e',
+      'controllers.monster.controller.s004':
+          '[MonsterController] This spirit has no associated architecture data',
       'controllers.monster.controller.s005':
-          '[MonsterController] 獲取建築資料失敗: \$e',
+          '[MonsterController] Failed to retrieve architecture data: \$e',
       'controllers.monster.controller.s006':
-          '[MonsterController] 怪物 \${monsterObj.name} 已經被捕捉過',
+          '[MonsterController] Spirit \${monsterObj.name} was already caught',
       'controllers.monster.controller.s007':
-          '[MonsterController] 成功捕捉怪物: \${monsterObj.name} 並已同步更新 QA 與建築資料',
-      'controllers.monster.controller.s008': '[MonsterController] 捕捉怪物時出錯: \$e',
+          '[MonsterController] Caught spirit \${monsterObj.name} and synchronized QA and architecture data',
+      'controllers.monster.controller.s008':
+          '[MonsterController] Error while catching spirit: \$e',
       'controllers.monster.controller.s009':
-          '[MonsterController] 測試功能捕捉全部精靈: \${missingMonsters.length}',
+          '[MonsterController] Test: caught all spirits: \${missingMonsters.length}',
       'controllers.monster.controller.s010':
-          '[MonsterController] 測試功能刪除全部精靈: \$deletedCount',
+          '[MonsterController] Test: deleted all spirits: \$deletedCount',
       'controllers.monster.controller.s011':
-          '[MonsterController] 最近精靈: \${nearestMonster.value?.name}, 距離: \${nearestDistance.value}',
+          '[MonsterController] Nearest spirit: \${nearestMonster.value?.name}, distance: \${nearestDistance.value}',
       'controllers.nfc.api.s001': 'Move closer to the NFC tag',
       'controllers.nfc.api.s002': 'Invalid NFC tag format',
-      'controllers.nfc.api.s003': '錯誤：嘗試在掃描失敗的情況下讀取 Data。請先檢查 isSuccess！',
-      'controllers.nfc.api.s004': '錯誤：嘗試在掃描成功的情況下讀取 Error 類型。',
+      'controllers.nfc.api.s003':
+          'Error: Tried to read Data after a failed scan. Check isSuccess first!',
+      'controllers.nfc.api.s004':
+          'Error: Tried to read the Error type after a successful scan.',
       'controllers.profile.edit.controller.s001':
-          '[profile_edit_controller] 成功載入頭像: \${previewUrl.value}',
+          '[profile_edit_controller] Avatar loaded: \${previewUrl.value}',
       'controllers.profile.edit.controller.s002': 'Tip',
       'controllers.profile.edit.controller.s003':
           'Your nickname cannot be empty!',
       'controllers.profile.edit.controller.s004':
-          '[ProfileEdit] 儲存變更：\$newNickname',
+          '[ProfileEdit] Saving changes: \$newNickname',
       'controllers.user.controller.s001':
-          '[UserController] 偵測到使用者登入: \${user.uid}',
-      'controllers.user.controller.s002': '[UserController] 目前為登出狀態',
+          '[UserController] User signed in: \${user.uid}',
+      'controllers.user.controller.s002': '[UserController] User is signed out',
       'controllers.user.controller.s003':
-          '[UserController] 成功從 Firestore 載入頭像: \${data.photoUrl}',
-      'controllers.user.controller.s004': '[UserController] 抓取錯誤: \$e',
-      'services.camera.service.s001': '[Camera]: AR捕捉成功！路徑：\$path',
-      'services.camera.service.s002': '[Camera]:使用者取消了拍照',
-      'services.camera.service.s003': '[Camera]:拍照成功！路徑：\${photo.path}',
-      'services.camera.service.s004': '[Camera]:相機出錯：\$e',
-      'services.firebase.auth.service.s001': '[AuthService] 登入失敗: \$e',
-      'services.firebase.auth.service.s002': '[AuthService] 註冊失敗: \$e',
-      'services.firebase.auth.service.s003': '[AuthService] Google 登入失敗: \$e',
-      'services.google.auth.service.s001': 'Google Sign-In: 初始化新使用者隨機頭像...',
-      'services.google.auth.service.s003': '❌ Google Sign-In 發生錯誤：\$e',
-      'services.json.to.suggestion.s001': '名稱',
-      'services.json.to.suggestion.s002': '種類',
-      'services.json.to.suggestion.s003': '緯度',
-      'services.json.to.suggestion.s004': '經度',
-      'services.json.to.suggestion.s005': '地景資料缺少有效的「名稱」欄位',
-      'services.json.to.suggestion.s006': '地景資料缺少有效的「種類」欄位',
-      'services.json.to.suggestion.s007': '地景資料缺少有效的「緯度」或「經度」欄位',
-      'services.json.to.suggestion.s008': '地景 JSON 根節點必須是陣列: \$assetPath',
+          '[UserController] Avatar loaded from Firestore: \${data.photoUrl}',
+      'controllers.user.controller.s004': '[UserController] Fetch error: \$e',
+      'services.camera.service.s001':
+          '[Camera] AR capture succeeded. Path: \$path',
+      'services.camera.service.s002': '[Camera] User cancelled the photo',
+      'services.camera.service.s003':
+          '[Camera] Photo captured. Path: \${photo.path}',
+      'services.camera.service.s004': '[Camera] Camera error: \$e',
+      'services.firebase.auth.service.s001':
+          '[AuthService] Sign-in failed: \$e',
+      'services.firebase.auth.service.s002':
+          '[AuthService] Registration failed: \$e',
+      'services.firebase.auth.service.s003':
+          '[AuthService] Google Sign-In failed: \$e',
+      'services.google.auth.service.s001':
+          'Google Sign-In: Initializing a random avatar for the new user...',
+      'services.google.auth.service.s003': '❌ Google Sign-In error: \$e',
+      'services.json.to.suggestion.s001': 'Name',
+      'services.json.to.suggestion.s002': 'Type',
+      'services.json.to.suggestion.s003': 'Latitude',
+      'services.json.to.suggestion.s004': 'Longitude',
+      'services.json.to.suggestion.s005':
+          'Location data is missing a valid “Name” field',
+      'services.json.to.suggestion.s006':
+          'Location data is missing a valid “Type” field',
+      'services.json.to.suggestion.s007':
+          'Location data is missing a valid latitude or longitude field',
+      'services.json.to.suggestion.s008':
+          'The location JSON root must be an array: \$assetPath',
       'services.json.to.suggestion.s009':
-          '地景資料第 \${index + 1} 筆不是物件: \$sourceName',
+          'Location record \${index + 1} is not an object: \$sourceName',
       'styles.level.style.s001': 'Fire',
       'styles.level.style.s002': 'Water',
       'styles.level.style.s003': 'Metal',
@@ -743,9 +807,12 @@ class AppTranslations extends Translations {
       'view.camera.view.s003': 'Choose a spirit to release',
       'view.camera.view.s004': 'No spirits available',
       'view.camera.view.s005': 'Failed to capture photo: \$e',
-      'view.camera.view.s006': '[CameraView] 讀取精靈相框資料失敗: \$e',
+      'view.camera.view.s006':
+          '[CameraView] Failed to load spirit frame data: \$e',
       'view.camera.view.s009': 'Grass',
       'view.camera.view.s010': 'Back',
+      'view.camera.view.s011': 'Open System Settings',
+      'view.camera.view.s012': 'Camera Permission Required',
       'view.campus.safety.s001': 'Campus Safety',
       'view.campus.safety.s002': 'Emergency Map',
       'view.campus.safety.s003': 'Call and Report',
@@ -811,22 +878,24 @@ class AppTranslations extends Translations {
           'Failed to delete all spirits. Please try again later.',
       'view.lhf.setting.page.s040':
           'You already have every spirit in your collection',
-      'view.lhf.setting.page.s041': 'Added \$count spirits to your collection',
+      'view.lhf.setting.page.s041': 'Added @count spirits to the collection',
       'view.lhf.setting.page.s042': 'Your collection was already empty',
       'view.lhf.setting.page.s043':
-          'Removed \$count spirits from your collection',
+          'Removed @count spirits from the collection',
       'view.lhf.setting.page.s044': 'Language',
       'view.lhf.setting.page.s045':
           'Choose the language used in the game interface.',
       'view.lhf.setting.page.s046': 'Chinese',
       'view.lhf.setting.page.s047': 'Current Language',
-      'view.lhf.setting.page.s048': 'User Agreement',
+      'view.lhf.setting.page.s048': 'Legal & Privacy',
       'view.lhf.setting.page.s049':
-          'View the current user agreement and related information.',
+          'View the Terms of Service, Privacy Policy, and your data rights.',
       'view.lhf.setting.page.s050': 'Tap to read the agreement',
       'view.lhf.setting.page.s051': 'Current volume: @volume',
-      'view.lhf.setting.page.s052': '[SettingPage] 捕捉全部精靈失敗: \$e',
-      'view.lhf.setting.page.s053': '[SettingPage] 刪除全部精靈失敗: \$e',
+      'view.lhf.setting.page.s052':
+          '[SettingPage] Failed to catch all spirits: \$e',
+      'view.lhf.setting.page.s053':
+          '[SettingPage] Failed to delete all spirits: \$e',
       'view.lhf.setting.page.s054': 'Import Game Data',
       'view.lhf.setting.page.s055': 'Importing game data...',
       'view.lhf.setting.page.s056': 'Game data import complete',
@@ -913,18 +982,26 @@ class AppTranslations extends Translations {
           'Apple Sign-In was linked successfully. Your Firebase UID and existing data are unchanged.',
       'view.lhf.setting.page.s113': 'Linking Apple Sign-In…',
       'view.lhf.setting.page.s114': 'Apple Sign-In',
-      'view.lhf.setting.page.s115': 'Cancel',
-      'view.lhf.setting.page.s116': 'Delete Account',
-      'view.lhf.setting.page.s117':
+      'view.lhf.setting.page.s119': 'Delete Account',
+      'view.lhf.setting.page.s120':
+          'Permanently delete your account, profile, and all collected spirits. This cannot be undone.',
+      'view.lhf.setting.page.s121': 'Permanently Delete My Account',
+      'view.lhf.setting.page.s122': 'Delete your account?',
+      'view.lhf.setting.page.s123':
+          'Your account, profile, and game collection will be permanently deleted. This cannot be undone.',
+      'view.lhf.setting.page.s124': 'Current password',
+      'view.lhf.setting.page.s125': 'Cancel',
+      'view.lhf.setting.page.s126': 'Delete Account',
+      'view.lhf.setting.page.s127':
           'Could not delete the account. Sign in again and retry.',
-      'view.lhf.setting.page.s118': 'Incorrect password. Try again.',
-      'view.login.page.s001': '[LoginPage] 登入成功，正在獲取資料...',
+      'view.lhf.setting.page.s128': 'Incorrect password. Try again.',
+      'view.login.page.s001': '[LoginPage] Signed in; retrieving data...',
       'view.login.page.s002': 'Incorrect email or password',
-      'view.login.page.s003': '[LoginPage] 登入出錯: \$e',
+      'view.login.page.s003': '[LoginPage] Sign-in error: \$e',
       'view.login.page.s004':
           'An error occurred while signing in. Please try again later.',
       'view.login.page.s005': 'Google Sign-In failed. Please try again later.',
-      'view.login.page.s006': '[LoginPage] Google 登入出錯: \$e',
+      'view.login.page.s006': '[LoginPage] Google Sign-In error: \$e',
       'view.login.page.s007':
           'An error occurred during Google Sign-In. Please try again later.',
       'view.login.page.s008':
@@ -934,15 +1011,16 @@ class AppTranslations extends Translations {
           'If this email is registered, a password reset email will be sent.',
       'view.map.suggestions.s001': 'Top 10 NCU Landmarks',
       'view.map.suggestions.s004':
-          '[Debug][MapSuggestionsPage] 載入地景資料失敗: \$error',
+          '[Debug][MapSuggestionsPage] Failed to load location data: \$error',
       'view.map.suggestions.s005': 'Failed to load landmark data: \$error',
       'view.map.suggestions.s006': 'GPS is turned off',
       'view.map.suggestions.s007': 'Location permission has not been granted',
       'view.nearby.monsters.display.s001':
-          '[MonsterMarkers] 動畫精靈圖載入失敗: \$animatedPath, \$error',
+          '[MonsterMarkers] Failed to load animated spirit image: \$animatedPath, \$error',
       'view.nearby.monsters.display.s002':
-          '[MonsterMarkers] 靜態精靈圖載入失敗: \${monster.imageURL}, \$error',
-      'view.nearby.monsters.display.s003': '無法將精靈圖片轉成 PNG bytes',
+          '[MonsterMarkers] Failed to load static spirit image: \${monster.imageURL}, \$error',
+      'view.nearby.monsters.display.s003':
+          'Unable to convert the spirit image to PNG bytes',
       'view.novice.leading.page.s001':
           'This is your current location. You will guide your companion as you explore the campus.',
       'view.novice.leading.page.s002': 'You can edit your profile here.',
@@ -965,13 +1043,19 @@ class AppTranslations extends Translations {
       'view.novice.leading.page.s013': 'Previous',
       'view.novice.leading.page.s014': 'Next',
       'view.photo.preview.s001': 'Photo saved to your gallery!',
-      'view.photo.preview.s002': 'Failed to save: \$e',
+      'view.photo.preview.s002': 'Save failed: @error',
       'view.photo.preview.s003': 'Photo Preview',
       'view.photo.preview.s004': 'Retake',
       'view.photo.preview.s005': 'Save',
+      'view.photo.preview.s006': 'Photo Permission Required',
+      'view.photo.preview.s007':
+          'Photo access is required to save photos. Enable access in System Settings and try again.',
+      'view.photo.preview.s008': 'Not Now',
+      'view.photo.preview.s009': 'Open Settings',
       'view.real.ar.view.s001': 'Place Spirit',
       'view.real.ar.view.s004': 'Sob...',
-      'view.real.ar.view.s005': '💡 已切換精靈模型為: \$selectedMonsterUrl',
+      'view.real.ar.view.s005':
+          '💡 Switched spirit model to: \$selectedMonsterUrl',
       'view.real.ar.view.s006': 'Please choose a spirit first!',
       'view.register.page.s001':
           'Please check that your registration information is correct',
@@ -979,33 +1063,33 @@ class AppTranslations extends Translations {
           'A verification email has been sent to @email. Verify your email before signing in.',
       'view.register.page.s003':
           'Registration failed. This email may already be in use, or there may be a network issue.',
-      'view.register.page.s004': '[RegisterPage] 註冊出錯: \$e',
+      'view.register.page.s004': '[RegisterPage] Registration error: \$e',
       'view.register.page.s005': 'Registration failed: \$e',
       'view.register.page.s006':
           'Google registration successful! Welcome to the adventure!',
       'view.register.page.s007':
           'Google registration failed. Please try again later.',
-      'view.register.page.s008': '[RegisterPage] Google 登入失敗: \$e',
+      'view.register.page.s008': '[RegisterPage] Google Sign-In failed: \$e',
       'view.register.page.s009': 'Google Sign-In failed: \$e',
       'view.register.page.s010':
           'Apple Sign-In successful! Welcome to the adventure!',
-      'view.user.protocol.s002': 'Temporary Page',
-      'view.user.protocol.s003': 'Agreement Coming Soon',
+      'view.user.protocol.s002': 'Legal Documents & Data Rights',
+      'view.user.protocol.s003':
+          'Explore the campus with clarity and confidence',
       'view.user.protocol.s004':
-          'The official user agreement, terms of service, and related information will appear here.',
-      'view.user.protocol.s005':
-          '\\n\\nThis is currently a temporary page used to complete and test navigation from the settings screen.',
+          'Please review these documents before using the service. They explain the service rules, data practices, account deletion, and your rights.',
+      'view.user.protocol.s005': 'Terms of Service',
       'view.user.protocol.s006':
-          '\\n\\nThe official agreement can later replace this content without changing the settings-page navigation.',
-      'view.user.protocol.s007': 'For now, you can confirm that',
+          'Covers account responsibilities, acceptable use, intellectual property, safety, service changes, and limitations of liability.',
+      'view.user.protocol.s007': 'Privacy Policy',
       'view.user.protocol.s008':
-          'The button shrinks when pressed, then bounces back before navigating.',
+          'Explains account data, precise location, camera and photos, NFC/Bluetooth permissions, Firebase and Google services, retention, and deletion.',
       'view.user.protocol.s009':
-          'No additional state handling is required when returning to Settings.',
-      'view.user.protocol.s010':
-          'The official agreement can be added directly to this file later.',
+          'Operator: NCU Campus Tour Team | Contact: ideasky716@gmail.com',
+      'view.user.protocol.s010': 'Effective and last updated: August 16, 2026',
       'widgets.ar.control.ar.control.view.s001': 'Control Your Spirit!',
-      'widgets.ar.control.ar.control.view.s002': '💡 模型已切換至: \$newUrl',
+      'widgets.ar.control.ar.control.view.s002':
+          '💡 Model switched to: \$newUrl',
       'widgets.buttons.click.and.accept.button.s001': 'Confirm',
       'widgets.buttons.click.and.accept.button.s002': 'Cancel',
       'widgets.buttons.nfc.button.s001':
@@ -1015,8 +1099,9 @@ class AppTranslations extends Translations {
       'widgets.buttons.nfc.button.s004': 'NFC permission is not enabled',
       'widgets.buttons.nfc.button.s005': 'Invalid tag format',
       'widgets.buttons.nfc.button.s006': 'An unknown error occurred',
-      'widgets.common.user.head.s001': '[UserHead] SVG 載入失敗: \$error',
-      'widgets.common.user.head.s002': '[UserHead] 圖片載入失敗: \$error',
+      'widgets.common.user.head.s001': '[UserHead] Failed to load SVG: \$error',
+      'widgets.common.user.head.s002':
+          '[UserHead] Failed to load image: \$error',
       'widgets.encyclopedia.all.the.monster.monster.text.s001':
           'The spirit hurried past the Elephant Herd sculpture toward the Black Box. Something along the way seemed to radiate magic.',
       'widgets.encyclopedia.all.the.monster.monster.text.s002':
@@ -1036,7 +1121,8 @@ class AppTranslations extends Translations {
       'widgets.encyclopedia.elf.creator.section.s001': 'Creator Information',
       'widgets.encyclopedia.elf.department.section.s001': 'College Departments',
       'widgets.encyclopedia.elf.grid.s001': 'No spirits captured yet',
-      'widgets.encyclopedia.elf.hero.section.s001': '圖片載入失敗路徑: \$imagePath',
+      'widgets.encyclopedia.elf.hero.section.s001':
+          'Failed image path: \$imagePath',
       'widgets.encyclopedia.elf.hero.section.s002':
           'Invalid image path:\\n\$imagePath',
       'widgets.encyclopedia.elf.installation.section.s001': 'Public Art',
@@ -1108,6 +1194,39 @@ class AppTranslations extends Translations {
           'Close NFC Tutorial',
       'widgets.game.catching.pages.graphics.text.level.page.s007':
           'There is no content available for this level.',
+      'widgets.game.catching.pages.graphics.text.level.page.s008':
+          'Story Review',
+      'widgets.game.catching.pages.graphics.text.level.page.s009':
+          'Close Story Review',
+      'widgets.game.catching.pages.monster.trace.plot.s001': 'You',
+      'widgets.game.catching.pages.monster.trace.plot.s002':
+          'It looks like something left strange tracks here...',
+      'widgets.game.catching.pages.monster.trace.plot.s003':
+          '(You crouch down for a closer look and discover unusual clues nearby.)',
+      'widgets.game.catching.pages.monster.trace.plot.s004':
+          'These must be the tracks left by that spirit.',
+      'widgets.game.catching.pages.monster.trace.plot.s005':
+          '(You place the tracks you found into the trace collection jar.)',
+      'widgets.game.catching.pages.monster.trace.plot.s006':
+          '(Keep searching for the next trace.)',
+      'widgets.game.catching.pages.monster.trace.plot.s007':
+          'The spirit hurried past the Elephant Herd sculpture toward the Black Box. Something along the way seemed to radiate magic.',
+      'widgets.game.catching.pages.monster.trace.plot.s008':
+          'Still no trace? Try passing through the archway and see what you discover.',
+      'widgets.game.catching.pages.monster.trace.plot.s009':
+          'The spirit once stopped to admire the DNA sculpture for a long time before moving on. Try searching nearby.',
+      'widgets.game.catching.pages.monster.trace.plot.s010':
+          'This trace points toward the place in the photo. Search the area carefully.',
+      'widgets.game.catching.pages.monster.trace.plot.s011':
+          'The pinecone in the clouds seems to carry a spirit\'s unusual presence.',
+      'widgets.game.catching.pages.monster.trace.plot.s012':
+          'This trace points toward the place in the photo. Search the area carefully.',
+      'widgets.game.catching.pages.monster.trace.plot.s013':
+          'Stand at the heart of the question. When the screen disappears completely from view, look toward its reflection on the water and the answer will become clear.',
+      'widgets.game.catching.pages.monster.trace.plot.s014':
+          'Does one of the clouds in your field of view look different from the others?',
+      'widgets.game.catching.pages.monster.trace.plot.s015':
+          'The spirit once gazed at the installation, waiting for the Chinese character “中,” representing National Central University, to appear.',
       'widgets.game.catching.pages.plot.level.s001': 'You found a magic stone.',
       'widgets.game.catching.pages.plot.level.s002':
           'Find the matching magic circle and place the stone on it!',
@@ -1122,14 +1241,16 @@ class AppTranslations extends Translations {
       'widgets.game.catching.pages.plot.level.s009': 'Companion',
       'widgets.game.game.map.s001': 'Campus Map',
       'widgets.game.game.map.s002': 'Forest Map',
-      'widgets.game.game.map.s003': '[Debug][GameMap][Error] 載入資源失敗: \$e',
+      'widgets.game.game.map.s003':
+          '[Debug][GameMap][Error] Failed to load resources: \$e',
       'widgets.game.game.map.s004':
-          '[Debug][GameMap]:使用固定測試定位 \${_fixedTestLocation.latitude}, \${_fixedTestLocation.longitude}',
+          '[Debug][GameMap] Using fixed test location: \${_fixedTestLocation.latitude}, \${_fixedTestLocation.longitude}',
       'widgets.game.game.map.s005':
-          '[Debug][GameMap]:位置更新: \${position.latitude}, \${position.longitude}',
-      'widgets.game.game.map.s006': '[Debug][GameMap]:已開始監聽位置變化',
+          '[Debug][GameMap] Location updated: \${position.latitude}, \${position.longitude}',
+      'widgets.game.game.map.s006':
+          '[Debug][GameMap] Started listening for location changes',
       'widgets.game.game.map.s007':
-          '[Debug][GameMap]:_checkPermissionAndListen 例外：\$e',
+          '[Debug][GameMap] _checkPermissionAndListen exception: \$e',
       'widgets.game.game.map.s008':
           'Unable to load questions for \${monster.name}. Please try again later.',
       'widgets.game.game.map.s009':
@@ -1153,6 +1274,12 @@ class AppTranslations extends Translations {
           'Enter a valid email address',
       'widgets.login.forgot.password.dialog.s006': 'Cancel',
       'widgets.login.forgot.password.dialog.s007': 'Send Reset Email',
+      'widgets.login.legal.document.links.s001':
+          'Unable to open the document. Please try again later.',
+      'widgets.login.legal.document.links.s002': 'Terms of Service',
+      'widgets.login.legal.document.links.s003': 'Privacy Policy',
+      'widgets.login.legal.document.links.s004': 'Legal documents and support',
+      'widgets.login.legal.document.links.s005': 'Support',
       'widgets.login.social.buttons.s001': 'Sign in with Google',
       'widgets.login.social.buttons.s002': 'Sign in with Apple',
       'widgets.login.wood.register.panel.s001': 'Please enter your name',
@@ -1201,76 +1328,83 @@ class AppTranslations extends Translations {
       'widgets.sections.monster.test.s013':
           'Test VR/AR level data. FullMissionPage should currently disable it.',
       'widgets.sections.start.menu.group.s001':
-          '❌ [StartMenuGroup] 圖片載入失敗: \$error',
+          '❌ [StartMenuGroup] Failed to load image: \$error',
       'widgets.sections.start.menu.group.s002':
           'Failed to load start_text.png\\n\$error',
       'widgets.sections.start.menu.group.s003': 'Start',
     },
     'ja': {
-      'controllers.login.controller.s001': '正在啟動 Google 認證...',
-      'controllers.login.controller.s002': 'Google 認證成功: \${user.uid}',
-      'controllers.login.controller.s003': '新使用者，正在建立 Firestore 資料...',
+      'controllers.login.controller.s001': 'Google認証を開始しています...',
+      'controllers.login.controller.s002': 'Google認証に成功しました: \${user.uid}',
+      'controllers.login.controller.s003': '新規ユーザーのFirestoreデータを作成しています...',
       'controllers.login.controller.s004': '冒険者',
-      'controllers.login.controller.s005': '正在載入使用者收藏與資料...',
+      'controllers.login.controller.s005': 'ユーザーのコレクションとデータを読み込んでいます...',
       'controllers.login.controller.s006':
-          '❌ LoginController.signInWithGoogle 失敗: \$e',
+          '❌ LoginController.signInWithGoogleに失敗しました: \$e',
       'controllers.monster.controller.s001':
-          '[MonsterController] 載入精靈總數失敗: \$e',
-      'controllers.monster.controller.s002': '[MonsterController] 此怪物沒有關聯的 QA',
+          '[MonsterController] 精霊の総数を読み込めませんでした: \$e',
+      'controllers.monster.controller.s002':
+          '[MonsterController] この精霊には関連するQAがありません',
       'controllers.monster.controller.s003':
-          '[MonsterController] 獲取 QA 失敗: \$e',
-      'controllers.monster.controller.s004': '[MonsterController] 此怪物沒有關聯的建築資料',
+          '[MonsterController] QAを取得できませんでした: \$e',
+      'controllers.monster.controller.s004':
+          '[MonsterController] この精霊には関連する建築データがありません',
       'controllers.monster.controller.s005':
-          '[MonsterController] 獲取建築資料失敗: \$e',
+          '[MonsterController] 建築データを取得できませんでした: \$e',
       'controllers.monster.controller.s006':
-          '[MonsterController] 怪物 \${monsterObj.name} 已經被捕捉過',
+          '[MonsterController] 精霊\${monsterObj.name}はすでに捕獲されています',
       'controllers.monster.controller.s007':
-          '[MonsterController] 成功捕捉怪物: \${monsterObj.name} 並已同步更新 QA 與建築資料',
-      'controllers.monster.controller.s008': '[MonsterController] 捕捉怪物時出錯: \$e',
+          '[MonsterController] 精霊\${monsterObj.name}を捕獲し、QAと建築データを同期しました',
+      'controllers.monster.controller.s008':
+          '[MonsterController] 精霊の捕獲中にエラーが発生しました: \$e',
       'controllers.monster.controller.s009':
-          '[MonsterController] 測試功能捕捉全部精靈: \${missingMonsters.length}',
+          '[MonsterController] テスト機能ですべての精霊を捕獲しました: \${missingMonsters.length}',
       'controllers.monster.controller.s010':
-          '[MonsterController] 測試功能刪除全部精靈: \$deletedCount',
+          '[MonsterController] テスト機能ですべての精霊を削除しました: \$deletedCount',
       'controllers.monster.controller.s011':
-          '[MonsterController] 最近精靈: \${nearestMonster.value?.name}, 距離: \${nearestDistance.value}',
+          '[MonsterController] 最も近い精霊: \${nearestMonster.value?.name}、距離: \${nearestDistance.value}',
       'controllers.nfc.api.s001': 'NFCタグに近づけてください',
       'controllers.nfc.api.s002': 'NFCタグの形式が正しくありません',
-      'controllers.nfc.api.s003': '錯誤：嘗試在掃描失敗的情況下讀取 Data。請先檢查 isSuccess！',
-      'controllers.nfc.api.s004': '錯誤：嘗試在掃描成功的情況下讀取 Error 類型。',
+      'controllers.nfc.api.s003':
+          'エラー：スキャン失敗時にDataを読み取ろうとしました。先にisSuccessを確認してください！',
+      'controllers.nfc.api.s004': 'エラー：スキャン成功時にError型を読み取ろうとしました。',
       'controllers.profile.edit.controller.s001':
-          '[profile_edit_controller] 成功載入頭像: \${previewUrl.value}',
+          '[profile_edit_controller] アバターを読み込みました: \${previewUrl.value}',
       'controllers.profile.edit.controller.s002': 'ヒント',
       'controllers.profile.edit.controller.s003': 'ニックネームを入力してください！',
       'controllers.profile.edit.controller.s004':
-          '[ProfileEdit] 儲存變更：\$newNickname',
+          '[ProfileEdit] 変更を保存します: \$newNickname',
       'controllers.user.controller.s001':
-          '[UserController] 偵測到使用者登入: \${user.uid}',
-      'controllers.user.controller.s002': '[UserController] 目前為登出狀態',
+          '[UserController] ユーザーのログインを検出しました: \${user.uid}',
+      'controllers.user.controller.s002': '[UserController] 現在ログアウトしています',
       'controllers.user.controller.s003':
-          '[UserController] 成功從 Firestore 載入頭像: \${data.photoUrl}',
-      'controllers.user.controller.s004': '[UserController] 抓取錯誤: \$e',
-      'services.camera.service.s001': '[Camera]: AR捕捉成功！路徑：\$path',
-      'services.camera.service.s002': '[Camera]:使用者取消了拍照',
-      'services.camera.service.s003': '[Camera]:拍照成功！路徑：\${photo.path}',
-      'services.camera.service.s004': '[Camera]:相機出錯：\$e',
-      'services.firebase.auth.service.s001': '[AuthService] 登入失敗: \$e',
-      'services.firebase.auth.service.s002': '[AuthService] 註冊失敗: \$e',
-      'services.firebase.auth.service.s003': '[AuthService] Google 登入失敗: \$e',
-      'services.google.auth.service.s001': 'Google Sign-In: 初始化新使用者隨機頭像...',
-      'services.google.auth.service.s003': '❌ Google Sign-In 發生錯誤：\$e',
-      'services.json.to.suggestion.s001': '名稱',
-      'services.json.to.suggestion.s002': '種類',
-      'services.json.to.suggestion.s003': '緯度',
-      'services.json.to.suggestion.s004': '經度',
-      'services.json.to.suggestion.s005': '地景資料缺少有效的「名稱」欄位',
-      'services.json.to.suggestion.s006': '地景資料缺少有效的「種類」欄位',
-      'services.json.to.suggestion.s007': '地景資料缺少有效的「緯度」或「經度」欄位',
-      'services.json.to.suggestion.s008': '地景 JSON 根節點必須是陣列: \$assetPath',
+          '[UserController] Firestoreからアバターを読み込みました: \${data.photoUrl}',
+      'controllers.user.controller.s004': '[UserController] 取得エラー: \$e',
+      'services.camera.service.s001': '[Camera] AR撮影に成功しました。パス: \$path',
+      'services.camera.service.s002': '[Camera] ユーザーが撮影をキャンセルしました',
+      'services.camera.service.s003': '[Camera] 撮影に成功しました。パス: \${photo.path}',
+      'services.camera.service.s004': '[Camera] カメラエラー: \$e',
+      'services.firebase.auth.service.s001': '[AuthService] ログインに失敗しました: \$e',
+      'services.firebase.auth.service.s002': '[AuthService] 登録に失敗しました: \$e',
+      'services.firebase.auth.service.s003':
+          '[AuthService] Googleログインに失敗しました: \$e',
+      'services.google.auth.service.s001':
+          'Googleログイン：新規ユーザーのランダムアバターを初期化しています...',
+      'services.google.auth.service.s003': '❌ Googleログインでエラーが発生しました: \$e',
+      'services.json.to.suggestion.s001': '名前',
+      'services.json.to.suggestion.s002': '種別',
+      'services.json.to.suggestion.s003': '緯度（Latitude）',
+      'services.json.to.suggestion.s004': '経度',
+      'services.json.to.suggestion.s005': '景観データに有効な「名前」フィールドがありません',
+      'services.json.to.suggestion.s006': '景観データに有効な「種類」フィールドがありません',
+      'services.json.to.suggestion.s007': '景観データに有効な緯度または経度フィールドがありません',
+      'services.json.to.suggestion.s008':
+          '景観JSONのルートは配列である必要があります: \$assetPath',
       'services.json.to.suggestion.s009':
-          '地景資料第 \${index + 1} 筆不是物件: \$sourceName',
-      'styles.level.style.s001': '火',
-      'styles.level.style.s002': '水',
-      'styles.level.style.s003': '金',
+          '景観データの\${index + 1}件目がオブジェクトではありません: \$sourceName',
+      'styles.level.style.s001': '火属性',
+      'styles.level.style.s002': '水属性',
+      'styles.level.style.s003': '金属性',
       'styles.map.suggestion.style.s001': 'パブリックアート',
       'styles.map.suggestion.style.s002': 'トイレ',
       'styles.nfc.leading.style.s001': 'NFCスキャンを開始',
@@ -1387,7 +1521,7 @@ class AppTranslations extends Translations {
       'view.aed.map.s008': 'キャンセル',
       'view.aed.map.s009': 'メールを開く',
       'view.aed.map.s010': '現在地を取得できません',
-      'view.aed.map.s011': '緯度',
+      'view.aed.map.s011': '緯度（Latitude）',
       'view.aed.map.s012': '経度',
       'view.aed.map.s013': 'Google Maps',
       'view.aed.map.s014':
@@ -1404,9 +1538,11 @@ class AppTranslations extends Translations {
       'view.camera.view.s003': '呼び出す精霊を選択',
       'view.camera.view.s004': '精霊がいません',
       'view.camera.view.s005': '写真の撮影に失敗しました: \$e',
-      'view.camera.view.s006': '[CameraView] 讀取精靈相框資料失敗: \$e',
-      'view.camera.view.s009': '草',
+      'view.camera.view.s006': '[CameraView] 精霊フレームデータを読み込めませんでした: \$e',
+      'view.camera.view.s009': '草属性',
       'view.camera.view.s010': '戻る',
+      'view.camera.view.s011': 'システム設定を開く',
+      'view.camera.view.s012': 'カメラの権限が必要です',
       'view.campus.safety.s001': 'キャンパス安全',
       'view.campus.safety.s002': '緊急マップ',
       'view.campus.safety.s003': '電話と通報',
@@ -1431,11 +1567,11 @@ class AppTranslations extends Translations {
       'view.lhf.setting.page.s008': 'ゲーム内の音量や振動に関する設定です。現在の環境に合わせて調整できます。',
       'view.lhf.setting.page.s009': '端末に保存',
       'view.lhf.setting.page.s010': '今すぐ適用',
-      'view.lhf.setting.page.s011': '音量',
+      'view.lhf.setting.page.s011': '音量レベル',
       'view.lhf.setting.page.s012': 'この機能はまだ利用できません。',
       'view.lhf.setting.page.s013': 'ミュート',
-      'view.lhf.setting.page.s014': '最大',
-      'view.lhf.setting.page.s015': '振動',
+      'view.lhf.setting.page.s014': '最大値',
+      'view.lhf.setting.page.s015': 'バイブレーション',
       'view.lhf.setting.page.s016': '対応端末の触覚フィードバックを設定します。',
       'view.lhf.setting.page.s017': 'オン',
       'view.lhf.setting.page.s018': 'オフ',
@@ -1459,19 +1595,19 @@ class AppTranslations extends Translations {
       'view.lhf.setting.page.s038': 'すべての精霊を捕獲できませんでした。しばらくしてからもう一度お試しください。',
       'view.lhf.setting.page.s039': 'すべての精霊を削除できませんでした。しばらくしてからもう一度お試しください。',
       'view.lhf.setting.page.s040': 'すでにすべての精霊を捕獲しています',
-      'view.lhf.setting.page.s041': '\$count体の精霊を図鑑に追加しました',
+      'view.lhf.setting.page.s041': '図鑑に精霊を@count体追加しました',
       'view.lhf.setting.page.s042': '図鑑はすでに空です',
-      'view.lhf.setting.page.s043': '図鑑から\$count体の精霊を削除しました',
+      'view.lhf.setting.page.s043': '図鑑から精霊を@count体削除しました',
       'view.lhf.setting.page.s044': '言語',
       'view.lhf.setting.page.s045': 'ゲーム画面に表示する言語を選択します。',
       'view.lhf.setting.page.s046': '中国語',
       'view.lhf.setting.page.s047': '現在の言語',
-      'view.lhf.setting.page.s048': '利用規約',
-      'view.lhf.setting.page.s049': '現在の利用規約と関連情報を確認します。',
+      'view.lhf.setting.page.s048': '法的情報とプライバシー',
+      'view.lhf.setting.page.s049': '利用規約、プライバシーポリシー、データに関する権利を確認します。',
       'view.lhf.setting.page.s050': 'タップして利用規約を読む',
       'view.lhf.setting.page.s051': '現在の音量: @volume',
-      'view.lhf.setting.page.s052': '[SettingPage] 捕捉全部精靈失敗: \$e',
-      'view.lhf.setting.page.s053': '[SettingPage] 刪除全部精靈失敗: \$e',
+      'view.lhf.setting.page.s052': '[SettingPage] すべての精霊を捕獲できませんでした: \$e',
+      'view.lhf.setting.page.s053': '[SettingPage] すべての精霊を削除できませんでした: \$e',
       'view.lhf.setting.page.s054': 'ゲームデータをインポート',
       'view.lhf.setting.page.s055': 'ゲームデータをインポートしています...',
       'view.lhf.setting.page.s056': 'ゲームデータのインポートが完了しました',
@@ -1540,31 +1676,38 @@ class AppTranslations extends Translations {
           'Appleログインを連携しました。Firebase UIDと既存データは変更されていません。',
       'view.lhf.setting.page.s113': 'Appleログインを連携しています…',
       'view.lhf.setting.page.s114': 'Appleログイン',
-      'view.lhf.setting.page.s115': 'キャンセル',
-      'view.lhf.setting.page.s116': '削除する',
-      'view.lhf.setting.page.s117': 'アカウントを削除できませんでした。再度ログインしてお試しください。',
-      'view.lhf.setting.page.s118': 'パスワードが正しくありません。',
-      'view.login.page.s001': '[LoginPage] 登入成功，正在獲取資料...',
+      'view.lhf.setting.page.s119': 'アカウントを削除',
+      'view.lhf.setting.page.s120':
+          'アカウント、プロフィール、精霊コレクションを完全に削除します。この操作は取り消せません。',
+      'view.lhf.setting.page.s121': 'アカウントを完全に削除',
+      'view.lhf.setting.page.s122': 'アカウントを削除しますか？',
+      'view.lhf.setting.page.s123': 'アカウント、プロフィール、ゲームのコレクションは完全に削除され、元に戻せません。',
+      'view.lhf.setting.page.s124': '現在のパスワード',
+      'view.lhf.setting.page.s125': 'キャンセル',
+      'view.lhf.setting.page.s126': '削除する',
+      'view.lhf.setting.page.s127': 'アカウントを削除できませんでした。再度ログインしてお試しください。',
+      'view.lhf.setting.page.s128': 'パスワードが正しくありません。',
+      'view.login.page.s001': '[LoginPage] ログインしました。データを取得しています...',
       'view.login.page.s002': 'メールアドレスまたはパスワードが正しくありません',
-      'view.login.page.s003': '[LoginPage] 登入出錯: \$e',
+      'view.login.page.s003': '[LoginPage] ログインエラー: \$e',
       'view.login.page.s004': 'ログイン中にエラーが発生しました。しばらくしてからもう一度お試しください。',
       'view.login.page.s005': 'Googleログインに失敗しました。しばらくしてからもう一度お試しください。',
-      'view.login.page.s006': '[LoginPage] Google 登入出錯: \$e',
+      'view.login.page.s006': '[LoginPage] Googleログインエラー: \$e',
       'view.login.page.s007': 'Googleログイン中にエラーが発生しました。しばらくしてからもう一度お試しください。',
       'view.login.page.s008': '@emailでメール認証を完了してからログインしてください。確認メールを再送しました。',
       'view.login.page.s009': 'メールアドレス',
       'view.login.page.s010': 'このメールアドレスが登録済みの場合、パスワード再設定メールが送信されます。',
       'view.map.suggestions.s001': '中央大学十景',
       'view.map.suggestions.s004':
-          '[Debug][MapSuggestionsPage] 載入地景資料失敗: \$error',
+          '[Debug][MapSuggestionsPage] 景観データを読み込めませんでした: \$error',
       'view.map.suggestions.s005': 'スポットデータの読み込みに失敗しました: \$error',
       'view.map.suggestions.s006': 'GPSがオフになっています',
       'view.map.suggestions.s007': '位置情報の権限が許可されていません',
       'view.nearby.monsters.display.s001':
-          '[MonsterMarkers] 動畫精靈圖載入失敗: \$animatedPath, \$error',
+          '[MonsterMarkers] 精霊のアニメーション画像を読み込めませんでした: \$animatedPath, \$error',
       'view.nearby.monsters.display.s002':
-          '[MonsterMarkers] 靜態精靈圖載入失敗: \${monster.imageURL}, \$error',
-      'view.nearby.monsters.display.s003': '無法將精靈圖片轉成 PNG bytes',
+          '[MonsterMarkers] 精霊の静止画像を読み込めませんでした: \${monster.imageURL}, \$error',
+      'view.nearby.monsters.display.s003': '精霊画像をPNGバイト列に変換できません',
       'view.novice.leading.page.s001': 'ここが現在地です。仲間を導いてキャンパスを探索しましょう。',
       'view.novice.leading.page.s002': 'ここでプロフィールを編集できます。',
       'view.novice.leading.page.s003': 'ここでアバターを変更できます。お気に入りのキャラクターを選びましょう！',
@@ -1580,37 +1723,44 @@ class AppTranslations extends Translations {
       'view.novice.leading.page.s013': '前へ',
       'view.novice.leading.page.s014': '次へ',
       'view.photo.preview.s001': '写真をアルバムに保存しました！',
-      'view.photo.preview.s002': '保存に失敗しました: \$e',
+      'view.photo.preview.s002': '保存に失敗しました：@error',
       'view.photo.preview.s003': '写真プレビュー',
       'view.photo.preview.s004': '撮り直す',
       'view.photo.preview.s005': '保存',
+      'view.photo.preview.s006': '写真へのアクセスが必要です',
+      'view.photo.preview.s007':
+          '写真を保存するには写真へのアクセスが必要です。システム設定でアクセスを許可してから、もう一度お試しください。',
+      'view.photo.preview.s008': '後で',
+      'view.photo.preview.s009': '設定を開く',
       'view.real.ar.view.s001': '精霊を配置',
       'view.real.ar.view.s004': 'えーん...',
-      'view.real.ar.view.s005': '💡 已切換精靈模型為: \$selectedMonsterUrl',
+      'view.real.ar.view.s005': '💡 精霊モデルを切り替えました: \$selectedMonsterUrl',
       'view.real.ar.view.s006': '先に精霊を選択してください！',
       'view.register.page.s001': '登録情報が正しいか確認してください',
       'view.register.page.s002': '確認メールを@emailに送信しました。メール認証を完了してからログインしてください。',
       'view.register.page.s003':
           '登録に失敗しました。このメールアドレスはすでに使用されているか、ネットワークに問題がある可能性があります。',
-      'view.register.page.s004': '[RegisterPage] 註冊出錯: \$e',
+      'view.register.page.s004': '[RegisterPage] 登録エラー: \$e',
       'view.register.page.s005': '登録に失敗しました: \$e',
       'view.register.page.s006': 'Googleでの登録が完了しました！冒険の世界へようこそ！',
       'view.register.page.s007': 'Googleでの登録に失敗しました。しばらくしてからもう一度お試しください。',
-      'view.register.page.s008': '[RegisterPage] Google 登入失敗: \$e',
+      'view.register.page.s008': '[RegisterPage] Googleログインに失敗しました: \$e',
       'view.register.page.s009': 'Googleログインに失敗しました: \$e',
       'view.register.page.s010': 'Appleでのログインが完了しました！冒険の世界へようこそ！',
-      'view.user.protocol.s002': '仮ページ',
-      'view.user.protocol.s003': '利用規約を準備中',
-      'view.user.protocol.s004': '正式な利用規約、サービス条件、および関連情報は今後ここに掲載されます。',
-      'view.user.protocol.s005': '\\n\\n現在は、設定画面からの遷移と操作を確認するための仮ページです。',
+      'view.user.protocol.s002': '法的文書とデータに関する権利',
+      'view.user.protocol.s003': '安心してキャンパスガイドを利用するために',
+      'view.user.protocol.s004':
+          'サービスを利用する前に、以下の文書をご確認ください。利用規則、データの取扱い、アカウント削除、お客様の権利について説明しています。',
+      'view.user.protocol.s005': '利用規約',
       'view.user.protocol.s006':
-          '\\n\\n今後ここを正式な規約に置き換えるだけで、設定画面の遷移処理を変更する必要はありません。',
-      'view.user.protocol.s007': '現在確認できること',
-      'view.user.protocol.s008': 'ボタンを押すと一度縮小し、指を離すと元に戻ってから画面が切り替わります。',
-      'view.user.protocol.s009': '設定画面へ戻る際に、追加の状態処理は必要ありません。',
-      'view.user.protocol.s010': '正式な規約は、今後このファイルに直接追加できます。',
+          'アカウントの責任、利用規則、知的財産権、安全上の注意、サービス変更、責任制限について説明します。',
+      'view.user.protocol.s007': 'プライバシーポリシー',
+      'view.user.protocol.s008':
+          'アカウント情報、正確な位置情報、カメラと写真、NFC／Bluetooth権限、FirebaseとGoogleのサービス、保存期間、削除について説明します。',
+      'view.user.protocol.s009': '運営：中央大学キャンパスガイドチーム｜連絡先：ideasky716@gmail.com',
+      'view.user.protocol.s010': '施行・最終更新日：2026年8月16日',
       'widgets.ar.control.ar.control.view.s001': '精霊を操作しよう！',
-      'widgets.ar.control.ar.control.view.s002': '💡 模型已切換至: \$newUrl',
+      'widgets.ar.control.ar.control.view.s002': '💡 モデルを切り替えました: \$newUrl',
       'widgets.buttons.click.and.accept.button.s001': '確認',
       'widgets.buttons.click.and.accept.button.s002': 'キャンセル',
       'widgets.buttons.nfc.button.s001': 'IDが一致しません。もう一度お試しください！',
@@ -1619,8 +1769,8 @@ class AppTranslations extends Translations {
       'widgets.buttons.nfc.button.s004': 'NFCの権限が許可されていません',
       'widgets.buttons.nfc.button.s005': 'タグの形式が正しくありません',
       'widgets.buttons.nfc.button.s006': '不明なエラーが発生しました',
-      'widgets.common.user.head.s001': '[UserHead] SVG 載入失敗: \$error',
-      'widgets.common.user.head.s002': '[UserHead] 圖片載入失敗: \$error',
+      'widgets.common.user.head.s001': '[UserHead] SVGを読み込めませんでした: \$error',
+      'widgets.common.user.head.s002': '[UserHead] 画像を読み込めませんでした: \$error',
       'widgets.encyclopedia.all.the.monster.monster.text.s001':
           '精霊は象群の彫刻を通り過ぎ、黒い箱へと急いでいきました。その途中で何かが魔力を放っているようです。',
       'widgets.encyclopedia.all.the.monster.monster.text.s002':
@@ -1640,7 +1790,8 @@ class AppTranslations extends Translations {
       'widgets.encyclopedia.elf.creator.section.s001': '作者情報',
       'widgets.encyclopedia.elf.department.section.s001': '学部・学科',
       'widgets.encyclopedia.elf.grid.s001': 'まだ精霊を捕獲していません',
-      'widgets.encyclopedia.elf.hero.section.s001': '圖片載入失敗路徑: \$imagePath',
+      'widgets.encyclopedia.elf.hero.section.s001':
+          '画像の読み込みに失敗したパス: \$imagePath',
       'widgets.encyclopedia.elf.hero.section.s002':
           '画像パスが正しくありません:\\n\$imagePath',
       'widgets.encyclopedia.elf.installation.section.s001': 'パブリックアート',
@@ -1657,7 +1808,7 @@ class AppTranslations extends Translations {
       'widgets.encyclopedia.page.selector.s001':
           '@currentPage / @totalPages ページ',
       'widgets.game.catching.pages.catching.faild.s001': '捕獲失敗',
-      'widgets.game.catching.pages.catching.faild.s002': '失敗',
+      'widgets.game.catching.pages.catching.faild.s002': 'チャレンジ失敗',
       'widgets.game.catching.pages.catching.faild.s003': 'ホームへ戻る',
       'widgets.game.catching.pages.cryptography.level.s001':
           '案内板を参考に正しい答えを選んでください。',
@@ -1682,9 +1833,9 @@ class AppTranslations extends Translations {
       'widgets.game.catching.pages.default.plot.s003': '不思議な石',
       'widgets.game.catching.pages.default.plot.s004': '（不思議な気配を放っている）',
       'widgets.game.catching.pages.default.plot.s006': '（魔法石を置く）',
-      'widgets.game.catching.pages.default.plot.s007': '魔法陣',
+      'widgets.game.catching.pages.default.plot.s007': '魔法の陣',
       'widgets.game.catching.pages.default.plot.s008': '精霊よ、現れろ！',
-      'widgets.game.catching.pages.default.plot.s009': '（怒）',
+      'widgets.game.catching.pages.default.plot.s009': '（怒っている）',
       'widgets.game.catching.pages.discovered.item.s001': '思わぬ収穫！攻略ガイドを見つけました。',
       'widgets.game.catching.pages.discovered.item.s002': '詳しくは金属製の案内板を確認',
       'widgets.game.catching.pages.discovered.item.s003': 'よく調べてみよう',
@@ -1702,6 +1853,36 @@ class AppTranslations extends Translations {
           'NFCチュートリアルを閉じる',
       'widgets.game.catching.pages.graphics.text.level.page.s007':
           'このステージには表示できる内容がありません。',
+      'widgets.game.catching.pages.graphics.text.level.page.s008': '物語を振り返る',
+      'widgets.game.catching.pages.graphics.text.level.page.s009': '物語を閉じる',
+      'widgets.game.catching.pages.monster.trace.plot.s001': 'あなた',
+      'widgets.game.catching.pages.monster.trace.plot.s002':
+          'ここに何か奇妙な痕跡が残されている……',
+      'widgets.game.catching.pages.monster.trace.plot.s003':
+          '（しゃがんで注意深く観察すると、近くに特別な手がかりが残されていた。）',
+      'widgets.game.catching.pages.monster.trace.plot.s004':
+          'これは、あの精霊が残した痕跡に違いない。',
+      'widgets.game.catching.pages.monster.trace.plot.s005':
+          '（見つけた痕跡を痕跡収集びんに収めた。）',
+      'widgets.game.catching.pages.monster.trace.plot.s006': '（次の痕跡を探し続けよう。）',
+      'widgets.game.catching.pages.monster.trace.plot.s007':
+          '精霊は象群の彫刻を通り過ぎ、黒い箱へと急いでいきました。その途中で何かが魔力を放っているようです。',
+      'widgets.game.catching.pages.monster.trace.plot.s008':
+          'まだ痕跡が見つかりませんか？アーチをくぐって、何か見つからないか探してみましょう。',
+      'widgets.game.catching.pages.monster.trace.plot.s009':
+          '精霊は DNA の彫刻を長い間眺めてから先へ進んだようです。近くを探してみましょう。',
+      'widgets.game.catching.pages.monster.trace.plot.s010':
+          'この痕跡は写真の場所へ続いているようです。近くを注意深く調べてみましょう。',
+      'widgets.game.catching.pages.monster.trace.plot.s011':
+          '雲の上の松ぼっくりに、精霊の特別な気配が残っているようです。',
+      'widgets.game.catching.pages.monster.trace.plot.s012':
+          'この痕跡は写真の場所へ続いているようです。近くを注意深く調べてみましょう。',
+      'widgets.game.catching.pages.monster.trace.plot.s013':
+          '問いの最も深い場所に立ち、屏風が視界から完全に消えたとき、水面に映る姿を見れば答えが明らかになるでしょう。',
+      'widgets.game.catching.pages.monster.trace.plot.s014':
+          '視野の中に、ほかとは少し違う雲がありませんか？',
+      'widgets.game.catching.pages.monster.trace.plot.s015':
+          '精霊は装置を見つめ、中央大学を表す「中」の文字が現れるのを待っていたようです。',
       'widgets.game.catching.pages.plot.level.s001': '魔法石を見つけました。',
       'widgets.game.catching.pages.plot.level.s002': '対応する魔法陣を見つけて、魔法石を置きましょう！',
       'widgets.game.catching.pages.plot.level.s003': '精霊を召喚しました。',
@@ -1713,14 +1894,15 @@ class AppTranslations extends Translations {
       'widgets.game.catching.pages.plot.level.s009': '仲間',
       'widgets.game.game.map.s001': 'キャンパスマップ',
       'widgets.game.game.map.s002': '森林マップ',
-      'widgets.game.game.map.s003': '[Debug][GameMap][Error] 載入資源失敗: \$e',
+      'widgets.game.game.map.s003':
+          '[Debug][GameMap][Error] リソースを読み込めませんでした: \$e',
       'widgets.game.game.map.s004':
-          '[Debug][GameMap]:使用固定測試定位 \${_fixedTestLocation.latitude}, \${_fixedTestLocation.longitude}',
+          '[Debug][GameMap] 固定テスト位置を使用します: \${_fixedTestLocation.latitude}, \${_fixedTestLocation.longitude}',
       'widgets.game.game.map.s005':
-          '[Debug][GameMap]:位置更新: \${position.latitude}, \${position.longitude}',
-      'widgets.game.game.map.s006': '[Debug][GameMap]:已開始監聽位置變化',
+          '[Debug][GameMap] 位置を更新しました: \${position.latitude}, \${position.longitude}',
+      'widgets.game.game.map.s006': '[Debug][GameMap] 位置変更の監視を開始しました',
       'widgets.game.game.map.s007':
-          '[Debug][GameMap]:_checkPermissionAndListen 例外：\$e',
+          '[Debug][GameMap] _checkPermissionAndListen例外: \$e',
       'widgets.game.game.map.s008':
           '\${monster.name}の問題を読み込めません。しばらくしてからもう一度お試しください。',
       'widgets.game.game.map.s009':
@@ -1732,7 +1914,7 @@ class AppTranslations extends Translations {
       'widgets.game.game.map.s016': 'スポット',
       'widgets.game.game.map.s017': '探索範囲外です！\nキャンパスに戻ると冒険を続けられます',
       'widgets.game.system.menu.s002': 'カメラ',
-      'widgets.game.system.menu.s003': '設定',
+      'widgets.game.system.menu.s003': '環境設定',
       'widgets.login.forgot.password.dialog.s001': 'パスワードを忘れた場合',
       'widgets.login.forgot.password.dialog.s002': 'メールアドレス',
       'widgets.login.forgot.password.dialog.s003': '登録時に使用したメールアドレスを入力してください',
@@ -1740,6 +1922,12 @@ class AppTranslations extends Translations {
       'widgets.login.forgot.password.dialog.s005': '有効なメールアドレスを入力してください',
       'widgets.login.forgot.password.dialog.s006': 'キャンセル',
       'widgets.login.forgot.password.dialog.s007': '再設定メールを送信',
+      'widgets.login.legal.document.links.s001':
+          '書類を開けませんでした。しばらくしてからもう一度お試しください。',
+      'widgets.login.legal.document.links.s002': '利用規約',
+      'widgets.login.legal.document.links.s003': 'プライバシーポリシー',
+      'widgets.login.legal.document.links.s004': '法的文書とサポート',
+      'widgets.login.legal.document.links.s005': 'サポート',
       'widgets.login.social.buttons.s001': 'Googleでログイン',
       'widgets.login.social.buttons.s002': 'Appleでサインイン',
       'widgets.login.wood.register.panel.s001': '名前を入力してください',
@@ -1781,7 +1969,7 @@ class AppTranslations extends Translations {
       'widgets.sections.monster.test.s013':
           'テスト用VR/ARステージデータです。現在はFullMissionPageで無効化される想定です。',
       'widgets.sections.start.menu.group.s001':
-          '❌ [StartMenuGroup] 圖片載入失敗: \$error',
+          '❌ [StartMenuGroup] 画像を読み込めませんでした: \$error',
       'widgets.sections.start.menu.group.s002':
           'start_text.pngの読み込みに失敗しました\\n\$error',
       'widgets.sections.start.menu.group.s003': 'スタート',

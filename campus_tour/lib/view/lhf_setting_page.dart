@@ -157,11 +157,15 @@ class SteeingPageStrings {
   }
 
   static String debugCaptureAllDone(int count) {
-    return count == 0 ? 'view.lhf.setting.page.s040'.tr : '已新增 $count 隻精靈到圖鑑';
+    return count == 0
+        ? 'view.lhf.setting.page.s040'.tr
+        : 'view.lhf.setting.page.s041'.trParams({'count': '$count'});
   }
 
   static String debugDeleteAllDone(int count) {
-    return count == 0 ? 'view.lhf.setting.page.s042'.tr : '已從圖鑑刪除 $count 隻精靈';
+    return count == 0
+        ? 'view.lhf.setting.page.s042'.tr
+        : 'view.lhf.setting.page.s043'.trParams({'count': '$count'});
   }
 
   // Language
@@ -172,25 +176,24 @@ class SteeingPageStrings {
   static const languageJapaneseLabel = '日本語';
   static String get languageDropdownLabel => 'view.lhf.setting.page.s047'.tr;
 
-  // Protocol
+  // Legal and privacy
   static String get userProtocolTitle => 'view.lhf.setting.page.s048'.tr;
   static String get userProtocolDescription => 'view.lhf.setting.page.s049'.tr;
-  static String get userProtocolButtonHint => 'view.lhf.setting.page.s050'.tr;
 
   // Account deletion
-  static String get deleteAccountTitle => 'view.lhf.setting.page.s109'.tr;
-  static String get deleteAccountDescription => 'view.lhf.setting.page.s110'.tr;
-  static String get deleteAccountButton => 'view.lhf.setting.page.s111'.tr;
+  static String get deleteAccountTitle => 'view.lhf.setting.page.s119'.tr;
+  static String get deleteAccountDescription => 'view.lhf.setting.page.s120'.tr;
+  static String get deleteAccountButton => 'view.lhf.setting.page.s121'.tr;
   static String get deleteAccountConfirmTitle =>
-      'view.lhf.setting.page.s112'.tr;
+      'view.lhf.setting.page.s122'.tr;
   static String get deleteAccountConfirmMessage =>
-      'view.lhf.setting.page.s113'.tr;
-  static String get deleteAccountPassword => 'view.lhf.setting.page.s114'.tr;
-  static String get deleteAccountCancel => 'view.lhf.setting.page.s115'.tr;
-  static String get deleteAccountConfirm => 'view.lhf.setting.page.s116'.tr;
-  static String get deleteAccountFailed => 'view.lhf.setting.page.s117'.tr;
+      'view.lhf.setting.page.s123'.tr;
+  static String get deleteAccountPassword => 'view.lhf.setting.page.s124'.tr;
+  static String get deleteAccountCancel => 'view.lhf.setting.page.s125'.tr;
+  static String get deleteAccountConfirm => 'view.lhf.setting.page.s126'.tr;
+  static String get deleteAccountFailed => 'view.lhf.setting.page.s127'.tr;
   static String get deleteAccountWrongPassword =>
-      'view.lhf.setting.page.s118'.tr;
+      'view.lhf.setting.page.s128'.tr;
 
   static String volumePercentage(int volume) => '$volume%';
 
@@ -244,9 +247,9 @@ class FullPageList {
     FullPageList.cardGap,
     FullPageList.accountSecurityCard,
     FullPageList.cardGap,
-    FullPageList.userProtocolButton,
-    FullPageList.cardGap,
     FullPageList.deleteAccountCard,
+    FullPageList.cardGap,
+    FullPageList.userProtocolButton,
   ];
 
   static Widget get pageHeader => _PageHeader();
@@ -263,8 +266,8 @@ class FullPageList {
   static Widget get debugCaptureAllCard => _DebugCaptureAllMonstersCard();
   static Widget get languageSetCard => _LanguageSettingCard();
   static Widget get accountSecurityCard => _AccountSecurityCard();
-  static Widget get userProtocolButton => _UserProtocolButton();
   static Widget get deleteAccountCard => _DeleteAccountCard();
+  static Widget get userProtocolButton => _UserProtocolButton();
 }
 
 class SettingPage extends StatefulWidget {
@@ -1375,53 +1378,21 @@ class _SetEmailPasswordDialogState extends State<_SetEmailPasswordDialog> {
   }
 }
 
-class _UserProtocolButton extends StatefulWidget {
+class _UserProtocolButton extends StatelessWidget {
   const _UserProtocolButton();
 
   @override
-  State<_UserProtocolButton> createState() => _UserProtocolButtonState();
-}
-
-class _UserProtocolButtonState extends State<_UserProtocolButton> {
-  static Duration get _pressAnimationDuration => Duration(milliseconds: 120);
-  static const double _pressedScale = 0.96;
-
-  bool _isPressed = false;
-
-  void _setPressed(bool value) {
-    if (_isPressed == value) {
-      return;
-    }
-
-    setState(() {
-      _isPressed = value;
-    });
-  }
-
-  Future<void> _handleTapUp() async {
-    _setPressed(false);
-    await Future<void>.delayed(_pressAnimationDuration);
-    if (!mounted) {
-      return;
-    }
-
-    await Navigator.of(context).push(
-      MaterialPageRoute<void>(builder: (context) => const UserProtocolPage()),
-    );
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTapDown: (_) => _setPressed(true),
-      onTapUp: (_) => _handleTapUp(),
-      onTapCancel: () => _setPressed(false),
-      behavior: HitTestBehavior.opaque,
-      child: AnimatedScale(
-        scale: _isPressed ? _pressedScale : 1,
-        duration: _pressAnimationDuration,
-        curve: Curves.easeOutCubic,
-        child: Container(
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        borderRadius: SettingPageStyles.panelBorderRadius,
+        onTap: () => Navigator.of(context).push(
+          MaterialPageRoute<void>(
+            builder: (context) => const UserProtocolPage(),
+          ),
+        ),
+        child: Ink(
           width: double.infinity,
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
           decoration: BoxDecoration(
@@ -1446,7 +1417,7 @@ class _UserProtocolButtonState extends State<_UserProtocolButton> {
                   borderRadius: SettingPageStyles.settingIconBorderRadius,
                 ),
                 child: Icon(
-                  Icons.description_rounded,
+                  Icons.policy_rounded,
                   color: SettingPageStyles.surfaceIconColor,
                   size: SettingPageStyles.settingIconGlyphSize,
                 ),
@@ -1476,24 +1447,10 @@ class _UserProtocolButtonState extends State<_UserProtocolButton> {
                 ),
               ),
               SizedBox(width: SettingPageStyles.gapMd),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Icon(
-                    Icons.chevron_right_rounded,
-                    color: Colors.white.withValues(alpha: 0.92),
-                    size: 30,
-                  ),
-                  // SizedBox(height: SettingPageStyles.gap2xs),
-                  // Text(
-                  //   SteeingPageStrings.userProtocolButtonHint,
-                  //   style: AppTheme.cardTitleStyle.copyWith(
-                  //     fontSize: 12,
-                  //     color: Colors.white.withValues(alpha: 0.88),
-                  //   ),
-                  //   textAlign: TextAlign.end,
-                  // ),
-                ],
+              Icon(
+                Icons.chevron_right_rounded,
+                color: Colors.white.withValues(alpha: 0.92),
+                size: 30,
               ),
             ],
           ),
@@ -1594,7 +1551,9 @@ class _DeleteAccountCardState extends State<_DeleteAccountCard> {
             : SteeingPageStrings.deleteAccountFailed,
         type: AppToastType.error,
       );
-    } catch (_) {
+    } catch (error, stackTrace) {
+      debugPrint('刪除帳號失敗: $error');
+      debugPrintStack(stackTrace: stackTrace);
       if (!mounted) return;
       SnackBarBuilder.show(
         context,

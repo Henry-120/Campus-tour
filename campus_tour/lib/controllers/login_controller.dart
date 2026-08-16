@@ -5,13 +5,20 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../controllers/monster_controller.dart';
 import '../controllers/user_controller.dart';
 import '../services/bighead_service.dart';
+import '../services/account_deletion_service.dart';
+import '../services/audio_service.dart';
+import '../local_information/local_setting.dart';
+import '../controllers/nfc_scan_controller.dart';
 import '../utils/account_data_sync_exception.dart';
 import 'package:get/get.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/painting.dart';
 
 class LoginController {
   final AuthService _authService = AuthService();
   final FirestoreService _firestoreService = FirestoreService();
+  final AccountDeletionService _accountDeletionService =
+      AccountDeletionService();
   final monsterController = Get.find<MonsterController>();
   final userController = Get.find<UserController>();
 
@@ -105,18 +112,27 @@ class LoginController {
     if (user == null) throw StateError('No signed-in user');
 
     // 先重新驗證，避免過期登入狀態造成帳號仍存在、資料卻已刪除。
-    final appleAuthorizationCode = await _authService
-        .reauthenticateForAccountDeletion(password: password);
+    final authorization = await _authService.reauthenticateForAccountDeletion(
+      password: password,
+    );
 
-    await _firestoreService.deleteUserData(user.uid);
+    // Refresh the callable token so its auth_time reflects the reauthentication.
+    await user.getIdToken(true);
 
-    if (appleAuthorizationCode != null && appleAuthorizationCode.isNotEmpty) {
-      await _authService.revokeAppleAuthorization(appleAuthorizationCode);
-    }
+    await _authService.revokeAccountProvider(authorization);
+    await _accountDeletionService.deleteCurrentAccountData();
 
-    await _authService.deleteCurrentUser();
+    await _authService.logout();
     monsterController.resetForLogout();
     userController.userModel.value = null;
+    if (Get.isRegistered<NfcScanController>()) {
+      Get.find<NfcScanController>().stopWaiting();
+    }
+    await AudioService().stopAll();
+    await LocalSettingService.settingsBox.clear();
+    PaintingBinding.instance.imageCache
+      ..clear()
+      ..clearLiveImages();
   }
 
   // 一般註冊

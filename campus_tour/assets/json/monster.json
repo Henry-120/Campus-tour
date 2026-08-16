@@ -337,8 +337,8 @@
     "type": "火",
     "imageURL": "assets/images/fairy_four_parts/sqirrel/1.png",
     "location": {
-      "latitude": 24.967732,
-      "longitude": 121.193638
+      "latitude": 24.58058,
+      "longitude": 121.11422
     },
     "architectureRef": "/architectures/a22",
     "qaRef": "/questions/qa22",
@@ -371,8 +371,8 @@
     "type": "火",
     "imageURL": "assets/images/fairy_four_parts/academic/1.png",
     "location": {
-      "latitude": 24.968333,
-      "longitude": 121.191722
+      "latitude": 24.58058,
+      "longitude": 121.1137
     },
     "architectureRef": "/architectures/a24",
     "qaRef": "/questions/qa24",
@@ -386,8 +386,8 @@
     "type": "火",
     "imageURL": "assets/images/fairy_four_parts/auditorium/1.png",
     "location": {
-      "latitude": 24.9683056,
-      "longitude": 121.1923611
+      "latitude": 24.58059,
+      "longitude": 121.11325
     },
     "architectureRef": "/architectures/a25",
     "qaRef": "/questions/qa25",

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class LegalDocumentLinks extends StatelessWidget {
@@ -7,18 +8,21 @@ class LegalDocumentLinks extends StatelessWidget {
   final bool darkText;
 
   static final Uri _termsUri = Uri.parse(
-    'https://docs.google.com/document/d/e/2PACX-1vSBgzOKiCsxdOe5BK7ULYseQyDZa90fKM0CaD0OnM8Cc-dCBT69btKADHXW0HxxDG8-P58HiCakcJ9o/pub',
+    'https://campus-tour-679e9.web.app/terms.html',
   );
   static final Uri _privacyUri = Uri.parse(
-    'https://docs.google.com/document/d/e/2PACX-1vSdO9T6huExJudyozQkozmICXjwx1JunvHA1CXKV894CMDbbsgK4TFXPVMp7i6RQIh8asPwTtbCj1Zg/pub',
+    'https://campus-tour-679e9.web.app/privacy.html',
+  );
+  static final Uri _supportUri = Uri.parse(
+    'https://campus-tour-679e9.web.app/support.html',
   );
 
   Future<void> _openDocument(BuildContext context, Uri uri) async {
     final opened = await launchUrl(uri, mode: LaunchMode.externalApplication);
     if (!opened && context.mounted) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(const SnackBar(content: Text('無法開啟文件，請稍後再試')));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('widgets.login.legal.document.links.s001'.tr)),
+      );
     }
   }
 
@@ -33,7 +37,7 @@ class LegalDocumentLinks extends StatelessWidget {
 
     return Semantics(
       container: true,
-      label: '法律文件',
+      label: 'widgets.login.legal.document.links.s004'.tr,
       child: Wrap(
         alignment: WrapAlignment.center,
         crossAxisAlignment: WrapCrossAlignment.center,
@@ -41,12 +45,26 @@ class LegalDocumentLinks extends StatelessWidget {
         children: [
           TextButton(
             onPressed: () => _openDocument(context, _termsUri),
-            child: Text('使用者服務協議', style: textStyle),
+            child: Text(
+              'widgets.login.legal.document.links.s002'.tr,
+              style: textStyle,
+            ),
           ),
           Text('｜', style: textStyle),
           TextButton(
             onPressed: () => _openDocument(context, _privacyUri),
-            child: Text('隱私權政策', style: textStyle),
+            child: Text(
+              'widgets.login.legal.document.links.s003'.tr,
+              style: textStyle,
+            ),
+          ),
+          Text('｜', style: textStyle),
+          TextButton(
+            onPressed: () => _openDocument(context, _supportUri),
+            child: Text(
+              'widgets.login.legal.document.links.s005'.tr,
+              style: textStyle,
+            ),
           ),
         ],
       ),

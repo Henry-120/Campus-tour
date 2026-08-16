@@ -145,5 +145,7 @@ class AudioService {
     await _overlayBgmPlayer.stop();
     await _sfxPlayer.stop();
     _currentMainBgmFile = null;
+    _isOverlayActive = false;
+    _isBgmSuppressedForSfx = false;
   }
 }

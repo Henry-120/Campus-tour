@@ -3,6 +3,18 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+enum AccountDeletionProvider { password, google, apple }
+
+class AccountDeletionAuthorization {
+  const AccountDeletionAuthorization({
+    required this.provider,
+    this.appleAuthorizationCode,
+  });
+
+  final AccountDeletionProvider provider;
+  final String? appleAuthorizationCode;
+}
+
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
@@ -169,9 +181,11 @@ class AuthService {
     await _googleSignIn.signOut();
   }
 
-  /// Reauthenticates using the account's existing provider. Returns an Apple
-  /// authorization code when one is available so it can be revoked on delete.
-  Future<String?> reauthenticateForAccountDeletion({String? password}) async {
+  /// Reauthenticates using an account provider and returns the information
+  /// needed to revoke that provider before the backend deletes the account.
+  Future<AccountDeletionAuthorization> reauthenticateForAccountDeletion({
+    String? password,
+  }) async {
     final user = _auth.currentUser;
     if (user == null) throw StateError('No signed-in user');
 
@@ -183,21 +197,21 @@ class AuthService {
       final provider = AppleAuthProvider()
         ..addScope('email')
         ..addScope('name');
-      final credential = await user.reauthenticateWithProvider(provider);
-      return credential.additionalUserInfo?.authorizationCode;
+      final credential = kIsWeb
+          ? await user.reauthenticateWithPopup(provider)
+          : await user.reauthenticateWithProvider(provider);
+      return AccountDeletionAuthorization(
+        provider: AccountDeletionProvider.apple,
+        appleAuthorizationCode:
+            credential.additionalUserInfo?.authorizationCode,
+      );
     }
 
     if (providerIds.contains(GoogleAuthProvider.PROVIDER_ID)) {
-      final googleUser = await _googleSignIn.signIn();
-      if (googleUser == null) throw StateError('Reauthentication cancelled');
-      final googleAuth = await googleUser.authentication;
-      await user.reauthenticateWithCredential(
-        GoogleAuthProvider.credential(
-          accessToken: googleAuth.accessToken,
-          idToken: googleAuth.idToken,
-        ),
+      await _reauthenticateWithGoogle(user);
+      return const AccountDeletionAuthorization(
+        provider: AccountDeletionProvider.google,
       );
-      return null;
     }
 
     final email = user.email;
@@ -207,17 +221,32 @@ class AuthService {
     await user.reauthenticateWithCredential(
       EmailAuthProvider.credential(email: email, password: password),
     );
-    return null;
+    return const AccountDeletionAuthorization(
+      provider: AccountDeletionProvider.password,
+    );
   }
 
-  Future<void> revokeAppleAuthorization(String authorizationCode) async {
-    await _auth.revokeTokenWithAuthorizationCode(authorizationCode);
-  }
-
-  Future<void> deleteCurrentUser() async {
-    final user = _auth.currentUser;
-    if (user == null) throw StateError('No signed-in user');
-    await user.delete();
-    await _googleSignIn.signOut();
+  Future<void> revokeAccountProvider(
+    AccountDeletionAuthorization authorization,
+  ) async {
+    switch (authorization.provider) {
+      case AccountDeletionProvider.password:
+        return;
+      case AccountDeletionProvider.google:
+        // disconnect revokes Google access; signOut alone only clears the
+        // local Google session.
+        await _googleSignIn.disconnect();
+        return;
+      case AccountDeletionProvider.apple:
+        final authorizationCode = authorization.appleAuthorizationCode;
+        if (authorizationCode == null || authorizationCode.isEmpty) {
+          throw FirebaseAuthException(
+            code: 'missing-apple-authorization-code',
+            message: 'Apple did not return an authorization code.',
+          );
+        }
+        await _auth.revokeTokenWithAuthorizationCode(authorizationCode);
+        return;
+    }
   }
 }

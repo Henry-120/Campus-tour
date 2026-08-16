@@ -1,12 +1,12 @@
 {
   "generatedBy": "tool/extract_chinese_strings.dart",
-  "totalUniqueStrings": 458,
+  "totalUniqueStrings": 505,
   "entries": [
     {
       "key": "controllers.login.controller.s001",
       "zh": "正在啟動 Google 認證...",
-      "en": "",
-      "ja": "",
+      "en": "Starting Google authentication...",
+      "ja": "Google認証を開始しています...",
       "occurrences": [
         {
           "file": "lib/controllers/login_controller.dart",
@@ -17,8 +17,8 @@
     {
       "key": "controllers.login.controller.s002",
       "zh": "Google 認證成功: ${user.uid}",
-      "en": "",
-      "ja": "",
+      "en": "Google authentication succeeded: ${user.uid}",
+      "ja": "Google認証に成功しました: ${user.uid}",
       "occurrences": [
         {
           "file": "lib/controllers/login_controller.dart",
@@ -29,8 +29,8 @@
     {
       "key": "controllers.login.controller.s003",
       "zh": "新使用者，正在建立 Firestore 資料...",
-      "en": "",
-      "ja": "",
+      "en": "New user; creating Firestore data...",
+      "ja": "新規ユーザーのFirestoreデータを作成しています...",
       "occurrences": [
         {
           "file": "lib/controllers/login_controller.dart",
@@ -65,8 +65,8 @@
     {
       "key": "controllers.login.controller.s005",
       "zh": "正在載入使用者收藏與資料...",
-      "en": "",
-      "ja": "",
+      "en": "Loading user collection and data...",
+      "ja": "ユーザーのコレクションとデータを読み込んでいます...",
       "occurrences": [
         {
           "file": "lib/controllers/login_controller.dart",
@@ -77,8 +77,8 @@
     {
       "key": "controllers.login.controller.s006",
       "zh": "❌ LoginController.signInWithGoogle 失敗: $e",
-      "en": "",
-      "ja": "",
+      "en": "❌ LoginController.signInWithGoogle failed: $e",
+      "ja": "❌ LoginController.signInWithGoogleに失敗しました: $e",
       "occurrences": [
         {
           "file": "lib/controllers/login_controller.dart",
@@ -89,8 +89,8 @@
     {
       "key": "controllers.monster.controller.s001",
       "zh": "[MonsterController] 載入精靈總數失敗: $e",
-      "en": "",
-      "ja": "",
+      "en": "[MonsterController] Failed to load total spirit count: $e",
+      "ja": "[MonsterController] 精霊の総数を読み込めませんでした: $e",
       "occurrences": [
         {
           "file": "lib/controllers/monster_controller.dart",
@@ -101,8 +101,8 @@
     {
       "key": "controllers.monster.controller.s002",
       "zh": "[MonsterController] 此怪物沒有關聯的 QA",
-      "en": "",
-      "ja": "",
+      "en": "[MonsterController] This spirit has no associated QA",
+      "ja": "[MonsterController] この精霊には関連するQAがありません",
       "occurrences": [
         {
           "file": "lib/controllers/monster_controller.dart",
@@ -113,8 +113,8 @@
     {
       "key": "controllers.monster.controller.s003",
       "zh": "[MonsterController] 獲取 QA 失敗: $e",
-      "en": "",
-      "ja": "",
+      "en": "[MonsterController] Failed to retrieve QA: $e",
+      "ja": "[MonsterController] QAを取得できませんでした: $e",
       "occurrences": [
         {
           "file": "lib/controllers/monster_controller.dart",
@@ -125,8 +125,8 @@
     {
       "key": "controllers.monster.controller.s004",
       "zh": "[MonsterController] 此怪物沒有關聯的建築資料",
-      "en": "",
-      "ja": "",
+      "en": "[MonsterController] This spirit has no associated architecture data",
+      "ja": "[MonsterController] この精霊には関連する建築データがありません",
       "occurrences": [
         {
           "file": "lib/controllers/monster_controller.dart",
@@ -137,8 +137,8 @@
     {
       "key": "controllers.monster.controller.s005",
       "zh": "[MonsterController] 獲取建築資料失敗: $e",
-      "en": "",
-      "ja": "",
+      "en": "[MonsterController] Failed to retrieve architecture data: $e",
+      "ja": "[MonsterController] 建築データを取得できませんでした: $e",
       "occurrences": [
         {
           "file": "lib/controllers/monster_controller.dart",
@@ -149,8 +149,8 @@
     {
       "key": "controllers.monster.controller.s006",
       "zh": "[MonsterController] 怪物 ${monsterObj.name} 已經被捕捉過",
-      "en": "",
-      "ja": "",
+      "en": "[MonsterController] Spirit ${monsterObj.name} was already caught",
+      "ja": "[MonsterController] 精霊${monsterObj.name}はすでに捕獲されています",
       "occurrences": [
         {
           "file": "lib/controllers/monster_controller.dart",
@@ -161,8 +161,8 @@
     {
       "key": "controllers.monster.controller.s007",
       "zh": "[MonsterController] 成功捕捉怪物: ${monsterObj.name} 並已同步更新 QA 與建築資料",
-      "en": "",
-      "ja": "",
+      "en": "[MonsterController] Caught spirit ${monsterObj.name} and synchronized QA and architecture data",
+      "ja": "[MonsterController] 精霊${monsterObj.name}を捕獲し、QAと建築データを同期しました",
       "occurrences": [
         {
           "file": "lib/controllers/monster_controller.dart",
@@ -173,8 +173,8 @@
     {
       "key": "controllers.monster.controller.s008",
       "zh": "[MonsterController] 捕捉怪物時出錯: $e",
-      "en": "",
-      "ja": "",
+      "en": "[MonsterController] Error while catching spirit: $e",
+      "ja": "[MonsterController] 精霊の捕獲中にエラーが発生しました: $e",
       "occurrences": [
         {
           "file": "lib/controllers/monster_controller.dart",
@@ -185,8 +185,8 @@
     {
       "key": "controllers.monster.controller.s009",
       "zh": "[MonsterController] 測試功能捕捉全部精靈: ${missingMonsters.length}",
-      "en": "",
-      "ja": "",
+      "en": "[MonsterController] Test: caught all spirits: ${missingMonsters.length}",
+      "ja": "[MonsterController] テスト機能ですべての精霊を捕獲しました: ${missingMonsters.length}",
       "occurrences": [
         {
           "file": "lib/controllers/monster_controller.dart",
@@ -197,8 +197,8 @@
     {
       "key": "controllers.monster.controller.s010",
       "zh": "[MonsterController] 測試功能刪除全部精靈: $deletedCount",
-      "en": "",
-      "ja": "",
+      "en": "[MonsterController] Test: deleted all spirits: $deletedCount",
+      "ja": "[MonsterController] テスト機能ですべての精霊を削除しました: $deletedCount",
       "occurrences": [
         {
           "file": "lib/controllers/monster_controller.dart",
@@ -209,8 +209,8 @@
     {
       "key": "controllers.monster.controller.s011",
       "zh": "[MonsterController] 最近精靈: ${nearestMonster.value?.name}, 距離: ${nearestDistance.value}",
-      "en": "",
-      "ja": "",
+      "en": "[MonsterController] Nearest spirit: ${nearestMonster.value?.name}, distance: ${nearestDistance.value}",
+      "ja": "[MonsterController] 最も近い精霊: ${nearestMonster.value?.name}、距離: ${nearestDistance.value}",
       "occurrences": [
         {
           "file": "lib/controllers/monster_controller.dart",
@@ -245,8 +245,8 @@
     {
       "key": "controllers.nfc.api.s003",
       "zh": "錯誤：嘗試在掃描失敗的情況下讀取 Data。請先檢查 isSuccess！",
-      "en": "",
-      "ja": "",
+      "en": "Error: Tried to read Data after a failed scan. Check isSuccess first!",
+      "ja": "エラー：スキャン失敗時にDataを読み取ろうとしました。先にisSuccessを確認してください！",
       "occurrences": [
         {
           "file": "lib/controllers/NFC_api.dart",
@@ -257,8 +257,8 @@
     {
       "key": "controllers.nfc.api.s004",
       "zh": "錯誤：嘗試在掃描成功的情況下讀取 Error 類型。",
-      "en": "",
-      "ja": "",
+      "en": "Error: Tried to read the Error type after a successful scan.",
+      "ja": "エラー：スキャン成功時にError型を読み取ろうとしました。",
       "occurrences": [
         {
           "file": "lib/controllers/NFC_api.dart",
@@ -269,8 +269,8 @@
     {
       "key": "controllers.profile.edit.controller.s001",
       "zh": "[profile_edit_controller] 成功載入頭像: ${previewUrl.value}",
-      "en": "",
-      "ja": "",
+      "en": "[profile_edit_controller] Avatar loaded: ${previewUrl.value}",
+      "ja": "[profile_edit_controller] アバターを読み込みました: ${previewUrl.value}",
       "occurrences": [
         {
           "file": "lib/controllers/profile_edit_controller.dart",
@@ -305,8 +305,8 @@
     {
       "key": "controllers.profile.edit.controller.s004",
       "zh": "[ProfileEdit] 儲存變更：$newNickname",
-      "en": "",
-      "ja": "",
+      "en": "[ProfileEdit] Saving changes: $newNickname",
+      "ja": "[ProfileEdit] 変更を保存します: $newNickname",
       "occurrences": [
         {
           "file": "lib/controllers/profile_edit_controller.dart",
@@ -317,8 +317,8 @@
     {
       "key": "controllers.user.controller.s001",
       "zh": "[UserController] 偵測到使用者登入: ${user.uid}",
-      "en": "",
-      "ja": "",
+      "en": "[UserController] User signed in: ${user.uid}",
+      "ja": "[UserController] ユーザーのログインを検出しました: ${user.uid}",
       "occurrences": [
         {
           "file": "lib/controllers/user_controller.dart",
@@ -329,8 +329,8 @@
     {
       "key": "controllers.user.controller.s002",
       "zh": "[UserController] 目前為登出狀態",
-      "en": "",
-      "ja": "",
+      "en": "[UserController] User is signed out",
+      "ja": "[UserController] 現在ログアウトしています",
       "occurrences": [
         {
           "file": "lib/controllers/user_controller.dart",
@@ -341,8 +341,8 @@
     {
       "key": "controllers.user.controller.s003",
       "zh": "[UserController] 成功從 Firestore 載入頭像: ${data.photoUrl}",
-      "en": "",
-      "ja": "",
+      "en": "[UserController] Avatar loaded from Firestore: ${data.photoUrl}",
+      "ja": "[UserController] Firestoreからアバターを読み込みました: ${data.photoUrl}",
       "occurrences": [
         {
           "file": "lib/controllers/user_controller.dart",
@@ -353,8 +353,8 @@
     {
       "key": "controllers.user.controller.s004",
       "zh": "[UserController] 抓取錯誤: $e",
-      "en": "",
-      "ja": "",
+      "en": "[UserController] Fetch error: $e",
+      "ja": "[UserController] 取得エラー: $e",
       "occurrences": [
         {
           "file": "lib/controllers/user_controller.dart",
@@ -365,8 +365,8 @@
     {
       "key": "services.camera.service.s001",
       "zh": "[Camera]: AR捕捉成功！路徑：$path",
-      "en": "",
-      "ja": "",
+      "en": "[Camera] AR capture succeeded. Path: $path",
+      "ja": "[Camera] AR撮影に成功しました。パス: $path",
       "occurrences": [
         {
           "file": "lib/services/camera_service.dart",
@@ -377,8 +377,8 @@
     {
       "key": "services.camera.service.s002",
       "zh": "[Camera]:使用者取消了拍照",
-      "en": "",
-      "ja": "",
+      "en": "[Camera] User cancelled the photo",
+      "ja": "[Camera] ユーザーが撮影をキャンセルしました",
       "occurrences": [
         {
           "file": "lib/services/camera_service.dart",
@@ -389,8 +389,8 @@
     {
       "key": "services.camera.service.s003",
       "zh": "[Camera]:拍照成功！路徑：${photo.path}",
-      "en": "",
-      "ja": "",
+      "en": "[Camera] Photo captured. Path: ${photo.path}",
+      "ja": "[Camera] 撮影に成功しました。パス: ${photo.path}",
       "occurrences": [
         {
           "file": "lib/services/camera_service.dart",
@@ -401,8 +401,8 @@
     {
       "key": "services.camera.service.s004",
       "zh": "[Camera]:相機出錯：$e",
-      "en": "",
-      "ja": "",
+      "en": "[Camera] Camera error: $e",
+      "ja": "[Camera] カメラエラー: $e",
       "occurrences": [
         {
           "file": "lib/services/camera_service.dart",
@@ -413,8 +413,8 @@
     {
       "key": "services.firebase.auth.service.s001",
       "zh": "[AuthService] 登入失敗: $e",
-      "en": "",
-      "ja": "",
+      "en": "[AuthService] Sign-in failed: $e",
+      "ja": "[AuthService] ログインに失敗しました: $e",
       "occurrences": [
         {
           "file": "lib/services/firebase_auth_service.dart",
@@ -425,8 +425,8 @@
     {
       "key": "services.firebase.auth.service.s002",
       "zh": "[AuthService] 註冊失敗: $e",
-      "en": "",
-      "ja": "",
+      "en": "[AuthService] Registration failed: $e",
+      "ja": "[AuthService] 登録に失敗しました: $e",
       "occurrences": [
         {
           "file": "lib/services/firebase_auth_service.dart",
@@ -437,8 +437,8 @@
     {
       "key": "services.firebase.auth.service.s003",
       "zh": "[AuthService] Google 登入失敗: $e",
-      "en": "",
-      "ja": "",
+      "en": "[AuthService] Google Sign-In failed: $e",
+      "ja": "[AuthService] Googleログインに失敗しました: $e",
       "occurrences": [
         {
           "file": "lib/services/firebase_auth_service.dart",
@@ -449,8 +449,8 @@
     {
       "key": "services.google.auth.service.s001",
       "zh": "Google Sign-In: 初始化新使用者隨機頭像...",
-      "en": "",
-      "ja": "",
+      "en": "Google Sign-In: Initializing a random avatar for the new user...",
+      "ja": "Googleログイン：新規ユーザーのランダムアバターを初期化しています...",
       "occurrences": [
         {
           "file": "lib/services/google_auth_service.dart",
@@ -461,8 +461,8 @@
     {
       "key": "services.google.auth.service.s003",
       "zh": "❌ Google Sign-In 發生錯誤：$e",
-      "en": "",
-      "ja": "",
+      "en": "❌ Google Sign-In error: $e",
+      "ja": "❌ Googleログインでエラーが発生しました: $e",
       "occurrences": [
         {
           "file": "lib/services/google_auth_service.dart",
@@ -473,8 +473,8 @@
     {
       "key": "services.json.to.suggestion.s001",
       "zh": "名稱",
-      "en": "",
-      "ja": "",
+      "en": "Name",
+      "ja": "名前",
       "occurrences": [
         {
           "file": "lib/services/json_to_suggestion.dart",
@@ -485,8 +485,8 @@
     {
       "key": "services.json.to.suggestion.s002",
       "zh": "種類",
-      "en": "",
-      "ja": "",
+      "en": "Type",
+      "ja": "種別",
       "occurrences": [
         {
           "file": "lib/services/json_to_suggestion.dart",
@@ -497,8 +497,8 @@
     {
       "key": "services.json.to.suggestion.s003",
       "zh": "緯度",
-      "en": "",
-      "ja": "",
+      "en": "Latitude",
+      "ja": "緯度（Latitude）",
       "occurrences": [
         {
           "file": "lib/services/json_to_suggestion.dart",
@@ -509,8 +509,8 @@
     {
       "key": "services.json.to.suggestion.s004",
       "zh": "經度",
-      "en": "",
-      "ja": "",
+      "en": "Longitude",
+      "ja": "経度",
       "occurrences": [
         {
           "file": "lib/services/json_to_suggestion.dart",
@@ -521,8 +521,8 @@
     {
       "key": "services.json.to.suggestion.s005",
       "zh": "地景資料缺少有效的「名稱」欄位",
-      "en": "",
-      "ja": "",
+      "en": "Location data is missing a valid “Name” field",
+      "ja": "景観データに有効な「名前」フィールドがありません",
       "occurrences": [
         {
           "file": "lib/services/json_to_suggestion.dart",
@@ -533,8 +533,8 @@
     {
       "key": "services.json.to.suggestion.s006",
       "zh": "地景資料缺少有效的「種類」欄位",
-      "en": "",
-      "ja": "",
+      "en": "Location data is missing a valid “Type” field",
+      "ja": "景観データに有効な「種類」フィールドがありません",
       "occurrences": [
         {
           "file": "lib/services/json_to_suggestion.dart",
@@ -545,8 +545,8 @@
     {
       "key": "services.json.to.suggestion.s007",
       "zh": "地景資料缺少有效的「緯度」或「經度」欄位",
-      "en": "",
-      "ja": "",
+      "en": "Location data is missing a valid latitude or longitude field",
+      "ja": "景観データに有効な緯度または経度フィールドがありません",
       "occurrences": [
         {
           "file": "lib/services/json_to_suggestion.dart",
@@ -557,8 +557,8 @@
     {
       "key": "services.json.to.suggestion.s008",
       "zh": "地景 JSON 根節點必須是陣列: $assetPath",
-      "en": "",
-      "ja": "",
+      "en": "The location JSON root must be an array: $assetPath",
+      "ja": "景観JSONのルートは配列である必要があります: $assetPath",
       "occurrences": [
         {
           "file": "lib/services/json_to_suggestion.dart",
@@ -569,8 +569,8 @@
     {
       "key": "services.json.to.suggestion.s009",
       "zh": "地景資料第 ${index + 1} 筆不是物件: $sourceName",
-      "en": "",
-      "ja": "",
+      "en": "Location record ${index + 1} is not an object: $sourceName",
+      "ja": "景観データの${index + 1}件目がオブジェクトではありません: $sourceName",
       "occurrences": [
         {
           "file": "lib/services/json_to_suggestion.dart",
@@ -582,7 +582,7 @@
       "key": "styles.level.style.s001",
       "zh": "火",
       "en": "Fire",
-      "ja": "火",
+      "ja": "火属性",
       "occurrences": [
         {
           "file": "lib/styles/level_style.dart",
@@ -602,7 +602,7 @@
       "key": "styles.level.style.s002",
       "zh": "水",
       "en": "Water",
-      "ja": "水",
+      "ja": "水属性",
       "occurrences": [
         {
           "file": "lib/styles/level_style.dart",
@@ -622,7 +622,7 @@
       "key": "styles.level.style.s003",
       "zh": "金",
       "en": "Metal",
-      "ja": "金",
+      "ja": "金属性",
       "occurrences": [
         {
           "file": "lib/styles/level_style.dart",
@@ -691,6 +691,880 @@
         {
           "file": "lib/styles/nfc_leading_style.dart",
           "line": 14
+        }
+      ]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s001",
+      "zh": "發生未預期的錯誤，請稍後再試。",
+      "en": "An unexpected error occurred. Please try again later.",
+      "ja": "予期しないエラーが発生しました。しばらくしてからもう一度お試しください。",
+      "occurrences": [
+        {
+          "file": "lib/utils/firebase_auth_error_message.dart"
+        }
+      ]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s002",
+      "zh": "已取消 Apple 登入。",
+      "en": "Apple Sign-In was canceled.",
+      "ja": "Appleでのサインインをキャンセルしました。",
+      "occurrences": [
+        {
+          "file": "lib/utils/firebase_auth_error_message.dart"
+        }
+      ]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s003",
+      "zh": "這個 Email 已使用其他登入方式，請先使用原本的方式登入。",
+      "en": "This email already uses another sign-in method. Sign in with the original method first.",
+      "ja": "このメールアドレスは別のログイン方法で使用されています。先に元の方法でログインしてください。",
+      "occurrences": [
+        {
+          "file": "lib/utils/firebase_auth_error_message.dart"
+        }
+      ]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s004",
+      "zh": "這個 Apple 帳號已連結到另一個帳號。",
+      "en": "This Apple Account is already linked to another account.",
+      "ja": "このApple Accountは別のアカウントにすでに連携されています。",
+      "occurrences": [
+        {
+          "file": "lib/utils/firebase_auth_error_message.dart"
+        }
+      ]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s005",
+      "zh": "Firebase 尚未啟用 Apple 登入。",
+      "en": "Apple Sign-In is not enabled in Firebase.",
+      "ja": "FirebaseでAppleログインが有効になっていません。",
+      "occurrences": [
+        {
+          "file": "lib/utils/firebase_auth_error_message.dart"
+        }
+      ]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s006",
+      "zh": "網路連線失敗，請確認網路後再試。",
+      "en": "Network connection failed. Check your connection and try again.",
+      "ja": "ネットワーク接続に失敗しました。接続を確認してもう一度お試しください。",
+      "occurrences": [
+        {
+          "file": "lib/utils/firebase_auth_error_message.dart"
+        }
+      ]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s007",
+      "zh": "嘗試次數過多，請稍後再試。",
+      "en": "Too many attempts. Please try again later.",
+      "ja": "試行回数が多すぎます。しばらくしてからもう一度お試しください。",
+      "occurrences": [
+        {
+          "file": "lib/utils/firebase_auth_error_message.dart"
+        }
+      ]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s008",
+      "zh": "Apple 登入憑證無效，請重新嘗試。",
+      "en": "The Apple Sign-In credential is invalid. Please try again.",
+      "ja": "Appleのログイン認証情報が無効です。もう一度お試しください。",
+      "occurrences": [
+        {
+          "file": "lib/utils/firebase_auth_error_message.dart"
+        }
+      ]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s009",
+      "zh": "Apple 登入網域尚未獲得授權，請檢查 Apple 與 Firebase 設定。",
+      "en": "The Apple Sign-In domain is not authorized. Check the Apple and Firebase settings.",
+      "ja": "Appleログインのドメインが承認されていません。AppleとFirebaseの設定を確認してください。",
+      "occurrences": [
+        {
+          "file": "lib/utils/firebase_auth_error_message.dart"
+        }
+      ]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s010",
+      "zh": "已有 Apple 登入流程正在進行，請完成後再試。",
+      "en": "An Apple Sign-In flow is already in progress. Complete it before trying again.",
+      "ja": "Appleログインの処理がすでに進行中です。完了してからもう一度お試しください。",
+      "occurrences": [
+        {
+          "file": "lib/utils/firebase_auth_error_message.dart"
+        }
+      ]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s011",
+      "zh": "Apple 登入失敗，請稍後再試。",
+      "en": "Apple Sign-In failed. Please try again later.",
+      "ja": "Appleログインに失敗しました。しばらくしてからもう一度お試しください。",
+      "occurrences": [
+        {
+          "file": "lib/utils/firebase_auth_error_message.dart"
+        }
+      ]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s012",
+      "zh": "目前帳號已經連結 Apple 登入。",
+      "en": "Apple Sign-In is already linked to this account.",
+      "ja": "現在のアカウントにはすでにAppleログインが連携されています。",
+      "occurrences": [
+        {
+          "file": "lib/utils/firebase_auth_error_message.dart"
+        }
+      ]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s013",
+      "zh": "找不到目前登入的帳號，請重新登入後再試。",
+      "en": "The signed-in account could not be found. Sign in again and retry.",
+      "ja": "現在ログインしているアカウントが見つかりません。もう一度ログインしてお試しください。",
+      "occurrences": [
+        {
+          "file": "lib/utils/firebase_auth_error_message.dart"
+        }
+      ]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s014",
+      "zh": "Email 格式不正確。",
+      "en": "Enter a valid email address.",
+      "ja": "有効なメールアドレスを入力してください。",
+      "occurrences": [
+        {
+          "file": "lib/utils/firebase_auth_error_message.dart"
+        }
+      ]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s015",
+      "zh": "請輸入密碼。",
+      "en": "Enter your password.",
+      "ja": "パスワードを入力してください。",
+      "occurrences": [
+        {
+          "file": "lib/utils/firebase_auth_error_message.dart"
+        }
+      ]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s016",
+      "zh": "密碼強度不足，請至少輸入 6 位。",
+      "en": "The password is too weak. Enter at least 6 characters.",
+      "ja": "パスワードが短すぎます。6文字以上で入力してください。",
+      "occurrences": [
+        {
+          "file": "lib/utils/firebase_auth_error_message.dart"
+        }
+      ]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s017",
+      "zh": "找不到這個 Email 的帳號。",
+      "en": "No account was found for this email address.",
+      "ja": "このメールアドレスのアカウントが見つかりません。",
+      "occurrences": [
+        {
+          "file": "lib/utils/firebase_auth_error_message.dart"
+        }
+      ]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s018",
+      "zh": "Email 或密碼不正確。",
+      "en": "The email address or password is incorrect.",
+      "ja": "メールアドレスまたはパスワードが正しくありません。",
+      "occurrences": [
+        {
+          "file": "lib/utils/firebase_auth_error_message.dart"
+        }
+      ]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s019",
+      "zh": "這個 Email 已經註冊，請直接登入或使用忘記密碼。",
+      "en": "This email is already registered. Sign in or use Forgot Password.",
+      "ja": "このメールアドレスは登録済みです。ログインするか、パスワードを再設定してください。",
+      "occurrences": [
+        {
+          "file": "lib/utils/firebase_auth_error_message.dart"
+        }
+      ]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s020",
+      "zh": "這個 Email 已使用其他登入方式，請先使用原本的登入方式。",
+      "en": "This email already uses another sign-in method. Sign in with the original method first.",
+      "ja": "このメールアドレスは別のログイン方法で使用されています。先に元の方法でログインしてください。",
+      "occurrences": [
+        {
+          "file": "lib/utils/firebase_auth_error_message.dart"
+        }
+      ]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s021",
+      "zh": "這個登入方式已經連結到目前帳號。",
+      "en": "This sign-in method is already linked to the current account.",
+      "ja": "このログイン方法は現在のアカウントにすでに連携されています。",
+      "occurrences": [
+        {
+          "file": "lib/utils/firebase_auth_error_message.dart"
+        }
+      ]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s022",
+      "zh": "這組登入資料已連結到其他帳號。",
+      "en": "These sign-in credentials are linked to another account.",
+      "ja": "このログイン情報は別のアカウントに連携されています。",
+      "occurrences": [
+        {
+          "file": "lib/utils/firebase_auth_error_message.dart"
+        }
+      ]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s023",
+      "zh": "為了帳號安全，請重新登入後再試一次。",
+      "en": "For account security, sign in again and retry.",
+      "ja": "アカウント保護のため、もう一度ログインしてからお試しください。",
+      "occurrences": [
+        {
+          "file": "lib/utils/firebase_auth_error_message.dart"
+        }
+      ]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s024",
+      "zh": "Firebase 尚未啟用這種登入方式。",
+      "en": "This sign-in method is not enabled in Firebase.",
+      "ja": "このログイン方法はFirebaseで有効になっていません。",
+      "occurrences": [
+        {
+          "file": "lib/utils/firebase_auth_error_message.dart"
+        }
+      ]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s025",
+      "zh": "這個帳號已被停用，請聯絡客服或管理員。",
+      "en": "This account has been disabled. Contact support or an administrator.",
+      "ja": "このアカウントは無効化されています。サポートまたは管理者にお問い合わせください。",
+      "occurrences": [
+        {
+          "file": "lib/utils/firebase_auth_error_message.dart"
+        }
+      ]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s026",
+      "zh": "登入狀態已失效，請重新登入。",
+      "en": "Your sign-in session has expired. Sign in again.",
+      "ja": "ログイン状態の有効期限が切れました。もう一度ログインしてください。",
+      "occurrences": [
+        {
+          "file": "lib/utils/firebase_auth_error_message.dart"
+        }
+      ]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s027",
+      "zh": "App 的 Firebase 驗證設定不正確，請聯絡客服。",
+      "en": "The app's Firebase Authentication configuration is invalid. Contact support.",
+      "ja": "アプリのFirebase認証設定が正しくありません。サポートにお問い合わせください。",
+      "occurrences": [
+        {
+          "file": "lib/utils/firebase_auth_error_message.dart"
+        }
+      ]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s028",
+      "zh": "驗證服務已達使用上限，請稍後再試。",
+      "en": "The authentication service quota has been reached. Try again later.",
+      "ja": "認証サービスの利用上限に達しました。しばらくしてからもう一度お試しください。",
+      "occurrences": [
+        {
+          "file": "lib/utils/firebase_auth_error_message.dart"
+        }
+      ]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s029",
+      "zh": "Firebase 驗證服務發生內部錯誤，請稍後再試。",
+      "en": "Firebase Authentication encountered an internal error. Try again later.",
+      "ja": "Firebase認証で内部エラーが発生しました。しばらくしてからもう一度お試しください。",
+      "occurrences": [
+        {
+          "file": "lib/utils/firebase_auth_error_message.dart"
+        }
+      ]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s030",
+      "zh": "登入驗證失敗，請稍後再試。",
+      "en": "Authentication failed. Try again later.",
+      "ja": "ログイン認証に失敗しました。しばらくしてからもう一度お試しください。",
+      "occurrences": [
+        {
+          "file": "lib/utils/firebase_auth_error_message.dart"
+        }
+      ]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s031",
+      "zh": "請輸入 Email。",
+      "en": "Enter your email address.",
+      "ja": "メールアドレスを入力してください。",
+      "occurrences": [
+        {
+          "file": "lib/utils/firebase_auth_error_message.dart"
+        }
+      ]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s032",
+      "zh": "密碼不符合安全規則，請依畫面提示設定更安全的密碼。",
+      "en": "The password does not meet the security requirements. Follow the on-screen password rules.",
+      "ja": "パスワードがセキュリティ要件を満たしていません。画面のルールに従って設定してください。",
+      "occurrences": [
+        {
+          "file": "lib/utils/firebase_auth_error_message.dart"
+        }
+      ]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s033",
+      "zh": "已取消 Google 登入。",
+      "en": "Google Sign-In was canceled.",
+      "ja": "Googleログインをキャンセルしました。",
+      "occurrences": [
+        {
+          "file": "lib/utils/firebase_auth_error_message.dart"
+        },
+        {
+          "file": "lib/view/login_page.dart"
+        },
+        {
+          "file": "lib/view/register_page.dart"
+        }
+      ]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s034",
+      "zh": "Google 登入設定不正確，請檢查 iOS URL Scheme、Client ID 與 Firebase 設定。",
+      "en": "Google Sign-In is misconfigured. Check the iOS URL scheme, client ID, and Firebase settings.",
+      "ja": "Googleログインの設定が正しくありません。iOSのURL Scheme、クライアントID、Firebase設定を確認してください。",
+      "occurrences": [
+        {
+          "file": "lib/utils/firebase_auth_error_message.dart"
+        }
+      ]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s035",
+      "zh": "Google 登入失敗，請稍後再試。",
+      "en": "Google Sign-In failed. Try again later.",
+      "ja": "Googleログインに失敗しました。しばらくしてからもう一度お試しください。",
+      "occurrences": [
+        {
+          "file": "lib/utils/firebase_auth_error_message.dart"
+        }
+      ]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s036",
+      "zh": "Google 登入憑證無效，請重新登入。",
+      "en": "The Google Sign-In credential is invalid. Sign in again.",
+      "ja": "Googleのログイン認証情報が無効です。もう一度ログインしてください。",
+      "occurrences": [
+        {
+          "file": "lib/utils/firebase_auth_error_message.dart"
+        }
+      ]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s037",
+      "zh": "Firebase 尚未啟用 Google 登入。",
+      "en": "Google Sign-In is not enabled in Firebase.",
+      "ja": "FirebaseでGoogleログインが有効になっていません。",
+      "occurrences": [
+        {
+          "file": "lib/utils/firebase_auth_error_message.dart"
+        }
+      ]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s038",
+      "zh": "請選擇目前登入的 Google 帳號。",
+      "en": "Select the Google account currently signed in.",
+      "ja": "現在ログインしているGoogleアカウントを選択してください。",
+      "occurrences": [
+        {
+          "file": "lib/utils/firebase_auth_error_message.dart"
+        }
+      ]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s039",
+      "zh": "找不到目前登入的帳號，請重新登入後再試。",
+      "en": "The signed-in account could not be found. Sign in again and retry.",
+      "ja": "現在ログインしているアカウントが見つかりません。もう一度ログインしてお試しください。",
+      "occurrences": [
+        {
+          "file": "lib/utils/firebase_auth_error_message.dart"
+        }
+      ]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s040",
+      "zh": "這個帳號已經可以使用 Email 和密碼登入。",
+      "en": "This account can already sign in with email and password.",
+      "ja": "このアカウントはすでにメールアドレスとパスワードでログインできます。",
+      "occurrences": [
+        {
+          "file": "lib/utils/firebase_auth_error_message.dart"
+        }
+      ]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s041",
+      "zh": "登入驗證已成功，但無法同步帳號資料。@detail",
+      "en": "Authentication succeeded, but the account data could not be synchronized. @detail",
+      "ja": "ログイン認証には成功しましたが、アカウントデータを同期できませんでした。@detail",
+      "occurrences": [
+        {
+          "file": "lib/utils/firebase_auth_error_message.dart"
+        }
+      ]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s042",
+      "zh": "帳號已建立且驗證信已寄出，但玩家資料初始化失敗。@detail",
+      "en": "The account was created and the verification email was sent, but player data initialization failed. @detail",
+      "ja": "アカウントを作成して確認メールを送信しましたが、プレイヤーデータの初期化に失敗しました。@detail",
+      "occurrences": [
+        {
+          "file": "lib/utils/firebase_auth_error_message.dart"
+        }
+      ]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s043",
+      "zh": "目前沒有存取資料的權限，請檢查 Firestore 安全規則。",
+      "en": "Data access was denied. Check the Firestore security rules.",
+      "ja": "データへのアクセス権限がありません。Firestoreのセキュリティルールを確認してください。",
+      "occurrences": [
+        {
+          "file": "lib/utils/firebase_auth_error_message.dart"
+        }
+      ]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s044",
+      "zh": "資料服務暫時無法使用，請確認網路後重新登入。",
+      "en": "The data service is temporarily unavailable. Check your connection and sign in again.",
+      "ja": "データサービスを一時的に利用できません。ネットワークを確認して、もう一度ログインしてください。",
+      "occurrences": [
+        {
+          "file": "lib/utils/firebase_auth_error_message.dart"
+        }
+      ]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s045",
+      "zh": "讀取資料逾時，請稍後重新登入。",
+      "en": "The data request timed out. Sign in again later.",
+      "ja": "データの読み込みがタイムアウトしました。しばらくしてからもう一度ログインしてください。",
+      "occurrences": [
+        {
+          "file": "lib/utils/firebase_auth_error_message.dart"
+        }
+      ]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s046",
+      "zh": "Firestore 認證狀態已失效，請重新登入。",
+      "en": "The Firestore authentication session has expired. Sign in again.",
+      "ja": "Firestoreの認証状態が失効しました。もう一度ログインしてください。",
+      "occurrences": [
+        {
+          "file": "lib/utils/firebase_auth_error_message.dart"
+        }
+      ]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s047",
+      "zh": "資料服務已達使用上限，請稍後再試。",
+      "en": "The data service quota has been reached. Try again later.",
+      "ja": "データサービスの利用上限に達しました。しばらくしてからもう一度お試しください。",
+      "occurrences": [
+        {
+          "file": "lib/utils/firebase_auth_error_message.dart"
+        }
+      ]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s048",
+      "zh": "找不到必要的帳號資料，請聯絡客服。",
+      "en": "Required account data could not be found. Contact support.",
+      "ja": "必要なアカウントデータが見つかりません。サポートにお問い合わせください。",
+      "occurrences": [
+        {
+          "file": "lib/utils/firebase_auth_error_message.dart"
+        }
+      ]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s049",
+      "zh": "Firestore 設定尚未完成，請檢查安全規則或索引。",
+      "en": "Firestore setup is incomplete. Check the security rules or indexes.",
+      "ja": "Firestoreの設定が完了していません。セキュリティルールまたはインデックスを確認してください。",
+      "occurrences": [
+        {
+          "file": "lib/utils/firebase_auth_error_message.dart"
+        }
+      ]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s050",
+      "zh": "帳號資料可能已損毀，請聯絡客服。",
+      "en": "The account data may be corrupted. Contact support.",
+      "ja": "アカウントデータが破損している可能性があります。サポートにお問い合わせください。",
+      "occurrences": [
+        {
+          "file": "lib/utils/firebase_auth_error_message.dart"
+        }
+      ]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s051",
+      "zh": "Firestore 發生內部錯誤，請稍後再試。",
+      "en": "Firestore encountered an internal error. Try again later.",
+      "ja": "Firestoreで内部エラーが発生しました。しばらくしてからもう一度お試しください。",
+      "occurrences": [
+        {
+          "file": "lib/utils/firebase_auth_error_message.dart"
+        }
+      ]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s052",
+      "zh": "讀取帳號資料失敗，請稍後重新登入。",
+      "en": "Account data could not be loaded. Sign in again later.",
+      "ja": "アカウントデータを読み込めませんでした。しばらくしてからもう一度ログインしてください。",
+      "occurrences": [
+        {
+          "file": "lib/utils/firebase_auth_error_message.dart"
+        }
+      ]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s053",
+      "zh": "瀏覽器封鎖了 Apple 登入視窗，請允許彈出式視窗後再試。",
+      "en": "The browser blocked the Apple Sign-In window. Allow pop-ups and try again.",
+      "ja": "ブラウザがAppleログイン画面をブロックしました。ポップアップを許可してからもう一度お試しください。",
+      "occurrences": [
+        {
+          "file": "lib/utils/firebase_auth_error_message.dart"
+        }
+      ]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s054",
+      "zh": "Apple 登入設定不正確，請檢查 Apple Developer 與 Firebase 設定。",
+      "en": "Apple Sign-In is misconfigured. Check the Apple Developer and Firebase settings.",
+      "ja": "Appleログインの設定が正しくありません。Apple DeveloperとFirebaseの設定を確認してください。",
+      "occurrences": [
+        {
+          "file": "lib/utils/firebase_auth_error_message.dart"
+        }
+      ]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s055",
+      "zh": "瀏覽器不支援 Apple 登入所需的儲存功能。",
+      "en": "This browser does not support the storage required for Apple Sign-In.",
+      "ja": "このブラウザはAppleログインに必要なストレージ機能をサポートしていません。",
+      "occurrences": [
+        {
+          "file": "lib/utils/firebase_auth_error_message.dart"
+        }
+      ]
+    },
+    {
+      "key": "utils.firebase.auth.error.message.s056",
+      "zh": "Google 登入狀態已失效，請重新選擇 Google 帳號。",
+      "en": "Your Google sign-in session has expired. Select your Google account again.",
+      "ja": "Googleのログイン状態が失効しました。Googleアカウントをもう一度選択してください。",
+      "occurrences": [
+        {
+          "file": "lib/utils/firebase_auth_error_message.dart"
+        }
+      ]
+    },
+    {
+      "key": "view.aed.map.s001",
+      "zh": "請先開啟定位服務，才能顯示目前位置。",
+      "en": "Turn on location services to show your current position.",
+      "ja": "現在地を表示するには、位置情報サービスをオンにしてください。",
+      "occurrences": [
+        {
+          "file": "lib/view/AED_map.dart",
+          "line": 69
+        }
+      ]
+    },
+    {
+      "key": "view.aed.map.s002",
+      "zh": "未取得定位權限，無法顯示目前位置。",
+      "en": "Location permission was not granted, so your current position cannot be shown.",
+      "ja": "位置情報の権限が許可されていないため、現在地を表示できません。",
+      "occurrences": [
+        {
+          "file": "lib/view/AED_map.dart",
+          "line": 79
+        }
+      ]
+    },
+    {
+      "key": "view.aed.map.s003",
+      "zh": "定位權限已被永久拒絕，請到系統設定開啟。",
+      "en": "Location permission was permanently denied. Enable it in system settings.",
+      "ja": "位置情報の権限が永続的に拒否されています。システム設定で許可してください。",
+      "occurrences": [
+        {
+          "file": "lib/view/AED_map.dart",
+          "line": 84
+        }
+      ]
+    },
+    {
+      "key": "view.aed.map.s004",
+      "zh": "取得目前位置失敗：@error",
+      "en": "Failed to get your current location: @error",
+      "ja": "現在地の取得に失敗しました: @error",
+      "occurrences": [
+        {
+          "file": "lib/view/AED_map.dart",
+          "line": 101
+        }
+      ]
+    },
+    {
+      "key": "view.aed.map.s005",
+      "zh": "定位更新失敗：@error",
+      "en": "Failed to update your location: @error",
+      "ja": "位置情報の更新に失敗しました: @error",
+      "occurrences": [
+        {
+          "file": "lib/view/AED_map.dart",
+          "line": 119
+        }
+      ]
+    },
+    {
+      "key": "view.aed.map.s006",
+      "zh": "回報緊急狀況",
+      "en": "Report an Emergency",
+      "ja": "緊急状況を通報",
+      "occurrences": [
+        {
+          "file": "lib/view/AED_map.dart",
+          "line": 148
+        }
+      ]
+    },
+    {
+      "key": "view.aed.map.s007",
+      "zh": "請簡單描述發生什麼事、受傷人數與現場狀況……",
+      "en": "Briefly describe what happened, the number of injured people, and the situation at the scene...",
+      "ja": "何が起きたか、負傷者の人数、現場の状況を簡潔に記入してください…",
+      "occurrences": [
+        {
+          "file": "lib/view/AED_map.dart",
+          "line": 156
+        }
+      ]
+    },
+    {
+      "key": "view.aed.map.s008",
+      "zh": "取消",
+      "en": "Cancel",
+      "ja": "キャンセル",
+      "occurrences": [
+        {
+          "file": "lib/view/AED_map.dart",
+          "line": 163
+        }
+      ]
+    },
+    {
+      "key": "view.aed.map.s009",
+      "zh": "開啟郵件",
+      "en": "Open Email",
+      "ja": "メールを開く",
+      "occurrences": [
+        {
+          "file": "lib/view/AED_map.dart",
+          "line": 171
+        }
+      ]
+    },
+    {
+      "key": "view.aed.map.s010",
+      "zh": "無法取得目前位置",
+      "en": "Current location unavailable",
+      "ja": "現在地を取得できません",
+      "occurrences": [
+        {
+          "file": "lib/view/AED_map.dart",
+          "line": 182
+        }
+      ]
+    },
+    {
+      "key": "view.aed.map.s011",
+      "zh": "緯度",
+      "en": "Latitude",
+      "ja": "緯度（Latitude）",
+      "occurrences": [
+        {
+          "file": "lib/view/AED_map.dart",
+          "line": 183
+        }
+      ]
+    },
+    {
+      "key": "view.aed.map.s012",
+      "zh": "經度",
+      "en": "Longitude",
+      "ja": "経度",
+      "occurrences": [
+        {
+          "file": "lib/view/AED_map.dart",
+          "line": 184
+        }
+      ]
+    },
+    {
+      "key": "view.aed.map.s013",
+      "zh": "Google Maps",
+      "en": "Google Maps",
+      "ja": "Google Maps",
+      "occurrences": [
+        {
+          "file": "lib/view/AED_map.dart",
+          "line": 185
+        }
+      ]
+    },
+    {
+      "key": "view.aed.map.s014",
+      "zh": "緊急狀況描述：\n@description\n\n目前位置：\n@location\n\n回報時間：@timestamp\n\n此信件由校園安全地圖產生，寄出前請再確認內容。",
+      "en": "Emergency description:\n@description\n\nCurrent location:\n@location\n\nReport time: @timestamp\n\nThis email was generated by the Campus Safety Map. Please verify the content before sending.",
+      "ja": "緊急状況の説明:\n@description\n\n現在地:\n@location\n\n通報時刻: @timestamp\n\nこのメールはキャンパス安全マップで作成されました。送信前に内容を確認してください。",
+      "occurrences": [
+        {
+          "file": "lib/view/AED_map.dart",
+          "line": 189
+        }
+      ]
+    },
+    {
+      "key": "view.aed.map.s015",
+      "zh": "【校園緊急通報】需要協助",
+      "en": "[Campus Emergency Report] Assistance Needed",
+      "ja": "【キャンパス緊急通報】支援が必要です",
+      "occurrences": [
+        {
+          "file": "lib/view/AED_map.dart",
+          "line": 195
+        }
+      ]
+    },
+    {
+      "key": "view.aed.map.s016",
+      "zh": "無法開啟郵件 App，請直接寄信至 @email。",
+      "en": "Unable to open an email app. Send the message directly to @email.",
+      "ja": "メールアプリを開けません。@email へ直接送信してください。",
+      "occurrences": [
+        {
+          "file": "lib/view/AED_map.dart",
+          "line": 199
+        }
+      ]
+    },
+    {
+      "key": "view.aed.map.s017",
+      "zh": "無法開啟撥號畫面，請手動撥打 03-2804814。",
+      "en": "Unable to open the dialer. Call 03-2804814 manually.",
+      "ja": "電話アプリを開けません。03-2804814 に直接電話してください。",
+      "occurrences": [
+        {
+          "file": "lib/view/AED_map.dart",
+          "line": 225
+        }
+      ]
+    },
+    {
+      "key": "view.aed.map.s018",
+      "zh": "防災地圖載入失敗：@error",
+      "en": "Failed to load the disaster prevention map: @error",
+      "ja": "防災マップの読み込みに失敗しました: @error",
+      "occurrences": [
+        {
+          "file": "lib/view/AED_map.dart",
+          "line": 303
+        }
+      ]
+    },
+    {
+      "key": "view.aed.map.s019",
+      "zh": "寄送位置與緊急狀況",
+      "en": "Send your location and emergency details",
+      "ja": "位置情報と緊急状況を送信",
+      "occurrences": [
+        {
+          "file": "lib/view/AED_map.dart",
+          "line": 357
+        }
+      ]
+    },
+    {
+      "key": "view.aed.map.s020",
+      "zh": "撥打衛保組 03-2804814",
+      "en": "Call the Health Center at 03-2804814",
+      "ja": "保健センター 03-2804814 に電話",
+      "occurrences": [
+        {
+          "file": "lib/view/AED_map.dart",
+          "line": 363
+        }
+      ]
+    },
+    {
+      "key": "view.call.and.email.s001",
+      "zh": "呼叫與回報",
+      "en": "Call and Report",
+      "ja": "電話と通報",
+      "occurrences": [
+        {
+          "file": "lib/view/call_and_email.dart",
+          "line": 86
         }
       ]
     },
@@ -765,8 +1639,8 @@
     {
       "key": "view.camera.view.s006",
       "zh": "[CameraView] 讀取精靈相框資料失敗: $e",
-      "en": "",
-      "ja": "",
+      "en": "[CameraView] Failed to load spirit frame data: $e",
+      "ja": "[CameraView] 精霊フレームデータを読み込めませんでした: $e",
       "occurrences": [
         {
           "file": "lib/view/Camera_view.dart",
@@ -778,7 +1652,7 @@
       "key": "view.camera.view.s009",
       "zh": "草",
       "en": "Grass",
-      "ja": "草",
+      "ja": "草属性",
       "occurrences": [
         {
           "file": "lib/view/Camera_view.dart",
@@ -803,6 +1677,66 @@
         {
           "file": "lib/view/user_protocol.dart",
           "line": 47
+        }
+      ]
+    },
+    {
+      "key": "view.camera.view.s011",
+      "zh": "開啟系統設定",
+      "en": "Open System Settings",
+      "ja": "システム設定を開く",
+      "occurrences": [
+        {
+          "file": "lib/view/camera_view.dart",
+          "line": 0
+        }
+      ]
+    },
+    {
+      "key": "view.camera.view.s012",
+      "zh": "需要相機權限",
+      "en": "Camera Permission Required",
+      "ja": "カメラの権限が必要です",
+      "occurrences": [
+        {
+          "file": "lib/view/camera_view.dart",
+          "line": 0
+        }
+      ]
+    },
+    {
+      "key": "view.campus.safety.s001",
+      "zh": "校園安全",
+      "en": "Campus Safety",
+      "ja": "キャンパス安全",
+      "occurrences": [
+        {
+          "file": "lib/view/campus_safty.dart",
+          "line": 30
+        }
+      ]
+    },
+    {
+      "key": "view.campus.safety.s002",
+      "zh": "緊急地圖",
+      "en": "Emergency Map",
+      "ja": "緊急マップ",
+      "occurrences": [
+        {
+          "file": "lib/view/campus_safty.dart",
+          "line": 53
+        }
+      ]
+    },
+    {
+      "key": "view.campus.safety.s003",
+      "zh": "呼叫與回報",
+      "en": "Call and Report",
+      "ja": "電話と通報",
+      "occurrences": [
+        {
+          "file": "lib/view/campus_safty.dart",
+          "line": 59
         }
       ]
     },
@@ -1058,7 +1992,7 @@
       "key": "view.lhf.setting.page.s011",
       "zh": "音量",
       "en": "Volume",
-      "ja": "音量",
+      "ja": "音量レベル",
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
@@ -1094,7 +2028,7 @@
       "key": "view.lhf.setting.page.s014",
       "zh": "最大",
       "en": "Max",
-      "ja": "最大",
+      "ja": "最大値",
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
@@ -1106,7 +2040,7 @@
       "key": "view.lhf.setting.page.s015",
       "zh": "振動",
       "en": "Vibration",
-      "ja": "振動",
+      "ja": "バイブレーション",
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
@@ -1400,9 +2334,9 @@
     },
     {
       "key": "view.lhf.setting.page.s041",
-      "zh": "已新增 $count 隻精靈到圖鑑",
-      "en": "Added $count spirits to your collection",
-      "ja": "$count体の精霊を図鑑に追加しました",
+      "zh": "已新增 @count 隻精靈到圖鑑",
+      "en": "Added @count spirits to the collection",
+      "ja": "図鑑に精霊を@count体追加しました",
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
@@ -1424,9 +2358,9 @@
     },
     {
       "key": "view.lhf.setting.page.s043",
-      "zh": "已從圖鑑刪除 $count 隻精靈",
-      "en": "Removed $count spirits from your collection",
-      "ja": "図鑑から$count体の精霊を削除しました",
+      "zh": "已從圖鑑刪除 @count 隻精靈",
+      "en": "Removed @count spirits from the collection",
+      "ja": "図鑑から精霊を@count体削除しました",
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
@@ -1484,9 +2418,9 @@
     },
     {
       "key": "view.lhf.setting.page.s048",
-      "zh": "使用者協議",
-      "en": "User Agreement",
-      "ja": "利用規約",
+      "zh": "法律與隱私",
+      "en": "Legal & Privacy",
+      "ja": "法的情報とプライバシー",
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
@@ -1500,9 +2434,9 @@
     },
     {
       "key": "view.lhf.setting.page.s049",
-      "zh": "查看目前版本的使用者協議與說明內容。",
-      "en": "View the current user agreement and related information.",
-      "ja": "現在の利用規約と関連情報を確認します。",
+      "zh": "查看服務條款、隱私權政策與您的資料權利。",
+      "en": "View the Terms of Service, Privacy Policy, and your data rights.",
+      "ja": "利用規約、プライバシーポリシー、データに関する権利を確認します。",
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
@@ -1537,8 +2471,8 @@
     {
       "key": "view.lhf.setting.page.s052",
       "zh": "[SettingPage] 捕捉全部精靈失敗: $e",
-      "en": "",
-      "ja": "",
+      "en": "[SettingPage] Failed to catch all spirits: $e",
+      "ja": "[SettingPage] すべての精霊を捕獲できませんでした: $e",
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
@@ -1549,8 +2483,8 @@
     {
       "key": "view.lhf.setting.page.s053",
       "zh": "[SettingPage] 刪除全部精靈失敗: $e",
-      "en": "",
-      "ja": "",
+      "en": "[SettingPage] Failed to delete all spirits: $e",
+      "ja": "[SettingPage] すべての精霊を削除できませんでした: $e",
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
@@ -1559,10 +2493,756 @@
       ]
     },
     {
+      "key": "view.lhf.setting.page.s054",
+      "zh": "匯入遊戲資料",
+      "en": "Import Game Data",
+      "ja": "ゲームデータをインポート",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 76
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s055",
+      "zh": "正在匯入遊戲資料...",
+      "en": "Importing game data...",
+      "ja": "ゲームデータをインポートしています...",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 77
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s056",
+      "zh": "遊戲資料匯入完成",
+      "en": "Game data import complete",
+      "ja": "ゲームデータのインポートが完了しました",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 78
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s057",
+      "zh": "遊戲資料匯入失敗，請確認帳號權限",
+      "en": "Failed to import game data. Check account permissions.",
+      "ja": "ゲームデータのインポートに失敗しました。アカウント権限を確認してください。",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 79
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s058",
+      "zh": "異地定位測試",
+      "en": "Remote Location Test",
+      "ja": "遠隔位置情報テスト",
+      "occurrences": []
+    },
+    {
+      "key": "view.lhf.setting.page.s059",
+      "zh": "目前位置將偏移至中央大學附近，僅供測試使用。",
+      "en": "Your location will be offset near National Central University for testing only.",
+      "ja": "テスト用に現在地を国立中央大学付近へずらします。",
+      "occurrences": []
+    },
+    {
+      "key": "view.lhf.setting.page.s060",
+      "zh": "測試定位中",
+      "en": "Test location active",
+      "ja": "テスト位置情報を使用中",
+      "occurrences": []
+    },
+    {
+      "key": "view.lhf.setting.page.s061",
+      "zh": "使用真實定位",
+      "en": "Using real location",
+      "ja": "実際の位置情報を使用中",
+      "occurrences": []
+    },
+    {
+      "key": "view.lhf.setting.page.s062",
+      "zh": "開始定位偏移",
+      "en": "Start location offset",
+      "ja": "位置オフセットを開始",
+      "occurrences": []
+    },
+    {
+      "key": "view.lhf.setting.page.s063",
+      "zh": "停止定位偏移",
+      "en": "Stop location offset",
+      "ja": "位置オフセットを停止",
+      "occurrences": []
+    },
+    {
+      "key": "view.lhf.setting.page.s064",
+      "zh": "正在取得目前位置...",
+      "en": "Getting current location...",
+      "ja": "現在地を取得しています...",
+      "occurrences": []
+    },
+    {
+      "key": "view.lhf.setting.page.s065",
+      "zh": "定位偏移已啟用",
+      "en": "Location offset enabled",
+      "ja": "位置オフセットを有効にしました",
+      "occurrences": []
+    },
+    {
+      "key": "view.lhf.setting.page.s066",
+      "zh": "已恢復真實定位",
+      "en": "Real location restored",
+      "ja": "実際の位置情報に戻しました",
+      "occurrences": []
+    },
+    {
+      "key": "view.lhf.setting.page.s067",
+      "zh": "無法啟用定位偏移，請確認 GPS 與定位權限",
+      "en": "Could not enable location offset. Check GPS and location permissions.",
+      "ja": "位置オフセットを有効にできません。GPSと位置情報の権限を確認してください。",
+      "occurrences": []
+    },
+    {
+      "key": "view.lhf.setting.page.s068",
+      "zh": "Email 登入密碼設定完成，現在可以使用 Google 或 Email 登入。",
+      "en": "Email sign-in password set. You can now sign in with Google or email.",
+      "ja": "メールログイン用パスワードを設定しました。Google またはメールアドレスでログインできます。",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 872
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s069",
+      "zh": "目前沒有登入帳號。",
+      "en": "No account is currently signed in.",
+      "ja": "現在ログインしているアカウントはありません。",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 888
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s070",
+      "zh": "Email 已完成驗證，現在可以使用 Email＋密碼登入。",
+      "en": "Email verified. You can now sign in with your email and password.",
+      "ja": "メール認証が完了しました。メールアドレスとパスワードでログインできます。",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 897
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s071",
+      "zh": "密碼設定完成，驗證信已寄出；請完成驗證後再使用 Email＋密碼登入。",
+      "en": "Password set and verification email sent. Verify your email before signing in with email and password.",
+      "ja": "パスワードを設定し、認証メールを送信しました。メールアドレスとパスワードでログインする前に、メール認証を完了してください。",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 909
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s072",
+      "zh": "驗證信已重新寄出，請前往信箱完成驗證。",
+      "en": "Verification email resent. Check your inbox to complete verification.",
+      "ja": "認証メールを再送しました。受信トレイを確認して認証を完了してください。",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 910
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s073",
+      "zh": "密碼已設定，但驗證信寄送失敗：@error",
+      "en": "Password set, but the verification email could not be sent: @error",
+      "ja": "パスワードは設定されましたが、認証メールを送信できませんでした：@error",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 919
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s074",
+      "zh": "帳號安全",
+      "en": "Account Security",
+      "ja": "アカウントセキュリティ",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 945
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s075",
+      "zh": "登入 Email：@email",
+      "en": "Sign-in email: @email",
+      "ja": "ログイン用メールアドレス：@email",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 948
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s076",
+      "zh": "待驗證",
+      "en": "Verification pending",
+      "ja": "メール認証待ち",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 951
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s077",
+      "zh": "Email 密碼已設定",
+      "en": "Email password set",
+      "ja": "メールパスワード設定済み",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 953
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s078",
+      "zh": "尚未設定密碼",
+      "en": "Password not set",
+      "ja": "パスワード未設定",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 954
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s079",
+      "zh": "密碼已設定。請完成 Email 驗證後，再使用 Email＋密碼登入；Google 登入不受影響。",
+      "en": "Your password is set. Verify your email before signing in with email and password. Google Sign-In is not affected.",
+      "ja": "パスワードは設定済みです。メールアドレスとパスワードでログインする前に、メール認証を完了してください。Google ログインには影響しません。",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 971
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s080",
+      "zh": "重新寄送驗證信",
+      "en": "Resend verification email",
+      "ja": "認証メールを再送",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 989
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s081",
+      "zh": "此帳號可以使用 Google 或 Email＋密碼登入。",
+      "en": "This account can sign in with Google or email and password.",
+      "ja": "このアカウントは、Google またはメールアドレスとパスワードでログインできます。",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 1001
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s082",
+      "zh": "此帳號可以使用 Email＋密碼登入。",
+      "en": "This account can sign in with email and password.",
+      "ja": "このアカウントは、メールアドレスとパスワードでログインできます。",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 1002
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s083",
+      "zh": "設定 Email 登入密碼",
+      "en": "Set Email Sign-In Password",
+      "ja": "メールログイン用パスワードを設定",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 1013
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s084",
+      "zh": "此 Email",
+      "en": "this email address",
+      "ja": "このメールアドレス",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 1075
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s085",
+      "zh": "設定後可使用 @email 與新密碼登入。",
+      "en": "After setup, you can sign in with @email and your new password.",
+      "ja": "設定後は、@email と新しいパスワードでログインできます。",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 1074
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s086",
+      "zh": "新密碼",
+      "en": "New password",
+      "ja": "新しいパスワード",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 1082
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s087",
+      "zh": "至少 6 位",
+      "en": "At least 6 characters",
+      "ja": "6文字以上",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 1083
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s088",
+      "zh": "請輸入新密碼",
+      "en": "Enter a new password",
+      "ja": "新しいパスワードを入力してください",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 1097
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s089",
+      "zh": "密碼至少需要 6 位",
+      "en": "Password must be at least 6 characters",
+      "ja": "パスワードは6文字以上で入力してください",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 1098
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s090",
+      "zh": "確認新密碼",
+      "en": "Confirm new password",
+      "ja": "新しいパスワードを確認",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 1108
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s091",
+      "zh": "請再次輸入新密碼",
+      "en": "Enter the new password again",
+      "ja": "新しいパスワードをもう一度入力してください",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 1122
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s092",
+      "zh": "兩次輸入的密碼不一致",
+      "en": "The passwords do not match",
+      "ja": "入力したパスワードが一致しません",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 1123
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s093",
+      "zh": "取消",
+      "en": "Cancel",
+      "ja": "キャンセル",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 1140
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s094",
+      "zh": "確認設定",
+      "en": "Set Password",
+      "ja": "パスワードを設定",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 1151
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s095",
+      "zh": "發生未預期的錯誤，請稍後再試。",
+      "en": "An unexpected error occurred. Try again later.",
+      "ja": "予期しないエラーが発生しました。しばらくしてからもう一度お試しください。",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 143
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s096",
+      "zh": "Email 格式不正確。",
+      "en": "Enter a valid email address.",
+      "ja": "有効なメールアドレスを入力してください。",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 147
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s097",
+      "zh": "請輸入密碼。",
+      "en": "Enter your password.",
+      "ja": "パスワードを入力してください。",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 148
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s098",
+      "zh": "密碼強度不足，請至少輸入 6 位。",
+      "en": "Password is too weak. Enter at least 6 characters.",
+      "ja": "パスワードが短すぎます。6文字以上で入力してください。",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 149
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s099",
+      "zh": "找不到目前登入的帳號。",
+      "en": "The signed-in account could not be found.",
+      "ja": "現在ログインしているアカウントが見つかりません。",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 150
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s100",
+      "zh": "這個帳號已經可以使用 Email 和密碼登入。",
+      "en": "This account can already sign in with email and password.",
+      "ja": "このアカウントはすでにメールアドレスとパスワードでログインできます。",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 151
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s101",
+      "zh": "這組登入資料已連結到其他帳號。",
+      "en": "These sign-in credentials are linked to another account.",
+      "ja": "このログイン情報は別のアカウントに連携されています。",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 152
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s102",
+      "zh": "為了帳號安全，請重新登入後再試一次。",
+      "en": "For account security, sign in again and retry.",
+      "ja": "アカウント保護のため、もう一度ログインしてからお試しください。",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 153
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s103",
+      "zh": "嘗試次數過多，請稍後再試。",
+      "en": "Too many attempts. Try again later.",
+      "ja": "試行回数が多すぎます。しばらくしてからもう一度お試しください。",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 154
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s104",
+      "zh": "網路連線失敗，請確認網路後再試。",
+      "en": "Network connection failed. Check your connection and retry.",
+      "ja": "ネットワーク接続に失敗しました。接続を確認してからもう一度お試しください。",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 155
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s105",
+      "zh": "Firebase 尚未啟用這種登入方式。",
+      "en": "This sign-in method is not enabled in Firebase.",
+      "ja": "このログイン方法はFirebaseで有効になっていません。",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 156
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s106",
+      "zh": "已取消 Google 身分確認。",
+      "en": "Google identity verification was canceled.",
+      "ja": "Googleでの本人確認をキャンセルしました。",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 157
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s107",
+      "zh": "請選擇目前登入的 Google 帳號。",
+      "en": "Select the Google account currently signed in.",
+      "ja": "現在ログインしているGoogleアカウントを選択してください。",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 158
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s108",
+      "zh": "帳號驗證失敗，請稍後再試。",
+      "en": "Account verification failed. Try again later.",
+      "ja": "アカウント認証に失敗しました。しばらくしてからもう一度お試しください。",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart",
+          "line": 159
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s109",
+      "zh": "Apple 登入已連結",
+      "en": "Apple Sign-In linked",
+      "ja": "Appleログイン連携済み",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart"
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s110",
+      "zh": "此帳號可以使用 Apple 登入，並會載入相同的使用者與遊戲資料。",
+      "en": "This account can sign in with Apple and load the same user and game data.",
+      "ja": "このアカウントはAppleでログインして、同じユーザー情報とゲームデータを読み込めます。",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart"
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s111",
+      "zh": "連結 Apple 登入後，之後可以用 Apple 登入目前這個帳號。",
+      "en": "Link Apple Sign-In to use Apple to access this account in the future.",
+      "ja": "Appleログインを連携すると、今後Appleを使って現在のアカウントにログインできます。",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart"
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s112",
+      "zh": "Apple 登入連結成功，Firebase UID 與原有資料維持不變。",
+      "en": "Apple Sign-In was linked successfully. Your Firebase UID and existing data are unchanged.",
+      "ja": "Appleログインを連携しました。Firebase UIDと既存データは変更されていません。",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart"
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s113",
+      "zh": "正在連結 Apple 登入…",
+      "en": "Linking Apple Sign-In…",
+      "ja": "Appleログインを連携しています…",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart"
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s114",
+      "zh": "Apple 登入",
+      "en": "Apple Sign-In",
+      "ja": "Appleログイン",
+      "occurrences": [
+        {
+          "file": "lib/view/lhf_setting_page.dart"
+        }
+      ]
+    },
+    {
+      "key": "view.lhf.setting.page.s119",
+      "zh": "刪除帳號",
+      "en": "Delete Account",
+      "ja": "アカウントを削除",
+      "occurrences": []
+    },
+    {
+      "key": "view.lhf.setting.page.s120",
+      "zh": "永久刪除帳號、個人資料與所有精靈收藏。此操作無法復原。",
+      "en": "Permanently delete your account, profile, and all collected spirits. This cannot be undone.",
+      "ja": "アカウント、プロフィール、精霊コレクションを完全に削除します。この操作は取り消せません。",
+      "occurrences": []
+    },
+    {
+      "key": "view.lhf.setting.page.s121",
+      "zh": "永久刪除我的帳號",
+      "en": "Permanently Delete My Account",
+      "ja": "アカウントを完全に削除",
+      "occurrences": []
+    },
+    {
+      "key": "view.lhf.setting.page.s122",
+      "zh": "確定要刪除帳號嗎？",
+      "en": "Delete your account?",
+      "ja": "アカウントを削除しますか？",
+      "occurrences": []
+    },
+    {
+      "key": "view.lhf.setting.page.s123",
+      "zh": "帳號、個人資料與遊戲收藏將永久刪除，且無法復原。",
+      "en": "Your account, profile, and game collection will be permanently deleted. This cannot be undone.",
+      "ja": "アカウント、プロフィール、ゲームのコレクションは完全に削除され、元に戻せません。",
+      "occurrences": []
+    },
+    {
+      "key": "view.lhf.setting.page.s124",
+      "zh": "請輸入目前密碼",
+      "en": "Current password",
+      "ja": "現在のパスワード",
+      "occurrences": []
+    },
+    {
+      "key": "view.lhf.setting.page.s125",
+      "zh": "取消",
+      "en": "Cancel",
+      "ja": "キャンセル",
+      "occurrences": []
+    },
+    {
+      "key": "view.lhf.setting.page.s126",
+      "zh": "確認刪除",
+      "en": "Delete Account",
+      "ja": "削除する",
+      "occurrences": []
+    },
+    {
+      "key": "view.lhf.setting.page.s127",
+      "zh": "無法刪除帳號，請重新登入後再試一次",
+      "en": "Could not delete the account. Sign in again and retry.",
+      "ja": "アカウントを削除できませんでした。再度ログインしてお試しください。",
+      "occurrences": []
+    },
+    {
+      "key": "view.lhf.setting.page.s128",
+      "zh": "密碼不正確，請重新輸入",
+      "en": "Incorrect password. Try again.",
+      "ja": "パスワードが正しくありません。",
+      "occurrences": []
+    },
+    {
       "key": "view.login.page.s001",
       "zh": "[LoginPage] 登入成功，正在獲取資料...",
-      "en": "",
-      "ja": "",
+      "en": "[LoginPage] Signed in; retrieving data...",
+      "ja": "[LoginPage] ログインしました。データを取得しています...",
       "occurrences": [
         {
           "file": "lib/view/login_page.dart",
@@ -1585,8 +3265,8 @@
     {
       "key": "view.login.page.s003",
       "zh": "[LoginPage] 登入出錯: $e",
-      "en": "",
-      "ja": "",
+      "en": "[LoginPage] Sign-in error: $e",
+      "ja": "[LoginPage] ログインエラー: $e",
       "occurrences": [
         {
           "file": "lib/view/login_page.dart",
@@ -1621,8 +3301,8 @@
     {
       "key": "view.login.page.s006",
       "zh": "[LoginPage] Google 登入出錯: $e",
-      "en": "",
-      "ja": "",
+      "en": "[LoginPage] Google Sign-In error: $e",
+      "ja": "[LoginPage] Googleログインエラー: $e",
       "occurrences": [
         {
           "file": "lib/view/login_page.dart",
@@ -1643,6 +3323,42 @@
       ]
     },
     {
+      "key": "view.login.page.s008",
+      "zh": "請先到 @email 完成 Email 驗證；驗證信已重新寄出。",
+      "en": "Verify your email at @email before signing in. A new verification email has been sent.",
+      "ja": "@emailでメール認証を完了してからログインしてください。確認メールを再送しました。",
+      "occurrences": [
+        {
+          "file": "lib/view/login_page.dart"
+        }
+      ]
+    },
+    {
+      "key": "view.login.page.s009",
+      "zh": "你的信箱",
+      "en": "your email address",
+      "ja": "メールアドレス",
+      "occurrences": [
+        {
+          "file": "lib/view/login_page.dart"
+        },
+        {
+          "file": "lib/view/register_page.dart"
+        }
+      ]
+    },
+    {
+      "key": "view.login.page.s010",
+      "zh": "如果此 Email 已註冊，密碼重設信將會寄到信箱。",
+      "en": "If this email is registered, a password reset email will be sent.",
+      "ja": "このメールアドレスが登録済みの場合、パスワード再設定メールが送信されます。",
+      "occurrences": [
+        {
+          "file": "lib/view/login_page.dart"
+        }
+      ]
+    },
+    {
       "key": "view.map.suggestions.s001",
       "zh": "中大十景",
       "en": "Top 10 NCU Landmarks",
@@ -1657,8 +3373,8 @@
     {
       "key": "view.map.suggestions.s004",
       "zh": "[Debug][MapSuggestionsPage] 載入地景資料失敗: $error",
-      "en": "",
-      "ja": "",
+      "en": "[Debug][MapSuggestionsPage] Failed to load location data: $error",
+      "ja": "[Debug][MapSuggestionsPage] 景観データを読み込めませんでした: $error",
       "occurrences": [
         {
           "file": "lib/view/map_suggestions.dart",
@@ -1705,8 +3421,8 @@
     {
       "key": "view.nearby.monsters.display.s001",
       "zh": "[MonsterMarkers] 動畫精靈圖載入失敗: $animatedPath, $error",
-      "en": "",
-      "ja": "",
+      "en": "[MonsterMarkers] Failed to load animated spirit image: $animatedPath, $error",
+      "ja": "[MonsterMarkers] 精霊のアニメーション画像を読み込めませんでした: $animatedPath, $error",
       "occurrences": [
         {
           "file": "lib/view/nearby_monsters_display.dart",
@@ -1717,8 +3433,8 @@
     {
       "key": "view.nearby.monsters.display.s002",
       "zh": "[MonsterMarkers] 靜態精靈圖載入失敗: ${monster.imageURL}, $error",
-      "en": "",
-      "ja": "",
+      "en": "[MonsterMarkers] Failed to load static spirit image: ${monster.imageURL}, $error",
+      "ja": "[MonsterMarkers] 精霊の静止画像を読み込めませんでした: ${monster.imageURL}, $error",
       "occurrences": [
         {
           "file": "lib/view/nearby_monsters_display.dart",
@@ -1729,8 +3445,8 @@
     {
       "key": "view.nearby.monsters.display.s003",
       "zh": "無法將精靈圖片轉成 PNG bytes",
-      "en": "",
-      "ja": "",
+      "en": "Unable to convert the spirit image to PNG bytes",
+      "ja": "精霊画像をPNGバイト列に変換できません",
       "occurrences": [
         {
           "file": "lib/view/nearby_monsters_display.dart",
@@ -1920,9 +3636,9 @@
     },
     {
       "key": "view.photo.preview.s002",
-      "zh": "儲存失敗: $e",
-      "en": "Failed to save: $e",
-      "ja": "保存に失敗しました: $e",
+      "zh": "儲存失敗：@error",
+      "en": "Save failed: @error",
+      "ja": "保存に失敗しました：@error",
       "occurrences": [
         {
           "file": "lib/view/photo_preview.dart",
@@ -1967,6 +3683,54 @@
       ]
     },
     {
+      "key": "view.photo.preview.s006",
+      "zh": "需要相簿權限",
+      "en": "Photo Permission Required",
+      "ja": "写真へのアクセスが必要です",
+      "occurrences": [
+        {
+          "file": "lib/view/photo_preview.dart",
+          "line": 0
+        }
+      ]
+    },
+    {
+      "key": "view.photo.preview.s007",
+      "zh": "需要相簿權限才能儲存照片。請到系統設定開啟相簿存取權後再試一次。",
+      "en": "Photo access is required to save photos. Enable access in System Settings and try again.",
+      "ja": "写真を保存するには写真へのアクセスが必要です。システム設定でアクセスを許可してから、もう一度お試しください。",
+      "occurrences": [
+        {
+          "file": "lib/view/photo_preview.dart",
+          "line": 0
+        }
+      ]
+    },
+    {
+      "key": "view.photo.preview.s008",
+      "zh": "稍後再說",
+      "en": "Not Now",
+      "ja": "後で",
+      "occurrences": [
+        {
+          "file": "lib/view/photo_preview.dart",
+          "line": 0
+        }
+      ]
+    },
+    {
+      "key": "view.photo.preview.s009",
+      "zh": "開啟設定",
+      "en": "Open Settings",
+      "ja": "設定を開く",
+      "occurrences": [
+        {
+          "file": "lib/view/photo_preview.dart",
+          "line": 0
+        }
+      ]
+    },
+    {
       "key": "view.real.ar.view.s001",
       "zh": "放置精靈",
       "en": "Place Spirit",
@@ -1993,8 +3757,8 @@
     {
       "key": "view.real.ar.view.s005",
       "zh": "💡 已切換精靈模型為: $selectedMonsterUrl",
-      "en": "",
-      "ja": "",
+      "en": "💡 Switched spirit model to: $selectedMonsterUrl",
+      "ja": "💡 精霊モデルを切り替えました: $selectedMonsterUrl",
       "occurrences": [
         {
           "file": "lib/view/real_ar_view.dart",
@@ -2053,8 +3817,8 @@
     {
       "key": "view.register.page.s004",
       "zh": "[RegisterPage] 註冊出錯: $e",
-      "en": "",
-      "ja": "",
+      "en": "[RegisterPage] Registration error: $e",
+      "ja": "[RegisterPage] 登録エラー: $e",
       "occurrences": [
         {
           "file": "lib/view/register_page.dart",
@@ -2101,8 +3865,8 @@
     {
       "key": "view.register.page.s008",
       "zh": "[RegisterPage] Google 登入失敗: $e",
-      "en": "",
-      "ja": "",
+      "en": "[RegisterPage] Google Sign-In failed: $e",
+      "ja": "[RegisterPage] Googleログインに失敗しました: $e",
       "occurrences": [
         {
           "file": "lib/view/register_page.dart",
@@ -2123,10 +3887,21 @@
       ]
     },
     {
+      "key": "view.register.page.s010",
+      "zh": "Apple 登入成功！歡迎加入冒險之旅",
+      "en": "Apple Sign-In successful! Welcome to the adventure!",
+      "ja": "Appleでのログインが完了しました！冒険の世界へようこそ！",
+      "occurrences": [
+        {
+          "file": "lib/view/register_page.dart"
+        }
+      ]
+    },
+    {
       "key": "view.user.protocol.s002",
-      "zh": "暫時替代頁面",
-      "en": "Temporary Page",
-      "ja": "仮ページ",
+      "zh": "法律文件與資料權利",
+      "en": "Legal Documents & Data Rights",
+      "ja": "法的文書とデータに関する権利",
       "occurrences": [
         {
           "file": "lib/view/user_protocol.dart",
@@ -2136,9 +3911,9 @@
     },
     {
       "key": "view.user.protocol.s003",
-      "zh": "協議內容準備中",
-      "en": "Agreement Coming Soon",
-      "ja": "利用規約を準備中",
+      "zh": "透明、安心地使用校園導覽服務",
+      "en": "Explore the campus with clarity and confidence",
+      "ja": "安心してキャンパスガイドを利用するために",
       "occurrences": [
         {
           "file": "lib/view/user_protocol.dart",
@@ -2148,9 +3923,9 @@
     },
     {
       "key": "view.user.protocol.s004",
-      "zh": "這裡之後會放正式的使用者協議、服務條款與相關說明。",
-      "en": "The official user agreement, terms of service, and related information will appear here.",
-      "ja": "正式な利用規約、サービス条件、および関連情報は今後ここに掲載されます。",
+      "zh": "請在使用服務前閱讀下列文件。內容說明服務規則、資料處理方式、帳號刪除流程及您的權利。",
+      "en": "Please review these documents before using the service. They explain the service rules, data practices, account deletion, and your rights.",
+      "ja": "サービスを利用する前に、以下の文書をご確認ください。利用規則、データの取扱い、アカウント削除、お客様の権利について説明しています。",
       "occurrences": [
         {
           "file": "lib/view/user_protocol.dart",
@@ -2160,9 +3935,9 @@
     },
     {
       "key": "view.user.protocol.s005",
-      "zh": "\\n\\n目前這是一個暫時性的替代頁面，用來先完成設定頁的跳轉流程與互動測試。",
-      "en": "\\n\\nThis is currently a temporary page used to complete and test navigation from the settings screen.",
-      "ja": "\\n\\n現在は、設定画面からの遷移と操作を確認するための仮ページです。",
+      "zh": "使用者服務協議",
+      "en": "Terms of Service",
+      "ja": "利用規約",
       "occurrences": [
         {
           "file": "lib/view/user_protocol.dart",
@@ -2172,9 +3947,9 @@
     },
     {
       "key": "view.user.protocol.s006",
-      "zh": "\\n\\n之後只要把這裡的內容替換成正式協議即可，不需要再修改設定頁按鈕的跳轉邏輯。",
-      "en": "\\n\\nThe official agreement can later replace this content without changing the settings-page navigation.",
-      "ja": "\\n\\n今後ここを正式な規約に置き換えるだけで、設定画面の遷移処理を変更する必要はありません。",
+      "zh": "說明帳號責任、服務使用規則、智慧財產權、安全注意事項、服務變更及責任限制。",
+      "en": "Covers account responsibilities, acceptable use, intellectual property, safety, service changes, and limitations of liability.",
+      "ja": "アカウントの責任、利用規則、知的財産権、安全上の注意、サービス変更、責任制限について説明します。",
       "occurrences": [
         {
           "file": "lib/view/user_protocol.dart",
@@ -2184,9 +3959,9 @@
     },
     {
       "key": "view.user.protocol.s007",
-      "zh": "目前可先確認",
-      "en": "For now, you can confirm that",
-      "ja": "現在確認できること",
+      "zh": "隱私權政策",
+      "en": "Privacy Policy",
+      "ja": "プライバシーポリシー",
       "occurrences": [
         {
           "file": "lib/view/user_protocol.dart",
@@ -2196,9 +3971,9 @@
     },
     {
       "key": "view.user.protocol.s008",
-      "zh": "按鈕按下時會先縮小，放開後回彈再跳轉。",
-      "en": "The button shrinks when pressed, then bounces back before navigating.",
-      "ja": "ボタンを押すと一度縮小し、指を離すと元に戻ってから画面が切り替わります。",
+      "zh": "說明帳號、精確位置、相機與照片、NFC／藍牙權限、Firebase 與 Google 服務、保存期限及資料刪除。",
+      "en": "Explains account data, precise location, camera and photos, NFC/Bluetooth permissions, Firebase and Google services, retention, and deletion.",
+      "ja": "アカウント情報、正確な位置情報、カメラと写真、NFC／Bluetooth権限、FirebaseとGoogleのサービス、保存期間、削除について説明します。",
       "occurrences": [
         {
           "file": "lib/view/user_protocol.dart",
@@ -2208,9 +3983,9 @@
     },
     {
       "key": "view.user.protocol.s009",
-      "zh": "返回設定頁後，不需要額外處理狀態。",
-      "en": "No additional state handling is required when returning to Settings.",
-      "ja": "設定画面へ戻る際に、追加の状態処理は必要ありません。",
+      "zh": "營運單位：中央大學校園導覽團隊｜聯絡信箱：ideasky716@gmail.com",
+      "en": "Operator: NCU Campus Tour Team | Contact: ideasky716@gmail.com",
+      "ja": "運営：中央大学キャンパスガイドチーム｜連絡先：ideasky716@gmail.com",
       "occurrences": [
         {
           "file": "lib/view/user_protocol.dart",
@@ -2220,9 +3995,9 @@
     },
     {
       "key": "view.user.protocol.s010",
-      "zh": "之後可直接在這個檔案補上正式協議內容。",
-      "en": "The official agreement can be added directly to this file later.",
-      "ja": "正式な規約は、今後このファイルに直接追加できます。",
+      "zh": "生效及最後更新日期：2026 年 8 月 16 日",
+      "en": "Effective and last updated: August 16, 2026",
+      "ja": "施行・最終更新日：2026年8月16日",
       "occurrences": [
         {
           "file": "lib/view/user_protocol.dart",
@@ -2245,8 +4020,8 @@
     {
       "key": "widgets.ar.control.ar.control.view.s002",
       "zh": "💡 模型已切換至: $newUrl",
-      "en": "",
-      "ja": "",
+      "en": "💡 Model switched to: $newUrl",
+      "ja": "💡 モデルを切り替えました: $newUrl",
       "occurrences": [
         {
           "file": "lib/widgets/ar_control/ar_control_view.dart",
@@ -2357,8 +4132,8 @@
     {
       "key": "widgets.common.user.head.s001",
       "zh": "[UserHead] SVG 載入失敗: $error",
-      "en": "",
-      "ja": "",
+      "en": "[UserHead] Failed to load SVG: $error",
+      "ja": "[UserHead] SVGを読み込めませんでした: $error",
       "occurrences": [
         {
           "file": "lib/widgets/common/user_head.dart",
@@ -2369,8 +4144,8 @@
     {
       "key": "widgets.common.user.head.s002",
       "zh": "[UserHead] 圖片載入失敗: $error",
-      "en": "",
-      "ja": "",
+      "en": "[UserHead] Failed to load image: $error",
+      "ja": "[UserHead] 画像を読み込めませんでした: $error",
       "occurrences": [
         {
           "file": "lib/widgets/common/user_head.dart",
@@ -2517,8 +4292,8 @@
     {
       "key": "widgets.encyclopedia.elf.hero.section.s001",
       "zh": "圖片載入失敗路徑: $imagePath",
-      "en": "",
-      "ja": "",
+      "en": "Failed image path: $imagePath",
+      "ja": "画像の読み込みに失敗したパス: $imagePath",
       "occurrences": [
         {
           "file": "lib/widgets/encyclopedia/elf_hero_section.dart",
@@ -2674,7 +4449,7 @@
       "key": "widgets.game.catching.pages.catching.faild.s002",
       "zh": "失敗",
       "en": "Failed",
-      "ja": "失敗",
+      "ja": "チャレンジ失敗",
       "occurrences": [
         {
           "file": "lib/widgets/game/catching_pages/catching_faild.dart",
@@ -2930,7 +4705,7 @@
       "key": "widgets.game.catching.pages.default.plot.s007",
       "zh": "魔法陣",
       "en": "Magic Circle",
-      "ja": "魔法陣",
+      "ja": "魔法の陣",
       "occurrences": [
         {
           "file": "lib/widgets/game/catching_pages/default_plot.dart",
@@ -2954,7 +4729,7 @@
       "key": "widgets.game.catching.pages.default.plot.s009",
       "zh": "（怒）",
       "en": "(Angry)",
-      "ja": "（怒）",
+      "ja": "（怒っている）",
       "occurrences": [
         {
           "file": "lib/widgets/game/catching_pages/default_plot.dart",
@@ -3119,6 +4894,125 @@
       ]
     },
     {
+      "key": "widgets.game.catching.pages.graphics.text.level.page.s008",
+      "zh": "劇情回顧",
+      "en": "Story Review",
+      "ja": "物語を振り返る",
+      "occurrences": []
+    },
+    {
+      "key": "widgets.game.catching.pages.graphics.text.level.page.s009",
+      "zh": "關閉劇情回顧",
+      "en": "Close Story Review",
+      "ja": "物語を閉じる",
+      "occurrences": []
+    },
+    {
+      "key": "widgets.game.catching.pages.monster.trace.plot.s001",
+      "zh": "你",
+      "en": "You",
+      "ja": "あなた",
+      "occurrences": []
+    },
+    {
+      "key": "widgets.game.catching.pages.monster.trace.plot.s002",
+      "zh": "這裡好像留下了一些奇怪的痕跡……",
+      "en": "It looks like something left strange tracks here...",
+      "ja": "ここに何か奇妙な痕跡が残されている……",
+      "occurrences": []
+    },
+    {
+      "key": "widgets.game.catching.pages.monster.trace.plot.s003",
+      "zh": "（你蹲下來仔細觀察，發現附近留有特殊的線索。）",
+      "en": "(You crouch down for a closer look and discover unusual clues nearby.)",
+      "ja": "（しゃがんで注意深く観察すると、近くに特別な手がかりが残されていた。）",
+      "occurrences": []
+    },
+    {
+      "key": "widgets.game.catching.pages.monster.trace.plot.s004",
+      "zh": "這應該就是那隻精靈留下的蹤跡。",
+      "en": "These must be the tracks left by that spirit.",
+      "ja": "これは、あの精霊が残した痕跡に違いない。",
+      "occurrences": []
+    },
+    {
+      "key": "widgets.game.catching.pages.monster.trace.plot.s005",
+      "zh": "（你將發現的蹤跡收進了蹤跡收集罐。）",
+      "en": "(You place the tracks you found into the trace collection jar.)",
+      "ja": "（見つけた痕跡を痕跡収集びんに収めた。）",
+      "occurrences": []
+    },
+    {
+      "key": "widgets.game.catching.pages.monster.trace.plot.s006",
+      "zh": "（繼續尋找下一個蹤跡吧。）",
+      "en": "(Keep searching for the next trace.)",
+      "ja": "（次の痕跡を探し続けよう。）",
+      "occurrences": []
+    },
+    {
+      "key": "widgets.game.catching.pages.monster.trace.plot.s007",
+      "zh": "精靈經由象群雕塑，匆匆跑向黑盒子，路途中似乎有什麼散發著魔力。",
+      "en": "The spirit hurried past the Elephant Herd sculpture toward the Black Box. Something along the way seemed to radiate magic.",
+      "ja": "精霊は象群の彫刻を通り過ぎ、黒い箱へと急いでいきました。その途中で何かが魔力を放っているようです。",
+      "occurrences": []
+    },
+    {
+      "key": "widgets.game.catching.pages.monster.trace.plot.s008",
+      "zh": "沒發現蹤跡嗎？或許可以試試穿過拱門，看看會不會有什麼發現。",
+      "en": "Still no trace? Try passing through the archway and see what you discover.",
+      "ja": "まだ痕跡が見つかりませんか？アーチをくぐって、何か見つからないか探してみましょう。",
+      "occurrences": []
+    },
+    {
+      "key": "widgets.game.catching.pages.monster.trace.plot.s009",
+      "zh": "精靈似乎曾駐足 DNA 觀賞許久，才又繼續前行，或許可以試著在附近找找看。",
+      "en": "The spirit once stopped to admire the DNA sculpture for a long time before moving on. Try searching nearby.",
+      "ja": "精霊は DNA の彫刻を長い間眺めてから先へ進んだようです。近くを探してみましょう。",
+      "occurrences": []
+    },
+    {
+      "key": "widgets.game.catching.pages.monster.trace.plot.s010",
+      "zh": "這道蹤跡指向照片中的位置，前往附近仔細調查吧。",
+      "en": "This trace points toward the place in the photo. Search the area carefully.",
+      "ja": "この痕跡は写真の場所へ続いているようです。近くを注意深く調べてみましょう。",
+      "occurrences": []
+    },
+    {
+      "key": "widgets.game.catching.pages.monster.trace.plot.s011",
+      "zh": "雲端上的松果似乎留有精靈的特殊氣息。",
+      "en": "The pinecone in the clouds seems to carry a spirit's unusual presence.",
+      "ja": "雲の上の松ぼっくりに、精霊の特別な気配が残っているようです。",
+      "occurrences": []
+    },
+    {
+      "key": "widgets.game.catching.pages.monster.trace.plot.s012",
+      "zh": "這道蹤跡指向照片中的位置，前往附近仔細調查吧。",
+      "en": "This trace points toward the place in the photo. Search the area carefully.",
+      "ja": "この痕跡は写真の場所へ続いているようです。近くを注意深く調べてみましょう。",
+      "occurrences": []
+    },
+    {
+      "key": "widgets.game.catching.pages.monster.trace.plot.s013",
+      "zh": "站在疑問最深處，當屏風完全消失於視野時，向水面反射，疑問自會明朗。",
+      "en": "Stand at the heart of the question. When the screen disappears completely from view, look toward its reflection on the water and the answer will become clear.",
+      "ja": "問いの最も深い場所に立ち、屏風が視界から完全に消えたとき、水面に映る姿を見れば答えが明らかになるでしょう。",
+      "occurrences": []
+    },
+    {
+      "key": "widgets.game.catching.pages.monster.trace.plot.s014",
+      "zh": "視野中，是不是有一朵雲特別不一樣？",
+      "en": "Does one of the clouds in your field of view look different from the others?",
+      "ja": "視野の中に、ほかとは少し違う雲がありませんか？",
+      "occurrences": []
+    },
+    {
+      "key": "widgets.game.catching.pages.monster.trace.plot.s015",
+      "zh": "精靈似乎曾望著裝置，期待能看到代表中央大學的「中」字出現。",
+      "en": "The spirit once gazed at the installation, waiting for the Chinese character “中,” representing National Central University, to appear.",
+      "ja": "精霊は装置を見つめ、中央大学を表す「中」の文字が現れるのを待っていたようです。",
+      "occurrences": []
+    },
+    {
       "key": "widgets.game.catching.pages.plot.level.s001",
       "zh": "你找到了一塊魔法石",
       "en": "You found a magic stone.",
@@ -3253,8 +5147,8 @@
     {
       "key": "widgets.game.game.map.s003",
       "zh": "[Debug][GameMap][Error] 載入資源失敗: $e",
-      "en": "",
-      "ja": "",
+      "en": "[Debug][GameMap][Error] Failed to load resources: $e",
+      "ja": "[Debug][GameMap][Error] リソースを読み込めませんでした: $e",
       "occurrences": [
         {
           "file": "lib/widgets/game/game_map.dart",
@@ -3265,8 +5159,8 @@
     {
       "key": "widgets.game.game.map.s004",
       "zh": "[Debug][GameMap]:使用固定測試定位 ${_fixedTestLocation.latitude}, ${_fixedTestLocation.longitude}",
-      "en": "",
-      "ja": "",
+      "en": "[Debug][GameMap] Using fixed test location: ${_fixedTestLocation.latitude}, ${_fixedTestLocation.longitude}",
+      "ja": "[Debug][GameMap] 固定テスト位置を使用します: ${_fixedTestLocation.latitude}, ${_fixedTestLocation.longitude}",
       "occurrences": [
         {
           "file": "lib/widgets/game/game_map.dart",
@@ -3277,8 +5171,8 @@
     {
       "key": "widgets.game.game.map.s005",
       "zh": "[Debug][GameMap]:位置更新: ${position.latitude}, ${position.longitude}",
-      "en": "",
-      "ja": "",
+      "en": "[Debug][GameMap] Location updated: ${position.latitude}, ${position.longitude}",
+      "ja": "[Debug][GameMap] 位置を更新しました: ${position.latitude}, ${position.longitude}",
       "occurrences": [
         {
           "file": "lib/widgets/game/game_map.dart",
@@ -3289,8 +5183,8 @@
     {
       "key": "widgets.game.game.map.s006",
       "zh": "[Debug][GameMap]:已開始監聽位置變化",
-      "en": "",
-      "ja": "",
+      "en": "[Debug][GameMap] Started listening for location changes",
+      "ja": "[Debug][GameMap] 位置変更の監視を開始しました",
       "occurrences": [
         {
           "file": "lib/widgets/game/game_map.dart",
@@ -3301,8 +5195,8 @@
     {
       "key": "widgets.game.game.map.s007",
       "zh": "[Debug][GameMap]:_checkPermissionAndListen 例外：$e",
-      "en": "",
-      "ja": "",
+      "en": "[Debug][GameMap] _checkPermissionAndListen exception: $e",
+      "ja": "[Debug][GameMap] _checkPermissionAndListen例外: $e",
       "occurrences": [
         {
           "file": "lib/widgets/game/game_map.dart",
@@ -3395,6 +5289,18 @@
       ]
     },
     {
+      "key": "widgets.game.game.map.s017",
+      "zh": "超出探索範圍！\n返回校園即可繼續冒險",
+      "en": "Out of exploration range!\nReturn to campus to continue your adventure",
+      "ja": "探索範囲外です！\nキャンパスに戻ると冒険を続けられます",
+      "occurrences": [
+        {
+          "file": "lib/widgets/game/game_map.dart",
+          "line": 593
+        }
+      ]
+    },
+    {
       "key": "widgets.game.system.menu.s002",
       "zh": "相機",
       "en": "Camera",
@@ -3410,11 +5316,176 @@
       "key": "widgets.game.system.menu.s003",
       "zh": "設定",
       "en": "Settings",
-      "ja": "設定",
+      "ja": "環境設定",
       "occurrences": [
         {
           "file": "lib/widgets/game/system_menu.dart",
           "line": 49
+        }
+      ]
+    },
+    {
+      "key": "widgets.login.forgot.password.dialog.s001",
+      "zh": "忘記密碼",
+      "en": "Forgot Password",
+      "ja": "パスワードを忘れた場合",
+      "occurrences": [
+        {
+          "file": "lib/widgets/login/forgot_password_dialog.dart"
+        }
+      ]
+    },
+    {
+      "key": "widgets.login.forgot.password.dialog.s002",
+      "zh": "Email",
+      "en": "Email",
+      "ja": "メールアドレス",
+      "occurrences": [
+        {
+          "file": "lib/widgets/login/forgot_password_dialog.dart"
+        }
+      ]
+    },
+    {
+      "key": "widgets.login.forgot.password.dialog.s003",
+      "zh": "請輸入註冊時使用的 Email",
+      "en": "Enter the email address used to register",
+      "ja": "登録時に使用したメールアドレスを入力してください",
+      "occurrences": [
+        {
+          "file": "lib/widgets/login/forgot_password_dialog.dart"
+        }
+      ]
+    },
+    {
+      "key": "widgets.login.forgot.password.dialog.s004",
+      "zh": "請輸入 Email",
+      "en": "Enter your email address",
+      "ja": "メールアドレスを入力してください",
+      "occurrences": [
+        {
+          "file": "lib/widgets/login/forgot_password_dialog.dart"
+        }
+      ]
+    },
+    {
+      "key": "widgets.login.forgot.password.dialog.s005",
+      "zh": "Email 格式不正確",
+      "en": "Enter a valid email address",
+      "ja": "有効なメールアドレスを入力してください",
+      "occurrences": [
+        {
+          "file": "lib/widgets/login/forgot_password_dialog.dart"
+        }
+      ]
+    },
+    {
+      "key": "widgets.login.forgot.password.dialog.s006",
+      "zh": "取消",
+      "en": "Cancel",
+      "ja": "キャンセル",
+      "occurrences": [
+        {
+          "file": "lib/widgets/login/forgot_password_dialog.dart"
+        }
+      ]
+    },
+    {
+      "key": "widgets.login.forgot.password.dialog.s007",
+      "zh": "寄送重設信",
+      "en": "Send Reset Email",
+      "ja": "再設定メールを送信",
+      "occurrences": [
+        {
+          "file": "lib/widgets/login/forgot_password_dialog.dart"
+        }
+      ]
+    },
+    {
+      "key": "widgets.login.legal.document.links.s001",
+      "zh": "無法開啟文件，請稍後再試",
+      "en": "Unable to open the document. Please try again later.",
+      "ja": "書類を開けませんでした。しばらくしてからもう一度お試しください。",
+      "occurrences": [
+        {
+          "file": "lib/widgets/login/legal_document_links.dart",
+          "line": 0
+        }
+      ]
+    },
+    {
+      "key": "widgets.login.legal.document.links.s002",
+      "zh": "使用者服務協議",
+      "en": "Terms of Service",
+      "ja": "利用規約",
+      "occurrences": [
+        {
+          "file": "lib/widgets/login/legal_document_links.dart",
+          "line": 0
+        }
+      ]
+    },
+    {
+      "key": "widgets.login.legal.document.links.s003",
+      "zh": "隱私權政策",
+      "en": "Privacy Policy",
+      "ja": "プライバシーポリシー",
+      "occurrences": [
+        {
+          "file": "lib/widgets/login/legal_document_links.dart",
+          "line": 0
+        }
+      ]
+    },
+    {
+      "key": "widgets.login.legal.document.links.s004",
+      "zh": "法律文件與支援",
+      "en": "Legal documents and support",
+      "ja": "法的文書とサポート",
+      "occurrences": [
+        {
+          "file": "lib/widgets/login/legal_document_links.dart",
+          "line": 0
+        }
+      ]
+    },
+    {
+      "key": "widgets.login.legal.document.links.s005",
+      "zh": "支援",
+      "en": "Support",
+      "ja": "サポート",
+      "occurrences": [
+        {
+          "file": "lib/widgets/login/legal_document_links.dart",
+          "line": 0
+        }
+      ]
+    },
+    {
+      "key": "widgets.login.social.buttons.s001",
+      "zh": "使用 Google 登入",
+      "en": "Sign in with Google",
+      "ja": "Googleでログイン",
+      "occurrences": [
+        {
+          "file": "lib/widgets/login/wood_login_panel.dart"
+        },
+        {
+          "file": "lib/widgets/login/wood_register_panel.dart"
+        }
+      ]
+    },
+    {
+      "key": "widgets.login.social.buttons.s002",
+      "zh": "使用 Apple 登入",
+      "en": "Sign in with Apple",
+      "ja": "Appleでサインイン",
+      "occurrences": [
+        {
+          "file": "lib/widgets/login/wood_login_panel.dart"
+        },
+        {
+          "file": "lib/widgets/login/wood_register_panel.dart"
         }
       ]
     },
@@ -3821,8 +5892,8 @@
     {
       "key": "widgets.sections.start.menu.group.s001",
       "zh": "❌ [StartMenuGroup] 圖片載入失敗: $error",
-      "en": "",
-      "ja": "",
+      "en": "❌ [StartMenuGroup] Failed to load image: $error",
+      "ja": "❌ [StartMenuGroup] 画像を読み込めませんでした: $error",
       "occurrences": [
         {
           "file": "lib/widgets/sections/start_menu_group.dart",
@@ -3853,444 +5924,6 @@
           "line": 54
         }
       ]
-    },
-    {
-      "key": "view.aed.map.s001", "zh": "請先開啟定位服務，才能顯示目前位置。", "en": "Turn on location services to show your current position.", "ja": "現在地を表示するには、位置情報サービスをオンにしてください。", "occurrences": [{"file": "lib/view/AED_map.dart", "line": 69}]
-    },
-    {
-      "key": "view.aed.map.s002", "zh": "未取得定位權限，無法顯示目前位置。", "en": "Location permission was not granted, so your current position cannot be shown.", "ja": "位置情報の権限が許可されていないため、現在地を表示できません。", "occurrences": [{"file": "lib/view/AED_map.dart", "line": 79}]
-    },
-    {
-      "key": "view.aed.map.s003", "zh": "定位權限已被永久拒絕，請到系統設定開啟。", "en": "Location permission was permanently denied. Enable it in system settings.", "ja": "位置情報の権限が永続的に拒否されています。システム設定で許可してください。", "occurrences": [{"file": "lib/view/AED_map.dart", "line": 84}]
-    },
-    {
-      "key": "view.aed.map.s004", "zh": "取得目前位置失敗：@error", "en": "Failed to get your current location: @error", "ja": "現在地の取得に失敗しました: @error", "occurrences": [{"file": "lib/view/AED_map.dart", "line": 101}]
-    },
-    {
-      "key": "view.aed.map.s005", "zh": "定位更新失敗：@error", "en": "Failed to update your location: @error", "ja": "位置情報の更新に失敗しました: @error", "occurrences": [{"file": "lib/view/AED_map.dart", "line": 119}]
-    },
-    {
-      "key": "view.aed.map.s006", "zh": "回報緊急狀況", "en": "Report an Emergency", "ja": "緊急状況を通報", "occurrences": [{"file": "lib/view/AED_map.dart", "line": 148}]
-    },
-    {
-      "key": "view.aed.map.s007", "zh": "請簡單描述發生什麼事、受傷人數與現場狀況……", "en": "Briefly describe what happened, the number of injured people, and the situation at the scene...", "ja": "何が起きたか、負傷者の人数、現場の状況を簡潔に記入してください…", "occurrences": [{"file": "lib/view/AED_map.dart", "line": 156}]
-    },
-    {
-      "key": "view.aed.map.s008", "zh": "取消", "en": "Cancel", "ja": "キャンセル", "occurrences": [{"file": "lib/view/AED_map.dart", "line": 163}]
-    },
-    {
-      "key": "view.aed.map.s009", "zh": "開啟郵件", "en": "Open Email", "ja": "メールを開く", "occurrences": [{"file": "lib/view/AED_map.dart", "line": 171}]
-    },
-    {
-      "key": "view.aed.map.s010", "zh": "無法取得目前位置", "en": "Current location unavailable", "ja": "現在地を取得できません", "occurrences": [{"file": "lib/view/AED_map.dart", "line": 182}]
-    },
-    {
-      "key": "view.aed.map.s011", "zh": "緯度", "en": "Latitude", "ja": "緯度", "occurrences": [{"file": "lib/view/AED_map.dart", "line": 183}]
-    },
-    {
-      "key": "view.aed.map.s012", "zh": "經度", "en": "Longitude", "ja": "経度", "occurrences": [{"file": "lib/view/AED_map.dart", "line": 184}]
-    },
-    {
-      "key": "view.aed.map.s013", "zh": "Google Maps", "en": "Google Maps", "ja": "Google Maps", "occurrences": [{"file": "lib/view/AED_map.dart", "line": 185}]
-    },
-    {
-      "key": "view.aed.map.s014", "zh": "緊急狀況描述：\n@description\n\n目前位置：\n@location\n\n回報時間：@timestamp\n\n此信件由校園安全地圖產生，寄出前請再確認內容。", "en": "Emergency description:\n@description\n\nCurrent location:\n@location\n\nReport time: @timestamp\n\nThis email was generated by the Campus Safety Map. Please verify the content before sending.", "ja": "緊急状況の説明:\n@description\n\n現在地:\n@location\n\n通報時刻: @timestamp\n\nこのメールはキャンパス安全マップで作成されました。送信前に内容を確認してください。", "occurrences": [{"file": "lib/view/AED_map.dart", "line": 189}]
-    },
-    {
-      "key": "view.aed.map.s015", "zh": "【校園緊急通報】需要協助", "en": "[Campus Emergency Report] Assistance Needed", "ja": "【キャンパス緊急通報】支援が必要です", "occurrences": [{"file": "lib/view/AED_map.dart", "line": 195}]
-    },
-    {
-      "key": "view.aed.map.s016", "zh": "無法開啟郵件 App，請直接寄信至 @email。", "en": "Unable to open an email app. Send the message directly to @email.", "ja": "メールアプリを開けません。@email へ直接送信してください。", "occurrences": [{"file": "lib/view/AED_map.dart", "line": 199}]
-    },
-    {
-      "key": "view.aed.map.s017", "zh": "無法開啟撥號畫面，請手動撥打 03-2804814。", "en": "Unable to open the dialer. Call 03-2804814 manually.", "ja": "電話アプリを開けません。03-2804814 に直接電話してください。", "occurrences": [{"file": "lib/view/AED_map.dart", "line": 225}]
-    },
-    {
-      "key": "view.aed.map.s018", "zh": "防災地圖載入失敗：@error", "en": "Failed to load the disaster prevention map: @error", "ja": "防災マップの読み込みに失敗しました: @error", "occurrences": [{"file": "lib/view/AED_map.dart", "line": 303}]
-    },
-    {
-      "key": "view.aed.map.s019", "zh": "寄送位置與緊急狀況", "en": "Send your location and emergency details", "ja": "位置情報と緊急状況を送信", "occurrences": [{"file": "lib/view/AED_map.dart", "line": 357}]
-    },
-    {
-      "key": "view.aed.map.s020", "zh": "撥打衛保組 03-2804814", "en": "Call the Health Center at 03-2804814", "ja": "保健センター 03-2804814 に電話", "occurrences": [{"file": "lib/view/AED_map.dart", "line": 363}]
-    },
-    {
-      "key": "view.lhf.setting.page.s054", "zh": "匯入遊戲資料", "en": "Import Game Data", "ja": "ゲームデータをインポート", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 76}]
-    },
-    {
-      "key": "view.lhf.setting.page.s055", "zh": "正在匯入遊戲資料...", "en": "Importing game data...", "ja": "ゲームデータをインポートしています...", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 77}]
-    },
-    {
-      "key": "view.lhf.setting.page.s056", "zh": "遊戲資料匯入完成", "en": "Game data import complete", "ja": "ゲームデータのインポートが完了しました", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 78}]
-    },
-    {
-      "key": "view.lhf.setting.page.s057", "zh": "遊戲資料匯入失敗，請確認帳號權限", "en": "Failed to import game data. Check account permissions.", "ja": "ゲームデータのインポートに失敗しました。アカウント権限を確認してください。", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 79}]
-    },
-    {
-      "key": "view.lhf.setting.page.s068", "zh": "Email 登入密碼設定完成，現在可以使用 Google 或 Email 登入。", "en": "Email sign-in password set. You can now sign in with Google or email.", "ja": "メールログイン用パスワードを設定しました。Google またはメールアドレスでログインできます。", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 872}]
-    },
-    {
-      "key": "view.lhf.setting.page.s069", "zh": "目前沒有登入帳號。", "en": "No account is currently signed in.", "ja": "現在ログインしているアカウントはありません。", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 888}]
-    },
-    {
-      "key": "view.lhf.setting.page.s070", "zh": "Email 已完成驗證，現在可以使用 Email＋密碼登入。", "en": "Email verified. You can now sign in with your email and password.", "ja": "メール認証が完了しました。メールアドレスとパスワードでログインできます。", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 897}]
-    },
-    {
-      "key": "view.lhf.setting.page.s071", "zh": "密碼設定完成，驗證信已寄出；請完成驗證後再使用 Email＋密碼登入。", "en": "Password set and verification email sent. Verify your email before signing in with email and password.", "ja": "パスワードを設定し、認証メールを送信しました。メールアドレスとパスワードでログインする前に、メール認証を完了してください。", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 909}]
-    },
-    {
-      "key": "view.lhf.setting.page.s072", "zh": "驗證信已重新寄出，請前往信箱完成驗證。", "en": "Verification email resent. Check your inbox to complete verification.", "ja": "認証メールを再送しました。受信トレイを確認して認証を完了してください。", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 910}]
-    },
-    {
-      "key": "view.lhf.setting.page.s073", "zh": "密碼已設定，但驗證信寄送失敗：@error", "en": "Password set, but the verification email could not be sent: @error", "ja": "パスワードは設定されましたが、認証メールを送信できませんでした：@error", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 919}]
-    },
-    {
-      "key": "view.lhf.setting.page.s074", "zh": "帳號安全", "en": "Account Security", "ja": "アカウントセキュリティ", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 945}]
-    },
-    {
-      "key": "view.lhf.setting.page.s075", "zh": "登入 Email：@email", "en": "Sign-in email: @email", "ja": "ログイン用メールアドレス：@email", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 948}]
-    },
-    {
-      "key": "view.lhf.setting.page.s076", "zh": "待驗證", "en": "Verification pending", "ja": "メール認証待ち", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 951}]
-    },
-    {
-      "key": "view.lhf.setting.page.s077", "zh": "Email 密碼已設定", "en": "Email password set", "ja": "メールパスワード設定済み", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 953}]
-    },
-    {
-      "key": "view.lhf.setting.page.s078", "zh": "尚未設定密碼", "en": "Password not set", "ja": "パスワード未設定", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 954}]
-    },
-    {
-      "key": "view.lhf.setting.page.s079", "zh": "密碼已設定。請完成 Email 驗證後，再使用 Email＋密碼登入；Google 登入不受影響。", "en": "Your password is set. Verify your email before signing in with email and password. Google Sign-In is not affected.", "ja": "パスワードは設定済みです。メールアドレスとパスワードでログインする前に、メール認証を完了してください。Google ログインには影響しません。", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 971}]
-    },
-    {
-      "key": "view.lhf.setting.page.s080", "zh": "重新寄送驗證信", "en": "Resend verification email", "ja": "認証メールを再送", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 989}]
-    },
-    {
-      "key": "view.lhf.setting.page.s081", "zh": "此帳號可以使用 Google 或 Email＋密碼登入。", "en": "This account can sign in with Google or email and password.", "ja": "このアカウントは、Google またはメールアドレスとパスワードでログインできます。", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 1001}]
-    },
-    {
-      "key": "view.lhf.setting.page.s082", "zh": "此帳號可以使用 Email＋密碼登入。", "en": "This account can sign in with email and password.", "ja": "このアカウントは、メールアドレスとパスワードでログインできます。", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 1002}]
-    },
-    {
-      "key": "view.lhf.setting.page.s083", "zh": "設定 Email 登入密碼", "en": "Set Email Sign-In Password", "ja": "メールログイン用パスワードを設定", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 1013}]
-    },
-    {
-      "key": "view.lhf.setting.page.s084", "zh": "此 Email", "en": "this email address", "ja": "このメールアドレス", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 1075}]
-    },
-    {
-      "key": "view.lhf.setting.page.s085", "zh": "設定後可使用 @email 與新密碼登入。", "en": "After setup, you can sign in with @email and your new password.", "ja": "設定後は、@email と新しいパスワードでログインできます。", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 1074}]
-    },
-    {
-      "key": "view.lhf.setting.page.s086", "zh": "新密碼", "en": "New password", "ja": "新しいパスワード", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 1082}]
-    },
-    {
-      "key": "view.lhf.setting.page.s087", "zh": "至少 6 位", "en": "At least 6 characters", "ja": "6文字以上", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 1083}]
-    },
-    {
-      "key": "view.lhf.setting.page.s088", "zh": "請輸入新密碼", "en": "Enter a new password", "ja": "新しいパスワードを入力してください", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 1097}]
-    },
-    {
-      "key": "view.lhf.setting.page.s089", "zh": "密碼至少需要 6 位", "en": "Password must be at least 6 characters", "ja": "パスワードは6文字以上で入力してください", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 1098}]
-    },
-    {
-      "key": "view.lhf.setting.page.s090", "zh": "確認新密碼", "en": "Confirm new password", "ja": "新しいパスワードを確認", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 1108}]
-    },
-    {
-      "key": "view.lhf.setting.page.s091", "zh": "請再次輸入新密碼", "en": "Enter the new password again", "ja": "新しいパスワードをもう一度入力してください", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 1122}]
-    },
-    {
-      "key": "view.lhf.setting.page.s092", "zh": "兩次輸入的密碼不一致", "en": "The passwords do not match", "ja": "入力したパスワードが一致しません", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 1123}]
-    },
-    {
-      "key": "view.lhf.setting.page.s093", "zh": "取消", "en": "Cancel", "ja": "キャンセル", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 1140}]
-    },
-    {
-      "key": "view.lhf.setting.page.s094", "zh": "確認設定", "en": "Set Password", "ja": "パスワードを設定", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 1151}]
-    },
-    {
-      "key": "view.lhf.setting.page.s095", "zh": "發生未預期的錯誤，請稍後再試。", "en": "An unexpected error occurred. Try again later.", "ja": "予期しないエラーが発生しました。しばらくしてからもう一度お試しください。", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 143}]
-    },
-    {
-      "key": "view.lhf.setting.page.s096", "zh": "Email 格式不正確。", "en": "Enter a valid email address.", "ja": "有効なメールアドレスを入力してください。", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 147}]
-    },
-    {
-      "key": "view.lhf.setting.page.s097", "zh": "請輸入密碼。", "en": "Enter your password.", "ja": "パスワードを入力してください。", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 148}]
-    },
-    {
-      "key": "view.lhf.setting.page.s098", "zh": "密碼強度不足，請至少輸入 6 位。", "en": "Password is too weak. Enter at least 6 characters.", "ja": "パスワードが短すぎます。6文字以上で入力してください。", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 149}]
-    },
-    {
-      "key": "view.lhf.setting.page.s099", "zh": "找不到目前登入的帳號。", "en": "The signed-in account could not be found.", "ja": "現在ログインしているアカウントが見つかりません。", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 150}]
-    },
-    {
-      "key": "view.lhf.setting.page.s100", "zh": "這個帳號已經可以使用 Email 和密碼登入。", "en": "This account can already sign in with email and password.", "ja": "このアカウントはすでにメールアドレスとパスワードでログインできます。", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 151}]
-    },
-    {
-      "key": "view.lhf.setting.page.s101", "zh": "這組登入資料已連結到其他帳號。", "en": "These sign-in credentials are linked to another account.", "ja": "このログイン情報は別のアカウントに連携されています。", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 152}]
-    },
-    {
-      "key": "view.lhf.setting.page.s102", "zh": "為了帳號安全，請重新登入後再試一次。", "en": "For account security, sign in again and retry.", "ja": "アカウント保護のため、もう一度ログインしてからお試しください。", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 153}]
-    },
-    {
-      "key": "view.lhf.setting.page.s103", "zh": "嘗試次數過多，請稍後再試。", "en": "Too many attempts. Try again later.", "ja": "試行回数が多すぎます。しばらくしてからもう一度お試しください。", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 154}]
-    },
-    {
-      "key": "view.lhf.setting.page.s104", "zh": "網路連線失敗，請確認網路後再試。", "en": "Network connection failed. Check your connection and retry.", "ja": "ネットワーク接続に失敗しました。接続を確認してからもう一度お試しください。", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 155}]
-    },
-    {
-      "key": "view.lhf.setting.page.s105", "zh": "Firebase 尚未啟用這種登入方式。", "en": "This sign-in method is not enabled in Firebase.", "ja": "このログイン方法はFirebaseで有効になっていません。", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 156}]
-    },
-    {
-      "key": "view.lhf.setting.page.s106", "zh": "已取消 Google 身分確認。", "en": "Google identity verification was canceled.", "ja": "Googleでの本人確認をキャンセルしました。", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 157}]
-    },
-    {
-      "key": "view.lhf.setting.page.s107", "zh": "請選擇目前登入的 Google 帳號。", "en": "Select the Google account currently signed in.", "ja": "現在ログインしているGoogleアカウントを選択してください。", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 158}]
-    },
-    {
-      "key": "view.lhf.setting.page.s108", "zh": "帳號驗證失敗，請稍後再試。", "en": "Account verification failed. Try again later.", "ja": "アカウント認証に失敗しました。しばらくしてからもう一度お試しください。", "occurrences": [{"file": "lib/view/lhf_setting_page.dart", "line": 159}]
-    },
-    {
-      "key": "widgets.game.game.map.s017", "zh": "超出探索範圍！\n返回校園即可繼續冒險", "en": "Out of exploration range!\nReturn to campus to continue your adventure", "ja": "探索範囲外です！\nキャンパスに戻ると冒険を続けられます", "occurrences": [{"file": "lib/widgets/game/game_map.dart", "line": 593}]
-    },
-    {
-      "key": "widgets.sections.drawer.button.group.s010", "zh": "校園安全", "en": "Campus Safety", "ja": "キャンパス安全", "occurrences": [{"file": "lib/widgets/sections/drawer_button_group.dart", "line": 281}]
-    },
-    {
-      "key": "view.campus.safety.s001", "zh": "校園安全", "en": "Campus Safety", "ja": "キャンパス安全", "occurrences": [{"file": "lib/view/campus_safty.dart", "line": 30}]
-    },
-    {
-      "key": "view.campus.safety.s002", "zh": "緊急地圖", "en": "Emergency Map", "ja": "緊急マップ", "occurrences": [{"file": "lib/view/campus_safty.dart", "line": 53}]
-    },
-    {
-      "key": "view.campus.safety.s003", "zh": "呼叫與回報", "en": "Call and Report", "ja": "電話と通報", "occurrences": [{"file": "lib/view/campus_safty.dart", "line": 59}]
-    },
-    {
-      "key": "view.call.and.email.s001", "zh": "呼叫與回報", "en": "Call and Report", "ja": "電話と通報", "occurrences": [{"file": "lib/view/call_and_email.dart", "line": 86}]
-    },
-    {
-      "key": "widgets.login.social.buttons.s001", "zh": "使用 Google 登入", "en": "Sign in with Google", "ja": "Googleでログイン", "occurrences": [{"file": "lib/widgets/login/wood_login_panel.dart"}, {"file": "lib/widgets/login/wood_register_panel.dart"}]
-    },
-    {
-      "key": "widgets.login.social.buttons.s002", "zh": "使用 Apple 登入", "en": "Sign in with Apple", "ja": "Appleでサインイン", "occurrences": [{"file": "lib/widgets/login/wood_login_panel.dart"}, {"file": "lib/widgets/login/wood_register_panel.dart"}]
-    },
-    {
-      "key": "view.register.page.s010", "zh": "Apple 登入成功！歡迎加入冒險之旅", "en": "Apple Sign-In successful! Welcome to the adventure!", "ja": "Appleでのログインが完了しました！冒険の世界へようこそ！", "occurrences": [{"file": "lib/view/register_page.dart"}]
-    },
-    {
-      "key": "utils.firebase.auth.error.message.s001", "zh": "發生未預期的錯誤，請稍後再試。", "en": "An unexpected error occurred. Please try again later.", "ja": "予期しないエラーが発生しました。しばらくしてからもう一度お試しください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
-    },
-    {
-      "key": "utils.firebase.auth.error.message.s002", "zh": "已取消 Apple 登入。", "en": "Apple Sign-In was canceled.", "ja": "Appleでのサインインをキャンセルしました。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
-    },
-    {
-      "key": "utils.firebase.auth.error.message.s003", "zh": "這個 Email 已使用其他登入方式，請先使用原本的方式登入。", "en": "This email already uses another sign-in method. Sign in with the original method first.", "ja": "このメールアドレスは別のログイン方法で使用されています。先に元の方法でログインしてください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
-    },
-    {
-      "key": "utils.firebase.auth.error.message.s004", "zh": "這個 Apple 帳號已連結到另一個帳號。", "en": "This Apple Account is already linked to another account.", "ja": "このApple Accountは別のアカウントにすでに連携されています。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
-    },
-    {
-      "key": "utils.firebase.auth.error.message.s005", "zh": "Firebase 尚未啟用 Apple 登入。", "en": "Apple Sign-In is not enabled in Firebase.", "ja": "FirebaseでAppleログインが有効になっていません。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
-    },
-    {
-      "key": "utils.firebase.auth.error.message.s006", "zh": "網路連線失敗，請確認網路後再試。", "en": "Network connection failed. Check your connection and try again.", "ja": "ネットワーク接続に失敗しました。接続を確認してもう一度お試しください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
-    },
-    {
-      "key": "utils.firebase.auth.error.message.s007", "zh": "嘗試次數過多，請稍後再試。", "en": "Too many attempts. Please try again later.", "ja": "試行回数が多すぎます。しばらくしてからもう一度お試しください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
-    },
-    {
-      "key": "utils.firebase.auth.error.message.s008", "zh": "Apple 登入憑證無效，請重新嘗試。", "en": "The Apple Sign-In credential is invalid. Please try again.", "ja": "Appleのログイン認証情報が無効です。もう一度お試しください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
-    },
-    {
-      "key": "utils.firebase.auth.error.message.s009", "zh": "Apple 登入網域尚未獲得授權，請檢查 Apple 與 Firebase 設定。", "en": "The Apple Sign-In domain is not authorized. Check the Apple and Firebase settings.", "ja": "Appleログインのドメインが承認されていません。AppleとFirebaseの設定を確認してください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
-    },
-    {
-      "key": "utils.firebase.auth.error.message.s010", "zh": "已有 Apple 登入流程正在進行，請完成後再試。", "en": "An Apple Sign-In flow is already in progress. Complete it before trying again.", "ja": "Appleログインの処理がすでに進行中です。完了してからもう一度お試しください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
-    },
-    {
-      "key": "utils.firebase.auth.error.message.s011", "zh": "Apple 登入失敗，請稍後再試。", "en": "Apple Sign-In failed. Please try again later.", "ja": "Appleログインに失敗しました。しばらくしてからもう一度お試しください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
-    },
-    {
-      "key": "view.lhf.setting.page.s109", "zh": "Apple 登入已連結", "en": "Apple Sign-In linked", "ja": "Appleログイン連携済み", "occurrences": [{"file": "lib/view/lhf_setting_page.dart"}]
-    },
-    {
-      "key": "view.lhf.setting.page.s110", "zh": "此帳號可以使用 Apple 登入，並會載入相同的使用者與遊戲資料。", "en": "This account can sign in with Apple and load the same user and game data.", "ja": "このアカウントはAppleでログインして、同じユーザー情報とゲームデータを読み込めます。", "occurrences": [{"file": "lib/view/lhf_setting_page.dart"}]
-    },
-    {
-      "key": "view.lhf.setting.page.s111", "zh": "連結 Apple 登入後，之後可以用 Apple 登入目前這個帳號。", "en": "Link Apple Sign-In to use Apple to access this account in the future.", "ja": "Appleログインを連携すると、今後Appleを使って現在のアカウントにログインできます。", "occurrences": [{"file": "lib/view/lhf_setting_page.dart"}]
-    },
-    {
-      "key": "view.lhf.setting.page.s112", "zh": "Apple 登入連結成功，Firebase UID 與原有資料維持不變。", "en": "Apple Sign-In was linked successfully. Your Firebase UID and existing data are unchanged.", "ja": "Appleログインを連携しました。Firebase UIDと既存データは変更されていません。", "occurrences": [{"file": "lib/view/lhf_setting_page.dart"}]
-    },
-    {
-      "key": "view.lhf.setting.page.s113", "zh": "正在連結 Apple 登入…", "en": "Linking Apple Sign-In…", "ja": "Appleログインを連携しています…", "occurrences": [{"file": "lib/view/lhf_setting_page.dart"}]
-    },
-    {
-      "key": "view.lhf.setting.page.s114", "zh": "Apple 登入", "en": "Apple Sign-In", "ja": "Appleログイン", "occurrences": [{"file": "lib/view/lhf_setting_page.dart"}]
-    },
-    {
-      "key": "utils.firebase.auth.error.message.s012", "zh": "目前帳號已經連結 Apple 登入。", "en": "Apple Sign-In is already linked to this account.", "ja": "現在のアカウントにはすでにAppleログインが連携されています。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
-    },
-    {
-      "key": "utils.firebase.auth.error.message.s013", "zh": "找不到目前登入的帳號，請重新登入後再試。", "en": "The signed-in account could not be found. Sign in again and retry.", "ja": "現在ログインしているアカウントが見つかりません。もう一度ログインしてお試しください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
-    },
-    {
-      "key": "utils.firebase.auth.error.message.s014", "zh": "Email 格式不正確。", "en": "Enter a valid email address.", "ja": "有効なメールアドレスを入力してください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
-    },
-    {
-      "key": "utils.firebase.auth.error.message.s015", "zh": "請輸入密碼。", "en": "Enter your password.", "ja": "パスワードを入力してください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
-    },
-    {
-      "key": "utils.firebase.auth.error.message.s016", "zh": "密碼強度不足，請至少輸入 6 位。", "en": "The password is too weak. Enter at least 6 characters.", "ja": "パスワードが短すぎます。6文字以上で入力してください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
-    },
-    {
-      "key": "utils.firebase.auth.error.message.s017", "zh": "找不到這個 Email 的帳號。", "en": "No account was found for this email address.", "ja": "このメールアドレスのアカウントが見つかりません。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
-    },
-    {
-      "key": "utils.firebase.auth.error.message.s018", "zh": "Email 或密碼不正確。", "en": "The email address or password is incorrect.", "ja": "メールアドレスまたはパスワードが正しくありません。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
-    },
-    {
-      "key": "utils.firebase.auth.error.message.s019", "zh": "這個 Email 已經註冊，請直接登入或使用忘記密碼。", "en": "This email is already registered. Sign in or use Forgot Password.", "ja": "このメールアドレスは登録済みです。ログインするか、パスワードを再設定してください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
-    },
-    {
-      "key": "utils.firebase.auth.error.message.s020", "zh": "這個 Email 已使用其他登入方式，請先使用原本的登入方式。", "en": "This email already uses another sign-in method. Sign in with the original method first.", "ja": "このメールアドレスは別のログイン方法で使用されています。先に元の方法でログインしてください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
-    },
-    {
-      "key": "utils.firebase.auth.error.message.s021", "zh": "這個登入方式已經連結到目前帳號。", "en": "This sign-in method is already linked to the current account.", "ja": "このログイン方法は現在のアカウントにすでに連携されています。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
-    },
-    {
-      "key": "utils.firebase.auth.error.message.s022", "zh": "這組登入資料已連結到其他帳號。", "en": "These sign-in credentials are linked to another account.", "ja": "このログイン情報は別のアカウントに連携されています。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
-    },
-    {
-      "key": "utils.firebase.auth.error.message.s023", "zh": "為了帳號安全，請重新登入後再試一次。", "en": "For account security, sign in again and retry.", "ja": "アカウント保護のため、もう一度ログインしてからお試しください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
-    },
-    {
-      "key": "utils.firebase.auth.error.message.s024", "zh": "Firebase 尚未啟用這種登入方式。", "en": "This sign-in method is not enabled in Firebase.", "ja": "このログイン方法はFirebaseで有効になっていません。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
-    },
-    {
-      "key": "utils.firebase.auth.error.message.s025", "zh": "這個帳號已被停用，請聯絡客服或管理員。", "en": "This account has been disabled. Contact support or an administrator.", "ja": "このアカウントは無効化されています。サポートまたは管理者にお問い合わせください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
-    },
-    {
-      "key": "utils.firebase.auth.error.message.s026", "zh": "登入狀態已失效，請重新登入。", "en": "Your sign-in session has expired. Sign in again.", "ja": "ログイン状態の有効期限が切れました。もう一度ログインしてください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
-    },
-    {
-      "key": "utils.firebase.auth.error.message.s027", "zh": "App 的 Firebase 驗證設定不正確，請聯絡客服。", "en": "The app's Firebase Authentication configuration is invalid. Contact support.", "ja": "アプリのFirebase認証設定が正しくありません。サポートにお問い合わせください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
-    },
-    {
-      "key": "utils.firebase.auth.error.message.s028", "zh": "驗證服務已達使用上限，請稍後再試。", "en": "The authentication service quota has been reached. Try again later.", "ja": "認証サービスの利用上限に達しました。しばらくしてからもう一度お試しください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
-    },
-    {
-      "key": "utils.firebase.auth.error.message.s029", "zh": "Firebase 驗證服務發生內部錯誤，請稍後再試。", "en": "Firebase Authentication encountered an internal error. Try again later.", "ja": "Firebase認証で内部エラーが発生しました。しばらくしてからもう一度お試しください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
-    },
-    {
-      "key": "utils.firebase.auth.error.message.s030", "zh": "登入驗證失敗，請稍後再試。", "en": "Authentication failed. Try again later.", "ja": "ログイン認証に失敗しました。しばらくしてからもう一度お試しください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
-    },
-    {
-      "key": "utils.firebase.auth.error.message.s031", "zh": "請輸入 Email。", "en": "Enter your email address.", "ja": "メールアドレスを入力してください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
-    },
-    {
-      "key": "utils.firebase.auth.error.message.s032", "zh": "密碼不符合安全規則，請依畫面提示設定更安全的密碼。", "en": "The password does not meet the security requirements. Follow the on-screen password rules.", "ja": "パスワードがセキュリティ要件を満たしていません。画面のルールに従って設定してください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
-    },
-    {
-      "key": "utils.firebase.auth.error.message.s033", "zh": "已取消 Google 登入。", "en": "Google Sign-In was canceled.", "ja": "Googleログインをキャンセルしました。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}, {"file": "lib/view/login_page.dart"}, {"file": "lib/view/register_page.dart"}]
-    },
-    {
-      "key": "utils.firebase.auth.error.message.s034", "zh": "Google 登入設定不正確，請檢查 iOS URL Scheme、Client ID 與 Firebase 設定。", "en": "Google Sign-In is misconfigured. Check the iOS URL scheme, client ID, and Firebase settings.", "ja": "Googleログインの設定が正しくありません。iOSのURL Scheme、クライアントID、Firebase設定を確認してください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
-    },
-    {
-      "key": "utils.firebase.auth.error.message.s035", "zh": "Google 登入失敗，請稍後再試。", "en": "Google Sign-In failed. Try again later.", "ja": "Googleログインに失敗しました。しばらくしてからもう一度お試しください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
-    },
-    {
-      "key": "utils.firebase.auth.error.message.s036", "zh": "Google 登入憑證無效，請重新登入。", "en": "The Google Sign-In credential is invalid. Sign in again.", "ja": "Googleのログイン認証情報が無効です。もう一度ログインしてください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
-    },
-    {
-      "key": "utils.firebase.auth.error.message.s037", "zh": "Firebase 尚未啟用 Google 登入。", "en": "Google Sign-In is not enabled in Firebase.", "ja": "FirebaseでGoogleログインが有効になっていません。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
-    },
-    {
-      "key": "utils.firebase.auth.error.message.s038", "zh": "請選擇目前登入的 Google 帳號。", "en": "Select the Google account currently signed in.", "ja": "現在ログインしているGoogleアカウントを選択してください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
-    },
-    {
-      "key": "utils.firebase.auth.error.message.s039", "zh": "找不到目前登入的帳號，請重新登入後再試。", "en": "The signed-in account could not be found. Sign in again and retry.", "ja": "現在ログインしているアカウントが見つかりません。もう一度ログインしてお試しください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
-    },
-    {
-      "key": "utils.firebase.auth.error.message.s040", "zh": "這個帳號已經可以使用 Email 和密碼登入。", "en": "This account can already sign in with email and password.", "ja": "このアカウントはすでにメールアドレスとパスワードでログインできます。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
-    },
-    {
-      "key": "utils.firebase.auth.error.message.s041", "zh": "登入驗證已成功，但無法同步帳號資料。@detail", "en": "Authentication succeeded, but the account data could not be synchronized. @detail", "ja": "ログイン認証には成功しましたが、アカウントデータを同期できませんでした。@detail", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
-    },
-    {
-      "key": "utils.firebase.auth.error.message.s042", "zh": "帳號已建立且驗證信已寄出，但玩家資料初始化失敗。@detail", "en": "The account was created and the verification email was sent, but player data initialization failed. @detail", "ja": "アカウントを作成して確認メールを送信しましたが、プレイヤーデータの初期化に失敗しました。@detail", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
-    },
-    {
-      "key": "utils.firebase.auth.error.message.s043", "zh": "目前沒有存取資料的權限，請檢查 Firestore 安全規則。", "en": "Data access was denied. Check the Firestore security rules.", "ja": "データへのアクセス権限がありません。Firestoreのセキュリティルールを確認してください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
-    },
-    {
-      "key": "utils.firebase.auth.error.message.s044", "zh": "資料服務暫時無法使用，請確認網路後重新登入。", "en": "The data service is temporarily unavailable. Check your connection and sign in again.", "ja": "データサービスを一時的に利用できません。ネットワークを確認して、もう一度ログインしてください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
-    },
-    {
-      "key": "utils.firebase.auth.error.message.s045", "zh": "讀取資料逾時，請稍後重新登入。", "en": "The data request timed out. Sign in again later.", "ja": "データの読み込みがタイムアウトしました。しばらくしてからもう一度ログインしてください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
-    },
-    {
-      "key": "utils.firebase.auth.error.message.s046", "zh": "Firestore 認證狀態已失效，請重新登入。", "en": "The Firestore authentication session has expired. Sign in again.", "ja": "Firestoreの認証状態が失効しました。もう一度ログインしてください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
-    },
-    {
-      "key": "utils.firebase.auth.error.message.s047", "zh": "資料服務已達使用上限，請稍後再試。", "en": "The data service quota has been reached. Try again later.", "ja": "データサービスの利用上限に達しました。しばらくしてからもう一度お試しください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
-    },
-    {
-      "key": "utils.firebase.auth.error.message.s048", "zh": "找不到必要的帳號資料，請聯絡客服。", "en": "Required account data could not be found. Contact support.", "ja": "必要なアカウントデータが見つかりません。サポートにお問い合わせください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
-    },
-    {
-      "key": "utils.firebase.auth.error.message.s049", "zh": "Firestore 設定尚未完成，請檢查安全規則或索引。", "en": "Firestore setup is incomplete. Check the security rules or indexes.", "ja": "Firestoreの設定が完了していません。セキュリティルールまたはインデックスを確認してください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
-    },
-    {
-      "key": "utils.firebase.auth.error.message.s050", "zh": "帳號資料可能已損毀，請聯絡客服。", "en": "The account data may be corrupted. Contact support.", "ja": "アカウントデータが破損している可能性があります。サポートにお問い合わせください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
-    },
-    {
-      "key": "utils.firebase.auth.error.message.s051", "zh": "Firestore 發生內部錯誤，請稍後再試。", "en": "Firestore encountered an internal error. Try again later.", "ja": "Firestoreで内部エラーが発生しました。しばらくしてからもう一度お試しください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
-    },
-    {
-      "key": "utils.firebase.auth.error.message.s052", "zh": "讀取帳號資料失敗，請稍後重新登入。", "en": "Account data could not be loaded. Sign in again later.", "ja": "アカウントデータを読み込めませんでした。しばらくしてからもう一度ログインしてください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
-    },
-    {
-      "key": "utils.firebase.auth.error.message.s053", "zh": "瀏覽器封鎖了 Apple 登入視窗，請允許彈出式視窗後再試。", "en": "The browser blocked the Apple Sign-In window. Allow pop-ups and try again.", "ja": "ブラウザがAppleログイン画面をブロックしました。ポップアップを許可してからもう一度お試しください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
-    },
-    {
-      "key": "utils.firebase.auth.error.message.s054", "zh": "Apple 登入設定不正確，請檢查 Apple Developer 與 Firebase 設定。", "en": "Apple Sign-In is misconfigured. Check the Apple Developer and Firebase settings.", "ja": "Appleログインの設定が正しくありません。Apple DeveloperとFirebaseの設定を確認してください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
-    },
-    {
-      "key": "utils.firebase.auth.error.message.s055", "zh": "瀏覽器不支援 Apple 登入所需的儲存功能。", "en": "This browser does not support the storage required for Apple Sign-In.", "ja": "このブラウザはAppleログインに必要なストレージ機能をサポートしていません。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
-    },
-    {
-      "key": "view.login.page.s008", "zh": "請先到 @email 完成 Email 驗證；驗證信已重新寄出。", "en": "Verify your email at @email before signing in. A new verification email has been sent.", "ja": "@emailでメール認証を完了してからログインしてください。確認メールを再送しました。", "occurrences": [{"file": "lib/view/login_page.dart"}]
-    },
-    {
-      "key": "view.login.page.s009", "zh": "你的信箱", "en": "your email address", "ja": "メールアドレス", "occurrences": [{"file": "lib/view/login_page.dart"}, {"file": "lib/view/register_page.dart"}]
-    },
-    {
-      "key": "view.login.page.s010", "zh": "如果此 Email 已註冊，密碼重設信將會寄到信箱。", "en": "If this email is registered, a password reset email will be sent.", "ja": "このメールアドレスが登録済みの場合、パスワード再設定メールが送信されます。", "occurrences": [{"file": "lib/view/login_page.dart"}]
-    },
-    {
-      "key": "widgets.login.forgot.password.dialog.s001", "zh": "忘記密碼", "en": "Forgot Password", "ja": "パスワードを忘れた場合", "occurrences": [{"file": "lib/widgets/login/forgot_password_dialog.dart"}]
-    },
-    {
-      "key": "widgets.login.forgot.password.dialog.s002", "zh": "Email", "en": "Email", "ja": "メールアドレス", "occurrences": [{"file": "lib/widgets/login/forgot_password_dialog.dart"}]
-    },
-    {
-      "key": "widgets.login.forgot.password.dialog.s003", "zh": "請輸入註冊時使用的 Email", "en": "Enter the email address used to register", "ja": "登録時に使用したメールアドレスを入力してください", "occurrences": [{"file": "lib/widgets/login/forgot_password_dialog.dart"}]
-    },
-    {
-      "key": "widgets.login.forgot.password.dialog.s004", "zh": "請輸入 Email", "en": "Enter your email address", "ja": "メールアドレスを入力してください", "occurrences": [{"file": "lib/widgets/login/forgot_password_dialog.dart"}]
-    },
-    {
-      "key": "widgets.login.forgot.password.dialog.s005", "zh": "Email 格式不正確", "en": "Enter a valid email address", "ja": "有効なメールアドレスを入力してください", "occurrences": [{"file": "lib/widgets/login/forgot_password_dialog.dart"}]
-    },
-    {
-      "key": "widgets.login.forgot.password.dialog.s006", "zh": "取消", "en": "Cancel", "ja": "キャンセル", "occurrences": [{"file": "lib/widgets/login/forgot_password_dialog.dart"}]
-    },
-    {
-      "key": "widgets.login.forgot.password.dialog.s007", "zh": "寄送重設信", "en": "Send Reset Email", "ja": "再設定メールを送信", "occurrences": [{"file": "lib/widgets/login/forgot_password_dialog.dart"}]
-    },
-    {
-      "key": "utils.firebase.auth.error.message.s056", "zh": "Google 登入狀態已失效，請重新選擇 Google 帳號。", "en": "Your Google sign-in session has expired. Select your Google account again.", "ja": "Googleのログイン状態が失効しました。Googleアカウントをもう一度選択してください。", "occurrences": [{"file": "lib/utils/firebase_auth_error_message.dart"}]
     }
   ]
 }
