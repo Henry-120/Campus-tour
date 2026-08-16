@@ -116,7 +116,7 @@ class _RegisterPageState extends State<RegisterPage> {
           type: AppToastType.success,
         );
 
-        navigateAfterLogin(context);
+        await navigateAfterLogin(context);
       } else {
         SnackBarBuilder.show(
           context,
@@ -167,7 +167,7 @@ class _RegisterPageState extends State<RegisterPage> {
           type: AppToastType.success,
         );
 
-        navigateAfterLogin(context);
+        await navigateAfterLogin(context);
       } else {
         SnackBarBuilder.show(
           context,

@@ -55,7 +55,7 @@ class _LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
           return;
         }
 
-        navigateAfterLogin(context);
+        await navigateAfterLogin(context);
       } else {
         SnackBarBuilder.show(
           context,
@@ -105,7 +105,7 @@ class _LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
       if (!mounted) return;
 
       if (user != null) {
-        navigateAfterLogin(context);
+        await navigateAfterLogin(context);
       } else {
         SnackBarBuilder.show(
           context,
@@ -150,7 +150,7 @@ class _LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
       if (!mounted) return;
 
       if (user != null) {
-        navigateAfterLogin(context);
+        await navigateAfterLogin(context);
       } else {
         SnackBarBuilder.show(
           context,

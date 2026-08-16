@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 
 import '../local_information/local_setting.dart';
+import '../services/audio_service.dart';
 import 'game_main_page.dart';
 import 'novice_leading_page.dart';
 
 // [L-01]
-void navigateAfterLogin(BuildContext context) {
+Future<void> navigateAfterLogin(BuildContext context) async {
+  // The tutorial uses the overlay player, so the login track on the main
+  // player must be stopped explicitly before either destination is shown.
+  await AudioService().stopMainBgm(onlyIfPlaying: 'audio/M01_login.m4a');
+  if (!context.mounted) return;
+
   // [L-02]
   if (LocalSettingService.noviceTeaching.hasExperienced) {
     // [L-03]

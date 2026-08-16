@@ -1,6 +1,6 @@
 {
   "generatedBy": "tool/extract_chinese_strings.dart",
-  "totalUniqueStrings": 505,
+  "totalUniqueStrings": 507,
   "entries": [
     {
       "key": "controllers.login.controller.s001",
