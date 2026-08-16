@@ -5,12 +5,20 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../controllers/monster_controller.dart';
 import '../controllers/user_controller.dart';
 import '../services/bighead_service.dart';
+import '../services/account_deletion_service.dart';
+import '../services/audio_service.dart';
+import '../local_information/local_setting.dart';
+import '../controllers/nfc_scan_controller.dart';
+import '../utils/account_data_sync_exception.dart';
 import 'package:get/get.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/painting.dart';
 
 class LoginController {
   final AuthService _authService = AuthService();
   final FirestoreService _firestoreService = FirestoreService();
+  final AccountDeletionService _accountDeletionService =
+      AccountDeletionService();
   final monsterController = Get.find<MonsterController>();
   final userController = Get.find<UserController>();
 
@@ -29,8 +37,7 @@ class LoginController {
       return refreshedUser;
     }
 
-    await monsterController.loadUserCollection(refreshedUser.uid);
-    await userController.fetchCurrentUser();
+    await _loadSignedInUserData(refreshedUser.uid);
     return refreshedUser;
   }
 
@@ -38,42 +45,57 @@ class LoginController {
     debugPrint("正在啟動 Google 認證...");
     final user = await _authService.signInWithGoogle();
 
-    if (user != null) {
-      debugPrint("Google 認證成功: ${user.uid}");
-      await _prepareSocialUser(user);
-    }
-    return user;
+    return _completeSocialSignIn(user, providerName: 'Google');
   }
 
   Future<User?> signInWithApple() async {
-    try {
-      final user = await _authService.signInWithApple();
-      if (user != null) {
-        await _prepareSocialUser(user);
-      }
-      return user;
-    } catch (e) {
-      debugPrint("LoginController.signInWithApple 失敗: $e");
-      rethrow;
-    }
+    debugPrint('正在啟動 Apple 認證...');
+    final user = await _authService.signInWithApple();
+
+    return _completeSocialSignIn(user, providerName: 'Apple');
   }
 
-  Future<void> _prepareSocialUser(User user) async {
-    final existingUser = await _firestoreService.getUser(user.uid);
-    if (existingUser == null) {
-      await _firestoreService.setUser(
-        UserModel(
-          uid: user.uid,
-          email: user.email ?? "",
-          nickname: user.displayName?.trim().isNotEmpty == true
-              ? user.displayName!.trim()
-              : "冒險者",
-          photoUrl: BigHeadService.generateRandomUrl(),
-        ),
+  Future<User?> _completeSocialSignIn(
+    User? user, {
+    required String providerName,
+  }) async {
+    if (user == null) return null;
+
+    debugPrint('$providerName 認證成功: ${user.uid}');
+
+    try {
+      // 所有社群登入都用 Firebase UID 找資料，避免 Apple 隱藏 Email 時
+      // 因 privaterelay.appleid.com 信箱而誤建或誤合併其他帳號。
+      final existingUser = await _firestoreService.getUser(user.uid);
+      if (existingUser == null) {
+        debugPrint('新使用者，正在建立 Firestore 資料...');
+
+        final photoUrl = BigHeadService.generateRandomUrl();
+        final displayName = user.displayName?.trim();
+
+        await _firestoreService.setUser(
+          UserModel(
+            uid: user.uid,
+            email: user.email ?? '',
+            nickname: displayName == null || displayName.isEmpty
+                ? 'controllers.login.controller.s004'.tr
+                : displayName,
+            photoUrl: photoUrl,
+          ),
+        );
+      }
+
+      debugPrint('正在載入使用者收藏與資料...');
+      await monsterController.loadUserCollection(user.uid);
+      await userController.fetchCurrentUser(throwOnError: true);
+    } catch (error, stackTrace) {
+      throw AccountDataSyncException(
+        operation: AccountDataSyncOperation.signIn,
+        cause: error,
+        stackTrace: stackTrace,
       );
     }
-    await monsterController.loadUserCollection(user.uid);
-    await userController.fetchCurrentUser();
+    return user;
   }
 
   Future<void> sendPasswordResetEmail(String email) =>
@@ -89,20 +111,28 @@ class LoginController {
     final user = _authService.currentUser;
     if (user == null) throw StateError('No signed-in user');
 
-    // Reauthenticate before deleting any data so a stale session cannot leave
-    // the account present while its Firestore profile has already been erased.
-    final appleAuthorizationCode = await _authService
-        .reauthenticateForAccountDeletion(password: password);
+    // 先重新驗證，避免過期登入狀態造成帳號仍存在、資料卻已刪除。
+    final authorization = await _authService.reauthenticateForAccountDeletion(
+      password: password,
+    );
 
-    await _firestoreService.deleteUserData(user.uid);
+    // Refresh the callable token so its auth_time reflects the reauthentication.
+    await user.getIdToken(true);
 
-    if (appleAuthorizationCode != null && appleAuthorizationCode.isNotEmpty) {
-      await _authService.revokeAppleAuthorization(appleAuthorizationCode);
-    }
+    await _authService.revokeAccountProvider(authorization);
+    await _accountDeletionService.deleteCurrentAccountData();
 
-    await _authService.deleteCurrentUser();
+    await _authService.logout();
     monsterController.resetForLogout();
     userController.userModel.value = null;
+    if (Get.isRegistered<NfcScanController>()) {
+      Get.find<NfcScanController>().stopWaiting();
+    }
+    await AudioService().stopAll();
+    await LocalSettingService.settingsBox.clear();
+    PaintingBinding.instance.imageCache
+      ..clear()
+      ..clearLiveImages();
   }
 
   // 一般註冊
@@ -110,20 +140,33 @@ class LoginController {
     final user = await _authService.register(email, password);
     if (user != null) {
       final randomAvatar = BigHeadService.generateRandomUrl();
+      AccountDataSyncException? syncError;
 
-      await _firestoreService.setUser(
-        UserModel(
-          uid: user.uid,
-          email: user.email ?? email,
-          nickname: nickname,
-          photoUrl: randomAvatar,
-        ),
-      );
+      try {
+        await _firestoreService.setUser(
+          UserModel(
+            uid: user.uid,
+            email: user.email ?? email,
+            nickname: nickname,
+            photoUrl: randomAvatar,
+          ),
+        );
+      } catch (error, stackTrace) {
+        syncError = AccountDataSyncException(
+          operation: AccountDataSyncOperation.registration,
+          cause: error,
+          stackTrace: stackTrace,
+        );
+      }
 
       try {
         await _authService.sendEmailVerification();
       } finally {
         await _authService.logout();
+      }
+
+      if (syncError != null) {
+        Error.throwWithStackTrace(syncError, syncError.stackTrace);
       }
     }
     return user;
@@ -139,5 +182,18 @@ class LoginController {
     );
 
     return isEmailPasswordUser && !user.emailVerified;
+  }
+
+  Future<void> _loadSignedInUserData(String uid) async {
+    try {
+      await monsterController.loadUserCollection(uid);
+      await userController.fetchCurrentUser(throwOnError: true);
+    } catch (error, stackTrace) {
+      throw AccountDataSyncException(
+        operation: AccountDataSyncOperation.signIn,
+        cause: error,
+        stackTrace: stackTrace,
+      );
+    }
   }
 }

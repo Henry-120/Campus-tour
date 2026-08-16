@@ -27,7 +27,7 @@ class UserController extends GetxController {
     });
   }
 
-  Future<void> fetchCurrentUser() async {
+  Future<void> fetchCurrentUser({bool throwOnError = false}) async {
     try {
       isLoading.value = true;
       final user = _auth.currentUser;
@@ -36,10 +36,17 @@ class UserController extends GetxController {
         if (data != null) {
           userModel.value = data;
           debugPrint("[UserController] 成功從 Firestore 載入頭像: ${data.photoUrl}");
+        } else if (throwOnError) {
+          throw FirebaseException(
+            plugin: 'cloud_firestore',
+            code: 'not-found',
+            message: 'The signed-in user document does not exist.',
+          );
         }
       }
     } catch (e) {
       debugPrint("[UserController] 抓取錯誤: $e");
+      if (throwOnError) rethrow;
     } finally {
       isLoading.value = false;
     }

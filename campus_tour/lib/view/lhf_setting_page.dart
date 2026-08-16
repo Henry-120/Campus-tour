@@ -9,6 +9,8 @@ import 'package:campus_tour/styles/setting_page_styles.dart';
 import 'package:campus_tour/view/user_protocol.dart';
 import 'package:campus_tour/view/start_page.dart';
 import 'package:campus_tour/widgets/common/snackbar_builder.dart';
+import 'package:campus_tour/widgets/login/official_apple_sign_in_button.dart';
+import 'package:campus_tour/utils/firebase_auth_error_message.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -141,35 +143,29 @@ class SteeingPageStrings {
       'view.lhf.setting.page.s092'.tr;
   static String get accountCancel => 'view.lhf.setting.page.s093'.tr;
   static String get accountConfirmSet => 'view.lhf.setting.page.s094'.tr;
+  static String get accountAppleLinked => 'view.lhf.setting.page.s109'.tr;
+  static String get accountAppleLinkedDescription =>
+      'view.lhf.setting.page.s110'.tr;
+  static String get accountAppleNotLinkedDescription =>
+      'view.lhf.setting.page.s111'.tr;
+  static String get accountAppleLinkSuccess => 'view.lhf.setting.page.s112'.tr;
+  static String get accountAppleLinking => 'view.lhf.setting.page.s113'.tr;
+  static String get accountAppleTitle => 'view.lhf.setting.page.s114'.tr;
 
   static String accountAuthError(Object error) {
-    if (error is! FirebaseAuthException) {
-      return 'view.lhf.setting.page.s095'.tr;
-    }
-
-    return switch (error.code) {
-      'invalid-email' => 'view.lhf.setting.page.s096'.tr,
-      'missing-password' => 'view.lhf.setting.page.s097'.tr,
-      'weak-password' => 'view.lhf.setting.page.s098'.tr,
-      'user-not-found' => 'view.lhf.setting.page.s099'.tr,
-      'provider-already-linked' => 'view.lhf.setting.page.s100'.tr,
-      'credential-already-in-use' => 'view.lhf.setting.page.s101'.tr,
-      'requires-recent-login' => 'view.lhf.setting.page.s102'.tr,
-      'too-many-requests' => 'view.lhf.setting.page.s103'.tr,
-      'network-request-failed' => 'view.lhf.setting.page.s104'.tr,
-      'operation-not-allowed' => 'view.lhf.setting.page.s105'.tr,
-      'google-sign-in-cancelled' => 'view.lhf.setting.page.s106'.tr,
-      'google-account-mismatch' => 'view.lhf.setting.page.s107'.tr,
-      _ => 'view.lhf.setting.page.s108'.tr,
-    };
+    return accountAuthErrorMessage(error);
   }
 
   static String debugCaptureAllDone(int count) {
-    return count == 0 ? 'view.lhf.setting.page.s040'.tr : '已新增 $count 隻精靈到圖鑑';
+    return count == 0
+        ? 'view.lhf.setting.page.s040'.tr
+        : 'view.lhf.setting.page.s041'.trParams({'count': '$count'});
   }
 
   static String debugDeleteAllDone(int count) {
-    return count == 0 ? 'view.lhf.setting.page.s042'.tr : '已從圖鑑刪除 $count 隻精靈';
+    return count == 0
+        ? 'view.lhf.setting.page.s042'.tr
+        : 'view.lhf.setting.page.s043'.trParams({'count': '$count'});
   }
 
   // Language
@@ -180,25 +176,24 @@ class SteeingPageStrings {
   static const languageJapaneseLabel = '日本語';
   static String get languageDropdownLabel => 'view.lhf.setting.page.s047'.tr;
 
-  // Protocol
+  // Legal and privacy
   static String get userProtocolTitle => 'view.lhf.setting.page.s048'.tr;
   static String get userProtocolDescription => 'view.lhf.setting.page.s049'.tr;
-  static String get userProtocolButtonHint => 'view.lhf.setting.page.s050'.tr;
 
   // Account deletion
-  static String get deleteAccountTitle => 'view.lhf.setting.page.s109'.tr;
-  static String get deleteAccountDescription => 'view.lhf.setting.page.s110'.tr;
-  static String get deleteAccountButton => 'view.lhf.setting.page.s111'.tr;
+  static String get deleteAccountTitle => 'view.lhf.setting.page.s119'.tr;
+  static String get deleteAccountDescription => 'view.lhf.setting.page.s120'.tr;
+  static String get deleteAccountButton => 'view.lhf.setting.page.s121'.tr;
   static String get deleteAccountConfirmTitle =>
-      'view.lhf.setting.page.s112'.tr;
+      'view.lhf.setting.page.s122'.tr;
   static String get deleteAccountConfirmMessage =>
-      'view.lhf.setting.page.s113'.tr;
-  static String get deleteAccountPassword => 'view.lhf.setting.page.s114'.tr;
-  static String get deleteAccountCancel => 'view.lhf.setting.page.s115'.tr;
-  static String get deleteAccountConfirm => 'view.lhf.setting.page.s116'.tr;
-  static String get deleteAccountFailed => 'view.lhf.setting.page.s117'.tr;
+      'view.lhf.setting.page.s123'.tr;
+  static String get deleteAccountPassword => 'view.lhf.setting.page.s124'.tr;
+  static String get deleteAccountCancel => 'view.lhf.setting.page.s125'.tr;
+  static String get deleteAccountConfirm => 'view.lhf.setting.page.s126'.tr;
+  static String get deleteAccountFailed => 'view.lhf.setting.page.s127'.tr;
   static String get deleteAccountWrongPassword =>
-      'view.lhf.setting.page.s118'.tr;
+      'view.lhf.setting.page.s128'.tr;
 
   static String volumePercentage(int volume) => '$volume%';
 
@@ -252,9 +247,9 @@ class FullPageList {
     FullPageList.cardGap,
     FullPageList.accountSecurityCard,
     FullPageList.cardGap,
-    FullPageList.userProtocolButton,
-    FullPageList.cardGap,
     FullPageList.deleteAccountCard,
+    FullPageList.cardGap,
+    FullPageList.userProtocolButton,
   ];
 
   static Widget get pageHeader => _PageHeader();
@@ -271,8 +266,8 @@ class FullPageList {
   static Widget get debugCaptureAllCard => _DebugCaptureAllMonstersCard();
   static Widget get languageSetCard => _LanguageSettingCard();
   static Widget get accountSecurityCard => _AccountSecurityCard();
-  static Widget get userProtocolButton => _UserProtocolButton();
   static Widget get deleteAccountCard => _DeleteAccountCard();
+  static Widget get userProtocolButton => _UserProtocolButton();
 }
 
 class SettingPage extends StatefulWidget {
@@ -929,6 +924,44 @@ class _AccountSecurityCard extends StatefulWidget {
 class _AccountSecurityCardState extends State<_AccountSecurityCard> {
   final AuthService _authService = AuthService();
   bool _isSendingVerification = false;
+  bool _isLinkingApple = false;
+
+  Future<void> _linkAppleProvider() async {
+    if (_isLinkingApple) return;
+
+    final originalUser = FirebaseAuth.instance.currentUser;
+    if (originalUser == null) return;
+
+    setState(() => _isLinkingApple = true);
+    try {
+      final linkedUser = await _authService.linkAppleProvider();
+      if (linkedUser.uid != originalUser.uid) {
+        throw StateError('Apple provider linking changed the Firebase UID.');
+      }
+
+      await linkedUser.reload();
+      if (!mounted) return;
+      setState(() {});
+      SnackBarBuilder.show(
+        context,
+        SteeingPageStrings.accountAppleLinkSuccess,
+        type: AppToastType.success,
+        duration: const Duration(seconds: 4),
+      );
+    } catch (error) {
+      if (!mounted) return;
+      SnackBarBuilder.show(
+        context,
+        appleAuthErrorMessage(error),
+        type: isAppleSignInCancellation(error)
+            ? AppToastType.info
+            : AppToastType.error,
+        duration: const Duration(seconds: 5),
+      );
+    } finally {
+      if (mounted) setState(() => _isLinkingApple = false);
+    }
+  }
 
   Future<void> _setEmailPassword() async {
     final linked = await showDialog<bool>(
@@ -1021,6 +1054,7 @@ class _AccountSecurityCardState extends State<_AccountSecurityCard> {
           (provider) => provider.providerId == GoogleAuthProvider.PROVIDER_ID,
         ) ??
         false;
+    final hasApple = _authService.hasAppleProvider(user);
     final needsEmailVerification =
         hasPassword && user != null && !user.emailVerified;
 
@@ -1038,66 +1072,156 @@ class _AccountSecurityCardState extends State<_AccountSecurityCard> {
             : SteeingPageStrings.accountPasswordNotSet,
         enabled: hasPassword && !needsEmailVerification,
       ),
-      child: needsEmailVerification
-          ? Column(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildPasswordSection(
+            user: user,
+            hasPassword: hasPassword,
+            hasGoogle: hasGoogle,
+            needsEmailVerification: needsEmailVerification,
+          ),
+          SizedBox(height: SettingPageStyles.gapLg),
+          const Divider(),
+          SizedBox(height: SettingPageStyles.gapMd),
+          Text(
+            SteeingPageStrings.accountAppleTitle,
+            style: SettingPageStyles.cardTitleStyle,
+          ),
+          SizedBox(height: SettingPageStyles.gapSm),
+          if (hasApple)
+            Row(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Icon(
-                      Icons.mark_email_unread_rounded,
-                      color: Colors.orange,
-                    ),
-                    SizedBox(width: SettingPageStyles.gapSm),
-                    Expanded(
-                      child: Text(
-                        SteeingPageStrings
-                            .accountVerificationRequiredDescription,
-                        style: SettingPageStyles.bodyTextStyle,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: SettingPageStyles.gapMd),
-                OutlinedButton.icon(
-                  onPressed: _isSendingVerification
-                      ? null
-                      : _sendVerificationEmail,
-                  icon: _isSendingVerification
-                      ? const SizedBox(
-                          width: 18,
-                          height: 18,
-                          child: CircularProgressIndicator(strokeWidth: 2),
-                        )
-                      : const Icon(Icons.outgoing_mail),
-                  label: Text(SteeingPageStrings.accountResendVerification),
-                ),
-              ],
-            )
-          : hasPassword
-          ? Row(
               children: [
                 const Icon(Icons.check_circle_rounded, color: Colors.green),
                 SizedBox(width: SettingPageStyles.gapSm),
                 Expanded(
-                  child: Text(
-                    hasGoogle
-                        ? SteeingPageStrings.accountGoogleAndEmailAvailable
-                        : SteeingPageStrings.accountEmailAvailable,
-                    style: SettingPageStyles.bodyTextStyle,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        SteeingPageStrings.accountAppleLinked,
+                        style: SettingPageStyles.bodyTextStyle.copyWith(
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        SteeingPageStrings.accountAppleLinkedDescription,
+                        style: SettingPageStyles.bodyTextStyle,
+                      ),
+                    ],
                   ),
                 ),
               ],
             )
-          : Align(
-              alignment: Alignment.centerLeft,
-              child: FilledButton.icon(
-                onPressed: user == null ? null : _setEmailPassword,
-                icon: const Icon(Icons.password_rounded),
-                label: Text(SteeingPageStrings.accountSetEmailPassword),
-              ),
+          else ...[
+            Text(
+              SteeingPageStrings.accountAppleNotLinkedDescription,
+              style: SettingPageStyles.bodyTextStyle,
             ),
+            SizedBox(height: SettingPageStyles.gapMd),
+            LayoutBuilder(
+              builder: (context, constraints) {
+                final useLogoOnly = constraints.maxWidth < 240;
+                return OfficialAppleSignInButton(
+                  onPressed: _linkAppleProvider,
+                  text: 'widgets.login.social.buttons.s002'.tr,
+                  width: useLogoOnly
+                      ? 52
+                      : constraints.maxWidth.clamp(240, 280),
+                  height: useLogoOnly ? 52 : 44,
+                  logoOnly: useLogoOnly,
+                  disabled: user == null || _isLinkingApple,
+                );
+              },
+            ),
+            if (_isLinkingApple) ...[
+              SizedBox(height: SettingPageStyles.gapSm),
+              Row(
+                children: [
+                  const SizedBox(
+                    width: 16,
+                    height: 16,
+                    child: CircularProgressIndicator(strokeWidth: 2),
+                  ),
+                  SizedBox(width: SettingPageStyles.gapSm),
+                  Text(
+                    SteeingPageStrings.accountAppleLinking,
+                    style: SettingPageStyles.bodyTextStyle,
+                  ),
+                ],
+              ),
+            ],
+          ],
+        ],
+      ),
+    );
+  }
+
+  Widget _buildPasswordSection({
+    required User? user,
+    required bool hasPassword,
+    required bool hasGoogle,
+    required bool needsEmailVerification,
+  }) {
+    if (needsEmailVerification) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Icon(Icons.mark_email_unread_rounded, color: Colors.orange),
+              SizedBox(width: SettingPageStyles.gapSm),
+              Expanded(
+                child: Text(
+                  SteeingPageStrings.accountVerificationRequiredDescription,
+                  style: SettingPageStyles.bodyTextStyle,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: SettingPageStyles.gapMd),
+          OutlinedButton.icon(
+            onPressed: _isSendingVerification ? null : _sendVerificationEmail,
+            icon: _isSendingVerification
+                ? const SizedBox(
+                    width: 18,
+                    height: 18,
+                    child: CircularProgressIndicator(strokeWidth: 2),
+                  )
+                : const Icon(Icons.outgoing_mail),
+            label: Text(SteeingPageStrings.accountResendVerification),
+          ),
+        ],
+      );
+    }
+
+    if (hasPassword) {
+      return Row(
+        children: [
+          const Icon(Icons.check_circle_rounded, color: Colors.green),
+          SizedBox(width: SettingPageStyles.gapSm),
+          Expanded(
+            child: Text(
+              hasGoogle
+                  ? SteeingPageStrings.accountGoogleAndEmailAvailable
+                  : SteeingPageStrings.accountEmailAvailable,
+              style: SettingPageStyles.bodyTextStyle,
+            ),
+          ),
+        ],
+      );
+    }
+
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: FilledButton.icon(
+        onPressed: user == null ? null : _setEmailPassword,
+        icon: const Icon(Icons.password_rounded),
+        label: Text(SteeingPageStrings.accountSetEmailPassword),
+      ),
     );
   }
 }
@@ -1254,53 +1378,21 @@ class _SetEmailPasswordDialogState extends State<_SetEmailPasswordDialog> {
   }
 }
 
-class _UserProtocolButton extends StatefulWidget {
+class _UserProtocolButton extends StatelessWidget {
   const _UserProtocolButton();
 
   @override
-  State<_UserProtocolButton> createState() => _UserProtocolButtonState();
-}
-
-class _UserProtocolButtonState extends State<_UserProtocolButton> {
-  static Duration get _pressAnimationDuration => Duration(milliseconds: 120);
-  static const double _pressedScale = 0.96;
-
-  bool _isPressed = false;
-
-  void _setPressed(bool value) {
-    if (_isPressed == value) {
-      return;
-    }
-
-    setState(() {
-      _isPressed = value;
-    });
-  }
-
-  Future<void> _handleTapUp() async {
-    _setPressed(false);
-    await Future<void>.delayed(_pressAnimationDuration);
-    if (!mounted) {
-      return;
-    }
-
-    await Navigator.of(context).push(
-      MaterialPageRoute<void>(builder: (context) => const UserProtocolPage()),
-    );
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTapDown: (_) => _setPressed(true),
-      onTapUp: (_) => _handleTapUp(),
-      onTapCancel: () => _setPressed(false),
-      behavior: HitTestBehavior.opaque,
-      child: AnimatedScale(
-        scale: _isPressed ? _pressedScale : 1,
-        duration: _pressAnimationDuration,
-        curve: Curves.easeOutCubic,
-        child: Container(
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        borderRadius: SettingPageStyles.panelBorderRadius,
+        onTap: () => Navigator.of(context).push(
+          MaterialPageRoute<void>(
+            builder: (context) => const UserProtocolPage(),
+          ),
+        ),
+        child: Ink(
           width: double.infinity,
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
           decoration: BoxDecoration(
@@ -1325,7 +1417,7 @@ class _UserProtocolButtonState extends State<_UserProtocolButton> {
                   borderRadius: SettingPageStyles.settingIconBorderRadius,
                 ),
                 child: Icon(
-                  Icons.description_rounded,
+                  Icons.policy_rounded,
                   color: SettingPageStyles.surfaceIconColor,
                   size: SettingPageStyles.settingIconGlyphSize,
                 ),
@@ -1355,24 +1447,10 @@ class _UserProtocolButtonState extends State<_UserProtocolButton> {
                 ),
               ),
               SizedBox(width: SettingPageStyles.gapMd),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Icon(
-                    Icons.chevron_right_rounded,
-                    color: Colors.white.withValues(alpha: 0.92),
-                    size: 30,
-                  ),
-                  // SizedBox(height: SettingPageStyles.gap2xs),
-                  // Text(
-                  //   SteeingPageStrings.userProtocolButtonHint,
-                  //   style: AppTheme.cardTitleStyle.copyWith(
-                  //     fontSize: 12,
-                  //     color: Colors.white.withValues(alpha: 0.88),
-                  //   ),
-                  //   textAlign: TextAlign.end,
-                  // ),
-                ],
+              Icon(
+                Icons.chevron_right_rounded,
+                color: Colors.white.withValues(alpha: 0.92),
+                size: 30,
               ),
             ],
           ),
@@ -1473,7 +1551,9 @@ class _DeleteAccountCardState extends State<_DeleteAccountCard> {
             : SteeingPageStrings.deleteAccountFailed,
         type: AppToastType.error,
       );
-    } catch (_) {
+    } catch (error, stackTrace) {
+      debugPrint('刪除帳號失敗: $error');
+      debugPrintStack(stackTrace: stackTrace);
       if (!mounted) return;
       SnackBarBuilder.show(
         context,

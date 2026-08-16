@@ -55,7 +55,7 @@ class _GameMainPageState extends State<GameMainPage>
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
     routeObserver.unsubscribe(this);
-    AudioService().stopMainBgm();
+    AudioService().stopMainBgm(onlyIfPlaying: 'audio/M04_walk_daytime.m4a');
     super.dispose();
   }
 

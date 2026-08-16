@@ -4,10 +4,11 @@ import '../../styles/app_theme.dart';
 import '../constants/asset_paths.dart';
 import '../constants/responsive.dart';
 import 'game_button.dart';
-import 'apple_sign_in_button.dart';
 import 'game_link_text.dart';
-import 'google_image_button.dart';
 import 'login_text_field.dart';
+import 'official_apple_sign_in_button.dart';
+import 'social_image_button.dart';
+import 'package:get/get.dart';
 
 class WoodLoginPanel extends StatelessWidget {
   const WoodLoginPanel({
@@ -124,20 +125,25 @@ class WoodLoginPanel extends StatelessWidget {
           ),
           Positioned(
             bottom: 10 * scale,
+            left: 68 * scale,
+            right: 68 * scale,
             child: Row(
-              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                GoogleImageButton(
+                SocialImageButton(
                   imagePath: AssetPaths.googleLogo,
+                  semanticsLabel: 'widgets.login.social.buttons.s001'.tr,
                   size: 88 * scale,
                   disabled: isLoading,
                   onTap: onGoogleSignIn,
                 ),
-                SizedBox(width: 14 * scale),
-                AppleSignInButton(
-                  size: 66 * scale,
+                OfficialAppleSignInButton(
+                  text: 'widgets.login.social.buttons.s002'.tr,
+                  width: 80 * scale,
+                  height: 80 * scale,
                   disabled: isLoading,
-                  onTap: onAppleSignIn,
+                  logoOnly: true,
+                  onPressed: onAppleSignIn,
                 ),
               ],
             ),

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 const _supportedLocales = ['zh', 'en', 'ja'];
+const _intentionalSharedValues = {'Google Maps', 'Email'};
 
 void main(List<String> args) {
   final root = Directory.current;
@@ -34,21 +35,39 @@ void main(List<String> args) {
   final translations = {
     for (final locale in _supportedLocales) locale: <String, String>{},
   };
+  final seenKeys = <String>{};
+  final errors = <String>[];
 
   for (final entry in entries.whereType<Map<String, dynamic>>()) {
     final key = entry['key'];
     final zh = entry['zh'];
     if (key is! String || key.isEmpty || zh is! String || zh.isEmpty) {
+      errors.add('Invalid key or Chinese translation: $key');
+      continue;
+    }
+    if (!seenKeys.add(key)) {
+      errors.add('Duplicate translation key: $key');
       continue;
     }
 
     translations['zh']![key] = zh;
     for (final locale in _supportedLocales.skip(1)) {
       final value = entry[locale];
-      translations[locale]![key] = value is String && value.isNotEmpty
-          ? value
-          : zh;
+      if (value is! String || value.trim().isEmpty) {
+        errors.add('$locale is empty for $key');
+        continue;
+      }
+      if (value == zh && !_intentionalSharedValues.contains(value)) {
+        errors.add('$locale falls back to Chinese for $key');
+      }
+      translations[locale]![key] = value;
     }
+  }
+
+  if (errors.isNotEmpty) {
+    stderr.writeln(errors.join('\n'));
+    exitCode = 1;
+    return;
   }
 
   final outputDir = Directory('${root.path}/lib/l10n')

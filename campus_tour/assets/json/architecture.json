@@ -534,11 +534,11 @@
     },
     "type": "裝置藝術",
     "story": {
-      "zh": "",
-      "en": "",
-      "ja": ""
+      "zh": "「筆墨紙硯」是中央大學正門入口處極具代表性的人文景觀。它巧妙結合地形與周邊建築，將傳統文房四寶藏進校園：高聳的「在臺復校紀念碑」如同一支筆，磚紅色警衛室宛如一塊墨，行政大樓的鏤空方格外牆象徵九宮格宣紙，而修剪出「中央大學」校名的綠色花圃則是一方硯台。四者共同迎接每位走進校園的人，也寓意中大學子在這張紙上揮毫，寫下屬於自己的大學篇章。",
+      "en": "The Four Treasures of the Study is one of the most distinctive cultural landscapes at National Central University's main entrance. The terrain and surrounding architecture cleverly evoke the four traditional tools of Chinese calligraphy: the towering Monument Commemorating NCU's Re-establishment in Taiwan represents a brush; the red-brick guardhouse resembles an ink stick; the open-grid facade of the Administration Building suggests gridded calligraphy paper; and the green flower bed trimmed to display the university's name forms an inkstone. Together, they welcome everyone entering the campus and symbolize NCU students writing their own university stories upon this sheet of paper.",
+      "ja": "「筆墨紙硯」は、国立中央大学の正門入口を代表する人文景観です。地形と周囲の建築を巧みに組み合わせ、中国の伝統的な文房四宝をキャンパスの風景に表現しています。高くそびえる「台湾復校記念碑」は筆、赤れんがの守衛室は墨、行政大楼の格子状の外壁は升目入りの宣紙、そして「中央大學」の文字に刈り込まれた緑の花壇は硯を象徴しています。四つの景観はキャンパスを訪れる人々を迎えるとともに、中大の学生がこの紙の上に自らの大学生活を描いていくという意味も込められています。"
     },
-    "imageURL": "",
+    "imageURL": "assets/images/art/Treasures.jpg",
     "author": "",
     "date": ""
   },
@@ -549,13 +549,13 @@
       "en": "Office of International Affairs",
       "ja": "国際事務所"
     },
-    "type": "裝置藝術",
+    "type": "景點",
     "story": {
       "zh": "想認識世界、走向國際，就從國際事務處開始！我們設有國際行政事務組、國際交流暨招生組及海外教育推廣組。無論你是來自世界各地、正在中大展開新生活，或想出國交換、體驗海外學習，我們都在這裡陪你一起探索。從校園生活、國際交流到跨文化活動，讓你的中大旅程更多元、更精彩！",
       "en": " Your global journey starts here at NCU! The Office of International Affairs (OIA) has three divisions: International Administrative Affairs, International Cooperation and Student Recruitment, and Global Education and Student Mobility. Whether you’re an international student starting a new chapter at NCU or an NCU student ready to explore the world, we’re here for you! From campus support and global opportunities to cross-cultural activities, let’s make your NCU journey more connected, exciting, and truly international!",
       "ja": "世界を知り、国際的な視野を広げたいなら、まずは国際事務処から！国際事務処には、「国際行政事務組」「国際交流・学生募集組」「海外教育推進組」の3つの部門があります。世界各地から中大に来て新しい生活を始める方も、海外交換留学や海外での学びを体験したい方も、私たちが皆さんの挑戦と新しい発見をサポートします。キャンパスライフから国際交流、異文化交流イベントまで、中大での学生生活をより多彩で、より充実したものにしていきましょう！"
     },
-    "imageURL": "assets/images/art/FiveElephant.jpg",
+    "imageURL": "",
     "author": "",
     "date": ""
   },
@@ -566,31 +566,31 @@
       "en": "Office of Student Affairs",
       "ja": "学生事務所"
     },
-    "type": "裝置藝術",
+    "type": "景點",
     "story": {
       "zh": "",
       "en": "",
       "ja": ""
     },
-    "imageURL": "assets/images/art/FiveElephant.jpg",
+    "imageURL": "",
     "author": "",
     "date": ""
   },
   {
     "id": "a25",
     "name": {
-      "zh": "大講堂",
+      "zh": "大禮堂",
       "en": "Auditorium",
-      "ja": "大講堂"
+      "ja": "大礼堂"
     },
     "type": "裝置藝術",
     "story": {
-      "zh": "",
-      "en": "",
-      "ja": ""
+      "zh": "大禮堂是中央大學教學研究綜合大樓的一部分，於2020年啟用。建築以校園常見的松果為設計意象，層層交疊的外觀呼應中大「以松立校」的精神，也象徵知識種子的孕育。館內設有約1,500個座位，並運用多角度的聲學反射設計，可供集會、演講、劇場與音樂演出使用，是校園中央的重要地標，也是桃園地區具規模的展演空間。",
+      "en": "The Auditorium is part of National Central University's Teaching and Research Complex and opened in 2020. Inspired by the pine cones commonly found across campus, its layered exterior reflects NCU's tradition of taking the pine tree as its symbol and represents the nurturing of seeds of knowledge. The hall seats approximately 1,500 people and features multi-angled acoustic reflectors. Designed for assemblies, lectures, theatrical productions, and concerts, it is both a major campus landmark and one of the largest performance venues in the Taoyuan area.",
+      "ja": "大礼堂は、国立中央大学の教育研究総合棟を構成する施設の一つで、2020年に開館しました。キャンパスでよく見られる松ぼっくりをモチーフとした重層的な外観は、松を大学の精神的象徴とする中大の伝統を表し、知識の種を育むという意味も込められています。館内には約1,500席が設けられ、多角度の音響反射設計が採用されています。集会や講演、演劇、音楽公演などに利用される、キャンパス中央の重要なランドマークであり、桃園地域でも有数の規模を誇る上演施設です。"
     },
-    "imageURL": "assets/images/art/FiveElephant.jpg",
-    "author": "",
-    "date": ""
+    "imageURL": "assets/images/art/Auditorium.jpg",
+    "author": "潘冀",
+    "date": "1981年"
   }
 ]
