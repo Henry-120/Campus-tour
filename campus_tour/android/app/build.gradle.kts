@@ -39,7 +39,7 @@ android {
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
     // Play Asset Delivery
-    assetPacks.add(":music_pack")
+    assetPacks.addAll(listOf(":music_pack", ":ar_model_pack"))
 
 
     compileOptions {

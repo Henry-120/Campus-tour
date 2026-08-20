@@ -442,6 +442,7 @@ class AppTranslations extends Translations {
       'widgets.sections.drawer.button.group.s008': '登出中...',
       'widgets.sections.drawer.button.group.s009': '登出',
       'widgets.sections.drawer.button.group.s010': '校園安全',
+      'widgets.sections.drawer.button.group.s011': 'MQTT 功能測試',
       'widgets.sections.monster.test.s001': '測試火精靈',
       'widgets.sections.monster.test.s003': '測試水精靈',
       'widgets.sections.monster.test.s005': '測試圖文關卡 1：觀察地圖後掃描 TEST_NFC_ID。',
@@ -985,6 +986,7 @@ class AppTranslations extends Translations {
       'widgets.sections.drawer.button.group.s008': 'Signing out...',
       'widgets.sections.drawer.button.group.s009': 'Sign Out',
       'widgets.sections.drawer.button.group.s010': 'Campus Safety',
+      'widgets.sections.drawer.button.group.s011': 'MQTT Test',
       'widgets.sections.monster.test.s001': 'Test Fire Spirit',
       'widgets.sections.monster.test.s003': 'Test Water Spirit',
       'widgets.sections.monster.test.s005':
@@ -1461,6 +1463,7 @@ class AppTranslations extends Translations {
       'widgets.sections.drawer.button.group.s008': 'ログアウト中...',
       'widgets.sections.drawer.button.group.s009': 'ログアウト',
       'widgets.sections.drawer.button.group.s010': 'キャンパス安全',
+      'widgets.sections.drawer.button.group.s011': 'MQTT機能テスト',
       'widgets.sections.monster.test.s001': 'テスト用の火の精霊',
       'widgets.sections.monster.test.s003': 'テスト用の水の精霊',
       'widgets.sections.monster.test.s005':

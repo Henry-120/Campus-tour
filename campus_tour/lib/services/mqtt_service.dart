@@ -1,12 +1,20 @@
-import 'package:mqtt_client/mqtt_client.dart';
-import 'package:mqtt_client/mqtt_server_client.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:convert';
-import 'package:campus_tour/config/esp32_scheme.dart';
-import 'package:flutter/material.dart';
 import 'dart:math';
 
+import 'package:campus_tour/config/esp32_scheme.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:mqtt_client/mqtt_client.dart';
+import 'package:mqtt_client/mqtt_server_client.dart';
+
 class MqttService {
+  static const Set<String> _supportedEvents = {
+    'scan_success',
+    'arrival',
+    'story_unlock',
+    'challenge_clear',
+  };
+
   final FirebaseAuth _auth = FirebaseAuth.instance;
   late final String _clientId;
   bool get isConnected =>
@@ -22,7 +30,8 @@ class MqttService {
       _clientId,
       Esp32MQTT_info.PORT,
     );
-    _client.logging(on: true);
+    _client.secure = true;
+    _client.logging(on: false);
   }
   Future<String?> get _idToken async {
     final user = _auth.currentUser;
@@ -50,8 +59,7 @@ class MqttService {
     }
     try {
       isConnecting = true;
-
-      await _client.connect();
+      await _client.connect(Esp32MQTT_info.USERNAME, Esp32MQTT_info.PASSWORD);
       return isConnected;
     } catch (e) {
       debugPrint('[MQTT] Connect error: $e');
@@ -61,29 +69,33 @@ class MqttService {
     }
   }
 
-  Future<void> sendMessageWithToken(String actionID) async {
+  Future<void> sendStationEvent({
+    required String stationId,
+    String event = 'scan_success',
+  }) async {
+    if (!_supportedEvents.contains(event)) {
+      throw ArgumentError.value(event, 'event', 'Unsupported MQTT event');
+    }
+
     if (!isConnected) {
       final success = await connect();
 
       if (!success) {
-        throw Exception("MQTT connection failed");
+        throw Exception('MQTT connection failed');
       }
     }
+
     final token = await _idToken;
     if (token == null) {
-      throw Exception("User not authenticated");
+      throw Exception('User not authenticated');
     }
-    final message = jsonEncode({
-      'action': 'play',
-      'actionID': actionID,
-      'token': token,
-    });
+
+    final topic = 'campustour/$stationId/checkin';
+    final message = jsonEncode({'idToken': token, 'event': event});
+
     final builder = MqttClientPayloadBuilder();
     builder.addString(message);
-    _client.publishMessage(
-      Esp32MQTT_info.TOPIC,
-      MqttQos.atLeastOnce,
-      builder.payload!,
-    );
+
+    _client.publishMessage(topic, MqttQos.atLeastOnce, builder.payload!);
   }
 }
