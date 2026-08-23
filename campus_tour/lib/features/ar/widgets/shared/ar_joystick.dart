@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// 供 iOS 與 Android AR 操控頁共用的虛擬搖桿。
 class ArJoystick extends StatefulWidget {
   final Function(double dx, double dy) onMove;
   final VoidCallback? onEnd;

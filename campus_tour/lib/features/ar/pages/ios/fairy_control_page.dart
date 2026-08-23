@@ -1,24 +1,25 @@
 import 'dart:math' as math;
+import 'package:campus_tour/controllers/monster_controller.dart';
+import 'package:campus_tour/features/ar/widgets/shared/ar_dance_button.dart';
+import 'package:campus_tour/features/ar/widgets/shared/ar_joystick.dart';
+import 'package:campus_tour/services/audio_service.dart';
 import 'package:flutter/material.dart';
 import 'package:arkit_plugin/arkit_plugin.dart';
 import 'package:vector_math/vector_math_64.dart' as vector;
-import '../../controllers/monster_controller.dart';
-import '../../services/audio_service.dart';
 import 'package:get/get.dart';
-import 'joy_stick.dart'; // 💡 引入搖桿組件
-import 'dance_button.dart';
 
-class ArPage extends StatefulWidget {
-  const ArPage({super.key, this.inheritArAudio = false});
+class IosFairyControlPage extends StatefulWidget {
+  const IosFairyControlPage({super.key, this.inheritArAudio = false});
 
   /// 從已播放 M12 的 AR 頁面進入時設為 true，避免重播或誤停父頁音樂。
   final bool inheritArAudio;
 
   @override
-  State<ArPage> createState() => _ArPageState();
+  State<IosFairyControlPage> createState() => _IosFairyControlPageState();
 }
 
-class _ArPageState extends State<ArPage> with WidgetsBindingObserver {
+class _IosFairyControlPageState extends State<IosFairyControlPage>
+    with WidgetsBindingObserver {
   ARKitController? arkitController;
   final monsterController = Get.find<MonsterController>();
 
@@ -101,7 +102,7 @@ class _ArPageState extends State<ArPage> with WidgetsBindingObserver {
             Positioned(
               right: 40, // 放在右下角，跟左邊的搖桿對稱
               bottom: 180,
-              child: DanceButton(
+              child: ArDanceButton(
                 onTap: () {
                   _switchFairyModel("Fairy_dancing.usdz"); // 💡 觸發跳舞動畫
                 },

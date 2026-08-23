@@ -4,6 +4,7 @@ import 'package:campus_tour/controllers/login_controller.dart';
 import 'package:campus_tour/controllers/user_controller.dart';
 import 'package:campus_tour/styles/app_theme.dart';
 import 'package:campus_tour/styles/setting_page_styles.dart';
+import 'package:campus_tour/view/MQTT_test.dart';
 import 'package:campus_tour/view/map_suggestions.dart';
 import 'package:campus_tour/view/novice_leading_page.dart';
 import 'package:campus_tour/view/start_page.dart';
@@ -36,6 +37,8 @@ class DrawerButtonGroup extends StatelessWidget {
                         _PanoramaMapButton(),
                         SizedBox(height: SettingPageStyles.gapMd),
                         _IssueReportButton(),
+                        SizedBox(height: SettingPageStyles.gapMd),
+                        _MqttTestButton(),
                         SizedBox(height: SettingPageStyles.gapMd),
                         _SecurityButton(),
                       ],
@@ -203,6 +206,26 @@ class _IssueReportButton extends StatelessWidget {
       icon: Icons.report_problem_rounded,
       title: 'widgets.sections.drawer.button.group.s005'.tr,
       onTap: () => _showFeatureNotImplementedMessage(context),
+    );
+  }
+}
+
+class _MqttTestButton extends StatelessWidget {
+  const _MqttTestButton();
+
+  void _onPress(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const MqttTestPage()),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return _DrawerActionTile(
+      icon: Icons.sensors_rounded,
+      title: 'widgets.sections.drawer.button.group.s011'.tr,
+      onTap: () => _onPress(context),
     );
   }
 }

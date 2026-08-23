@@ -1,6 +1,6 @@
 {
   "generatedBy": "tool/extract_chinese_strings.dart",
-  "totalUniqueStrings": 507,
+  "totalUniqueStrings": 539,
   "entries": [
     {
       "key": "controllers.login.controller.s001",
@@ -359,6 +359,378 @@
         {
           "file": "lib/controllers/user_controller.dart",
           "line": 42
+        }
+      ]
+    },
+    {
+      "key": "features.ar.controllers.android.android.ar.scene.controller.s001",
+      "zh": "無法啟動 AR",
+      "en": "Unable to start AR",
+      "ja": "AR を起動できません",
+      "occurrences": [
+        {
+          "file": "lib/features/ar/controllers/android/android_ar_scene_controller.dart",
+          "line": 50
+        }
+      ]
+    },
+    {
+      "key": "features.ar.pages.android.ar.placement.page.s001",
+      "zh": "模型尚未準備完成，請再選一次。",
+      "en": "The model is not ready yet. Select it again.",
+      "ja": "モデルの準備ができていません。もう一度選択してください。",
+      "occurrences": [
+        {
+          "file": "lib/features/ar/pages/android/ar_placement_page.dart",
+          "line": 82
+        }
+      ]
+    },
+    {
+      "key": "features.ar.pages.android.ar.placement.page.s002",
+      "zh": "這個精靈目前沒有 Android AR 模型。",
+      "en": "This spirit does not currently have an Android AR model.",
+      "ja": "この精霊には現在 Android AR モデルがありません。",
+      "occurrences": [
+        {
+          "file": "lib/features/ar/pages/android/ar_placement_page.dart",
+          "line": 91
+        }
+      ]
+    },
+    {
+      "key": "features.ar.pages.android.ar.placement.page.s003",
+      "zh": "請先從下方選擇一隻支援 Android AR 的精靈。",
+      "en": "Select an Android AR-compatible spirit below.",
+      "ja": "下から Android AR に対応した精霊を選択してください。",
+      "occurrences": [
+        {
+          "file": "lib/features/ar/pages/android/ar_placement_page.dart",
+          "line": 113
+        }
+      ]
+    },
+    {
+      "key": "features.ar.pages.android.ar.placement.page.s004",
+      "zh": "精靈已固定在平面上；點其他平面可重新放置。",
+      "en": "The spirit is anchored to the surface. Tap another surface to reposition it.",
+      "ja": "精霊を平面に固定しました。別の平面をタップすると再配置できます。",
+      "occurrences": [
+        {
+          "file": "lib/features/ar/pages/android/ar_placement_page.dart",
+          "line": 116
+        }
+      ]
+    },
+    {
+      "key": "features.ar.pages.android.ar.placement.page.s005",
+      "zh": "已偵測到平面，請點一下網格上的地面或桌面。",
+      "en": "Surface detected. Tap the gridded floor or table.",
+      "ja": "平面を検出しました。グリッドが表示された床または机をタップしてください。",
+      "occurrences": [
+        {
+          "file": "lib/features/ar/pages/android/ar_placement_page.dart",
+          "line": 119
+        }
+      ]
+    },
+    {
+      "key": "features.ar.pages.android.ar.placement.page.s006",
+      "zh": "請緩慢移動手機，先掃描地面或桌面。",
+      "en": "Move your phone slowly to scan the floor or a table.",
+      "ja": "スマートフォンをゆっくり動かして、床または机をスキャンしてください。",
+      "occurrences": [
+        {
+          "file": "lib/features/ar/pages/android/ar_placement_page.dart",
+          "line": 121
+        }
+      ]
+    },
+    {
+      "key": "features.ar.pages.android.ar.placement.page.s007",
+      "zh": "請先從下方選擇精靈。",
+      "en": "Select a spirit below first.",
+      "ja": "先に下から精霊を選択してください。",
+      "occurrences": [
+        {
+          "file": "lib/features/ar/pages/android/ar_placement_page.dart",
+          "line": 163
+        }
+      ]
+    },
+    {
+      "key": "features.ar.pages.android.ar.placement.page.s008",
+      "zh": "AR 啟動失敗：@message",
+      "en": "Failed to start AR: @message",
+      "ja": "AR の起動に失敗しました：@message",
+      "occurrences": [
+        {
+          "file": "lib/features/ar/pages/android/ar_placement_page.dart",
+          "line": 164
+        }
+      ]
+    },
+    {
+      "key": "features.ar.pages.android.ar.placement.page.s009",
+      "zh": "正在啟動 ARCore…",
+      "en": "Starting ARCore…",
+      "ja": "ARCore を起動しています…",
+      "occurrences": [
+        {
+          "file": "lib/features/ar/pages/android/ar_placement_page.dart",
+          "line": 192
+        }
+      ]
+    },
+    {
+      "key": "features.ar.pages.android.ar.placement.page.s010",
+      "zh": "目前取得的精靈中沒有可用的 Android AR 模型。",
+      "en": "None of the available spirits has a usable Android AR model.",
+      "ja": "現在取得できる精霊には、利用可能な Android AR モデルがありません。",
+      "occurrences": [
+        {
+          "file": "lib/features/ar/pages/android/ar_placement_page.dart",
+          "line": 233
+        }
+      ]
+    },
+    {
+      "key": "features.ar.pages.android.ar.placement.page.s011",
+      "zh": "清除精靈",
+      "en": "Clear spirit",
+      "ja": "精霊を削除",
+      "occurrences": [
+        {
+          "file": "lib/features/ar/pages/android/ar_placement_page.dart",
+          "line": 305
+        }
+      ]
+    },
+    {
+      "key": "features.ar.pages.ar.support.gate.page.s001",
+      "zh": "正在確認裝置的 AR 支援狀態…",
+      "en": "Checking this device's AR support…",
+      "ja": "デバイスの AR 対応状況を確認しています…",
+      "occurrences": [
+        {
+          "file": "lib/features/ar/pages/ar_support_gate_page.dart",
+          "line": 83
+        }
+      ]
+    },
+    {
+      "key": "features.ar.pages.ar.unavailable.page.s001",
+      "zh": "需要安裝或更新 ARCore",
+      "en": "ARCore must be installed or updated",
+      "ja": "ARCore のインストールまたは更新が必要です",
+      "occurrences": [
+        {
+          "file": "lib/features/ar/pages/ar_unavailable_page.dart",
+          "line": 14
+        }
+      ]
+    },
+    {
+      "key": "features.ar.pages.ar.unavailable.page.s002",
+      "zh": "此裝置不支援 AR",
+      "en": "This device does not support AR",
+      "ja": "このデバイスは AR に対応していません",
+      "occurrences": [
+        {
+          "file": "lib/features/ar/pages/ar_unavailable_page.dart",
+          "line": 16
+        }
+      ]
+    },
+    {
+      "key": "features.ar.pages.ar.unavailable.page.s003",
+      "zh": "需要相機權限",
+      "en": "Camera permission required",
+      "ja": "カメラの権限が必要です",
+      "occurrences": [
+        {
+          "file": "lib/features/ar/pages/ar_unavailable_page.dart",
+          "line": 19
+        }
+      ]
+    },
+    {
+      "key": "features.ar.pages.ar.unavailable.page.s004",
+      "zh": "相機受到系統限制",
+      "en": "Camera access is restricted",
+      "ja": "カメラの使用が制限されています",
+      "occurrences": [
+        {
+          "file": "lib/features/ar/pages/ar_unavailable_page.dart",
+          "line": 21
+        }
+      ]
+    },
+    {
+      "key": "features.ar.pages.ar.unavailable.page.s005",
+      "zh": "此平台沒有 AR 功能",
+      "en": "AR is unavailable on this platform",
+      "ja": "このプラットフォームでは AR を利用できません",
+      "occurrences": [
+        {
+          "file": "lib/features/ar/pages/ar_unavailable_page.dart",
+          "line": 23
+        }
+      ]
+    },
+    {
+      "key": "features.ar.pages.ar.unavailable.page.s006",
+      "zh": "暫時無法啟動 AR",
+      "en": "Unable to start AR right now",
+      "ja": "現在 AR を起動できません",
+      "occurrences": [
+        {
+          "file": "lib/features/ar/pages/ar_unavailable_page.dart",
+          "line": 24
+        }
+      ]
+    },
+    {
+      "key": "features.ar.pages.ar.unavailable.page.s007",
+      "zh": "請完成 Google Play 服務的 AR 安裝或更新，回到 App 後再試一次。",
+      "en": "Complete the Google Play Services for AR installation or update, then return to the app and try again.",
+      "ja": "Google Play 開発者サービス（AR）のインストールまたは更新を完了し、アプリに戻ってもう一度お試しください。",
+      "occurrences": [
+        {
+          "file": "lib/features/ar/pages/ar_unavailable_page.dart",
+          "line": 29
+        }
+      ]
+    },
+    {
+      "key": "features.ar.pages.ar.unavailable.page.s008",
+      "zh": "這台裝置不支援目前所需的 ARKit／ARCore 世界追蹤功能。",
+      "en": "This device does not support the ARKit/ARCore world-tracking capabilities required by this feature.",
+      "ja": "このデバイスは、この機能に必要な ARKit／ARCore のワールドトラッキングに対応していません。",
+      "occurrences": [
+        {
+          "file": "lib/features/ar/pages/ar_unavailable_page.dart",
+          "line": 31
+        }
+      ]
+    },
+    {
+      "key": "features.ar.pages.ar.unavailable.page.s009",
+      "zh": "AR 必須使用相機辨識環境；請允許相機權限後重試。",
+      "en": "AR uses the camera to understand your surroundings. Allow camera access and try again.",
+      "ja": "AR は周囲を認識するためにカメラを使用します。カメラの使用を許可して、もう一度お試しください。",
+      "occurrences": [
+        {
+          "file": "lib/features/ar/pages/ar_unavailable_page.dart",
+          "line": 33
+        }
+      ]
+    },
+    {
+      "key": "features.ar.pages.ar.unavailable.page.s010",
+      "zh": "相機權限已被關閉，請前往系統設定允許此 App 使用相機。",
+      "en": "Camera access is disabled. Open system settings and allow this app to use the camera.",
+      "ja": "カメラの権限が無効です。システム設定でこのアプリのカメラ使用を許可してください。",
+      "occurrences": [
+        {
+          "file": "lib/features/ar/pages/ar_unavailable_page.dart",
+          "line": 35
+        }
+      ]
+    },
+    {
+      "key": "features.ar.pages.ar.unavailable.page.s011",
+      "zh": "此裝置的相機目前受家長控制或系統政策限制。",
+      "en": "Camera access is currently restricted by parental controls or system policy.",
+      "ja": "カメラは現在、ペアレンタルコントロールまたはシステムポリシーによって制限されています。",
+      "occurrences": [
+        {
+          "file": "lib/features/ar/pages/ar_unavailable_page.dart",
+          "line": 37
+        }
+      ]
+    },
+    {
+      "key": "features.ar.pages.ar.unavailable.page.s012",
+      "zh": "AR 放置功能目前只支援 Android 與 iOS 實體裝置。",
+      "en": "AR placement is currently available only on physical Android and iOS devices.",
+      "ja": "AR 配置機能は現在、Android および iOS の実機でのみ利用できます。",
+      "occurrences": [
+        {
+          "file": "lib/features/ar/pages/ar_unavailable_page.dart",
+          "line": 39
+        }
+      ]
+    },
+    {
+      "key": "features.ar.pages.ar.unavailable.page.s013",
+      "zh": "請稍後再試，或重新啟動 App。",
+      "en": "Try again later or restart the app.",
+      "ja": "しばらくしてから再試行するか、アプリを再起動してください。",
+      "occurrences": [
+        {
+          "file": "lib/features/ar/pages/ar_unavailable_page.dart",
+          "line": 40
+        }
+      ]
+    },
+    {
+      "key": "features.ar.pages.ar.unavailable.page.s014",
+      "zh": "AR 精靈",
+      "en": "AR Spirits",
+      "ja": "AR 精霊",
+      "occurrences": [
+        {
+          "file": "lib/features/ar/pages/ar_unavailable_page.dart",
+          "line": 47
+        }
+      ]
+    },
+    {
+      "key": "features.ar.pages.ar.unavailable.page.s015",
+      "zh": "開啟系統設定",
+      "en": "Open system settings",
+      "ja": "システム設定を開く",
+      "occurrences": [
+        {
+          "file": "lib/features/ar/pages/ar_unavailable_page.dart",
+          "line": 71
+        }
+      ]
+    },
+    {
+      "key": "features.ar.pages.ar.unavailable.page.s016",
+      "zh": "再試一次",
+      "en": "Try again",
+      "ja": "もう一度試す",
+      "occurrences": [
+        {
+          "file": "lib/features/ar/pages/ar_unavailable_page.dart",
+          "line": 79
+        }
+      ]
+    },
+    {
+      "key": "features.ar.services.android.arcore.support.service.s001",
+      "zh": "無法確認 Google Play 服務的 AR 支援狀態。",
+      "en": "Unable to verify AR support through Google Play Services.",
+      "ja": "Google Play 開発者サービスで AR の対応状況を確認できません。",
+      "occurrences": [
+        {
+          "file": "lib/features/ar/services/android/arcore_support_service.dart",
+          "line": 24
+        }
+      ]
+    },
+    {
+      "key": "features.ar.widgets.android.arcore.scene.view.s001",
+      "zh": "ARCore 僅支援 Android",
+      "en": "ARCore is only available on Android",
+      "ja": "ARCore は Android でのみ利用できます",
+      "occurrences": [
+        {
+          "file": "lib/features/ar/widgets/android/arcore_scene_view.dart",
+          "line": 64
         }
       ]
     },
@@ -5766,6 +6138,18 @@
         {
           "file": "lib/widgets/sections/drawer_button_group.dart",
           "line": 281
+        }
+      ]
+    },
+    {
+      "key": "widgets.sections.drawer.button.group.s011",
+      "zh": "MQTT 功能測試",
+      "en": "MQTT Test",
+      "ja": "MQTT機能テスト",
+      "occurrences": [
+        {
+          "file": "lib/widgets/sections/drawer_button_group.dart",
+          "line": 291
         }
       ]
     },

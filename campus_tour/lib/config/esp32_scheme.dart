@@ -5,8 +5,9 @@ abstract final class Esp32BleInfo {
 }
 
 abstract final class Esp32MqttInfo {
-  static const brokerAddress = '';
+  static const brokerAddress = 'ncu-station.tail77ced6.ts.net';
   static const client = 'flutter_client';
-  static const topic = 'esp32/actions';
-  static const port = 0000;
+  static const port = 8443;
+  static const username = 'phone_app';
+  static const password = 'ncu_explorer_2026';
 }

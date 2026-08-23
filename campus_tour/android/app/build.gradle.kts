@@ -5,6 +5,7 @@ plugins {
     id("com.google.gms.google-services")
     // END: FlutterFire Configuration
     id("kotlin-android")
+    id("org.jetbrains.kotlin.plugin.compose")
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id("dev.flutter.flutter-gradle-plugin")
 }
@@ -19,6 +20,9 @@ android {
     namespace = "com.example.campus_tour"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
+    // Play Asset Delivery
+    assetPacks.add(":ar_model_pack")
+
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -42,10 +46,13 @@ android {
         versionName = flutter.versionName
     }
 
+    buildFeatures {
+        compose = true
+    }
+
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
+            // Keep the existing main-branch signing behavior.
             signingConfig = signingConfigs.getByName("debug")
         }
     }
@@ -55,3 +62,10 @@ flutter {
     source = "../.."
 }
 
+dependencies {
+    implementation(platform("androidx.compose:compose-bom:2026.05.00"))
+    implementation("androidx.compose.ui:ui")
+    implementation("androidx.compose.foundation:foundation")
+    implementation("androidx.activity:activity-compose:1.9.0")
+    implementation("io.github.sceneview:arsceneview:4.6.2")
+}

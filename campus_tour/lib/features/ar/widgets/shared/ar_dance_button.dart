@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-class DanceButton extends StatefulWidget {
+class ArDanceButton extends StatefulWidget {
   final VoidCallback onTap; // 改為點擊觸發
 
-  const DanceButton({super.key, required this.onTap});
+  const ArDanceButton({super.key, required this.onTap});
 
   @override
-  State<DanceButton> createState() => _DanceButtonState();
+  State<ArDanceButton> createState() => _ArDanceButtonState();
 }
 
-class _DanceButtonState extends State<DanceButton>
+class _ArDanceButtonState extends State<ArDanceButton>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _scaleAnimation;
