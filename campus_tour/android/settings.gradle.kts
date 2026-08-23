@@ -29,3 +29,4 @@ plugins {
 
 include(":app")
 include(":music_pack")
+include(":ar_model_pack")

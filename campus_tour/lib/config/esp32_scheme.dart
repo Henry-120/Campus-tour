@@ -5,8 +5,9 @@ class Esp32BLE_info {
 }
 
 class Esp32MQTT_info {
-  static const BROKER_ADDRESS = '';
+  static const BROKER_ADDRESS = 'ncu-station.tail77ced6.ts.net';
   static const CLIENT = 'flutter_client';
-  static const TOPIC = 'esp32/actions';
-  static const PORT = 0000;
+  static const PORT = 8443;
+  static const USERNAME = 'phone_app';
+  static const PASSWORD = 'ncu_explorer_2026';
 }
