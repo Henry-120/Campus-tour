@@ -23,8 +23,8 @@ class _AEDMapState extends State<AEDMap> {
       'assets/images/Disaster_Evacuation_Map/防災地圖_地圖.jpg';
 
   // 空白底圖，只給你的圖片當地圖使用
-  static const String _blankStyle = '''
-  {
+  // iOS MapLibre only recognizes inline JSON when the first character is `{`.
+  static const String _blankStyle = '''{
     "version": 8,
     "sources": {},
     "layers": [
@@ -36,8 +36,7 @@ class _AEDMapState extends State<AEDMap> {
         }
       }
     ]
-  }
-  ''';
+  }''';
 
   //
   // 順序：
