@@ -8,6 +8,7 @@ import 'package:campus_tour/services/firebase_auth_service.dart';
 import 'package:campus_tour/styles/app_theme.dart';
 import 'package:campus_tour/styles/setting_page_styles.dart';
 import 'package:campus_tour/view/user_protocol.dart';
+import 'package:campus_tour/view/about_us_page.dart';
 import 'package:campus_tour/view/start_page.dart';
 import 'package:campus_tour/widgets/common/snackbar_builder.dart';
 import 'package:campus_tour/widgets/login/official_apple_sign_in_button.dart';
@@ -181,6 +182,10 @@ class SteeingPageStrings {
   static String get userProtocolTitle => 'view.lhf.setting.page.s048'.tr;
   static String get userProtocolDescription => 'view.lhf.setting.page.s049'.tr;
 
+  // About us
+  static const String aboutUsTitle = '關於我們';
+  static const String aboutUsDescription = '製作團隊、指導監製與合作單位';
+
   // Account deletion
   static String get deleteAccountTitle => 'view.lhf.setting.page.s119'.tr;
   static String get deleteAccountDescription => 'view.lhf.setting.page.s120'.tr;
@@ -250,6 +255,8 @@ class FullPageList {
     FullPageList.deleteAccountCard,
     FullPageList.cardGap,
     FullPageList.userProtocolButton,
+    FullPageList.cardGap,
+    FullPageList.aboutUsButton,
   ];
 
   static Widget get pageHeader => _PageHeader();
@@ -269,6 +276,7 @@ class FullPageList {
   static Widget get accountSecurityCard => _AccountSecurityCard();
   static Widget get deleteAccountCard => _DeleteAccountCard();
   static Widget get userProtocolButton => _UserProtocolButton();
+  static Widget get aboutUsButton => _AboutUsButton();
 }
 
 class SettingPage extends StatefulWidget {
@@ -1473,6 +1481,65 @@ class _UserProtocolButton extends StatelessWidget {
               Icon(
                 Icons.chevron_right_rounded,
                 color: Colors.white.withValues(alpha: 0.92),
+                size: 30,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _AboutUsButton extends StatelessWidget {
+  const _AboutUsButton();
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        borderRadius: SettingPageStyles.panelBorderRadius,
+        onTap: () => Navigator.of(
+          context,
+        ).push(MaterialPageRoute<void>(builder: (_) => const AboutUsPage())),
+        child: Ink(
+          width: double.infinity,
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+          decoration: SettingPageStyles.settingCardDecoration,
+          child: Row(
+            children: [
+              Container(
+                width: SettingPageStyles.settingIconSize,
+                height: SettingPageStyles.settingIconSize,
+                decoration: SettingPageStyles.settingIconDecoration,
+                child: const Icon(
+                  Icons.groups_rounded,
+                  color: SettingPageStyles.surfaceIconColor,
+                  size: SettingPageStyles.settingIconGlyphSize,
+                ),
+              ),
+              SizedBox(width: SettingPageStyles.gapLg),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      SteeingPageStrings.aboutUsTitle,
+                      style: SettingPageStyles.cardTitleStyle,
+                    ),
+                    SizedBox(height: SettingPageStyles.gap2xs),
+                    Text(
+                      SteeingPageStrings.aboutUsDescription,
+                      style: SettingPageStyles.bodyTextStyle,
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(width: SettingPageStyles.gapMd),
+              const Icon(
+                Icons.chevron_right_rounded,
+                color: SettingPageStyles.mutedIconColor,
                 size: 30,
               ),
             ],
