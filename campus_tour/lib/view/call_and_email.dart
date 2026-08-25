@@ -11,8 +11,9 @@ class CallAndEmailPage extends StatefulWidget {
 }
 
 class _CallAndEmailPageState extends State<CallAndEmailPage> {
-  static const String _healthCenterEmail = 'henry12081017@gmail.com';
+  // static const String _healthCenterEmail = 'henry12081017@gmail.com';
   static const String _healthCenterDirectPhone = '032804814';
+  static const String _emergencySmsRecipient = '0911949630';
 
   String? _statusMessage;
 
@@ -21,7 +22,7 @@ class _CallAndEmailPageState extends State<CallAndEmailPage> {
     setState(() => _statusMessage = message);
   }
 
-  Future<void> _composeEmergencyEmail() async {
+  Future<void> _composeEmergencySms() async {
     final description = await showDialog<String>(
       context: context,
       builder: (_) => const _EmergencyReportDialog(),
@@ -35,24 +36,15 @@ class _CallAndEmailPageState extends State<CallAndEmailPage> {
       fresh: true,
     );
     final locationText = position == null
-        ? 'view.aed.map.s010'.tr
-        : '${'view.aed.map.s011'.tr}：${position.latitude}\n'
-              '${'view.aed.map.s012'.tr}：${position.longitude}\n'
-              '${'view.aed.map.s013'.tr}：https://www.google.com/maps/search/?api=1&query='
-              '${position.latitude},${position.longitude}';
-    final body = 'view.aed.map.s014'.trParams({
-      'description': description,
-      'location': locationText,
-      'timestamp': '${DateTime.now().toLocal()}',
-    });
-    final emailUri = Uri(
-      scheme: 'mailto',
-      path: _healthCenterEmail,
-      queryParameters: {'subject': 'view.aed.map.s015'.tr, 'body': body},
+        ? '位置未取得'
+        : 'https://www.google.com/maps/search/?api=1&query=${position.latitude},${position.longitude}';
+    final body = '【校園緊急】$description\n位置：$locationText\n時間：${DateTime.now().toLocal().toString().substring(0, 19)}';
+    final smsUri = Uri.parse(
+      'sms:$_emergencySmsRecipient?body=${Uri.encodeComponent(body)}',
     );
 
-    if (!await launchUrl(emailUri, mode: LaunchMode.externalApplication)) {
-      _setStatus('view.aed.map.s016'.trParams({'email': _healthCenterEmail}));
+    if (!await launchUrl(smsUri, mode: LaunchMode.externalApplication)) {
+      _setStatus('view.aed.map.s021'.trParams({'phone': _emergencySmsRecipient}));
     }
   }
 
@@ -82,10 +74,10 @@ class _CallAndEmailPageState extends State<CallAndEmailPage> {
               ),
               const SizedBox(height: 18),
               _ContactActionButton(
-                icon: Icons.email_rounded,
+                icon: Icons.sms_rounded,
                 label: 'view.aed.map.s019'.tr,
                 color: const Color(0xFF1D4ED8),
-                onPressed: _composeEmergencyEmail,
+                onPressed: _composeEmergencySms,
               ),
               if (_statusMessage != null) ...[
                 const SizedBox(height: 24),
@@ -190,7 +182,7 @@ class _EmergencyReportDialogState extends State<_EmergencyReportDialog> {
         ),
         FilledButton(
           onPressed: _canSubmit ? _submit : null,
-          child: Text('view.aed.map.s009'.tr),
+          child: Text('view.aed.map.s022'.tr),
         ),
       ],
     );
