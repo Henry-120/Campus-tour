@@ -4987,9 +4987,9 @@
     },
     {
       "key": "widgets.game.catching.pages.cryptography.level.s010",
-      "zh": "精靈被成功擊倒",
-      "en": "The spirit has been defeated!",
-      "ja": "精霊を倒しました！",
+      "zh": "精靈被收服了！",
+      "en": "The spirit has been captured!",
+      "ja": "精霊を仲間にしました！",
       "occurrences": [
         {
           "file": "lib/widgets/game/catching_pages/cryptography_level.dart",

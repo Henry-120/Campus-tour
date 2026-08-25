@@ -484,7 +484,7 @@ class AppTranslations extends Translations {
       'widgets.game.catching.pages.cryptography.level.s007': '目前題目',
       'widgets.game.catching.pages.cryptography.level.s008': '答對了，對其造成1點傷害',
       'widgets.game.catching.pages.cryptography.level.s009': '答錯了，自己受到 1 點傷害',
-      'widgets.game.catching.pages.cryptography.level.s010': '精靈被成功擊倒',
+      'widgets.game.catching.pages.cryptography.level.s010': '精靈被收服了！',
       'widgets.game.catching.pages.cryptography.level.s011': '血量歸零，挑戰失敗',
       'widgets.game.catching.pages.cryptography.level.s012': '下一題',
       'widgets.game.catching.pages.cryptography.level.s013': '完成戰鬥',
@@ -1263,7 +1263,7 @@ class AppTranslations extends Translations {
       'widgets.game.catching.pages.cryptography.level.s009':
           'Incorrect! You took 1 damage.',
       'widgets.game.catching.pages.cryptography.level.s010':
-          'The spirit has been defeated!',
+          'The spirit has been captured!',
       'widgets.game.catching.pages.cryptography.level.s011':
           'Your HP reached zero. Challenge failed.',
       'widgets.game.catching.pages.cryptography.level.s012': 'Next Question',
@@ -1983,7 +1983,7 @@ class AppTranslations extends Translations {
       'widgets.game.catching.pages.cryptography.level.s007': '現在の問題',
       'widgets.game.catching.pages.cryptography.level.s008': '正解！1ダメージを与えました。',
       'widgets.game.catching.pages.cryptography.level.s009': '不正解！1ダメージを受けました。',
-      'widgets.game.catching.pages.cryptography.level.s010': '精霊を倒しました！',
+      'widgets.game.catching.pages.cryptography.level.s010': '精霊を仲間にしました！',
       'widgets.game.catching.pages.cryptography.level.s011':
           'HPがゼロになりました。チャレンジ失敗です。',
       'widgets.game.catching.pages.cryptography.level.s012': '次の問題',

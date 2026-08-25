@@ -322,7 +322,7 @@ Total unique strings: 472
 | `widgets.game.catching.pages.cryptography.level.s007` | 目前題目 | Current Question |  |
 | `widgets.game.catching.pages.cryptography.level.s008` | 答對了，對其造成1點傷害 | Correct! You dealt 1 damage. |  |
 | `widgets.game.catching.pages.cryptography.level.s009` | 答錯了，自己受到 1 點傷害 | Incorrect! You took 1 damage. |  |
-| `widgets.game.catching.pages.cryptography.level.s010` | 精靈被成功擊倒 | The spirit has been defeated! |  |
+| `widgets.game.catching.pages.cryptography.level.s010` | 精靈被收服了！ | The spirit has been captured! | 精霊を仲間にしました！ |
 | `widgets.game.catching.pages.cryptography.level.s011` | 血量歸零，挑戰失敗 | Your HP reached zero. Challenge failed. |  |
 | `widgets.game.catching.pages.cryptography.level.s012` | 下一題 | Next Question |  |
 | `widgets.game.catching.pages.cryptography.level.s013` | 完成戰鬥 | Finish Battle |  |
