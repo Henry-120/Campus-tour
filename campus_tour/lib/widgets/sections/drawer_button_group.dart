@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:campus_tour/controllers/login_controller.dart';
@@ -31,16 +32,18 @@ class DrawerButtonGroup extends StatelessWidget {
                   child: ConstrainedBox(
                     constraints: const BoxConstraints(maxWidth: 244),
                     child: Column(
-                      children: const [
-                        _TutorialButton(),
-                        SizedBox(height: SettingPageStyles.gapMd),
-                        _PanoramaMapButton(),
-                        SizedBox(height: SettingPageStyles.gapMd),
-                        _IssueReportButton(),
-                        SizedBox(height: SettingPageStyles.gapMd),
-                        _MqttTestButton(),
-                        SizedBox(height: SettingPageStyles.gapMd),
-                        _SecurityButton(),
+                      children: [
+                        const _TutorialButton(),
+                        const SizedBox(height: SettingPageStyles.gapMd),
+                        const _PanoramaMapButton(),
+                        const SizedBox(height: SettingPageStyles.gapMd),
+                        const _IssueReportButton(),
+                        if (kDebugMode) ...[
+                          const SizedBox(height: SettingPageStyles.gapMd),
+                          const _MqttTestButton(),
+                        ],
+                        const SizedBox(height: SettingPageStyles.gapMd),
+                        const _SecurityButton(),
                       ],
                     ),
                   ),
