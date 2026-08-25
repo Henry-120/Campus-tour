@@ -1,6 +1,6 @@
 {
   "generatedBy": "tool/extract_chinese_strings.dart",
-  "totalUniqueStrings": 539,
+  "totalUniqueStrings": 541,
   "entries": [
     {
       "key": "controllers.login.controller.s001",
@@ -1925,6 +1925,30 @@
         {
           "file": "lib/view/aed_map.dart",
           "line": 363
+        }
+      ]
+    },
+    {
+      "key": "view.aed.map.s021",
+      "zh": "無法開啟簡訊 App，請直接撥打 @phone。",
+      "en": "Unable to open the messaging app. Please call @phone directly.",
+      "ja": "メッセージアプリを開けません。@phone に直接お電話ください。",
+      "occurrences": [
+        {
+          "file": "lib/view/call_and_email.dart",
+          "line": 51
+        }
+      ]
+    },
+    {
+      "key": "view.aed.map.s022",
+      "zh": "開啟簡訊",
+      "en": "Open Message",
+      "ja": "メッセージを開く",
+      "occurrences": [
+        {
+          "file": "lib/view/call_and_email.dart",
+          "line": 224
         }
       ]
     },

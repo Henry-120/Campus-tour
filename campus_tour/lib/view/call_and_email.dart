@@ -1,5 +1,7 @@
 import 'package:campus_tour/controllers/location_controller.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -11,8 +13,11 @@ class CallAndEmailPage extends StatefulWidget {
 }
 
 class _CallAndEmailPageState extends State<CallAndEmailPage> {
-  static const String _healthCenterEmail = 'henry12081017@gmail.com';
   static const String _healthCenterDirectPhone = '032804814';
+  static const String _emergencySmsRecipient = '0911949630';
+  static const MethodChannel _iosMessageChannel = MethodChannel(
+    'tw.edu.ncu.campustour/message_compose',
+  );
 
   String? _statusMessage;
 
@@ -21,7 +26,7 @@ class _CallAndEmailPageState extends State<CallAndEmailPage> {
     setState(() => _statusMessage = message);
   }
 
-  Future<void> _composeEmergencyEmail() async {
+  Future<void> _composeEmergencySms() async {
     final description = await showDialog<String>(
       context: context,
       builder: (_) => const _EmergencyReportDialog(),
@@ -36,24 +41,54 @@ class _CallAndEmailPageState extends State<CallAndEmailPage> {
     );
     final locationText = position == null
         ? 'view.aed.map.s010'.tr
-        : '${'view.aed.map.s011'.tr}：${position.latitude}\n'
-              '${'view.aed.map.s012'.tr}：${position.longitude}\n'
-              '${'view.aed.map.s013'.tr}：https://www.google.com/maps/search/?api=1&query='
+        : 'https://www.google.com/maps/search/?api=1&query='
               '${position.latitude},${position.longitude}';
     final body = 'view.aed.map.s014'.trParams({
       'description': description,
       'location': locationText,
       'timestamp': '${DateTime.now().toLocal()}',
     });
-    final emailUri = Uri(
-      scheme: 'mailto',
-      path: _healthCenterEmail,
-      queryParameters: {'subject': 'view.aed.map.s015'.tr, 'body': body},
-    );
 
-    if (!await launchUrl(emailUri, mode: LaunchMode.externalApplication)) {
-      _setStatus('view.aed.map.s016'.trParams({'email': _healthCenterEmail}));
+    final opened = await _openSmsComposer(body);
+    if (!opened) {
+      _setStatus(
+        'view.aed.map.s021'.trParams({'phone': _emergencySmsRecipient}),
+      );
     }
+  }
+
+  Future<bool> _openSmsComposer(String body) async {
+    if (defaultTargetPlatform == TargetPlatform.iOS) {
+      try {
+        return await _iosMessageChannel.invokeMethod<bool>(
+              'composeEmergencySms',
+              <String, String>{
+                'recipient': _emergencySmsRecipient,
+                'body': body,
+              },
+            ) ??
+            false;
+      } on PlatformException {
+        return false;
+      }
+    }
+
+    final smsUri = Uri(
+      scheme: 'sms',
+      path: _emergencySmsRecipient,
+      query: _encodeQueryParameters(<String, String>{'body': body}),
+    );
+    return launchUrl(smsUri, mode: LaunchMode.externalApplication);
+  }
+
+  String _encodeQueryParameters(Map<String, String> parameters) {
+    return parameters.entries
+        .map(
+          (entry) =>
+              '${Uri.encodeComponent(entry.key)}='
+              '${Uri.encodeComponent(entry.value)}',
+        )
+        .join('&');
   }
 
   Future<void> _callHealthCenter() async {
@@ -82,10 +117,10 @@ class _CallAndEmailPageState extends State<CallAndEmailPage> {
               ),
               const SizedBox(height: 18),
               _ContactActionButton(
-                icon: Icons.email_rounded,
+                icon: Icons.sms_rounded,
                 label: 'view.aed.map.s019'.tr,
                 color: const Color(0xFF1D4ED8),
-                onPressed: _composeEmergencyEmail,
+                onPressed: _composeEmergencySms,
               ),
               if (_statusMessage != null) ...[
                 const SizedBox(height: 24),
@@ -190,7 +225,7 @@ class _EmergencyReportDialogState extends State<_EmergencyReportDialog> {
         ),
         FilledButton(
           onPressed: _canSubmit ? _submit : null,
-          child: Text('view.aed.map.s009'.tr),
+          child: Text('view.aed.map.s022'.tr),
         ),
       ],
     );
