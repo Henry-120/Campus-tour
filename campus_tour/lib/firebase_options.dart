@@ -25,10 +25,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -58,7 +55,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyADyRlCi8SRBCXpqJLf3huNXxSMuPQ1uxA',
-    appId: '1:322346919988:android:d63e21b522238a65240261',
+    appId: '1:322346919988:android:4e7b416d5dabe18e240261',
     messagingSenderId: '322346919988',
     projectId: 'campus-tour-679e9',
     storageBucket: 'campus-tour-679e9.firebasestorage.app',
@@ -72,5 +69,15 @@ class DefaultFirebaseOptions {
     androidClientId: '322346919988-hk2tpub7785r2cfcd7tmcho3r4ttijso.apps.googleusercontent.com',
     iosClientId: '322346919988-lmlmfqi4qb82o8u8jtg41ce47stpuioj.apps.googleusercontent.com',
     iosBundleId: 'com.henryKuo.Campustour',
+  );
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyC3dYSvWuMjfJuuvHLJgty3z_eKIaWRSD4',
+    appId: '1:322346919988:ios:4497d9fd152c52b7240261',
+    messagingSenderId: '322346919988',
+    projectId: 'campus-tour-679e9',
+    storageBucket: 'campus-tour-679e9.firebasestorage.app',
+    androidClientId: '322346919988-hk2tpub7785r2cfcd7tmcho3r4ttijso.apps.googleusercontent.com',
+    iosClientId: '322346919988-d555vambpeuvljnfkm8vujot734fu5el.apps.googleusercontent.com',
+    iosBundleId: 'com.example.campusTour',
   );
 }

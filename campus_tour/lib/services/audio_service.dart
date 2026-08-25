@@ -1,4 +1,8 @@
+import 'dart:io';
+
 import 'package:audioplayers/audioplayers.dart';
+
+import 'pad_audio_service.dart';
 
 class AudioService {
   static final AudioService _instance = AudioService._internal();
@@ -15,6 +19,15 @@ class AudioService {
 
   bool _isOverlayActive = false;
   bool _isBgmSuppressedForSfx = false;
+
+  Future<Source> _getSource(String fileName) {
+    if (Platform.isAndroid) {
+      final audioFileName = fileName.replaceAll('\\', '/').split('/').last;
+      return PadAudioService.getSource('music/$audioFileName');
+    }
+
+    return Future<Source>.value(AssetSource(fileName));
+  }
 
   // ── 主 BGM（例如 GameMainPage 的 walk_daytime）──────────────────────
   //   進入主畫面呼叫 playMainBgm，可以持續播放。
@@ -33,7 +46,7 @@ class AudioService {
       return;
     }
     _currentMainBgmFile = fileName;
-    await _mainBgmPlayer.setSource(AssetSource(fileName));
+    await _mainBgmPlayer.setSource(await _getSource(fileName));
     _mainBgmPlayer.setReleaseMode(ReleaseMode.loop);
     await _mainBgmPlayer.setVolume(volume);
     await _mainBgmPlayer.setPlaybackRate(playbackRate);
@@ -67,7 +80,7 @@ class AudioService {
     double playbackRate = 1.0,
   }) async {
     _isOverlayActive = true;
-    await _overlayBgmPlayer.setSource(AssetSource(fileName));
+    await _overlayBgmPlayer.setSource(await _getSource(fileName));
     _overlayBgmPlayer.setReleaseMode(
       isLooping ? ReleaseMode.loop : ReleaseMode.release,
     );
@@ -99,7 +112,7 @@ class AudioService {
     }
 
     try {
-      await _sfxPlayer.setSource(AssetSource(fileName));
+      await _sfxPlayer.setSource(await _getSource(fileName));
       _sfxPlayer.setReleaseMode(ReleaseMode.release);
       await _sfxPlayer.setVolume(volume);
 

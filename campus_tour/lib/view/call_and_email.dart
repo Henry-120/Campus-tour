@@ -1,5 +1,5 @@
+import 'package:campus_tour/controllers/location_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -31,7 +31,9 @@ class _CallAndEmailPageState extends State<CallAndEmailPage> {
     await Future<void>.delayed(const Duration(milliseconds: 250));
     if (!mounted) return;
 
-    final position = await _positionForReport();
+    final position = await Get.find<LocationController>().getCurrentPosition(
+      fresh: true,
+    );
     final locationText = position == null
         ? 'view.aed.map.s010'.tr
         : '${'view.aed.map.s011'.tr}：${position.latitude}\n'
@@ -51,26 +53,6 @@ class _CallAndEmailPageState extends State<CallAndEmailPage> {
 
     if (!await launchUrl(emailUri, mode: LaunchMode.externalApplication)) {
       _setStatus('view.aed.map.s016'.trParams({'email': _healthCenterEmail}));
-    }
-  }
-
-  Future<Position?> _positionForReport() async {
-    try {
-      var permission = await Geolocator.checkPermission();
-      if (permission == LocationPermission.denied) {
-        permission = await Geolocator.requestPermission();
-      }
-      if (permission == LocationPermission.denied ||
-          permission == LocationPermission.deniedForever) {
-        return null;
-      }
-      return await Geolocator.getCurrentPosition(
-        locationSettings: const LocationSettings(
-          accuracy: LocationAccuracy.best,
-        ),
-      );
-    } catch (_) {
-      return null;
     }
   }
 

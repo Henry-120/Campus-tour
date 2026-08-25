@@ -8,8 +8,8 @@ Campus Tour 是一款以中央大學校園為場景的 Flutter 導覽遊戲。�
 - 定位與附近精靈：透過 Geolocator 監聽玩家位置，顯示附近可捕捉精靈與最近精靈方向提示。
 - 任務式捕捉流程：依建築類型組合劇情關卡、圖文線索、NFC 掃描與密碼/問答關卡。
 - 使用者與圖鑑：Firebase Auth、Firestore 與 GetX 管理登入狀態、使用者資料與已捕捉精靈。
-- 多媒體互動：支援 BGM/SFX、相機、iOS AR 放置/操控、震動回饋與相簿儲存。
-- 平台差異 UI：iOS 顯示 AR StoneButton；Android 隱藏 AR 功能並放大底部 StoneButton。
+- 多媒體互動：支援 BGM/SFX、相機、iOS ARKit 與 Android ARCore 放置、震動回饋與相簿儲存。
+- 平台差異 UI：iOS 與 Android 皆顯示 AR StoneButton；Android 進入前會檢查 ARCore 與相機權限，iOS 保留原本直接進入 ARKit 頁面的流程。
 - 開發測試工具：Debug 模式下可在設定中心一鍵將所有精靈加入目前使用者圖鑑。
 
 ## 技術棧
@@ -21,7 +21,7 @@ Campus Tour 是一款以中央大學校園為場景的 Flutter 導覽遊戲。�
 - Geolocator、Flutter Compass
 - NFC Manager
 - Camera、Image Picker、Video Player
-- ARKit Plugin、Vector Math
+- ARKit Plugin、ARCore SceneView、Vector Math
 - Hive 本地設定儲存
 - Audioplayers
 
@@ -56,7 +56,7 @@ campus_tour/
 - Firebase 專案設定
 - Google Maps API Key
 - 測試定位、NFC、相機或 AR 功能時，建議使用實體裝置
-- ARKit 功能僅在 iOS 裝置顯示入口；Android 目前不顯示 AR StoneButton
+- AR 功能支援 iOS ARKit 與 Android ARCore；請使用具備 AR 能力的實體裝置
 
 目前本機可用的 Flutter SDK 路徑：
 
@@ -140,16 +140,15 @@ Android 權限主要設定於 `android/app/src/main/AndroidManifest.xml`。iOS �
 
 ## 平台功能差異
 
-- iOS：底部系統選單顯示「圖鑑、相機、AR、設定」，StoneButton 基礎尺寸為 `90`。
-- Android：底部系統選單顯示「圖鑑、相機、設定」，不顯示 AR 入口，StoneButton 基礎尺寸為 `110`。
+- iOS／Android：底部系統選單顯示「圖鑑、相機、AR、設定」，StoneButton 基礎尺寸為 `90`。
 - AR 頁面不會自動預選精靈；玩家需先手動選擇下方列表中的精靈，再點擊 AR 平面放置。
-- 選到特定支援操控的模型時會進入 AR 操控頁，可使用虛擬搖桿移動精靈並用跳舞按鈕切換動畫。
+- iOS 選到特定支援操控的模型時會進入 AR 操控頁，可使用虛擬搖桿移動精靈並用跳舞按鈕切換動畫。
 
 ## 開發測試功能
 
 Debug build 的設定中心會顯示「測試：捕捉全部精靈」卡片。點擊「一鍵捕捉全部」會把 Firestore `monsters` 集合中尚未捕捉的精靈加入目前登入使用者的 `users/{uid}/monsters` 圖鑑子集合。
 
-此功能使用 monster id 作為 user monster document id，因此重複點擊不會洗出重複收藏。Release build 不會顯示此測試卡片。
+此功能使用 monster id 作為 user monster document id，因此重複點擊不會洗出重複收藏。Release build 預設不顯示此測試卡片；內部測試版可在建置時加上 `--dart-define=SHOW_MONSTER_COLLECTION_CONTROLS=true` 來保留「新增全部」與「刪除全部」。「匯入遊戲資料」仍只會出現在 Debug build。
 
 ## 測試與檢查
 
@@ -204,7 +203,7 @@ flutter build ios --release
 
 - NFC、ARKit、相機、定位、羅盤、震動最好用實體 Android/iPhone 測試；模擬器無法完整驗證。
 - iOS 使用 ARKit 時需確認目標裝置支援；不支援時應有可接受的錯誤提示或替代流程。
-- Android 若未來加入 ARCore，也需確認裝置支援與 Play Console device compatibility。
+- Android 會先檢查 ARCore 支援與 Google Play 服務的 AR 安裝狀態；目前 Android 模型目錄只包含松鼠 GLB。
 
 ### 資料與營運
 
@@ -247,8 +246,8 @@ flutter build ios --release
 
 ### AR 按鈕沒有出現
 
-- 目前 AR 入口只在 iOS 顯示；Android 會隱藏 AR StoneButton。
-- iOS 請確認使用支援 ARKit 的實體裝置。
+- AR 入口只在 Android 與 iOS 顯示。
+- iOS 請確認使用支援 ARKit 的實體裝置；Android 請確認裝置支援 ARCore 且已安裝 Google Play 服務的 AR。
 - 確認 `ios/Runner/Info.plist` 有相機權限描述，且 AR 模型資源已加入 iOS project resources。
 
 ## 開發備註

@@ -1,10 +1,10 @@
+import 'package:campus_tour/controllers/location_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:maplibre_gl/maplibre_gl.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'dart:math' as math;
 import 'dart:async';
-import 'package:geolocator/geolocator.dart';
 import 'package:flutter_compass/flutter_compass.dart';
 
 class AEDMap extends StatefulWidget {
@@ -61,7 +61,8 @@ class _AEDMapState extends State<AEDMap> {
   );
 
   PlayerSymbolController? _playerSymbolController;
-  late final PlayerLocationController _playerLocationController;
+  late final LocationController _locationController;
+  late final Worker _locationWorker;
   late final CampusMapCameraController _cameraController;
   late final CampusImageLayerController _imageLayerController;
 
@@ -71,8 +72,12 @@ class _AEDMapState extends State<AEDMap> {
   void initState() {
     super.initState();
     _lockLandscape();
-    _playerLocationController = PlayerLocationController();
-    _playerLocationController.state.addListener(_handleLocationChanged);
+    _locationController = Get.find<LocationController>();
+    _locationWorker = ever<AppLocationState>(
+      _locationController.state,
+      _handleLocationChanged,
+    );
+    _handleLocationChanged(_locationController.state.value);
     _cameraController = CampusMapCameraController(
       campusBounds: _campusBounds,
       maxZoom: 20,
@@ -91,8 +96,7 @@ class _AEDMapState extends State<AEDMap> {
 
   @override
   void dispose() {
-    _playerLocationController.state.removeListener(_handleLocationChanged);
-    _playerLocationController.dispose();
+    _locationWorker.dispose();
     _playerSymbolController?.dispose();
     _restoreOrientation();
     super.dispose();
@@ -133,11 +137,16 @@ class _AEDMapState extends State<AEDMap> {
     _playerSymbolController ??= PlayerSymbolController(controller);
 
     await _playerSymbolController!.initialize();
-    await _playerLocationController.start();
+    final currentPosition = _locationController.position;
+    if (currentPosition != null) {
+      await _playerSymbolController!.updatePosition(
+        LatLng(currentPosition.latitude, currentPosition.longitude),
+      );
+    }
+    await _locationController.startTracking();
   }
 
-  void _handleLocationChanged() {
-    final locationState = _playerLocationController.state.value;
+  void _handleLocationChanged(AppLocationState locationState) {
     final position = locationState.position;
 
     if (position != null) {
@@ -153,19 +162,19 @@ class _AEDMapState extends State<AEDMap> {
     });
   }
 
-  String? _messageForLocationState(PlayerLocationState locationState) {
+  String? _messageForLocationState(AppLocationState locationState) {
     switch (locationState.status) {
-      case PlayerLocationStatus.idle:
-      case PlayerLocationStatus.requestingPermission:
-      case PlayerLocationStatus.ready:
+      case AppLocationStatus.idle:
+      case AppLocationStatus.requestingPermission:
+      case AppLocationStatus.ready:
         return null;
-      case PlayerLocationStatus.serviceDisabled:
+      case AppLocationStatus.serviceDisabled:
         return 'view.aed.map.s001'.tr;
-      case PlayerLocationStatus.permissionDenied:
+      case AppLocationStatus.permissionDenied:
         return 'view.aed.map.s002'.tr;
-      case PlayerLocationStatus.permissionDeniedForever:
+      case AppLocationStatus.permissionDeniedForever:
         return 'view.aed.map.s003'.tr;
-      case PlayerLocationStatus.error:
+      case AppLocationStatus.error:
         return 'view.aed.map.s004'.trParams({
           'error': locationState.errorMessage ?? '',
         });
@@ -250,114 +259,6 @@ class _AEDMapState extends State<AEDMap> {
         ],
       ),
     );
-  }
-}
-
-enum PlayerLocationStatus {
-  idle,
-  requestingPermission,
-  ready,
-  serviceDisabled,
-  permissionDenied,
-  permissionDeniedForever,
-  error,
-}
-
-class PlayerLocationState {
-  const PlayerLocationState({
-    required this.status,
-    this.position,
-    this.errorMessage,
-  });
-
-  final PlayerLocationStatus status;
-  final Position? position;
-  final String? errorMessage;
-}
-
-class PlayerLocationController {
-  PlayerLocationController()
-    : state = ValueNotifier<PlayerLocationState>(
-        const PlayerLocationState(status: PlayerLocationStatus.idle),
-      );
-
-  final ValueNotifier<PlayerLocationState> state;
-
-  StreamSubscription<Position>? _positionSubscription;
-  bool _started = false;
-
-  Future<void> start() async {
-    if (_started) return;
-    _started = true;
-
-    final serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      state.value = const PlayerLocationState(
-        status: PlayerLocationStatus.serviceDisabled,
-      );
-      return;
-    }
-
-    var permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      state.value = const PlayerLocationState(
-        status: PlayerLocationStatus.requestingPermission,
-      );
-      permission = await Geolocator.requestPermission();
-    }
-
-    if (permission == LocationPermission.denied) {
-      state.value = const PlayerLocationState(
-        status: PlayerLocationStatus.permissionDenied,
-      );
-      return;
-    }
-
-    if (permission == LocationPermission.deniedForever) {
-      state.value = const PlayerLocationState(
-        status: PlayerLocationStatus.permissionDeniedForever,
-      );
-      return;
-    }
-
-    try {
-      final initialPosition = await Geolocator.getCurrentPosition(
-        locationSettings: const LocationSettings(
-          accuracy: LocationAccuracy.best,
-        ),
-      );
-      _setPosition(initialPosition);
-    } catch (error) {
-      _setError(error);
-    }
-
-    const locationSettings = LocationSettings(
-      accuracy: LocationAccuracy.best,
-      distanceFilter: 1,
-    );
-
-    _positionSubscription = Geolocator.getPositionStream(
-      locationSettings: locationSettings,
-    ).listen(_setPosition, onError: _setError);
-  }
-
-  void _setPosition(Position position) {
-    state.value = PlayerLocationState(
-      status: PlayerLocationStatus.ready,
-      position: position,
-    );
-  }
-
-  void _setError(Object error) {
-    state.value = PlayerLocationState(
-      status: PlayerLocationStatus.error,
-      errorMessage: '$error',
-    );
-  }
-
-  void dispose() {
-    _positionSubscription?.cancel();
-    state.dispose();
   }
 }
 

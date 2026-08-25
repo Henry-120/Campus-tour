@@ -48,7 +48,7 @@ class _CryptographyLevelPageState extends State<CryptographyLevelPage>
     _enemyHp =
         widget.level.questionSet.length *
         CryptographyLevel.enemyDamageOnCorrect;
-    AudioService().playOverlayBgm(fileName: 'audio/M08_qa_time.wav');
+    AudioService().playOverlayBgm(fileName: 'audio/M08_qa_time.flac');
   }
 
   @override

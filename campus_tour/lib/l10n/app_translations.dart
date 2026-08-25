@@ -51,6 +51,87 @@ class AppTranslations extends Translations {
       'controllers.user.controller.s003':
           '[UserController] 成功從 Firestore 載入頭像: \${data.photoUrl}',
       'controllers.user.controller.s004': '[UserController] 抓取錯誤: \$e',
+      'features.ar.controllers.android.android.ar.scene.controller.s001':
+          '無法啟動 AR',
+      'features.ar.pages.android.ar.placement.page.s001': '模型尚未準備完成，請再選一次。',
+      'features.ar.pages.android.ar.placement.page.s002':
+          '這個精靈目前沒有 Android AR 模型。',
+      'features.ar.pages.android.ar.placement.page.s003':
+          '請先從下方選擇一隻支援 Android AR 的精靈。',
+      'features.ar.pages.android.ar.placement.page.s004':
+          '精靈已固定在平面上；點其他平面可重新放置。',
+      'features.ar.pages.android.ar.placement.page.s005':
+          '已偵測到平面，請點一下網格上的地面或桌面。',
+      'features.ar.pages.android.ar.placement.page.s006': '請緩慢移動手機，先掃描地面或桌面。',
+      'features.ar.pages.android.ar.placement.page.s007': '請先從下方選擇精靈。',
+      'features.ar.pages.android.ar.placement.page.s008': 'AR 啟動失敗：@message',
+      'features.ar.pages.android.ar.placement.page.s009': '正在啟動 ARCore…',
+      'features.ar.pages.android.ar.placement.page.s010':
+          '目前取得的精靈中沒有可用的 Android AR 模型。',
+      'features.ar.pages.android.ar.placement.page.s011': '清除精靈',
+      'features.ar.pages.ar.support.gate.page.s001': '正在確認裝置的 AR 支援狀態…',
+      'features.ar.pages.ar.unavailable.page.s001': '需要安裝或更新 ARCore',
+      'features.ar.pages.ar.unavailable.page.s002': '此裝置不支援 AR',
+      'features.ar.pages.ar.unavailable.page.s003': '需要相機權限',
+      'features.ar.pages.ar.unavailable.page.s004': '相機受到系統限制',
+      'features.ar.pages.ar.unavailable.page.s005': '此平台沒有 AR 功能',
+      'features.ar.pages.ar.unavailable.page.s006': '暫時無法啟動 AR',
+      'features.ar.pages.ar.unavailable.page.s007':
+          '請完成 Google Play 服務的 AR 安裝或更新，回到 App 後再試一次。',
+      'features.ar.pages.ar.unavailable.page.s008':
+          '這台裝置不支援目前所需的 ARKit／ARCore 世界追蹤功能。',
+      'features.ar.pages.ar.unavailable.page.s009': 'AR 必須使用相機辨識環境；請允許相機權限後重試。',
+      'features.ar.pages.ar.unavailable.page.s010':
+          '相機權限已被關閉，請前往系統設定允許此 App 使用相機。',
+      'features.ar.pages.ar.unavailable.page.s011': '此裝置的相機目前受家長控制或系統政策限制。',
+      'features.ar.pages.ar.unavailable.page.s012':
+          'AR 放置功能目前只支援 Android 與 iOS 實體裝置。',
+      'features.ar.pages.ar.unavailable.page.s013': '請稍後再試，或重新啟動 App。',
+      'features.ar.pages.ar.unavailable.page.s014': 'AR 精靈',
+      'features.ar.pages.ar.unavailable.page.s015': '開啟系統設定',
+      'features.ar.pages.ar.unavailable.page.s016': '再試一次',
+      'features.ar.services.android.arcore.support.service.s001':
+          '無法確認 Google Play 服務的 AR 支援狀態。',
+      'features.ar.widgets.android.arcore.scene.view.s001':
+          'ARCore 僅支援 Android',
+      'features.station.hardware.sakura.page.s001': '我的精靈收藏',
+      'features.station.hardware.sakura.page.s002': '已收集精靈',
+      'features.station.hardware.sakura.page.s003':
+          '已收集 @captured / @total 隻精靈',
+      'features.station.hardware.sakura.page.s004': '已收集 @captured 隻精靈，總數載入中',
+      'features.station.hardware.sakura.page.s005': '再收集 @count 隻即可完成',
+      'features.station.hardware.sakura.page.s006': '已完成精靈收藏',
+      'features.station.hardware.sakura.page.s007': '尚未收集任何精靈',
+      'features.station.hardware.sakura.page.s008': '想起',
+      'features.station.hardware.sakura.page.s009': '想到某個人',
+      'features.station.hardware.sakura.page.s010': '好事',
+      'features.station.hardware.sakura.page.s011': '分享今天的小確幸',
+      'features.station.hardware.sakura.page.s012': '加油',
+      'features.station.hardware.sakura.page.s013': '給今天努力的自己或別人',
+      'features.station.hardware.sakura.page.s014': '點此選擇精靈',
+      'features.station.hardware.sakura.page.s015': '更換精靈',
+      'features.station.hardware.sakura.page.s016': '復原上一筆',
+      'features.station.hardware.sakura.page.s017': '重做下一筆',
+      'features.station.hardware.sakura.page.s018': '清除全部筆跡',
+      'features.station.hardware.sakura.page.s019': '選擇卡片精靈',
+      'features.station.hardware.sakura.page.s020': '目前沒有可以選擇的精靈',
+      'features.station.hardware.sakura.page.s021': '@current / @total 頁',
+      'features.station.hardware.sakura.page.s022': '上次觸發：@time',
+      'features.station.hardware.sakura.page.s023': '尚無上次觸發紀錄',
+      'features.station.hardware.sakura.page.s024': '正在讀取硬體狀態…',
+      'features.station.hardware.sakura.page.s025': '現在可以留下花瓣',
+      'features.station.hardware.sakura.page.s026': '冷卻中：@duration',
+      'features.station.hardware.sakura.page.s027': '正在送出花瓣…',
+      'features.station.hardware.sakura.page.s028': '等待硬體回應：@duration',
+      'features.station.hardware.sakura.page.s029': '花瓣已被收到',
+      'features.station.hardware.sakura.page.s030': '兩分鐘內未收到回應，可以重新送出',
+      'features.station.hardware.sakura.page.s031': '發生未知錯誤',
+      'features.station.hardware.sakura.page.s032': '留下這片花瓣',
+      'features.station.hardware.sakura.page.s033': '正在送出…',
+      'features.station.hardware.sakura.page.s034': '等待回應…',
+      'features.station.hardware.sakura.page.s035': '重新送出',
+      'features.station.hardware.sakura.page.s036': '花瓣已送達',
+      'features.station.hardware.sakura.page.s037': '請先選擇一隻精靈',
       'services.camera.service.s001': '[Camera]: AR捕捉成功！路徑：\$path',
       'services.camera.service.s002': '[Camera]:使用者取消了拍照',
       'services.camera.service.s003': '[Camera]:拍照成功！路徑：\${photo.path}',
@@ -175,6 +256,17 @@ class AppTranslations extends Translations {
       'view.lhf.setting.page.s055': '正在匯入遊戲資料...',
       'view.lhf.setting.page.s056': '遊戲資料匯入完成',
       'view.lhf.setting.page.s057': '遊戲資料匯入失敗，請確認帳號權限',
+      'view.lhf.setting.page.s058': '異地定位測試',
+      'view.lhf.setting.page.s059':
+          '將啟用當下的真實位置映射到中央大學 @latitude, @longitude，之後的移動距離與方向維持不變。重新啟動 App 後會自動關閉。',
+      'view.lhf.setting.page.s060': '測試定位中',
+      'view.lhf.setting.page.s061': '使用真實定位',
+      'view.lhf.setting.page.s062': '開始定位偏移',
+      'view.lhf.setting.page.s063': '停止定位偏移',
+      'view.lhf.setting.page.s064': '正在取得目前位置...',
+      'view.lhf.setting.page.s065': '定位偏移已啟用',
+      'view.lhf.setting.page.s066': '已恢復真實定位',
+      'view.lhf.setting.page.s067': '無法啟用定位偏移，請確認 GPS 與定位權限',
       'view.login.page.s001': '[LoginPage] 登入成功，正在獲取資料...',
       'view.login.page.s002': '帳號或密碼錯誤',
       'view.login.page.s003': '[LoginPage] 登入出錯: \$e',
@@ -388,6 +480,7 @@ class AppTranslations extends Translations {
       'widgets.sections.drawer.button.group.s008': '登出中...',
       'widgets.sections.drawer.button.group.s009': '登出',
       'widgets.sections.drawer.button.group.s010': '校園安全',
+      'widgets.sections.drawer.button.group.s011': 'MQTT 功能測試',
       'widgets.sections.monster.test.s001': '測試火精靈',
       'widgets.sections.monster.test.s003': '測試水精靈',
       'widgets.sections.monster.test.s005': '測試圖文關卡 1：觀察地圖後掃描 TEST_NFC_ID。',
@@ -450,6 +543,109 @@ class AppTranslations extends Translations {
       'controllers.user.controller.s003':
           '[UserController] 成功從 Firestore 載入頭像: \${data.photoUrl}',
       'controllers.user.controller.s004': '[UserController] 抓取錯誤: \$e',
+      'features.ar.controllers.android.android.ar.scene.controller.s001':
+          'Unable to start AR',
+      'features.ar.pages.android.ar.placement.page.s001':
+          'The model is not ready yet. Select it again.',
+      'features.ar.pages.android.ar.placement.page.s002':
+          'This spirit does not currently have an Android AR model.',
+      'features.ar.pages.android.ar.placement.page.s003':
+          'Select an Android AR-compatible spirit below.',
+      'features.ar.pages.android.ar.placement.page.s004':
+          'The spirit is anchored to the surface. Tap another surface to reposition it.',
+      'features.ar.pages.android.ar.placement.page.s005':
+          'Surface detected. Tap the gridded floor or table.',
+      'features.ar.pages.android.ar.placement.page.s006':
+          'Move your phone slowly to scan the floor or a table.',
+      'features.ar.pages.android.ar.placement.page.s007':
+          'Select a spirit below first.',
+      'features.ar.pages.android.ar.placement.page.s008':
+          'Failed to start AR: @message',
+      'features.ar.pages.android.ar.placement.page.s009': 'Starting ARCore…',
+      'features.ar.pages.android.ar.placement.page.s010':
+          'None of the available spirits has a usable Android AR model.',
+      'features.ar.pages.android.ar.placement.page.s011': 'Clear spirit',
+      'features.ar.pages.ar.support.gate.page.s001':
+          'Checking this device\'s AR support…',
+      'features.ar.pages.ar.unavailable.page.s001':
+          'ARCore must be installed or updated',
+      'features.ar.pages.ar.unavailable.page.s002':
+          'This device does not support AR',
+      'features.ar.pages.ar.unavailable.page.s003':
+          'Camera permission required',
+      'features.ar.pages.ar.unavailable.page.s004':
+          'Camera access is restricted',
+      'features.ar.pages.ar.unavailable.page.s005':
+          'AR is unavailable on this platform',
+      'features.ar.pages.ar.unavailable.page.s006':
+          'Unable to start AR right now',
+      'features.ar.pages.ar.unavailable.page.s007':
+          'Complete the Google Play Services for AR installation or update, then return to the app and try again.',
+      'features.ar.pages.ar.unavailable.page.s008':
+          'This device does not support the ARKit/ARCore world-tracking capabilities required by this feature.',
+      'features.ar.pages.ar.unavailable.page.s009':
+          'AR uses the camera to understand your surroundings. Allow camera access and try again.',
+      'features.ar.pages.ar.unavailable.page.s010':
+          'Camera access is disabled. Open system settings and allow this app to use the camera.',
+      'features.ar.pages.ar.unavailable.page.s011':
+          'Camera access is currently restricted by parental controls or system policy.',
+      'features.ar.pages.ar.unavailable.page.s012':
+          'AR placement is currently available only on physical Android and iOS devices.',
+      'features.ar.pages.ar.unavailable.page.s013':
+          'Try again later or restart the app.',
+      'features.ar.pages.ar.unavailable.page.s014': 'AR Spirits',
+      'features.ar.pages.ar.unavailable.page.s015': 'Open system settings',
+      'features.ar.pages.ar.unavailable.page.s016': 'Try again',
+      'features.ar.services.android.arcore.support.service.s001':
+          'Unable to verify AR support through Google Play Services.',
+      'features.ar.widgets.android.arcore.scene.view.s001':
+          'ARCore is only available on Android',
+      'features.station.hardware.sakura.page.s001': 'My Spirit Collection',
+      'features.station.hardware.sakura.page.s002': 'Collected spirits',
+      'features.station.hardware.sakura.page.s003':
+          'Collected @captured / @total spirits',
+      'features.station.hardware.sakura.page.s004':
+          'Collected @captured spirits; loading total',
+      'features.station.hardware.sakura.page.s005':
+          'Collect @count more to complete the set',
+      'features.station.hardware.sakura.page.s006':
+          'Spirit collection complete',
+      'features.station.hardware.sakura.page.s007': 'No spirits collected yet',
+      'features.station.hardware.sakura.page.s008': 'Remember',
+      'features.station.hardware.sakura.page.s009': 'Think of someone',
+      'features.station.hardware.sakura.page.s010': 'Good thing',
+      'features.station.hardware.sakura.page.s011': 'Share today\'s little joy',
+      'features.station.hardware.sakura.page.s012': 'Cheer',
+      'features.station.hardware.sakura.page.s013':
+          'For yourself or someone who tried hard today',
+      'features.station.hardware.sakura.page.s014': 'Tap to choose a spirit',
+      'features.station.hardware.sakura.page.s015': 'Change spirit',
+      'features.station.hardware.sakura.page.s016': 'Undo last stroke',
+      'features.station.hardware.sakura.page.s017': 'Redo stroke',
+      'features.station.hardware.sakura.page.s018': 'Clear all handwriting',
+      'features.station.hardware.sakura.page.s019': 'Choose a card spirit',
+      'features.station.hardware.sakura.page.s020':
+          'No spirits are available to choose',
+      'features.station.hardware.sakura.page.s021': 'Page @current / @total',
+      'features.station.hardware.sakura.page.s022': 'Last triggered: @time',
+      'features.station.hardware.sakura.page.s023':
+          'No previous trigger recorded',
+      'features.station.hardware.sakura.page.s024': 'Loading hardware status…',
+      'features.station.hardware.sakura.page.s025': 'You can leave a petal now',
+      'features.station.hardware.sakura.page.s026': 'Cooldown: @duration',
+      'features.station.hardware.sakura.page.s027': 'Sending your petal…',
+      'features.station.hardware.sakura.page.s028':
+          'Waiting for hardware: @duration',
+      'features.station.hardware.sakura.page.s029': 'Your petal was received',
+      'features.station.hardware.sakura.page.s030':
+          'No response within two minutes; you can resend',
+      'features.station.hardware.sakura.page.s031': 'An unknown error occurred',
+      'features.station.hardware.sakura.page.s032': 'Leave this petal',
+      'features.station.hardware.sakura.page.s033': 'Sending…',
+      'features.station.hardware.sakura.page.s034': 'Waiting for a response…',
+      'features.station.hardware.sakura.page.s035': 'Send again',
+      'features.station.hardware.sakura.page.s036': 'Petal delivered',
+      'features.station.hardware.sakura.page.s037': 'Choose a spirit first',
       'services.camera.service.s001': '[Camera]: AR捕捉成功！路徑：\$path',
       'services.camera.service.s002': '[Camera]:使用者取消了拍照',
       'services.camera.service.s003': '[Camera]:拍照成功！路徑：\${photo.path}',
@@ -598,6 +794,18 @@ class AppTranslations extends Translations {
       'view.lhf.setting.page.s056': 'Game data import complete',
       'view.lhf.setting.page.s057':
           'Failed to import game data. Check account permissions.',
+      'view.lhf.setting.page.s058': 'Remote Location Test',
+      'view.lhf.setting.page.s059':
+          'Maps your real position at activation to NCU @latitude, @longitude. Subsequent movement keeps the same distance and direction. The mode turns off after restarting the app.',
+      'view.lhf.setting.page.s060': 'Test location active',
+      'view.lhf.setting.page.s061': 'Using real location',
+      'view.lhf.setting.page.s062': 'Start location offset',
+      'view.lhf.setting.page.s063': 'Stop location offset',
+      'view.lhf.setting.page.s064': 'Getting current location...',
+      'view.lhf.setting.page.s065': 'Location offset enabled',
+      'view.lhf.setting.page.s066': 'Real location restored',
+      'view.lhf.setting.page.s067':
+          'Unable to enable the location offset. Check GPS and location permission.',
       'view.login.page.s001': '[LoginPage] 登入成功，正在獲取資料...',
       'view.login.page.s002': 'Incorrect email or password',
       'view.login.page.s003': '[LoginPage] 登入出錯: \$e',
@@ -862,6 +1070,7 @@ class AppTranslations extends Translations {
       'widgets.sections.drawer.button.group.s008': 'Signing out...',
       'widgets.sections.drawer.button.group.s009': 'Sign Out',
       'widgets.sections.drawer.button.group.s010': 'Campus Safety',
+      'widgets.sections.drawer.button.group.s011': 'MQTT Test',
       'widgets.sections.monster.test.s001': 'Test Fire Spirit',
       'widgets.sections.monster.test.s003': 'Test Water Spirit',
       'widgets.sections.monster.test.s005':
@@ -928,6 +1137,93 @@ class AppTranslations extends Translations {
       'controllers.user.controller.s003':
           '[UserController] 成功從 Firestore 載入頭像: \${data.photoUrl}',
       'controllers.user.controller.s004': '[UserController] 抓取錯誤: \$e',
+      'features.ar.controllers.android.android.ar.scene.controller.s001':
+          'AR を起動できません',
+      'features.ar.pages.android.ar.placement.page.s001':
+          'モデルの準備ができていません。もう一度選択してください。',
+      'features.ar.pages.android.ar.placement.page.s002':
+          'この精霊には現在 Android AR モデルがありません。',
+      'features.ar.pages.android.ar.placement.page.s003':
+          '下から Android AR に対応した精霊を選択してください。',
+      'features.ar.pages.android.ar.placement.page.s004':
+          '精霊を平面に固定しました。別の平面をタップすると再配置できます。',
+      'features.ar.pages.android.ar.placement.page.s005':
+          '平面を検出しました。グリッドが表示された床または机をタップしてください。',
+      'features.ar.pages.android.ar.placement.page.s006':
+          'スマートフォンをゆっくり動かして、床または机をスキャンしてください。',
+      'features.ar.pages.android.ar.placement.page.s007': '先に下から精霊を選択してください。',
+      'features.ar.pages.android.ar.placement.page.s008':
+          'AR の起動に失敗しました：@message',
+      'features.ar.pages.android.ar.placement.page.s009': 'ARCore を起動しています…',
+      'features.ar.pages.android.ar.placement.page.s010':
+          '現在取得できる精霊には、利用可能な Android AR モデルがありません。',
+      'features.ar.pages.android.ar.placement.page.s011': '精霊を削除',
+      'features.ar.pages.ar.support.gate.page.s001': 'デバイスの AR 対応状況を確認しています…',
+      'features.ar.pages.ar.unavailable.page.s001': 'ARCore のインストールまたは更新が必要です',
+      'features.ar.pages.ar.unavailable.page.s002': 'このデバイスは AR に対応していません',
+      'features.ar.pages.ar.unavailable.page.s003': 'カメラの権限が必要です',
+      'features.ar.pages.ar.unavailable.page.s004': 'カメラの使用が制限されています',
+      'features.ar.pages.ar.unavailable.page.s005': 'このプラットフォームでは AR を利用できません',
+      'features.ar.pages.ar.unavailable.page.s006': '現在 AR を起動できません',
+      'features.ar.pages.ar.unavailable.page.s007':
+          'Google Play 開発者サービス（AR）のインストールまたは更新を完了し、アプリに戻ってもう一度お試しください。',
+      'features.ar.pages.ar.unavailable.page.s008':
+          'このデバイスは、この機能に必要な ARKit／ARCore のワールドトラッキングに対応していません。',
+      'features.ar.pages.ar.unavailable.page.s009':
+          'AR は周囲を認識するためにカメラを使用します。カメラの使用を許可して、もう一度お試しください。',
+      'features.ar.pages.ar.unavailable.page.s010':
+          'カメラの権限が無効です。システム設定でこのアプリのカメラ使用を許可してください。',
+      'features.ar.pages.ar.unavailable.page.s011':
+          'カメラは現在、ペアレンタルコントロールまたはシステムポリシーによって制限されています。',
+      'features.ar.pages.ar.unavailable.page.s012':
+          'AR 配置機能は現在、Android および iOS の実機でのみ利用できます。',
+      'features.ar.pages.ar.unavailable.page.s013':
+          'しばらくしてから再試行するか、アプリを再起動してください。',
+      'features.ar.pages.ar.unavailable.page.s014': 'AR 精霊',
+      'features.ar.pages.ar.unavailable.page.s015': 'システム設定を開く',
+      'features.ar.pages.ar.unavailable.page.s016': 'もう一度試す',
+      'features.ar.services.android.arcore.support.service.s001':
+          'Google Play 開発者サービスで AR の対応状況を確認できません。',
+      'features.ar.widgets.android.arcore.scene.view.s001':
+          'ARCore は Android でのみ利用できます',
+      'features.station.hardware.sakura.page.s001': '私の精霊コレクション',
+      'features.station.hardware.sakura.page.s002': '収集済みの精霊',
+      'features.station.hardware.sakura.page.s003':
+          '精霊 @captured / @total 体を収集',
+      'features.station.hardware.sakura.page.s004': '@captured 体を収集済み。総数を読み込み中',
+      'features.station.hardware.sakura.page.s005': 'あと @count 体でコンプリート',
+      'features.station.hardware.sakura.page.s006': '精霊コレクション完成',
+      'features.station.hardware.sakura.page.s007': 'まだ精霊を収集していません',
+      'features.station.hardware.sakura.page.s008': '思い出す',
+      'features.station.hardware.sakura.page.s009': '誰かを思い浮かべて',
+      'features.station.hardware.sakura.page.s010': 'よかったこと',
+      'features.station.hardware.sakura.page.s011': '今日の小さな幸せを分かち合おう',
+      'features.station.hardware.sakura.page.s012': 'エール',
+      'features.station.hardware.sakura.page.s013': '今日頑張った自分や誰かへ',
+      'features.station.hardware.sakura.page.s014': 'タップして精霊を選択',
+      'features.station.hardware.sakura.page.s015': '精霊を変更',
+      'features.station.hardware.sakura.page.s016': '一つ前の線を元に戻す',
+      'features.station.hardware.sakura.page.s017': '線をやり直す',
+      'features.station.hardware.sakura.page.s018': '手書きをすべて消去',
+      'features.station.hardware.sakura.page.s019': 'カードの精霊を選択',
+      'features.station.hardware.sakura.page.s020': '選択できる精霊がいません',
+      'features.station.hardware.sakura.page.s021': '@current / @total ページ',
+      'features.station.hardware.sakura.page.s022': '前回の起動：@time',
+      'features.station.hardware.sakura.page.s023': '前回の起動記録はありません',
+      'features.station.hardware.sakura.page.s024': 'ハードウェアの状態を読み込み中…',
+      'features.station.hardware.sakura.page.s025': '今、花びらを残せます',
+      'features.station.hardware.sakura.page.s026': 'クールダウン中：@duration',
+      'features.station.hardware.sakura.page.s027': '花びらを送信中…',
+      'features.station.hardware.sakura.page.s028': 'ハードウェアの応答待ち：@duration',
+      'features.station.hardware.sakura.page.s029': '花びらが届きました',
+      'features.station.hardware.sakura.page.s030': '2分以内に応答がありません。再送できます',
+      'features.station.hardware.sakura.page.s031': '不明なエラーが発生しました',
+      'features.station.hardware.sakura.page.s032': 'この花びらを残す',
+      'features.station.hardware.sakura.page.s033': '送信中…',
+      'features.station.hardware.sakura.page.s034': '応答を待っています…',
+      'features.station.hardware.sakura.page.s035': 'もう一度送る',
+      'features.station.hardware.sakura.page.s036': '花びらが届きました',
+      'features.station.hardware.sakura.page.s037': '先に精霊を選択してください',
       'services.camera.service.s001': '[Camera]: AR捕捉成功！路徑：\$path',
       'services.camera.service.s002': '[Camera]:使用者取消了拍照',
       'services.camera.service.s003': '[Camera]:拍照成功！路徑：\${photo.path}',
@@ -1053,6 +1349,17 @@ class AppTranslations extends Translations {
       'view.lhf.setting.page.s055': 'ゲームデータをインポートしています...',
       'view.lhf.setting.page.s056': 'ゲームデータのインポートが完了しました',
       'view.lhf.setting.page.s057': 'ゲームデータのインポートに失敗しました。アカウント権限を確認してください。',
+      'view.lhf.setting.page.s058': '遠隔位置情報テスト',
+      'view.lhf.setting.page.s059':
+          '有効化時の実際の位置を中央大学 @latitude, @longitude に対応させ、その後の移動距離と方向を維持します。アプリを再起動すると自動的にオフになります。',
+      'view.lhf.setting.page.s060': 'テスト位置情報を使用中',
+      'view.lhf.setting.page.s061': '実際の位置情報を使用中',
+      'view.lhf.setting.page.s062': '位置オフセットを開始',
+      'view.lhf.setting.page.s063': '位置オフセットを停止',
+      'view.lhf.setting.page.s064': '現在地を取得しています...',
+      'view.lhf.setting.page.s065': '位置オフセットを有効にしました',
+      'view.lhf.setting.page.s066': '実際の位置情報に戻しました',
+      'view.lhf.setting.page.s067': '位置オフセットを有効にできません。GPSと位置情報の権限を確認してください。',
       'view.login.page.s001': '[LoginPage] 登入成功，正在獲取資料...',
       'view.login.page.s002': 'メールアドレスまたはパスワードが正しくありません',
       'view.login.page.s003': '[LoginPage] 登入出錯: \$e',
@@ -1278,6 +1585,7 @@ class AppTranslations extends Translations {
       'widgets.sections.drawer.button.group.s008': 'ログアウト中...',
       'widgets.sections.drawer.button.group.s009': 'ログアウト',
       'widgets.sections.drawer.button.group.s010': 'キャンパス安全',
+      'widgets.sections.drawer.button.group.s011': 'MQTT機能テスト',
       'widgets.sections.monster.test.s001': 'テスト用の火の精霊',
       'widgets.sections.monster.test.s003': 'テスト用の水の精霊',
       'widgets.sections.monster.test.s005':

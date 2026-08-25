@@ -1,0 +1,11 @@
+plugins {
+    id 'com.android.asset-pack'
+}
+
+assetPack {
+    packName = "ar_model_pack"
+
+    dynamicDelivery {
+        deliveryType = "install-time"
+    }
+}

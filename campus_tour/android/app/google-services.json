@@ -48,6 +48,102 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:322346919988:android:d65b4139099a0fa2240261",
+        "android_client_info": {
+          "package_name": "com.henryKuo.Campustour"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "322346919988-o3kh3d3k6kmeo7hv60rd4vln0cljv5kd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADyRlCi8SRBCXpqJLf3huNXxSMuPQ1uxA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "322346919988-o3kh3d3k6kmeo7hv60rd4vln0cljv5kd.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "322346919988-d555vambpeuvljnfkm8vujot734fu5el.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.campusTour"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:322346919988:android:4e7b416d5dabe18e240261",
+        "android_client_info": {
+          "package_name": "tw.edu.ncu.campustour"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "322346919988-l118ti73av0mdtrlarfftnau63iemjgq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "tw.edu.ncu.campustour",
+            "certificate_hash": "b1ab9c2f790d6c682c2781d1eacf4165d3ce3972"
+          }
+        },
+        {
+          "client_id": "322346919988-n8750s89jd7gr99m9p85nf839gvlt00d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "tw.edu.ncu.campustour",
+            "certificate_hash": "a50565045ffd02d7d46bfcd82585ec3281150f77"
+          }
+        },
+        {
+          "client_id": "322346919988-s8uni8lc165el8rlrl1959k1hgr2vb7f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "tw.edu.ncu.campustour",
+            "certificate_hash": "389db4191ab8be036d6b27bd05f7b56ff8908b4a"
+          }
+        },
+        {
+          "client_id": "322346919988-o3kh3d3k6kmeo7hv60rd4vln0cljv5kd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADyRlCi8SRBCXpqJLf3huNXxSMuPQ1uxA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "322346919988-o3kh3d3k6kmeo7hv60rd4vln0cljv5kd.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "322346919988-d555vambpeuvljnfkm8vujot734fu5el.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.campusTour"
+              }
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"

@@ -44,7 +44,7 @@ class _ArCapturePageState extends State<ArCapturePage>
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    AudioService().playOverlayBgm(fileName: 'audio/M12_AR_camera.wav');
+    AudioService().playOverlayBgm(fileName: 'audio/M12_AR_camera.flac');
     _startArMode();
   }
 

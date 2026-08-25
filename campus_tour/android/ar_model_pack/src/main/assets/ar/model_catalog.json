@@ -1,0 +1,196 @@
+{
+  "models": [
+    {
+      "arRef": "NCU_Lake.usdz",
+      "aliases": ["NCU_Lake.glb"],
+      "assetPath": "ar/models/monsters/NCU_Lake.glb",
+      "targetHeightMeters": 0.08,
+      "sourceHeightUnits": 0.5747841831482852,
+      "sourceCenterXUnits": 0.0
+    },
+    {
+      "arRef": "Hakka.usdz",
+      "aliases": ["Hakka.glb"],
+      "assetPath": "ar/models/monsters/Hakka.glb",
+      "targetHeightMeters": 0.08,
+      "sourceHeightUnits": 1.6999997339531916,
+      "sourceCenterXUnits": 5.960464477539063e-8
+    },
+    {
+      "arRef": "ES.usdz",
+      "aliases": ["ES.glb"],
+      "assetPath": "ar/models/monsters/ES.glb",
+      "targetHeightMeters": 0.08,
+      "sourceHeightUnits": 1.625603610450625,
+      "sourceCenterXUnits": 0.0
+    },
+    {
+      "arRef": "Elephant.usdz",
+      "aliases": ["Elephant.glb"],
+      "assetPath": "ar/models/monsters/Elephant.glb",
+      "targetHeightMeters": 0.08,
+      "sourceHeightUnits": 1.0458115302026272,
+      "sourceCenterXUnits": 0.0
+    },
+    {
+      "arRef": "Rock.usdz",
+      "aliases": ["Rock.glb"],
+      "assetPath": "ar/models/monsters/Rock.glb",
+      "targetHeightMeters": 0.08,
+      "sourceHeightUnits": 1.1916051062893303,
+      "sourceCenterXUnits": 0.0
+    },
+    {
+      "arRef": "Mechanic.usdz",
+      "aliases": ["Mechanic.glb"],
+      "assetPath": "ar/models/monsters/Mechanic.glb",
+      "targetHeightMeters": 0.08,
+      "sourceHeightUnits": 1.7000004135473432,
+      "sourceCenterXUnits": -0.08363997936248779
+    },
+    {
+      "arRef": "language.usdz",
+      "aliases": ["language.glb"],
+      "assetPath": "ar/models/monsters/language.glb",
+      "targetHeightMeters": 0.08,
+      "sourceHeightUnits": 1.699999878510262,
+      "sourceCenterXUnits": -5.960464477539063e-8
+    },
+    {
+      "arRef": "Recycle.usdz",
+      "aliases": ["Recycle.glb"],
+      "assetPath": "ar/models/monsters/Recycle.glb",
+      "targetHeightMeters": 0.08,
+      "sourceHeightUnits": 1.700000165170426,
+      "sourceCenterXUnits": 0.0
+    },
+    {
+      "arRef": "Math.usdz",
+      "aliases": ["Math.glb"],
+      "assetPath": "ar/models/monsters/Math.glb",
+      "targetHeightMeters": 0.08,
+      "sourceHeightUnits": 1.3877455414868436,
+      "sourceCenterXUnits": 0.0
+    },
+    {
+      "arRef": "SE.usdz",
+      "aliases": ["SE.glb"],
+      "assetPath": "ar/models/monsters/SE.glb",
+      "targetHeightMeters": 0.08,
+      "sourceHeightUnits": 1.7000001457192422,
+      "sourceCenterXUnits": 0.0
+    },
+    {
+      "arRef": "flower_river.usdz",
+      "aliases": ["flower_river.glb"],
+      "assetPath": "ar/models/monsters/flower_river.glb",
+      "targetHeightMeters": 0.08,
+      "sourceHeightUnits": 1.7000001232518542,
+      "sourceCenterXUnits": 0.0
+    },
+    {
+      "arRef": "Management.usdz",
+      "aliases": ["Management.glb"],
+      "assetPath": "ar/models/monsters/Management.glb",
+      "targetHeightMeters": 0.08,
+      "sourceHeightUnits": 1.699999876055415,
+      "sourceCenterXUnits": 0.0
+    },
+    {
+      "arRef": "Infor_Engineer.usdz",
+      "aliases": ["Infor_Engineer.glb"],
+      "assetPath": "ar/models/monsters/Infor_Engineer.glb",
+      "targetHeightMeters": 0.08,
+      "sourceHeightUnits": 1.6999999215720152,
+      "sourceCenterXUnits": 0.0
+    },
+    {
+      "arRef": "DNA.usdz",
+      "aliases": ["DNA.glb"],
+      "assetPath": "ar/models/monsters/DNA.glb",
+      "targetHeightMeters": 0.08,
+      "sourceHeightUnits": 1.1473520090061378,
+      "sourceCenterXUnits": 5.960464477539063e-8
+    },
+    {
+      "arRef": "Feather.usdz",
+      "aliases": ["Feather.glb"],
+      "assetPath": "ar/models/monsters/Feather.glb",
+      "targetHeightMeters": 0.08,
+      "sourceHeightUnits": 1.699999927476358,
+      "sourceCenterXUnits": 0.0
+    },
+    {
+      "arRef": "Sit_on_the_cloud.usdz",
+      "aliases": ["Sit_on_the_cloud.glb"],
+      "assetPath": "ar/models/monsters/Sit_on_the_cloud.glb",
+      "targetHeightMeters": 0.08,
+      "sourceHeightUnits": 1.6860865685435726,
+      "sourceCenterXUnits": 0.0
+    },
+    {
+      "arRef": "sit_and_listen.usdz",
+      "aliases": ["sit_and_listen.glb"],
+      "assetPath": "ar/models/monsters/sit_and_listen.glb",
+      "targetHeightMeters": 0.08,
+      "sourceHeightUnits": 1.217906640913938,
+      "sourceCenterXUnits": 0.0
+    },
+    {
+      "arRef": "qmark.usdz",
+      "aliases": ["qmark.glb"],
+      "assetPath": "ar/models/monsters/qmark.glb",
+      "targetHeightMeters": 0.08,
+      "sourceHeightUnits": 1.6999998326941679,
+      "sourceCenterXUnits": 0.0
+    },
+    {
+      "arRef": "clound.usdz",
+      "aliases": ["clound.glb"],
+      "assetPath": "ar/models/monsters/clound.glb",
+      "targetHeightMeters": 0.08,
+      "sourceHeightUnits": 1.625880163680705,
+      "sourceCenterXUnits": -5.960464477539063e-8
+    },
+    {
+      "arRef": "circle_90.usdz",
+      "aliases": ["circle_90.glb"],
+      "assetPath": "ar/models/monsters/circle_90.glb",
+      "targetHeightMeters": 0.08,
+      "sourceHeightUnits": 1.6999997990754405,
+      "sourceCenterXUnits": 0.0
+    },
+    {
+      "arRef": "squirrel.usdz",
+      "aliases": ["squirrel.glb"],
+      "assetPath": "ar/models/monsters/squirrel.glb",
+      "targetHeightMeters": 0.08,
+      "sourceHeightUnits": 1.699999851096706,
+      "sourceCenterXUnits": 0.14127004146575928
+    },
+    {
+      "arRef": "global_bboy.usdz",
+      "aliases": ["global_bboy.glb"],
+      "assetPath": "ar/models/monsters/global_bboy.glb",
+      "targetHeightMeters": 0.08,
+      "sourceHeightUnits": 1.6056823826467728,
+      "sourceCenterXUnits": 1.1920928955078125e-7
+    },
+    {
+      "arRef": "school_landing.usdz",
+      "aliases": ["school_landing.glb"],
+      "assetPath": "ar/models/monsters/school_landing.glb",
+      "targetHeightMeters": 0.08,
+      "sourceHeightUnits": 1.7000000962073436,
+      "sourceCenterXUnits": 0.040289998054504395
+    },
+    {
+      "arRef": "pine_cone.usdz",
+      "aliases": ["pine_cone.glb"],
+      "assetPath": "ar/models/monsters/pine_cone.glb",
+      "targetHeightMeters": 0.08,
+      "sourceHeightUnits": 1.6999998745570508,
+      "sourceCenterXUnits": 0.0
+    }
+  ]
+}

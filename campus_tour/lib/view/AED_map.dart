@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:campus_tour/controllers/location_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_compass/flutter_compass.dart';
@@ -30,7 +31,8 @@ class _AEDMapState extends State<AEDMap> {
     DeviceOrientation.portraitUp,
   ];
 
-  StreamSubscription<Position>? _positionSubscription;
+  late final LocationController _locationController;
+  late final Worker _locationWorker;
   StreamSubscription<CompassEvent>? _compassSubscription;
   Position? _currentPosition;
   double? _heading;
@@ -39,14 +41,20 @@ class _AEDMapState extends State<AEDMap> {
   @override
   void initState() {
     super.initState();
+    _locationController = Get.find<LocationController>();
+    _locationWorker = ever<AppLocationState>(
+      _locationController.state,
+      _handleLocationState,
+    );
+    _handleLocationState(_locationController.state.value);
     _lockLandscape();
-    _startLocationTracking();
+    unawaited(_locationController.startTracking());
     _startCompassTracking();
   }
 
   @override
   void dispose() {
-    _positionSubscription?.cancel();
+    _locationWorker.dispose();
     _compassSubscription?.cancel();
     _restoreOrientation();
     super.dispose();
@@ -60,62 +68,25 @@ class _AEDMapState extends State<AEDMap> {
     await SystemChrome.setPreferredOrientations(_restoreOrientations);
   }
 
-  Future<void> _startLocationTracking() async {
-    final serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      _setStatus('view.aed.map.s001'.tr);
-      return;
-    }
+  void _handleLocationState(AppLocationState locationState) {
+    if (!mounted) return;
 
-    var permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-    }
+    final message = switch (locationState.status) {
+      AppLocationStatus.idle ||
+      AppLocationStatus.requestingPermission ||
+      AppLocationStatus.ready => null,
+      AppLocationStatus.serviceDisabled => 'view.aed.map.s001'.tr,
+      AppLocationStatus.permissionDenied => 'view.aed.map.s002'.tr,
+      AppLocationStatus.permissionDeniedForever => 'view.aed.map.s003'.tr,
+      AppLocationStatus.error => 'view.aed.map.s004'.trParams({
+        'error': locationState.errorMessage ?? '',
+      }),
+    };
 
-    if (permission == LocationPermission.denied) {
-      _setStatus('view.aed.map.s002'.tr);
-      return;
-    }
-
-    if (permission == LocationPermission.deniedForever) {
-      _setStatus('view.aed.map.s003'.tr);
-      return;
-    }
-
-    try {
-      final initialPosition = await Geolocator.getCurrentPosition(
-        locationSettings: const LocationSettings(
-          accuracy: LocationAccuracy.best,
-        ),
-      );
-
-      if (!mounted) return;
-      setState(() {
-        _currentPosition = initialPosition;
-        _statusMessage = null;
-      });
-    } catch (error) {
-      _setStatus('view.aed.map.s004'.trParams({'error': '$error'}));
-    }
-
-    _positionSubscription =
-        Geolocator.getPositionStream(
-          locationSettings: const LocationSettings(
-            accuracy: LocationAccuracy.best,
-            distanceFilter: 1,
-          ),
-        ).listen(
-          (position) {
-            if (!mounted) return;
-            setState(() {
-              _currentPosition = position;
-              _statusMessage = null;
-            });
-          },
-          onError: (error) {
-            _setStatus('view.aed.map.s005'.trParams({'error': '$error'}));
-          },
-        );
+    setState(() {
+      _currentPosition = locationState.position;
+      _statusMessage = message;
+    });
   }
 
   void _startCompassTracking() {
@@ -126,14 +97,6 @@ class _AEDMapState extends State<AEDMap> {
       setState(() {
         _heading = heading;
       });
-    });
-  }
-
-  void _setStatus(String message) {
-    if (!mounted) return;
-
-    setState(() {
-      _statusMessage = message;
     });
   }
 
