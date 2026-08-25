@@ -19,6 +19,7 @@ class _SakuraPageState extends State<SakuraPage> {
   late final PageController _pageController;
   late final StationHardwareViewModel _hardwareViewModel;
   late final SakuraCardDraftViewModel _draftViewModel;
+  bool _isDrawingInteractionActive = false;
 
   @override
   void initState() {
@@ -52,7 +53,9 @@ class _SakuraPageState extends State<SakuraPage> {
       body: PageView(
         controller: _pageController,
         pageSnapping: true,
-        physics: const PageScrollPhysics(),
+        physics: _isDrawingInteractionActive
+            ? const NeverScrollableScrollPhysics()
+            : const PageScrollPhysics(),
         children: [
           SakuraCollectionView(
             hardwareViewModel: _hardwareViewModel,
@@ -62,6 +65,7 @@ class _SakuraPageState extends State<SakuraPage> {
             hardwareViewModel: _hardwareViewModel,
             draftViewModel: _draftViewModel,
             onPreviousPage: () => _goToPage(0),
+            onDrawingInteractionChanged: _setDrawingInteractionActive,
           ),
         ],
       ),
@@ -77,5 +81,10 @@ class _SakuraPageState extends State<SakuraPage> {
         curve: Curves.easeInOutCubic,
       ),
     );
+  }
+
+  void _setDrawingInteractionActive(bool isActive) {
+    if (_isDrawingInteractionActive == isActive || !mounted) return;
+    setState(() => _isDrawingInteractionActive = isActive);
   }
 }

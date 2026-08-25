@@ -15,13 +15,13 @@ class SakuraCardLayout {
   static const SakuraCardLayout normal = SakuraCardLayout(
     aspectRatio: 1086 / 1448,
     writingArea: Rect.fromLTWH(0.205, 0.466, 0.630, 0.350),
-    monsterArea: Rect.fromLTWH(0.585, 0.500, 0.390, 0.440),
+    monsterArea: Rect.fromLTRB(0.585, 0.500, 1.000, 1.000),
   );
 
   static const SakuraCardLayout completed = SakuraCardLayout(
     aspectRatio: 1122 / 1402,
     writingArea: Rect.fromLTWH(0.210, 0.475, 0.625, 0.365),
-    monsterArea: Rect.fromLTWH(0.585, 0.500, 0.390, 0.440),
+    monsterArea: Rect.fromLTRB(0.585, 0.500, 1.000, 1.000),
   );
 
   final double aspectRatio;

@@ -10,6 +10,7 @@ void main() {
 
   testWidgets('prompts follow drawing undo and redo state', (tester) async {
     final draft = SakuraCardDraftViewModel();
+    var isDrawingInteractionActive = false;
     addTearDown(draft.dispose);
     addTearDown(Get.reset);
 
@@ -26,6 +27,9 @@ void main() {
                 isCollectionComplete: false,
                 isLocked: false,
                 onSelectMonster: () {},
+                onDrawingInteractionChanged: (isActive) {
+                  isDrawingInteractionActive = isActive;
+                },
               ),
             ),
           ),
@@ -41,14 +45,27 @@ void main() {
     final monsterRect = tester.getRect(
       find.byKey(const ValueKey('sakura-monster-selection-target')),
     );
+    final cardRect = tester.getRect(
+      find.byKey(const ValueKey('sakura-card-canvas')),
+    );
     expect(monsterRect.right, greaterThan(rect.right));
     expect(monsterRect.bottom, greaterThan(rect.bottom));
-
-    await tester.dragFrom(
-      rect.topLeft + Offset(rect.width * 0.16, rect.height * 0.30),
-      Offset(rect.width * 0.24, rect.height * 0.18),
+    expect(monsterRect.right, closeTo(cardRect.right, 0.01));
+    expect(monsterRect.bottom, closeTo(cardRect.bottom, 0.01));
+    expect(
+      find.byKey(const ValueKey('sakura-empty-monster-frame')),
+      findsOneWidget,
     );
+
+    final gesture = await tester.startGesture(
+      rect.topLeft + Offset(rect.width * 0.16, rect.height * 0.30),
+    );
+    await tester.pump();
+    expect(isDrawingInteractionActive, isTrue);
+    await gesture.moveBy(Offset(rect.width * 0.24, rect.height * 0.18));
+    await gesture.up();
     await tester.pumpAndSettle();
+    expect(isDrawingInteractionActive, isFalse);
 
     expect(draft.strokes, isNotEmpty);
     expect(_promptOpacity(tester), 0);

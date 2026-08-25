@@ -17,12 +17,14 @@ class SakuraHandwritingCard extends StatelessWidget {
     required this.isCollectionComplete,
     required this.isLocked,
     required this.onSelectMonster,
+    this.onDrawingInteractionChanged,
   });
 
   final SakuraCardDraftViewModel draft;
   final bool isCollectionComplete;
   final bool isLocked;
   final VoidCallback onSelectMonster;
+  final ValueChanged<bool>? onDrawingInteractionChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +36,7 @@ class SakuraHandwritingCard extends StatelessWidget {
         : SakuraAssets.card;
 
     return AspectRatio(
+      key: const ValueKey('sakura-card-canvas'),
       aspectRatio: layout.aspectRatio,
       child: Stack(
         clipBehavior: Clip.none,
@@ -59,8 +62,25 @@ class SakuraHandwritingCard extends StatelessWidget {
                   clipBehavior: Clip.none,
                   children: [
                     Positioned.fromRect(
+                      rect: monsterRect,
+                      child: AnimatedBuilder(
+                        animation: draft,
+                        builder: (context, _) {
+                          return _MonsterSelectionTarget(
+                            monster: draft.selectedMonster,
+                            enabled: !isLocked,
+                            onTap: onSelectMonster,
+                          );
+                        },
+                      ),
+                    ),
+                    Positioned.fromRect(
                       rect: writingRect,
-                      child: _WritingSurface(draft: draft, isLocked: isLocked),
+                      child: _WritingSurface(
+                        draft: draft,
+                        isLocked: isLocked,
+                        onInteractionChanged: onDrawingInteractionChanged,
+                      ),
                     ),
                     Positioned(
                       left: writingRect.right - toolbarWidth - 4,
@@ -108,19 +128,6 @@ class SakuraHandwritingCard extends StatelessWidget {
                         },
                       ),
                     ),
-                    Positioned.fromRect(
-                      rect: monsterRect,
-                      child: AnimatedBuilder(
-                        animation: draft,
-                        builder: (context, _) {
-                          return _MonsterSelectionTarget(
-                            monster: draft.selectedMonster,
-                            enabled: !isLocked,
-                            onTap: onSelectMonster,
-                          );
-                        },
-                      ),
-                    ),
                   ],
                 );
               },
@@ -133,10 +140,15 @@ class SakuraHandwritingCard extends StatelessWidget {
 }
 
 class _WritingSurface extends StatefulWidget {
-  const _WritingSurface({required this.draft, required this.isLocked});
+  const _WritingSurface({
+    required this.draft,
+    required this.isLocked,
+    required this.onInteractionChanged,
+  });
 
   final SakuraCardDraftViewModel draft;
   final bool isLocked;
+  final ValueChanged<bool>? onInteractionChanged;
 
   @override
   State<_WritingSurface> createState() => _WritingSurfaceState();
@@ -152,54 +164,67 @@ class _WritingSurfaceState extends State<_WritingSurface> {
       builder: (context, constraints) {
         final size = Size(constraints.maxWidth, constraints.maxHeight);
 
-        return ClipRect(
-          child: Stack(
-            children: [
-              Positioned.fill(
-                child: GestureDetector(
-                  key: const ValueKey('sakura-handwriting-surface'),
-                  behavior: HitTestBehavior.opaque,
-                  onPanStart: widget.isLocked
-                      ? null
-                      : (details) => _startStroke(details.localPosition, size),
-                  onPanUpdate: widget.isLocked
-                      ? null
-                      : (details) => _updateStroke(details.localPosition, size),
-                  onPanEnd: widget.isLocked ? null : (_) => _finishStroke(),
-                  onPanCancel: widget.isLocked ? null : _cancelStroke,
-                  child: AnimatedBuilder(
-                    animation: widget.draft,
-                    builder: (context, _) {
-                      return RepaintBoundary(
-                        child: CustomPaint(
-                          painter: _SakuraStrokePainter(
-                            strokes: widget.draft.strokes,
-                            activePoints: widget.draft.activePoints,
+        return Listener(
+          behavior: HitTestBehavior.opaque,
+          onPointerDown: widget.isLocked
+              ? null
+              : (_) => widget.onInteractionChanged?.call(true),
+          onPointerUp: (_) => widget.onInteractionChanged?.call(false),
+          onPointerCancel: (_) => widget.onInteractionChanged?.call(false),
+          child: ClipRect(
+            child: Stack(
+              children: [
+                Positioned.fill(
+                  child: GestureDetector(
+                    key: const ValueKey('sakura-handwriting-surface'),
+                    behavior: HitTestBehavior.opaque,
+                    onPanStart: widget.isLocked
+                        ? null
+                        : (details) =>
+                              _startStroke(details.localPosition, size),
+                    onPanUpdate: widget.isLocked
+                        ? null
+                        : (details) =>
+                              _updateStroke(details.localPosition, size),
+                    onPanEnd: widget.isLocked ? null : (_) => _finishStroke(),
+                    onPanCancel: widget.isLocked ? null : _cancelStroke,
+                    child: AnimatedBuilder(
+                      animation: widget.draft,
+                      builder: (context, _) {
+                        return RepaintBoundary(
+                          child: CustomPaint(
+                            painter: _SakuraStrokePainter(
+                              strokes: widget.draft.strokes,
+                              activePoints: widget.draft.activePoints,
+                            ),
+                            child: const SizedBox.expand(),
                           ),
-                          child: const SizedBox.expand(),
-                        ),
-                      );
-                    },
+                        );
+                      },
+                    ),
                   ),
                 ),
-              ),
-              Positioned.fill(
-                child: IgnorePointer(
-                  child: AnimatedBuilder(
-                    animation: widget.draft,
-                    builder: (context, _) {
-                      return AnimatedOpacity(
-                        key: const ValueKey('sakura-writing-prompts'),
-                        opacity: widget.draft.hasHandwriting ? 0 : 1,
-                        duration: const Duration(milliseconds: 200),
-                        curve: Curves.easeOut,
-                        child: const _WritingPrompts(),
-                      );
-                    },
+                Positioned.fill(
+                  child: ExcludeSemantics(
+                    child: IgnorePointer(
+                      ignoring: true,
+                      child: AnimatedBuilder(
+                        animation: widget.draft,
+                        builder: (context, _) {
+                          return AnimatedOpacity(
+                            key: const ValueKey('sakura-writing-prompts'),
+                            opacity: widget.draft.hasHandwriting ? 0 : 1,
+                            duration: const Duration(milliseconds: 200),
+                            curve: Curves.easeOut,
+                            child: const _WritingPrompts(),
+                          );
+                        },
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },
@@ -346,16 +371,17 @@ class _MonsterSelectionTarget extends StatelessWidget {
         child: InkWell(
           onTap: enabled ? onTap : null,
           borderRadius: BorderRadius.circular(10),
-          child: DecoratedBox(
-            decoration: BoxDecoration(
-              color: const Color(0xFFFFF8F2).withValues(alpha: 0.58),
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(
-                color: const Color(0xFFD6978B).withValues(alpha: 0.68),
-              ),
-            ),
-            child: selectedMonster == null
-                ? Center(
+          child: selectedMonster == null
+              ? DecoratedBox(
+                  key: const ValueKey('sakura-empty-monster-frame'),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFFFF8F2).withValues(alpha: 0.58),
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(
+                      color: const Color(0xFFD6978B).withValues(alpha: 0.68),
+                    ),
+                  ),
+                  child: Center(
                     child: Padding(
                       padding: const EdgeInsets.all(4),
                       child: Text(
@@ -369,37 +395,29 @@ class _MonsterSelectionTarget extends StatelessWidget {
                         ),
                       ),
                     ),
-                  )
-                : Padding(
-                    padding: const EdgeInsets.all(3),
-                    child: Column(
-                      children: [
-                        Expanded(
-                          child: Image.asset(
-                            MonsterImagePath.staticImage(
-                              selectedMonster.imageURL,
-                            ),
-                            fit: BoxFit.contain,
-                            errorBuilder: (_, _, _) => const Icon(
-                              Icons.broken_image_outlined,
-                              size: 20,
-                              color: Color(0xFF9A6E63),
-                            ),
+                  ),
+                )
+              : SizedBox.expand(
+                  child: ClipRect(
+                    child: FractionalTranslation(
+                      translation: const Offset(0.08, 0.09),
+                      child: Image.asset(
+                        MonsterImagePath.staticImage(selectedMonster.imageURL),
+                        key: const ValueKey('sakura-selected-monster-image'),
+                        fit: BoxFit.contain,
+                        alignment: Alignment.bottomRight,
+                        errorBuilder: (_, _, _) => const Align(
+                          alignment: Alignment.bottomRight,
+                          child: Icon(
+                            Icons.broken_image_outlined,
+                            size: 20,
+                            color: Color(0xFF9A6E63),
                           ),
                         ),
-                        Text(
-                          selectedMonster.name,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: AppTheme.cardTitleStyle.copyWith(
-                            fontSize: 8,
-                            height: 1,
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
                   ),
-          ),
+                ),
         ),
       ),
     );

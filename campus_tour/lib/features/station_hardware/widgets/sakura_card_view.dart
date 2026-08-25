@@ -20,11 +20,13 @@ class SakuraCardView extends StatefulWidget {
     required this.hardwareViewModel,
     required this.draftViewModel,
     required this.onPreviousPage,
+    required this.onDrawingInteractionChanged,
   });
 
   final StationHardwareViewModel hardwareViewModel;
   final SakuraCardDraftViewModel draftViewModel;
   final VoidCallback onPreviousPage;
+  final ValueChanged<bool> onDrawingInteractionChanged;
 
   @override
   State<SakuraCardView> createState() => _SakuraCardViewState();
@@ -103,7 +105,7 @@ class _SakuraCardViewState extends State<SakuraCardView>
           ),
           SafeArea(
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(20, 14, 20, 16),
+              padding: const EdgeInsets.fromLTRB(12, 10, 12, 12),
               child: Column(
                 children: [
                   Align(
@@ -123,7 +125,7 @@ class _SakuraCardViewState extends State<SakuraCardView>
                             ? SakuraCardLayout.completed
                             : SakuraCardLayout.normal;
                         final width = math.min(
-                          math.min(constraints.maxWidth, 370.0),
+                          math.min(constraints.maxWidth, 400.0),
                           constraints.maxHeight * layout.aspectRatio,
                         );
 
@@ -137,6 +139,8 @@ class _SakuraCardViewState extends State<SakuraCardView>
                                 isCollectionComplete: isComplete,
                                 isLocked: isLocked,
                                 onSelectMonster: _openMonsterPicker,
+                                onDrawingInteractionChanged:
+                                    widget.onDrawingInteractionChanged,
                               ),
                               builder: (context, card) => _DepartureAnimation(
                                 progress: _departureController.value,

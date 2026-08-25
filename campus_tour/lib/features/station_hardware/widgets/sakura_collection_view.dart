@@ -37,12 +37,20 @@ class SakuraCollectionView extends StatelessWidget {
           Positioned.fill(
             child: AnimatedSwitcher(
               duration: const Duration(milliseconds: 450),
-              child: Image.asset(
-                isComplete
-                    ? SakuraAssets.backgroundLeftFull
-                    : SakuraAssets.backgroundLeft,
+              layoutBuilder: (currentChild, previousChildren) {
+                return Stack(
+                  fit: StackFit.expand,
+                  children: [...previousChildren, ?currentChild],
+                );
+              },
+              child: SizedBox.expand(
                 key: ValueKey(isComplete),
-                fit: BoxFit.cover,
+                child: Image.asset(
+                  isComplete
+                      ? SakuraAssets.backgroundLeftFull
+                      : SakuraAssets.backgroundLeft,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           ),
