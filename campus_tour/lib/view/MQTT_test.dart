@@ -308,7 +308,6 @@ class _MqttTestPageState extends State<MqttTestPage> {
                 _logs.isEmpty ? '尚無測試紀錄' : _logs.join('\n'),
                 style: const TextStyle(
                   color: Color(0xFFFFEDE2),
-                  fontFamily: 'monospace',
                   fontSize: 13,
                   height: 1.55,
                 ),
