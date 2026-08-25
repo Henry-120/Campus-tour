@@ -116,7 +116,7 @@ class AppTranslations extends Translations {
       'styles.level.style.s001': '火',
       'styles.level.style.s002': '水',
       'styles.level.style.s003': '金',
-      'styles.map.suggestion.style.s001': '裝置藝術',
+      'styles.map.suggestion.style.s001': '公共藝術',
       'styles.map.suggestion.style.s002': '廁所',
       'styles.nfc.leading.style.s001': '開始NFC掃描',
       'styles.nfc.leading.style.s002': '掃描中',
