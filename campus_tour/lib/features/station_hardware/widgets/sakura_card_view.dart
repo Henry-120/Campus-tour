@@ -208,6 +208,8 @@ class _SakuraCardViewState extends State<SakuraCardView>
   }
 
   void _send({required bool hasMonster}) {
+    FocusScope.of(context).unfocus();
+
     if (!hasMonster) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -220,7 +222,9 @@ class _SakuraCardViewState extends State<SakuraCardView>
     unawaited(
       widget.hardwareViewModel.send(
         stationId: StationId.sakura,
-        input: const StationHardwareInput(),
+        input: StationHardwareInput(
+          message: widget.draftViewModel.message.trim(),
+        ),
       ),
     );
   }

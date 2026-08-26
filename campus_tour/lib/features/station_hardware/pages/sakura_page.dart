@@ -49,6 +49,7 @@ class _SakuraPageState extends State<SakuraPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: const Color(0xFFFFF7F1),
       body: PageView(
         controller: _pageController,

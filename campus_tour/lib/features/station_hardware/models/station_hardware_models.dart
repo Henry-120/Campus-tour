@@ -23,10 +23,12 @@ enum MqttEventType {
 
 /// Page-owned input accepted by the station hardware feature.
 ///
-/// It is intentionally empty for now. Add future player choices or other
-/// explicitly allowed page fields here instead of passing an arbitrary map.
+/// Page data belongs here instead of in an arbitrary map. The MQTT adapter can
+/// deliberately choose which fields are ready to cross the backend boundary.
 class StationHardwareInput {
-  const StationHardwareInput();
+  const StationHardwareInput({this.message = ''});
+
+  final String message;
 }
 
 /// MQTT data assembled from trusted application state and page-owned input.

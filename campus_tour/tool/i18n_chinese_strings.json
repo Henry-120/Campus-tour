@@ -1,6 +1,6 @@
 {
   "generatedBy": "tool/extract_chinese_strings.dart",
-  "totalUniqueStrings": 410,
+  "totalUniqueStrings": 411,
   "entries": [
     {
       "key": "controllers.login.controller.s001",
@@ -4147,6 +4147,9 @@
     },
     {
       "key": "features.station.hardware.sakura.page.s037", "zh": "請先選擇一隻精靈", "en": "Choose a spirit first", "ja": "先に精霊を選択してください", "occurrences": [{"file": "lib/features/station_hardware/widgets/sakura_card_view.dart", "line": 1}]
+    },
+    {
+      "key": "features.station.hardware.sakura.page.s038", "zh": "寫下想留下的話…", "en": "Write a message to leave behind…", "ja": "残したい言葉を書いてください…", "occurrences": [{"file": "lib/features/station_hardware/widgets/sakura_handwriting_pad.dart", "line": 1}]
     }
   ]
 }

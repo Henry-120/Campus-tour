@@ -8,6 +8,7 @@ import 'package:campus_tour/models/user_monster_model.dart';
 import 'package:campus_tour/styles/app_theme.dart';
 import 'package:campus_tour/utils/monster_image_path.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class SakuraHandwritingCard extends StatelessWidget {
@@ -49,14 +50,14 @@ class SakuraHandwritingCard extends StatelessWidget {
                   constraints.maxWidth,
                   constraints.maxHeight,
                 );
-                final writingRect = layout.writingRectFor(cardSize);
+                final messageRect = layout.messageRectFor(cardSize);
+                final drawingRect = layout.drawingRectFor(cardSize);
                 final monsterRect = layout.monsterRectFor(cardSize);
                 final toolExtent = math.min(
                   40.0,
-                  math.max(34.0, writingRect.height * 0.25),
+                  math.max(34.0, drawingRect.height * 0.25),
                 );
                 const toolGap = 2.0;
-                final toolbarWidth = toolExtent * 3 + toolGap * 2;
 
                 return Stack(
                   clipBehavior: Clip.none,
@@ -75,7 +76,15 @@ class SakuraHandwritingCard extends StatelessWidget {
                       ),
                     ),
                     Positioned.fromRect(
-                      rect: writingRect,
+                      rect: messageRect,
+                      child: _SakuraMessageInput(
+                        draft: draft,
+                        isLocked: isLocked,
+                        onInteractionChanged: onDrawingInteractionChanged,
+                      ),
+                    ),
+                    Positioned.fromRect(
+                      rect: drawingRect,
                       child: _WritingSurface(
                         draft: draft,
                         isLocked: isLocked,
@@ -83,12 +92,13 @@ class SakuraHandwritingCard extends StatelessWidget {
                       ),
                     ),
                     Positioned(
-                      left: writingRect.right - toolbarWidth - 4,
-                      top: writingRect.top - toolExtent * 0.48,
+                      left: cardSize.width * 0.035,
+                      bottom: cardSize.height * 0.03,
                       child: AnimatedBuilder(
                         animation: draft,
                         builder: (context, _) {
                           return Row(
+                            key: const ValueKey('sakura-drawing-toolbar'),
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               _DrawingToolButton(
@@ -135,6 +145,134 @@ class SakuraHandwritingCard extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class _SakuraMessageInput extends StatefulWidget {
+  const _SakuraMessageInput({
+    required this.draft,
+    required this.isLocked,
+    required this.onInteractionChanged,
+  });
+
+  final SakuraCardDraftViewModel draft;
+  final bool isLocked;
+  final ValueChanged<bool>? onInteractionChanged;
+
+  @override
+  State<_SakuraMessageInput> createState() => _SakuraMessageInputState();
+}
+
+class _SakuraMessageInputState extends State<_SakuraMessageInput> {
+  late final TextEditingController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = TextEditingController(text: widget.draft.message);
+    widget.draft.addListener(_syncFromDraft);
+  }
+
+  @override
+  void didUpdateWidget(covariant _SakuraMessageInput oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (identical(oldWidget.draft, widget.draft)) return;
+
+    oldWidget.draft.removeListener(_syncFromDraft);
+    widget.draft.addListener(_syncFromDraft);
+    _syncFromDraft();
+  }
+
+  @override
+  void dispose() {
+    widget.draft.removeListener(_syncFromDraft);
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Listener(
+      key: const ValueKey('sakura-message-input-region'),
+      behavior: HitTestBehavior.opaque,
+      onPointerDown: widget.isLocked
+          ? null
+          : (_) => widget.onInteractionChanged?.call(true),
+      onPointerUp: (_) => widget.onInteractionChanged?.call(false),
+      onPointerCancel: (_) => widget.onInteractionChanged?.call(false),
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final horizontalPadding = math.max(20.0, constraints.maxWidth * 0.12);
+          final fontSize = (constraints.maxHeight * 0.21)
+              .clamp(10.0, 13.0)
+              .toDouble();
+
+          return ClipRect(
+            child: Stack(
+              fit: StackFit.expand,
+              children: [
+                IgnorePointer(
+                  child: Transform.scale(
+                    scaleY: 2.05,
+                    child: Image.asset(SakuraAssets.inputBox, fit: BoxFit.fill),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+                  child: TextField(
+                    key: const ValueKey('sakura-message-input'),
+                    controller: _controller,
+                    readOnly: widget.isLocked,
+                    keyboardType: TextInputType.multiline,
+                    textInputAction: TextInputAction.newline,
+                    minLines: 2,
+                    maxLines: 2,
+                    maxLength: SakuraCardDraftViewModel.maxMessageCharacters,
+                    maxLengthEnforcement: MaxLengthEnforcement.enforced,
+                    onChanged: widget.draft.updateMessage,
+                    textAlignVertical: TextAlignVertical.center,
+                    style: AppTheme.cardTitleStyle.copyWith(
+                      fontSize: fontSize,
+                      height: 1.15,
+                      fontWeight: FontWeight.w600,
+                      color: const Color(0xFF75483F),
+                    ),
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      enabledBorder: InputBorder.none,
+                      focusedBorder: InputBorder.none,
+                      counterText: '',
+                      isCollapsed: true,
+                      contentPadding: EdgeInsets.symmetric(
+                        vertical: constraints.maxHeight * 0.18,
+                      ),
+                      hintText: 'features.station.hardware.sakura.page.s038'.tr,
+                      hintMaxLines: 2,
+                      hintStyle: AppTheme.cardTitleStyle.copyWith(
+                        fontSize: fontSize,
+                        height: 1.15,
+                        fontWeight: FontWeight.w500,
+                        color: const Color(0xFF9B756D),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  void _syncFromDraft() {
+    final message = widget.draft.message;
+    if (_controller.text == message) return;
+
+    _controller.value = TextEditingValue(
+      text: message,
+      selection: TextSelection.collapsed(offset: message.length),
     );
   }
 }

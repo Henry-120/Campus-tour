@@ -12,6 +12,7 @@ abstract final class SakuraAssets {
       'assets/images/component/sakuraLine_short.png';
   static const String smallSakura = 'assets/images/component/smallSakura.png';
   static const String sendButton = 'assets/images/component/sakuraButtin.png';
+  static const String inputBox = 'assets/images/component/sakuraInputbox.png';
 
   // The picker intentionally owns its presentation instead of importing the
   // encyclopedia widgets, while reusing the same established visual assets.

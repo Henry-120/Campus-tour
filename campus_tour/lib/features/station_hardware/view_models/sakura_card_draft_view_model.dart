@@ -7,6 +7,7 @@ import 'package:flutter/foundation.dart';
 class SakuraCardDraftViewModel extends ChangeNotifier {
   static const int maxStrokes = 50;
   static const int maxPoints = 1500;
+  static const int maxMessageCharacters = 60;
   static const int _maxHistoryEntries = 60;
 
   List<SakuraStroke> _strokes = <SakuraStroke>[];
@@ -14,10 +15,12 @@ class SakuraCardDraftViewModel extends ChangeNotifier {
   final List<List<SakuraStroke>> _undoHistory = <List<SakuraStroke>>[];
   final List<List<SakuraStroke>> _redoHistory = <List<SakuraStroke>>[];
   UserMonsterModel? _selectedMonster;
+  String _message = '';
 
   List<SakuraStroke> get strokes => List<SakuraStroke>.unmodifiable(_strokes);
   List<Offset> get activePoints => List<Offset>.unmodifiable(_activePoints);
   UserMonsterModel? get selectedMonster => _selectedMonster;
+  String get message => _message;
 
   bool get hasHandwriting => _strokes.isNotEmpty || _activePoints.isNotEmpty;
   bool get canUndo => _undoHistory.isNotEmpty && _activePoints.isEmpty;
@@ -96,12 +99,19 @@ class SakuraCardDraftViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  void updateMessage(String value) {
+    if (_message == value) return;
+    _message = value;
+    notifyListeners();
+  }
+
   void clearDraft() {
     _strokes = <SakuraStroke>[];
     _activePoints.clear();
     _undoHistory.clear();
     _redoHistory.clear();
     _selectedMonster = null;
+    _message = '';
     notifyListeners();
   }
 

@@ -72,6 +72,17 @@ void main() {
         Offset(1, 0),
       ]);
     });
+
+    test('message is independent from drawing and cleared with the draft', () {
+      viewModel.updateMessage('今天也辛苦了');
+      _drawStroke(viewModel, const [Offset(0.1, 0.2), Offset(0.3, 0.4)]);
+
+      viewModel.clearDrawing();
+      expect(viewModel.message, '今天也辛苦了');
+
+      viewModel.clearDraft();
+      expect(viewModel.message, isEmpty);
+    });
   });
 }
 
