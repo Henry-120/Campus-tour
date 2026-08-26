@@ -33,19 +33,24 @@ class StationHardwareInput {
 
 /// MQTT data assembled from trusted application state and page-owned input.
 class MqttEventData {
-  MqttEventData({required String displayName})
-    : displayName = _normalizeDisplayName(displayName);
+  MqttEventData({required String displayName, String cardText = ''})
+    : displayName = _normalizeDisplayName(displayName),
+      cardText = cardText.trim();
 
   factory MqttEventData.fromInput({
     required StationHardwareInput input,
     required String displayName,
   }) {
-    return MqttEventData(displayName: displayName);
+    return MqttEventData(displayName: displayName, cardText: input.message);
   }
 
   final String displayName;
+  final String cardText;
 
-  Map<String, Object?> toJson() => {'displayName': displayName};
+  Map<String, Object?> toJson() => {
+    'displayName': displayName,
+    'cardText': cardText,
+  };
 
   static String _normalizeDisplayName(String value) {
     final normalized = value.trim();
