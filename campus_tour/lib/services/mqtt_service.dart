@@ -172,7 +172,7 @@ class MqttService {
       });
 
       final builder = MqttClientPayloadBuilder();
-      builder.addString(message);
+      builder.addUTF8String(message);
       final payload = builder.payload;
       if (payload == null) {
         throw StateError('MQTT payload is empty');

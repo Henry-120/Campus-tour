@@ -36,13 +36,11 @@ class StationHardwareViewModel extends GetxController
   final Rx<StationHardwarePhase> _phase = StationHardwarePhase.idle.obs;
   final Rxn<DateTime> _lastTriggerTime = Rxn<DateTime>();
   final RxnString _errorMessage = RxnString();
-  final RxInt _clockTick = 0.obs;
 
   StreamSubscription<HardwareDeviceData?>? _confirmationSubscription;
   Completer<HardwareDeviceData>? _confirmationCompleter;
   Timer? _confirmationTimer;
   Timer? _cooldownTimer;
-  Timer? _statusTicker;
   DateTime? _confirmationDeadline;
 
   bool _historyAvailable = false;
@@ -52,6 +50,8 @@ class StationHardwareViewModel extends GetxController
   Stream<StationHardwarePhase> get phaseChanges => _phase.stream;
   DateTime? get lastTriggerTime => _lastTriggerTime.value;
   String? get errorMessage => _errorMessage.value;
+  DateTime? get cooldownDeadline => lastTriggerTime?.add(cooldownDuration);
+  DateTime? get confirmationDeadline => _confirmationDeadline;
 
   int get capturedCount => _monsterController.userMonsterCollection.length;
   int? get totalMonsterCount => _monsterController.totalMonsterCount.value;
@@ -78,41 +78,15 @@ class StationHardwareViewModel extends GetxController
         _isCooldownComplete;
   }
 
-  Duration get remainingCooldown {
-    _clockTick.value;
-    final triggerTime = lastTriggerTime;
-    if (triggerTime == null) return Duration.zero;
-
-    final remaining = triggerTime
-        .add(cooldownDuration)
-        .difference(DateTime.now().toUtc());
-    return remaining.isNegative ? Duration.zero : remaining;
-  }
-
-  Duration get remainingConfirmation {
-    _clockTick.value;
-    final deadline = _confirmationDeadline;
-    if (deadline == null) return Duration.zero;
-
-    final remaining = deadline.difference(DateTime.now().toUtc());
-    return remaining.isNegative ? Duration.zero : remaining;
-  }
-
   bool get _isCooldownComplete {
-    final triggerTime = lastTriggerTime;
-    if (triggerTime == null) return true;
-
-    final nextAvailableTime = triggerTime.add(cooldownDuration);
-    return !DateTime.now().toUtc().isBefore(nextAvailableTime);
+    final deadline = cooldownDeadline;
+    return deadline == null || !DateTime.now().toUtc().isBefore(deadline);
   }
 
   @override
   void onInit() {
     super.onInit();
     WidgetsBinding.instance.addObserver(this);
-    _statusTicker = Timer.periodic(const Duration(seconds: 1), (_) {
-      if (!_disposed) _clockTick.value++;
-    });
     unawaited(refreshLastTriggerTime());
   }
 
@@ -206,7 +180,6 @@ class StationHardwareViewModel extends GetxController
       if (_disposed) return;
 
       _confirmationDeadline = DateTime.now().toUtc().add(confirmationTimeout);
-      _clockTick.value++;
       _phase.value = StationHardwarePhase.waitingForHardware;
       final confirmedDevice = await _waitForHardwareUpdate(beforeTriggerTime);
       if (_disposed) return;
@@ -237,7 +210,6 @@ class StationHardwareViewModel extends GetxController
       _setError('發送過程發生未知錯誤');
     } finally {
       _confirmationDeadline = null;
-      if (!_disposed) _clockTick.value++;
     }
   }
 
@@ -248,8 +220,8 @@ class StationHardwareViewModel extends GetxController
     }
 
     return capturedCount >= total
-        ? MqttEventType.challengeClear
-        : MqttEventType.storyUnlock;
+        ? MqttEventType.challengeComplete
+        : MqttEventType.storyUnlocked;
   }
 
   void _applyDeviceData(HardwareDeviceData? deviceData) {
@@ -262,12 +234,12 @@ class StationHardwareViewModel extends GetxController
     _cooldownTimer?.cancel();
     _cooldownTimer = null;
 
-    _statusTicker?.cancel();
-    _statusTicker = null;
-    _confirmationDeadline = null;
+    final deadline = cooldownDeadline;
+    if (deadline == null) return;
 
-    final remaining = remainingCooldown;
+    final remaining = deadline.difference(DateTime.now().toUtc());
     if (remaining == Duration.zero) return;
+    if (remaining.isNegative) return;
 
     _cooldownTimer = Timer(remaining, () {
       if (_disposed) return;
@@ -362,6 +334,7 @@ class StationHardwareViewModel extends GetxController
   void onClose() {
     _disposed = true;
     WidgetsBinding.instance.removeObserver(this);
+    _confirmationDeadline = null;
 
     _cooldownTimer?.cancel();
     _cooldownTimer = null;

@@ -19,8 +19,8 @@ class _MqttTestPageState extends State<MqttTestPage> {
   static const Map<MqttEventType, String> _eventLabels = {
     MqttEventType.scanSuccess: '掃描成功 (scan_success)',
     MqttEventType.arrival: '抵達站點 (arrival)',
-    MqttEventType.storyUnlock: '解鎖故事 (story_unlock)',
-    MqttEventType.challengeClear: '完成挑戰 (challenge_clear)',
+    MqttEventType.storyUnlocked: '解鎖故事 (story_unlock)',
+    MqttEventType.challengeComplete: '完成挑戰 (challenge_clear)',
   };
 
   // 在頁面重開時沿用同一條測試連線，避免建立多個 MQTT client。

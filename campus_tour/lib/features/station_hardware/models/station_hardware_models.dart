@@ -13,8 +13,8 @@ enum StationId {
 enum MqttEventType {
   scanSuccess('scan_success'),
   arrival('arrival'),
-  storyUnlock('story_unlock'),
-  challengeClear('challenge_clear');
+  storyUnlocked('story_unlocked'),
+  challengeComplete('challenge_complete');
 
   const MqttEventType(this.wireName);
 

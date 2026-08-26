@@ -91,9 +91,9 @@ class _SakuraCardViewState extends State<SakuraCardView>
       final canSend = widget.hardwareViewModel.canSend;
       final lastTriggerTime = widget.hardwareViewModel.lastTriggerTime;
       final errorMessage = widget.hardwareViewModel.errorMessage;
-      final remainingCooldown = widget.hardwareViewModel.remainingCooldown;
-      final remainingConfirmation =
-          widget.hardwareViewModel.remainingConfirmation;
+      final cooldownDeadline = widget.hardwareViewModel.cooldownDeadline;
+      final confirmationDeadline =
+          widget.hardwareViewModel.confirmationDeadline;
       final isLocked =
           widget.hardwareViewModel.isBusy ||
           phase == StationHardwarePhase.confirmed;
@@ -153,12 +153,12 @@ class _SakuraCardViewState extends State<SakuraCardView>
                     ),
                   ),
                   const SizedBox(height: 4),
-                  _HardwareStatusPanel(
+                  SakuraHardwareStatusPanel(
                     phase: phase,
                     lastTriggerTime: lastTriggerTime,
                     errorMessage: errorMessage,
-                    remainingCooldown: remainingCooldown,
-                    remainingConfirmation: remainingConfirmation,
+                    cooldownDeadline: cooldownDeadline,
+                    confirmationDeadline: confirmationDeadline,
                   ),
                   const SizedBox(height: 5),
                   AnimatedBuilder(
@@ -240,20 +240,60 @@ class _SakuraCardViewState extends State<SakuraCardView>
   }
 }
 
-class _HardwareStatusPanel extends StatelessWidget {
-  const _HardwareStatusPanel({
+class SakuraHardwareStatusPanel extends StatefulWidget {
+  const SakuraHardwareStatusPanel({
+    super.key,
     required this.phase,
     required this.lastTriggerTime,
     required this.errorMessage,
-    required this.remainingCooldown,
-    required this.remainingConfirmation,
+    required this.cooldownDeadline,
+    required this.confirmationDeadline,
+    this.now,
   });
 
   final StationHardwarePhase phase;
   final DateTime? lastTriggerTime;
   final String? errorMessage;
-  final Duration remainingCooldown;
-  final Duration remainingConfirmation;
+  final DateTime? cooldownDeadline;
+  final DateTime? confirmationDeadline;
+
+  /// Injectable clock used to keep countdown behavior deterministic in tests.
+  final DateTime Function()? now;
+
+  @override
+  State<SakuraHardwareStatusPanel> createState() =>
+      _SakuraHardwareStatusPanelState();
+}
+
+class _SakuraHardwareStatusPanelState extends State<SakuraHardwareStatusPanel> {
+  static const Duration _cooldownResolution = Duration(minutes: 1);
+  static const Duration _confirmationResolution = Duration(seconds: 1);
+
+  Timer? _displayTimer;
+
+  @override
+  void initState() {
+    super.initState();
+    _scheduleNextRefresh();
+  }
+
+  @override
+  void didUpdateWidget(covariant SakuraHardwareStatusPanel oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.phase != widget.phase ||
+        oldWidget.cooldownDeadline != widget.cooldownDeadline ||
+        oldWidget.confirmationDeadline != widget.confirmationDeadline ||
+        oldWidget.now != widget.now) {
+      _scheduleNextRefresh();
+    }
+  }
+
+  @override
+  void dispose() {
+    _displayTimer?.cancel();
+    _displayTimer = null;
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -272,10 +312,10 @@ class _HardwareStatusPanel extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            lastTriggerTime == null
+            widget.lastTriggerTime == null
                 ? 'features.station.hardware.sakura.page.s023'.tr
                 : 'features.station.hardware.sakura.page.s022'.trParams({
-                    'time': _formatDateTime(lastTriggerTime!.toLocal()),
+                    'time': _formatDateTime(widget.lastTriggerTime!.toLocal()),
                   }),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
@@ -287,6 +327,7 @@ class _HardwareStatusPanel extends StatelessWidget {
           const SizedBox(height: 3),
           Text(
             _statusText(),
+            key: const ValueKey('sakura-hardware-status-text'),
             textAlign: TextAlign.center,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
@@ -302,29 +343,65 @@ class _HardwareStatusPanel extends StatelessWidget {
   }
 
   String _statusText() {
-    return switch (phase) {
+    return switch (widget.phase) {
       StationHardwarePhase.idle || StationHardwarePhase.loadingHistory =>
         'features.station.hardware.sakura.page.s024'.tr,
       StationHardwarePhase.ready =>
         'features.station.hardware.sakura.page.s025'.tr,
       StationHardwarePhase.cooldown =>
         'features.station.hardware.sakura.page.s026'.trParams({
-          'duration': _formatDuration(remainingCooldown),
+          'duration': _formatCooldown(widget.cooldownDeadline),
         }),
       StationHardwarePhase.publishing =>
         'features.station.hardware.sakura.page.s027'.tr,
       StationHardwarePhase.waitingForHardware =>
         'features.station.hardware.sakura.page.s028'.trParams({
-          'duration': _formatDuration(remainingConfirmation),
+          'duration': _formatConfirmation(widget.confirmationDeadline),
         }),
       StationHardwarePhase.confirmed =>
         'features.station.hardware.sakura.page.s029'.tr,
       StationHardwarePhase.confirmationTimeout =>
         'features.station.hardware.sakura.page.s030'.tr,
       StationHardwarePhase.error =>
-        errorMessage ?? 'features.station.hardware.sakura.page.s031'.tr,
+        widget.errorMessage ?? 'features.station.hardware.sakura.page.s031'.tr,
     };
   }
+
+  void _scheduleNextRefresh() {
+    _displayTimer?.cancel();
+    _displayTimer = null;
+
+    final deadline = _activeDeadline;
+    final resolution = _activeResolution;
+    if (deadline == null || resolution == null) return;
+
+    final remaining = deadline.difference(_now);
+    if (remaining <= Duration.zero) return;
+
+    final unitMicroseconds = resolution.inMicroseconds;
+    final remainder = remaining.inMicroseconds % unitMicroseconds;
+    final delayMicroseconds = remainder == 0 ? unitMicroseconds : remainder;
+
+    _displayTimer = Timer(Duration(microseconds: delayMicroseconds), () {
+      if (!mounted) return;
+      setState(() {});
+      _scheduleNextRefresh();
+    });
+  }
+
+  DateTime get _now => (widget.now ?? DateTime.now)().toUtc();
+
+  DateTime? get _activeDeadline => switch (widget.phase) {
+    StationHardwarePhase.cooldown => widget.cooldownDeadline,
+    StationHardwarePhase.waitingForHardware => widget.confirmationDeadline,
+    _ => null,
+  };
+
+  Duration? get _activeResolution => switch (widget.phase) {
+    StationHardwarePhase.cooldown => _cooldownResolution,
+    StationHardwarePhase.waitingForHardware => _confirmationResolution,
+    _ => null,
+  };
 
   String _formatDateTime(DateTime value) {
     String twoDigits(int number) => number.toString().padLeft(2, '0');
@@ -332,11 +409,36 @@ class _HardwareStatusPanel extends StatelessWidget {
         '${twoDigits(value.hour)}:${twoDigits(value.minute)}';
   }
 
-  String _formatDuration(Duration value) {
-    final hours = value.inHours.toString().padLeft(2, '0');
-    final minutes = (value.inMinutes % 60).toString().padLeft(2, '0');
-    final seconds = (value.inSeconds % 60).toString().padLeft(2, '0');
-    return '$hours:$minutes:$seconds';
+  String _formatCooldown(DateTime? deadline) {
+    final totalMinutes = _ceilingUnits(
+      _remainingUntil(deadline),
+      _cooldownResolution,
+    );
+    final hours = (totalMinutes ~/ 60).toString().padLeft(2, '0');
+    final minutes = (totalMinutes % 60).toString().padLeft(2, '0');
+    return '$hours:$minutes';
+  }
+
+  String _formatConfirmation(DateTime? deadline) {
+    final totalSeconds = _ceilingUnits(
+      _remainingUntil(deadline),
+      _confirmationResolution,
+    );
+    final minutes = (totalSeconds ~/ 60).toString().padLeft(2, '0');
+    final seconds = (totalSeconds % 60).toString().padLeft(2, '0');
+    return '$minutes:$seconds';
+  }
+
+  Duration _remainingUntil(DateTime? deadline) {
+    if (deadline == null) return Duration.zero;
+    final remaining = deadline.difference(_now);
+    return remaining.isNegative ? Duration.zero : remaining;
+  }
+
+  int _ceilingUnits(Duration duration, Duration unit) {
+    if (duration <= Duration.zero) return 0;
+    return (duration.inMicroseconds + unit.inMicroseconds - 1) ~/
+        unit.inMicroseconds;
   }
 }
 
