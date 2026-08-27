@@ -42,6 +42,7 @@ android {
     assetPacks.addAll(listOf(":music_pack", ":ar_model_pack"))
 
 
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17

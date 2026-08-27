@@ -2,6 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
+  static ThemeData get themeData {
+    final baseTheme = ThemeData();
+    return baseTheme.copyWith(
+      textTheme: GoogleFonts.zenMaruGothicTextTheme(baseTheme.textTheme),
+      primaryTextTheme: GoogleFonts.zenMaruGothicTextTheme(
+        baseTheme.primaryTextTheme,
+      ),
+    );
+  }
+
   // 💡 依照「註冊背景圖」風格調整的核心配色
   static const Color primaryColor = Color(0xFFD99A84); // 溫暖的黏土紅/棕
   static const Color secondaryColor = Color(0xFFF4C8B8); // 淺肉粉色

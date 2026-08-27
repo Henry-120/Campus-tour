@@ -2,7 +2,11 @@
   {
     "id": "m1",
     "nfcAns": null,
-    "name": {"zh": "中大湖水怪", "en": "NCU Lake Monster", "ja": "中大湖の水怪"},
+    "name": {
+      "zh": "中大湖水怪",
+      "en": "NCU Lake Monster",
+      "ja": "中大湖の水怪"
+    },
     "type": "水",
     "imageURL": "assets/images/fairy_four_parts/zhongda_lake/1.png",
     "location": {
@@ -17,7 +21,7 @@
   {
     "id": "m2",
     "nfcAns": null,
-    "name": {"zh": "客家狗", "en": "Hakka Hound", "ja": "客家犬"},
+    "name": { "zh": "客家狗", "en": "Hakka Hound", "ja": "客家犬" },
     "type": "火",
     "imageURL": "assets/images/fairy_four_parts/hakka_college/1.png",
     "location": {
@@ -32,7 +36,7 @@
   {
     "id": "m3",
     "nfcAns": null,
-    "name": {"zh": "小蛋球", "en": "Little Eggball", "ja": "たまっこ"},
+    "name": { "zh": "小蛋球", "en": "Little Eggball", "ja": "たまっこ" },
     "type": "水",
     "imageURL": "assets/images/fairy_four_parts/geoscience/1.png",
     "location": {
@@ -47,7 +51,7 @@
   {
     "id": "m4",
     "nfcAns": "04:CA:97:D4:2E:61:81",
-    "name": {"zh": "大大象", "en": "Jumbo Elephant", "ja": "でかぞう"},
+    "name": { "zh": "大大象", "en": "Jumbo Elephant", "ja": "でかぞう" },
     "type": "水",
     "imageURL": "assets/images/fairy_four_parts/elephant_five_forms/1.png",
     "location": {
@@ -62,7 +66,7 @@
   {
     "id": "m5",
     "nfcAns": "04:19:59:D3:2E:61:80",
-    "name": {"zh": "小拳極", "en": "Little Taichi Fist", "ja": "小拳極"},
+    "name": { "zh": "小拳極", "en": "Little Taichi Fist", "ja": "小拳極" },
     "type": "火",
     "imageURL": "assets/images/fairy_four_parts/taichi_sculpture/1.png",
     "location": {
@@ -77,7 +81,7 @@
   {
     "id": "m6",
     "nfcAns": null,
-    "name": {"zh": "機居械", "en": "Mech Dweller", "ja": "メカ居人"},
+    "name": { "zh": "機居械", "en": "Mech Dweller", "ja": "メカ居人" },
     "type": "火",
     "imageURL": "assets/images/fairy_four_parts/engineering/1.png",
     "location": {
@@ -92,7 +96,7 @@
   {
     "id": "m7",
     "nfcAns": null,
-    "name": {"zh": "讀書怪", "en": "Bookworm Monster", "ja": "読書怪"},
+    "name": { "zh": "讀書怪", "en": "Bookworm Monster", "ja": "読書怪" },
     "type": "草",
     "imageURL": "assets/images/fairy_four_parts/literature/1.png",
     "location": {
@@ -107,7 +111,7 @@
   {
     "id": "m8",
     "nfcAns": null,
-    "name": {"zh": "嚶嚶嚶", "en": "Chirpy", "ja": "インインイン"},
+    "name": { "zh": "嚶嚶嚶", "en": "Chirpy", "ja": "インインイン" },
     "type": "草",
     "imageURL": "assets/images/fairy_four_parts/friendship_cherry/1.png",
     "location": {
@@ -122,7 +126,7 @@
   {
     "id": "m9",
     "nfcAns": null,
-    "name": {"zh": "環寶寶", "en": "Eco Baby", "ja": "エコベビー"},
+    "name": { "zh": "環寶寶", "en": "Eco Baby", "ja": "エコベビー" },
     "type": "草",
     "imageURL": "assets/images/fairy_four_parts/sustainability_college/1.png",
     "location": {
@@ -137,7 +141,11 @@
   {
     "id": "m10",
     "nfcAns": null,
-    "name": {"zh": "數碼博士", "en": "Professor Digital", "ja": "デジタル博士"},
+    "name": {
+      "zh": "數碼博士",
+      "en": "Professor Digital",
+      "ja": "デジタル博士"
+    },
     "type": "火",
     "imageURL": "assets/images/fairy_four_parts/science_college/1.png",
     "location": {
@@ -152,7 +160,7 @@
   {
     "id": "m11",
     "nfcAns": null,
-    "name": {"zh": "大英菌", "en": "English Shroom", "ja": "英語キノコ"},
+    "name": { "zh": "大英菌", "en": "English Shroom", "ja": "英語キノコ" },
     "type": "草",
     "imageURL": "assets/images/fairy_four_parts/biomedical_college/1.png",
     "location": {
@@ -167,7 +175,7 @@
   {
     "id": "m12",
     "nfcAns": null,
-    "name": {"zh": "毛毛精靈", "en": "Fluffy Spirit", "ja": "もこもこ精霊"},
+    "name": { "zh": "毛毛精靈", "en": "Fluffy Spirit", "ja": "もこもこ精霊" },
     "type": "水",
     "imageURL": "assets/images/fairy_four_parts/baihua_river/1.png",
     "location": {
@@ -182,7 +190,7 @@
   {
     "id": "m13",
     "nfcAns": null,
-    "name": {"zh": "SM獸", "en": "SM Beast", "ja": "SM獣"},
+    "name": { "zh": "SM獸", "en": "SM Beast", "ja": "SM獣" },
     "type": "草",
     "imageURL": "assets/images/fairy_four_parts/business_college/1.png",
     "location": {
@@ -197,7 +205,7 @@
   {
     "id": "m14",
     "nfcAns": null,
-    "name": {"zh": "亮晶精", "en": "Sparkle Spirit", "ja": "きらめき精霊"},
+    "name": { "zh": "亮晶精", "en": "Sparkle Spirit", "ja": "きらめき精霊" },
     "type": "水",
     "imageURL": "assets/images/fairy_four_parts/electrical_college/1.png",
     "location": {
@@ -212,7 +220,7 @@
   {
     "id": "m15",
     "nfcAns": "04:A1:ED:D2:2E:61:80",
-    "name": {"zh": "DNA 交響曲", "en": "DNA Symphony", "ja": "DNA交響曲"},
+    "name": { "zh": "DNA 交響曲", "en": "DNA Symphony", "ja": "DNA交響曲" },
     "type": "火",
     "imageURL": "assets/images/fairy_four_parts/DNA/1.png",
     "location": {
@@ -227,7 +235,7 @@
   {
     "id": "m16",
     "nfcAns": "04:1B:E1:D4:2E:61:80",
-    "name": {"zh": "羽翼", "en": "Wings", "ja": "羽翼"},
+    "name": { "zh": "羽翼", "en": "Wings", "ja": "羽翼" },
     "type": "火",
     "imageURL": "assets/images/fairy_four_parts/Feather/1.png",
     "location": {
@@ -242,7 +250,11 @@
   {
     "id": "m17",
     "nfcAns": "04:A7:66:D2:2E:61:80",
-    "name": {"zh": "坐雲飛想", "en": "Cloudborne Thoughts", "ja": "雲に座して想う"},
+    "name": {
+      "zh": "坐雲飛想",
+      "en": "Cloudborne Thoughts",
+      "ja": "雲に座して想う"
+    },
     "type": "草",
     "imageURL": "assets/images/fairy_four_parts/think_above_cloud/1.png",
     "location": {
@@ -257,7 +269,11 @@
   {
     "id": "m18",
     "nfcAns": "04:F1:CC:FB:56:59:80",
-    "name": {"zh": "坐聽‧松風", "en": "Listening to the Pine Wind", "ja": "座して松風を聴く"},
+    "name": {
+      "zh": "坐聽‧松風",
+      "en": "Listening to the Pine Wind",
+      "ja": "座して松風を聴く"
+    },
     "type": "水",
     "imageURL": "assets/images/fairy_four_parts/listening_to_the_pine_wind/1.png",
     "location": {
@@ -272,7 +288,7 @@
   {
     "id": "m19",
     "nfcAns": "04:B2:B2:D4:2E:61:80",
-    "name": {"zh": "為什麼", "en": "Why", "ja": "なぜ"},
+    "name": { "zh": "為什麼", "en": "Why", "ja": "なぜ" },
     "type": "草",
     "imageURL": "assets/images/fairy_four_parts/qmark/1.png",
     "location": {
@@ -287,7 +303,7 @@
   {
     "id": "m20",
     "nfcAns": "04:09:6A:D4:2E:61:80",
-    "name": {"zh": "漫步雲端", "en": "Walking on Clouds", "ja": "雲上の散歩"},
+    "name": { "zh": "漫步雲端", "en": "Walking on Clouds", "ja": "雲上の散歩" },
     "type": "水",
     "imageURL": "assets/images/fairy_four_parts/walking_amongst_the_clouds/1.png",
     "location": {
@@ -302,7 +318,7 @@
   {
     "id": "m21",
     "nfcAns": "04:9E:69:D2:2E:61:80",
-    "name": {"zh": "蘊˙行", "en": "Inner Journey", "ja": "蘊・行"},
+    "name": { "zh": "蘊˙行", "en": "Inner Journey", "ja": "蘊・行" },
     "type": "草",
     "imageURL": "assets/images/fairy_four_parts/circle_90de_II/1.png",
     "location": {
@@ -317,14 +333,14 @@
   {
     "id": "m22",
     "nfcAns": null,
-    "name": {"zh": "鼠來寶", "en": "Lucky Squirrel", "ja": "福リス"},
+    "name": { "zh": "鼠來寶", "en": "Lucky Squirrel", "ja": "福リス" },
     "type": "火",
     "imageURL": "assets/images/fairy_four_parts/sqirrel/1.png",
     "location": {
-      "latitude": 0,
-      "longitude": 0
+      "latitude": 24.58058,
+      "longitude": 121.11422
     },
-    "architectureRef": "/architectures/a21",
+    "architectureRef": "/architectures/a22",
     "qaRef": "/questions/qa22",
     "ARRef": "squirrel.usdz",
     "videoRef": "assets/images/img_frame/fire.png"
@@ -332,12 +348,16 @@
   {
     "id": "m23",
     "nfcAns": null,
-    "name": {"zh": "地球村村長", "en": "Global Village Chief", "ja": "地球村の村長"},
+    "name": {
+      "zh": "地球村村長",
+      "en": "Global Village Chief",
+      "ja": "地球村の村長"
+    },
     "type": "火",
     "imageURL": "assets/images/fairy_four_parts/international/1.png",
     "location": {
-      "latitude": 0,
-      "longitude": 0
+      "latitude": 24.968333,
+      "longitude": 121.191722
     },
     "architectureRef": "/architectures/a23",
     "qaRef": "/questions/qa23",
@@ -347,12 +367,12 @@
   {
     "id": "m24",
     "nfcAns": null,
-    "name": {"zh": "學分廢", "en": "Credit Waster", "ja": "単位ロス"},
+    "name": { "zh": "學分廢", "en": "Credit Waster", "ja": "単位ロス" },
     "type": "火",
     "imageURL": "assets/images/fairy_four_parts/academic/1.png",
     "location": {
-      "latitude": 0,
-      "longitude": 0
+      "latitude": 24.58058,
+      "longitude": 121.1137
     },
     "architectureRef": "/architectures/a24",
     "qaRef": "/questions/qa24",
@@ -362,12 +382,12 @@
   {
     "id": "m25",
     "nfcAns": null,
-    "name": {"zh": "大講糖", "en": "Lecture Candy", "ja": "大講糖"},
+    "name": { "zh": "大禮糖", "en": "Auditorium Candy", "ja": "大礼糖" },
     "type": "火",
     "imageURL": "assets/images/fairy_four_parts/auditorium/1.png",
     "location": {
-      "latitude": 24.967741,
-      "longitude": 121.193638
+      "latitude": 24.58059,
+      "longitude": 121.11325
     },
     "architectureRef": "/architectures/a25",
     "qaRef": "/questions/qa25",

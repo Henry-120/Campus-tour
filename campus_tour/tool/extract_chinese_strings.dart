@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 final _cjkPattern = RegExp(r'[\u3400-\u9fff]');
+final _translationKeyPattern = RegExp(r'^[a-z0-9]+(?:\.[a-z0-9]+)+\.s\d{3}$');
 
 void main(List<String> args) {
   final root = Directory.current;
@@ -12,19 +13,40 @@ void main(List<String> args) {
     return;
   }
 
+  final jsonFile = File('${root.path}/tool/i18n_chinese_strings.json');
+  final existingEntries = _readExistingEntries(jsonFile);
+  final existingByText = <String, _StringEntry>{
+    for (final entry in existingEntries) entry.zh: entry,
+  };
+  final existingByKey = <String, _StringEntry>{
+    for (final entry in existingEntries) entry.key: entry,
+  };
+  final usedKeys = existingByKey.keys.toSet();
+  final referencedKeys = <String>{};
   final entriesByText = <String, _StringEntry>{};
   final dartFiles =
       libDir
           .listSync(recursive: true)
           .whereType<File>()
           .where((file) => file.path.endsWith('.dart'))
+          .where((file) => !file.path.contains('/lib/l10n/'))
           .toList()
         ..sort((a, b) => a.path.compareTo(b.path));
 
   for (final file in dartFiles) {
     final relativePath = _relativePath(root, file);
     final source = file.readAsStringSync();
+    referencedKeys.addAll(
+      RegExp(
+        r'''['"]([^'"]+)['"]\s*\.tr(?:Params)?\b''',
+      ).allMatches(source).map((match) => match.group(1)!),
+    );
     final literals = _extractStringLiterals(source);
+    referencedKeys.addAll(
+      literals
+          .map((literal) => literal.value.trim())
+          .where(_translationKeyPattern.hasMatch),
+    );
     var sequence = 0;
 
     for (final literal in literals) {
@@ -32,14 +54,32 @@ void main(List<String> args) {
       if (text.isEmpty || !_cjkPattern.hasMatch(text)) continue;
 
       sequence++;
-      final key = _keyFor(relativePath, sequence);
+      var key = _keyFor(relativePath, sequence);
+      while (usedKeys.contains(key) && existingByText[text]?.key != key) {
+        sequence++;
+        key = _keyFor(relativePath, sequence);
+      }
       final entry = entriesByText.putIfAbsent(
         text,
-        () => _StringEntry(key: key, zh: text),
+        () =>
+            existingByText[text]?.copyWithoutOccurrences() ??
+            _StringEntry(key: key, zh: text),
       );
+      usedKeys.add(entry.key);
       entry.occurrences.add(
         _Occurrence(file: relativePath, line: _lineFor(source, literal.start)),
       );
+    }
+  }
+
+  // Some translated content (for example story dialogue) is referenced only
+  // by key. Preserve those entries even when the Chinese text is not a literal
+  // in the Dart source.
+  for (final key in referencedKeys) {
+    final existing = existingByKey[key];
+    if (existing != null &&
+        !entriesByText.values.any((entry) => entry.key == key)) {
+      entriesByText['__key__$key'] = existing.copyWithoutOccurrences();
     }
   }
 
@@ -48,7 +88,6 @@ void main(List<String> args) {
   final outputDir = Directory('${root.path}/tool');
   outputDir.createSync(recursive: true);
 
-  final jsonFile = File('${outputDir.path}/i18n_chinese_strings.json');
   jsonFile.writeAsStringSync(
     const JsonEncoder.withIndent('  ').convert({
       'generatedBy': 'tool/extract_chinese_strings.dart',
@@ -63,6 +102,19 @@ void main(List<String> args) {
   stdout.writeln('Found ${entries.length} unique Chinese strings.');
   stdout.writeln('Wrote ${_relativePath(root, jsonFile)}');
   stdout.writeln('Wrote ${_relativePath(root, markdownFile)}');
+}
+
+List<_StringEntry> _readExistingEntries(File file) {
+  if (!file.existsSync()) return const [];
+  final decoded = jsonDecode(file.readAsStringSync());
+  if (decoded is! Map<String, dynamic> || decoded['entries'] is! List) {
+    return const [];
+  }
+  return (decoded['entries'] as List)
+      .whereType<Map<String, dynamic>>()
+      .map(_StringEntry.fromJson)
+      .where((entry) => entry.key.isNotEmpty && entry.zh.isNotEmpty)
+      .toList();
 }
 
 List<_StringLiteral> _extractStringLiterals(String source) {
@@ -214,7 +266,7 @@ String _markdownFor(List<_StringEntry> entries) {
         .map((occurrence) => '${occurrence.file}:${occurrence.line}')
         .join('<br>');
     buffer.writeln(
-      '| `${entry.key}` | ${_escapeMarkdownTable(entry.zh)} |  | $occurrences |',
+      '| `${entry.key}` | ${_escapeMarkdownTable(entry.zh)} | ${_escapeMarkdownTable(entry.en)} | $occurrences |',
     );
   }
 
@@ -237,17 +289,35 @@ class _StringLiteral {
 }
 
 class _StringEntry {
-  _StringEntry({required this.key, required this.zh});
+  _StringEntry({
+    required this.key,
+    required this.zh,
+    this.en = '',
+    this.ja = '',
+  });
+
+  factory _StringEntry.fromJson(Map<String, dynamic> json) => _StringEntry(
+    key: json['key'] is String ? json['key'] as String : '',
+    zh: json['zh'] is String ? json['zh'] as String : '',
+    en: json['en'] is String ? json['en'] as String : '',
+    ja: json['ja'] is String ? json['ja'] as String : '',
+  );
 
   final String key;
   final String zh;
+  final String en;
+  final String ja;
   final occurrences = <_Occurrence>[];
+
+  _StringEntry copyWithoutOccurrences() =>
+      _StringEntry(key: key, zh: zh, en: en, ja: ja);
 
   Map<String, Object?> toJson() {
     return {
       'key': key,
       'zh': zh,
-      'en': '',
+      'en': en,
+      'ja': ja,
       'occurrences': occurrences
           .map(
             (occurrence) => {'file': occurrence.file, 'line': occurrence.line},

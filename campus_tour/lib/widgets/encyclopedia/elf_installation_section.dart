@@ -9,7 +9,7 @@ class ElfInstallationSection extends StatelessWidget {
   final String location;
   final String year;
 
-  ElfInstallationSection({
+  const ElfInstallationSection({
     super.key,
     required this.imagePath,
     required this.location,

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:campus_tour/controllers/login_controller.dart';
 import 'package:campus_tour/controllers/user_controller.dart';
+import 'package:campus_tour/features/station_hardware/pages/sakura_page.dart';
 import 'package:campus_tour/styles/app_theme.dart';
 import 'package:campus_tour/styles/setting_page_styles.dart';
-import 'package:campus_tour/view/MQTT_test.dart';
 import 'package:campus_tour/view/map_suggestions.dart';
 import 'package:campus_tour/view/novice_leading_page.dart';
 import 'package:campus_tour/view/start_page.dart';
@@ -216,7 +216,7 @@ class _MqttTestButton extends StatelessWidget {
   void _onPress(BuildContext context) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const MqttTestPage()),
+      MaterialPageRoute(builder: (context) => const SakuraPage()),
     );
   }
 

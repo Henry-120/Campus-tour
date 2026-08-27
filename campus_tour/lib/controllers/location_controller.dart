@@ -5,6 +5,8 @@ import 'package:flutter/foundation.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 
+import 'reviewer_access_controller.dart';
+
 /// Controls whether the location-offset test UI is compiled into the app.
 ///
 /// Debug builds show the controls by default. Store test builds must opt in with
@@ -25,7 +27,12 @@ abstract final class LocationTestConfig {
   static const double anchorLatitude = 24.967731;
   static const double anchorLongitude = 121.193638;
 
-  static const bool capabilityEnabled = showControls || forceEnabled;
+  static bool get capabilityEnabled {
+    final reviewerEnabled =
+        Get.isRegistered<ReviewerAccessController>() &&
+        Get.find<ReviewerAccessController>().isReviewer.value;
+    return showControls || forceEnabled || reviewerEnabled;
+  }
 }
 
 enum AppLocationStatus {

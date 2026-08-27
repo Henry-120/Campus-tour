@@ -23,7 +23,7 @@ class _GameMainPageState extends State<GameMainPage>
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    AudioService().playMainBgm(fileName: 'audio/M04_walk_daytime.flac');
+    AudioService().playMainBgm(track: AudioTrack.walkDaytime);
   }
 
   @override
@@ -55,7 +55,7 @@ class _GameMainPageState extends State<GameMainPage>
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
     routeObserver.unsubscribe(this);
-    AudioService().stopMainBgm();
+    AudioService().stopMainBgm(onlyIfPlaying: AudioTrack.walkDaytime);
     super.dispose();
   }
 

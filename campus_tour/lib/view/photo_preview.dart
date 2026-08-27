@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 class PhotoPreviewPage extends StatelessWidget {
   final String imagePath;
 
-  PhotoPreviewPage({super.key, required this.imagePath});
+  const PhotoPreviewPage({super.key, required this.imagePath});
 
   Future<void> _savePhoto(BuildContext context) async {
     try {
@@ -38,7 +38,11 @@ class PhotoPreviewPage extends StatelessWidget {
       }
     } catch (e) {
       if (context.mounted) {
-        SnackBarBuilder.show(context, '儲存失敗: $e', type: AppToastType.error);
+        SnackBarBuilder.show(
+          context,
+          'view.photo.preview.s002'.trParams({'error': '$e'}),
+          type: AppToastType.error,
+        );
       }
     }
   }
@@ -48,19 +52,19 @@ class PhotoPreviewPage extends StatelessWidget {
       context: context,
       builder: (dialogContext) {
         return AlertDialog(
-          title: Text('需要相簿權限'),
-          content: Text('需要相簿權限才能儲存照片。請到系統設定開啟相簿存取權後再試一次。'),
+          title: Text('view.photo.preview.s006'.tr),
+          content: Text('view.photo.preview.s007'.tr),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(dialogContext).pop(),
-              child: Text('稍後再說'),
+              child: Text('view.photo.preview.s008'.tr),
             ),
             FilledButton(
               onPressed: () {
                 Navigator.of(dialogContext).pop();
                 openAppSettings();
               },
-              child: Text('開啟設定'),
+              child: Text('view.photo.preview.s009'.tr),
             ),
           ],
         );

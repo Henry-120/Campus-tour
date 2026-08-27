@@ -3,6 +3,18 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+enum AccountDeletionProvider { password, google, apple }
+
+class AccountDeletionAuthorization {
+  const AccountDeletionAuthorization({
+    required this.provider,
+    this.appleAuthorizationCode,
+  });
+
+  final AccountDeletionProvider provider;
+  final String? appleAuthorizationCode;
+}
+
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
@@ -10,29 +22,19 @@ class AuthService {
   User? get currentUser => _auth.currentUser;
 
   Future<User?> login(String email, String password) async {
-    try {
-      UserCredential credential = await _auth.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-      return credential.user;
-    } catch (e) {
-      debugPrint("[AuthService] 登入失敗: $e");
-      return null;
-    }
+    final credential = await _auth.signInWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+    return credential.user;
   }
 
   Future<User?> register(String email, String password) async {
-    try {
-      UserCredential credential = await _auth.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-      return credential.user;
-    } catch (e) {
-      debugPrint("[AuthService] 註冊失敗: $e");
-      return null;
-    }
+    final credential = await _auth.createUserWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+    return credential.user;
   }
 
   Future<void> sendEmailVerification() async {
@@ -52,29 +54,199 @@ class AuthService {
 
   // Google 登入/註冊
   Future<User?> signInWithGoogle() async {
-    try {
-      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
-      if (googleUser == null) return null; // 使用者取消登入
+    final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+    if (googleUser == null) return null;
 
-      final GoogleSignInAuthentication googleAuth =
-          await googleUser.authentication;
-      final AuthCredential credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth.accessToken,
-        idToken: googleAuth.idToken,
-      );
+    final credential = await _googleCredential(googleUser);
+    final userCredential = await _auth.signInWithCredential(credential);
+    return userCredential.user;
+  }
 
-      UserCredential userCredential = await _auth.signInWithCredential(
-        credential,
+  // Apple 登入/註冊。iOS、Android 使用原生 Provider 流程，Web 使用彈出視窗。
+  Future<User?> signInWithApple() async {
+    final appleProvider = AppleAuthProvider()
+      ..addScope('email')
+      ..addScope('name');
+
+    final userCredential = kIsWeb
+        ? await _auth.signInWithPopup(appleProvider)
+        : await _auth.signInWithProvider(appleProvider);
+    return userCredential.user;
+  }
+
+  bool hasPasswordProvider([User? user]) {
+    final target = user ?? _auth.currentUser;
+    return target?.providerData.any(
+          (provider) => provider.providerId == EmailAuthProvider.PROVIDER_ID,
+        ) ??
+        false;
+  }
+
+  bool hasAppleProvider([User? user]) {
+    final target = user ?? _auth.currentUser;
+    return target?.providerData.any(
+          (provider) => provider.providerId == AppleAuthProvider.PROVIDER_ID,
+        ) ??
+        false;
+  }
+
+  Future<User> linkAppleProvider() async {
+    final user = _auth.currentUser;
+    if (user == null) {
+      throw FirebaseAuthException(
+        code: 'user-not-found',
+        message: '目前沒有可連結 Apple 登入的帳號。',
       );
-      return userCredential.user;
-    } catch (e) {
-      debugPrint("[AuthService] Google 登入失敗: $e");
-      return null;
     }
+    if (hasAppleProvider(user)) return user;
+
+    final appleProvider = AppleAuthProvider()
+      ..addScope('email')
+      ..addScope('name');
+    final result = kIsWeb
+        ? await user.linkWithPopup(appleProvider)
+        : await user.linkWithProvider(appleProvider);
+    return result.user ?? user;
+  }
+
+  Future<User> linkEmailPassword(String password) async {
+    var user = _auth.currentUser;
+    final email = user?.email;
+    if (user == null || email == null || email.isEmpty) {
+      throw FirebaseAuthException(
+        code: 'user-not-found',
+        message: '目前沒有可連結密碼的登入帳號。',
+      );
+    }
+    if (hasPasswordProvider(user)) {
+      throw FirebaseAuthException(
+        code: 'provider-already-linked',
+        message: '這個帳號已經可以使用 Email 和密碼登入。',
+      );
+    }
+
+    final passwordCredential = EmailAuthProvider.credential(
+      email: email,
+      password: password,
+    );
+
+    try {
+      final result = await user.linkWithCredential(passwordCredential);
+      return result.user ?? user;
+    } on FirebaseAuthException catch (error) {
+      if (error.code != 'requires-recent-login') rethrow;
+
+      await _reauthenticateWithGoogle(user);
+      user = _auth.currentUser ?? user;
+      final result = await user.linkWithCredential(passwordCredential);
+      return result.user ?? user;
+    }
+  }
+
+  Future<void> sendPasswordResetEmail(String email) async {
+    await _auth.sendPasswordResetEmail(email: email.trim());
+  }
+
+  Future<AuthCredential> _googleCredential(
+    GoogleSignInAccount googleUser,
+  ) async {
+    final googleAuth = await googleUser.authentication;
+    return GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
+  }
+
+  Future<void> _reauthenticateWithGoogle(User user) async {
+    final googleUser = await _googleSignIn.signIn();
+    if (googleUser == null) {
+      throw FirebaseAuthException(
+        code: 'google-sign-in-cancelled',
+        message: '已取消 Google 身分確認。',
+      );
+    }
+    if (googleUser.email.toLowerCase() != user.email?.toLowerCase()) {
+      throw FirebaseAuthException(
+        code: 'google-account-mismatch',
+        message: '請選擇目前登入的 Google 帳號。',
+      );
+    }
+
+    final credential = await _googleCredential(googleUser);
+    await user.reauthenticateWithCredential(credential);
   }
 
   Future<void> logout() async {
     await _auth.signOut();
     await _googleSignIn.signOut();
+  }
+
+  /// Reauthenticates using an account provider and returns the information
+  /// needed to revoke that provider before the backend deletes the account.
+  Future<AccountDeletionAuthorization> reauthenticateForAccountDeletion({
+    String? password,
+  }) async {
+    final user = _auth.currentUser;
+    if (user == null) throw StateError('No signed-in user');
+
+    final providerIds = user.providerData
+        .map((info) => info.providerId)
+        .toSet();
+
+    if (providerIds.contains(AppleAuthProvider.PROVIDER_ID)) {
+      final provider = AppleAuthProvider()
+        ..addScope('email')
+        ..addScope('name');
+      final credential = kIsWeb
+          ? await user.reauthenticateWithPopup(provider)
+          : await user.reauthenticateWithProvider(provider);
+      return AccountDeletionAuthorization(
+        provider: AccountDeletionProvider.apple,
+        appleAuthorizationCode:
+            credential.additionalUserInfo?.authorizationCode,
+      );
+    }
+
+    if (providerIds.contains(GoogleAuthProvider.PROVIDER_ID)) {
+      await _reauthenticateWithGoogle(user);
+      return const AccountDeletionAuthorization(
+        provider: AccountDeletionProvider.google,
+      );
+    }
+
+    final email = user.email;
+    if (email == null || password == null || password.isEmpty) {
+      throw StateError('Password required');
+    }
+    await user.reauthenticateWithCredential(
+      EmailAuthProvider.credential(email: email, password: password),
+    );
+    return const AccountDeletionAuthorization(
+      provider: AccountDeletionProvider.password,
+    );
+  }
+
+  Future<void> revokeAccountProvider(
+    AccountDeletionAuthorization authorization,
+  ) async {
+    switch (authorization.provider) {
+      case AccountDeletionProvider.password:
+        return;
+      case AccountDeletionProvider.google:
+        // disconnect revokes Google access; signOut alone only clears the
+        // local Google session.
+        await _googleSignIn.disconnect();
+        return;
+      case AccountDeletionProvider.apple:
+        final authorizationCode = authorization.appleAuthorizationCode;
+        if (authorizationCode == null || authorizationCode.isEmpty) {
+          throw FirebaseAuthException(
+            code: 'missing-apple-authorization-code',
+            message: 'Apple did not return an authorization code.',
+          );
+        }
+        await _auth.revokeTokenWithAuthorizationCode(authorizationCode);
+        return;
+    }
   }
 }

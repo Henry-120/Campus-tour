@@ -8,8 +8,8 @@ enum BleResult { found, permissionDenied, bluetoothOff, notFound, opps }
 
 class BleService {
   final FlutterReactiveBle _ble = FlutterReactiveBle();
-  final String _serviceUuid = Esp32BLE_info.ID;
-  final int _rssiThreshold = Esp32BLE_info.DISTANT;
+  final String _serviceUuid = Esp32BleInfo.id;
+  final int _rssiThreshold = Esp32BleInfo.distance;
   final int watingSeconds = 10;
 
   Future<bool> checkPermissions() async {
@@ -64,7 +64,7 @@ class BleService {
         .listen(
           (device) {
             debugPrint("Found: ${device.name}, RSSI: ${device.rssi}");
-            if (device.name == Esp32BLE_info.NAME &&
+            if (device.name == Esp32BleInfo.name &&
                 device.rssi >= _rssiThreshold) {
               if (!completer.isCompleted) completer.complete(BleResult.found);
             }

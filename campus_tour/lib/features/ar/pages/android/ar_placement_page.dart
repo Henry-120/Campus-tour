@@ -36,7 +36,7 @@ class _AndroidArPlacementPageState extends State<AndroidArPlacementPage>
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    AudioService().playOverlayBgm(fileName: 'audio/M12_AR_camera.flac');
+    AudioService().playOverlayBgm(track: AudioTrack.arCamera);
   }
 
   @override

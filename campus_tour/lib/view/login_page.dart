@@ -2,17 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../services/audio_service.dart';
 import '../controllers/login_controller.dart';
-import '../controllers/user_controller.dart';
+import '../utils/account_data_sync_exception.dart';
 import '../widgets/constants/asset_paths.dart';
 import '../widgets/constants/responsive.dart';
 import '../widgets/common/snackbar_builder.dart';
+import '../utils/firebase_auth_error_message.dart';
 import '../widgets/login/game_title.dart';
+import '../widgets/login/legal_document_links.dart';
+import '../widgets/login/forgot_password_dialog.dart';
 import '../widgets/login/wood_login_panel.dart';
 import 'after_login.dart';
 import 'register_page.dart';
 
 class LoginPage extends StatefulWidget {
-  LoginPage({super.key});
+  const LoginPage({super.key});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -34,29 +37,25 @@ class _LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
     try {
       final user = await _controller.login(
         _emailController.text.trim(),
-        _passwordController.text.trim(),
+        _passwordController.text,
       );
 
       if (!mounted) return;
 
       if (user != null) {
-        // if (!user.emailVerified) {
-        //   SnackBarBuilder.show(
-        //     context,
-        //     "請先到 ${user.email ?? '你的信箱'} 點擊驗證信後再登入",
-        //     type: AppToastType.warning,
-        //   );
-        //   return;
-        // }
-
-        if (Get.isRegistered<UserController>()) {
-          debugPrint('view.login.page.s001'.tr);
-          await Get.find<UserController>().fetchCurrentUser();
+        if (!user.emailVerified) {
+          SnackBarBuilder.show(
+            context,
+            'view.login.page.s008'.trParams({
+              'email': user.email ?? 'view.login.page.s009'.tr,
+            }),
+            type: AppToastType.warning,
+            duration: const Duration(seconds: 5),
+          );
+          return;
         }
 
-        if (!mounted) return;
-
-        navigateAfterLogin(context);
+        await navigateAfterLogin(context);
       } else {
         SnackBarBuilder.show(
           context,
@@ -64,14 +63,23 @@ class _LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
           type: AppToastType.error,
         );
       }
-    } catch (e) {
-      debugPrint("[LoginPage] 登入出錯: $e");
+    } on AccountDataSyncException catch (error) {
+      debugPrint('[LoginPage] 登入成功，但同步資料失敗: $error');
+      if (!mounted) return;
+      SnackBarBuilder.show(
+        context,
+        accountDataSyncErrorMessage(error),
+        type: AppToastType.error,
+        duration: const Duration(seconds: 6),
+      );
+    } catch (error) {
+      debugPrint("[LoginPage] 登入出錯: $error");
 
       if (!mounted) return;
 
       SnackBarBuilder.show(
         context,
-        'view.login.page.s004'.tr,
+        firebaseAuthErrorMessage(error),
         type: AppToastType.error,
       );
     } finally {
@@ -82,7 +90,10 @@ class _LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
   }
 
   void _goToRegister() {
-    Navigator.push(context, MaterialPageRoute(builder: (_) => RegisterPage()));
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (_) => const RegisterPage()),
+    );
   }
 
   Future<void> _handleGoogleSignIn() async {
@@ -94,23 +105,34 @@ class _LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
       if (!mounted) return;
 
       if (user != null) {
-        navigateAfterLogin(context);
+        await navigateAfterLogin(context);
       } else {
         SnackBarBuilder.show(
           context,
-          'view.login.page.s005'.tr,
-          type: AppToastType.error,
+          'utils.firebase.auth.error.message.s033'.tr,
+          type: AppToastType.info,
         );
       }
-    } catch (e) {
-      debugPrint("[LoginPage] Google 登入出錯: $e");
+    } on AccountDataSyncException catch (error) {
+      debugPrint('[LoginPage] Google 登入成功，但同步資料失敗: $error');
+      if (!mounted) return;
+      SnackBarBuilder.show(
+        context,
+        accountDataSyncErrorMessage(error),
+        type: AppToastType.error,
+        duration: const Duration(seconds: 6),
+      );
+    } catch (error) {
+      debugPrint("[LoginPage] Google 登入出錯: $error");
 
       if (!mounted) return;
 
       SnackBarBuilder.show(
         context,
-        'view.login.page.s007'.tr,
-        type: AppToastType.error,
+        googleAuthErrorMessage(error),
+        type: isGoogleSignInCancellation(error)
+            ? AppToastType.info
+            : AppToastType.error,
       );
     } finally {
       if (mounted) {
@@ -119,11 +141,86 @@ class _LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
     }
   }
 
+  Future<void> _handleAppleSignIn() async {
+    setState(() => _isLoading = true);
+
+    try {
+      final user = await _controller.signInWithApple();
+
+      if (!mounted) return;
+
+      if (user != null) {
+        await navigateAfterLogin(context);
+      } else {
+        SnackBarBuilder.show(
+          context,
+          'utils.firebase.auth.error.message.s011'.tr,
+          type: AppToastType.error,
+        );
+      }
+    } on AccountDataSyncException catch (error) {
+      debugPrint('[LoginPage] Apple 登入成功，但同步資料失敗: $error');
+      if (!mounted) return;
+      SnackBarBuilder.show(
+        context,
+        accountDataSyncErrorMessage(error),
+        type: AppToastType.error,
+        duration: const Duration(seconds: 6),
+      );
+    } catch (error) {
+      debugPrint('[LoginPage] Apple 登入出錯: $error');
+
+      if (!mounted) return;
+
+      SnackBarBuilder.show(
+        context,
+        appleAuthErrorMessage(error),
+        type: isAppleSignInCancellation(error)
+            ? AppToastType.info
+            : AppToastType.error,
+      );
+    } finally {
+      if (mounted) {
+        setState(() => _isLoading = false);
+      }
+    }
+  }
+
+  Future<void> _showForgotPasswordDialog() async {
+    final email = await showDialog<String>(
+      context: context,
+      builder: (_) =>
+          ForgotPasswordDialog(initialEmail: _emailController.text.trim()),
+    );
+    if (email == null || !mounted) return;
+
+    setState(() => _isLoading = true);
+    try {
+      await _controller.sendPasswordResetEmail(email);
+      if (!mounted) return;
+      SnackBarBuilder.show(
+        context,
+        'view.login.page.s010'.tr,
+        type: AppToastType.success,
+        duration: const Duration(seconds: 4),
+      );
+    } catch (error) {
+      if (!mounted) return;
+      SnackBarBuilder.show(
+        context,
+        firebaseAuthErrorMessage(error),
+        type: AppToastType.error,
+      );
+    } finally {
+      if (mounted) setState(() => _isLoading = false);
+    }
+  }
+
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    AudioService().playMainBgm(fileName: 'audio/M01_login.flac');
+    AudioService().playMainBgm(track: AudioTrack.login);
   }
 
   @override
@@ -170,8 +267,12 @@ class _LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
                       onLogin: _login,
                       onRegister: _goToRegister,
                       onGoogleSignIn: _handleGoogleSignIn,
+                      onAppleSignIn: _handleAppleSignIn,
+                      onForgotPassword: _showForgotPasswordDialog,
                     ),
-                    SizedBox(height: 30 * scale),
+                    SizedBox(height: 8 * scale),
+                    const LegalDocumentLinks(),
+                    SizedBox(height: 18 * scale),
                   ],
                 ),
               ),

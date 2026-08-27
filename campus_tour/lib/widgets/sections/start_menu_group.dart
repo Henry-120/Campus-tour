@@ -8,7 +8,7 @@ import '../constants/responsive.dart';
 import 'package:get/get.dart';
 
 class StartMenuGroup extends StatelessWidget {
-  StartMenuGroup({super.key});
+  const StartMenuGroup({super.key});
 
   @override
   Widget build(BuildContext context) {

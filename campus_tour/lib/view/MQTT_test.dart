@@ -1,6 +1,8 @@
 // ignore_for_file: file_names
 
 import 'package:campus_tour/config/esp32_scheme.dart';
+import 'package:campus_tour/features/station_hardware/models/station_hardware_models.dart';
+
 import 'package:campus_tour/services/mqtt_service.dart';
 import 'package:campus_tour/styles/app_theme.dart';
 import 'package:campus_tour/styles/setting_page_styles.dart';
@@ -15,11 +17,11 @@ class MqttTestPage extends StatefulWidget {
 }
 
 class _MqttTestPageState extends State<MqttTestPage> {
-  static const Map<String, String> _eventLabels = {
-    'scan_success': '掃描成功 (scan_success)',
-    'arrival': '抵達站點 (arrival)',
-    'story_unlock': '解鎖故事 (story_unlock)',
-    'challenge_clear': '完成挑戰 (challenge_clear)',
+  static const Map<MqttEventType, String> _eventLabels = {
+    MqttEventType.scanSuccess: '掃描成功 (scan_success)',
+    MqttEventType.arrival: '抵達站點 (arrival)',
+    MqttEventType.storyUnlocked: '解鎖故事 (story_unlock)',
+    MqttEventType.challengeComplete: '完成挑戰 (challenge_clear)',
   };
 
   // 在頁面重開時沿用同一條測試連線，避免建立多個 MQTT client。
@@ -27,11 +29,12 @@ class _MqttTestPageState extends State<MqttTestPage> {
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _stationIdController = TextEditingController(
-    text: 'test-station',
+    text: StationId.sakura.wireName,
   );
   final List<String> _logs = [];
 
-  String _selectedEvent = _eventLabels.keys.first;
+  MqttEventType _selectedEvent = _eventLabels.keys.first;
+
   String _statusMessage = '尚未開始測試';
   _MqttTestPhase _phase = _MqttTestPhase.idle;
   bool _isBusy = false;
@@ -70,7 +73,8 @@ class _MqttTestPageState extends State<MqttTestPage> {
       _isBusy = true;
       _phase = _MqttTestPhase.connecting;
       _statusMessage = '正在連線至 MQTT Broker…';
-      _addLog('開始連線 ${Esp32MQTT_info.BROKER_ADDRESS}:${Esp32MQTT_info.PORT}');
+
+      _addLog('開始連線 ${Esp32MqttInfo.brokerAddress}:${Esp32MqttInfo.port}');
     });
 
     final connected = await _mqttService.connect();
@@ -86,21 +90,26 @@ class _MqttTestPageState extends State<MqttTestPage> {
 
   Future<void> _publishTestEvent() async {
     if (_isBusy || !(_formKey.currentState?.validate() ?? false)) return;
-
-    final stationId = _stationIdController.text.trim();
-    final topic = 'campustour/$stationId/checkin';
+    const stationId = StationId.sakura;
+    final topic = 'campustour/${stationId.wireName}/checkin';
 
     setState(() {
       _isBusy = true;
       _phase = _MqttTestPhase.publishing;
       _statusMessage = '正在送出測試事件…';
-      _addLog('準備發佈 $_selectedEvent → $topic');
+      _addLog('準備發佈 ${_selectedEvent.wireName} → $topic');
     });
 
     try {
+      final user = FirebaseAuth.instance.currentUser;
+      if (user == null) {
+        throw const MqttAuthenticationException();
+      }
+
       await _mqttService.sendStationEvent(
         stationId: stationId,
         event: _selectedEvent,
+        data: MqttEventData(displayName: _displayNameFor(user)),
       );
       if (!mounted) return;
 
@@ -127,13 +136,14 @@ class _MqttTestPageState extends State<MqttTestPage> {
     setState(_logs.clear);
   }
 
-  String? _validateStationId(String? value) {
-    final stationId = value?.trim() ?? '';
-    if (stationId.isEmpty) return '請輸入 Station ID';
-    if (stationId.contains(RegExp(r'[/+#]'))) {
-      return 'Station ID 不可包含 /、+ 或 #';
-    }
-    return null;
+  String _displayNameFor(User user) {
+    final displayName = user.displayName?.trim();
+    if (displayName != null && displayName.isNotEmpty) return displayName;
+
+    final email = user.email?.trim();
+    if (email != null && email.isNotEmpty) return email;
+
+    return user.uid;
   }
 
   @override
@@ -193,24 +203,24 @@ class _MqttTestPageState extends State<MqttTestPage> {
             Text('事件發佈測試', style: SettingPageStyles.cardTitleStyle),
             const SizedBox(height: SettingPageStyles.gap2xs),
             Text(
-              '測試訊息會附帶目前使用者的 Firebase ID Token，並以 QoS 1 發佈。',
+              '測試訊息會附帶目前使用者的 Firebase ID Token、顯示名稱，並以 QoS 1 發佈。',
+
               style: SettingPageStyles.bodyTextStyle,
             ),
             const SizedBox(height: SettingPageStyles.gapXl),
             TextFormField(
               controller: _stationIdController,
               enabled: !_isBusy,
+              readOnly: true,
               decoration: _inputDecoration(
                 label: 'Station ID',
-                hint: '例如：station-001',
+                hint: '目前固定站點',
                 icon: Icons.location_on_outlined,
               ),
               textInputAction: TextInputAction.next,
-              validator: _validateStationId,
-              autovalidateMode: AutovalidateMode.onUserInteraction,
             ),
             const SizedBox(height: SettingPageStyles.gapLg),
-            DropdownButtonFormField<String>(
+            DropdownButtonFormField<MqttEventType>(
               initialValue: _selectedEvent,
               decoration: _inputDecoration(
                 label: 'Event',
@@ -218,7 +228,7 @@ class _MqttTestPageState extends State<MqttTestPage> {
               ),
               items: _eventLabels.entries
                   .map(
-                    (entry) => DropdownMenuItem<String>(
+                    (entry) => DropdownMenuItem<MqttEventType>(
                       value: entry.key,
                       child: Text(entry.value),
                     ),
@@ -309,6 +319,7 @@ class _MqttTestPageState extends State<MqttTestPage> {
                 style: const TextStyle(
                   color: Color(0xFFFFEDE2),
                   fontFamily: 'monospace',
+
                   fontSize: 13,
                   height: 1.55,
                 ),
@@ -421,7 +432,8 @@ class _ConnectionStatusCard extends StatelessWidget {
           const SizedBox(height: SettingPageStyles.gapXl),
           _InfoRow(
             icon: Icons.dns_outlined,
-            label: '${Esp32MQTT_info.BROKER_ADDRESS}:${Esp32MQTT_info.PORT}',
+
+            label: '${Esp32MqttInfo.brokerAddress}:${Esp32MqttInfo.port}',
           ),
           const SizedBox(height: SettingPageStyles.gapSm),
           const _InfoRow(icon: Icons.lock_outline_rounded, label: 'TLS 加密連線'),

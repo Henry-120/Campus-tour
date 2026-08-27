@@ -13,7 +13,8 @@ class EncyclopediaPage extends StatefulWidget {
   State<EncyclopediaPage> createState() => _EncyclopediaPageState();
 }
 
-class _EncyclopediaPageState extends State<EncyclopediaPage> with WidgetsBindingObserver {
+class _EncyclopediaPageState extends State<EncyclopediaPage>
+    with WidgetsBindingObserver {
   void _playBgmByProgress() {
     final controller = Get.find<MonsterController>();
     final caughtCount = controller.userMonsterCollection.length;
@@ -23,12 +24,12 @@ class _EncyclopediaPageState extends State<EncyclopediaPage> with WidgetsBinding
         totalCount != null && totalCount > 0 && caughtCount >= totalCount;
 
     if (isComplete) {
-      AudioService().playOverlayBgm(fileName: 'audio/M13_final_stage_BPM130.flac');
+      AudioService().playOverlayBgm(track: AudioTrack.finalStageBpm130);
     } else {
-      AudioService().playOverlayBgm(fileName: 'audio/M11_encyclopedia.flac');
+      AudioService().playOverlayBgm(track: AudioTrack.encyclopedia);
     }
   }
-  
+
   @override
   void initState() {
     super.initState();

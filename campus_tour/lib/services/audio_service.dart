@@ -4,6 +4,30 @@ import 'package:audioplayers/audioplayers.dart';
 
 import 'pad_audio_service.dart';
 
+enum AudioTrack {
+  login('M01_login'),
+  settings('M02_settings'),
+  tutorial('M03_tutorial'),
+  walkDaytime('M04_walk_daytime'),
+  walkNight('M05_walk_night'),
+  findMonster('M06_find_monster'),
+  opening('M07_opening'),
+  qaTime('M08_qa_time'),
+  catchSuccess('M09_catch_success'),
+  catchFail('M10_catch_fail'),
+  encyclopedia('M11_encyclopedia'),
+  arCamera('M12_AR_camera'),
+  finalStageBpm130('M13_final_stage_BPM130'),
+  finalStageBpm135('M13_final_stage_BPM135');
+
+  const AudioTrack(this.baseName);
+
+  final String baseName;
+
+  String get androidAssetPath => 'music/$baseName.flac';
+  String get iosAssetPath => 'audio/$baseName.m4a';
+}
+
 class AudioService {
   static final AudioService _instance = AudioService._internal();
   factory AudioService() => _instance;
@@ -15,18 +39,23 @@ class AudioService {
   final AudioPlayer _sfxPlayer = AudioPlayer();
 
   // 記錄目前 mainBgm 播的是哪一首，避免同一首被重播從頭
-  String? _currentMainBgmFile;
+  AudioTrack? _currentMainBgmTrack;
 
   bool _isOverlayActive = false;
   bool _isBgmSuppressedForSfx = false;
 
-  Future<Source> _getSource(String fileName) {
+  Future<Source> _getSource(AudioTrack track) {
     if (Platform.isAndroid) {
-      final audioFileName = fileName.replaceAll('\\', '/').split('/').last;
-      return PadAudioService.getSource('music/$audioFileName');
+      return PadAudioService.getSource(track.androidAssetPath);
     }
 
-    return Future<Source>.value(AssetSource(fileName));
+    if (Platform.isIOS) {
+      return Future<Source>.value(AssetSource(track.iosAssetPath));
+    }
+
+    return Future<Source>.error(
+      UnsupportedError('Audio playback is only configured for Android and iOS'),
+    );
   }
 
   // ── 主 BGM（例如 GameMainPage 的 walk_daytime）──────────────────────
@@ -34,19 +63,19 @@ class AudioService {
   //   打開子頁面時 pauseMainBgm，回來時 resumeMainBgm，播放位置會延續。
 
   Future<void> playMainBgm({
-    required String fileName,
+    required AudioTrack track,
     double volume = 1.0,
     double playbackRate = 1.0,
   }) async {
     // 如果已經在播同一首，就不重設 source，直接 resume
-    if (_currentMainBgmFile == fileName) {
+    if (_currentMainBgmTrack == track) {
       if (!_isBgmSuppressedForSfx) {
         await _mainBgmPlayer.resume();
       }
       return;
     }
-    _currentMainBgmFile = fileName;
-    await _mainBgmPlayer.setSource(await _getSource(fileName));
+    _currentMainBgmTrack = track;
+    await _mainBgmPlayer.setSource(await _getSource(track));
     _mainBgmPlayer.setReleaseMode(ReleaseMode.loop);
     await _mainBgmPlayer.setVolume(volume);
     await _mainBgmPlayer.setPlaybackRate(playbackRate);
@@ -62,25 +91,25 @@ class AudioService {
     }
   }
 
-  Future<void> stopMainBgm({String? onlyIfPlaying}) async {
-    if (onlyIfPlaying != null && _currentMainBgmFile != onlyIfPlaying) {
+  Future<void> stopMainBgm({AudioTrack? onlyIfPlaying}) async {
+    if (onlyIfPlaying != null && _currentMainBgmTrack != onlyIfPlaying) {
       return;
     }
     await _mainBgmPlayer.stop();
-    _currentMainBgmFile = null;
+    _currentMainBgmTrack = null;
   }
 
   // ── 子頁面 BGM（例如圖鑑、AR 相機）────────────────────────────────
   //   進來播、離開停，不會影響主 BGM 的播放位置。
 
   Future<void> playOverlayBgm({
-    required String fileName,
+    required AudioTrack track,
     double volume = 1.0,
     bool isLooping = true,
     double playbackRate = 1.0,
   }) async {
     _isOverlayActive = true;
-    await _overlayBgmPlayer.setSource(await _getSource(fileName));
+    await _overlayBgmPlayer.setSource(await _getSource(track));
     _overlayBgmPlayer.setReleaseMode(
       isLooping ? ReleaseMode.loop : ReleaseMode.release,
     );
@@ -101,7 +130,7 @@ class AudioService {
   // ── 音效（一次性，如捕捉成功、失敗音效）──────────────────────────
 
   Future<void> playSfx({
-    required String fileName,
+    required AudioTrack track,
     double volume = 1.0,
     bool pauseBgmUntilComplete = false,
     Function? onComplete,
@@ -112,7 +141,7 @@ class AudioService {
     }
 
     try {
-      await _sfxPlayer.setSource(await _getSource(fileName));
+      await _sfxPlayer.setSource(await _getSource(track));
       _sfxPlayer.setReleaseMode(ReleaseMode.release);
       await _sfxPlayer.setVolume(volume);
 
@@ -157,6 +186,8 @@ class AudioService {
     await _mainBgmPlayer.stop();
     await _overlayBgmPlayer.stop();
     await _sfxPlayer.stop();
-    _currentMainBgmFile = null;
+    _currentMainBgmTrack = null;
+    _isOverlayActive = false;
+    _isBgmSuppressedForSfx = false;
   }
 }

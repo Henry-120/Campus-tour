@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'dart:math' as math;
 import 'dart:async';
+import 'dart:ui' as ui;
 import 'package:flutter_compass/flutter_compass.dart';
 
 class AEDMap extends StatefulWidget {
@@ -22,8 +23,8 @@ class _AEDMapState extends State<AEDMap> {
       'assets/images/Disaster_Evacuation_Map/防災地圖_地圖.jpg';
 
   // 空白底圖，只給你的圖片當地圖使用
-  static const String _blankStyle = '''
-  {
+  // iOS MapLibre only recognizes inline JSON when the first character is `{`.
+  static const String _blankStyle = '''{
     "version": 8,
     "sources": {},
     "layers": [
@@ -31,12 +32,11 @@ class _AEDMapState extends State<AEDMap> {
         "id": "background",
         "type": "background",
         "paint": {
-          "background-color": " #000000"
+          "background-color": "#000000"
         }
       }
     ]
-  }
-  ''';
+  }''';
 
   //
   // 順序：
@@ -564,12 +564,17 @@ class CampusImageLayerController {
 
   bool _added = false;
 
+  // MapLibre uploads image sources as GPU textures. The original campus map is
+  // 7734 px wide, which exceeds the texture limit on some iOS devices.
+  static const int _maxTextureWidth = 4096;
+
   Future<void> addToMap(MapLibreMapController controller) async {
     if (_added) return;
-    _added = true;
 
     final byteData = await rootBundle.load(assetPath);
-    final imageBytes = byteData.buffer.asUint8List();
+    final imageBytes = await _resizeForMapTexture(
+      byteData.buffer.asUint8List(),
+    );
 
     final imageCoordinates = LatLngQuad(
       topLeft: topLeft,
@@ -581,6 +586,28 @@ class CampusImageLayerController {
     await controller.addImageSource(sourceId, imageBytes, imageCoordinates);
 
     await _addImageLayerBelowSymbols(controller);
+    _added = true;
+  }
+
+  Future<Uint8List> _resizeForMapTexture(Uint8List sourceBytes) async {
+    final codec = await ui.instantiateImageCodec(
+      sourceBytes,
+      targetWidth: _maxTextureWidth,
+    );
+    final frame = await codec.getNextFrame();
+
+    try {
+      final resizedBytes = await frame.image.toByteData(
+        format: ui.ImageByteFormat.png,
+      );
+      if (resizedBytes == null) {
+        throw StateError('無法轉換校園緊急地圖圖片');
+      }
+      return resizedBytes.buffer.asUint8List();
+    } finally {
+      frame.image.dispose();
+      codec.dispose();
+    }
   }
 
   Future<void> _addImageLayerBelowSymbols(

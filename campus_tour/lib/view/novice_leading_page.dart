@@ -5,7 +5,7 @@ import '../services/audio_service.dart';
 import 'package:get/get.dart';
 
 class NoviceLeadingPage extends StatefulWidget {
-  NoviceLeadingPage({super.key, this.onFinish});
+  const NoviceLeadingPage({super.key, this.onFinish});
 
   final VoidCallback? onFinish;
 
@@ -70,7 +70,7 @@ class _NoviceLeadingPageState extends State<NoviceLeadingPage>
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      AudioService().playOverlayBgm(fileName: 'audio/M03_tutorial.flac');
+      AudioService().playOverlayBgm(track: AudioTrack.tutorial);
     });
   }
 

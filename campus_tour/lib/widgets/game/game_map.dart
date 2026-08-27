@@ -119,7 +119,6 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
     southwest: southwest,
     northeast: northeast,
   );
-  // static const double playerSize = 60;
 
   Future<void> _loadAssets() async {
     try {
@@ -468,13 +467,9 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
                   _selectedTileLayer = layer;
                 });
                 if (layer == MapTileLayer.forest) {
-                  AudioService().playMainBgm(
-                    fileName: 'audio/M05_walk_night.flac',
-                  );
+                  AudioService().playMainBgm(track: AudioTrack.walkNight);
                 } else {
-                  AudioService().playMainBgm(
-                    fileName: 'audio/M04_walk_daytime.flac',
-                  );
+                  AudioService().playMainBgm(track: AudioTrack.walkDaytime);
                 }
               },
             ),

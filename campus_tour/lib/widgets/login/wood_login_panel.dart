@@ -5,8 +5,10 @@ import '../constants/asset_paths.dart';
 import '../constants/responsive.dart';
 import 'game_button.dart';
 import 'game_link_text.dart';
-import 'google_image_button.dart';
 import 'login_text_field.dart';
+import 'official_apple_sign_in_button.dart';
+import 'social_image_button.dart';
+import 'package:get/get.dart';
 
 class WoodLoginPanel extends StatelessWidget {
   const WoodLoginPanel({
@@ -17,6 +19,8 @@ class WoodLoginPanel extends StatelessWidget {
     required this.onLogin,
     required this.onRegister,
     required this.onGoogleSignIn,
+    required this.onAppleSignIn,
+    required this.onForgotPassword,
   });
 
   final TextEditingController emailController;
@@ -25,6 +29,8 @@ class WoodLoginPanel extends StatelessWidget {
   final VoidCallback onLogin;
   final VoidCallback onRegister;
   final VoidCallback onGoogleSignIn;
+  final VoidCallback onAppleSignIn;
+  final VoidCallback onForgotPassword;
 
   @override
   Widget build(BuildContext context) {
@@ -49,12 +55,13 @@ class WoodLoginPanel extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                _buildLabel(context, "Username"),
+                _buildLabel(context, "Email"),
                 SizedBox(height: 8 * scale),
                 LoginTextField(
                   controller: emailController,
-                  hintText: "Enter your Username",
-                  icon: Icons.eco,
+                  hintText: "Enter your Email",
+                  icon: Icons.email,
+                  keyboardType: TextInputType.emailAddress,
                   height: 50 * scale,
                   fontSize: 16 * scale,
                   hintFontSize: 14 * scale,
@@ -77,7 +84,17 @@ class WoodLoginPanel extends StatelessWidget {
                   radius: 12 * scale,
                   verticalPadding: 0,
                 ),
-                SizedBox(height: 22 * scale),
+                SizedBox(height: 5 * scale),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: GameLinkText(
+                    text: "Forgot password?",
+                    onTap: isLoading ? () {} : onForgotPassword,
+                    fontSize: 13 * scale,
+                    color: AppTheme.loginGlowColor,
+                  ),
+                ),
+                SizedBox(height: 8 * scale),
                 GameButton(
                   text: "LOGIN",
                   isLoading: isLoading,
@@ -108,11 +125,27 @@ class WoodLoginPanel extends StatelessWidget {
           ),
           Positioned(
             bottom: 10 * scale,
-            child: GoogleImageButton(
-              imagePath: AssetPaths.googleLogo,
-              size: 88 * scale,
-              disabled: isLoading,
-              onTap: onGoogleSignIn,
+            left: 68 * scale,
+            right: 68 * scale,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                SocialImageButton(
+                  imagePath: AssetPaths.googleLogo,
+                  semanticsLabel: 'widgets.login.social.buttons.s001'.tr,
+                  size: 88 * scale,
+                  disabled: isLoading,
+                  onTap: onGoogleSignIn,
+                ),
+                OfficialAppleSignInButton(
+                  text: 'widgets.login.social.buttons.s002'.tr,
+                  width: 80 * scale,
+                  height: 80 * scale,
+                  disabled: isLoading,
+                  logoOnly: true,
+                  onPressed: onAppleSignIn,
+                ),
+              ],
             ),
           ),
         ],

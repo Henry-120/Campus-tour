@@ -44,7 +44,7 @@ class _ArCapturePageState extends State<ArCapturePage>
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-    AudioService().playOverlayBgm(fileName: 'audio/M12_AR_camera.flac');
+    AudioService().playOverlayBgm(track: AudioTrack.arCamera);
     _startArMode();
   }
 
@@ -334,7 +334,7 @@ class _ArCapturePageState extends State<ArCapturePage>
           ),
           SizedBox(height: 18 * scale),
           Text(
-            '需要相機權限',
+            'view.camera.view.s012'.tr,
             style: AppTheme.overlayTextStyle(22 * scale),
             textAlign: TextAlign.center,
           ),
@@ -348,7 +348,7 @@ class _ArCapturePageState extends State<ArCapturePage>
           TextButton.icon(
             onPressed: openAppSettings,
             icon: Icon(Icons.settings_rounded),
-            label: Text('開啟系統設定'),
+            label: Text('view.camera.view.s011'.tr),
           ),
         ],
       ),

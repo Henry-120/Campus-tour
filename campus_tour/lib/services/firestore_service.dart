@@ -25,6 +25,26 @@ class FirestoreService {
     await _db.collection("users").doc(uid).update(data);
   }
 
+  /// Deletes all user-owned Firestore data known to the app.
+  Future<void> deleteUserData(String uid) async {
+    final userRef = _db.collection("users").doc(uid);
+    final monsters = await userRef.collection("monsters").get();
+
+    // Keep batches comfortably below Firestore's 500-operation limit.
+    for (var offset = 0; offset < monsters.docs.length; offset += 400) {
+      final batch = _db.batch();
+      final end = offset + 400 < monsters.docs.length
+          ? offset + 400
+          : monsters.docs.length;
+      for (final doc in monsters.docs.sublist(offset, end)) {
+        batch.delete(doc.reference);
+      }
+      await batch.commit();
+    }
+
+    await userRef.delete();
+  }
+
   // ===== Monster =====
   Future<void> setMonster(MonsterModel monster) async {
     await _db.collection("monsters").doc(monster.id).set(monster.toMap());

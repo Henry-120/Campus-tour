@@ -1,1 +1,49 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"campus-tour-679e9","appId":"1:322346919988:android:4e7b416d5dabe18e240261","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"campus-tour-679e9","configurations":{"android":"1:322346919988:android:4e7b416d5dabe18e240261","ios":"1:322346919988:ios:c0610a44476602fd240261","macos":"1:322346919988:ios:4497d9fd152c52b7240261"}}},"ios":{"default":{"projectId":"campus-tour-679e9","appId":"1:322346919988:ios:c0610a44476602fd240261","uploadDebugSymbols":false,"fileOutput":"ios/Runner/GoogleService-Info.plist"}}}}}
+
+{
+  "functions": {
+    "source": "functions"
+  },
+  "hosting": {
+    "public": "legal_site",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "headers": [
+      {
+        "source": "**/*.@(html|css)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=300"
+          }
+        ]
+      }
+    ]
+  },
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "campus-tour-679e9",
+          "appId": "1:322346919988:android:4e7b416d5dabe18e240261",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "campus-tour-679e9",
+          "configurations": {
+            "android": "1:322346919988:android:4e7b416d5dabe18e240261",
+            "ios": "1:322346919988:ios:c0610a44476602fd240261"
+          }
+        }
+      },
+      "ios": {
+        "default": {
+          "projectId": "campus-tour-679e9",
+          "appId": "1:322346919988:ios:c0610a44476602fd240261",
+          "uploadDebugSymbols": false,
+          "fileOutput": "ios/Runner/GoogleService-Info.plist"
+        }
+      }
+    }
+  }
+}

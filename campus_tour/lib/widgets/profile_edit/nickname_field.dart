@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 class NicknameField extends StatelessWidget {
   final ProfileEditController controller;
 
-  NicknameField({super.key, required this.controller});
+  const NicknameField({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
