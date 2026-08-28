@@ -73,7 +73,6 @@ class _MqttTestPageState extends State<MqttTestPage> {
       _isBusy = true;
       _phase = _MqttTestPhase.connecting;
       _statusMessage = '正在連線至 MQTT Broker…';
-
       _addLog('開始連線 ${Esp32MqttInfo.brokerAddress}:${Esp32MqttInfo.port}');
     });
 
@@ -432,7 +431,6 @@ class _ConnectionStatusCard extends StatelessWidget {
           const SizedBox(height: SettingPageStyles.gapXl),
           _InfoRow(
             icon: Icons.dns_outlined,
-
             label: '${Esp32MqttInfo.brokerAddress}:${Esp32MqttInfo.port}',
           ),
           const SizedBox(height: SettingPageStyles.gapSm),

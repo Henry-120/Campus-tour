@@ -27,7 +27,6 @@ Future<void> main() async {
   await OrientationService.lockPortrait();
 
   // 💡 預先注入 Controller，內部的 onInit 會自動監聽 Firebase Auth 狀態
-
   Get.put(ReviewerAccessController(), permanent: true);
   Get.put(LocationController(), permanent: true);
   Get.put(MonsterController());

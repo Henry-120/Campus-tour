@@ -56,6 +56,7 @@ class _GameMainPageState extends State<GameMainPage>
     WidgetsBinding.instance.removeObserver(this);
     routeObserver.unsubscribe(this);
     AudioService().stopMainBgm(onlyIfPlaying: AudioTrack.walkDaytime);
+
     super.dispose();
   }
 

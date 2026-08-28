@@ -49,6 +49,8 @@
 	<string>需要使用相機來捕捉校園精靈並提供AR互動體驗</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>需要您的位置資訊來在校園地圖上顯示您的目前位置。</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>咚谷粒需要位置資訊，以在您使用校園地圖、附近精靈或緊急通報功能時顯示目前位置；本 App 不會建立背景位置紀錄。</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>需要權限來將您拍下的校園精靈照片儲存至相簿。</string>
 	<key>NSPhotoLibraryUsageDescription</key>

@@ -31,7 +31,6 @@ class _IosArPlacementPageState extends State<IosArPlacementPage>
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
-
     AudioService().playOverlayBgm(track: AudioTrack.arCamera);
   }
 

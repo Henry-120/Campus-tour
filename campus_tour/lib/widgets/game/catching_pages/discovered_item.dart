@@ -14,22 +14,13 @@ class DiscoveredItem {
   );
 
   // [L-02]
-  static DiscoveredItem get magicStone => DiscoveredItem(
-    title: 'widgets.game.catching.pages.discovered.item.s004'.tr,
-    noteText: 'widgets.game.catching.pages.discovered.item.s005'.tr,
-    imagePath: 'assets/images/Plot/magicStone.PNG',
-    buttonText: 'widgets.game.catching.pages.discovered.item.s006'.tr,
-    fallbackIcon: Icons.diamond_rounded,
-  );
-
-  // [L-03]
   final String title;
   final String noteText;
   final String imagePath;
   final String buttonText;
   final IconData fallbackIcon;
 
-  // [L-04]
+  // [L-03]
   DiscoveredItem({
     required this.title,
     required this.noteText,

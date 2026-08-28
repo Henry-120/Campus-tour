@@ -1,6 +1,6 @@
 {
   "generatedBy": "tool/extract_chinese_strings.dart",
-  "totalUniqueStrings": 677,
+  "totalUniqueStrings": 698,
   "entries": [
     {
       "key": "controllers.login.controller.s001",
@@ -1297,7 +1297,7 @@
         },
         {
           "file": "lib/view/camera_view.dart",
-          "line": 407
+          "line": 410
         }
       ]
     },
@@ -1321,7 +1321,7 @@
         },
         {
           "file": "lib/view/camera_view.dart",
-          "line": 409
+          "line": 412
         }
       ]
     },
@@ -1334,6 +1334,10 @@
         {
           "file": "lib/styles/level_style.dart",
           "line": 174
+        },
+        {
+          "file": "lib/view/camera_view.dart",
+          "line": 416
         }
       ]
     },
@@ -1773,10 +1777,6 @@
       "ja": "私たちについて",
       "occurrences": [
         {
-          "file": "lib/view/about_us_page.dart",
-          "line": 7
-        },
-        {
           "file": "lib/view/lhf_setting_page.dart",
           "line": 185
         }
@@ -1790,7 +1790,7 @@
       "occurrences": [
         {
           "file": "lib/view/about_us_page.dart",
-          "line": 67
+          "line": 126
         }
       ]
     },
@@ -1802,7 +1802,7 @@
       "occurrences": [
         {
           "file": "lib/view/about_us_page.dart",
-          "line": 67
+          "line": 126
         }
       ]
     },
@@ -1814,7 +1814,7 @@
       "occurrences": [
         {
           "file": "lib/view/about_us_page.dart",
-          "line": 69
+          "line": 128
         }
       ]
     },
@@ -1826,7 +1826,7 @@
       "occurrences": [
         {
           "file": "lib/view/about_us_page.dart",
-          "line": 69
+          "line": 128
         }
       ]
     },
@@ -1838,19 +1838,7 @@
       "occurrences": [
         {
           "file": "lib/view/about_us_page.dart",
-          "line": 71
-        }
-      ]
-    },
-    {
-      "key": "view.about.us.page.s007",
-      "zh": "涉足學園音樂大學",
-      "en": "Shobi University of Music",
-      "ja": "尚美学園大学",
-      "occurrences": [
-        {
-          "file": "lib/view/about_us_page.dart",
-          "line": 71
+          "line": 130
         }
       ]
     },
@@ -1862,7 +1850,7 @@
       "occurrences": [
         {
           "file": "lib/view/about_us_page.dart",
-          "line": 83
+          "line": 142
         }
       ]
     },
@@ -1874,7 +1862,7 @@
       "occurrences": [
         {
           "file": "lib/view/about_us_page.dart",
-          "line": 84
+          "line": 143
         }
       ]
     },
@@ -1886,7 +1874,7 @@
       "occurrences": [
         {
           "file": "lib/view/about_us_page.dart",
-          "line": 84
+          "line": 143
         }
       ]
     },
@@ -1898,19 +1886,7 @@
       "occurrences": [
         {
           "file": "lib/view/about_us_page.dart",
-          "line": 84
-        }
-      ]
-    },
-    {
-      "key": "view.about.us.page.s012",
-      "zh": "經濟系 陸乾甫",
-      "en": "Department of Economics — 陸乾甫",
-      "ja": "経済学科・陸乾甫",
-      "occurrences": [
-        {
-          "file": "lib/view/about_us_page.dart",
-          "line": 84
+          "line": 143
         }
       ]
     },
@@ -1922,7 +1898,7 @@
       "occurrences": [
         {
           "file": "lib/view/about_us_page.dart",
-          "line": 84
+          "line": 143
         }
       ]
     },
@@ -1934,7 +1910,179 @@
       "occurrences": [
         {
           "file": "lib/view/about_us_page.dart",
-          "line": 84
+          "line": 143
+        }
+      ]
+    },
+    {
+      "key": "view.about.us.page.s015",
+      "zh": "關於咚谷粒",
+      "en": "About Campus Tour",
+      "ja": "咚谷粒について",
+      "occurrences": [
+        {
+          "file": "lib/view/about_us_page.dart",
+          "line": 7
+        },
+        {
+          "file": "lib/view/about_us_page.dart",
+          "line": 80
+        }
+      ]
+    },
+    {
+      "key": "view.about.us.page.s017",
+      "zh": "「咚谷粒－校園導覽」是一款全新打造的中央大學校園導覽 App，",
+      "en": "“Campus Tour” is a newly developed campus guide app for National Central University,",
+      "ja": "「咚谷粒－キャンパスガイド」は、国立中央大学のために新たに開発されたキャンパスガイドアプリです。",
+      "occurrences": [
+        {
+          "file": "lib/view/about_us_page.dart",
+          "line": 93
+        }
+      ]
+    },
+    {
+      "key": "view.about.us.page.s018",
+      "zh": "結合多國語言、虛擬情境互動與遊戲化探索，希望讓來自不同國家與地區的使用者，",
+      "en": "Combining multilingual content, virtual interactive experiences, and gamified exploration, it helps users from different countries and regions",
+      "ja": "多言語コンテンツ、バーチャルなインタラクション、ゲーム感覚の探索を組み合わせ、さまざまな国や地域の利用者が、",
+      "occurrences": [
+        {
+          "file": "lib/view/about_us_page.dart",
+          "line": 94
+        }
+      ]
+    },
+    {
+      "key": "view.about.us.page.s019",
+      "zh": "都能用更有趣、更直覺的方式認識中央大學。\\n\\n",
+      "en": "discover National Central University in a more engaging and intuitive way.\\n\\n",
+      "ja": "より楽しく直感的に国立中央大学を知ることができるよう目指しています。\\n\\n",
+      "occurrences": [
+        {
+          "file": "lib/view/about_us_page.dart",
+          "line": 95
+        }
+      ]
+    },
+    {
+      "key": "view.about.us.page.s020",
+      "zh": "為推動校園走向國際並提升校園導覽的互動體驗，國際事務處召集並支持學生團隊共同開發設計",
+      "en": "To promote campus internationalization and enhance the interactive campus tour experience, the Office of International Affairs brought together and supported a student team to jointly develop and design",
+      "ja": "キャンパスの国際化とインタラクティブな案内体験の向上を推進するため、国際事務処が学生チームを招集・支援し、共同で企画・開発した",
+      "occurrences": [
+        {
+          "file": "lib/view/about_us_page.dart",
+          "line": 96
+        }
+      ]
+    },
+    {
+      "key": "view.about.us.page.s021",
+      "zh": "「咚谷粒－校園導覽」App。App 以圖鑑收集與校園探索遊戲為核心，",
+      "en": "the “Campus Tour” app. Centered on collection and campus-exploration gameplay,",
+      "ja": "「咚谷粒－キャンパスガイド」アプリです。図鑑の収集とキャンパス探索ゲームを中心に、",
+      "occurrences": [
+        {
+          "file": "lib/view/about_us_page.dart",
+          "line": 97
+        }
+      ]
+    },
+    {
+      "key": "view.about.us.page.s022",
+      "zh": "將數位互動與實際走訪結合，鼓勵使用者親自穿梭校園，",
+      "en": "it combines digital interaction with in-person visits and encourages users to explore the campus,",
+      "ja": "デジタルなインタラクションと実際の訪問を組み合わせ、利用者が自らキャンパスを巡り、",
+      "occurrences": [
+        {
+          "file": "lib/view/about_us_page.dart",
+          "line": 98
+        }
+      ]
+    },
+    {
+      "key": "view.about.us.page.s023",
+      "zh": "在探索與收集的過程中逐步認識中央大學。\\n\\n",
+      "en": "gradually learning about National Central University while exploring and collecting.\\n\\n",
+      "ja": "探索と収集を通じて、国立中央大学への理解を深められるようにしています。\\n\\n",
+      "occurrences": [
+        {
+          "file": "lib/view/about_us_page.dart",
+          "line": 99
+        }
+      ]
+    },
+    {
+      "key": "view.about.us.page.s024",
+      "zh": "使用者可以透過遊戲化任務走訪校內不同地點，探索各學院與行政單位、",
+      "en": "Through gamified missions, users can visit different locations across campus and explore its colleges, administrative units,",
+      "ja": "ゲーム形式のミッションで学内のさまざまな場所を訪れ、各学部や行政組織、",
+      "occurrences": [
+        {
+          "file": "lib/view/about_us_page.dart",
+          "line": 100
+        }
+      ]
+    },
+    {
+      "key": "view.about.us.page.s025",
+      "zh": "中大十景、特色建築及裝置藝術，並在互動過程中了解相關介紹與校園特色。",
+      "en": "NCU’s Ten Scenic Spots, distinctive buildings, and public art while learning about their stories and campus features through interaction.",
+      "ja": "中大十景、特色ある建築、パブリックアートを巡り、インタラクションを通してその紹介やキャンパスの特色を学べます。",
+      "occurrences": [
+        {
+          "file": "lib/view/about_us_page.dart",
+          "line": 101
+        }
+      ]
+    },
+    {
+      "key": "view.about.us.page.s026",
+      "zh": "透過多國語言內容與虛實整合的導覽方式，讓校園導覽不再只是單向閱讀資訊，",
+      "en": "With multilingual content and a tour experience connecting the physical and digital worlds, campus tours become more than one-way reading;",
+      "ja": "多言語コンテンツと現実・デジタルを融合した案内により、キャンパスツアーは一方的に情報を読むだけではなく、",
+      "occurrences": [
+        {
+          "file": "lib/view/about_us_page.dart",
+          "line": 102
+        }
+      ]
+    },
+    {
+      "key": "view.about.us.page.s027",
+      "zh": "而是一場可以親自參與、探索與收藏的校園冒險。",
+      "en": "they become a campus adventure that users can join, explore, and collect.",
+      "ja": "自ら参加し、探索し、収集できるキャンパスアドベンチャーになります。",
+      "occurrences": [
+        {
+          "file": "lib/view/about_us_page.dart",
+          "line": 103
+        }
+      ]
+    },
+    {
+      "key": "view.about.us.page.s033",
+      "zh": "洗足學園音樂大學",
+      "en": "Senzoku Gakuen College of Music",
+      "ja": "洗足学園音楽大学",
+      "occurrences": [
+        {
+          "file": "lib/view/about_us_page.dart",
+          "line": 130
+        }
+      ]
+    },
+    {
+      "key": "view.about.us.page.s038",
+      "zh": "經濟系 陸竑甫",
+      "en": "Department of Economics — 陸竑甫",
+      "ja": "経済学科・陸竑甫",
+      "occurrences": [
+        {
+          "file": "lib/view/about_us_page.dart",
+          "line": 143
         }
       ]
     },
@@ -2122,7 +2270,7 @@
       "occurrences": [
         {
           "file": "lib/view/camera_view.dart",
-          "line": 77
+          "line": 78
         }
       ]
     },
@@ -2134,7 +2282,7 @@
       "occurrences": [
         {
           "file": "lib/view/camera_view.dart",
-          "line": 89
+          "line": 90
         }
       ]
     },
@@ -2172,7 +2320,7 @@
       "occurrences": [
         {
           "file": "lib/view/camera_view.dart",
-          "line": 400
+          "line": 403
         }
       ]
     },
@@ -2184,7 +2332,7 @@
       "occurrences": [
         {
           "file": "lib/view/camera_view.dart",
-          "line": 65
+          "line": 66
         }
       ]
     },
@@ -2204,7 +2352,7 @@
         },
         {
           "file": "lib/view/camera_view.dart",
-          "line": 411
+          "line": 414
         }
       ]
     },
@@ -2237,7 +2385,19 @@
       "occurrences": [
         {
           "file": "lib/view/camera_view.dart",
-          "line": 80
+          "line": 81
+        }
+      ]
+    },
+    {
+      "key": "view.camera.view.s021",
+      "zh": "木",
+      "en": "Wood",
+      "ja": "木属性",
+      "occurrences": [
+        {
+          "file": "lib/view/camera_view.dart",
+          "line": 418
         }
       ]
     },
@@ -2720,7 +2880,7 @@
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
-          "line": 791
+          "line": 793
         }
       ]
     },
@@ -2732,7 +2892,7 @@
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
-          "line": 834
+          "line": 836
         }
       ]
     },
@@ -3024,6 +3184,41 @@
       "occurrences": []
     },
     {
+      "key": "view.lhf.setting.page.s095",
+      "zh": "發生未預期的錯誤，請稍後再試。",
+      "en": "An unexpected error occurred. Try again later.",
+      "ja": "予期しないエラーが発生しました。しばらくしてからもう一度お試しください。",
+      "occurrences": []
+    },
+    {
+      "key": "view.lhf.setting.page.s096",
+      "zh": "Email 格式不正確。",
+      "en": "Enter a valid email address.",
+      "ja": "有効なメールアドレスを入力してください。",
+      "occurrences": []
+    },
+    {
+      "key": "view.lhf.setting.page.s097",
+      "zh": "請輸入密碼。",
+      "en": "Enter your password.",
+      "ja": "パスワードを入力してください。",
+      "occurrences": []
+    },
+    {
+      "key": "view.lhf.setting.page.s098",
+      "zh": "密碼強度不足，請至少輸入 6 位。",
+      "en": "Password is too weak. Enter at least 6 characters.",
+      "ja": "パスワードが短すぎます。6文字以上で入力してください。",
+      "occurrences": []
+    },
+    {
+      "key": "view.lhf.setting.page.s099",
+      "zh": "找不到目前登入的帳號。",
+      "en": "The signed-in account could not be found.",
+      "ja": "現在ログインしているアカウントが見つかりません。",
+      "occurrences": []
+    },
+    {
       "key": "view.lhf.setting.page.s100",
       "zh": "這個帳號已經可以使用 Email 和密碼登入。",
       "en": "This account can already sign in with email and password.",
@@ -3034,6 +3229,41 @@
           "line": 124
         }
       ]
+    },
+    {
+      "key": "view.lhf.setting.page.s101",
+      "zh": "這組登入資料已連結到其他帳號。",
+      "en": "These sign-in credentials are linked to another account.",
+      "ja": "このログイン情報は別のアカウントに連携されています。",
+      "occurrences": []
+    },
+    {
+      "key": "view.lhf.setting.page.s102",
+      "zh": "為了帳號安全，請重新登入後再試一次。",
+      "en": "For account security, sign in again and retry.",
+      "ja": "アカウント保護のため、もう一度ログインしてからお試しください。",
+      "occurrences": []
+    },
+    {
+      "key": "view.lhf.setting.page.s103",
+      "zh": "嘗試次數過多，請稍後再試。",
+      "en": "Too many attempts. Try again later.",
+      "ja": "試行回数が多すぎます。しばらくしてからもう一度お試しください。",
+      "occurrences": []
+    },
+    {
+      "key": "view.lhf.setting.page.s104",
+      "zh": "網路連線失敗，請確認網路後再試。",
+      "en": "Network connection failed. Check your connection and retry.",
+      "ja": "ネットワーク接続に失敗しました。接続を確認してからもう一度お試しください。",
+      "occurrences": []
+    },
+    {
+      "key": "view.lhf.setting.page.s105",
+      "zh": "Firebase 尚未啟用這種登入方式。",
+      "en": "This sign-in method is not enabled in Firebase.",
+      "ja": "このログイン方法はFirebaseで有効になっていません。",
+      "occurrences": []
     },
     {
       "key": "view.lhf.setting.page.s106",
@@ -3058,6 +3288,13 @@
           "line": 171
         }
       ]
+    },
+    {
+      "key": "view.lhf.setting.page.s108",
+      "zh": "帳號驗證失敗，請稍後再試。",
+      "en": "Account verification failed. Try again later.",
+      "ja": "アカウント認証に失敗しました。しばらくしてからもう一度お試しください。",
+      "occurrences": []
     },
     {
       "key": "view.lhf.setting.page.s109",
@@ -3109,7 +3346,7 @@
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
-          "line": 879
+          "line": 881
         }
       ]
     },
@@ -3121,7 +3358,7 @@
       "occurrences": [
         {
           "file": "lib/view/lhf_setting_page.dart",
-          "line": 1644
+          "line": 1646
         }
       ]
     },
@@ -3437,7 +3674,7 @@
       "occurrences": [
         {
           "file": "lib/view/MQTT_test.dart",
-          "line": 77
+          "line": 76
         }
       ]
     },
@@ -3449,7 +3686,7 @@
       "occurrences": [
         {
           "file": "lib/view/MQTT_test.dart",
-          "line": 86
+          "line": 85
         }
       ]
     },
@@ -3461,7 +3698,7 @@
       "occurrences": [
         {
           "file": "lib/view/MQTT_test.dart",
-          "line": 86
+          "line": 85
         }
       ]
     },
@@ -3473,7 +3710,7 @@
       "occurrences": [
         {
           "file": "lib/view/MQTT_test.dart",
-          "line": 87
+          "line": 86
         }
       ]
     },
@@ -3485,7 +3722,7 @@
       "occurrences": [
         {
           "file": "lib/view/MQTT_test.dart",
-          "line": 87
+          "line": 86
         }
       ]
     },
@@ -3497,7 +3734,7 @@
       "occurrences": [
         {
           "file": "lib/view/MQTT_test.dart",
-          "line": 99
+          "line": 98
         }
       ]
     },
@@ -3509,7 +3746,7 @@
       "occurrences": [
         {
           "file": "lib/view/MQTT_test.dart",
-          "line": 100
+          "line": 99
         }
       ]
     },
@@ -3521,7 +3758,7 @@
       "occurrences": [
         {
           "file": "lib/view/MQTT_test.dart",
-          "line": 118
+          "line": 117
         }
       ]
     },
@@ -3533,7 +3770,7 @@
       "occurrences": [
         {
           "file": "lib/view/MQTT_test.dart",
-          "line": 119
+          "line": 118
         }
       ]
     },
@@ -3545,7 +3782,7 @@
       "occurrences": [
         {
           "file": "lib/view/MQTT_test.dart",
-          "line": 127
+          "line": 126
         }
       ]
     },
@@ -3557,7 +3794,7 @@
       "occurrences": [
         {
           "file": "lib/view/MQTT_test.dart",
-          "line": 128
+          "line": 127
         }
       ]
     },
@@ -3569,7 +3806,7 @@
       "occurrences": [
         {
           "file": "lib/view/MQTT_test.dart",
-          "line": 177
+          "line": 176
         }
       ]
     },
@@ -3581,7 +3818,7 @@
       "occurrences": [
         {
           "file": "lib/view/MQTT_test.dart",
-          "line": 178
+          "line": 177
         }
       ]
     },
@@ -3593,7 +3830,7 @@
       "occurrences": [
         {
           "file": "lib/view/MQTT_test.dart",
-          "line": 203
+          "line": 202
         }
       ]
     },
@@ -3605,7 +3842,7 @@
       "occurrences": [
         {
           "file": "lib/view/MQTT_test.dart",
-          "line": 206
+          "line": 205
         }
       ]
     },
@@ -3617,7 +3854,7 @@
       "occurrences": [
         {
           "file": "lib/view/MQTT_test.dart",
-          "line": 217
+          "line": 216
         }
       ]
     },
@@ -3629,7 +3866,7 @@
       "occurrences": [
         {
           "file": "lib/view/MQTT_test.dart",
-          "line": 253
+          "line": 252
         }
       ]
     },
@@ -3641,7 +3878,7 @@
       "occurrences": [
         {
           "file": "lib/view/MQTT_test.dart",
-          "line": 269
+          "line": 268
         }
       ]
     },
@@ -3653,7 +3890,7 @@
       "occurrences": [
         {
           "file": "lib/view/MQTT_test.dart",
-          "line": 276
+          "line": 275
         }
       ]
     },
@@ -3665,7 +3902,7 @@
       "occurrences": [
         {
           "file": "lib/view/MQTT_test.dart",
-          "line": 299
+          "line": 298
         }
       ]
     },
@@ -3677,7 +3914,7 @@
       "occurrences": [
         {
           "file": "lib/view/MQTT_test.dart",
-          "line": 303
+          "line": 302
         }
       ]
     },
@@ -3689,7 +3926,7 @@
       "occurrences": [
         {
           "file": "lib/view/MQTT_test.dart",
-          "line": 318
+          "line": 317
         }
       ]
     },
@@ -3701,7 +3938,7 @@
       "occurrences": [
         {
           "file": "lib/view/MQTT_test.dart",
-          "line": 417
+          "line": 416
         }
       ]
     },
@@ -3713,7 +3950,7 @@
       "occurrences": [
         {
           "file": "lib/view/MQTT_test.dart",
-          "line": 439
+          "line": 437
         }
       ]
     },
@@ -3725,7 +3962,7 @@
       "occurrences": [
         {
           "file": "lib/view/MQTT_test.dart",
-          "line": 465
+          "line": 463
         }
       ]
     },
@@ -3737,7 +3974,7 @@
       "occurrences": [
         {
           "file": "lib/view/MQTT_test.dart",
-          "line": 465
+          "line": 463
         }
       ]
     },
@@ -3988,7 +4225,7 @@
       "occurrences": [
         {
           "file": "lib/features/ar/pages/ios/ar_placement_page.dart",
-          "line": 131
+          "line": 130
         }
       ]
     },
@@ -4184,7 +4421,7 @@
       "occurrences": [
         {
           "file": "lib/features/ar/pages/ios/fairy_control_page.dart",
-          "line": 222
+          "line": 221
         }
       ]
     },
@@ -4481,9 +4718,9 @@
     },
     {
       "key": "widgets.game.catching.pages.cryptography.level.s010",
-      "zh": "精靈被成功擊倒",
-      "en": "The spirit has been defeated!",
-      "ja": "精霊を倒しました！",
+      "zh": "精靈被收服了！",
+      "en": "The spirit has been captured!",
+      "ja": "精霊を仲間にしました！",
       "occurrences": []
     },
     {
@@ -4657,27 +4894,6 @@
       "zh": "好好研究它",
       "en": "Study it carefully",
       "ja": "よく調べてみよう",
-      "occurrences": []
-    },
-    {
-      "key": "widgets.game.catching.pages.discovered.item.s004",
-      "zh": "發現道具",
-      "en": "Item Found",
-      "ja": "アイテム発見",
-      "occurrences": []
-    },
-    {
-      "key": "widgets.game.catching.pages.discovered.item.s005",
-      "zh": "一顆發著光的魔法石",
-      "en": "A glowing magic stone",
-      "ja": "光り輝く魔法石",
-      "occurrences": []
-    },
-    {
-      "key": "widgets.game.catching.pages.discovered.item.s006",
-      "zh": "帶著它",
-      "en": "Take It",
-      "ja": "持っていく",
       "occurrences": []
     },
     {
@@ -6075,7 +6291,7 @@
       "occurrences": [
         {
           "file": "lib/view/MQTT_test.dart",
-          "line": 155
+          "line": 154
         }
       ]
     },

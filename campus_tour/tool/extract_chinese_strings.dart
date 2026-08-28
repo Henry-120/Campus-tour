@@ -3,6 +3,10 @@ import 'dart:io';
 
 final _cjkPattern = RegExp(r'[\u3400-\u9fff]');
 final _translationKeyPattern = RegExp(r'^[a-z0-9]+(?:\.[a-z0-9]+)+\.s\d{3}$');
+final _preservedTranslationKeys = <String>{
+  for (var index = 95; index <= 108; index++)
+    'view.lhf.setting.page.s${index.toString().padLeft(3, '0')}',
+};
 
 void main(List<String> args) {
   final root = Directory.current;
@@ -22,7 +26,7 @@ void main(List<String> args) {
     for (final entry in existingEntries) entry.key: entry,
   };
   final usedKeys = existingByKey.keys.toSet();
-  final referencedKeys = <String>{};
+  final referencedKeys = _preservedTranslationKeys.toSet();
   final entriesByText = <String, _StringEntry>{};
   final dartFiles =
       libDir

@@ -20,9 +20,10 @@ void main() {
   });
 
   test('every literal translation key used by the app exists', () {
-    final keyPattern = RegExp(
-      r'''['"]([a-z0-9]+(?:\.[a-z0-9]+)+\.s\d{3})['"]''',
-    );
+    final keyPatterns = <RegExp>[
+      RegExp(r'''['"]([a-z0-9]+(?:\.[a-z0-9]+)+\.s\d{3})['"]'''),
+      RegExp(r'''['"]([^'"]+)['"]\s*\.tr(?:Params)?\b'''),
+    ];
     final missing = <String>[];
 
     for (final entity in Directory('lib').listSync(recursive: true)) {
@@ -32,8 +33,11 @@ void main() {
         continue;
       }
       final source = entity.readAsStringSync();
-      for (final match in keyPattern.allMatches(source)) {
-        final key = match.group(1)!;
+      final referencedKeys = <String>{
+        for (final pattern in keyPatterns)
+          for (final match in pattern.allMatches(source)) match.group(1)!,
+      };
+      for (final key in referencedKeys) {
         for (final locale in locales) {
           if (!translations[locale]!.containsKey(key)) {
             missing.add('$locale $key (${entity.path})');

@@ -1,9 +1,7 @@
-import 'dart:io';
-
 import 'package:audioplayers/audioplayers.dart';
-
 import '../local_information/local_setting.dart';
 import 'pad_audio_service.dart';
+import 'dart:io';
 
 enum AudioTrack {
   login('M01_login'),
@@ -101,6 +99,7 @@ class AudioService {
     }
     _currentMainBgmTrack = track;
     await _mainBgmPlayer.setSource(await _getSource(track));
+
     _mainBgmPlayer.setReleaseMode(ReleaseMode.loop);
     await _mainBgmPlayer.setVolume(_mainBgmGain * _masterVolume);
     await _mainBgmPlayer.setPlaybackRate(playbackRate);
@@ -136,6 +135,7 @@ class AudioService {
     _overlayBgmGain = _normalizeVolume(volume);
     _isOverlayActive = true;
     await _overlayBgmPlayer.setSource(await _getSource(track));
+
     _overlayBgmPlayer.setReleaseMode(
       isLooping ? ReleaseMode.loop : ReleaseMode.release,
     );

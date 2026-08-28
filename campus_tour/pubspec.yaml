@@ -11,7 +11,7 @@ description: "A new Flutter project."
 
 publish_to: "none"
 
-version: 1.0.1+8
+version: 1.0.1+11
 
 environment:
   sdk: ^3.11.3
@@ -56,8 +56,6 @@ dependencies:
   maplibre_gl: ^0.26.2
   cloud_functions: ^6.3.6
 
-  webview_flutter: ^4.14.1 #內嵌瀏覽器
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -98,9 +96,9 @@ flutter:
     - assets/images/fairy_four_parts/international/
     - assets/images/component/
     - assets/images/NCU/
-    - path:  assets/audio/
+    - path: assets/audio/
       platforms:
-      - ios
+        - ios
     - assets/mapStyles/
     - assets/json/
     - assets/json/locations/

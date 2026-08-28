@@ -8,25 +8,25 @@ void main() {
   ) async {
     await tester.pumpWidget(const MaterialApp(home: AboutUsPage()));
 
-    const expectedText = [
-      '關於我們',
-      '發行單位',
-      '國立中央大學國際處',
-      '指導監製',
-      '王聖翔 老師',
-      '國際合作',
-      '涉足學園音樂大學',
-      '遊戲App開發製作',
-      '資管系 郭碩宏',
-      '資工系 蔡佳穎',
-      '資工系 葉芮丞',
-      '經濟系 陸乾甫',
-      '財金系 陳俊嘉',
-      '光電系 羅靖宥',
-    ];
+    const expectedTextCounts = {
+      '關於咚谷粒': 2,
+      '發行單位': 1,
+      '國立中央大學國際處': 1,
+      '指導監製': 1,
+      '王聖翔 老師': 1,
+      '國際合作': 1,
+      '洗足學園音樂大學': 1,
+      '遊戲App開發製作': 1,
+      '資管系 郭碩宏': 1,
+      '資工系 蔡佳穎': 1,
+      '資工系 葉芮丞': 1,
+      '經濟系 陸竑甫': 1,
+      '財金系 陳俊嘉': 1,
+      '光電系 羅靖宥': 1,
+    };
 
-    for (final text in expectedText) {
-      expect(find.text(text), findsOneWidget);
+    for (final entry in expectedTextCounts.entries) {
+      expect(find.text(entry.key), findsNWidgets(entry.value));
     }
   });
 }

@@ -10,6 +10,7 @@ Future<void> navigateAfterLogin(BuildContext context) async {
   // The tutorial uses the overlay player, so the login track on the main
   // player must be stopped explicitly before either destination is shown.
   await AudioService().stopMainBgm(onlyIfPlaying: AudioTrack.login);
+
   if (!context.mounted) return;
 
   // [L-02]

@@ -98,7 +98,6 @@ class MqttService {
 
     try {
       await _client.connect(Esp32MqttInfo.username, Esp32MqttInfo.password);
-
       return isConnected;
     } catch (error) {
       _lastConnectionError = error;

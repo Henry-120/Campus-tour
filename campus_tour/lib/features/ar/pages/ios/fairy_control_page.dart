@@ -37,7 +37,6 @@ class _IosFairyControlPageState extends State<IosFairyControlPage>
     super.initState();
     if (!widget.inheritArAudio) {
       WidgetsBinding.instance.addObserver(this);
-
       AudioService().playOverlayBgm(track: AudioTrack.arCamera);
     }
   }
