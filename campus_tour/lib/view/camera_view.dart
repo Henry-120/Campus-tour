@@ -143,14 +143,13 @@ class _ArCapturePageState extends State<ArCapturePage>
                     // 📸 1. 最底層：相機畫面
                     Padding(
                       padding: EdgeInsets.only(
-                        left: constraints.maxWidth * 0.04, // 寬度的 5%
+                        left: constraints.maxWidth * 0.04,
                         right: constraints.maxWidth * 0.04,
-                        top: constraints.maxHeight * 0.08, // 高度的 8%
+                        top: constraints.maxHeight * 0.08,
                         bottom: constraints.maxHeight * 0.07,
-                      ), // 💡 根據相框粗細調整，讓相機不超出邊界
+                      ), // 根據相框粗細調整，讓相機不超出邊界
                       child: Center(
-                        // 💡 使用 AspectRatio 確保相機「比例不變」且「不被裁切」
-                        // 它會自動判斷橫向或縱向哪個先達到邊界就停住
+                        // 維持原始直式比例，避免相機預覽被拉伸。
                         child: AspectRatio(
                           aspectRatio: 9 / 16,
                           child: ClipRRect(
@@ -374,10 +373,13 @@ class _ArCapturePageState extends State<ArCapturePage>
   }
 
   String _framePathForUserMonster(UserMonsterModel userMonster) {
+    final typeFramePath = _framePathForType(userMonster.type);
+    if (typeFramePath.isNotEmpty) return typeFramePath;
+
+    // 舊資料可能只有 videoRef，保留作為未知屬性的相容備援。
     final videoRef = userMonster.videoRef?.trim() ?? '';
     if (videoRef.isNotEmpty) return videoRef;
-
-    return _framePathForType(userMonster.type);
+    return '';
   }
 
   Future<String> _loadFramePathFromMonsterRef(
@@ -388,14 +390,14 @@ class _ArCapturePageState extends State<ArCapturePage>
       final data = snapshot.data() as Map<String, dynamic>?;
       if (data == null) return '';
 
-      final videoRef = (data['videoRef'] ?? '').toString().trim();
-      if (videoRef.isNotEmpty) return videoRef;
-
       final rawType = data['type'];
       final canonicalType = rawType is Map
           ? rawType['zh']?.toString() ?? ''
           : rawType?.toString() ?? '';
-      return _framePathForType(canonicalType);
+      final typeFramePath = _framePathForType(canonicalType);
+      if (typeFramePath.isNotEmpty) return typeFramePath;
+
+      return (data['videoRef'] ?? '').toString().trim();
     } catch (e) {
       debugPrint("[CameraView] 讀取精靈相框資料失敗: $e");
       return '';
@@ -410,6 +412,10 @@ class _ArCapturePageState extends State<ArCapturePage>
         return 'assets/images/img_frame/water.png';
       case '草':
         return 'assets/images/img_frame/grass.png';
+      case '金':
+        return 'assets/images/img_frame/gold.png';
+      case '木':
+        return 'assets/images/img_frame/wood.png';
       default:
         return '';
     }
