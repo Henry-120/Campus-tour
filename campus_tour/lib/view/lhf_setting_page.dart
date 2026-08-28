@@ -380,7 +380,9 @@ class _VolumeSettingCard extends StatelessWidget {
                   divisions: 100,
                   label: SteeingPageStrings.volumePercentage(volume),
                   onChanged: (value) async {
-                    await LocalSettingService.volume.update(value.round());
+                    final int volume = value.round();
+                    await LocalSettingService.volume.update(volume);
+                    await AudioService().setMasterVolume(volume / 100);
                   },
                 ),
               ),

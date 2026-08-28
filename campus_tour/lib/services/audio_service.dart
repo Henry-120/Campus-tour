@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:audioplayers/audioplayers.dart';
 
+import '../local_information/local_setting.dart';
 import 'pad_audio_service.dart';
 
 enum AudioTrack {
@@ -38,11 +39,32 @@ class AudioService {
   final AudioPlayer _overlayBgmPlayer = AudioPlayer();
   final AudioPlayer _sfxPlayer = AudioPlayer();
 
+  double _masterVolume = 1.0;
+  double _mainBgmGain = 1.0;
+  double _overlayBgmGain = 1.0;
+  double _sfxGain = 1.0;
+
   // 記錄目前 mainBgm 播的是哪一首，避免同一首被重播從頭
   AudioTrack? _currentMainBgmTrack;
 
   bool _isOverlayActive = false;
   bool _isBgmSuppressedForSfx = false;
+
+  double _normalizeVolume(double volume) => volume.clamp(0.0, 1.0).toDouble();
+
+  Future<void> initializeVolume() async {
+    await setMasterVolume(LocalSettingService.volume.ratio);
+  }
+
+  Future<void> setMasterVolume(double volume) async {
+    _masterVolume = _normalizeVolume(volume);
+
+    await Future.wait([
+      _mainBgmPlayer.setVolume(_mainBgmGain * _masterVolume),
+      _overlayBgmPlayer.setVolume(_overlayBgmGain * _masterVolume),
+      _sfxPlayer.setVolume(_sfxGain * _masterVolume),
+    ]);
+  }
 
   Future<Source> _getSource(AudioTrack track) {
     if (Platform.isAndroid) {
@@ -67,8 +89,11 @@ class AudioService {
     double volume = 1.0,
     double playbackRate = 1.0,
   }) async {
+    _mainBgmGain = _normalizeVolume(volume);
+
     // 如果已經在播同一首，就不重設 source，直接 resume
     if (_currentMainBgmTrack == track) {
+      await _mainBgmPlayer.setVolume(_mainBgmGain * _masterVolume);
       if (!_isBgmSuppressedForSfx) {
         await _mainBgmPlayer.resume();
       }
@@ -77,7 +102,7 @@ class AudioService {
     _currentMainBgmTrack = track;
     await _mainBgmPlayer.setSource(await _getSource(track));
     _mainBgmPlayer.setReleaseMode(ReleaseMode.loop);
-    await _mainBgmPlayer.setVolume(volume);
+    await _mainBgmPlayer.setVolume(_mainBgmGain * _masterVolume);
     await _mainBgmPlayer.setPlaybackRate(playbackRate);
     if (!_isBgmSuppressedForSfx) {
       await _mainBgmPlayer.resume();
@@ -108,12 +133,13 @@ class AudioService {
     bool isLooping = true,
     double playbackRate = 1.0,
   }) async {
+    _overlayBgmGain = _normalizeVolume(volume);
     _isOverlayActive = true;
     await _overlayBgmPlayer.setSource(await _getSource(track));
     _overlayBgmPlayer.setReleaseMode(
       isLooping ? ReleaseMode.loop : ReleaseMode.release,
     );
-    await _overlayBgmPlayer.setVolume(volume);
+    await _overlayBgmPlayer.setVolume(_overlayBgmGain * _masterVolume);
     await _overlayBgmPlayer.setPlaybackRate(playbackRate);
     if (!_isBgmSuppressedForSfx) {
       await _overlayBgmPlayer.resume();
@@ -135,6 +161,8 @@ class AudioService {
     bool pauseBgmUntilComplete = false,
     Function? onComplete,
   }) async {
+    _sfxGain = _normalizeVolume(volume);
+
     if (pauseBgmUntilComplete) {
       _isBgmSuppressedForSfx = true;
       await pauseAllBgm();
@@ -143,7 +171,7 @@ class AudioService {
     try {
       await _sfxPlayer.setSource(await _getSource(track));
       _sfxPlayer.setReleaseMode(ReleaseMode.release);
-      await _sfxPlayer.setVolume(volume);
+      await _sfxPlayer.setVolume(_sfxGain * _masterVolume);
 
       final completed = _sfxPlayer.onPlayerComplete.first;
       await _sfxPlayer.resume();

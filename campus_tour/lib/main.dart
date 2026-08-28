@@ -11,6 +11,7 @@ import 'controllers/user_controller.dart';
 import 'l10n/app_translations.dart';
 import 'package:get/get.dart';
 import 'local_information/local_setting.dart';
+import 'services/audio_service.dart';
 import 'services/orientation_service.dart';
 import 'styles/app_theme.dart';
 
@@ -19,6 +20,7 @@ final RouteObserver<ModalRoute> routeObserver = RouteObserver<ModalRoute>();
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await LocalSettingService.initBox();
+  await AudioService().initializeVolume();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
