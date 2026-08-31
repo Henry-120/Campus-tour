@@ -356,42 +356,45 @@ class _LogoutButtonState extends State<_LogoutButton> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 176,
-      height: 52,
-      child: OutlinedButton(
-        onPressed: _isLoggingOut ? null : _logout,
-        style: OutlinedButton.styleFrom(
-          foregroundColor: const Color(0xFFE85D75),
-          backgroundColor: AppTheme.cardColor.withValues(alpha: 0.88),
-          side: BorderSide(
-            color: const Color(0xFFE85D75).withValues(alpha: 0.5),
-            width: 1.4,
+    return ConstrainedBox(
+      constraints: const BoxConstraints(maxWidth: 244),
+      child: SizedBox(
+        width: double.infinity,
+        height: 52,
+        child: OutlinedButton(
+          onPressed: _isLoggingOut ? null : _logout,
+          style: OutlinedButton.styleFrom(
+            foregroundColor: const Color(0xFFE85D75),
+            backgroundColor: AppTheme.cardColor.withValues(alpha: 0.88),
+            side: BorderSide(
+              color: const Color(0xFFE85D75).withValues(alpha: 0.5),
+              width: 1.4,
+            ),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(14),
+            ),
+            textStyle: AppTheme.buttonTextStyle.copyWith(
+              fontSize: 18,
+              fontWeight: FontWeight.w800,
+              letterSpacing: 0,
+            ),
           ),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(14),
-          ),
-          textStyle: AppTheme.buttonTextStyle.copyWith(
-            fontSize: 18,
-            fontWeight: FontWeight.w800,
-            letterSpacing: 0,
-          ),
+          child: _isLoggingOut
+              ? const SizedBox(
+                  width: 20,
+                  height: 20,
+                  child: CircularProgressIndicator(strokeWidth: 2.4),
+                )
+              : Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(Icons.logout_rounded, size: 22),
+                    const SizedBox(width: SettingPageStyles.gapXs),
+                    Text('widgets.sections.drawer.button.group.s009'.tr),
+                  ],
+                ),
         ),
-        child: _isLoggingOut
-            ? const SizedBox(
-                width: 20,
-                height: 20,
-                child: CircularProgressIndicator(strokeWidth: 2.4),
-              )
-            : Row(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Icon(Icons.logout_rounded, size: 22),
-                  const SizedBox(width: SettingPageStyles.gapXs),
-                  Text('widgets.sections.drawer.button.group.s009'.tr),
-                ],
-              ),
       ),
     );
   }

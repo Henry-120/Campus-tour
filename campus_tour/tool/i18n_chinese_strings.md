@@ -288,7 +288,7 @@ Total unique strings: 698
 | `view.lhf.setting.page.s009` | 本機儲存 | Stored on this device |  |
 | `view.lhf.setting.page.s010` | 立即套用 | Apply Now |  |
 | `view.lhf.setting.page.s011` | 音量 | Volume |  |
-| `view.lhf.setting.page.s012` | 目前此功能尚未完成。 | This feature is not available yet. |  |
+| `view.lhf.setting.page.s012` | 調整音量大小 | Adjust the volume level. |  |
 | `view.lhf.setting.page.s013` | 靜音 | Mute |  |
 | `view.lhf.setting.page.s014` | 最大 | Max |  |
 | `view.lhf.setting.page.s015` | 振動 | Vibration |  |
@@ -696,7 +696,7 @@ Total unique strings: 698
 | `widgets.sections.drawer.button.group.s003` | 新手教學 | Tutorial |  |
 | `widgets.sections.drawer.button.group.s004` | 校園全景地圖 | Campus Panorama Map |  |
 | `widgets.sections.drawer.button.group.s005` | 問題回報 | Report a Problem |  |
-| `widgets.sections.drawer.button.group.s006` | 此功能尚未實做，有問題歡迎聯繫：創作團隊 | This feature is not available yet. Please contact the development team if you need help. |  |
+| `widgets.sections.drawer.button.group.s006` | 有問題需要回報請郵件聯繫ideasky716@gmail.com，謝謝 | To report a problem, please email ideasky716@gmail.com. Thank you. |  |
 | `widgets.sections.drawer.button.group.s007` | 登出失敗，請稍後再試 | Sign-out failed. Please try again later. |  |
 | `widgets.sections.drawer.button.group.s009` | 登出 | Sign Out |  |
 | `widgets.sections.drawer.button.group.s010` | 校園安全 | Campus Safety |  |

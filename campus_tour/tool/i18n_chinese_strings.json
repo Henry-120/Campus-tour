@@ -2603,9 +2603,9 @@
     },
     {
       "key": "view.lhf.setting.page.s012",
-      "zh": "目前此功能尚未完成。",
-      "en": "This feature is not available yet.",
-      "ja": "この機能はまだ利用できません。",
+      "zh": "調整音量大小",
+      "en": "Adjust the volume level.",
+      "ja": "音量を調整します。",
       "occurrences": []
     },
     {
@@ -6257,9 +6257,9 @@
     },
     {
       "key": "widgets.sections.drawer.button.group.s006",
-      "zh": "此功能尚未實做，有問題歡迎聯繫：創作團隊",
-      "en": "This feature is not available yet. Please contact the development team if you need help.",
-      "ja": "この機能はまだ利用できません。問題がある場合は開発チームにお問い合わせください。",
+      "zh": "有問題需要回報請郵件聯繫ideasky716@gmail.com，謝謝",
+      "en": "To report a problem, please email ideasky716@gmail.com. Thank you.",
+      "ja": "問題を報告する場合は、ideasky716@gmail.comまでメールでご連絡ください。ありがとうございます。",
       "occurrences": []
     },
     {
