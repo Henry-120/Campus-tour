@@ -1,8 +1,8 @@
 import 'package:campus_tour/styles/app_theme.dart';
-import 'package:campus_tour/view/AED_map_Android.dart';
 import 'package:campus_tour/view/call_and_email.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:campus_tour/features/campus_map/pages/emergency_map_page.dart';
 
 class CampusSafetyPage extends StatelessWidget {
   const CampusSafetyPage({super.key});
@@ -10,7 +10,7 @@ class CampusSafetyPage extends StatelessWidget {
   void _openEmergencyMap(BuildContext context) {
     Navigator.of(
       context,
-    ).push(MaterialPageRoute(builder: (_) => const AEDMap()));
+    ).push(MaterialPageRoute(builder: (_) => const EmergencyMapPage()));
   }
 
   void _openCallAndReport(BuildContext context) {

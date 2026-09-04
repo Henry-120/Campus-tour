@@ -99,8 +99,8 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
   String? _mapStyle; // 地圖 JSON 風格
 
   // AssetMapBitmap? _customMapImage; // 特製地圖圖片
-  double _maxZoomRate = 18.5;
-  double _minZoomRate = 18.5;
+  static const double _maxZoomRate = 19.0;
+  static const double _minZoomRate = 16.0;
 
   LatLng? _playerPosition;
   bool _hasCenteredMap = false;
@@ -236,49 +236,16 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
               ),
             ),
           );
-
-          // 完成後鎖定縮放倍率
-          setState(() {
-            _minZoomRate = 18.5;
-            _maxZoomRate = 18.5;
-          });
         }
       });
       return;
     }
 
     _mapController!.animateCamera(
-      CameraUpdate.newCameraPosition(
-        CameraPosition(
-          target: LatLng(position.latitude, position.longitude),
-          zoom: 18.5,
-          bearing: 0,
-        ),
-      ),
+      CameraUpdate.newLatLng(LatLng(position.latitude, position.longitude)),
     );
   }
 
-  // Future<void> _handleMonsterCapture(MonsterModel monster) async {
-  //   final uid = FirebaseAuth.instance.currentUser?.uid;
-  //   if (uid == null) return;
-
-  //   final controller = Get.find<MonsterController>();
-  //   final success = await controller.captureMonster(monster, uid);
-
-  //   if (mounted) {
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       SnackBar(
-  //         content: Text(
-  //           success ? '成功捕捉 ${monster.name} ✓' : '${monster.name} 已捕捉過',
-  //         ),
-  //         backgroundColor: success ? Colors.green : Colors.orange,
-  //         duration: Duration(seconds: 2),
-  //       ),
-  //     );
-  //   }
-  // }
-
-  //從這裡開始
   bool _isCaptureFlowActive = false;
 
   Future<void> _handleMonsterCapture(MonsterModel monster) async {
@@ -347,7 +314,6 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
       _isCaptureFlowActive = false;
     }
   }
-  //到這裡為止
 
   Set<Marker> _debugMonsterMarkers(Set<Marker> markers) {
     debugPrint('========== [MarkerDebug_GameMap] ==========');
