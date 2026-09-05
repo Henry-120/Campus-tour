@@ -22,7 +22,7 @@ class GeoreferencedImageConfig {
 
 abstract final class CampusMapGeoreferencedImages {
   static const emergency = GeoreferencedImageConfig(
-    assetPath: 'assets/images/campus_map_emergency.png',
+    assetPath: 'assets/images/Disaster_Evacuation_Map/防災地圖_地圖.jpg',
     // 順序：
     // 左上 → 右上 → 右下 → 左下
     topLeft: LatLng(24.972389, 121.184551),

@@ -20,8 +20,8 @@ abstract final class CampusMapViewports {
   static final emergency = MapViewportConfig(
     initialCenter: LatLng(24.968147, 121.191456),
     cameraBounds: LatLngBounds(
-      southwest: LatLng(24.96, 121.18),
-      northeast: LatLng(25.00, 121.22),
+      southwest: LatLng(24.963905, 121.184551),
+      northeast: LatLng(24.972389, 121.198360),
     ),
     fallbackMinZoom: 16,
     maxZoom: 20,

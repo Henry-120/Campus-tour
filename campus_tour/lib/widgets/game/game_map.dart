@@ -101,6 +101,9 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
   // AssetMapBitmap? _customMapImage; // 特製地圖圖片
   static const double _maxZoomRate = 19.0;
   static const double _minZoomRate = 16.0;
+  static const double _homeZoom = 18.5;
+  static const double _homeBearing = 0;
+  static const double _homeTilt = 0;
 
   LatLng? _playerPosition;
   bool _hasCenteredMap = false;
@@ -243,6 +246,28 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
 
     _mapController!.animateCamera(
       CameraUpdate.newLatLng(LatLng(position.latitude, position.longitude)),
+    );
+  }
+
+  Future<void> _returnToCurrentLocation() async {
+    final position =
+        _locationController.position ??
+        await _locationController.getCurrentPosition(fresh: true);
+
+    if (!mounted || position == null) return;
+
+    final controller = _mapController;
+    if (controller == null) return;
+
+    await controller.animateCamera(
+      CameraUpdate.newCameraPosition(
+        CameraPosition(
+          target: LatLng(position.latitude, position.longitude),
+          zoom: _homeZoom,
+          bearing: _homeBearing,
+          tilt: _homeTilt,
+        ),
+      ),
     );
   }
 
@@ -446,6 +471,22 @@ class _GameMapState extends State<GameMap> with MonsterMarkersMixin {
           top: 76,
           child: SafeArea(child: _DrawerHintButton()),
         ),
+        if (_hasLocationPermission)
+          Positioned(
+            right: 16,
+            top: 136,
+            child: SafeArea(
+              child: GestureDetector(
+                onTap: _returnToCurrentLocation,
+                child: Image.asset(
+                  'assets/images/component/position_return.png',
+                  width: 52,
+                  height: 52,
+                  fit: BoxFit.contain,
+                ),
+              ),
+            ),
+          ),
         if (!_hasLocationPermission)
           Positioned(
             right: 16,
