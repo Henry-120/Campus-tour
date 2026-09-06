@@ -9,12 +9,14 @@ class CampusMapCameraController {
       maxZoom = config.maxZoom,
       padding = config.padding,
       fallbackMinZoom = config.fallbackMinZoom,
+      playerFocusZoom = config.playerFocusZoom,
       _minZoom = config.fallbackMinZoom;
 
   final LatLngBounds cameraBounds;
   final double maxZoom;
   final double padding;
   final double fallbackMinZoom;
+  final double playerFocusZoom;
 
   MapLibreMapController? _mapController;
 
@@ -92,6 +94,29 @@ class CampusMapCameraController {
     if (controller == null) return;
 
     await controller.animateCamera(CameraUpdate.newLatLngZoom(target, zoom));
+  }
+
+  Future<void> followPlayer(LatLng position) async {
+    final controller = _mapController;
+    if (controller == null) return;
+
+    await controller.animateCamera(CameraUpdate.newLatLng(position));
+  }
+
+  Future<void> returnToPlayer(LatLng position) async {
+    final controller = _mapController;
+    if (controller == null) return;
+
+    await controller.animateCamera(
+      CameraUpdate.newCameraPosition(
+        CameraPosition(
+          target: position,
+          zoom: playerFocusZoom,
+          bearing: 0,
+          tilt: 0,
+        ),
+      ),
+    );
   }
 
   double _calculateFitMinZoom({

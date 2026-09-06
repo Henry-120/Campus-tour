@@ -11,6 +11,8 @@ class PlayerSymbolController {
   MapLibreMapController? _mapController;
 
   StreamSubscription<CompassEvent>? _compassSub;
+  double? _deviceHeading;
+  double _cameraBearing = 0;
   int _walkFrame = 0;
   static const int _defaultWalkSpeed = 140;
   static const double _defaultIconSize = 0.6;
@@ -35,8 +37,10 @@ class PlayerSymbolController {
     if (identical(_mapController, controller)) return;
 
     _mapController = controller;
+    _cameraBearing = _normalizeBearing(controller.cameraPosition?.bearing ?? 0);
     _attachedToCurrentStyle = false;
     _playerSymbol = null;
+    _updateDirectionFromCurrentBearings();
   }
 
   //初始化
@@ -76,19 +80,41 @@ class PlayerSymbolController {
   void _startCompassStream() {
     _compassSub = FlutterCompass.events?.listen((event) {
       final heading = event.heading;
-      if (heading == null) return;
+      if (heading == null || !heading.isFinite) return;
 
-      final nextDirection = _directionFromHeading(heading);
-
-      if (nextDirection == _currentDirection) return;
-
-      _currentDirection = nextDirection;
-      _updatePlayerSymbol();
+      _deviceHeading = _normalizeBearing(heading);
+      _updateDirectionFromCurrentBearings();
     });
   }
 
+  /// 可直接由主地圖的 MapLibreMap.onCameraMove 呼叫。
+  void handleCameraMove(CameraPosition cameraPosition) {
+    if (_isDisposed || !cameraPosition.bearing.isFinite) return;
+
+    final nextBearing = _normalizeBearing(cameraPosition.bearing);
+    if (_shortestBearingDelta(_cameraBearing, nextBearing).abs() < 0.01) {
+      return;
+    }
+
+    _cameraBearing = nextBearing;
+    _updateDirectionFromCurrentBearings();
+  }
+
+  void _updateDirectionFromCurrentBearings() {
+    final deviceHeading = _deviceHeading;
+    if (deviceHeading == null) return;
+
+    final relativeHeading = _normalizeBearing(deviceHeading - _cameraBearing);
+    final nextDirection = _directionFromHeading(relativeHeading);
+
+    if (nextDirection == _currentDirection) return;
+
+    _currentDirection = nextDirection;
+    unawaited(_updatePlayerSymbol());
+  }
+
   String _directionFromHeading(double heading) {
-    final normalized = (heading + 360) % 360;
+    final normalized = _normalizeBearing(heading);
 
     if (normalized >= 315 || normalized < 45) {
       return 'up';
@@ -99,6 +125,14 @@ class PlayerSymbolController {
     } else {
       return 'left';
     }
+  }
+
+  double _normalizeBearing(double bearing) {
+    return (bearing % 360 + 360) % 360;
+  }
+
+  double _shortestBearingDelta(double from, double to) {
+    return (to - from + 540) % 360 - 180;
   }
 
   //以附帶更新鎖的方式再最後再執行一次最新更新
@@ -239,6 +273,8 @@ class PlayerSymbolController {
     _attachedToCurrentStyle = false;
     _playerSymbol = null;
     _mapController = null;
+    _deviceHeading = null;
+    _cameraBearing = 0;
     _needsPlayerSymbolUpdate = false;
   }
 

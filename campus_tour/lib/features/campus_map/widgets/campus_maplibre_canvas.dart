@@ -52,11 +52,14 @@ class MainGameCampusMaplibreCanvas extends StatelessWidget {
     required this.cameraController,
     required MapCreatedCallback onMapCreated,
     required Future<void> Function() onStyleLoaded,
+    required OnCameraMoveCallback onCameraMove,
   }) : _onMapCreated = onMapCreated,
-       _onStyleLoaded = onStyleLoaded;
+       _onStyleLoaded = onStyleLoaded,
+       _onCameraMove = onCameraMove;
   final CampusMapCameraController cameraController;
   final MapCreatedCallback _onMapCreated;
   final Future<void> Function() _onStyleLoaded;
+  final OnCameraMoveCallback _onCameraMove;
   @override
   Widget build(BuildContext context) {
     return MapLibreMap(
@@ -66,13 +69,15 @@ class MainGameCampusMaplibreCanvas extends StatelessWidget {
       ),
       onMapCreated: _onMapCreated,
       onStyleLoadedCallback: _onStyleLoaded,
+      trackCameraPosition: true,
+      onCameraMove: _onCameraMove,
 
       // 玩家定位
       myLocationEnabled: false,
       myLocationTrackingMode: MyLocationTrackingMode.none,
 
       compassEnabled: true,
-      rotateGesturesEnabled: false,
+      rotateGesturesEnabled: true,
       scrollGesturesEnabled: true,
       zoomGesturesEnabled: true,
       tiltGesturesEnabled: false,

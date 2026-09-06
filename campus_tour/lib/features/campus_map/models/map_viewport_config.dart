@@ -7,6 +7,7 @@ class MapViewportConfig {
     required this.fallbackMinZoom,
     required this.maxZoom,
     required this.padding,
+    required this.playerFocusZoom,
   });
 
   final LatLng initialCenter;
@@ -14,6 +15,7 @@ class MapViewportConfig {
   final double fallbackMinZoom;
   final double maxZoom;
   final double padding;
+  final double playerFocusZoom;
 }
 
 abstract final class CampusMapViewports {
@@ -26,6 +28,7 @@ abstract final class CampusMapViewports {
     fallbackMinZoom: 16,
     maxZoom: 20,
     padding: 2,
+    playerFocusZoom: 18,
   );
   static final mainMap = MapViewportConfig(
     initialCenter: LatLng(24.968418, 121.191243),
@@ -36,5 +39,6 @@ abstract final class CampusMapViewports {
     fallbackMinZoom: 16,
     maxZoom: 20,
     padding: 2,
+    playerFocusZoom: 18.5,
   );
 }
