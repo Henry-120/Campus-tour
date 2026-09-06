@@ -27,7 +27,14 @@ abstract final class CampusMapViewports {
     maxZoom: 20,
     padding: 2,
   );
-  // static final main = MapViewportConfig(...);
+  static final mainMap = MapViewportConfig(
+    initialCenter: LatLng(24.968418, 121.191243),
+    cameraBounds: LatLngBounds(
+      southwest: LatLng(24.965184, 121.185000),
+      northeast: LatLng(24.971653, 121.197487),
+    ),
+    fallbackMinZoom: 16,
+    maxZoom: 20,
+    padding: 2,
+  );
 }
-
-abstract class MainMapViewport {}

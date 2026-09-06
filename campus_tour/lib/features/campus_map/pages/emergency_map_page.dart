@@ -25,7 +25,7 @@ class _EmergencyMapPageState extends State<EmergencyMapPage> {
   // 空白底圖，只給你的圖片當地圖使用
   // iOS MapLibre only recognizes inline JSON when the first character is `{`.
 
-  PlayerSymbolController? _playerSymbolController;
+  late final PlayerSymbolController _playerSymbolController;
   late final LocationController _locationController;
   late final Worker _locationWorker;
   late final CampusMapCameraController _cameraController;
@@ -43,6 +43,7 @@ class _EmergencyMapPageState extends State<EmergencyMapPage> {
       _handleLocationChanged,
     );
     _handleLocationChanged(_locationController.state.value);
+    _playerSymbolController = PlayerSymbolController();
     _cameraController = CampusMapCameraController(
       config: CampusMapViewports.emergency,
     );
@@ -55,7 +56,7 @@ class _EmergencyMapPageState extends State<EmergencyMapPage> {
   @override
   void dispose() {
     _locationWorker.dispose();
-    _playerSymbolController?.dispose();
+    _playerSymbolController.dispose();
     unawaited(OrientationService.lockPortrait());
     super.dispose();
   }
@@ -74,22 +75,23 @@ class _EmergencyMapPageState extends State<EmergencyMapPage> {
   void _onMapCreated(MapLibreMapController controller) {
     _controller = controller;
     _cameraController.attachMapController(controller);
+    _playerSymbolController.attachMapController(controller);
   }
 
   Future<void> _onStyleLoaded() async {
     final controller = _controller;
     if (controller == null) return;
+    _imageLayerController.resetAfterStyleReload();
+    _playerSymbolController.resetAfterStyleReload();
 
     await _imageLayerController.addToMap(controller);
 
-    await _cameraController.fitcameraBounds();
+    await _cameraController.fitCameraBounds();
 
-    _playerSymbolController ??= PlayerSymbolController(controller);
-
-    await _playerSymbolController!.initialize();
+    await _playerSymbolController.initialize();
     final currentPosition = _locationController.position;
     if (currentPosition != null) {
-      await _playerSymbolController!.updatePosition(
+      await _playerSymbolController.updatePosition(
         LatLng(currentPosition.latitude, currentPosition.longitude),
       );
     }
@@ -100,7 +102,7 @@ class _EmergencyMapPageState extends State<EmergencyMapPage> {
     final position = locationState.position;
 
     if (position != null) {
-      _playerSymbolController?.updatePosition(
+      _playerSymbolController.updatePosition(
         LatLng(position.latitude, position.longitude),
       );
     }

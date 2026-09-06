@@ -32,4 +32,26 @@ abstract final class CampusMapGeoreferencedImages {
     sourceId: 'emergency-campus-image-source',
     layerId: 'emergency-campus-image-layer',
   );
+
+  static const mainCampus = GeoreferencedImageConfig(
+    assetPath: 'assets/images/map_materials/main_map/cute_map_real.png',
+
+    topLeft: LatLng(24.971653, 121.185000),
+    topRight: LatLng(24.971653, 121.197487),
+    bottomRight: LatLng(24.965184, 121.197487),
+    bottomLeft: LatLng(24.965184, 121.185000),
+    sourceId: 'main-campus-image-source',
+    layerId: 'main-campus-image-layer',
+  );
+
+  static const mainForest = GeoreferencedImageConfig(
+    assetPath: 'assets/images/map_materials/main_map/cute_forest_map.png',
+
+    topLeft: LatLng(24.971653, 121.185000),
+    topRight: LatLng(24.971653, 121.197487),
+    bottomRight: LatLng(24.965184, 121.197487),
+    bottomLeft: LatLng(24.965184, 121.185000),
+    sourceId: 'main-forest-image-source',
+    layerId: 'main-forest-image-layer',
+  );
 }

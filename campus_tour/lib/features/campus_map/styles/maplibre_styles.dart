@@ -13,3 +13,12 @@ abstract class EmergencyMaplibreStyles {
     ]
   }''';
 }
+
+abstract final class MainGameMaplibreStyles {
+  static const String blankStyle = '''{
+    "version": 8,
+    "sources": {},
+    "layers": []
+  }
+  ''';
+}

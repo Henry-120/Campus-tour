@@ -58,7 +58,7 @@ class CampusMapCameraController {
     _isViewportReady = true;
   }
 
-  Future<void> fitcameraBounds() async {
+  Future<void> fitCameraBounds() async {
     final controller = _mapController;
     if (controller == null) return;
 

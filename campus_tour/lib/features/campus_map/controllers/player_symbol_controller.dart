@@ -8,7 +8,7 @@ class PlayerSymbolController {
   bool _runtimeStarted = false;
   bool _attachedToCurrentStyle = false;
   Symbol? _playerSymbol;
-  MapLibreMapController? controller;
+  MapLibreMapController? _mapController;
 
   StreamSubscription<CompassEvent>? _compassSub;
   int _walkFrame = 0;
@@ -18,14 +18,25 @@ class PlayerSymbolController {
   Timer? _walkAnimationTimer;
   String _currentDirection = 'right';
   LatLng? _latestPlayerLatLng;
+  int _styleRevision = 0;
+  bool _isDisposed = false;
 
   //更新鎖狀態列
   bool _isUpdatingPlayerSymbol = false;
   bool _needsPlayerSymbolUpdate = false;
 
-  PlayerSymbolController(this.controller);
+  PlayerSymbolController();
   String get _currentPlayerIcon {
     return 'squirrel_${_currentDirection}_$_walkFrame';
+  }
+
+  void attachMapController(MapLibreMapController controller) {
+    if (_isDisposed) return;
+    if (identical(_mapController, controller)) return;
+
+    _mapController = controller;
+    _attachedToCurrentStyle = false;
+    _playerSymbol = null;
   }
 
   //初始化
@@ -92,6 +103,7 @@ class PlayerSymbolController {
 
   //以附帶更新鎖的方式再最後再執行一次最新更新
   Future<void> _updatePlayerSymbol() async {
+    if (_isDisposed) return;
     if (_isUpdatingPlayerSymbol) {
       _needsPlayerSymbolUpdate = true;
       return;
@@ -113,8 +125,10 @@ class PlayerSymbolController {
   }
 
   Future<void> _performPlayerSymbolUpdate() async {
-    if (!_attachedToCurrentStyle) return;
-    final controller = this.controller;
+    if (_isDisposed || !_attachedToCurrentStyle) return;
+    final revision = _styleRevision;
+
+    final controller = _mapController;
     final position = _latestPlayerLatLng;
 
     if (controller == null || position == null) return;
@@ -122,38 +136,83 @@ class PlayerSymbolController {
     final iconName = _currentPlayerIcon;
 
     if (_playerSymbol == null) {
-      _playerSymbol = await controller.addSymbol(
-        SymbolOptions(
-          geometry: position,
-          iconImage: iconName,
-          iconSize: _defaultIconSize,
-          iconAnchor: 'center',
-          zIndex: 999,
-        ),
-      );
+      try {
+        final newSymbol = await controller.addSymbol(
+          SymbolOptions(
+            geometry: position,
+            iconImage: iconName,
+            iconSize: _defaultIconSize,
+            iconAnchor: 'center',
+            zIndex: 999,
+          ),
+        );
+        if (revision != _styleRevision ||
+            !identical(controller, _mapController)) {
+          return;
+        }
+        _playerSymbol = newSymbol;
+      } catch (error) {
+        final operationIsStale =
+            _isDisposed ||
+            revision != _styleRevision ||
+            !identical(controller, _mapController);
+
+        if (operationIsStale) return;
+
+        rethrow;
+      }
     } else {
-      await controller.updateSymbol(
-        _playerSymbol!,
-        SymbolOptions(geometry: position, iconImage: iconName),
-      );
+      try {
+        await controller.updateSymbol(
+          _playerSymbol!,
+          SymbolOptions(geometry: position, iconImage: iconName),
+        );
+      } catch (error) {
+        final operationIsStale =
+            _isDisposed ||
+            revision != _styleRevision ||
+            !identical(controller, _mapController);
+
+        if (operationIsStale) return;
+
+        rethrow;
+      }
     }
   }
 
   Future<void> updatePosition(LatLng position) async {
+    if (_isDisposed) return;
     _latestPlayerLatLng = position;
     await _updatePlayerSymbol();
   }
 
   Future<void> initialize() async {
-    final mapController = controller;
+    if (_isDisposed) return;
+    final mapController = _mapController;
     if (mapController == null) {
       throw StateError('SymbolController 尚未取得 MapLibreMapController');
     }
-
+    final revision = _styleRevision;
     // 1. 先把玩家動畫圖片註冊進 MapLibre style
     if (!_attachedToCurrentStyle) {
-      await _addPlayerAnimationImages(mapController);
-      _attachedToCurrentStyle = true;
+      try {
+        await _addPlayerAnimationImages(mapController);
+        if (_isDisposed ||
+            revision != _styleRevision ||
+            !identical(mapController, _mapController)) {
+          return;
+        }
+        _attachedToCurrentStyle = true;
+      } catch (error) {
+        final operationIsStale =
+            _isDisposed ||
+            revision != _styleRevision ||
+            !identical(mapController, _mapController);
+
+        if (operationIsStale) return;
+
+        rethrow;
+      }
     }
     // 2. 開始走路動畫
     // 3. 開始監聽指南針方向
@@ -162,18 +221,32 @@ class PlayerSymbolController {
       _startCompassStream();
       _runtimeStarted = true;
     }
-
-    _attachedToCurrentStyle = true;
     await _updatePlayerSymbol();
   }
 
   void dispose() {
+    if (_isDisposed) return;
+
+    _isDisposed = true;
+    _styleRevision++;
+
     _walkAnimationTimer?.cancel();
-    _compassSub?.cancel();
+    _walkAnimationTimer = null;
+
+    unawaited(_compassSub?.cancel());
+    _compassSub = null;
+
+    _attachedToCurrentStyle = false;
+    _playerSymbol = null;
+    _mapController = null;
+    _needsPlayerSymbolUpdate = false;
   }
 
   //預留用
   void resetAfterStyleReload() {
+    if (_isDisposed) return;
+
+    _styleRevision++;
     _attachedToCurrentStyle = false;
     _playerSymbol = null;
   }
