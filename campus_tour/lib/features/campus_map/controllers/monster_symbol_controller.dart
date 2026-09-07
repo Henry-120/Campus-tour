@@ -14,7 +14,7 @@ class MonsterSymbolController {
   static const int _frameCount = 4;
   static const Duration _frameDuration = Duration(milliseconds: 300);
   static const int _imageSize = 300;
-  static const double _iconSize = 0.5;
+  static const double _iconSize = 1.6;
   static const int _zIndex = 100;
   static const String _iconAnchor = 'bottom';
 

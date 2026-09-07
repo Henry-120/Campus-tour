@@ -36,9 +36,9 @@ npm run reviewer:revoke
 ## 審核操作
 
 1. 使用 Email 與密碼登入。
-2. 開啟設定，使用 Apple Review Demo 的位置映射功能。
+2. 開啟設定，使用 Apple、Android 審核展示模式的位置映射功能。
 3. 回到地圖，選擇尚未捕捉的精靈。
-4. 進入 NFC 畫面後，點選 `Apple Review: Simulate NFC Tag`。
+4. 進入 NFC 畫面後，點選 `Apple、Android 審核：模擬 NFC 感應`。
 5. 模擬 Tag 會走和實體 NFC 相同的 ID 比對成功 handler，再繼續任務與捕捉流程。
 
 一般帳號沒有 Reviewer Claim，因此不會看到位置映射或 NFC 模擬按鈕。
@@ -55,17 +55,17 @@ Password: 123456
 
 Because App Review may take place outside National Central University and
 without access to our physical NFC tags, this dedicated account has access to
-a clearly labeled Apple Review Demo Mode.
+a clearly labeled Apple and Android Review Demo Mode.
 
 Location flow:
 1. Sign in with the review account.
 2. Open Settings.
-3. In the Apple Review Demo section, tap the location mapping button.
+3. In the Apple and Android Review Demo section, tap the location mapping button.
 4. Return to the map and select an available character.
 
 NFC flow:
 1. Continue until the NFC screen appears.
-2. Tap “Apple Review: Simulate NFC Tag”.
+2. Tap “Apple and Android Review: Simulate NFC Tag”.
 3. Complete the remaining mission and verify the captured character appears
    in the collection.
 

@@ -1,10 +1,10 @@
 import 'dart:math' as math;
+import 'package:campus_tour/controllers/location_controller.dart';
+import 'package:campus_tour/controllers/monster_controller.dart';
+import 'package:campus_tour/styles/app_theme.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_compass/flutter_compass.dart';
 import 'package:get/get.dart';
-import '../../controllers/location_controller.dart';
-import '../../controllers/monster_controller.dart';
-import '../../styles/app_theme.dart';
 
 class NearestMonsterArrow extends StatefulWidget {
   const NearestMonsterArrow({super.key});

@@ -1,3 +1,4 @@
+import 'package:campus_tour/features/campus_map/models/player_symbol_config.dart';
 import 'package:maplibre_gl/maplibre_gl.dart';
 import 'package:flutter/services.dart';
 import 'dart:async';
@@ -15,7 +16,7 @@ class PlayerSymbolController {
   double _cameraBearing = 0;
   int _walkFrame = 0;
   static const int _defaultWalkSpeed = 140;
-  static const double _defaultIconSize = 0.6;
+  final double iconSize;
 
   Timer? _walkAnimationTimer;
   String _currentDirection = 'right';
@@ -27,7 +28,8 @@ class PlayerSymbolController {
   bool _isUpdatingPlayerSymbol = false;
   bool _needsPlayerSymbolUpdate = false;
 
-  PlayerSymbolController();
+  PlayerSymbolController({required PlayerSymbolConfig config})
+    : iconSize = config.iconSize;
   String get _currentPlayerIcon {
     return 'squirrel_${_currentDirection}_$_walkFrame';
   }
@@ -175,7 +177,7 @@ class PlayerSymbolController {
           SymbolOptions(
             geometry: position,
             iconImage: iconName,
-            iconSize: _defaultIconSize,
+            iconSize: iconSize,
             iconAnchor: 'center',
             zIndex: 999,
           ),

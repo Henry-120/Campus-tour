@@ -39,6 +39,6 @@ abstract final class CampusMapViewports {
     fallbackMinZoom: 16,
     maxZoom: 20,
     padding: 2,
-    playerFocusZoom: 18.5,
+    playerFocusZoom: 17,
   );
 }

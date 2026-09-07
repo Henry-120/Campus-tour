@@ -2926,16 +2926,16 @@
     },
     {
       "key": "view.lhf.setting.page.s058",
-      "zh": "Apple 審核展示模式",
-      "en": "Apple Review Demo Mode",
-      "ja": "Apple審査デモモード",
+      "zh": "Apple、Android 審核展示模式",
+      "en": "Apple and Android Review Demo Mode",
+      "ja": "Apple・Android審査デモモード",
       "occurrences": []
     },
     {
       "key": "view.lhf.setting.page.s059",
-      "zh": "供 App Review 體驗校園核心流程，將目前位置安全映射至中央大學。",
-      "en": "Maps your current location to National Central University so App Review can experience the core campus flow.",
-      "ja": "App Reviewでキャンパスの主要機能を体験できるよう、現在地を国立中央大学に安全にマッピングします。",
+      "zh": "供 Apple、Android 平台審核人員體驗校園核心流程，將目前位置安全映射至中央大學。",
+      "en": "Maps your current location to National Central University so Apple and Android reviewers can experience the core campus flow.",
+      "ja": "Apple・Androidの審査担当者がキャンパスの主要機能を体験できるよう、現在地を国立中央大学に安全にマッピングします。",
       "occurrences": []
     },
     {
@@ -2975,9 +2975,9 @@
     },
     {
       "key": "view.lhf.setting.page.s065",
-      "zh": "Apple 審核位置映射已啟用",
-      "en": "Apple Review location mapping enabled",
-      "ja": "Apple審査用の位置マッピングを有効にしました",
+      "zh": "Apple、Android 審核位置映射已啟用",
+      "en": "Apple and Android review location mapping enabled",
+      "ja": "Apple・Android審査用の位置マッピングを有効にしました",
       "occurrences": []
     },
     {
@@ -4488,9 +4488,9 @@
     },
     {
       "key": "widgets.buttons.nfc.button.s007",
-      "zh": "Apple 審核：模擬 NFC 感應",
-      "en": "Apple Review: Simulate NFC Tag",
-      "ja": "Apple審査：NFCタグをシミュレート",
+      "zh": "Apple、Android 審核：模擬 NFC 感應",
+      "en": "Apple and Android Review: Simulate NFC Tag",
+      "ja": "Apple・Android審査：NFCタグをシミュレート",
       "occurrences": []
     },
     {

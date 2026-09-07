@@ -332,14 +332,14 @@ Total unique strings: 698
 | `view.lhf.setting.page.s055` | 正在匯入遊戲資料... | Importing game data... |  |
 | `view.lhf.setting.page.s056` | 遊戲資料匯入完成 | Game data import complete |  |
 | `view.lhf.setting.page.s057` | 遊戲資料匯入失敗，請確認帳號權限 | Failed to import game data. Check account permissions. |  |
-| `view.lhf.setting.page.s058` | Apple 審核展示模式 | Apple Review Demo Mode |  |
-| `view.lhf.setting.page.s059` | 供 App Review 體驗校園核心流程，將目前位置安全映射至中央大學。 | Maps your current location to National Central University so App Review can experience the core campus flow. |  |
+| `view.lhf.setting.page.s058` | Apple、Android 審核展示模式 | Apple and Android Review Demo Mode |  |
+| `view.lhf.setting.page.s059` | 供 Apple、Android 平台審核人員體驗校園核心流程，將目前位置安全映射至中央大學。 | Maps your current location to National Central University so Apple and Android reviewers can experience the core campus flow. |  |
 | `view.lhf.setting.page.s060` | 校園位置映射中 | Campus location mapped |  |
 | `view.lhf.setting.page.s061` | 使用真實定位 | Using real location |  |
 | `view.lhf.setting.page.s062` | 將位置映射至校園 | Map Location to Campus |  |
 | `view.lhf.setting.page.s063` | 停止展示模式 | Stop Demo Mode |  |
 | `view.lhf.setting.page.s064` | 正在取得目前位置... | Getting current location... |  |
-| `view.lhf.setting.page.s065` | Apple 審核位置映射已啟用 | Apple Review location mapping enabled |  |
+| `view.lhf.setting.page.s065` | Apple、Android 審核位置映射已啟用 | Apple and Android review location mapping enabled |  |
 | `view.lhf.setting.page.s066` | 已恢復真實定位 | Real location restored |  |
 | `view.lhf.setting.page.s067` | 無法啟用位置映射，請確認 GPS 與定位權限 | Could not map the location. Check GPS and location permissions. |  |
 | `view.lhf.setting.page.s068` | Email 登入密碼設定完成，現在可以使用 Google 或 Email 登入。 | Email sign-in password set. You can now sign in with Google or email. |  |
@@ -511,7 +511,7 @@ Total unique strings: 698
 | `widgets.buttons.nfc.button.s004` | NFC權限未開放 | NFC permission is not enabled |  |
 | `widgets.buttons.nfc.button.s005` | 標籤格式錯誤 | Invalid tag format |  |
 | `widgets.buttons.nfc.button.s006` | 發生未知錯誤 | An unknown error occurred |  |
-| `widgets.buttons.nfc.button.s007` | Apple 審核：模擬 NFC 感應 | Apple Review: Simulate NFC Tag |  |
+| `widgets.buttons.nfc.button.s007` | Apple、Android 審核：模擬 NFC 感應 | Apple and Android Review: Simulate NFC Tag |  |
 | `widgets.common.user.head.s001` | [UserHead] SVG 載入失敗: $error | [UserHead] Failed to load SVG: $error | lib/widgets/common/user_head.dart:73 |
 | `widgets.common.user.head.s002` | [UserHead] 圖片載入失敗: $error | [UserHead] Failed to load image: $error | lib/widgets/common/user_head.dart:87 |
 | `widgets.encyclopedia.elf.creator.section.s001` | Creator Info (創作者資料) | Creator Information |  |

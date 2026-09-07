@@ -2,14 +2,14 @@ import 'dart:async';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 
+import 'package:campus_tour/controllers/monster_controller.dart';
+import 'package:campus_tour/features/google_cappus_map/marker/monster_marker.dart';
+import 'package:campus_tour/models/monster_model.dart';
+import 'package:campus_tour/utils/monster_image_path.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:campus_tour/utils/monster_image_path.dart';
-import '../../controllers/monster_controller.dart';
-import '../../models/monster_model.dart';
-import '../../widgets/game/monster_marker.dart';
 
 /// 提供給 GameMap 使用的 mixin，負責維護怪物 markers set。
 ///

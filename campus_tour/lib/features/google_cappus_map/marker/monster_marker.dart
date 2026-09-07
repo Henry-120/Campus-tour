@@ -1,6 +1,6 @@
+import 'package:campus_tour/models/monster_model.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import '../../models/monster_model.dart';
 
 /// 封裝怪物在地圖上的 Marker，比照 UserMarker 的設計模式。
 class MonsterMarker {

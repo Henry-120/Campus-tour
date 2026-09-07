@@ -10,8 +10,8 @@ class NearestMonsterArrowController {
   static const String _arrowAssetPath = 'assets/images/arrow_global_3.png';
   static const String _arrowImageId = 'nearest-monster-arrow-image';
   static const double _earthRadiusMeters = 6371008.8;
-  static const double _radiusMeters = 25;
-  static const double _iconSize = 0.5;
+  static const double _radiusMeters = 35;
+  static const double _iconSize = 1.0;
   static const double _imageRotationOffset = 0;
   static const int _imageSize = 96;
   static const int _zIndex = 998;

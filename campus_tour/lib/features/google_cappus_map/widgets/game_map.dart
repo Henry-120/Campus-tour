@@ -8,14 +8,14 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:campus_tour/controllers/location_controller.dart';
 import 'package:campus_tour/controllers/monster_controller.dart';
 import 'package:campus_tour/controllers/nfc_scan_controller.dart';
+import 'package:campus_tour/features/google_cappus_map/mixins/nearby_monsters_display.dart';
 import 'package:campus_tour/local_information/local_setting.dart';
 import 'package:campus_tour/models/architecture_model.dart';
+import 'package:campus_tour/models/monster_model.dart';
 import 'package:campus_tour/styles/app_theme.dart';
 import 'package:campus_tour/utils/monster_image_path.dart';
 import 'package:get/get.dart';
-import '../../view/nearby_monsters_display.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import '../../models/monster_model.dart';
 //for mission
 import 'package:campus_tour/view/full_mission_page.dart';
 import 'package:campus_tour/widgets/game/catching_pages/monster_model_cry.dart';

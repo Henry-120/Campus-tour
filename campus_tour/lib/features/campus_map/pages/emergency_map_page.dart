@@ -8,6 +8,7 @@ import 'package:campus_tour/features/campus_map/models/map_viewport_config.dart'
 import 'package:campus_tour/features/campus_map/controllers/player_symbol_controller.dart';
 import 'package:campus_tour/features/campus_map/controllers/georeferenced_image_layer_controller.dart';
 import 'package:campus_tour/features/campus_map/models/georeferenced_image_config.dart';
+import 'package:campus_tour/features/campus_map/models/player_symbol_config.dart';
 import 'package:campus_tour/features/campus_map/widgets/campus_maplibre_canvas.dart';
 import 'package:campus_tour/services/orientation_service.dart';
 
@@ -38,12 +39,9 @@ class _EmergencyMapPageState extends State<EmergencyMapPage> {
     super.initState();
     unawaited(OrientationService.lockLandscape());
     _locationController = Get.find<LocationController>();
-    _locationWorker = ever<AppLocationState>(
-      _locationController.state,
-      _handleLocationChanged,
+    _playerSymbolController = PlayerSymbolController(
+      config: CampusMapPlayerSymbolConfigs.emergency,
     );
-    _handleLocationChanged(_locationController.state.value);
-    _playerSymbolController = PlayerSymbolController();
     _cameraController = CampusMapCameraController(
       config: CampusMapViewports.emergency,
     );
@@ -51,6 +49,11 @@ class _EmergencyMapPageState extends State<EmergencyMapPage> {
     _imageLayerController = GeoreferencedImageLayerController(
       config: CampusMapGeoreferencedImages.emergency,
     );
+    _locationWorker = ever<AppLocationState>(
+      _locationController.state,
+      _handleLocationChanged,
+    );
+    _handleLocationChanged(_locationController.state.value);
   }
 
   @override
@@ -85,6 +88,8 @@ class _EmergencyMapPageState extends State<EmergencyMapPage> {
     _playerSymbolController.resetAfterStyleReload();
 
     await _imageLayerController.addToMap(controller);
+
+    await controller.setSymbolIconAllowOverlap(true);
 
     await _cameraController.fitCameraBounds();
 
