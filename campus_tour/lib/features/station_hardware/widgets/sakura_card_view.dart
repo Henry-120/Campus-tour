@@ -3,6 +3,7 @@ import 'dart:math' as math;
 
 import 'package:campus_tour/features/station_hardware/constants/sakura_assets.dart';
 import 'package:campus_tour/features/station_hardware/constants/sakura_card_layout.dart';
+import 'package:campus_tour/features/station_hardware/models/sakura_card_submission.dart';
 import 'package:campus_tour/features/station_hardware/models/station_hardware_models.dart';
 import 'package:campus_tour/features/station_hardware/pages/sakura_monster_picker_page.dart';
 import 'package:campus_tour/features/station_hardware/view_models/sakura_card_draft_view_model.dart';
@@ -10,6 +11,7 @@ import 'package:campus_tour/features/station_hardware/view_models/station_hardwa
 import 'package:campus_tour/features/station_hardware/widgets/sakura_handwriting_pad.dart';
 import 'package:campus_tour/features/station_hardware/widgets/sakura_page_controls.dart';
 import 'package:campus_tour/models/user_monster_model.dart';
+import 'package:campus_tour/services/sakura_card_submission_service.dart';
 import 'package:campus_tour/styles/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -35,7 +37,9 @@ class SakuraCardView extends StatefulWidget {
 class _SakuraCardViewState extends State<SakuraCardView>
     with SingleTickerProviderStateMixin {
   late final AnimationController _departureController;
+  late final SakuraCardSubmissionService _submissionService;
   StreamSubscription<StationHardwarePhase>? _phaseSubscription;
+  bool _isSubmittingHandwriting = false;
 
   @override
   void initState() {
@@ -45,6 +49,7 @@ class _SakuraCardViewState extends State<SakuraCardView>
       duration: const Duration(milliseconds: 1250),
       reverseDuration: const Duration(milliseconds: 650),
     );
+    _submissionService = SakuraCardSubmissionService();
     _phaseSubscription = widget.hardwareViewModel.phaseChanges.listen(
       _handlePhase,
     );
@@ -95,6 +100,7 @@ class _SakuraCardViewState extends State<SakuraCardView>
       final confirmationDeadline =
           widget.hardwareViewModel.confirmationDeadline;
       final isLocked =
+          _isSubmittingHandwriting ||
           widget.hardwareViewModel.isBusy ||
           phase == StationHardwarePhase.confirmed;
 
@@ -168,9 +174,12 @@ class _SakuraCardViewState extends State<SakuraCardView>
                           widget.draftViewModel.selectedMonster != null;
 
                       return _SakuraSendButton(
-                        label: _buttonLabel(phase),
-                        visuallyEnabled: canSend && hasMonster,
-                        interactive: canSend,
+                        label: _isSubmittingHandwriting
+                            ? 'features.station.hardware.sakura.page.s033'.tr
+                            : _buttonLabel(phase),
+                        visuallyEnabled:
+                            canSend && hasMonster && !_isSubmittingHandwriting,
+                        interactive: canSend && !_isSubmittingHandwriting,
                         onTap: () => _send(hasMonster: hasMonster),
                       );
                     },
@@ -198,7 +207,7 @@ class _SakuraCardViewState extends State<SakuraCardView>
   }
 
   Future<void> _openMonsterPicker() async {
-    if (widget.hardwareViewModel.isBusy) return;
+    if (_isSubmittingHandwriting || widget.hardwareViewModel.isBusy) return;
 
     final monster = await Navigator.of(context).push<UserMonsterModel>(
       MaterialPageRoute(builder: (_) => const SakuraMonsterPickerPage()),
@@ -207,8 +216,10 @@ class _SakuraCardViewState extends State<SakuraCardView>
     widget.draftViewModel.selectMonster(monster);
   }
 
-  void _send({required bool hasMonster}) {
+  Future<void> _send({required bool hasMonster}) async {
     FocusScope.of(context).unfocus();
+
+    if (_isSubmittingHandwriting) return;
 
     if (!hasMonster) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -219,14 +230,33 @@ class _SakuraCardViewState extends State<SakuraCardView>
       return;
     }
 
-    unawaited(
-      widget.hardwareViewModel.send(
+    setState(() => _isSubmittingHandwriting = true);
+
+    try {
+      final submission = SakuraCardSubmission(
+        strokes: widget.draftViewModel.strokes,
+      );
+      await _submissionService.submit(submission);
+      if (!mounted) return;
+
+      await widget.hardwareViewModel.send(
         stationId: StationId.sakura,
         input: StationHardwareInput(
           message: widget.draftViewModel.message.trim(),
         ),
-      ),
-    );
+      );
+    } catch (_) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('features.station.hardware.sakura.page.s031'.tr),
+        ),
+      );
+    } finally {
+      if (mounted) {
+        setState(() => _isSubmittingHandwriting = false);
+      }
+    }
   }
 
   String _buttonLabel(StationHardwarePhase phase) {

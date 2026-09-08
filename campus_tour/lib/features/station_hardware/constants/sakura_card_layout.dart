@@ -18,12 +18,10 @@ class SakuraCardLayout {
     0.92,
     0.34,
   );
-  static const Rect _drawingWithinContent = Rect.fromLTWH(
-    0.00,
-    0.34,
-    1.00,
-    0.74,
-  );
+  static const double _drawingTopWithinContent = 0.34;
+
+  /// The handwriting surface keeps a height-to-width ratio of 1:3.2.
+  static const double handwritingAspectRatio = 3.2;
 
   static const SakuraCardLayout normal = SakuraCardLayout(
     aspectRatio: 1086 / 1448,
@@ -57,10 +55,17 @@ class SakuraCardLayout {
     normalized: _messageWithinContent,
   );
 
-  Rect drawingRectFor(Size cardSize) => _rectWithin(
-    outer: contentRectFor(cardSize),
-    normalized: _drawingWithinContent,
-  );
+  Rect drawingRectFor(Size cardSize) {
+    final contentRect = contentRectFor(cardSize);
+    final drawingWidth = contentRect.width;
+
+    return Rect.fromLTWH(
+      contentRect.left,
+      contentRect.top + _drawingTopWithinContent * contentRect.height,
+      drawingWidth,
+      drawingWidth / handwritingAspectRatio,
+    );
+  }
 
   Rect monsterRectFor(Size cardSize) {
     return Rect.fromLTWH(

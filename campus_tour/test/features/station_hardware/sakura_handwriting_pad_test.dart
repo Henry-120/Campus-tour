@@ -72,7 +72,11 @@ void main() {
     final drawingLayoutRect = SakuraCardLayout.normal.drawingRectFor(
       cardRect.size,
     );
-    expect(drawingLayoutRect.bottom, greaterThan(contentLayoutRect.bottom));
+    expect(
+      drawingLayoutRect.width / drawingLayoutRect.height,
+      closeTo(SakuraCardLayout.handwritingAspectRatio, 0.001),
+    );
+    expect(drawingLayoutRect.bottom, lessThan(contentLayoutRect.bottom));
     expect(toolbarRect.left, lessThan(cardRect.left + cardRect.width * 0.10));
     expect(
       toolbarRect.bottom,
@@ -118,7 +122,7 @@ void main() {
     expect(input.controller?.text, isEmpty);
   });
 
-  testWidgets('Japanese prompts fit inside the extended drawing area', (
+  testWidgets('Japanese prompts fit inside the compact drawing area', (
     tester,
   ) async {
     final draft = SakuraCardDraftViewModel();

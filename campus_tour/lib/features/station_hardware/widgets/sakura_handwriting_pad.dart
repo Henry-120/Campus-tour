@@ -411,15 +411,10 @@ class _WritingPrompts extends StatelessWidget {
         color: const Color(0xFFFFFBF7).withValues(alpha: 0.62),
       ),
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(8, 16, 8, 8),
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [
-            _PromptRow(
-              labelKey: 'features.station.hardware.sakura.page.s008',
-              descriptionKey: 'features.station.hardware.sakura.page.s009',
-            ),
-            SizedBox(height: 4),
             _PromptRow(
               labelKey: 'features.station.hardware.sakura.page.s010',
               descriptionKey: 'features.station.hardware.sakura.page.s011',
