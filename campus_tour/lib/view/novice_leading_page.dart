@@ -58,6 +58,16 @@ class _NoviceLeadingPageState extends State<NoviceLeadingPage>
       message: 'view.novice.leading.page.s009'.tr,
       textAlignment: Alignment.topCenter,
     ),
+    _NoviceLeadingStep.image(
+      imageAsset: 'assets/images/novice_leading/AR.png',
+      message: 'view.novice.leading.page.s015'.tr,
+      textAlignment: Alignment.topCenter,
+    ),
+    _NoviceLeadingStep.image(
+      imageAsset: 'assets/images/novice_leading/full_map.png',
+      message: 'view.novice.leading.page.s016'.tr,
+      textAlignment: Alignment.bottomCenter,
+    ),
     _NoviceLeadingStep.finish(message: 'view.novice.leading.page.s010'.tr),
   ];
 

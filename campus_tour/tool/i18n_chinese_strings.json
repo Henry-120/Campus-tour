@@ -1,6 +1,6 @@
 {
   "generatedBy": "tool/extract_chinese_strings.dart",
-  "totalUniqueStrings": 698,
+  "totalUniqueStrings": 700,
   "entries": [
     {
       "key": "controllers.login.controller.s001",
@@ -4129,6 +4129,20 @@
       "zh": "下一步",
       "en": "Next",
       "ja": "次へ",
+      "occurrences": []
+    },
+    {
+      "key": "view.novice.leading.page.s015",
+      "zh": "這裡有虛實互動AR功能",
+      "en": "Explore interactive AR experiences here.",
+      "ja": "ここでは、現実とバーチャルが融合したAR体験を楽しめます。",
+      "occurrences": []
+    },
+    {
+      "key": "view.novice.leading.page.s016",
+      "zh": "點此觀看校園全景與景點",
+      "en": "Tap here to view campus panoramas and attractions.",
+      "ja": "ここをタップして、キャンパスのパノラマや見どころを確認できます。",
       "occurrences": []
     },
     {

@@ -77,7 +77,7 @@ class MainGameCampusMaplibreCanvas extends StatelessWidget {
       myLocationTrackingMode: MyLocationTrackingMode.none,
 
       compassEnabled: true,
-      rotateGesturesEnabled: true,
+      rotateGesturesEnabled: false,
       scrollGesturesEnabled: true,
       zoomGesturesEnabled: true,
       tiltGesturesEnabled: false,
