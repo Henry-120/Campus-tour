@@ -8,6 +8,8 @@ class MapViewportConfig {
     required this.maxZoom,
     required this.padding,
     required this.playerFocusZoom,
+    this.keepViewportInsideBounds = false,
+    this.edgeBufferPixels = 0,
   });
 
   final LatLng initialCenter;
@@ -16,6 +18,12 @@ class MapViewportConfig {
   final double maxZoom;
   final double padding;
   final double playerFocusZoom;
+
+  /// 是否讓整個手機畫面永遠落在地圖圖片範圍內，而不只是限制鏡頭中心。
+  final bool keepViewportInsideBounds;
+
+  /// 額外保留的畫面內縮像素，避免浮點誤差造成地圖邊緣露出細縫。
+  final double edgeBufferPixels;
 }
 
 abstract final class CampusMapViewports {
@@ -40,5 +48,7 @@ abstract final class CampusMapViewports {
     maxZoom: 20,
     padding: 2,
     playerFocusZoom: 17,
+    keepViewportInsideBounds: true,
+    edgeBufferPixels: 4,
   );
 }

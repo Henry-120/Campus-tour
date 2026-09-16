@@ -1,8 +1,8 @@
-import 'package:campus_tour/styles/level_style.dart';
-import 'package:campus_tour/widgets/buttons/nfc_button.dart';
-import 'package:campus_tour/widgets/game/catching_pages/discovered_item_page.dart';
-import 'package:campus_tour/widgets/game/catching_pages/graphics_text_level.dart';
-import 'package:campus_tour/widgets/game/catching_pages/plot_level.dart';
+import 'package:campus_tour/features/monster_capture/models/graphics_text_level.dart';
+import 'package:campus_tour/features/monster_capture/models/plot_level.dart';
+import 'package:campus_tour/features/monster_capture/pages/discovered_item_page.dart';
+import 'package:campus_tour/features/monster_capture/styles/level_style.dart';
+import 'package:campus_tour/features/monster_capture/widgets/nfc_button.dart';
 import 'package:flutter/material.dart';
 import 'package:campus_tour/services/audio_service.dart';
 

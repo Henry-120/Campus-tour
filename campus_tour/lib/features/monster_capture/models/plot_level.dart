@@ -1,5 +1,5 @@
-import 'package:campus_tour/styles/level_style.dart';
-import 'package:campus_tour/widgets/game/catching_pages/discovered_item.dart';
+import 'package:campus_tour/features/monster_capture/models/discovered_item.dart';
+import 'package:campus_tour/features/monster_capture/styles/level_style.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';

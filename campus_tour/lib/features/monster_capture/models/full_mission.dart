@@ -1,8 +1,8 @@
-import 'camara_level.dart';
+import 'camera_level.dart';
 import 'cryptography_level.dart';
 import 'graphics_text_level.dart';
 import 'plot_level.dart';
-import 'trace_levle.dart';
+import 'trace_level.dart';
 
 /// FullMission represents exactly one of the available level types
 /// in this folder. It stores a `levelType` string and nullable fields

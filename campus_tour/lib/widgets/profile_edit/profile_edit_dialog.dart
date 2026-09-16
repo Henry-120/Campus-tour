@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../controllers/profile_edit_controller.dart';
+import '../../controllers/user_controller.dart';
+import '../../models/user_model.dart';
 import '../../styles/app_theme.dart';
 import '../constants/asset_paths.dart';
 import 'avatar_preview.dart';
@@ -8,13 +10,43 @@ import 'game_dialog_button.dart';
 import 'nickname_field.dart';
 import '../constants/responsive.dart';
 
-class ProfileEditDialog extends StatelessWidget {
-  const ProfileEditDialog({super.key});
+class ProfileEditDialog extends StatefulWidget {
+  const ProfileEditDialog({
+    super.key,
+    required this.userController,
+    required this.initialUser,
+    required this.editingUid,
+  });
+
+  final UserController userController;
+  final UserModel initialUser;
+  final String editingUid;
+
+  @override
+  State<ProfileEditDialog> createState() => _ProfileEditDialogState();
+}
+
+class _ProfileEditDialogState extends State<ProfileEditDialog> {
+  late final ProfileEditController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = ProfileEditController(
+      userController: widget.userController,
+      editingUid: widget.editingUid,
+      initialUser: widget.initialUser,
+    );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(ProfileEditController());
-
     return Dialog(
       backgroundColor: Colors.transparent,
       insetPadding: EdgeInsets.symmetric(horizontal: Responsive.w(context, 28)),
@@ -37,7 +69,7 @@ class ProfileEditDialog extends StatelessWidget {
           children: [
             _buildHeader(context),
             SizedBox(height: Responsive.h(context, 20)),
-            AvatarPreview(controller: controller),
+            AvatarPreview(controller: _controller),
             SizedBox(height: Responsive.h(context, 12)),
             Text(
               'widgets.profile.edit.profile.edit.dialog.s001'.tr,
@@ -49,9 +81,9 @@ class ProfileEditDialog extends StatelessWidget {
               ),
             ),
             SizedBox(height: Responsive.h(context, 25)),
-            NicknameField(controller: controller),
+            NicknameField(controller: _controller),
             SizedBox(height: Responsive.h(context, 25)),
-            _buildActions(context, controller),
+            _buildActions(context, _controller),
           ],
         ),
       ),
@@ -113,8 +145,8 @@ class ProfileEditDialog extends StatelessWidget {
             borderColor: Color(0xFFB86E22),
             textColor: Colors.white,
             onTap: () async {
-              await controller.saveProfile();
-              if (context.mounted) Navigator.pop(context);
+              final saved = await controller.saveProfile();
+              if (saved && context.mounted) Navigator.pop(context);
             },
           ),
         ),

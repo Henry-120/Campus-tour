@@ -4,7 +4,7 @@ import 'package:campus_tour/controllers/monster_controller.dart';
 import 'package:campus_tour/controllers/user_controller.dart';
 import 'package:campus_tour/features/station_hardware/models/station_hardware_models.dart';
 import 'package:campus_tour/services/mqtt_service.dart';
-import 'package:campus_tour/services/station_event_history_service.dart';
+import 'package:campus_tour/features/station_hardware/services/station_event_history_service.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';

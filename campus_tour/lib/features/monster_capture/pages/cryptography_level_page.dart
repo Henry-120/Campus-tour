@@ -1,9 +1,9 @@
 import 'dart:math' as math;
 import 'package:campus_tour/services/audio_service.dart';
-import 'package:campus_tour/controllers/shock_controllers.dart';
-import 'package:campus_tour/styles/level_style.dart';
-import 'package:campus_tour/widgets/game/catching_pages/cryptography_level.dart';
-import 'package:campus_tour/widgets/game/catching_pages/monster_model_cry.dart';
+import 'package:campus_tour/controllers/shock_controller.dart';
+import 'package:campus_tour/features/monster_capture/models/cryptography_level.dart';
+import 'package:campus_tour/features/monster_capture/models/monster_model_cry.dart';
+import 'package:campus_tour/features/monster_capture/styles/level_style.dart';
 import 'package:flutter/material.dart';
 
 class CryptographyLevelPage extends StatefulWidget {

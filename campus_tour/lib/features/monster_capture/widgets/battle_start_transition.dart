@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:campus_tour/styles/app_theme.dart';
-import 'package:campus_tour/styles/level_style.dart';
+import 'package:campus_tour/features/monster_capture/styles/level_style.dart';
 import 'package:flutter/material.dart';
 
 class BattleStartTransition extends StatefulWidget {

@@ -1,30 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import '../models/user_model.dart';
 import '../services/bighead_service.dart';
 import 'user_controller.dart';
 
-class ProfileEditController extends GetxController {
-  final UserController userController = Get.find<UserController>();
-
-  late TextEditingController nameController;
-  final RxnString previewUrl = RxnString();
-
-  @override
-  void onInit() {
-    super.onInit();
-    // 💡 修正：初始化時將目前的暱稱帶入輸入框，讓使用者可以直接修改
-    final currentNickname = userController.userModel.value?.nickname ?? "";
-    nameController = TextEditingController(text: currentNickname);
-
-    previewUrl.value = userController.userModel.value?.photoUrl;
-    debugPrint("[profile_edit_controller] 成功載入頭像: ${previewUrl.value}");
+class ProfileEditController {
+  ProfileEditController({
+    required this.userController,
+    required this.editingUid,
+    required UserModel initialUser,
+  }) : nameController = TextEditingController(text: initialUser.nickname) {
+    previewUrl.value = initialUser.photoUrl;
+    debugPrint(
+      '[ProfileEditController] Loaded avatar for $editingUid: '
+      '${previewUrl.value}',
+    );
   }
 
-  @override
-  void onClose() {
+  final UserController userController;
+  final String editingUid;
+  final TextEditingController nameController;
+  final RxnString previewUrl = RxnString();
+  bool _isDisposed = false;
+
+  void dispose() {
+    _isDisposed = true;
     nameController.dispose();
-    super.onClose();
+    previewUrl.close();
   }
 
   Future<void> generateRandomAvatar() async {
@@ -42,25 +45,42 @@ class ProfileEditController extends GetxController {
     previewUrl.value = "";
     await Future.delayed(const Duration(milliseconds: 100));
 
-    previewUrl.value = newUrl;
+    if (!_isDisposed) {
+      previewUrl.value = newUrl;
+    }
   }
 
-  Future<void> saveProfile() async {
+  Future<bool> saveProfile() async {
     final newNickname = nameController.text.trim();
 
-    // 💡 增加防呆：暱稱不可為空
     if (newNickname.isEmpty) {
       Get.snackbar(
-        "小提示",
-        "暱稱不能空著喔！",
+        'controllers.profile.edit.controller.s002'.tr,
+        'controllers.profile.edit.controller.s003'.tr,
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.orange.shade100,
         colorText: Colors.brown,
       );
-      return;
+      return false;
     }
 
-    debugPrint("[ProfileEdit] 儲存變更：$newNickname");
-    await userController.updateProfile(newNickname, previewUrl.value);
+    final saved = await userController.updateProfile(
+      expectedUid: editingUid,
+      nickname: newNickname,
+      photoUrl: previewUrl.value,
+    );
+    if (!saved) {
+      Get.snackbar(
+        'controllers.profile.edit.controller.s002'.tr,
+        'utils.firebase.auth.error.message.s026'.tr,
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.orange.shade100,
+        colorText: Colors.brown,
+      );
+      return false;
+    }
+
+    debugPrint('[ProfileEdit] Saved changes for $editingUid: $newNickname');
+    return true;
   }
 }

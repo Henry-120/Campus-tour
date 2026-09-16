@@ -1,4 +1,4 @@
-import 'package:campus_tour/widgets/game/catching_pages/plot_level.dart';
+import 'package:campus_tour/features/monster_capture/models/plot_level.dart';
 
 import 'package:get/get.dart';
 

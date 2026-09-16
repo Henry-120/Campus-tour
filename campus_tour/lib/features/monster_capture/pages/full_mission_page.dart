@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:campus_tour/widgets/constants/asset_paths.dart';
-import 'package:campus_tour/widgets/game/catching_pages/battle_start_transition.dart';
-import 'package:campus_tour/widgets/game/catching_pages/catching_faild.dart';
-import 'package:campus_tour/widgets/game/catching_pages/cryptography_level_page.dart';
-import 'package:campus_tour/widgets/game/catching_pages/full_mission.dart';
-import 'package:campus_tour/widgets/game/catching_pages/graphics_text_level_page.dart';
-import 'package:campus_tour/widgets/game/catching_pages/monster_model_cry.dart';
-import 'package:campus_tour/widgets/game/catching_pages/plot_level.dart';
-import 'package:campus_tour/widgets/game/catching_pages/plot_level_page.dart';
-import '../services/audio_service.dart';
+import 'package:campus_tour/features/monster_capture/models/full_mission.dart';
+import 'package:campus_tour/features/monster_capture/models/monster_model_cry.dart';
+import 'package:campus_tour/features/monster_capture/models/plot_level.dart';
+import 'package:campus_tour/features/monster_capture/pages/catching_faild_page.dart';
+import 'package:campus_tour/features/monster_capture/pages/cryptography_level_page.dart';
+import 'package:campus_tour/features/monster_capture/pages/graphics_text_level_page.dart';
+import 'package:campus_tour/features/monster_capture/pages/plot_level_page.dart';
+import 'package:campus_tour/features/monster_capture/widgets/battle_start_transition.dart';
+import 'package:campus_tour/services/audio_service.dart';
 
 import 'package:get/get.dart';
 

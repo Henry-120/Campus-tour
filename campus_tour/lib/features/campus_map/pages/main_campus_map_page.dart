@@ -12,7 +12,7 @@ import 'package:campus_tour/features/campus_map/controllers/player_symbol_contro
 import 'package:campus_tour/features/campus_map/models/map_background_config.dart';
 import 'package:campus_tour/features/campus_map/models/map_viewport_config.dart';
 import 'package:campus_tour/features/campus_map/models/player_symbol_config.dart';
-import 'package:campus_tour/features/campus_map/pages/monster_capture_page.dart';
+import 'package:campus_tour/features/monster_capture/pages/monster_capture_page.dart';
 import 'package:campus_tour/features/campus_map/widgets/campus_maplibre_canvas.dart';
 import 'package:campus_tour/features/campus_map/widgets/main_map_controls.dart';
 import 'package:campus_tour/features/campus_map/widgets/main_map_status_overlay.dart';
@@ -20,7 +20,7 @@ import 'package:campus_tour/features/campus_map/widgets/nearest_monster_info_ove
 import 'package:campus_tour/main.dart';
 import 'package:campus_tour/models/monster_model.dart';
 import 'package:campus_tour/services/audio_service.dart';
-import 'package:campus_tour/widgets/common/drawer.dart';
+import 'package:campus_tour/features/drawer/drawer.dart';
 import 'package:campus_tour/widgets/common/scale_button.dart';
 import 'package:campus_tour/widgets/common/snackbar_builder.dart';
 import 'package:campus_tour/widgets/constants/responsive.dart';
@@ -67,6 +67,8 @@ class _MainCampusMapPageState extends State<MainCampusMapPage>
   Timer? _backgroundRefreshTimer;
   Future<void>? _styleRestoreFuture;
   Future<void>? _mapKindSyncFuture;
+  Future<void>? _campusStateSyncFuture;
+  Completer<void>? _returnCameraIdleCompleter;
 
   LatLng? _playerPosition;
   MonsterModel? _nearestMonster;
@@ -75,15 +77,18 @@ class _MainCampusMapPageState extends State<MainCampusMapPage>
   CampusMapBackgroundKind _backgroundKind = _backgroundKindAt(DateTime.now());
   String? _locationUnavailableMessage;
 
-  bool _viewportPrepared = false;
   bool _styleRestoreRequested = false;
   bool _mapKindSyncRequested = false;
+  bool _campusStateSyncRequested = false;
   bool _styleReady = false;
   bool _hasCenteredMap = false;
   bool _hasLocation = false;
   bool _isPlayerInsideCampusBounds = true;
   bool _isCaptureFlowActive = false;
+  bool _isReturningToPlayer = false;
+  bool _isReturnCameraReady = false;
   int _styleRevision = 0;
+  int _cameraFollowRevision = 0;
 
   @override
   void initState() {
@@ -126,8 +131,9 @@ class _MainCampusMapPageState extends State<MainCampusMapPage>
       _handleNearestMonsterDistanceChanged,
     );
 
-    _handleNearbyMonstersChanged(_monsterController.nearbyMonsters);
+    // 先套用目前位置的校內外狀態，再決定初始怪物是否應顯示。
     _handleLocationChanged(_locationController.state.value);
+    _handleNearbyMonstersChanged(_monsterController.nearbyMonsters);
     _scheduleBackgroundRefresh();
 
     unawaited(_locationController.startTracking());
@@ -141,10 +147,8 @@ class _MainCampusMapPageState extends State<MainCampusMapPage>
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    if (!_viewportPrepared) {
-      _cameraController.prepareViewport(context);
-      _viewportPrepared = true;
-    }
+    // MediaQuery 尺寸改變時重新計算最低倍率與安全鏡頭範圍。
+    _cameraController.prepareViewport(context);
 
     final route = ModalRoute.of(context);
     if (route != null && !identical(route, _subscribedRoute)) {
@@ -233,7 +237,10 @@ class _MainCampusMapPageState extends State<MainCampusMapPage>
     await _backgroundController.addToMap(controller, _backgroundKind);
     if (!_isCurrentStyleOperation(controller, revision)) return;
 
-    await _mainMapImageController.addToMap(controller);
+    await _mainMapImageController.addToMap(
+      controller,
+      isVisible: _isPlayerInsideCampusBounds,
+    );
     if (!_isCurrentStyleOperation(controller, revision)) return;
 
     await controller.setSymbolIconAllowOverlap(true);
@@ -268,27 +275,31 @@ class _MainCampusMapPageState extends State<MainCampusMapPage>
   }
 
   Future<void> _restoreLiveMapState() async {
-    final playerPosition = _playerPosition;
-    if (playerPosition != null) {
-      await _playerSymbolController.updatePosition(playerPosition);
-
-      if (!_hasCenteredMap) {
-        _hasCenteredMap = true;
-        await _cameraController.returnToPlayer(playerPosition);
-      }
-    } else if (!_hasCenteredMap) {
-      await _cameraController.fitCameraBounds();
-    }
-
-    await _monsterSymbolController.setMonsters(
-      _monsterController.nearbyMonsters,
-    );
-    await _syncNearestMonsterArrow();
+    // Style 重載後一次還原目前應有的校內／校外畫面內容。
+    await _requestCampusStateSync();
   }
 
   void _handleCameraMove(CameraPosition cameraPosition) {
     _playerSymbolController.handleCameraMove(cameraPosition);
     _nearestMonsterArrowController.handleCameraMove(cameraPosition);
+    _cameraController.handleCameraMove(
+      cameraPosition,
+      constrainToBounds: _isPlayerInsideCampusBounds,
+    );
+  }
+
+  void _handleCameraIdle() {
+    final boundsChanged = _cameraController.commitPendingCameraTargetBounds(
+      constrainToBounds: _isPlayerInsideCampusBounds,
+    );
+    if (boundsChanged && mounted) {
+      // 只在縮放停止且安全範圍真的改變時重建，避免移動期間反覆更新原生選項。
+      setState(() {});
+    }
+
+    // 明確通知定位流程動畫已停止，避免只依賴平台 Future 的回傳時機。
+    final completer = _returnCameraIdleCompleter;
+    if (completer != null && !completer.isCompleted) completer.complete();
   }
 
   void _handleLocationChanged(AppLocationState locationState) {
@@ -307,6 +318,8 @@ class _MainCampusMapPageState extends State<MainCampusMapPage>
     }
 
     final playerPosition = LatLng(position.latitude, position.longitude);
+    final cameraFollowRevision = ++_cameraFollowRevision;
+    final oldIsInsideCampusBounds = _isPlayerInsideCampusBounds;
     final isInsideCampusBounds = _isInsideCampusBounds(playerPosition);
     final shouldRebuild =
         !_hasLocation ||
@@ -322,20 +335,42 @@ class _MainCampusMapPageState extends State<MainCampusMapPage>
       });
     }
 
-    unawaited(_updatePlayerMapState(playerPosition));
+    if (isInsideCampusBounds != oldIsInsideCampusBounds) {
+      if (_isReturningToPlayer) {
+        // 定位期間先記住校內外狀態變更，等相機完成後再同步圖片與鏡頭。
+        _campusStateSyncRequested = true;
+        unawaited(_updatePlayerMapState(playerPosition, cameraFollowRevision));
+      } else {
+        unawaited(_requestCampusStateSync());
+      }
+    } else {
+      unawaited(_updatePlayerMapState(playerPosition, cameraFollowRevision));
+    }
     unawaited(_updateLocationMonsters(position));
   }
 
-  Future<void> _updatePlayerMapState(LatLng playerPosition) async {
+  Future<void> _updatePlayerMapState(
+    LatLng playerPosition,
+    int cameraFollowRevision,
+  ) async {
     try {
       await _playerSymbolController.updatePosition(playerPosition);
 
-      if (_styleReady) {
+      if (_styleReady &&
+          !_isReturningToPlayer &&
+          cameraFollowRevision == _cameraFollowRevision) {
+        // 只有最新一筆 GPS 可以控制相機，避免較慢完成的舊更新覆蓋定位結果。
         if (!_hasCenteredMap) {
           _hasCenteredMap = true;
-          await _cameraController.returnToPlayer(playerPosition);
+          await _cameraController.returnToPlayer(
+            playerPosition,
+            constrainToBounds: _isPlayerInsideCampusBounds,
+          );
         } else {
-          await _cameraController.followPlayer(playerPosition);
+          await _cameraController.followPlayer(
+            playerPosition,
+            constrainToBounds: _isPlayerInsideCampusBounds,
+          );
         }
       }
 
@@ -344,6 +379,103 @@ class _MainCampusMapPageState extends State<MainCampusMapPage>
       if (!mounted) return;
       debugPrint('[MainCampusMapPage] 更新玩家地圖狀態失敗：$error\n$stackTrace');
     }
+  }
+
+  Future<void> _requestCampusStateSync() {
+    _campusStateSyncRequested = true;
+
+    if (!_styleReady || _mapController == null) {
+      return Future<void>.value();
+    }
+
+    final runningSync = _campusStateSyncFuture;
+    if (runningSync != null) return runningSync;
+
+    final sync = _runCampusStateSyncQueue();
+    _campusStateSyncFuture = sync;
+
+    return sync.whenComplete(() {
+      if (identical(_campusStateSyncFuture, sync)) {
+        _campusStateSyncFuture = null;
+      }
+    });
+  }
+
+  Future<void> _runCampusStateSyncQueue() async {
+    while (_campusStateSyncRequested && _styleReady && mounted) {
+      _campusStateSyncRequested = false;
+      final controller = _mapController;
+      if (controller == null) return;
+
+      final isInsideCampusBounds = _isPlayerInsideCampusBounds;
+      final playerPosition = _playerPosition;
+
+      try {
+        await _applyCampusState(
+          controller: controller,
+          isInsideCampusBounds: isInsideCampusBounds,
+          playerPosition: playerPosition,
+        );
+      } catch (error, stackTrace) {
+        if (!mounted || !identical(controller, _mapController)) return;
+        debugPrint('[MainCampusMapPage] 同步校內外地圖狀態失敗：$error\n$stackTrace');
+      }
+    }
+  }
+
+  Future<void> _applyCampusState({
+    required MapLibreMapController controller,
+    required bool isInsideCampusBounds,
+    required LatLng? playerPosition,
+  }) async {
+    if (!isInsideCampusBounds) {
+      // 先隱藏有邊界的圖片與怪物，再解除鏡頭限制跟隨校外玩家。
+      await _mainMapImageController.setVisible(controller, false);
+      if (_isPlayerInsideCampusBounds) return;
+
+      await _monsterSymbolController.setMonsters(const <MonsterModel>[]);
+
+      if (playerPosition != null) {
+        await _playerSymbolController.updatePosition(playerPosition);
+        if (!_isReturningToPlayer) {
+          await _cameraController.followPlayer(
+            playerPosition,
+            constrainToBounds: false,
+          );
+          _hasCenteredMap = true;
+        }
+      }
+
+      // 校外仍保留最近怪物箭頭，讓玩家可以沿方向返回探索區域。
+      await _syncNearestMonsterArrow();
+      return;
+    }
+
+    // 回到校內時先把鏡頭移回安全中心範圍，完成後才顯示地圖，避免短暫露邊。
+    if (playerPosition != null) {
+      await _playerSymbolController.updatePosition(playerPosition);
+      if (_isReturningToPlayer) {
+        if (!_isReturnCameraReady) return;
+        _hasCenteredMap = true;
+      } else {
+        await _cameraController.returnToPlayer(
+          playerPosition,
+          constrainToBounds: true,
+        );
+        _hasCenteredMap = true;
+      }
+    } else if (!_hasCenteredMap) {
+      await _cameraController.fitCameraBounds();
+      _hasCenteredMap = true;
+    }
+
+    if (!_isPlayerInsideCampusBounds) return;
+
+    await _mainMapImageController.setVisible(controller, true);
+    await _monsterSymbolController.setMonsters(
+      _monsterController.nearbyMonsters,
+    );
+    await _syncNearestMonsterArrow();
   }
 
   Future<void> _updateLocationMonsters(Position position) async {
@@ -356,7 +488,12 @@ class _MainCampusMapPageState extends State<MainCampusMapPage>
   }
 
   void _handleNearbyMonstersChanged(List<MonsterModel> monsters) {
-    unawaited(_setVisibleMonsters(monsters));
+    // 校外只留下玩家與指路箭頭；怪物等回到校內再同步顯示。
+    final visibleMonsters =
+        _isPlayerInsideCampusBounds && _mainMapImageController.isVisible
+        ? monsters
+        : const <MonsterModel>[];
+    unawaited(_setVisibleMonsters(visibleMonsters));
   }
 
   Future<void> _setVisibleMonsters(List<MonsterModel> monsters) async {
@@ -399,11 +536,15 @@ class _MainCampusMapPageState extends State<MainCampusMapPage>
     final playerPosition = _playerPosition;
     final nearestMonster = _monsterController.nearestMonster.value;
     final nearestDistance = _monsterController.nearestDistance.value;
+    final shouldHideForShortDistance =
+        _isPlayerInsideCampusBounds &&
+        nearestDistance != null &&
+        nearestDistance < _minimumArrowDistance;
 
     if (playerPosition == null ||
         nearestMonster == null ||
         nearestDistance == null ||
-        nearestDistance < _minimumArrowDistance) {
+        shouldHideForShortDistance) {
       await _nearestMonsterArrowController.hide();
       return;
     }
@@ -553,15 +694,92 @@ class _MainCampusMapPageState extends State<MainCampusMapPage>
   }
 
   Future<void> _returnToCurrentLocation() async {
-    final position =
-        _locationController.position ??
-        await _locationController.getCurrentPosition(fresh: true);
-    if (!mounted || position == null) return;
+    // 定位尚未結束時忽略重複點擊，避免多個相機動畫互相取消。
+    if (_isReturningToPlayer) return;
 
-    final playerPosition = LatLng(position.latitude, position.longitude);
-    _playerPosition = playerPosition;
-    _hasCenteredMap = true;
-    await _cameraController.returnToPlayer(playerPosition);
+    _isReturningToPlayer = true;
+    _isReturnCameraReady = false;
+    _cameraFollowRevision++;
+
+    try {
+      // 定位按鈕一律要求新的 GPS 座標，不再優先使用可能過期的快取位置。
+      final position = await _locationController.getCurrentPosition(
+        fresh: true,
+      );
+      if (!mounted ||
+          position == null ||
+          _locationController.state.value.status != AppLocationStatus.ready ||
+          _mapController == null) {
+        return;
+      }
+
+      var playerPosition = LatLng(position.latitude, position.longitude);
+      var isInsideCampusBounds = _isInsideCampusBounds(playerPosition);
+      _playerPosition = playerPosition;
+      _hasCenteredMap = true;
+
+      if (!_hasLocation ||
+          isInsideCampusBounds != _isPlayerInsideCampusBounds ||
+          _locationUnavailableMessage != null) {
+        setState(() {
+          _hasLocation = true;
+          _isPlayerInsideCampusBounds = isInsideCampusBounds;
+          _locationUnavailableMessage = null;
+        });
+      }
+
+      // 等待先前已開始的校內外同步，確保它不會在定位動畫途中搶走相機。
+      final runningCampusSync = _campusStateSyncFuture;
+      if (runningCampusSync != null) await runningCampusSync;
+      if (!mounted) return;
+
+      final cameraIdleCompleter = Completer<void>();
+      _returnCameraIdleCompleter = cameraIdleCompleter;
+      try {
+        await _cameraController.returnToPlayer(
+          playerPosition,
+          constrainToBounds: isInsideCampusBounds,
+        );
+        await cameraIdleCompleter.future.timeout(const Duration(seconds: 2));
+      } on TimeoutException {
+        // 少數裝置在相機位置沒有變化時不會送出 idle，逾時後仍執行最後校正。
+        debugPrint('[MainCampusMapPage] 等待定位相機停止逾時，改用目前邊界繼續校正');
+      } finally {
+        if (identical(_returnCameraIdleCompleter, cameraIdleCompleter)) {
+          _returnCameraIdleCompleter = null;
+        }
+      }
+      if (!mounted) return;
+
+      // 第一段動畫停止後會提交目標 zoom 的 Android 邊界；等畫面重建後，
+      // 再使用期間收到的最新座標做一次無動畫校正，避免被舊邊界卡住。
+      await WidgetsBinding.instance.endOfFrame;
+      if (!mounted) return;
+
+      playerPosition = _playerPosition ?? playerPosition;
+      isInsideCampusBounds = _isInsideCampusBounds(playerPosition);
+      await _cameraController.returnToPlayer(
+        playerPosition,
+        constrainToBounds: isInsideCampusBounds,
+        animated: false,
+      );
+      if (!mounted) return;
+
+      _isReturnCameraReady = true;
+      await _requestCampusStateSync();
+    } catch (error, stackTrace) {
+      if (!mounted) return;
+      debugPrint('[MainCampusMapPage] 返回目前位置失敗：$error\n$stackTrace');
+    } finally {
+      _isReturningToPlayer = false;
+      _isReturnCameraReady = false;
+      _cameraFollowRevision++;
+
+      // 定位期間若跨越校園邊界，結束後補做尚未完成的畫面同步。
+      if (mounted && _campusStateSyncRequested) {
+        unawaited(_requestCampusStateSync());
+      }
+    }
   }
 
   void _openDrawer() {
@@ -645,6 +863,13 @@ class _MainCampusMapPageState extends State<MainCampusMapPage>
 
     _styleRestoreRequested = false;
     _mapKindSyncRequested = false;
+    _campusStateSyncRequested = false;
+    final returnCameraIdleCompleter = _returnCameraIdleCompleter;
+    if (returnCameraIdleCompleter != null &&
+        !returnCameraIdleCompleter.isCompleted) {
+      returnCameraIdleCompleter.complete();
+    }
+    _returnCameraIdleCompleter = null;
     _styleReady = false;
     _mapController = null;
 
@@ -676,9 +901,11 @@ class _MainCampusMapPageState extends State<MainCampusMapPage>
           children: [
             MainGameCampusMaplibreCanvas(
               cameraController: _cameraController,
+              constrainCamera: _isPlayerInsideCampusBounds,
               onMapCreated: _onMapCreated,
               onStyleLoaded: _onStyleLoaded,
               onCameraMove: _handleCameraMove,
+              onCameraIdle: _handleCameraIdle,
             ),
             MainMapControls(
               selectedMapKind: _selectedMapKind,

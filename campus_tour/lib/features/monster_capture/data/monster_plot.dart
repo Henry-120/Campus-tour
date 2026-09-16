@@ -1,4 +1,4 @@
-import 'package:campus_tour/widgets/game/catching_pages/plot_level.dart';
+import 'package:campus_tour/features/monster_capture/models/plot_level.dart';
 
 /// 每個精靈的專屬 battle 劇情台詞。
 /// Key 為 monster.id（對應 Firestore 的文件 ID）。

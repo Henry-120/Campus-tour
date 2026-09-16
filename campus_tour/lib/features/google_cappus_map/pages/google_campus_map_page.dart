@@ -3,7 +3,7 @@ import 'package:campus_tour/services/audio_service.dart';
 import 'package:campus_tour/features/google_cappus_map/widgets/game_map.dart';
 import 'package:campus_tour/features/google_cappus_map/widgets/nearest_monster_arrow.dart';
 import 'package:campus_tour/features/google_cappus_map/widgets/player_sprite.dart';
-import 'package:campus_tour/widgets/common/drawer.dart';
+import 'package:campus_tour/features/drawer/drawer.dart';
 import 'package:campus_tour/widgets/common/scale_button.dart';
 import 'package:campus_tour/widgets/constants/responsive.dart';
 import 'package:campus_tour/widgets/game/system_menu.dart';

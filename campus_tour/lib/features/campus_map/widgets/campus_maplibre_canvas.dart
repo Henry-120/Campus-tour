@@ -50,16 +50,23 @@ class MainGameCampusMaplibreCanvas extends StatelessWidget {
   const MainGameCampusMaplibreCanvas({
     super.key,
     required this.cameraController,
+    required this.constrainCamera,
     required MapCreatedCallback onMapCreated,
     required Future<void> Function() onStyleLoaded,
     required OnCameraMoveCallback onCameraMove,
+    required VoidCallback onCameraIdle,
   }) : _onMapCreated = onMapCreated,
        _onStyleLoaded = onStyleLoaded,
-       _onCameraMove = onCameraMove;
+       _onCameraMove = onCameraMove,
+       _onCameraIdle = onCameraIdle;
   final CampusMapCameraController cameraController;
+
+  /// 校內顯示地圖時限制鏡頭；校外只剩背景時解除限制，讓鏡頭繼續跟隨玩家。
+  final bool constrainCamera;
   final MapCreatedCallback _onMapCreated;
   final Future<void> Function() _onStyleLoaded;
   final OnCameraMoveCallback _onCameraMove;
+  final VoidCallback _onCameraIdle;
   @override
   Widget build(BuildContext context) {
     return MapLibreMap(
@@ -71,6 +78,7 @@ class MainGameCampusMaplibreCanvas extends StatelessWidget {
       onStyleLoadedCallback: _onStyleLoaded,
       trackCameraPosition: true,
       onCameraMove: _onCameraMove,
+      onCameraIdle: _onCameraIdle,
 
       // 玩家定位
       myLocationEnabled: false,
@@ -81,7 +89,9 @@ class MainGameCampusMaplibreCanvas extends StatelessWidget {
       scrollGesturesEnabled: true,
       zoomGesturesEnabled: true,
       tiltGesturesEnabled: false,
-      cameraTargetBounds: cameraController.cameraTargetBounds,
+      cameraTargetBounds: constrainCamera
+          ? cameraController.cameraTargetBounds
+          : CameraTargetBounds.unbounded,
       minMaxZoomPreference: cameraController.zoomPreference,
       annotationOrder: const [
         AnnotationType.fill,

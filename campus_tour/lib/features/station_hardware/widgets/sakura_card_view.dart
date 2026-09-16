@@ -11,7 +11,7 @@ import 'package:campus_tour/features/station_hardware/view_models/station_hardwa
 import 'package:campus_tour/features/station_hardware/widgets/sakura_handwriting_pad.dart';
 import 'package:campus_tour/features/station_hardware/widgets/sakura_page_controls.dart';
 import 'package:campus_tour/models/user_monster_model.dart';
-import 'package:campus_tour/services/sakura_card_submission_service.dart';
+import 'package:campus_tour/features/station_hardware/services/sakura_card_submission_service.dart';
 import 'package:campus_tour/styles/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

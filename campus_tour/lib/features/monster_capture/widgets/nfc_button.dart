@@ -3,11 +3,11 @@ import 'dart:async';
 import 'package:campus_tour/controllers/nfc_api.dart';
 import 'package:campus_tour/controllers/nfc_scan_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:campus_tour/styles/nfc_leading_style.dart';
+import 'package:campus_tour/features/monster_capture/styles/nfc_leading_style.dart';
 import 'package:campus_tour/widgets/common/snackbar_builder.dart';
 import 'package:get/get.dart';
 
-import '../../controllers/reviewer_access_controller.dart';
+import 'package:campus_tour/controllers/reviewer_access_controller.dart';
 
 class NfcButtonAbstract extends StatelessWidget {
   final Icon nfcIcon = NfcLeadingStyle.nfcIcon;
