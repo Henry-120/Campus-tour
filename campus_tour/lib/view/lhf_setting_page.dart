@@ -242,7 +242,7 @@ class FullPageList {
     FullPageList.vibrationSetCard,
     FullPageList.cardGap,
     FullPageList.autoSkipStorySetCard,
-    FullPageList.reviewerLocationSection,
+    // FullPageList.reviewerLocationSection,
     if (MonsterCollectionTestConfig.showControls) FullPageList.cardGap,
     if (MonsterCollectionTestConfig.showControls)
       FullPageList.debugCaptureAllCard,
